@@ -6,6 +6,8 @@ from generic_delete.config.ConfigStore import *
 from generic_delete.udfs.UDFs import *
 
 def Generic_Delete(spark: SparkSession):
-    spark.sql(f"TRUNCATE TABLE {Config.CATALOG}.{Config.DATABASE}.{Config.TABLE};")
+    spark.sql(
+        f"DELETE FROM TABLE {Config.CATALOG}.{Config.DATABASE}.{Config.TABLE} WHERE SRC_SYS_CD = {Config.SRCSYSCD};"
+    )
 
     return 

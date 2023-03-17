@@ -16,7 +16,35 @@
     "configuration" : {
       "common" : {
         "type" : "record",
-        "fields" : [ ]
+        "fields" : [ {
+          "name" : "DATABASE",
+          "kind" : {
+            "type" : "string",
+            "value" : "l1_md_prophecy"
+          },
+          "optional" : false
+        }, {
+          "name" : "CATALOG",
+          "kind" : {
+            "type" : "string",
+            "value" : "hive_metastore"
+          },
+          "optional" : false
+        }, {
+          "name" : "TABLE",
+          "kind" : {
+            "type" : "string",
+            "value" : "MD_SER_NUM_STOCK_SGMNT_SWAP"
+          },
+          "optional" : false
+        }, {
+          "name" : "SRCSYSCD",
+          "kind" : {
+            "type" : "string",
+            "value" : "BBN"
+          },
+          "optional" : false
+        } ]
       },
       "oldCommon" : {
         "type" : "record",
@@ -51,8 +79,8 @@
       "metadata" : {
         "label" : "Generic_Delete",
         "slug" : "Generic_Delete",
-        "x" : 960,
-        "y" : 400,
+        "x" : 720,
+        "y" : 240,
         "phase" : 0,
         "cache" : false,
         "detailedStats" : false,
@@ -65,7 +93,7 @@
         "isCustomOutputSchema" : true
       },
       "properties" : {
-        "script" : "spark.sql(f\"TRUNCATE TABLE {Config.CATALOG}.{Config.DATABASE}.{Config.TABLE};\")",
+        "script" : "spark.sql(f\"DELETE FROM TABLE {Config.CATALOG}.{Config.DATABASE}.{Config.TABLE} WHERE SRC_SYS_CD = {Config.SRCSYSCD};\")",
         "scriptMethodHeader" : "def Script(spark: SparkSession) -> None:",
         "scriptMethodFooter" : "    return "
       }
