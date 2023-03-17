@@ -1,0 +1,101 @@
+{
+  "metainfo" : {
+    "id" : "1",
+    "language" : "python",
+    "fabricId" : "32",
+    "frontEndLanguage" : "sql",
+    "mode" : "batch",
+    "udfs" : {
+      "language" : "python",
+      "udfs" : [ ]
+    },
+    "udafs" : {
+      "language" : "python",
+      "code" : ""
+    },
+    "configuration" : {
+      "common" : {
+        "type" : "record",
+        "fields" : [ {
+          "name" : "CATALOG",
+          "kind" : {
+            "type" : "string",
+            "value" : "hive_metastore"
+          },
+          "optional" : false
+        }, {
+          "name" : "DATABASE",
+          "kind" : {
+            "type" : "string",
+            "value" : "l1_md_prophecy"
+          },
+          "optional" : false
+        }, {
+          "name" : "TABLE",
+          "kind" : {
+            "type" : "string",
+            "value" : "MD_SER_NUM_STOCK_SGMNT"
+          },
+          "optional" : false
+        } ]
+      },
+      "oldCommon" : {
+        "type" : "record",
+        "fields" : [ ]
+      },
+      "fabrics" : { },
+      "instances" : { },
+      "selected" : "MD_SER_NUM_STOCK_SGMNT",
+      "nonEditable" : [ ],
+      "isSubscribedPipelineWithPipelineConfigs" : false
+    },
+    "sparkConf" : [ ],
+    "hadoopConf" : [ ],
+    "codeMode" : "sparse",
+    "buildSystem" : "maven",
+    "externalDependencies" : [ ],
+    "isImported" : false,
+    "interimMode" : "Full",
+    "interimModeEnabled" : true,
+    "visualCodeInterimMode" : "Disabled",
+    "recordsLimit" : {
+      "enabled" : false,
+      "value" : 1000
+    },
+    "topLevelPackage" : "generic_swap"
+  },
+  "connections" : [ ],
+  "processes" : {
+    "_y1D2ueQpCl3J8F3zGhRm$$8eZJ8-pU_lcxP_qK54HUi" : {
+      "id" : "_y1D2ueQpCl3J8F3zGhRm$$8eZJ8-pU_lcxP_qK54HUi",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "GENERIC_SWAP",
+        "slug" : "GENERIC_SWAP",
+        "x" : 860,
+        "y" : 280,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true
+      },
+      "properties" : {
+        "script" : "spark.sql(f\"ALTER TABLE {Config.CATALOG}.{Config.DATABASE}.{Config.TABLE} RENAME TO {Config.CATALOG}.{Config.DATABASE}.{Config.TABLE}_TEMP;\")\r\nspark.sql(f\"ALTER TABLE {Config.CATALOG}.{Config.DATABASE}.{Config.TABLE}_SWAP RENAME TO {Config.CATALOG}.{Config.DATABASE}.{Config.TABLE};\")\r\nspark.sql(f\"ALTER TABLE {Config.CATALOG}.{Config.DATABASE}.{Config.TABLE}_TEMP RENAME TO {Config.CATALOG}.{Config.DATABASE}.{Config.TABLE}_SWAP;\")",
+        "scriptMethodHeader" : "def Script(spark: SparkSession) -> None:",
+        "scriptMethodFooter" : "    return "
+      }
+    }
+  },
+  "ports" : {
+    "inputs" : [ ],
+    "outputs" : [ ],
+    "selectedInputFields" : [ ],
+    "isCustomOutputSchema" : false
+  }
+}
