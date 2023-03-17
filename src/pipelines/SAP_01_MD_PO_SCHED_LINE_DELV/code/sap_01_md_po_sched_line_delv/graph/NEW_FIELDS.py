@@ -49,6 +49,6 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         )\
         .withColumn("CAT_OF_DELV_DT", trim(col("lpein")))\
         .withColumn("BTCH_NUM", trim(col("charg")))\
-        .withColumn("DAI_ETL_ID", lit(1))\
+        .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", to_timestamp(current_timestamp(), "yyyyMMdd"))\
         .withColumn("DAI_UPDT_DTTM", to_timestamp(current_timestamp(), "yyyyMMdd"))
