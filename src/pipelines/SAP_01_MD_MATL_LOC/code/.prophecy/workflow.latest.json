@@ -78,7 +78,19 @@
     },
     "topLevelPackage" : "sap_01_md_matl_loc"
   },
-  "connections" : [ ],
+  "connections" : [ {
+    "id" : "jPqKbTpMAMtMCStOs-2mi$$SXBAu7NX9P9ibF2q-F9JL",
+    "source" : "J4_uS3Q4GhLzOZu0ywART$$NUBQymIdgcgIKQgmw18UQ",
+    "sourcePort" : "XKQAzwCyxKqPPiRqgbCB_$$oQrRD8nAiVmZB6zBLPCWx",
+    "target" : "Ygybeo-L_9gfTWyJP58kO$$ghCuC-x0xdexnQoJjAKGI",
+    "targetPort" : "Y29MGjTP4vJpr73bnhZgh$$o3zVK8n7hVylnCaCeRCSK"
+  }, {
+    "id" : "KWF4JMOT4qXjaWsf5fdWb$$pAZKnIPecP87aL5ZkTsdv",
+    "source" : "Ygybeo-L_9gfTWyJP58kO$$ghCuC-x0xdexnQoJjAKGI",
+    "sourcePort" : "zluE_iOWt6V_xX3pJbias$$tbD0Wi6N8OEk-kvMWja53",
+    "target" : "zlcCuFmuBDSAyEd8qfh_-$$XY5CJ5AjbjmcMkpDEigAK",
+    "targetPort" : "TBMsgwE-FvI_wjxGYMgY9$$gS74cv1CMd60FqNWxv3X6"
+  } ],
   "processes" : {
     "J4_uS3Q4GhLzOZu0ywART$$NUBQymIdgcgIKQgmw18UQ" : {
       "id" : "J4_uS3Q4GhLzOZu0ywART$$NUBQymIdgcgIKQgmw18UQ",
@@ -105,6 +117,105 @@
       },
       "properties" : {
         "datasetId" : "datasets/DS_SAP_01_MARC"
+      }
+    },
+    "Ygybeo-L_9gfTWyJP58kO$$ghCuC-x0xdexnQoJjAKGI" : {
+      "id" : "Ygybeo-L_9gfTWyJP58kO$$ghCuC-x0xdexnQoJjAKGI",
+      "component" : "Filter",
+      "metadata" : {
+        "label" : "MANDT_FILTER",
+        "slug" : "MANDT_FILTER",
+        "x" : -200,
+        "y" : 160,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Y29MGjTP4vJpr73bnhZgh$$o3zVK8n7hVylnCaCeRCSK",
+          "slug" : "in0",
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "zluE_iOWt6V_xX3pJbias$$tbD0Wi6N8OEk-kvMWja53",
+          "slug" : "out",
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ "Y29MGjTP4vJpr73bnhZgh$$o3zVK8n7hVylnCaCeRCSK##MANDT" ],
+        "condition" : {
+          "format" : "sql",
+          "expression" : "MANDT = '$MANDT'"
+        }
+      }
+    },
+    "zlcCuFmuBDSAyEd8qfh_-$$XY5CJ5AjbjmcMkpDEigAK" : {
+      "id" : "zlcCuFmuBDSAyEd8qfh_-$$XY5CJ5AjbjmcMkpDEigAK",
+      "component" : "SchemaTransform",
+      "metadata" : {
+        "label" : "NEW_FIELDS_RENAME_FORMAT",
+        "slug" : "NEW_FIELDS_RENAME_FORMAT",
+        "x" : -60,
+        "y" : 160,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "TBMsgwE-FvI_wjxGYMgY9$$gS74cv1CMd60FqNWxv3X6",
+          "slug" : "in0",
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "G3GXwPLRKIi_MYS_-Tuuu$$QMNPMXRvBTPsWSS9fVtDn",
+          "slug" : "out",
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ "TBMsgwE-FvI_wjxGYMgY9$$gS74cv1CMd60FqNWxv3X6##MATNR" ],
+        "transformations" : [ {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "SRC_SYS_CD",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "'$SRC_SYS_CD'"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "MATL_NUM",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "matnr"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        } ]
       }
     }
   },

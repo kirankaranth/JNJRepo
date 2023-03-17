@@ -8,6 +8,8 @@ from sap_01_md_matl_loc.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_SAP_MARC = SAP_MARC(spark)
+    df_MANDT_FILTER = MANDT_FILTER(spark, df_SAP_MARC)
+    df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_MANDT_FILTER)
 
 def main():
     spark = SparkSession.builder\
