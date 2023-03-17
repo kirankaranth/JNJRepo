@@ -8,6 +8,10 @@ from sap_01_md_po_sched_line_delv.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_SAP_EKET = SAP_EKET(spark)
+    df_MANDT_FILTER = MANDT_FILTER(spark, df_SAP_EKET)
+    df_NEW_FIELDS = NEW_FIELDS(spark, df_MANDT_FILTER)
+    df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS)
+    Target_1(spark, df_SET_FIELD_ORDER_REFORMAT)
 
 def main():
     spark = SparkSession.builder\
