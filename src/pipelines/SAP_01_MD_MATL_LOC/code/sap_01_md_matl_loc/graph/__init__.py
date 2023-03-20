@@ -1,6 +1,7 @@
 from .SAP_NSDM_V_MARC import *
 from .SAP_T141T import *
 from .SAP_T024F import *
+from .Join_1 import *
 from .SAP_T024 import *
 from .MANDT_FILTER_04 import *
 from .SAP_T024D import *

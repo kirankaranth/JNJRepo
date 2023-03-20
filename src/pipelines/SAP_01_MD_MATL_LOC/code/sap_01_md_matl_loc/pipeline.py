@@ -17,7 +17,14 @@ def pipeline(spark: SparkSession) -> None:
     df_SAP_T024D = SAP_T024D(spark)
     df_MANDT_FILTER_03 = MANDT_FILTER_03(spark, df_SAP_T024D)
     df_MANDT_FILTER_01 = MANDT_FILTER_01(spark, df_SAP_NSDM_V_MARC)
-    df_Join_1 = Join_1(spark, df_MANDT_FILTER_01, df_MANDT_FILTER_02)
+    df_Join_1 = Join_1(
+        spark, 
+        df_MANDT_FILTER_01, 
+        df_MANDT_FILTER_02, 
+        df_MANDT_FILTER_03, 
+        df_MANDT_FILTER_04, 
+        df_MANDT_FILTER_05
+    )
 
 def main():
     spark = SparkSession.builder\

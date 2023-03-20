@@ -120,6 +120,24 @@
     "sourcePort" : "0aoH9o-_gDRaxXczezHtc$$TA6X-vbwKiZ1ywMX_G_BT",
     "target" : "MLZbf6uOU9FBTntojxxVR$$tCoJiedPCjvUyMkWdTL0c",
     "targetPort" : "xw6B66qjajIzaPXyeKMzX$$KE2ETcEqb294jxqPVJe5q"
+  }, {
+    "id" : "OsAYFOc-tW0KlD4OOu4zs",
+    "source" : "oEjdIA07iTsduGOshWO8e$$tfmpOkWusAD0IzjkZI3kO",
+    "sourcePort" : "B3WF2WukZS6-iyPuowD0K$$SWEk-5jhQTHeXV0xd2sw9",
+    "target" : "MLZbf6uOU9FBTntojxxVR$$tCoJiedPCjvUyMkWdTL0c",
+    "targetPort" : "AKCm-NaeUOwYK4iwZKUJB$$eFyX6cWMOa-X7kJtJCIED"
+  }, {
+    "id" : "s58J1TXmputQAi37q_K6G",
+    "source" : "Ob5Ig1OmN7vevfmz-bw8A$$gx6u3KZjqxMHwOKR9Am6P",
+    "sourcePort" : "sPy-QzE0dyRa86UFvjWKw$$3bVVoSo6z5J1p7uHF9_nY",
+    "target" : "MLZbf6uOU9FBTntojxxVR$$tCoJiedPCjvUyMkWdTL0c",
+    "targetPort" : "3YCX686BZg0a58T0Q9QH8$$LKGkeF6BvczogZnMt3Mmn"
+  }, {
+    "id" : "pbU1Vc6i2pYPbLlHiMBl0",
+    "source" : "lF_YMzD8aiudqlzMMNlOO$$l8eE7DOO9T7ECaljXEBtQ",
+    "sourcePort" : "vrflcMnbfKxkLKTTd6hoV$$xqtxbxzYio5219yLg3ppT",
+    "target" : "MLZbf6uOU9FBTntojxxVR$$tCoJiedPCjvUyMkWdTL0c",
+    "targetPort" : "0XNxhfFlsQ-VxeZEIumEW$$ZAsOoHD2BDNtkBqBqqS12"
   } ],
   "processes" : {
     "lF_YMzD8aiudqlzMMNlOO$$l8eE7DOO9T7ECaljXEBtQ" : {
@@ -365,6 +383,18 @@
           "id" : "xw6B66qjajIzaPXyeKMzX$$KE2ETcEqb294jxqPVJe5q",
           "slug" : "in1",
           "isStreaming" : false
+        }, {
+          "id" : "AKCm-NaeUOwYK4iwZKUJB$$eFyX6cWMOa-X7kJtJCIED",
+          "slug" : "in2",
+          "isStreaming" : false
+        }, {
+          "id" : "3YCX686BZg0a58T0Q9QH8$$LKGkeF6BvczogZnMt3Mmn",
+          "slug" : "in3",
+          "isStreaming" : false
+        }, {
+          "id" : "0XNxhfFlsQ-VxeZEIumEW$$ZAsOoHD2BDNtkBqBqqS12",
+          "slug" : "in4",
+          "isStreaming" : false
         } ],
         "outputs" : [ {
           "id" : "0ZrLGwcMtlxXki9XQu4UM$$E59DVpzYJh37QfSYHPBAu",
@@ -379,43 +409,32 @@
           "alias" : "in1",
           "expression" : {
             "format" : "sql",
-            "expression" : "in0.mandt = in1.mandt"
+            "expression" : "in0.MMSTA = in1.MMSTA"
           },
-          "joinType" : "inner"
+          "joinType" : "left_outer"
+        }, {
+          "alias" : "in2",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "in0.DISPO = in2.DISPO"
+          },
+          "joinType" : "left_outer"
+        }, {
+          "alias" : "in3",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "in0.WERKS=in3.WERKS And in0.FEVOR=in3.FEVOR"
+          },
+          "joinType" : "left_outer"
+        }, {
+          "alias" : "in4",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "in0.EKGRP=in4.EKGRP"
+          },
+          "joinType" : "left_outer"
         } ],
-        "expressions" : [ {
-          "target" : "MANDT",
-          "expression" : {
-            "format" : "sql",
-            "expression" : "in0.MANDT"
-          },
-          "description" : "",
-          "_row_id" : null
-        }, {
-          "target" : "MTSTB",
-          "expression" : {
-            "format" : "sql",
-            "expression" : "select trim(T141T.MTSTB) from NSDM_V_MARC left join T141T on NSDM_V_MARC.MMSTA=T141T.MMSTA\r\nwhere T141T.SPRAS=\"E\""
-          },
-          "description" : "",
-          "_row_id" : null
-        }, {
-          "target" : "MMSTA",
-          "expression" : {
-            "format" : "sql",
-            "expression" : "in0.MMSTA"
-          },
-          "description" : "",
-          "_row_id" : null
-        }, {
-          "target" : "SPRAS",
-          "expression" : {
-            "format" : "sql",
-            "expression" : "in1.SPRAS"
-          },
-          "description" : "",
-          "_row_id" : null
-        } ],
+        "expressions" : [ ],
         "hints" : [ {
           "id" : "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9",
           "alias" : "in0",
@@ -426,10 +445,25 @@
           "alias" : "in1",
           "hintType" : "none",
           "propagateColumns" : false
+        }, {
+          "id" : "AKCm-NaeUOwYK4iwZKUJB$$eFyX6cWMOa-X7kJtJCIED",
+          "alias" : "in2",
+          "hintType" : "none",
+          "propagateColumns" : false
+        }, {
+          "id" : "3YCX686BZg0a58T0Q9QH8$$LKGkeF6BvczogZnMt3Mmn",
+          "alias" : "in3",
+          "hintType" : "none",
+          "propagateColumns" : false
+        }, {
+          "id" : "0XNxhfFlsQ-VxeZEIumEW$$ZAsOoHD2BDNtkBqBqqS12",
+          "alias" : "in4",
+          "hintType" : "none",
+          "propagateColumns" : false
         } ],
         "allIn1" : null,
-        "activeTab" : "expressions",
-        "columnsSelector" : [ "xw6B66qjajIzaPXyeKMzX$$KE2ETcEqb294jxqPVJe5q##MANDT", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##MANDT", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##MMSTA", "xw6B66qjajIzaPXyeKMzX$$KE2ETcEqb294jxqPVJe5q##SPRAS", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##MANDT" ],
+        "activeTab" : "conditions",
+        "columnsSelector" : [ "3YCX686BZg0a58T0Q9QH8$$LKGkeF6BvczogZnMt3Mmn##WERKS", "AKCm-NaeUOwYK4iwZKUJB$$eFyX6cWMOa-X7kJtJCIED##DISPO", "3YCX686BZg0a58T0Q9QH8$$LKGkeF6BvczogZnMt3Mmn##FEVOR", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##DISPO", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##EKGRP", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##MMSTA", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##FEVOR", "xw6B66qjajIzaPXyeKMzX$$KE2ETcEqb294jxqPVJe5q##MMSTA", "0XNxhfFlsQ-VxeZEIumEW$$ZAsOoHD2BDNtkBqBqqS12##EKGRP", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##WERKS" ],
         "allIn0" : null,
         "whereClause" : null,
         "headAlias" : "in0"
@@ -530,22 +564,5 @@
     "outputs" : [ ],
     "selectedInputFields" : [ ],
     "isCustomOutputSchema" : false
-  },
-  "diagnostics" : [ {
-    "property" : "$.workflow.processes.MLZbf6uOU9FBTntojxxVR$$tCoJiedPCjvUyMkWdTL0c.properties.expressions[1].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "select trim(T141T.MTSTB) from NSDM_V_MARC left join T141T on NSDM_V_MARC.MMSTA=T141T.MMSTA\r\nwhere T141T.SPRAS=\"E\" is not a valid spark-sql expression [Expressions]",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  } ]
+  }
 }
