@@ -8,6 +8,9 @@ from sap_01_md_matl_loc.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_SAP_NSDM_V_MARC = SAP_NSDM_V_MARC(spark)
+    df_MANDT_FILTER_01 = MANDT_FILTER_01(spark, df_SAP_NSDM_V_MARC)
+    df_SAP_T141T = SAP_T141T(spark)
+    df_MANDT_FILTER_02 = MANDT_FILTER_02(spark, df_SAP_T141T)
 
 def main():
     spark = SparkSession.builder\
