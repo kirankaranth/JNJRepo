@@ -13,7 +13,9 @@ def pipeline(spark: SparkSession) -> None:
     df_MANDT_FILTER_TSPAT = MANDT_FILTER_TSPAT(spark, df_DS_SAP_01_TSPAT)
     df_DS_SAP_01_TVFKT = DS_SAP_01_TVFKT(spark)
     df_MANDT_FILTER_TVFKT = MANDT_FILTER_TVFKT(spark, df_DS_SAP_01_TVFKT)
-    df_Join_1 = Join_1(spark, df_MANDT_FILTER, df_MANDT_FILTER_TSPAT, df_MANDT_FILTER_TVFKT)
+    df_DS_SAP_01_TVKOT = DS_SAP_01_TVKOT(spark)
+    df_MANDT_FILTER_TVKOT = MANDT_FILTER_TVKOT(spark, df_DS_SAP_01_TVKOT)
+    df_Join_1 = Join_1(spark, df_MANDT_FILTER, df_MANDT_FILTER_TSPAT, df_MANDT_FILTER_TVFKT, df_MANDT_FILTER_TVKOT)
 
 def main():
     spark = SparkSession.builder\
