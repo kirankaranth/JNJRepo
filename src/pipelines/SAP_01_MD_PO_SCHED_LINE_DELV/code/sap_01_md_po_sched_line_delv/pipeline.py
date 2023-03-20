@@ -7,6 +7,7 @@ from prophecy.utils import *
 from sap_01_md_po_sched_line_delv.graph import *
 
 def pipeline(spark: SparkSession) -> None:
+    df_DS_SAP_01_EKET = DS_SAP_01_EKET(spark)
     df_SAP_EKET = SAP_EKET(spark)
     df_MANDT_FILTER = MANDT_FILTER(spark, df_SAP_EKET)
     df_NEW_FIELDS = NEW_FIELDS(spark, df_MANDT_FILTER)
