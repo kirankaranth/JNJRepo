@@ -1,4 +1,3 @@
-from .SchemaTransform_1 import *
 from .MANDT_FILTER_TVFKT import *
 from .DS_SAP_01_TSPAT import *
 from .MANDT_FILTER_TVTWT import *
