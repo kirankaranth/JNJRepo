@@ -7,10 +7,16 @@ from prophecy.utils import *
 from sap_01_md_matl_loc.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    df_SAP_NSDM_V_MARC = SAP_NSDM_V_MARC(spark)
-    df_MANDT_FILTER_01 = MANDT_FILTER_01(spark, df_SAP_NSDM_V_MARC)
+    df_SAP_T024 = SAP_T024(spark)
+    df_MANDT_FILTER_05 = MANDT_FILTER_05(spark, df_SAP_T024)
     df_SAP_T141T = SAP_T141T(spark)
+    df_SAP_NSDM_V_MARC = SAP_NSDM_V_MARC(spark)
+    df_SAP_T024F = SAP_T024F(spark)
+    df_MANDT_FILTER_04 = MANDT_FILTER_04(spark, df_SAP_T024F)
     df_MANDT_FILTER_02 = MANDT_FILTER_02(spark, df_SAP_T141T)
+    df_SAP_T024D = SAP_T024D(spark)
+    df_MANDT_FILTER_03 = MANDT_FILTER_03(spark, df_SAP_T024D)
+    df_MANDT_FILTER_01 = MANDT_FILTER_01(spark, df_SAP_NSDM_V_MARC)
 
 def main():
     spark = SparkSession.builder\
