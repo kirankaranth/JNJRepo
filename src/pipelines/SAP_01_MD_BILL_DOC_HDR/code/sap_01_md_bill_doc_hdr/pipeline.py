@@ -7,9 +7,13 @@ from prophecy.utils import *
 from sap_01_md_bill_doc_hdr.graph import *
 
 def pipeline(spark: SparkSession) -> None:
+    df_SAP_TVFKT = SAP_TVFKT(spark)
     df_SAP_VBRK = SAP_VBRK(spark)
     df_MANDT_FILTER = MANDT_FILTER(spark, df_SAP_VBRK)
+    df_SAP_TVTWT = SAP_TVTWT(spark)
     df_Join_1 = Join_1(spark, df_MANDT_FILTER)
+    df_SAP_TSPAT = SAP_TSPAT(spark)
+    df_SAP_TVKOT = SAP_TVKOT(spark)
     df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_Join_1)
 
 def main():
