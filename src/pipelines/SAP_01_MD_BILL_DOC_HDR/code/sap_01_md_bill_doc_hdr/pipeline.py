@@ -25,6 +25,7 @@ def pipeline(spark: SparkSession) -> None:
         df_MANDT_FILTER_TVKOT, 
         df_MANDT_FILTER_TVTWT
     )
+    df_SchemaTransform_1 = SchemaTransform_1(spark, df_Join_1)
 
 def main():
     spark = SparkSession.builder\
