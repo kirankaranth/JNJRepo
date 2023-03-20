@@ -8,8 +8,9 @@ from sap_01_md_bill_doc_hdr.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_SAP_VBRK = SAP_VBRK(spark)
-    df_MANDT_Filter = MANDT_Filter(spark, df_SAP_VBRK)
-    df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_MANDT_Filter)
+    df_MANDT_FILTER = MANDT_FILTER(spark, df_SAP_VBRK)
+    df_Join_1 = Join_1(spark, df_MANDT_FILTER)
+    df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_Join_1)
 
 def main():
     spark = SparkSession.builder\
