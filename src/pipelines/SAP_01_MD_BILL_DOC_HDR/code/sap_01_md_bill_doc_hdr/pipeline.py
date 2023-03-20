@@ -7,7 +7,7 @@ from prophecy.utils import *
 from sap_01_md_bill_doc_hdr.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    pass
+    df_DS_SAP_01_VBRK = DS_SAP_01_VBRK(spark)
 
 def main():
     spark = SparkSession.builder\
