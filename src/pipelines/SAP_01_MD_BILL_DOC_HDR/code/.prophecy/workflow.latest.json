@@ -1470,6 +1470,22 @@
             "sourceColumn" : "",
             "targetColumn" : ""
           }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "CRT_DTTM",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "CASE WHEN ERDAT = ‘00000000’ THEN NULL ELSE SELECT to_timestamp(concat(ERDAT, ERZET),'yyyyMMddHHmmss') end as CRT_DTTM - Follow UTC"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
         } ]
       }
     },
@@ -1520,7 +1536,7 @@
       }
     },
     "severity" : 1,
-    "message" : "pyspark.sql.utils.AnalysisException: Reference 'MANDT' is ambiguous, could be: MANDT, MANDT, MANDT, MANDT, MANDT.",
+    "message" : "could not parse expression, error: \nSyntax error at or near 'ERDAT'(line 1, pos 10)\n\n== SQL ==\nCASE WHEN ERDAT = ‘00000000’ THEN NULL ELSE SELECT to_timestamp(concat(ERDAT, ERZET),'yyyyMMddHHmmss') end as CRT_DTTM - Follow UTC\n----------^^^\n",
     "tags" : [ ],
     "relatedInformation" : [ ]
   } ]
