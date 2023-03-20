@@ -1,18 +1,13 @@
 from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
-from sap_01_md_matl_loc.config.ConfigStore import *
-from sap_01_md_matl_loc.udfs.UDFs import *
+from sap_t141t_en.config.ConfigStore import *
+from sap_t141t_en.udfs.UDFs import *
 from prophecy.utils import *
-from sap_01_md_matl_loc.graph import *
+from sap_t141t_en.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    df_SAP_NSDM_V_MARC = SAP_NSDM_V_MARC(spark)
-    SG_LU_T141T_EN(spark)
-    df_SAP_T024F = SAP_T024F(spark)
-    df_SAP_T024D = SAP_T024D(spark)
-    df_MANDT_FILTER_01 = MANDT_FILTER_01(spark, df_SAP_NSDM_V_MARC)
-    df_SAP_T024 = SAP_T024(spark)
+    SAP_T141T_Lookup(spark)
 
 def main():
     spark = SparkSession.builder\
@@ -23,9 +18,9 @@ def main():
                 .getOrCreate()\
                 .newSession()
     Utils.initializeFromArgs(spark, parse_args())
-    spark.conf.set("prophecy.metadata.pipeline.uri", "pipelines/SAP_01_MD_MATL_LOC")
+    spark.conf.set("prophecy.metadata.pipeline.uri", "pipelines/SAP_T141T_EN")
     
-    MetricsCollector.start(spark = spark, pipelineId = "pipelines/SAP_01_MD_MATL_LOC")
+    MetricsCollector.start(spark = spark, pipelineId = "pipelines/SAP_T141T_EN")
     pipeline(spark)
     MetricsCollector.end(spark)
 
