@@ -10,12 +10,21 @@ class Config(ConfigBase):
             MANDT: str=None, 
             COLUMNS: int=None, 
             DBNAME: str=None, 
-            DAI_ETL_ID: int=None
+            DAI_ETL_ID: int=None, 
+            SHIP_TO: str=None
     ):
         self.spark = None
-        self.update(SRC_SYS_CD, MANDT, COLUMNS, DBNAME, DAI_ETL_ID)
+        self.update(SRC_SYS_CD, MANDT, COLUMNS, DBNAME, DAI_ETL_ID, SHIP_TO)
 
-    def update(self, SRC_SYS_CD: str="BBA", MANDT: str="100", COLUMNS: int=79, DBNAME: str="BBA", DAI_ETL_ID: int=0):
+    def update(
+            self,
+            SRC_SYS_CD: str="bba", 
+            MANDT: str="100", 
+            COLUMNS: int=80, 
+            DBNAME: str="bba", 
+            DAI_ETL_ID: int=0, 
+            SHIP_TO: str="CAST(NULL\u00A0AS\u00A0STRING)"
+    ):
         global prophecy_spark_context
         prophecy_spark_context = self.spark
         self.SRC_SYS_CD = SRC_SYS_CD
@@ -23,4 +32,5 @@ class Config(ConfigBase):
         self.COLUMNS = self.get_int_value(COLUMNS)
         self.DBNAME = DBNAME
         self.DAI_ETL_ID = self.get_int_value(DAI_ETL_ID)
+        self.SHIP_TO = SHIP_TO
         pass

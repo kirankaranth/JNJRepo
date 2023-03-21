@@ -6,4 +6,4 @@ from sap_01_md_bill_doc_hdr.config.ConfigStore import *
 from sap_01_md_bill_doc_hdr.udfs.UDFs import *
 
 def SAP_VBRK(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM bba.VBRK WHERE _deleted_ = 'F'")
+    return spark.sql(f"SELECT * FROM {Config.DBNAME}.VBRK WHERE _deleted_ = 'F'")
