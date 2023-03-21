@@ -60,6 +60,7 @@ def SchemaTransform_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("PLNT_IN_TRNST_QTY", lit(None).cast(DecimalType(18, 4)))\
         .withColumn("FISC_YR_OF_CUR_PER", lit(None).cast(IntegerType()))\
         .withColumn("CUR_PER", lit(None).cast(IntegerType()))\
+        .withColumn("SHRT_MATL_NUM", trim(col("LIITM")))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", to_timestamp(current_timestamp(), "yyyy-MM-dd"))\
         .withColumn("DAI_UPDT_DTTM", to_timestamp(current_timestamp(), "yyyy-MM-dd"))
