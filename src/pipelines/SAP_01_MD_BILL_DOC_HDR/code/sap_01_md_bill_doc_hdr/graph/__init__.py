@@ -8,5 +8,6 @@ from .Join_1 import *
 from .DS_SAP_01_TVTWT import *
 from .DS_SAP_01_TVKOT import *
 from .DS_SAP_01_VBRK import *
+from .NEW_FIELDS_RENAME_FORMAT import *
 from .MANDT_FILTER import *
 from .MANDT_FILTER_TSPAT import *
