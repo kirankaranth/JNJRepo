@@ -345,7 +345,7 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "cw-JqaRt7MYYYcMGMz8YY$$fH6PBuapEvSWGXSfpiku7##LIPBIN" ],
+        "columnsSelector" : [ "cw-JqaRt7MYYYcMGMz8YY$$fH6PBuapEvSWGXSfpiku7##LILOTS", "cw-JqaRt7MYYYcMGMz8YY$$fH6PBuapEvSWGXSfpiku7##LIPBIN", "cw-JqaRt7MYYYcMGMz8YY$$fH6PBuapEvSWGXSfpiku7##LIPQOH" ],
         "transformations" : [ {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
@@ -369,6 +369,38 @@
             "expression" : {
               "format" : "sql",
               "expression" : "'#'"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "XFRM_UNRSTRCTD_STCK\r\n",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "CASE WHEN TRIM(COALESCE(LILOTS, '')) = '' THEN LIPQOH ELSE 0 END AS UNRSTRCTD_STCK\r\n"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "XFRM_RSTRCTD_STCK\r\n",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "CASE WHEN TRIM(COALESCE(LILOTS, '')) <> '' THEN LIPQOH ELSE 0 END AS RSTRCTD_STCK\r\n"
             }
           },
           "DropColumn" : {

@@ -18,8 +18,17 @@ def SchemaTransform_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
             .otherwise(col("lipbin"))
         )\
         .withColumn(
-        "XFRM_PRTY_NUM",
-        lit(
-          "#"
-        )
-    )
+          "XFRM_PRTY_NUM",
+          lit(
+            "#"
+          )
+        )\
+        .withColumn(
+          "XFRM_UNRSTRCTD_STCK\r\n",
+          when((trim(coalesce(col("LILOTS"), lit(""))) == lit("")), col("LIPQOH"))\
+            .otherwise(lit(0))\
+            .alias("UNRSTRCTD_STCK")
+        )\
+        .withColumn("XFRM_RSTRCTD_STCK\r\n", when((trim(coalesce(col("LILOTS"), lit(""))) != lit("")), col("LIPQOH"))\
+        .otherwise(lit(0))\
+        .alias("RSTRCTD_STCK"))
