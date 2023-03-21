@@ -8,11 +8,10 @@ from jde_01_md_matl_inv.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_JDE_F4101 = JDE_F4101(spark)
-    MD_MAT_INV_SWAP(spark)
     df_JDE_F41021 = JDE_F41021(spark)
     df_Join_1 = Join_1(spark, df_JDE_F41021, df_JDE_F4101)
     df_SchemaTransform_1 = SchemaTransform_1(spark, df_Join_1)
-    df_Reformat_1 = Reformat_1(spark)
+    MD_MAT_INV_SWAP(spark, df_SchemaTransform_1)
 
 def main():
     spark = SparkSession.builder\
