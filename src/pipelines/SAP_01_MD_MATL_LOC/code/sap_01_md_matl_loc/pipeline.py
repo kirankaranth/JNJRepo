@@ -10,6 +10,8 @@ def pipeline(spark: SparkSession) -> None:
     df_SAP_MARC = SAP_MARC(spark)
     df_MANDT_FILTER = MANDT_FILTER(spark, df_SAP_MARC)
     df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_MANDT_FILTER)
+    df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS_RENAME_FORMAT)
+    MD_MATL_LOC_SWAP(spark, df_SET_FIELD_ORDER_REFORMAT)
 
 def main():
     spark = SparkSession.builder\
