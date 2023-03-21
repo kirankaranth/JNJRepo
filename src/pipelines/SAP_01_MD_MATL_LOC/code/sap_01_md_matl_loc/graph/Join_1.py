@@ -22,4 +22,6 @@ def Join_1(
           ((col("in0.WERKS") == col("in3.WERKS")) & (col("in0.FEVOR") == col("in3.FEVOR"))),
           "left_outer"
         )\
-        .join(in4.alias("in4"), (col("in0.EKGRP") == col("in4.EKGRP")), "left_outer")
+        .join(in4.alias("in4"), (col("in0.EKGRP") == col("in4.EKGRP")), "left_outer")\
+        .where((col("in1.SPRAS") == lit("E")))\
+        .select(col("in0.WERKS").alias("NSDM_V_MARC_WERKS"), col("in0.MATNR").alias("NSDM_V_MARC_MATNR"))
