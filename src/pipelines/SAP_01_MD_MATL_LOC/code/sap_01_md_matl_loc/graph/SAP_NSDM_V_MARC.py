@@ -6,4 +6,4 @@ from sap_01_md_matl_loc.config.ConfigStore import *
 from sap_01_md_matl_loc.udfs.UDFs import *
 
 def SAP_NSDM_V_MARC(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM hm2.nsdm_v_marc WHERE _deleted_ = 'F'")
+    return spark.sql(f"SELECT * FROM $(DBNAME).nsdm_v_marc WHERE _deleted_ = 'F'")

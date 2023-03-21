@@ -11,12 +11,12 @@ def pipeline(spark: SparkSession) -> None:
     df_MANDT_FILTER_05 = MANDT_FILTER_05(spark, df_SAP_T024)
     df_SAP_T141T = SAP_T141T(spark)
     df_SAP_NSDM_V_MARC = SAP_NSDM_V_MARC(spark)
-    df_SAP_T024F = SAP_T024F(spark)
-    df_MANDT_FILTER_04 = MANDT_FILTER_04(spark, df_SAP_T024F)
+    df_MANDT_FILTER_01 = MANDT_FILTER_01(spark, df_SAP_NSDM_V_MARC)
     df_MANDT_FILTER_02 = MANDT_FILTER_02(spark, df_SAP_T141T)
     df_SAP_T024D = SAP_T024D(spark)
     df_MANDT_FILTER_03 = MANDT_FILTER_03(spark, df_SAP_T024D)
-    df_MANDT_FILTER_01 = MANDT_FILTER_01(spark, df_SAP_NSDM_V_MARC)
+    df_SAP_T024F = SAP_T024F(spark)
+    df_MANDT_FILTER_04 = MANDT_FILTER_04(spark, df_SAP_T024F)
     df_Join_1 = Join_1(
         spark, 
         df_MANDT_FILTER_01, 
@@ -25,6 +25,7 @@ def pipeline(spark: SparkSession) -> None:
         df_MANDT_FILTER_04, 
         df_MANDT_FILTER_05
     )
+    df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_Join_1)
 
 def main():
     spark = SparkSession.builder\
