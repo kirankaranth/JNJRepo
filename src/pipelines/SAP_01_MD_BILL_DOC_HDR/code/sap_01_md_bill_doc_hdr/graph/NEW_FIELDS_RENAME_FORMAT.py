@@ -41,12 +41,12 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("DOC_COND_OWN_COND", trim(col("KNUMV")))\
         .withColumn("SHIPPING_COND_CD", trim(col("VSBED")))\
         .withColumn("FISC_YR", trim(col("GJAHR")))\
-        .withColumn("PSTNG_PER", trim(col("POPER")))\
+        .withColumn("PSTNG_PER", trim(col("POPER")).cast(IntegerType()))\
         .withColumn("CUST_GRP_CD", trim(col("KDGRP")))\
         .withColumn("INTNL_COM_CD", trim(col("INCO1")))\
         .withColumn("DEL_DPRT_PT_CD", trim(col("INCO2")))\
         .withColumn("PSTNG_STS", trim(col("RFBSK")))\
-        .withColumn("EXCH_RT_FIN_PSTNG", trim(col("KURRF")))\
+        .withColumn("EXCH_RT_FIN_PSTNG", trim(col("KURRF")).cast(DecimalType(18, 4)))\
         .withColumn("ADDL_VAL_DAYS", trim(col("VALTG")))\
         .withColumn(
           "FX_VAL_DTTM",
@@ -58,7 +58,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("REGION_CD", trim(col("REGIO")))\
         .withColumn("CO_CD", trim(col("BUKRS")))\
         .withColumn("TAX_CLSN_1", trim(col("TAXK1")))\
-        .withColumn("NET_VAL_AMT", trim(col("NETWR")))\
+        .withColumn("NET_VAL_AMT", trim(col("NETWR")).cast(DecimalType(18, 4)))\
         .withColumn("COMB_CRITA", trim(col("ZUKRI")))\
         .withColumn("STATS_CRNCY", trim(col("STWAE")))\
         .withColumn(
@@ -69,7 +69,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("CNTL_AREA_CD", trim(col("KKBER")))\
         .withColumn("CR_ACCT", trim(col("KNKLI")))\
         .withColumn("CRNCY_CR_CNTL_AREA", trim(col("CMWAE")))\
-        .withColumn("CR_DX_RT", trim(col("CMKUF")))\
+        .withColumn("CR_DX_RT", trim(col("CMKUF")).cast(DecimalType(18, 4)))\
         .withColumn("HIER_TYPE_PRC", trim(col("HITYP_PR")))\
         .withColumn("CUST_PO_NUM", trim(col("BSTNK_VF")))\
         .withColumn("TRAD_PTNR_CO_CD", trim(col("VBUND")))\
@@ -78,14 +78,14 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("CTRY_VAT_NUM", trim(col("STCEG_L")))\
         .withColumn("REF_DOC_NUM", trim(col("XBLNR")))\
         .withColumn("ASGNMT_NUM", trim(col("ZUONR")))\
-        .withColumn("TAX_AMT", trim(col("MWSBK")))\
+        .withColumn("TAX_AMT", trim(col("MWSBK")).cast(DecimalType(18, 4)))\
         .withColumn("LOGL_SYS", trim(col("LOGSYS")))\
         .withColumn(
           "TRNL_DTTM",
           when((col("KURRF_DAT") == lit("00000000")), lit(None)).otherwise(to_timestamp(col("KURRF_DAT"), "yyyyMMdd"))
         )\
         .withColumn("PMT_REF", trim(col("KIDNO")))\
-        .withColumn("NUM_OF_PG", trim(col("NUMPG")))\
+        .withColumn("NUM_OF_PG", trim(col("NUMPG")).cast(IntegerType()))\
         .withColumn("PSTNG_BILL_STS_CD", trim(col("BUCHK")))\
         .withColumn("INVC_LIST_STS_CD", trim(col("RELIK")))\
         .withColumn("CUST_PRC_GRP", trim(col("KONDA")))\
