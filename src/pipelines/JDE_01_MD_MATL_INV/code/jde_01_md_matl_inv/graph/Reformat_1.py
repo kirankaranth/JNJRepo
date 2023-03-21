@@ -5,5 +5,5 @@ from prophecy.libs import typed_lit
 from jde_01_md_matl_inv.config.ConfigStore import *
 from jde_01_md_matl_inv.udfs.UDFs import *
 
-def JDE_F41021_3(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM jes.f41021_adt WHERE _deleted_ = 'F'")
+def Reformat_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
+    return in0
