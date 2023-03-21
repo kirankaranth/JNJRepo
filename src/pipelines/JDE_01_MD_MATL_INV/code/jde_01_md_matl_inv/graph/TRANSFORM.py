@@ -5,7 +5,7 @@ from prophecy.libs import typed_lit
 from jde_01_md_matl_inv.config.ConfigStore import *
 from jde_01_md_matl_inv.udfs.UDFs import *
 
-def SchemaTransform_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
+def TRANSFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
         .withColumn("SRC_SYS_CD", lit(Config.SRC_SYS_CD))\
         .withColumn("SRC_TBL_NM", lit(Config.DBTABLE1))\

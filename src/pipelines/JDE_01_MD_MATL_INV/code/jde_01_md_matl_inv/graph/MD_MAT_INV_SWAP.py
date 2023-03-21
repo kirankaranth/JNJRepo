@@ -9,5 +9,5 @@ def MD_MAT_INV_SWAP(spark: SparkSession, in0: DataFrame):
     in0.write\
         .format("delta")\
         .option("path", "dbfs:/mnt/dev_curdelta/l1_prophecy/md_material/md_matl_inv_swap")\
-        .mode("overwrite")\
+        .mode("error")\
         .saveAsTable(f"l1_md_prophecy.md_matl_inv_swap")

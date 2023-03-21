@@ -10,8 +10,9 @@ def pipeline(spark: SparkSession) -> None:
     df_JDE_F4101 = JDE_F4101(spark)
     MD_MAT_INV_SWAP(spark)
     df_JDE_F41021 = JDE_F41021(spark)
-    df_Join_1 = Join_1(spark, df_JDE_F41021, df_JDE_F4101)
-    df_SchemaTransform_1 = SchemaTransform_1(spark, df_Join_1)
+    df_JOIN = JOIN(spark, df_JDE_F41021, df_JDE_F4101)
+    df_TRANSFORM = TRANSFORM(spark, df_JOIN)
+    df_SET_FIELD_ORDER = SET_FIELD_ORDER(spark, df_TRANSFORM)
 
 def main():
     spark = SparkSession.builder\
