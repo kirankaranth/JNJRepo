@@ -6,7 +6,4 @@ from jde_01_md_matl_inv.config.ConfigStore import *
 from jde_01_md_matl_inv.udfs.UDFs import *
 
 def Join_1(spark: SparkSession, in0: DataFrame, in1: DataFrame, ) -> DataFrame:
-    return in0\
-        .alias("in0")\
-        .join(in1.alias("in1"), (col("in0.IMITM") == col("in1.LIITM")), "inner")\
-        .select(col("in1.SRC_SYS_CD").alias("SRC_SYS_CD"), lit(Config.DBTABLE1).alias("SRC_TBL_NM"), col("in0.IMLITM").alias("MATL_NUM"), col("in1.LIMCU").alias("PLNT_CD"), col("in1.LILOCN").alias("SLOC_CD"), col("in1.LILOTN").alias("BTCH_NUM"), col("in1.LILOTS").alias("BTCH_STS_CD"), col("in1.XFRM_SPCL_STCK_IND").alias("SPCL_STCK_IND"), col("in1.XFRM_PRTY_NUM").alias("PRTY_NUM"), col("in1.XFRM_RSTRCTD_STCK").alias("UNRSTRCTD_STCK"), col("in1.XFRM_IN_TRNSFR_STCK").alias("IN_TRNSFR_STCK"), col("in1.XFRM_QLTY_INSP_STCK").alias("QLTY_INSP_STCK"), col("in1.XFRM_UNRSTRCTD_STCK").alias("RSTRCTD_STCK"), lit(None).cast(DecimalType(18, 4)).alias("BLCKD_STCK"), to_timestamp(lit(None)).alias("CRT_DTTM"), lit(None).cast(DecimalType(18, 4)).alias("RTRNS"), col("in0.IMUOM1").alias("BASE_UOM_CD"), lit(None).cast(DecimalType(18, 4)).alias("STO_IN_TRNST_QTY"), lit(None).cast(DecimalType(18, 4)).alias("PLNT_IN_TRNST_QTY"), lit(None).cast(IntegerType()).alias("FISC_YR_OF_CUR_PER"), lit(None).cast(IntegerType()).alias("CUR_PER"), lit(Config.DAI_ETL_ID).alias("DAI_ETL_ID"))
+    return in0.alias("in0").join(in1.alias("in1"), (col("in1.LIITM") == col("in0.IMITM")), "left_outer")
