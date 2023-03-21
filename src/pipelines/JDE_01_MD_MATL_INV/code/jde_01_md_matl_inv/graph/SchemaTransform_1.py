@@ -9,7 +9,15 @@ def SchemaTransform_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
         .withColumn("SRC_SYS_CD", col("SRC_SYS_CD"))\
         .withColumn("SRC_TBL_NM", lit(Config.DBTABLE1))\
-        .withColumn("MATL_NUM", col("IMLITM"))\
+        .withColumn(
+          "MATL_NUM",
+          coalesce(
+            col("IMLITM"), 
+            lit(
+              "#"
+            )
+          )
+        )\
         .withColumn("PLNT_CD", col("LIMCU"))\
         .withColumn("SLOC_CD", col("LILOCN"))\
         .withColumn("BTCH_NUM", col("LILOTN"))\
