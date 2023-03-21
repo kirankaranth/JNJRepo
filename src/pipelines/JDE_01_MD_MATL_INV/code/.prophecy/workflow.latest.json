@@ -88,8 +88,8 @@
     "interimModeEnabled" : true,
     "visualCodeInterimMode" : "Disabled",
     "recordsLimit" : {
-      "enabled" : false,
-      "value" : 1000
+      "enabled" : true,
+      "value" : 50
     },
     "topLevelPackage" : "jde_01_md_matl_inv"
   },
@@ -204,8 +204,8 @@
       "id" : "M5oOOdrYPFnoN12CyWSEf$$K2JWFZrAHp71kNUcEdKed",
       "component" : "Target",
       "metadata" : {
-        "label" : "Target_1",
-        "slug" : "Target_1",
+        "label" : "MD_MAT_INV_SWAP",
+        "slug" : "MD_MAT_INV_SWAP",
         "x" : -1280,
         "y" : -520,
         "phase" : 0,
@@ -216,14 +216,15 @@
       "ports" : {
         "inputs" : [ {
           "id" : "EdQQ3jiLh0YtJ2uMBXugb$$oepX2zyACuiwIP3reWVRX",
-          "slug" : "in0",
-          "isStreaming" : false
+          "slug" : "in0"
         } ],
         "outputs" : [ ],
         "selectedInputFields" : [ ],
         "isCustomOutputSchema" : false
       },
-      "properties" : { }
+      "properties" : {
+        "datasetId" : "datasets/MD_MATL_INV_SWAP"
+      }
     },
     "Ux9FcvjLOvdcEH_xIS70U$$XpdwomT1Q3MB58pSqNHy0" : {
       "id" : "Ux9FcvjLOvdcEH_xIS70U$$XpdwomT1Q3MB58pSqNHy0",
@@ -427,7 +428,7 @@
           "target" : "BLCKD_STCK",
           "expression" : {
             "format" : "sql",
-            "expression" : "null"
+            "expression" : "CAST(null decimal(18,4))"
           },
           "description" : "",
           "_row_id" : ""
@@ -435,7 +436,7 @@
           "target" : "CRT_DTTM",
           "expression" : {
             "format" : "sql",
-            "expression" : "null"
+            "expression" : "CAST(null AS DateTime)"
           },
           "description" : "",
           "_row_id" : ""
@@ -443,7 +444,7 @@
           "target" : "RTRNS  ",
           "expression" : {
             "format" : "sql",
-            "expression" : "null"
+            "expression" : "CAST(null decimal(18,4))"
           },
           "description" : "",
           "_row_id" : ""
@@ -459,7 +460,7 @@
           "target" : "STO_IN_TRNST_QTY",
           "expression" : {
             "format" : "sql",
-            "expression" : "null"
+            "expression" : "CAST(null decimal(18,4))"
           },
           "description" : "",
           "_row_id" : ""
@@ -467,7 +468,7 @@
           "target" : "PLNT_IN_TRNST_QTY",
           "expression" : {
             "format" : "sql",
-            "expression" : "null"
+            "expression" : "CAST(null decimal(18,4))"
           },
           "description" : "",
           "_row_id" : ""
@@ -475,7 +476,7 @@
           "target" : "FISC_YR_OF_CUR_PER",
           "expression" : {
             "format" : "sql",
-            "expression" : "null"
+            "expression" : "CAST(null AS int)"
           },
           "description" : "",
           "_row_id" : ""
@@ -483,7 +484,7 @@
           "target" : "CUR_PER",
           "expression" : {
             "format" : "sql",
-            "expression" : "null"
+            "expression" : "CAST(null AS int)"
           },
           "description" : "",
           "_row_id" : ""
@@ -663,7 +664,7 @@
             "sourceColumn" : "XFRM_UNRSTRCTD_STCK",
             "expression" : {
               "format" : "sql",
-              "expression" : "CASE WHEN TRIM(COALESCE(LILOTS, '')) = '' THEN LIPQOH/'$DIVISOR' ELSE 0 END AS UNRSTRCTD_STCK\r\n"
+              "expression" : "CAST(CASE WHEN TRIM(COALESCE(LILOTS, '')) = '' THEN LIPQOH/'$DIVISOR' ELSE 0 END AS DECIMAL (18,4))"
             }
           },
           "DropColumn" : {
@@ -679,7 +680,7 @@
             "sourceColumn" : "XFRM_RSTRCTD_STCK",
             "expression" : {
               "format" : "sql",
-              "expression" : "CASE WHEN TRIM(COALESCE(LILOTS, '')) <> '' THEN LIPQOH/'$DIVISOR' ELSE 0 END AS RSTRCTD_STCK\r\n"
+              "expression" : "CAST(CASE WHEN TRIM(COALESCE(LILOTS, '')) <> '' THEN LIPQOH/'$DIVISOR' ELSE 0 END AS DECIMAL (18,4))"
             }
           },
           "DropColumn" : {
@@ -711,7 +712,7 @@
             "sourceColumn" : "XFRM_IN_TRNSFR_STCK",
             "expression" : {
               "format" : "sql",
-              "expression" : "LIQTTR/'$DIVISOR'\r\n"
+              "expression" : "CAST(LIQTTR/'$DIVISOR' AS DECIMAL (18,4))"
             }
           },
           "DropColumn" : {
@@ -727,7 +728,7 @@
             "sourceColumn" : "XFRM_QLTY_INSP_STCK",
             "expression" : {
               "format" : "sql",
-              "expression" : "LIQTIN/'$DIVISOR'\r\n"
+              "expression" : "CAST(LIQTIN/'$DIVISOR' AS DECIMAL (18,4))\r\n"
             }
           },
           "DropColumn" : {
@@ -802,7 +803,7 @@
     "isCustomOutputSchema" : false
   },
   "diagnostics" : [ {
-    "property" : "$.workflow.processes.M5oOOdrYPFnoN12CyWSEf$$K2JWFZrAHp71kNUcEdKed.properties.datasetId",
+    "property" : "$.workflow.processes.ltHfVgrXGnMFfWqIlk3Fx$$4GMyqB6PMqprjJlKWtwcQ.properties.expressions[13].expression.expression",
     "range" : {
       "start" : {
         "line" : 0,
@@ -814,7 +815,87 @@
       }
     },
     "severity" : 1,
-    "message" : "dataset id missing",
+    "message" : "CAST(null decimal(18,4)) is not a valid spark-sql expression [Expressions]",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.ltHfVgrXGnMFfWqIlk3Fx$$4GMyqB6PMqprjJlKWtwcQ.properties.expressions[14].expression.expression",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "CAST(null AS DateTime) is not a valid spark-sql expression [Expressions]",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.ltHfVgrXGnMFfWqIlk3Fx$$4GMyqB6PMqprjJlKWtwcQ.properties.expressions[15].expression.expression",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "CAST(null decimal(18,4)) is not a valid spark-sql expression [Expressions]",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.ltHfVgrXGnMFfWqIlk3Fx$$4GMyqB6PMqprjJlKWtwcQ.properties.expressions[17].expression.expression",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "CAST(null decimal(18,4)) is not a valid spark-sql expression [Expressions]",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.ltHfVgrXGnMFfWqIlk3Fx$$4GMyqB6PMqprjJlKWtwcQ.properties.expressions[18].expression.expression",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "CAST(null decimal(18,4)) is not a valid spark-sql expression [Expressions]",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.M5oOOdrYPFnoN12CyWSEf$$K2JWFZrAHp71kNUcEdKed",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "One of the upstream gems is broken. Please, fix it first.",
     "tags" : [ ],
     "relatedInformation" : [ ]
   } ]
