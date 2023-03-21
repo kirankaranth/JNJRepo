@@ -9,10 +9,16 @@ from sap_01_md_sls_ordr_line.graph import *
 def pipeline(spark: SparkSession) -> None:
     df_SAP_TVM2T = SAP_TVM2T(spark)
     df_SAP_VBAP = SAP_VBAP(spark)
+    df_SAP_TVROT = SAP_TVROT(spark)
     df_SAP_VBKD = SAP_VBKD(spark)
+    df_SAP_TVRO = SAP_TVRO(spark)
+    df_SAP_TVM5T = SAP_TVM5T(spark)
     df_SAP_TVAPT = SAP_TVAPT(spark)
+    df_SAP_TVST = SAP_TVST(spark)
+    df_SAP_TVSTT = SAP_TVSTT(spark)
     df_SAP_TVM1T = SAP_TVM1T(spark)
     df_SAP_TVAGT = SAP_TVAGT(spark)
+    df_SAP_TVM3T = SAP_TVM3T(spark)
     df_SAP_VBAK = SAP_VBAK(spark)
 
 def main():
