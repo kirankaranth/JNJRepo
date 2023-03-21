@@ -387,10 +387,16 @@ pipelines:
     mode: batch
     language: python
     createdAt: '2023-03-21 17:29:57'
-    modifiedAt: '2023-03-21 17:51:22'
+    modifiedAt: '2023-03-21 18:52:36'
     datasets:
       inputs: []
-      outputs: []
+      outputs:
+      - datasets/STRCT_MD_PR
+      - datasets/STRCT_MD_PRCHSNG_ORG
+      - datasets/STRCT_MD_PRCH_INFO
+      - datasets/STRCT_MD_PRCH_INFO_ORG
+      - datasets/STRCT_MD_PR_LINE
+      - datasets/STRCT_MD_STRG_BINS
     dependencies: {}
   pipelines/TBL_STRCT_MES_MD_RESOURCE:
     name: TBL_STRCT_MES_MD_RESOURCE
@@ -447,10 +453,21 @@ pipelines:
     mode: batch
     language: python
     createdAt: '2023-03-21 17:29:57'
-    modifiedAt: '2023-03-21 17:51:22'
+    modifiedAt: '2023-03-21 18:58:28'
     datasets:
       inputs: []
-      outputs: []
+      outputs:
+      - datasets/STRCT_MES_MD_DATA_CLCT_DEF
+      - datasets/STRCT_MES_MD_DATA_CLCT_DEF_BASE
+      - datasets/STRCT_MES_MD_DATA_PT_HIST_DTL
+      - datasets/STRCT_MES_MD_ELCTRNC_PCDR
+      - datasets/STRCT_MES_MD_ELCTRNC_PCDR_BASE
+      - datasets/STRCT_MES_MD_MFG_ORDR_MATL_LIST
+      - datasets/STRCT_MES_MD_RECIPE_SPEC_ITM
+      - datasets/STRCT_MES_MD_SPEC
+      - datasets/STRCT_MES_MD_SPEC_BASE
+      - datasets/STRCT_MES_MD_TASKLIST_BASE
+      - datasets/STRCT_MES_MD_TASK_ITM
     dependencies: {}
   pipelines/TBL_STRCT_MES_MD_SITE_PLANT:
     name: TBL_STRCT_MES_MD_SITE_PLANT
@@ -459,10 +476,14 @@ pipelines:
     mode: batch
     language: python
     createdAt: '2023-03-21 17:29:57'
-    modifiedAt: '2023-03-21 17:51:22'
+    modifiedAt: '2023-03-21 18:57:44'
     datasets:
       inputs: []
-      outputs: []
+      outputs:
+      - datasets/STRCT_MES_MD_ENTRP
+      - datasets/STRCT_MES_MD_FCTRY
+      - datasets/STRCT_MES_MD_LOC
+      - datasets/STRCT_MES_MD_ORG
     dependencies: {}
   pipelines/TBL_STRCT_MES_MD_WORKFLOW:
     name: TBL_STRCT_MES_MD_WORKFLOW
@@ -471,10 +492,17 @@ pipelines:
     mode: batch
     language: python
     createdAt: '2023-03-21 17:29:57'
-    modifiedAt: '2023-03-21 17:51:22'
+    modifiedAt: '2023-03-21 18:56:49'
     datasets:
       inputs: []
-      outputs: []
+      outputs:
+      - datasets/STRCT_MES_MD_OPR
+      - datasets/STRCT_MES_MD_OUTB_CIO_RQST
+      - datasets/STRCT_MES_MD_RPT_EXTRUSION_OPR
+      - datasets/STRCT_MES_MD_RTE_STEP
+      - datasets/STRCT_MES_MD_WRKF
+      - datasets/STRCT_MES_MD_WRKF_BASE
+      - datasets/STRCT_MES_MD_WRKF_STEP
     dependencies: {}
   pipelines/TBL_STRCT_MES_MD_MATERIAL:
     name: TBL_STRCT_MES_MD_MATERIAL
@@ -483,10 +511,14 @@ pipelines:
     mode: batch
     language: python
     createdAt: '2023-03-21 17:29:57'
-    modifiedAt: '2023-03-21 17:51:22'
+    modifiedAt: '2023-03-21 18:56:03'
     datasets:
       inputs: []
-      outputs: []
+      outputs:
+      - datasets/STRCT_MES_MD_PROD
+      - datasets/STRCT_MES_MD_PROD_BASE
+      - datasets/STRCT_MES_MD_PROD_RVSN
+      - datasets/STRCT_MES_MD_PROD_RVSN_BASE
     dependencies: {}
 datasets:
   datasets/STRCT_MD_HU_SER:
@@ -5650,7 +5682,37 @@ datasets:
         createdAt: '2023-03-20 18:20:04'
         modifiedAt: '2023-03-20 18:20:04'
 templates: {}
-jobs: {}
+jobs:
+  jobs/JOB_TBL_STRCT_MD:
+    name: JOB_TBL_STRCT_MD
+    description: ''
+    fabricUID: 32
+    scheduler:
+      Databricks: {}
+    cloudProvider: null
+    jobSize: Prophecy_Small
+    scheduleCron: 0 0 0 1/1 * ? *
+    timeout: null
+    alerting:
+      emails: ''
+      onStart: false
+      onSuccess: false
+      onFailure: false
+    pipelines:
+    - pipelines/TBL_STRCT_MD_BUSINESS_PARTNER
+    - pipelines/TBL_STRCT_MD_HANDLING_UNIT
+    - pipelines/TBL_STRCT_MD_PLANT
+    - pipelines/TBL_STRCT_MD_BATCH_MASTER
+    - pipelines/TBL_STRCT_MD_SOURCELIST
+    - pipelines/TBL_STRCT_MD_INSPECTION_LOT
+    jobClusterMode:
+      clusterMode:
+        Single: {}
+      clusterId: null
+    enabled: null
+    createdAt: '2023-03-21 18:50:06'
+    modifiedAt: '2023-03-21 18:51:28'
+    author: skostadi@its.jnj.com
 libraries: []
 subgraphs: {}
 sqlModels: {}
