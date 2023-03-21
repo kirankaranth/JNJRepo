@@ -7,6 +7,7 @@ from sap_01_md_bill_doc_hdr.udfs.UDFs import *
 
 def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
+        .withColumn("SRC_SYS_CD", lit(Config.SRC_SYS_CD))\
         .withColumn("BILL_DOC", col("VBELN"))\
         .withColumn("SLORG_CD", trim(col("VKORG")))\
         .withColumn("SLORG_DESC", trim(col("TVKOT_VTEXT")))\
