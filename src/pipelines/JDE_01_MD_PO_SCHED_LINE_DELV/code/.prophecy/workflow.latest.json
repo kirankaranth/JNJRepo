@@ -317,6 +317,22 @@
         }, {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
+            "sourceColumn" : "CMT_QTY",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "NULL"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
             "sourceColumn" : "ORDER_TYPE",
             "expression" : {
               "format" : "sql",
@@ -481,8 +497,8 @@
       "id" : "0XCy9IPxyCUT_1oQQKvLm$$POiCqDEHNYCbbS7XWFKUM",
       "component" : "Target",
       "metadata" : {
-        "label" : "MD_PO_SCHED_LINE_DELV",
-        "slug" : "MD_PO_SCHED_LINE_DELV",
+        "label" : "MD_PO_SCHED_LINE_DELV_SWAP",
+        "slug" : "MD_PO_SCHED_LINE_DELV_SWAP",
         "x" : 120,
         "y" : -200,
         "phase" : 0,
@@ -500,15 +516,17 @@
         "selectedInputFields" : [ ],
         "isCustomOutputSchema" : false
       },
-      "properties" : { }
+      "properties" : {
+        "datasetId" : "datasets/md_po_sched_line_delv_swap"
+      }
     },
     "XvO7xwnnjgMK3FX-y5qnW$$8UmCaF7agjgm4XSNZZRiN" : {
       "id" : "XvO7xwnnjgMK3FX-y5qnW$$8UmCaF7agjgm4XSNZZRiN",
       "component" : "Reformat",
       "metadata" : {
-        "label" : "Reformat_1",
-        "slug" : "Reformat_1",
-        "x" : -400,
+        "label" : "SET_FIELD_ORDER_REFORMAT",
+        "slug" : "SET_FIELD_ORDER_REFORMAT",
+        "x" : -380,
         "y" : -200,
         "phase" : 0,
         "cache" : false,
@@ -530,8 +548,148 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ ],
-        "expressions" : [ ]
+        "columnsSelector" : [ "I8XdmcHWcszLyMC0Plv0r$$m_gxKHEqP5zZQBrFrtbIO##DAI_CRT_DTTM", "I8XdmcHWcszLyMC0Plv0r$$m_gxKHEqP5zZQBrFrtbIO##SCHD_QTY", "I8XdmcHWcszLyMC0Plv0r$$m_gxKHEqP5zZQBrFrtbIO##STAT_DELV_DTTM", "I8XdmcHWcszLyMC0Plv0r$$m_gxKHEqP5zZQBrFrtbIO##DAI_ETL_ID", "I8XdmcHWcszLyMC0Plv0r$$m_gxKHEqP5zZQBrFrtbIO##DAI_UPDT_DTTM", "I8XdmcHWcszLyMC0Plv0r$$m_gxKHEqP5zZQBrFrtbIO##CAT_OF_DELV_DT", "I8XdmcHWcszLyMC0Plv0r$$m_gxKHEqP5zZQBrFrtbIO##DELV_DTTM", "I8XdmcHWcszLyMC0Plv0r$$m_gxKHEqP5zZQBrFrtbIO##ORDER_TYPE", "I8XdmcHWcszLyMC0Plv0r$$m_gxKHEqP5zZQBrFrtbIO##PO_LINE_NBR", "I8XdmcHWcszLyMC0Plv0r$$m_gxKHEqP5zZQBrFrtbIO##ORDER_CO", "I8XdmcHWcszLyMC0Plv0r$$m_gxKHEqP5zZQBrFrtbIO##ORDER_SUF", "I8XdmcHWcszLyMC0Plv0r$$m_gxKHEqP5zZQBrFrtbIO##BTCH_NUM", "I8XdmcHWcszLyMC0Plv0r$$m_gxKHEqP5zZQBrFrtbIO##STK_TFR_RECV_QTY", "I8XdmcHWcszLyMC0Plv0r$$m_gxKHEqP5zZQBrFrtbIO##PO_NUM", "I8XdmcHWcszLyMC0Plv0r$$m_gxKHEqP5zZQBrFrtbIO##RECV_QTY", "I8XdmcHWcszLyMC0Plv0r$$m_gxKHEqP5zZQBrFrtbIO##SRC_SYS_CD", "I8XdmcHWcszLyMC0Plv0r$$m_gxKHEqP5zZQBrFrtbIO##CMT_DTTM", "I8XdmcHWcszLyMC0Plv0r$$m_gxKHEqP5zZQBrFrtbIO##PREV_QTY", "I8XdmcHWcszLyMC0Plv0r$$m_gxKHEqP5zZQBrFrtbIO##MRP_ADJ_QTY", "I8XdmcHWcszLyMC0Plv0r$$m_gxKHEqP5zZQBrFrtbIO##DELV_SCHED_CNT_NBR" ],
+        "expressions" : [ {
+          "target" : "SRC_SYS_CD",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "SRC_SYS_CD"
+          },
+          "description" : ""
+        }, {
+          "target" : "PO_NUM",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "PO_NUM"
+          },
+          "description" : ""
+        }, {
+          "target" : "PO_LINE_NBR",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "PO_LINE_NBR"
+          },
+          "description" : ""
+        }, {
+          "target" : "DELV_SCHED_CNT_NBR",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "DELV_SCHED_CNT_NBR"
+          },
+          "description" : ""
+        }, {
+          "target" : "DELV_DTTM",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "DELV_DTTM"
+          },
+          "description" : ""
+        }, {
+          "target" : "SCHD_QTY",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "SCHD_QTY"
+          },
+          "description" : ""
+        }, {
+          "target" : "RECV_QTY",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "RECV_QTY"
+          },
+          "description" : ""
+        }, {
+          "target" : "STK_TFR_RECV_QTY",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "STK_TFR_RECV_QTY"
+          },
+          "description" : ""
+        }, {
+          "target" : "MRP_ADJ_QTY",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "MRP_ADJ_QTY"
+          },
+          "description" : ""
+        }, {
+          "target" : "STAT_DELV_DTTM",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "STAT_DELV_DTTM"
+          },
+          "description" : ""
+        }, {
+          "target" : "ORDER_TYPE",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "ORDER_TYPE"
+          },
+          "description" : ""
+        }, {
+          "target" : "ORDER_CO",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "ORDER_CO"
+          },
+          "description" : ""
+        }, {
+          "target" : "ORDER_SUF",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "ORDER_SUF"
+          },
+          "description" : ""
+        }, {
+          "target" : "PREV_QTY",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "PREV_QTY"
+          },
+          "description" : ""
+        }, {
+          "target" : "CMT_DTTM",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "CMT_DTTM"
+          },
+          "description" : ""
+        }, {
+          "target" : "CAT_OF_DELV_DT",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "CAT_OF_DELV_DT"
+          },
+          "description" : ""
+        }, {
+          "target" : "BTCH_NUM",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "BTCH_NUM"
+          },
+          "description" : ""
+        }, {
+          "target" : "DAI_ETL_ID",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "DAI_ETL_ID"
+          },
+          "description" : ""
+        }, {
+          "target" : "DAI_CRT_DTTM",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "DAI_CRT_DTTM"
+          },
+          "description" : ""
+        }, {
+          "target" : "DAI_UPDT_DTTM",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "DAI_UPDT_DTTM"
+          },
+          "description" : ""
+        } ]
       }
     }
   },
@@ -540,22 +698,5 @@
     "outputs" : [ ],
     "selectedInputFields" : [ ],
     "isCustomOutputSchema" : false
-  },
-  "diagnostics" : [ {
-    "property" : "$.workflow.processes.0XCy9IPxyCUT_1oQQKvLm$$POiCqDEHNYCbbS7XWFKUM.properties.datasetId",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "dataset id missing",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  } ]
+  }
 }

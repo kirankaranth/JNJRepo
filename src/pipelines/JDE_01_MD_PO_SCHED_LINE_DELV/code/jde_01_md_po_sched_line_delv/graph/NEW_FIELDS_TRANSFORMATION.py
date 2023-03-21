@@ -64,6 +64,7 @@ def NEW_FIELDS_TRANSFORMATION(spark: SparkSession, in0: DataFrame) -> DataFrame:
             ))
           )
         )\
+        .withColumn("CMT_QTY", lit(None))\
         .withColumn("ORDER_TYPE", col("pddcto"))\
         .withColumn("ORDER_CO", col("pdkcoo"))\
         .withColumn("ORDER_SUF", col("pdsfxo"))\
