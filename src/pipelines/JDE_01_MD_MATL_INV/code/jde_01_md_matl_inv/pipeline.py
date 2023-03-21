@@ -12,7 +12,7 @@ def pipeline(spark: SparkSession) -> None:
     df_JDE_F41021 = JDE_F41021(spark)
     df_Join_1 = Join_1(spark, df_JDE_F41021, df_JDE_F4101)
     df_SchemaTransform_1 = SchemaTransform_1(spark, df_Join_1)
-    df_Reformat_1 = Reformat_1(spark, df_SchemaTransform_1)
+    df_Reformat_1 = Reformat_1(spark)
 
 def main():
     spark = SparkSession.builder\
