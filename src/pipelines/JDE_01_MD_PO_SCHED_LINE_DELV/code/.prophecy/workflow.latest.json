@@ -16,7 +16,42 @@
     "configuration" : {
       "common" : {
         "type" : "record",
-        "fields" : [ ]
+        "fields" : [ {
+          "name" : "SRC_SYS_CD",
+          "kind" : {
+            "type" : "string",
+            "value" : null
+          },
+          "optional" : false
+        }, {
+          "name" : "DBNAME",
+          "kind" : {
+            "type" : "string",
+            "value" : null
+          },
+          "optional" : false
+        }, {
+          "name" : "COLUMNS",
+          "kind" : {
+            "type" : "long",
+            "value" : null
+          },
+          "optional" : false
+        }, {
+          "name" : "DAI_ETL_ID",
+          "kind" : {
+            "type" : "int",
+            "value" : null
+          },
+          "optional" : false
+        }, {
+          "name" : "DBTABLE",
+          "kind" : {
+            "type" : "string",
+            "value" : null
+          },
+          "optional" : false
+        } ]
       },
       "oldCommon" : {
         "type" : "record",
@@ -24,7 +59,7 @@
       },
       "fabrics" : { },
       "instances" : { },
-      "selected" : "default",
+      "selected" : "JES",
       "nonEditable" : [ ],
       "isSubscribedPipelineWithPipelineConfigs" : false
     },
@@ -38,12 +73,18 @@
     "interimModeEnabled" : true,
     "visualCodeInterimMode" : "Disabled",
     "recordsLimit" : {
-      "enabled" : false,
-      "value" : 1000
+      "enabled" : true,
+      "value" : 25
     },
     "topLevelPackage" : "jde_01_md_po_sched_line_delv"
   },
-  "connections" : [ ],
+  "connections" : [ {
+    "id" : "4vaf9K_fKXL7OIaS6E-MY",
+    "source" : "NQ3EXKL5ryPsVA7Lu3C__$$UgNXQUVBWDdzPFXI_m1ok",
+    "sourcePort" : "1tyFe1oJvJZHtnOgFsg6n$$Sv5ze5bZ9-9kZNw0y0oE1",
+    "target" : "nMm-9O6Oh_ZgnYoYp2dQN$$6gDU75wJ--7PjQ6wi8noe",
+    "targetPort" : "fBjKZG-cN-TDgVXXGbhz7$$CT-w9Rk2Saq1ylIZOkFrT"
+  } ],
   "processes" : {
     "NQ3EXKL5ryPsVA7Lu3C__$$UgNXQUVBWDdzPFXI_m1ok" : {
       "id" : "NQ3EXKL5ryPsVA7Lu3C__$$UgNXQUVBWDdzPFXI_m1ok",
@@ -54,7 +95,7 @@
         "x" : 140,
         "y" : 160,
         "phase" : 0,
-        "cache" : false,
+        "cache" : true,
         "detailedStats" : false,
         "isImported" : false
       },
@@ -71,6 +112,358 @@
       "properties" : {
         "datasetId" : "datasets/DS_JDE_01_F4311"
       }
+    },
+    "nMm-9O6Oh_ZgnYoYp2dQN$$6gDU75wJ--7PjQ6wi8noe" : {
+      "id" : "nMm-9O6Oh_ZgnYoYp2dQN$$6gDU75wJ--7PjQ6wi8noe",
+      "component" : "SchemaTransform",
+      "metadata" : {
+        "label" : "NEW_FIELDS_TRANSFORMATION",
+        "slug" : "NEW_FIELDS_TRANSFORMATION",
+        "x" : 280,
+        "y" : 160,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "fBjKZG-cN-TDgVXXGbhz7$$CT-w9Rk2Saq1ylIZOkFrT",
+          "slug" : "in0",
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Ge3ZMLttvfoDrpp1nLRH6$$sbI27rPuvVp3qXeTWAIsS",
+          "slug" : "out",
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ "fBjKZG-cN-TDgVXXGbhz7$$CT-w9Rk2Saq1ylIZOkFrT##PDDOCO", "fBjKZG-cN-TDgVXXGbhz7$$CT-w9Rk2Saq1ylIZOkFrT##PDUREC", "fBjKZG-cN-TDgVXXGbhz7$$CT-w9Rk2Saq1ylIZOkFrT##PDPDDJ", "fBjKZG-cN-TDgVXXGbhz7$$CT-w9Rk2Saq1ylIZOkFrT##PDLNID", "fBjKZG-cN-TDgVXXGbhz7$$CT-w9Rk2Saq1ylIZOkFrT##PDOPDJ", "fBjKZG-cN-TDgVXXGbhz7$$CT-w9Rk2Saq1ylIZOkFrT##PDUORG", "fBjKZG-cN-TDgVXXGbhz7$$CT-w9Rk2Saq1ylIZOkFrT##PDDCTO", "fBjKZG-cN-TDgVXXGbhz7$$CT-w9Rk2Saq1ylIZOkFrT##PDSFXO", "fBjKZG-cN-TDgVXXGbhz7$$CT-w9Rk2Saq1ylIZOkFrT##PDKCOO" ],
+        "transformations" : [ {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "SRC_SYS_CD",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "'$SRC_SYS_CD'"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "PO_NUM",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "pddoco"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "PO_LINE_NBR",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "pdlnid"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "DELV_SCHED_CNT_NBR",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "'#'"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "DELV_DTTM",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "CASE WHEN LOWER(TRIM(pdpddj)) = 'null' OR TRIM(pdpddj) = '' OR TRIM(pdpddj) = '0' THEN NULL ELSE to_timestamp(substr(CAST(date_add(concat(substr(CAST(CAST(TRIM(pdpddj) AS INT) + 1900000 AS STRING),1,4),'-01-01'), CAST(substr(CAST(CAST(TRIM(pdpddj) AS INT) + 1900000 AS string),5) AS INT )-1) AS STRING), 1, 10),'yyyy-MM-dd') END"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "SCHD_QTY",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "trim(pduorg)"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "RECV_QTY",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "isNull"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "STK_TFR_RECV_QTY",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "trim(pdurec)"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "MRP_ADJ_QTY",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "isNull"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "STAT_DELV_DTTM",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "CASE WHEN LOWER(TRIM(pdopdj )) = 'null' OR TRIM(pdopdj ) = '' OR TRIM(pdopdj ) = '0' THEN NULL ELSE to_timestamp(substr(CAST(date_add(concat(substr(CAST(CAST(TRIM(pdopdj ) AS INT) + 1900000 AS STRING),1,4),'-01-01'), CAST(substr(CAST(CAST(TRIM(pdopdj ) AS INT) + 1900000 AS string),5) AS INT )-1) AS STRING), 1, 10),'yyyy-MM-dd') END"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "ORDER_TYPE",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "pddcto"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "ORDER_CO",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "pdkcoo"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "ORDER_SUF",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "pdsfxo"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "PREV_QTY",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "isNull"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "CMT_DTTM",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "isNull"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "CAT_OF_DELV_DT",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "isNull"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "BTCH_NUM",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "isNull"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "DAI_ETL_ID",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "'$DAI_ETL_ID'"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "DAI_CRT_DTTM",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "current_date()"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "DAI_UPDT_DTTM",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "current_timestamp()"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        } ]
+      }
     }
   },
   "ports" : {
@@ -78,5 +471,102 @@
     "outputs" : [ ],
     "selectedInputFields" : [ ],
     "isCustomOutputSchema" : false
-  }
+  },
+  "diagnostics" : [ {
+    "property" : "$.workflow.metainfo.configuration.common.fields[0].kind.value",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "default values error for key: SRC_SYS_CD value: null",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.metainfo.configuration.common.fields[1].kind.value",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "default values error for key: DBNAME value: null",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.metainfo.configuration.common.fields[2].kind.value",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "default values error for key: COLUMNS value: null",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.metainfo.configuration.common.fields[3].kind.value",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "default values error for key: DAI_ETL_ID value: null",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.metainfo.configuration.common.fields[4].kind.value",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "default values error for key: DBTABLE value: null",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.nMm-9O6Oh_ZgnYoYp2dQN$$6gDU75wJ--7PjQ6wi8noe",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "'Config' object has no attribute 'SRC_SYS_CD'",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  } ]
 }
