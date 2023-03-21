@@ -55,9 +55,9 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("FRWD_CNSMPTN_DAYS_CNT", col("vint2").cast(DecimalType(18, 4)))\
         .withColumn("CNSMPTN_MODE_CD", trim(col("vrmod")))\
         .withColumn("PRCHSNG_GRP_CD", trim(col("ekgrp")))\
-        .withColumn("MMS_FIN_CLSN_CD", trim(col("zzmmsficlass")))\
-        .withColumn("VMI_IND", trim(col("zzsmiind")))\
-        .withColumn("MSTR_PLNG_FMLY_CD", trim(col("zzmpfamily")))\
+        .withColumn("MMS_FIN_CLSN_CD", lit(Config.MMS_FIN_CLSN_CD))\
+        .withColumn("VMI_IND", lit(Config.VMI_IND))\
+        .withColumn("MSTR_PLNG_FMLY_CD", lit(Config.MSTR_PLNG_FMLY_CD))\
         .withColumn("ENTR_SPEC_MATL_PLNT_STS_CD", lit(None).cast(StringType()))\
         .withColumn("ENTR_PRCMT_TYPE_CD", lit(None).cast(StringType()))\
         .withColumn("MATL_HAZ_CD", lit(None).cast(StringType()))\
@@ -132,7 +132,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("RESET_FCST_MDL", lit(None).cast(StringType()))\
         .withColumn("SRVC_LVL", lit(None).cast(DecimalType(18, 4)))\
         .withColumn("ACT_PUSH", lit(None).cast(StringType()))\
-        .withColumn("MTS_MTO_FL", trim(col("zzmtomtsind")))\
+        .withColumn("MTS_MTO_FL", lit(Config.MTS_MTO_FL))\
         .withColumn("CNSMPTN_MODE", lit(None).cast(StringType()))\
         .withColumn("DUAL_SRCNG_WIP", lit(None).cast(StringType()))\
         .withColumn("MATL_STS_DESC", lit(None).cast(StringType()))\
