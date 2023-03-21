@@ -6,4 +6,4 @@ from sap_01_md_matl_loc.config.ConfigStore import *
 from sap_01_md_matl_loc.udfs.UDFs import *
 
 def SAP_T024D(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM $(DBNAME).t024d WHERE _deleted_ = 'F'")
+    return spark.sql(f"SELECT * FROM {Config.DBNAME}.t024d WHERE _deleted_ = 'F'")

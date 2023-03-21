@@ -263,14 +263,14 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##KAUTB", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##SSQSS", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##MINBE", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##AWSLS", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##LVORM", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##KORDB", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##LADGR", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##LOSGR", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##DISLS", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##SERNP" ],
+        "columnsSelector" : [ "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##KAUTB", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##SSQSS", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##MINBE", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##AWSLS", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##LVORM", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##KORDB", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##LADGR", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##LOSGR", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##DISLS", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##MATNR", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##SERNP", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##MMSTD" ],
         "transformations" : [ {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
             "sourceColumn" : "SRC_SYS_CD",
             "expression" : {
               "format" : "sql",
-              "expression" : "$(DBNAME)"
+              "expression" : "MANDT"
             }
           },
           "DropColumn" : {
@@ -286,7 +286,7 @@
             "sourceColumn" : "MATL_NUM",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "MATNR"
             }
           },
           "DropColumn" : {
@@ -302,7 +302,7 @@
             "sourceColumn" : "PLNT_CD",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "WERKS"
             }
           },
           "DropColumn" : {
@@ -478,7 +478,7 @@
             "sourceColumn" : "SPEC_MATL_PLNT_STS_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "CASE WHEN MMSTD = '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE To_timestamp(MMSTD,\"yyyyMMdd\")"
+              "expression" : "CASE WHEN MMSTD = '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE To_timestamp(MMSTD,\"yyyyMMdd\") END AS SPEC_MATL_PLNT_STS_DTTM"
             }
           },
           "DropColumn" : {
@@ -892,7 +892,7 @@
     "isCustomOutputSchema" : false
   },
   "diagnostics" : [ {
-    "property" : "$.workflow.processes.NKxjm1pi6s5F4tMMuWj1_$$tsMTTSvi7WKou-2VFGMwp.properties.transformations[1].expression.expression",
+    "property" : "$.workflow.processes.NKxjm1pi6s5F4tMMuWj1_$$tsMTTSvi7WKou-2VFGMwp",
     "range" : {
       "start" : {
         "line" : 0,
@@ -904,23 +904,7 @@
       }
     },
     "severity" : 1,
-    "message" : "Expression can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.NKxjm1pi6s5F4tMMuWj1_$$tsMTTSvi7WKou-2VFGMwp.properties.transformations[2].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Expression can't be empty.",
+    "message" : "pyspark.sql.utils.AnalysisException: Reference 'MANDT' is ambiguous, could be: MANDT, MANDT, MANDT, MANDT, MANDT.",
     "tags" : [ ],
     "relatedInformation" : [ ]
   } ]

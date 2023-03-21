@@ -6,4 +6,4 @@ from sap_01_md_matl_loc.config.ConfigStore import *
 from sap_01_md_matl_loc.udfs.UDFs import *
 
 def SAP_T024(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"$(DBNAME).t024")
+    return spark.read.table(f"{Config.DBNAME}.t024")
