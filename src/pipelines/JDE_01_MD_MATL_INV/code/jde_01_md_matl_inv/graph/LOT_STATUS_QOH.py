@@ -25,10 +25,16 @@ def LOT_STATUS_QOH(spark: SparkSession, in0: DataFrame) -> DataFrame:
         )\
         .withColumn(
           "XFRM_UNRSTRCTD_STCK",
-          when((trim(coalesce(col("LILOTS"), lit(""))) == lit("")), col("LIPQOH"))\
+          when((trim(coalesce(col("LILOTS"), lit(""))) == lit("")), (col("LIPQOH") / lit(Config.DIVISOR)))\
             .otherwise(lit(0))\
             .alias("UNRSTRCTD_STCK")
         )\
-        .withColumn("XFRM_RSTRCTD_STCK", when((trim(coalesce(col("LILOTS"), lit(""))) != lit("")), col("LIPQOH"))\
-        .otherwise(lit(0))\
-        .alias("RSTRCTD_STCK"))
+        .withColumn(
+          "XFRM_RSTRCTD_STCK",
+          when((trim(coalesce(col("LILOTS"), lit(""))) != lit("")), (col("LIPQOH") / lit(Config.DIVISOR)))\
+            .otherwise(lit(0))\
+            .alias("RSTRCTD_STCK")
+        )\
+        .withColumn("SRC_SYS_CD", lit(Config.SRC_SYS_CD))\
+        .withColumn("XFRM_IN_TRNSFR_STCK", (col("LIQTTR") / lit(Config.DIVISOR)))\
+        .withColumn("XFRM_QLTY_INSP_STCK", (col("LIQTIN") / lit(Config.DIVISOR)))
