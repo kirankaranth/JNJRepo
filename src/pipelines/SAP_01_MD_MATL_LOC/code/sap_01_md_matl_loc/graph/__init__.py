@@ -9,4 +9,5 @@ from .SAP_T024D import *
 from .MANDT_FILTER_05 import *
 from .MANDT_FILTER_03 import *
 from .MANDT_FILTER_02 import *
+from .NEW_FIELDS_RENAME_FORMAT import *
 from .MANDT_FILTER_01 import *

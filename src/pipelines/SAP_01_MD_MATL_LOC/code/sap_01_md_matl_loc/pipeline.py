@@ -27,6 +27,7 @@ def pipeline(spark: SparkSession) -> None:
     )
     df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_Join_1)
     df_SET_FIELDS_ORDER_REFORMAT = SET_FIELDS_ORDER_REFORMAT(spark, df_NEW_FIELDS_RENAME_FORMAT)
+    SAP_MD_MATL_LOC(spark, df_SET_FIELDS_ORDER_REFORMAT)
 
 def main():
     spark = SparkSession.builder\
