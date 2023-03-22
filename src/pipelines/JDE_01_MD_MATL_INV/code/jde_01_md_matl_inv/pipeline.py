@@ -11,10 +11,10 @@ def pipeline(spark: SparkSession) -> None:
     df_JDE_F41021 = JDE_F41021(spark)
     df_JOIN = JOIN(spark, df_JDE_F41021, df_JDE_F4101)
     df_TRANSFORM = TRANSFORM(spark, df_JOIN)
-    df_DEDUPLICATE = DEDUPLICATE(spark, df_TRANSFORM)
-    df_SET_FIELD_ORDER = SET_FIELD_ORDER(spark, df_DEDUPLICATE)
-    MD_MAT_INV_SWAP(spark, df_SET_FIELD_ORDER)
     df_ROW_NUM_TEST = ROW_NUM_TEST(spark, df_TRANSFORM)
+    df_SET_FIELD_ORDER = SET_FIELD_ORDER(spark, df_ROW_NUM_TEST)
+    MD_MAT_INV_SWAP(spark, df_SET_FIELD_ORDER)
+    df_DEDUPLICATE = DEDUPLICATE(spark, df_TRANSFORM)
 
 def main():
     spark = SparkSession.builder\
