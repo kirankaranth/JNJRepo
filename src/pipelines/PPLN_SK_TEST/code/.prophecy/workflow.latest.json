@@ -1,0 +1,189 @@
+{
+  "metainfo" : {
+    "id" : "1",
+    "language" : "python",
+    "fabricId" : "32",
+    "frontEndLanguage" : "sql",
+    "mode" : "batch",
+    "udfs" : {
+      "language" : "python",
+      "udfs" : [ ]
+    },
+    "udafs" : {
+      "language" : "python",
+      "code" : ""
+    },
+    "configuration" : {
+      "common" : {
+        "type" : "record",
+        "fields" : [ {
+          "name" : "targetSchema",
+          "kind" : {
+            "type" : "string",
+            "value" : "l1_md_prophecy"
+          },
+          "optional" : false
+        }, {
+          "name" : "sourceSystem",
+          "kind" : {
+            "type" : "string",
+            "value" : "atl"
+          },
+          "optional" : false
+        } ]
+      },
+      "oldCommon" : {
+        "type" : "record",
+        "fields" : [ ]
+      },
+      "fabrics" : { },
+      "instances" : { },
+      "selected" : "default",
+      "nonEditable" : [ ],
+      "isSubscribedPipelineWithPipelineConfigs" : false
+    },
+    "sparkConf" : [ ],
+    "hadoopConf" : [ ],
+    "codeMode" : "sparse",
+    "buildSystem" : "maven",
+    "externalDependencies" : [ ],
+    "isImported" : false,
+    "interimMode" : "Full",
+    "interimModeEnabled" : true,
+    "visualCodeInterimMode" : "Disabled",
+    "recordsLimit" : {
+      "enabled" : false,
+      "value" : 1000
+    },
+    "topLevelPackage" : "ppln_sk_test"
+  },
+  "connections" : [ {
+    "id" : "B38QxjMkGu_aXhfm4djhx",
+    "source" : "JGoctfyLkUaEKvRnaoJ_t$$NApXNhIH7PK0hFKQ6a-wz",
+    "sourcePort" : "2tp7gKsSzjtxdkvm_7VRR$$ohVa6ageHGagExTCKrdBj",
+    "target" : "BBO6R4uxqSuIaYC21h7B-$$7chkc4Rt8xofs4yT5wjVV",
+    "targetPort" : "_a5ThhT0UbZcG9jULu2Y3$$Z1Iz-IvSmY06t2-ECimgd"
+  }, {
+    "id" : "z7YnkXBtZd4kkwAe5lsvr",
+    "source" : "3AjEowht0R1n6sP3x22pl$$-T1-mkyXKt1Wia4eJmMGl",
+    "sourcePort" : "mSrL4HwIHjq7j8gU0gTg1$$RoqmijFr5HMSX7xq07esU",
+    "target" : "JGoctfyLkUaEKvRnaoJ_t$$NApXNhIH7PK0hFKQ6a-wz",
+    "targetPort" : "3T-AB7T4OZDFCKt5vHy8x$$dbBV2YEyqquejYCW2sYUl"
+  } ],
+  "processes" : {
+    "BBO6R4uxqSuIaYC21h7B-$$7chkc4Rt8xofs4yT5wjVV" : {
+      "id" : "BBO6R4uxqSuIaYC21h7B-$$7chkc4Rt8xofs4yT5wjVV",
+      "component" : "Target",
+      "metadata" : {
+        "label" : "MD_MATL",
+        "slug" : "MD_MATL",
+        "x" : -300,
+        "y" : -140,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "_a5ThhT0UbZcG9jULu2Y3$$Z1Iz-IvSmY06t2-ECimgd",
+          "slug" : "in0",
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/MD_MATL"
+      }
+    },
+    "JGoctfyLkUaEKvRnaoJ_t$$NApXNhIH7PK0hFKQ6a-wz" : {
+      "id" : "JGoctfyLkUaEKvRnaoJ_t$$NApXNhIH7PK0hFKQ6a-wz",
+      "component" : "SchemaTransform",
+      "metadata" : {
+        "label" : "SchemaTransform_1",
+        "slug" : "SchemaTransform_1",
+        "x" : -500,
+        "y" : -140,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "3T-AB7T4OZDFCKt5vHy8x$$dbBV2YEyqquejYCW2sYUl",
+          "slug" : "in0",
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "2tp7gKsSzjtxdkvm_7VRR$$ohVa6ageHGagExTCKrdBj",
+          "slug" : "out",
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "transformations" : [ {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "SRC_SYS_CD2",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "'$sourceSystem'"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        } ]
+      }
+    },
+    "3AjEowht0R1n6sP3x22pl$$-T1-mkyXKt1Wia4eJmMGl" : {
+      "id" : "3AjEowht0R1n6sP3x22pl$$-T1-mkyXKt1Wia4eJmMGl",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "Script_1",
+        "slug" : "Script_1",
+        "x" : -720,
+        "y" : -120,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "mSrL4HwIHjq7j8gU0gTg1$$RoqmijFr5HMSX7xq07esU",
+          "slug" : "out0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true
+      },
+      "properties" : {
+        "script" : "out0 = spark.sql(f\"\"\"\n    SELECT * \n    \n    FROM {Config.sourceSystem}.mara\n    limit 10\n\"\"\")",
+        "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+        "scriptMethodFooter" : "    return out0"
+      }
+    }
+  },
+  "ports" : {
+    "inputs" : [ ],
+    "outputs" : [ ],
+    "selectedInputFields" : [ ],
+    "isCustomOutputSchema" : false
+  }
+}
