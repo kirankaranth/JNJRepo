@@ -9,8 +9,8 @@ class Config(ConfigBase):
             SRC_SYS_CD: str=None, 
             DBNAME: str=None, 
             TABLENAME: str=None, 
-            DAI_ETL_ID: str=None, 
-            COLUMNS: str=None
+            DAI_ETL_ID: int=None, 
+            COLUMNS: int=None
     ):
         self.spark = None
         self.update(SRC_SYS_CD, DBNAME, TABLENAME, DAI_ETL_ID, COLUMNS)
@@ -20,14 +20,14 @@ class Config(ConfigBase):
             SRC_SYS_CD: str="jes", 
             DBNAME: str="jes", 
             TABLENAME: str="f4311", 
-            DAI_ETL_ID: str="0", 
-            COLUMNS: str="21"
+            DAI_ETL_ID: int=0, 
+            COLUMNS: int=21
     ):
         global prophecy_spark_context
         prophecy_spark_context = self.spark
         self.SRC_SYS_CD = SRC_SYS_CD
         self.DBNAME = DBNAME
         self.TABLENAME = TABLENAME
-        self.DAI_ETL_ID = DAI_ETL_ID
-        self.COLUMNS = COLUMNS
+        self.DAI_ETL_ID = self.get_int_value(DAI_ETL_ID)
+        self.COLUMNS = self.get_int_value(COLUMNS)
         pass

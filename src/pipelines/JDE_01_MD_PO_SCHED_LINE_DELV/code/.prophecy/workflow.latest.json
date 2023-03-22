@@ -40,15 +40,15 @@
         }, {
           "name" : "DAI_ETL_ID",
           "kind" : {
-            "type" : "string",
-            "value" : "0"
+            "type" : "int",
+            "value" : 0
           },
           "optional" : false
         }, {
           "name" : "COLUMNS",
           "kind" : {
-            "type" : "string",
-            "value" : "21"
+            "type" : "long",
+            "value" : 21
           },
           "optional" : false
         } ]
@@ -59,7 +59,7 @@
       },
       "fabrics" : { },
       "instances" : { },
-      "selected" : "JES",
+      "selected" : "default",
       "nonEditable" : [ ],
       "isSubscribedPipelineWithPipelineConfigs" : false
     },
@@ -153,7 +153,7 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "fBjKZG-cN-TDgVXXGbhz7$$CT-w9Rk2Saq1ylIZOkFrT##PDDOCO", "fBjKZG-cN-TDgVXXGbhz7$$CT-w9Rk2Saq1ylIZOkFrT##PDUREC", "fBjKZG-cN-TDgVXXGbhz7$$CT-w9Rk2Saq1ylIZOkFrT##PDLNID", "fBjKZG-cN-TDgVXXGbhz7$$CT-w9Rk2Saq1ylIZOkFrT##PDOPDJ", "fBjKZG-cN-TDgVXXGbhz7$$CT-w9Rk2Saq1ylIZOkFrT##PDUORG", "fBjKZG-cN-TDgVXXGbhz7$$CT-w9Rk2Saq1ylIZOkFrT##PDDCTO", "fBjKZG-cN-TDgVXXGbhz7$$CT-w9Rk2Saq1ylIZOkFrT##PDSFXO", "fBjKZG-cN-TDgVXXGbhz7$$CT-w9Rk2Saq1ylIZOkFrT##PDKCOO" ],
+        "columnsSelector" : [ "fBjKZG-cN-TDgVXXGbhz7$$CT-w9Rk2Saq1ylIZOkFrT##PDDOCO", "fBjKZG-cN-TDgVXXGbhz7$$CT-w9Rk2Saq1ylIZOkFrT##PDUREC", "fBjKZG-cN-TDgVXXGbhz7$$CT-w9Rk2Saq1ylIZOkFrT##PDLNID", "fBjKZG-cN-TDgVXXGbhz7$$CT-w9Rk2Saq1ylIZOkFrT##PDOPDJ", "fBjKZG-cN-TDgVXXGbhz7$$CT-w9Rk2Saq1ylIZOkFrT##PDUORG", "fBjKZG-cN-TDgVXXGbhz7$$CT-w9Rk2Saq1ylIZOkFrT##PDDCTO", "fBjKZG-cN-TDgVXXGbhz7$$CT-w9Rk2Saq1ylIZOkFrT##PDDRQJ", "fBjKZG-cN-TDgVXXGbhz7$$CT-w9Rk2Saq1ylIZOkFrT##PDSFXO", "fBjKZG-cN-TDgVXXGbhz7$$CT-w9Rk2Saq1ylIZOkFrT##PDKCOO" ],
         "transformations" : [ {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
@@ -224,7 +224,7 @@
             "sourceColumn" : "DELV_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "to_timestamp(\r\n    CASE\r\n        WHEN LOWER(TRIM(pdopdj)) IS NULL OR TRIM(pdopdj) = '' OR TRIM(pdopdj) = '0' THEN NULL \r\n        ELSE to_timestamp(\r\n            CONCAT(\r\n                CAST(SUBSTR(TRIM(pdopdj), 1, 4) AS VARCHAR(4)),\r\n                '-',\r\n                CAST(SUBSTR(TRIM(pdopdj), 5, 2) AS VARCHAR(2)),\r\n                '-',\r\n                CAST(SUBSTR(TRIM(pdopdj), 7, 2) AS VARCHAR(2))\r\n            ),\r\n            'yyyy-MM-dd'\r\n        )\r\n    END\r\n)"
+              "expression" : "NULL"
             }
           },
           "DropColumn" : {
@@ -304,7 +304,7 @@
             "sourceColumn" : "STAT_DELV_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "to_timestamp(\r\n    CASE\r\n        WHEN LOWER(TRIM(pdopdj)) IS NULL OR TRIM(pdopdj) = '' OR TRIM(pdopdj) = '0' THEN NULL \r\n        ELSE to_timestamp(\r\n            CONCAT(\r\n                CAST(SUBSTR(TRIM(pdopdj), 1, 4) AS VARCHAR(4)),\r\n                '-',\r\n                CAST(SUBSTR(TRIM(pdopdj), 5, 2) AS VARCHAR(2)),\r\n                '-',\r\n                CAST(SUBSTR(TRIM(pdopdj), 7, 2) AS VARCHAR(2))\r\n            ),\r\n            'yyyy-MM-dd'\r\n        )\r\n    END\r\n)"
+              "expression" : "\r\n    CASE\r\n        WHEN LOWER(TRIM(pdopdj)) IS NULL OR TRIM(pddrqj) = '' OR TRIM(pddrqj) = '0' THEN NULL \r\n        ELSE to_timestamp(\r\n            CONCAT(\r\n                CAST(SUBSTR(TRIM(pddrqj), 1, 4) AS VARCHAR(4)),\r\n                '-',\r\n                CAST(SUBSTR(TRIM(pddrqj), 5, 2) AS VARCHAR(2)),\r\n                '-',\r\n                CAST(SUBSTR(TRIM(pddrqj), 7, 2) AS VARCHAR(2))\r\n            ),\r\n            'yyyy-MM-dd'\r\n        )\r\n    END\r\n"
             }
           },
           "DropColumn" : {
@@ -400,7 +400,7 @@
             "sourceColumn" : "CMT_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "NULL"
+              "expression" : "\r\n    CASE\r\n        WHEN LOWER(TRIM(pdopdj)) IS NULL OR TRIM(pdopdj) = '' OR TRIM(pdopdj) = '0' THEN NULL \r\n        ELSE to_timestamp(\r\n            CONCAT(\r\n                CAST(SUBSTR(TRIM(pdopdj), 1, 4) AS VARCHAR(4)),\r\n                '-',\r\n                CAST(SUBSTR(TRIM(pdopdj), 5, 2) AS VARCHAR(2)),\r\n                '-',\r\n                CAST(SUBSTR(TRIM(pdopdj), 7, 2) AS VARCHAR(2))\r\n            ),\r\n            'yyyy-MM-dd'\r\n        )\r\n    END"
             }
           },
           "DropColumn" : {
