@@ -16,8 +16,8 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("SRC_LIST_IND", trim(col("KORDB")))\
         .withColumn("LD_GRP_CD", trim(col("LADGR")))\
         .withColumn("QUAL_MGMT_CNTL_CD", trim(col("SSQSS")))\
-        .withColumn("REORDR_QTY", trim(col("MINBE")))\
-        .withColumn("COST_LOT_SIZE_VAL", trim(col("LOSGR")))\
+        .withColumn("REORDR_QTY", trim(col("MINBE")).cast(DecimalType(18, 4)))\
+        .withColumn("COST_LOT_SIZE_VAL", trim(col("LOSGR")).cast(DecimalType(18, 4)))\
         .withColumn("SERIZATION_PRFL_CD", trim(col("SERNP")))\
         .withColumn("SPEC_MATL_PLNT_STS_CD", trim(col("MMSTA")))\
         .withColumn(
@@ -39,21 +39,21 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("MRP_TYPE_CD", trim(col("DISMM")))\
         .withColumn("ORIG_CTRY_CD", trim(col("HERKL")))\
         .withColumn("PLNG_STRTGY_GRP_CD", trim(col("STRGR")))\
-        .withColumn("RD_VAL_QTY", trim(col("BSTRF")))\
-        .withColumn("LOT_SIZE_FX_QTY", trim(col("BSTFE")))\
-        .withColumn("GOOD_RCPT_LEAD_DAYS_QTY", trim(col("WEBAZ")))\
-        .withColumn("LOT_SIZE_MAX_QTY", trim(col("BSTMA")))\
-        .withColumn("LOT_SIZE_MIN_QTY", trim(col("BSTMI")))\
-        .withColumn("SFTY_STK_QTY", trim(col("EISBE")))\
+        .withColumn("RD_VAL_QTY", trim(col("BSTRF")).cast(DecimalType(18, 4)))\
+        .withColumn("LOT_SIZE_FX_QTY", trim(col("BSTFE")).cast(DecimalType(18, 4)))\
+        .withColumn("GOOD_RCPT_LEAD_DAYS_QTY", trim(col("WEBAZ")).cast(DecimalType(18, 4)))\
+        .withColumn("LOT_SIZE_MAX_QTY", trim(col("BSTMA")).cast(DecimalType(22, 4)))\
+        .withColumn("LOT_SIZE_MIN_QTY", trim(col("BSTMI")).cast(DecimalType(18, 4)))\
+        .withColumn("SFTY_STK_QTY", trim(col("EISBE")).cast(DecimalType(18, 4)))\
         .withColumn("PLNG_TIME_FENCE_DAYS_CNT", trim(col("FXHOR")))\
-        .withColumn("MAX_STK_LVL_QTY", trim(col("MABST")))\
+        .withColumn("MAX_STK_LVL_QTY", trim(col("MABST")).cast(DecimalType(18, 4)))\
         .withColumn("SFTY_TIME_DAYS_CNT", trim(col("SHZET")))\
-        .withColumn("PLAN_DELV_DAYS_CNT", trim(col("PLIFZ")))\
-        .withColumn("SCRAP_PCT", trim(col("AUSSS")))\
-        .withColumn("INHS_PRDTN_DAYS_CNT", trim(col("DZEIT")))\
-        .withColumn("MIN_SFTY_STK_QTY", trim(col("EISLO")))\
-        .withColumn("BKWRD_CNSMPTN_DAYS_CNT", trim(col("VINT1")))\
-        .withColumn("FRWD_CNSMPTN_DAYS_CNT", trim(col("VINT2")))\
+        .withColumn("PLAN_DELV_DAYS_CNT", trim(col("PLIFZ")).cast(DecimalType(18, 4)))\
+        .withColumn("SCRAP_PCT", trim(col("AUSSS")).cast(DecimalType(18, 4)))\
+        .withColumn("INHS_PRDTN_DAYS_CNT", trim(col("DZEIT")).cast(DecimalType(18, 4)))\
+        .withColumn("MIN_SFTY_STK_QTY", trim(col("EISLO")).cast(DecimalType(18, 4)))\
+        .withColumn("BKWRD_CNSMPTN_DAYS_CNT", trim(col("VINT1")).cast(DecimalType(18, 4)))\
+        .withColumn("FRWD_CNSMPTN_DAYS_CNT", trim(col("VINT2")).cast(DecimalType(18, 4)))\
         .withColumn("CNSMPTN_MODE_CD", trim(col("VRMOD")))\
         .withColumn("PRCHSNG_GRP_CD", trim(col("EKGRP")))\
         .withColumn("MMS_FIN_CLSN_CD", lit(None).cast(StringType()))\
@@ -78,13 +78,13 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("FLLP_MATL", trim(col("NFMAT")))\
         .withColumn("RQR_GRP_IN", trim(col("KZBED")))\
         .withColumn("MIX_MRP_IN", trim(col("MISKZ")))\
-        .withColumn("BASE_QTY", trim(col("BASMG")))\
-        .withColumn("MAX_STRG_PER", trim(col("MAXLZ")))\
+        .withColumn("BASE_QTY", trim(col("BASMG")).cast(DecimalType(18, 4)))\
+        .withColumn("MAX_STRG_PER", trim(col("MAXLZ")).cast(DecimalType(18, 4)))\
         .withColumn("UNIT_FOR_MAX_STRG", trim(col("LZEIH")))\
-        .withColumn("OVR_DELV_TLRNC", trim(col("UEETO")))\
+        .withColumn("OVR_DELV_TLRNC", trim(col("UEETO")).cast(DecimalType(18, 4)))\
         .withColumn("UNLTD_OVER_DELV_IN", trim(col("UEETK")))\
-        .withColumn("UND_DELV_TLRNC", trim(col("UNETO")))\
-        .withColumn("TOT_REPLN_LT", trim(col("WZEIT")))\
+        .withColumn("UND_DELV_TLRNC", trim(col("UNETO")).cast(DecimalType(18, 4)))\
+        .withColumn("TOT_REPLN_LT", trim(col("WZEIT")).cast(DecimalType(18, 4)))\
         .withColumn("INSP_STK", trim(col("INSMK")))\
         .withColumn("BTCH_MGMT_PLNT_IN", trim(col("XCHPF")))\
         .withColumn("FISC_YR_VRNT", trim(col("PERIV")))\
@@ -99,7 +99,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("GRP_CNTR", trim(col("APLAL")))\
         .withColumn("ISS_STRG_LOC", trim(col("LGPRO")))\
         .withColumn("MRP_GRP", trim(col("DISGR")))\
-        .withColumn("CMPNT_SCRAP_PCT", trim(col("KAUSF")))\
+        .withColumn("CMPNT_SCRAP_PCT", trim(col("KAUSF")).cast(DecimalType(18, 4)))\
         .withColumn("CERT_TYPE", trim(col("QZGTP")))\
         .withColumn("INSP_SETUP_FOR_MATL", trim(col("QMATV")))\
         .withColumn("PHY_INV_CC", trim(col("ABCIN")))\
@@ -113,7 +113,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("FIX_CC_IN", trim(col("CCFIX")))\
         .withColumn("PROD_SCHDLNG_PRFL", trim(col("SFCPF")))\
         .withColumn("CUR_PER", trim(col("LFMON")))\
-        .withColumn("INSP_INTV", trim(col("PRFRQ")))\
+        .withColumn("INSP_INTV", trim(col("PRFRQ")).cast(DecimalType(18, 4)))\
         .withColumn("DOC_REQ_IN", trim(col("KZDKZ")))\
         .withColumn("MATL_FRGHT_GRP", trim(col("MFRGR")))\
         .withColumn("MATL_AUTH_QM", trim(col("QMATA")))\
@@ -141,7 +141,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         )\
         .withColumn("ORIG_BATCH_REF_MATL", trim(col("UCMAT")))\
         .withColumn("RESET_FCST_MDL", trim(col("AUTRU")))\
-        .withColumn("SRVC_LVL", trim(col("LGRAD")))\
+        .withColumn("SRVC_LVL", trim(col("LGRAD")).cast(DecimalType(18, 4)))\
         .withColumn("ACT_PUSH", trim(col("ZZ1_ACTIVATE_PUSH_PLT")))\
         .withColumn("MTS_MTO_FL", trim(col("ZZ1_MTS_MTO_FLAG_PLT")))\
         .withColumn("CNSMPTN_MODE", trim(col("ZZ1_CONSUMPTION_MODE_PLT")))\

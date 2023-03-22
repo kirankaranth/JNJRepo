@@ -97,6 +97,7 @@ def SET_FIELDS_ORDER_REFORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("REP_MFG_PRFL"), 
         col("NEG_STK_PLNT"), 
         col("PLNG_CYC"), 
+        col("RD_PRFL"), 
         col("CO_PROD_IN"), 
         col("BULK_MATL_IN"), 
         col("FIX_CC_IN"), 
