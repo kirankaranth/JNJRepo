@@ -7,7 +7,12 @@
     "mode" : "batch",
     "udfs" : {
       "language" : "python",
-      "udfs" : [ ]
+      "udfs" : [ {
+        "name" : "get_mandt_code",
+        "code" : "@udf(returnType = StringType())\r\ndef get_mandt_code(mandt: str):\r\n    return mandt_code_map.get(mandt, \"Not Found\")",
+        "language" : "python"
+      } ],
+      "initialCode" : "mandt_code_map = {\"bbl\" : \"100\", \"p01\" : \"020\", \"bwi\" : \"400\"}"
     },
     "udafs" : {
       "language" : "python",
@@ -62,7 +67,7 @@
           "name" : "MMS_FIN_CLSN_CD",
           "kind" : {
             "type" : "string",
-            "value" : "Trim(zzmmsficlass)"
+            "value" : "trim(col(\"zzmmsficlass\")"
           },
           "optional" : false
         }, {
@@ -94,7 +99,7 @@
       },
       "fabrics" : { },
       "instances" : { },
-      "selected" : "GEU",
+      "selected" : "P01",
       "nonEditable" : [ ],
       "isSubscribedPipelineWithPipelineConfigs" : false
     },
@@ -1167,7 +1172,7 @@
         "columnsSelector" : [ "Y29MGjTP4vJpr73bnhZgh$$o3zVK8n7hVylnCaCeRCSK##MANDT" ],
         "condition" : {
           "format" : "sql",
-          "expression" : "MANDT = '$MANDT'"
+          "expression" : "MANDT = get_mandt_code('$SRC_SYS_CD')"
         }
       }
     },

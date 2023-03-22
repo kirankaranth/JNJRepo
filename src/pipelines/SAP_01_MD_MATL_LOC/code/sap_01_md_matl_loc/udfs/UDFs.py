@@ -12,6 +12,11 @@ from prophecy.lookups import (
     lookup_row_reverse,
     lookup_nth
 )
+mandt_code_map = {"bbl" : "100", "p01" : "020", "bwi" : "400"}
 
 def registerUDFs(spark: SparkSession):
-    pass
+    spark.udf.register("get_mandt_code", get_mandt_code)
+
+@udf(returnType = StringType())
+def get_mandt_code(mandt: str):
+    return mandt_code_map.get(mandt, "Not Found")

@@ -6,4 +6,4 @@ from sap_01_md_matl_loc.config.ConfigStore import *
 from sap_01_md_matl_loc.udfs.UDFs import *
 
 def JDE_F4102(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM jes.f4102_adt WHERE _deleted_ = 'F'")
+    return spark.sql(f"SELECT * FROM {Config.DBNAME}.{Config.DBTABLE} WHERE _deleted_ = 'F'")

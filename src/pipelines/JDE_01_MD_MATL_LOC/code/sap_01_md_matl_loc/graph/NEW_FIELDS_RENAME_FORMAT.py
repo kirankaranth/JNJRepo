@@ -43,9 +43,9 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("PLNG_TIME_FENCE_DAYS_CNT", trim(col("IBLTLV")))\
         .withColumn("MAX_STK_LVL_QTY", lit(None).cast(DecimalType(18, 4)))\
         .withColumn("SFTY_TIME_DAYS_CNT", lit(None).cast(StringType()))\
-        .withColumn("PLAN_DELV_DAYS_CNT", col("IBLTLV").cast(DecimalType(18, 4)))\
+        .withColumn("PLAN_DELV_DAYS_CNT", lit(Config.PLAN_DELV_DAYS_CNT))\
         .withColumn("SCRAP_PCT", lit(None).cast(DecimalType(18, 4)))\
-        .withColumn("INHS_PRDTN_DAYS_CNT", col("IBLTLV").cast(DecimalType(18, 4)))\
+        .withColumn("INHS_PRDTN_DAYS_CNT", lit(Config.INHS_PRDTN_DAYS_CNT))\
         .withColumn("MIN_SFTY_STK_QTY", lit(None).cast(DecimalType(18, 4)))\
         .withColumn("BKWRD_CNSMPTN_DAYS_CNT", lit(None).cast(DecimalType(18, 4)))\
         .withColumn("FRWD_CNSMPTN_DAYS_CNT", lit(None).cast(DecimalType(18, 4)))\

@@ -19,7 +19,11 @@ class Config(ConfigBase):
             FLLP_MATL: str=None, 
             CNTL_CODE: str=None, 
             MM_DFLT_SUPP_AREA: str=None, 
-            MTS_MTO_FL: str=None
+            MTS_MTO_FL: str=None, 
+            PRCMT_TYPE_CD: str=None, 
+            PLAN_DELV_DAYS_CNT: str=None, 
+            INHS_PRDTN_DAYS_CNT: str=None, 
+            MRP_TYPE_CD: str=None
     ):
         self.spark = None
         self.update(
@@ -36,14 +40,18 @@ class Config(ConfigBase):
             FLLP_MATL, 
             CNTL_CODE, 
             MM_DFLT_SUPP_AREA, 
-            MTS_MTO_FL
+            MTS_MTO_FL, 
+            PRCMT_TYPE_CD, 
+            PLAN_DELV_DAYS_CNT, 
+            INHS_PRDTN_DAYS_CNT, 
+            MRP_TYPE_CD
         )
 
     def update(
             self,
-            SRC_SYS_CD: str="jes", 
+            SRC_SYS_CD: str="jet", 
             COLUMNS: int=134, 
-            DBNAME: str="jes", 
+            DBNAME: str="jet", 
             TABLENAME: str="f4102_adt", 
             DAI_ETL_ID: int=0, 
             VMI_IND: str="cast(null as string)", 
@@ -54,7 +62,11 @@ class Config(ConfigBase):
             FLLP_MATL: str="cast(null as string)", 
             CNTL_CODE: str="cast(null as string)", 
             MM_DFLT_SUPP_AREA: str="cast(null as string)", 
-            MTS_MTO_FL: str="cast(null as string)"
+            MTS_MTO_FL: str="cast(null as string)", 
+            PRCMT_TYPE_CD: str="trim(ibstkt)", 
+            PLAN_DELV_DAYS_CNT: str="trim(ibltlv)", 
+            INHS_PRDTN_DAYS_CNT: str="trim(ibltlv)", 
+            MRP_TYPE_CD: str="trim(ibsrp6)"
     ):
         global prophecy_spark_context
         prophecy_spark_context = self.spark
@@ -72,4 +84,8 @@ class Config(ConfigBase):
         self.CNTL_CODE = CNTL_CODE
         self.MM_DFLT_SUPP_AREA = MM_DFLT_SUPP_AREA
         self.MTS_MTO_FL = MTS_MTO_FL
+        self.PRCMT_TYPE_CD = PRCMT_TYPE_CD
+        self.PLAN_DELV_DAYS_CNT = PLAN_DELV_DAYS_CNT
+        self.INHS_PRDTN_DAYS_CNT = INHS_PRDTN_DAYS_CNT
+        self.MRP_TYPE_CD = MRP_TYPE_CD
         pass

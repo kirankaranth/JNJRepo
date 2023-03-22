@@ -39,7 +39,7 @@ class Config(ConfigBase):
             DBNAME: str="bbl", 
             TABLENAME: str="marc", 
             DAI_ETL_ID: int=0, 
-            MMS_FIN_CLSN_CD: str="Trim(zzmmsficlass)", 
+            MMS_FIN_CLSN_CD: str="trim(col(\"zzmmsficlass\")", 
             VMI_IND: str="Trim(zzsmiind)", 
             MSTR_PLNG_FMLY_CD: str="trim(zzmpfamily)", 
             MTS_MTO_FL: str="trim(zzmtomtsind)"
