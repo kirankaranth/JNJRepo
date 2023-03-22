@@ -8,9 +8,6 @@ from tbl_strct_MD_MATERIAL.udfs.UDFs import *
 def MD_MATL_MFG_ALLC(spark: SparkSession, in0: DataFrame):
     in0.write\
         .format("delta")\
-        .option("optimizeWrite", True)\
-        .option("overwriteSchema", True)\
         .option("path", f"/mnt/{Config.targetEnv}_curdelta/{Config.targetApp}/{Config.targetDomain}/MD_MATL_MFG_ALLC")\
         .mode("overwrite")\
-        .partitionBy("SRC_SYS_CD")\
         .saveAsTable(f"{Config.targetSchema}.MD_MATL_MFG_ALLC")
