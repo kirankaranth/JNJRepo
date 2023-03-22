@@ -7,15 +7,29 @@ buildSystem: wheel
 pipelines:
   pipelines/SAP_01_MD_MATL_LOC:
     name: SAP_01_MD_MATL_LOC
-    description: ''
+    description: Pipeline to all SAP systems for MD_MATL_LOC
     author: ggrilo1@its.jnj.com
     mode: batch
     language: python
     createdAt: '2023-03-17 17:58:14'
-    modifiedAt: '2023-03-21 14:56:18'
+    modifiedAt: '2023-03-22 10:28:47'
     datasets:
       inputs:
       - datasets/DS_SAP_01_MARC
+      outputs:
+      - datasets/MD_MATL_LOC_SWAP
+    dependencies: {}
+  pipelines/JDE_01_MD_MATL_LOC:
+    name: JDE_01_MD_MATL_LOC
+    description: Pipeline to all SAP systems for MD_MATL_LOC
+    author: ggrilo1@its.jnj.com
+    mode: batch
+    language: python
+    createdAt: '2023-03-22 10:40:57'
+    modifiedAt: '2023-03-22 12:13:34'
+    datasets:
+      inputs:
+      - datasets/DS_JDE_MD_MATL_LOC
       outputs:
       - datasets/MD_MATL_LOC_SWAP
     dependencies: {}
@@ -40,7 +54,7 @@ datasets:
     description: ''
     author: ggrilo1@its.jnj.com
     createdAt: '2023-03-21 11:27:18'
-    modifiedAt: '2023-03-21 13:59:33'
+    modifiedAt: '2023-03-22 12:13:34'
     mode: batch
     physicalDatasets:
       CDL_L1_Dev:
@@ -50,11 +64,26 @@ datasets:
         author: ggrilo1@its.jnj.com
         createdAt: '2023-03-21 11:27:19'
         modifiedAt: '2023-03-21 11:27:19'
+  datasets/DS_JDE_MD_MATL_LOC:
+    name: DS_JDE_01_F4102
+    description: 'datasource to get JDE F4102 table '
+    author: ggrilo1@its.jnj.com
+    createdAt: '2023-03-22 10:37:49'
+    modifiedAt: '2023-03-22 10:44:55'
+    mode: batch
+    physicalDatasets:
+      CDL_L1_Dev:
+        fabricId: 32
+        datasetType: Database
+        description: ''
+        author: ggrilo1@its.jnj.com
+        createdAt: '2023-03-22 10:37:49'
+        modifiedAt: '2023-03-22 10:37:49'
 templates: {}
 jobs:
   jobs/JOB_SAP_01_MD_MATL_LOC:
     name: JOB_SAP_01_MD_MATL_LOC
-    description: ''
+    description: job to run all sap systems for MD_MATL_LOC
     fabricUID: 32
     scheduler:
       Databricks: {}
@@ -75,7 +104,7 @@ jobs:
       clusterId: null
     enabled: null
     createdAt: '2023-03-21 14:58:14'
-    modifiedAt: '2023-03-21 15:04:56'
+    modifiedAt: '2023-03-21 15:32:25'
     author: ggrilo1@its.jnj.com
 libraries: []
 subgraphs: {}
