@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 setup(
-    name = 'PPLN_SK_TEST',
+    name = 'PPLN_SK_TEST_BBN_BBA_P01',
     version = '1.0',
     packages = find_packages(include = ('ppln_sk_test*', )) + ["prophecy_config_instances"],
     package_dir = {'prophecy_config_instances' : 'configs/resources/config'},
