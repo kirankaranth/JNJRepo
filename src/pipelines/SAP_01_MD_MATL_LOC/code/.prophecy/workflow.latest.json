@@ -17,10 +17,17 @@
       "common" : {
         "type" : "record",
         "fields" : [ {
-          "name" : "SRC_SYS_CD",
+          "name" : "sourceSystem",
           "kind" : {
             "type" : "string",
             "value" : "hm2"
+          },
+          "optional" : false
+        }, {
+          "name" : "targetSchema",
+          "kind" : {
+            "type" : "string",
+            "value" : "md_l1_prophecy"
           },
           "optional" : false
         }, {
@@ -1035,20 +1042,6 @@
           },
           "description" : ""
         }, {
-          "target" : "ZZ1_DUAL_SRC_WIP_PROJ_PLT",
-          "expression" : {
-            "format" : "sql",
-            "expression" : "ZZ1_DUAL_SRC_WIP_PROJ_PLT"
-          },
-          "description" : ""
-        }, {
-          "target" : "ZZ1_DUAL_SRC_WIP_PROJ_PLT",
-          "expression" : {
-            "format" : "sql",
-            "expression" : "ZZ1_DUAL_SRC_WIP_PROJ_PLT"
-          },
-          "description" : ""
-        }, {
           "target" : "MTSTB",
           "expression" : {
             "format" : "sql",
@@ -1203,7 +1196,7 @@
             "sourceColumn" : "SRC_SYS_CD",
             "expression" : {
               "format" : "sql",
-              "expression" : "'$SRC_SYS_CD'"
+              "expression" : "'$sourceSystem'"
             }
           },
           "DropColumn" : {
@@ -3315,7 +3308,7 @@
             "sourceColumn" : "DAI_CRT_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "current_date()"
+              "expression" : "to_timestamp(current_timestamp(),'yyyy-MM-dd')"
             }
           },
           "DropColumn" : {
@@ -3331,7 +3324,7 @@
             "sourceColumn" : "DAI_UPDT_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "current_timestamp()"
+              "expression" : "to_timestamp(current_timestamp(),'yyyy-MM-dd')"
             }
           },
           "DropColumn" : {
@@ -4688,7 +4681,9 @@
         "selectedInputFields" : [ ],
         "isCustomOutputSchema" : false
       },
-      "properties" : { }
+      "properties" : {
+        "datasetId" : "datasets/MD_MATL_LOC"
+      }
     }
   },
   "ports" : {
@@ -4696,22 +4691,5 @@
     "outputs" : [ ],
     "selectedInputFields" : [ ],
     "isCustomOutputSchema" : false
-  },
-  "diagnostics" : [ {
-    "property" : "$.workflow.processes._0TgG825wDac0WdxVIsGb$$ITAHKzzBSu9vQqgzR5Ylu.properties.datasetId",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "dataset id missing",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  } ]
+  }
 }

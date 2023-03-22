@@ -123,8 +123,6 @@ def SET_FIELDS_ORDER_REFORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("ZZ1_MTS_MTO_FLAG_PLT"), 
         col("ZZ1_CONSUMPTION_MODE_PLT"), 
         col("ZZ1_DUAL_SRC_WIP_PROJ_PLT"), 
-        col("ZZ1_DUAL_SRC_WIP_PROJ_PLT"), 
-        col("ZZ1_DUAL_SRC_WIP_PROJ_PLT"), 
         col("MTSTB"), 
         col("TXT"), 
         col("EKNAM"), 

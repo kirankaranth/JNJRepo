@@ -3,6 +3,7 @@ from .SAP_T141T import *
 from .SAP_T024F import *
 from .Join_1 import *
 from .SAP_T024 import *
+from .SAP_MD_MATL_LOC import *
 from .SET_FIELDS_ORDER_REFORMAT import *
 from .MANDT_FILTER_04 import *
 from .SAP_T024D import *

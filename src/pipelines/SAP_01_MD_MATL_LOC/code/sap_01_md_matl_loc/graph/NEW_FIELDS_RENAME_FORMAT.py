@@ -7,7 +7,7 @@ from sap_01_md_matl_loc.udfs.UDFs import *
 
 def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
-        .withColumn("SRC_SYS_CD", lit(Config.SRC_SYS_CD))\
+        .withColumn("SRC_SYS_CD", lit(Config.sourceSystem))\
         .withColumn("MATL_NUM", col("NSDM_V_MARC_MATNR"))\
         .withColumn("PLNT_CD", col("NSDM_V_MARC_WERKS"))\
         .withColumn("VAR_CNTL_CD", trim(col("AWSLS")))\
@@ -154,5 +154,5 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("SEQ_NUM", trim(col("ZZ1_SEQUENCE_NUMBER_PLT")))\
         .withColumn("MAINT_STS", trim(col("PSTAT")))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
-        .withColumn("DAI_CRT_DTTM", current_date())\
-        .withColumn("DAI_UPDT_DTTM", current_timestamp())
+        .withColumn("DAI_CRT_DTTM", to_timestamp(current_timestamp(), "yyyy-MM-dd"))\
+        .withColumn("DAI_UPDT_DTTM", to_timestamp(current_timestamp(), "yyyy-MM-dd"))
