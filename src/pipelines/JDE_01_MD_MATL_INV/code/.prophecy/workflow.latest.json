@@ -112,12 +112,6 @@
     "target" : "6RTPsyPHJ0sWf47pu8GpG$$2D_fJFNxkJfVJ2G622sL7",
     "targetPort" : "dXPc4JWJaI3jodUIv3uFV$$lcLM0NwN6Ft17fuBFST0J"
   }, {
-    "id" : "KpY0gZXn8jG8ObQD7GjHn",
-    "source" : "eocfCGB_Ntnf-mPShLDUL$$OSsJliJS0uB5U--nSZvGI",
-    "sourcePort" : "b46Ffqs-8HbCWzHvxvAmg$$W2KWWaiMsXop1XLVR4F8y",
-    "target" : "M5oOOdrYPFnoN12CyWSEf$$K2JWFZrAHp71kNUcEdKed",
-    "targetPort" : "EdQQ3jiLh0YtJ2uMBXugb$$oepX2zyACuiwIP3reWVRX"
-  }, {
     "id" : "l-A174yPeoNyES8J4BnfI$$cuqtHuy7tnuX-BHsWiQ2j",
     "source" : "6RTPsyPHJ0sWf47pu8GpG$$2D_fJFNxkJfVJ2G622sL7",
     "sourcePort" : "MgOxEkYISTc7-LX2Fz_lW$$apIwGNx_rdXAIACiuviTc",
@@ -129,6 +123,18 @@
     "sourcePort" : "thXiZPTcVhdGglL0i6xfR$$pXL4TCZiJKyDw2kpf7NnR",
     "target" : "eocfCGB_Ntnf-mPShLDUL$$OSsJliJS0uB5U--nSZvGI",
     "targetPort" : "maBkeW9nupLwg0_hnwNDe$$Okbk4czIg4Z6cSd9gx-36"
+  }, {
+    "id" : "QdzMAcA4kEBmhf_IrMLT-",
+    "source" : "6RTPsyPHJ0sWf47pu8GpG$$2D_fJFNxkJfVJ2G622sL7",
+    "sourcePort" : "MgOxEkYISTc7-LX2Fz_lW$$apIwGNx_rdXAIACiuviTc",
+    "target" : "cvwBu3IzDI-9_21GUDFHP$$65PIH-lb814jNoG9hAMAo",
+    "targetPort" : "zJRF9Ypmw3j9S7_hG7u1b$$WzjdT0QuAx8BjUsqxNRwU"
+  }, {
+    "id" : "OhWbflsn2x639ZS1k0wMf$$qghv_LhrtLewNpLJPHwX_",
+    "source" : "eocfCGB_Ntnf-mPShLDUL$$OSsJliJS0uB5U--nSZvGI",
+    "sourcePort" : "b46Ffqs-8HbCWzHvxvAmg$$W2KWWaiMsXop1XLVR4F8y",
+    "target" : "M5oOOdrYPFnoN12CyWSEf$$K2JWFZrAHp71kNUcEdKed",
+    "targetPort" : "EdQQ3jiLh0YtJ2uMBXugb$$oepX2zyACuiwIP3reWVRX"
   } ],
   "processes" : {
     "0Lhszmn7DhrOVbS6PTGma$$d5Kj6tlMD5fUdmVz8b70W" : {
@@ -164,7 +170,7 @@
       "metadata" : {
         "label" : "MD_MAT_INV_SWAP",
         "slug" : "MD_MAT_INV_SWAP",
-        "x" : -1540,
+        "x" : -1560,
         "y" : -620,
         "phase" : 0,
         "cache" : false,
@@ -183,6 +189,43 @@
       },
       "properties" : {
         "datasetId" : "datasets/MD_MATL_INV_SWAP"
+      }
+    },
+    "cvwBu3IzDI-9_21GUDFHP$$65PIH-lb814jNoG9hAMAo" : {
+      "id" : "cvwBu3IzDI-9_21GUDFHP$$65PIH-lb814jNoG9hAMAo",
+      "component" : "SQLStatement",
+      "metadata" : {
+        "label" : "ROW_NUM_TEST",
+        "slug" : "ROW_NUM_TEST",
+        "x" : -1860,
+        "y" : -840,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "zJRF9Ypmw3j9S7_hG7u1b$$WzjdT0QuAx8BjUsqxNRwU",
+          "slug" : "in0",
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Hg8eTvVKTzQ3tVUGsRIxd$$FOc2A5owkboOAx9aP2YKk",
+          "slug" : "out",
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "fileTabs" : [ {
+          "path" : "out",
+          "id" : "Hg8eTvVKTzQ3tVUGsRIxd$$FOc2A5owkboOAx9aP2YKk",
+          "language" : "sql",
+          "content" : "SELECT \r\n    * \r\nFROM \r\n    (SELECT \r\n        *,\r\n        row_number() OVER(PARTITION BY SRC_SYS_CD, MATL_NUM, PLNT_CD, SLOC_CD, BTCH_NUM, BTCH_STS_CD \r\n        ORDER BY SRC_SYS_CD, MATL_NUM, PLNT_CD, SLOC_CD, BTCH_NUM, BTCH_STS_CD) rank_no\r\n    FROM\r\n        in0) a\r\nWHERE rank_no = 1"
+        } ],
+        "inputPortNames" : [ "in0" ]
       }
     },
     "ltHfVgrXGnMFfWqIlk3Fx$$4GMyqB6PMqprjJlKWtwcQ" : {

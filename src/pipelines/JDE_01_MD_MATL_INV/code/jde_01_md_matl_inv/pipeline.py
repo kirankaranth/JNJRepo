@@ -14,6 +14,7 @@ def pipeline(spark: SparkSession) -> None:
     df_DEDUPLICATE = DEDUPLICATE(spark, df_TRANSFORM)
     df_SET_FIELD_ORDER = SET_FIELD_ORDER(spark, df_DEDUPLICATE)
     MD_MAT_INV_SWAP(spark, df_SET_FIELD_ORDER)
+    df_ROW_NUM_TEST = ROW_NUM_TEST(spark, df_TRANSFORM)
 
 def main():
     spark = SparkSession.builder\
