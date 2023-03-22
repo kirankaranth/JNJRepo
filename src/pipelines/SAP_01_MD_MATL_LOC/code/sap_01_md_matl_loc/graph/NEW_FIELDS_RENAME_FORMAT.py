@@ -132,7 +132,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("DO_NOT_COST_IN", trim(col("NCOST")))\
         .withColumn("SPL_PRCMT_TYPE_COST", trim(col("SOBSK")))\
         .withColumn("CVGE_PRFL_RNG", trim(col("RWPRO")))\
-        .withColumn("EXPT_CERT_NUM\r\n", trim(col("PRENO")))\
+        .withColumn("EXPT_CERT_NUM", trim(col("PRENO")))\
         .withColumn(
           "EXPT_CERT_DTTM",
           when((col("PREND") == lit("00000000")), lit(None).cast(TimestampType()))\
