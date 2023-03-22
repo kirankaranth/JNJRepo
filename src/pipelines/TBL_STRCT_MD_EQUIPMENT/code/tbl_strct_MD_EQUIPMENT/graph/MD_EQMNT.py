@@ -8,6 +8,9 @@ from tbl_strct_MD_EQUIPMENT.udfs.UDFs import *
 def MD_EQMNT(spark: SparkSession, in0: DataFrame):
     in0.write\
         .format("delta")\
+        .option("optimizeWrite", True)\
+        .option("mergeSchema", True)\
         .option("path", f"/mnt/{Config.targetEnv}_curdelta/{Config.targetApp}/{Config.targetDomain}/MD_EQMNT")\
-        .mode("overwrite")\
+        .mode("append")\
+        .partitionBy("SRC_SYS_CD")\
         .saveAsTable(f"{Config.targetSchema}.MD_EQMNT")
