@@ -20,6 +20,7 @@ def SET_FIELD_ORDER(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("IN_TRNSFR_STCK"), 
         col("QLTY_INSP_STCK"), 
         col("RSTRCTD_STCK"), 
+        col("BLCKD_STCK"), 
         col("CRT_DTTM"), 
         col("RTRNS"), 
         col("BASE_UOM_CD"), 
