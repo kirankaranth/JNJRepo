@@ -6,7 +6,8 @@ class Config(ConfigBase):
 
     def __init__(
             self,
-            SRC_SYS_CD: str=None, 
+            sourceSystem: str=None, 
+            targetSchema: str=None, 
             MANDT: str=None, 
             COLUMNS: int=None, 
             DBNAME: str=None, 
@@ -16,11 +17,22 @@ class Config(ConfigBase):
             INVC_LIST_STS_CD: str=None
     ):
         self.spark = None
-        self.update(SRC_SYS_CD, MANDT, COLUMNS, DBNAME, DAI_ETL_ID, SHIP_TO, PSTNG_BILL_STS_CD, INVC_LIST_STS_CD)
+        self.update(
+            sourceSystem, 
+            targetSchema, 
+            MANDT, 
+            COLUMNS, 
+            DBNAME, 
+            DAI_ETL_ID, 
+            SHIP_TO, 
+            PSTNG_BILL_STS_CD, 
+            INVC_LIST_STS_CD
+        )
 
     def update(
             self,
-            SRC_SYS_CD: str="bba", 
+            sourceSystem: str="bba", 
+            targetSchema: str="l1_md_prophecy", 
             MANDT: str="100", 
             COLUMNS: int=80, 
             DBNAME: str="bba", 
@@ -31,7 +43,8 @@ class Config(ConfigBase):
     ):
         global prophecy_spark_context
         prophecy_spark_context = self.spark
-        self.SRC_SYS_CD = SRC_SYS_CD
+        self.sourceSystem = sourceSystem
+        self.targetSchema = targetSchema
         self.MANDT = MANDT
         self.COLUMNS = self.get_int_value(COLUMNS)
         self.DBNAME = DBNAME
