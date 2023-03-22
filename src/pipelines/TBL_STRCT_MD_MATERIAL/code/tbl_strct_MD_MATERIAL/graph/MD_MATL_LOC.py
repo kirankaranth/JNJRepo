@@ -9,8 +9,9 @@ def MD_MATL_LOC(spark: SparkSession, in0: DataFrame):
     in0.write\
         .format("delta")\
         .option("optimizeWrite", True)\
-        .option("overwriteSchema", True)\
+        .option("mergeSchema", True)\
+        .option("overwriteSchema", False)\
         .option("path", f"/mnt/{Config.targetEnv}_curdelta/{Config.targetApp}/{Config.targetDomain}/MD_MATL_LOC")\
-        .mode("overwrite")\
+        .mode("append")\
         .partitionBy("SRC_SYS_CD")\
         .saveAsTable(f"{Config.targetSchema}.MD_MATL_LOC")

@@ -1,0 +1,195 @@
+{
+  "metainfo" : {
+    "id" : "1",
+    "language" : "python",
+    "fabricId" : "32",
+    "frontEndLanguage" : "sql",
+    "mode" : "batch",
+    "udfs" : {
+      "language" : "python",
+      "udfs" : [ ]
+    },
+    "udafs" : {
+      "language" : "python",
+      "code" : ""
+    },
+    "configuration" : {
+      "common" : {
+        "type" : "record",
+        "fields" : [ {
+          "name" : "sourceSystem",
+          "kind" : {
+            "type" : "string",
+            "value" : "bba"
+          },
+          "optional" : false
+        }, {
+          "name" : "targetSchema",
+          "kind" : {
+            "type" : "string",
+            "value" : "l1_md_prophecy"
+          },
+          "optional" : false
+        } ]
+      },
+      "oldCommon" : {
+        "type" : "record",
+        "fields" : [ ]
+      },
+      "fabrics" : { },
+      "instances" : { },
+      "selected" : "default",
+      "nonEditable" : [ ],
+      "isSubscribedPipelineWithPipelineConfigs" : false
+    },
+    "sparkConf" : [ ],
+    "hadoopConf" : [ ],
+    "codeMode" : "sparse",
+    "buildSystem" : "maven",
+    "externalDependencies" : [ ],
+    "isImported" : false,
+    "interimMode" : "Full",
+    "interimModeEnabled" : true,
+    "visualCodeInterimMode" : "Disabled",
+    "recordsLimit" : {
+      "enabled" : false,
+      "value" : 1000
+    },
+    "topLevelPackage" : "ppln_sk_test3"
+  },
+  "connections" : [ {
+    "id" : "yABZAqp2c40Ob3Ek4DRa6",
+    "source" : "V_Aj6Rjg7cc6RHmJveV8q$$IerZJEOE75q4nEEb2tcen",
+    "sourcePort" : "eXaRML_q6BcZnAcvNozH-$$KQ50HQ-o0kXhuh5GxKtoJ",
+    "target" : "KSSB5c6atj_IDRmcW1gTT$$Q3JRDAy-wD4TxFTpIgOPP",
+    "targetPort" : "bnK4_WlFflJ1M5UGeZKQi$$c8ehm9R6LwLzCMoeGTSks"
+  }, {
+    "id" : "S8-Q4ZMIH9yyDnf0jYYLO",
+    "source" : "KSSB5c6atj_IDRmcW1gTT$$Q3JRDAy-wD4TxFTpIgOPP",
+    "sourcePort" : "pTYZqQVlTdamlO_e2mXhZ$$Zm9_aM1XN4WPA51pFTaXd",
+    "target" : "WFC2CLDsJw05GZo7WLj0H$$WJ1pOaA5e1IXuio0tFmXo",
+    "targetPort" : "IYFhLb14M2Iv2yo6lswKN$$79CzDm_uDVdaCfmOTrnqy"
+  } ],
+  "processes" : {
+    "V_Aj6Rjg7cc6RHmJveV8q$$IerZJEOE75q4nEEb2tcen" : {
+      "id" : "V_Aj6Rjg7cc6RHmJveV8q$$IerZJEOE75q4nEEb2tcen",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "atl_mara",
+        "slug" : "atl_mara",
+        "x" : 640,
+        "y" : 240,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "eXaRML_q6BcZnAcvNozH-$$KQ50HQ-o0kXhuh5GxKtoJ",
+          "slug" : "out",
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/atl_mara"
+      }
+    },
+    "KSSB5c6atj_IDRmcW1gTT$$Q3JRDAy-wD4TxFTpIgOPP" : {
+      "id" : "KSSB5c6atj_IDRmcW1gTT$$Q3JRDAy-wD4TxFTpIgOPP",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "Reformat_1",
+        "slug" : "Reformat_1",
+        "x" : 780,
+        "y" : 240,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "bnK4_WlFflJ1M5UGeZKQi$$c8ehm9R6LwLzCMoeGTSks",
+          "slug" : "in0",
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "pTYZqQVlTdamlO_e2mXhZ$$Zm9_aM1XN4WPA51pFTaXd",
+          "slug" : "out",
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ "bnK4_WlFflJ1M5UGeZKQi$$c8ehm9R6LwLzCMoeGTSks##MATNR", "bnK4_WlFflJ1M5UGeZKQi$$c8ehm9R6LwLzCMoeGTSks##WEORA" ],
+        "expressions" : [ {
+          "target" : "MATL_NUM",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "MATNR"
+          },
+          "description" : ""
+        }, {
+          "target" : "SRC_SYS_CD",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "'$sourceSystem'"
+          },
+          "description" : ""
+        }, {
+          "target" : "PLNT_CD",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "trim(WEORA)"
+          },
+          "description" : ""
+        }, {
+          "target" : "VAR_CNTL_CD",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "trim(WEORA)"
+          },
+          "description" : ""
+        } ]
+      }
+    },
+    "WFC2CLDsJw05GZo7WLj0H$$WJ1pOaA5e1IXuio0tFmXo" : {
+      "id" : "WFC2CLDsJw05GZo7WLj0H$$WJ1pOaA5e1IXuio0tFmXo",
+      "component" : "Target",
+      "metadata" : {
+        "label" : "MD_MATL_LOC",
+        "slug" : "MD_MATL_LOC",
+        "x" : 940,
+        "y" : 240,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "IYFhLb14M2Iv2yo6lswKN$$79CzDm_uDVdaCfmOTrnqy",
+          "slug" : "in0",
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/MD_MATL_LOC"
+      }
+    }
+  },
+  "ports" : {
+    "inputs" : [ ],
+    "outputs" : [ ],
+    "selectedInputFields" : [ ],
+    "isCustomOutputSchema" : false
+  }
+}
