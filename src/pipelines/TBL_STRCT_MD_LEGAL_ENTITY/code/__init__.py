@@ -1,0 +1,1 @@
+from .tbl_strct_MD_LEGAL_ENTITY import *
