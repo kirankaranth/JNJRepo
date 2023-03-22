@@ -112,7 +112,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("BULK_MATL_IN", trim(col("SCHGT")))\
         .withColumn("FIX_CC_IN", trim(col("CCFIX")))\
         .withColumn("PROD_SCHDLNG_PRFL", trim(col("SFCPF")))\
-        .withColumn("CUR_PER", trim(col("LFMON")))\
+        .withColumn("CUR_PER", trim(col("LFMON")).cast(IntegerType()))\
         .withColumn("INSP_INTV", trim(col("PRFRQ")).cast(DecimalType(18, 4)))\
         .withColumn("DOC_REQ_IN", trim(col("KZDKZ")))\
         .withColumn("MATL_FRGHT_GRP", trim(col("MFRGR")))\

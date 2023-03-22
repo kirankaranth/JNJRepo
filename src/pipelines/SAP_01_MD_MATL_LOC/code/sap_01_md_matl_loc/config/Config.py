@@ -19,7 +19,7 @@ class Config(ConfigBase):
     def update(
             self,
             sourceSystem: str="hm2", 
-            targetSchema: str="md_l1_prophecy", 
+            targetSchema: str="l1_md_prophecy", 
             MANDT: str="100", 
             COLUMNS: int=134, 
             DBNAME: str="pqa_hm2", 
