@@ -90,6 +90,12 @@
     "sourcePort" : "V3mg_cHjRt5a1__UByHgr$$9y2YYdvGXQUSNWUW8_WaF",
     "target" : "hyNqsqY5E_ovSqv7dQdKA$$hLaRVFWV-LvnIudMaWjZ6",
     "targetPort" : "oMNFQCzpVkwu1B5WkYFTc$$A_gfPxV3cn9J43u-HxWVe"
+  }, {
+    "id" : "z-JIM-Ok6PRivXnlh5bl9$$chbkG5uNGTz45e1dpyL99",
+    "source" : "hyNqsqY5E_ovSqv7dQdKA$$hLaRVFWV-LvnIudMaWjZ6",
+    "sourcePort" : "xuADUULJhbqMd6le8juOG$$rKoyysaemXHe3Uk9_a0J0",
+    "target" : "N56B_I-G8HtyUQS7ySPDB$$ECghvlMSiRYe2bgUqSP8p",
+    "targetPort" : "8PmrfYTSQnQv2AtqqMA1o$$jKjQHO_-_zp6A0y3tjD-O"
   } ],
   "processes" : {
     "hbPilGYfTYk9LUBd8Jby4$$oXI40Z7V3t3Z9qosKSJk8" : {
@@ -150,8 +156,8 @@
       "id" : "hyNqsqY5E_ovSqv7dQdKA$$hLaRVFWV-LvnIudMaWjZ6",
       "component" : "Join",
       "metadata" : {
-        "label" : "Join_1",
-        "slug" : "Join_1",
+        "label" : "Join_F0404_F0101",
+        "slug" : "Join_F0404_F0101",
         "x" : -100,
         "y" : -20,
         "phase" : 0,
@@ -900,6 +906,54 @@
         "allIn0" : null,
         "whereClause" : null,
         "headAlias" : "in0"
+      }
+    },
+    "N56B_I-G8HtyUQS7ySPDB$$ECghvlMSiRYe2bgUqSP8p" : {
+      "id" : "N56B_I-G8HtyUQS7ySPDB$$ECghvlMSiRYe2bgUqSP8p",
+      "component" : "SchemaTransform",
+      "metadata" : {
+        "label" : "ST_Join_F0404_F0101",
+        "slug" : "ST_Join_F0404_F0101",
+        "x" : 100,
+        "y" : -20,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "8PmrfYTSQnQv2AtqqMA1o$$jKjQHO_-_zp6A0y3tjD-O",
+          "slug" : "in0",
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "OpvmwnVpZ2BHCi3VUZsra$$SSg2VQ_RFb9mlS7ZBj3xz",
+          "slug" : "out",
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ "8PmrfYTSQnQv2AtqqMA1o$$jKjQHO_-_zp6A0y3tjD-O##A6UPMJ" ],
+        "transformations" : [ {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "CRT_ON_DTTM",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "CASE WHEN LOWER(TRIM(a6upmj)) = 'null' OR TRIM(a6upmj) = '' OR TRIM(a6upmj) = '0' THEN NULL \r\nELSE \r\n    to_timestamp(\r\n                substr(\r\n                        CAST(date_add(concat(substr(CAST(CAST(TRIM(a6upmj) AS INT) + 1900000 AS STRING),1,4),'-01-01'), \r\n                                        CAST(substr(CAST(CAST(TRIM(a6upmj) AS INT) + 1900000 AS string),5,3) AS INT )-1) AS STRING), 1, 10),'yyyy-MM-dd') END"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        } ]
       }
     }
   },
