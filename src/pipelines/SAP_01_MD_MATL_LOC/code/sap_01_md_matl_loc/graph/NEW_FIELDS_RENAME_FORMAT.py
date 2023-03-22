@@ -154,5 +154,5 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("SEQ_NUM", trim(col("ZZ1_SEQUENCE_NUMBER_PLT")))\
         .withColumn("MAINT_STS", trim(col("PSTAT")))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
-        .withColumn("DAI_CRT_DTTM", lit(None).cast(StringType()))\
-        .withColumn("DAI_UPDT_DTTM", lit(None).cast(StringType()))
+        .withColumn("DAI_CRT_DTTM", current_date())\
+        .withColumn("DAI_UPDT_DTTM", current_timestamp())
