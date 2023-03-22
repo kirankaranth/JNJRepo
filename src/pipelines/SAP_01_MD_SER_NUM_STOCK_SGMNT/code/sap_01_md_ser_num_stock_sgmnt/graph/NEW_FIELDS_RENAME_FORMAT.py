@@ -7,7 +7,7 @@ from sap_01_md_ser_num_stock_sgmnt.udfs.UDFs import *
 
 def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
-        .withColumn("SRC_SYS_CD", lit(Config.SRC_SYS_CD))\
+        .withColumn("SRC_SYS_CD", lit(Config.sourceSystem))\
         .withColumn("EQMNT_NUM", col("EQUNR"))\
         .withColumn("STOCK_TYPE_GOODS_MVMT", trim(col("LBBSA")))\
         .withColumn("PLNT", trim(col("B_WERK")))\
@@ -21,5 +21,5 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("WBS_ELMNT", trim(col("PS_PSP_PNR")))\
         .withColumn("OWN_STOCK", trim(col("DISUB_OWNER")))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
-        .withColumn("DAI_CRT_DTTM", to_timestamp(current_timestamp(), "yyyy-MM-dd"))\
-        .withColumn("DAI_UPDT_DTTM", to_timestamp(current_timestamp(), "yyyy-MM-dd"))
+        .withColumn("DAI_CRT_DTTM", current_timestamp())\
+        .withColumn("DAI_UPDT_DTTM", current_timestamp())

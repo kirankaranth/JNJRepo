@@ -326,7 +326,7 @@ pipelines:
     mode: batch
     language: python
     createdAt: '2023-03-21 17:29:57'
-    modifiedAt: '2023-03-21 19:19:53'
+    modifiedAt: '2023-03-22 15:40:58'
     datasets:
       inputs: []
       outputs:
@@ -406,19 +406,6 @@ pipelines:
       inputs: []
       outputs:
       - datasets/STRCT_MD_TFR_ORDR_ITM
-    dependencies: {}
-  pipelines/TBL_STRCT_MD_PLANT:
-    name: TBL_STRCT_MD_PLANT
-    description: Create the tables & structures associated with MD_PLANT
-    author: skostadi@its.jnj.com
-    mode: batch
-    language: python
-    createdAt: '2023-03-21 17:29:57'
-    modifiedAt: '2023-03-21 19:18:22'
-    datasets:
-      inputs: []
-      outputs:
-      - datasets/STRCT_MD_PLNT
     dependencies: {}
   pipelines/TBL_STRCT_MD_BATCH_MASTER:
     name: TBL_STRCT_MD_BATCH_MASTER
@@ -645,36 +632,33 @@ pipelines:
       - datasets/STRCT_MES_MD_PROD_RVSN
       - datasets/STRCT_MES_MD_PROD_RVSN_BASE
     dependencies: {}
+  pipelines/TBL_STRCT_MD_PLANT:
+    name: TBL_STRCT_MD_PLANT
+    description: Create the tables & structures associated with MD_PLANT
+    author: skostadi@its.jnj.com
+    mode: batch
+    language: python
+    createdAt: '2023-03-21 17:29:57'
+    modifiedAt: '2023-03-21 19:18:22'
+    datasets:
+      inputs: []
+      outputs:
+      - datasets/STRCT_MD_PLNT
+    dependencies: {}
   pipelines/SAP_01_MD_SER_NUM_STOCK_SGMNT:
-    name: SAP_01_MD_SER_NUM_STOCK_SGMNT
+    name: SAP_MD_SER_NUM_STOCK_SGMNT_ATL_BBA_BBL_BBN_MRS
     description: EDM MD_SER_NUM_STOCK_SGMNT for some SAP System that have the DISUB_OWNER
       field
     author: smille29@its.jnj.com
     mode: batch
     language: python
     createdAt: '2023-03-13 20:16:19'
-    modifiedAt: '2023-03-20 21:43:07'
+    modifiedAt: '2023-03-22 22:04:37'
     datasets:
       inputs:
       - datasets/DS_SAP_EQBS_01
       outputs:
-      - datasets/DS_MD_SER_NUM_STOCK_SGMNT_SWAP
-    dependencies: {}
-  pipelines/SAP_02_MD_SER_NUM_STOCK_SGMNT:
-    name: SAP_02_MD_SER_NUM_STOCK_SGMNT
-    description: JEKT-24-Initial Source GEM and Config Parameters for hcs, mbp, p01,
-      svs source systems on EDM MD_SER_NUM_STOCK_SGMNT where DISUB_OWNER field is
-      missing
-    author: smille29@its.jnj.com
-    mode: batch
-    language: python
-    createdAt: '2023-03-13 21:12:56'
-    modifiedAt: '2023-03-20 21:55:31'
-    datasets:
-      inputs:
-      - datasets/DS_SAP_EQBS_02
-      outputs:
-      - datasets/DS_MD_SER_NUM_STOCK_SGMNT_SWAP
+      - datasets/MD_SER_NUM_STOCK_SGMNT
     dependencies: {}
   pipelines/SK_SAP_01_MD_SER_NUM_STOCK_SGMNT:
     name: SK_SAP_01_MD_SER_NUM_STOCK_SGMNT
@@ -687,6 +671,22 @@ pipelines:
     datasets:
       inputs:
       - datasets/DS_SAP_EQBS_01
+      outputs:
+      - datasets/MD_SER_NUM_STOCK_SGMNT
+    dependencies: {}
+  pipelines/SAP_02_MD_SER_NUM_STOCK_SGMNT:
+    name: SAP_MD_SER_NUM_STOCK_SGMNT_HCS_MBP_P01_SVS
+    description: JEKT-24-Initial Source GEM and Config Parameters for hcs, mbp, p01,
+      svs source systems on EDM MD_SER_NUM_STOCK_SGMNT where DISUB_OWNER field is
+      missing
+    author: smille29@its.jnj.com
+    mode: batch
+    language: python
+    createdAt: '2023-03-13 21:12:56'
+    modifiedAt: '2023-03-22 22:22:21'
+    datasets:
+      inputs:
+      - datasets/DS_SAP_EQBS_02
       outputs:
       - datasets/MD_SER_NUM_STOCK_SGMNT
     dependencies: {}
@@ -1177,21 +1177,6 @@ datasets:
     author: skostadi@its.jnj.com
     createdAt: '2023-03-20 18:20:04'
     modifiedAt: '2023-03-20 18:20:04'
-    mode: batch
-    physicalDatasets:
-      CDL_L1_Dev:
-        fabricId: 32
-        datasetType: Database
-        description: ''
-        author: skostadi@its.jnj.com
-        createdAt: '2023-03-20 18:20:04'
-        modifiedAt: '2023-03-20 18:20:04'
-  datasets/MD_SER_NUM_STOCK_SGMNT:
-    name: MD_SER_NUM_STOCK_SGMNT
-    description: ''
-    author: skostadi@its.jnj.com
-    createdAt: '2023-03-20 18:20:04'
-    modifiedAt: '2023-03-22 12:50:52'
     mode: batch
     physicalDatasets:
       CDL_L1_Dev:
@@ -2361,7 +2346,7 @@ datasets:
     description: ''
     author: skostadi@its.jnj.com
     createdAt: '2023-03-20 18:20:04'
-    modifiedAt: '2023-03-20 18:20:04'
+    modifiedAt: '2023-03-22 15:45:31'
     mode: batch
     physicalDatasets:
       CDL_L1_Dev:
@@ -2991,7 +2976,7 @@ datasets:
     description: ''
     author: skostadi@its.jnj.com
     createdAt: '2023-03-20 18:20:04'
-    modifiedAt: '2023-03-20 18:20:04'
+    modifiedAt: '2023-03-22 20:28:47'
     mode: batch
     physicalDatasets:
       CDL_L1_Dev:
@@ -5851,36 +5836,6 @@ datasets:
         author: skostadi@its.jnj.com
         createdAt: '2023-03-20 18:20:04'
         modifiedAt: '2023-03-20 18:20:04'
-  datasets/DS_SAP_EQBS_01:
-    name: DS_SAP_EQBS_01
-    description: ''
-    author: smille29@its.jnj.com
-    createdAt: '2023-03-13 20:29:35'
-    modifiedAt: '2023-03-13 20:29:35'
-    mode: batch
-    physicalDatasets:
-      CDL_L1_Dev:
-        fabricId: 32
-        datasetType: Database
-        description: ''
-        author: smille29@its.jnj.com
-        createdAt: '2023-03-13 20:29:35'
-        modifiedAt: '2023-03-13 20:29:35'
-  datasets/DS_MD_SER_NUM_STOCK_SGMNT_SWAP:
-    name: DS_MD_SER_NUM_STOCK_SGMNT_SWAP
-    description: ''
-    author: smille29@its.jnj.com
-    createdAt: '2023-03-13 21:04:37'
-    modifiedAt: '2023-03-22 12:46:36'
-    mode: batch
-    physicalDatasets:
-      CDL_L1_Dev:
-        fabricId: 32
-        datasetType: Database
-        description: ''
-        author: smille29@its.jnj.com
-        createdAt: '2023-03-13 21:04:37'
-        modifiedAt: '2023-03-13 21:04:37'
   datasets/DS_SAP_EQBS_02:
     name: DS_SAP_EQBS_02
     description: ''
@@ -5896,6 +5851,36 @@ datasets:
         author: smille29@its.jnj.com
         createdAt: '2023-03-13 21:15:37'
         modifiedAt: '2023-03-13 21:15:37'
+  datasets/DS_SAP_EQBS_01:
+    name: DS_SAP_EQBS_01
+    description: ''
+    author: smille29@its.jnj.com
+    createdAt: '2023-03-13 20:29:35'
+    modifiedAt: '2023-03-22 22:01:18'
+    mode: batch
+    physicalDatasets:
+      CDL_L1_Dev:
+        fabricId: 32
+        datasetType: Database
+        description: ''
+        author: smille29@its.jnj.com
+        createdAt: '2023-03-13 20:29:35'
+        modifiedAt: '2023-03-13 20:29:35'
+  datasets/MD_SER_NUM_STOCK_SGMNT:
+    name: MD_SER_NUM_STOCK_SGMNT
+    description: ''
+    author: skostadi@its.jnj.com
+    createdAt: '2023-03-20 18:20:04'
+    modifiedAt: '2023-03-22 22:02:37'
+    mode: batch
+    physicalDatasets:
+      CDL_L1_Dev:
+        fabricId: 32
+        datasetType: Database
+        description: ''
+        author: skostadi@its.jnj.com
+        createdAt: '2023-03-20 18:20:04'
+        modifiedAt: '2023-03-20 18:20:04'
 templates: {}
 jobs:
   jobs/JOB_TBL_STRCT_MD:
@@ -5959,17 +5944,17 @@ jobs:
       clusterId: null
     enabled: null
     createdAt: '2023-03-21 18:50:06'
-    modifiedAt: '2023-03-21 21:40:53'
+    modifiedAt: '2023-03-22 22:06:56'
     author: skostadi@its.jnj.com
-  jobs/SAP_BBN_MD_SER_NUM_STOCK_SGMNT:
-    name: SAP_BBN_MD_SER_NUM_STOCK_SGMNT
+  jobs/ATL_PIPELINES_JOB:
+    name: ATL_PIPELINES_JOB
     description: ''
     fabricUID: 32
     scheduler:
       Databricks: {}
     cloudProvider: null
     jobSize: Prophecy_Small
-    scheduleCron: 0 0 12 * * ? *
+    scheduleCron: 0 0 2 * * ? *
     timeout: null
     alerting:
       emails: ''
@@ -5983,18 +5968,18 @@ jobs:
         Single: {}
       clusterId: null
     enabled: null
-    createdAt: '2023-03-16 16:07:01'
-    modifiedAt: '2023-03-16 16:09:24'
+    createdAt: '2023-03-22 22:08:11'
+    modifiedAt: '2023-03-22 22:08:43'
     author: smille29@its.jnj.com
-  jobs/SAP_BBL_MD_SER_NUM_STOCK_SGMNT:
-    name: SAP_BBL_MD_SER_NUM_STOCK_SGMNT
+  jobs/BBA_PIPELINE_JOB:
+    name: BBA_PIPELINE_JOB
     description: ''
     fabricUID: 32
     scheduler:
       Databricks: {}
     cloudProvider: null
     jobSize: Prophecy_Small
-    scheduleCron: 0 0 13 1/1 * ? *
+    scheduleCron: 0 0 9 * * ? *
     timeout: null
     alerting:
       emails: ''
@@ -6008,8 +5993,208 @@ jobs:
         Single: {}
       clusterId: null
     enabled: null
-    createdAt: '2023-03-16 16:11:17'
-    modifiedAt: '2023-03-16 16:23:47'
+    createdAt: '2023-03-22 22:09:30'
+    modifiedAt: '2023-03-22 22:10:01'
+    author: smille29@its.jnj.com
+  jobs/BBL_PIPELINE_JOB:
+    name: BBL_PIPELINE_JOB
+    description: ''
+    fabricUID: 32
+    scheduler:
+      Databricks: {}
+    cloudProvider: null
+    jobSize: Prophecy_Small
+    scheduleCron: 0 5 9 * * ? *
+    timeout: null
+    alerting:
+      emails: ''
+      onStart: false
+      onSuccess: false
+      onFailure: false
+    pipelines:
+    - pipelines/SAP_01_MD_SER_NUM_STOCK_SGMNT
+    jobClusterMode:
+      clusterMode:
+        Single: {}
+      clusterId: null
+    enabled: null
+    createdAt: '2023-03-22 22:10:55'
+    modifiedAt: '2023-03-22 22:11:25'
+    author: smille29@its.jnj.com
+  jobs/BBN_PIPELINE_JOB:
+    name: BBN_PIPELINE_JOB
+    description: ''
+    fabricUID: 32
+    scheduler:
+      Databricks: {}
+    cloudProvider: null
+    jobSize: Prophecy_Small
+    scheduleCron: 0 0 8 * * ? *
+    timeout: null
+    alerting:
+      emails: ''
+      onStart: false
+      onSuccess: false
+      onFailure: false
+    pipelines:
+    - pipelines/SAP_01_MD_SER_NUM_STOCK_SGMNT
+    jobClusterMode:
+      clusterMode:
+        Single: {}
+      clusterId: null
+    enabled: null
+    createdAt: '2023-03-22 22:12:59'
+    modifiedAt: '2023-03-22 22:13:19'
+    author: smille29@its.jnj.com
+  jobs/HMD_PIPELINE_JOB:
+    name: HMD_PIPELINE_JOB
+    description: ''
+    fabricUID: 32
+    scheduler:
+      Databricks: {}
+    cloudProvider: null
+    jobSize: Prophecy_Small
+    scheduleCron: 0 0 6 * * ? *
+    timeout: null
+    alerting:
+      emails: ''
+      onStart: false
+      onSuccess: false
+      onFailure: false
+    pipelines:
+    - pipelines/SAP_01_MD_SER_NUM_STOCK_SGMNT
+    jobClusterMode:
+      clusterMode:
+        Single: {}
+      clusterId: null
+    enabled: null
+    createdAt: '2023-03-22 22:13:59'
+    modifiedAt: '2023-03-22 22:14:18'
+    author: smille29@its.jnj.com
+  jobs/MRS_PIPELINE_JOB:
+    name: MRS_PIPELINE_JOB
+    description: ''
+    fabricUID: 32
+    scheduler:
+      Databricks: {}
+    cloudProvider: null
+    jobSize: Prophecy_Small
+    scheduleCron: 0 0 11 * * ? *
+    timeout: null
+    alerting:
+      emails: ''
+      onStart: false
+      onSuccess: false
+      onFailure: false
+    pipelines:
+    - pipelines/SAP_01_MD_SER_NUM_STOCK_SGMNT
+    jobClusterMode:
+      clusterMode:
+        Single: {}
+      clusterId: null
+    enabled: null
+    createdAt: '2023-03-22 22:14:56'
+    modifiedAt: '2023-03-22 22:15:20'
+    author: smille29@its.jnj.com
+  jobs/HCS_PIPELINE_JOB:
+    name: HCS_PIPELINE_JOB
+    description: ''
+    fabricUID: 32
+    scheduler:
+      Databricks: {}
+    cloudProvider: null
+    jobSize: Prophecy_Small
+    scheduleCron: 0 30 2 * * ? *
+    timeout: null
+    alerting:
+      emails: ''
+      onStart: false
+      onSuccess: false
+      onFailure: false
+    pipelines:
+    - pipelines/SAP_02_MD_SER_NUM_STOCK_SGMNT
+    jobClusterMode:
+      clusterMode:
+        Single: {}
+      clusterId: null
+    enabled: null
+    createdAt: '2023-03-22 22:16:06'
+    modifiedAt: '2023-03-22 22:16:25'
+    author: smille29@its.jnj.com
+  jobs/MBP_PIPELINE_JOB:
+    name: MBP_PIPELINE_JOB
+    description: ''
+    fabricUID: 32
+    scheduler:
+      Databricks: {}
+    cloudProvider: null
+    jobSize: Prophecy_Small
+    scheduleCron: 0 0 10 * * ? *
+    timeout: null
+    alerting:
+      emails: ''
+      onStart: false
+      onSuccess: false
+      onFailure: false
+    pipelines:
+    - pipelines/SAP_02_MD_SER_NUM_STOCK_SGMNT
+    jobClusterMode:
+      clusterMode:
+        Single: {}
+      clusterId: null
+    enabled: null
+    createdAt: '2023-03-22 22:17:03'
+    modifiedAt: '2023-03-22 22:17:23'
+    author: smille29@its.jnj.com
+  jobs/P01_PIPELINE_JOB:
+    name: P01_PIPELINE_JOB
+    description: ''
+    fabricUID: 32
+    scheduler:
+      Databricks: {}
+    cloudProvider: null
+    jobSize: Prophecy_Small
+    scheduleCron: 0 0 6 * * ? *
+    timeout: null
+    alerting:
+      emails: ''
+      onStart: false
+      onSuccess: false
+      onFailure: false
+    pipelines:
+    - pipelines/SAP_02_MD_SER_NUM_STOCK_SGMNT
+    jobClusterMode:
+      clusterMode:
+        Single: {}
+      clusterId: null
+    enabled: null
+    createdAt: '2023-03-22 22:18:04'
+    modifiedAt: '2023-03-22 22:18:24'
+    author: smille29@its.jnj.com
+  jobs/SVS_PIPELINE_JOB:
+    name: SVS_PIPELINE_JOB
+    description: ''
+    fabricUID: 32
+    scheduler:
+      Databricks: {}
+    cloudProvider: null
+    jobSize: Prophecy_Small
+    scheduleCron: 0 0 2 * * ? *
+    timeout: null
+    alerting:
+      emails: ''
+      onStart: false
+      onSuccess: false
+      onFailure: false
+    pipelines:
+    - pipelines/SAP_02_MD_SER_NUM_STOCK_SGMNT
+    jobClusterMode:
+      clusterMode:
+        Single: {}
+      clusterId: null
+    enabled: null
+    createdAt: '2023-03-22 22:18:58'
+    modifiedAt: '2023-03-22 22:19:19'
     author: smille29@its.jnj.com
 libraries: []
 subgraphs: {}

@@ -11,7 +11,7 @@ def pipeline(spark: SparkSession) -> None:
     df_MANDT_Filter_Parameter = MANDT_Filter_Parameter(spark, df_SAP_EQBS_02)
     df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_MANDT_Filter_Parameter)
     df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS_RENAME_FORMAT)
-    MD_SER_NUM_STOCK_SGMNT_SWAP(spark, df_SET_FIELD_ORDER_REFORMAT)
+    MD_SER_NUM_STOCK_SGMNT(spark, df_SET_FIELD_ORDER_REFORMAT)
 
 def main():
     spark = SparkSession.builder\

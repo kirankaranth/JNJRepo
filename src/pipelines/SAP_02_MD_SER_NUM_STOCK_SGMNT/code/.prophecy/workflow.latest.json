@@ -17,10 +17,17 @@
       "common" : {
         "type" : "record",
         "fields" : [ {
-          "name" : "SRC_SYS_CD",
+          "name" : "sourceSystem",
           "kind" : {
             "type" : "string",
             "value" : "hcs"
+          },
+          "optional" : false
+        }, {
+          "name" : "targetSchema",
+          "kind" : {
+            "type" : "string",
+            "value" : "l1_md_prophecy"
           },
           "optional" : false
         }, {
@@ -52,7 +59,7 @@
       },
       "fabrics" : { },
       "instances" : { },
-      "selected" : "SVS",
+      "selected" : "default",
       "nonEditable" : [ ],
       "isSubscribedPipelineWithPipelineConfigs" : false
     },
@@ -84,46 +91,19 @@
     "target" : "UV_CY8dvg5GgoAlS7uyds$$4QyyutzcZ-1jNQDYRogfS",
     "targetPort" : "LzoUIRkoS9zYt5elAOZ-A$$qgnxt12--7F40Z7WBLJkH"
   }, {
-    "id" : "rgfa9JYpYJVTRhwXiTfBd",
-    "source" : "UV_CY8dvg5GgoAlS7uyds$$4QyyutzcZ-1jNQDYRogfS",
-    "sourcePort" : "pyGBleqopuGx9Lb8XZgK_$$bZGsilcpCWvmJuYe2EHWO",
-    "target" : "tb_jh4CGOHODXYmjBP0V9$$jjJuUgBbyTf0ReyuiWFcE",
-    "targetPort" : "0HhIjxA-O9o2F2dxKuHSt$$5GR3Vg7XnQv64gozzHLLP"
-  }, {
     "id" : "9N6uu_WLZgVZXQOXHiZAl",
     "source" : "Narz4ADL8pIBVif1wSBt-$$x7Nhio_C3W757W2o1j7bw",
     "sourcePort" : "KqjIEKFBDEtwWnETzWaoo$$KbUVnm_QraCaQcSL1c2sV",
     "target" : "GEoBbRKhHOpPlNMEQuzfZ$$8P28Yq9g1ojrqFzK_XV03",
     "targetPort" : "wEj0I4cBzHmFBSZO1KeW6$$0N7u7ZcRgGhCgjycK9bdK"
+  }, {
+    "id" : "Inm-rfOBvX1ErQRSplglk$$-yzTUPKXyV0oVbNu4NibD",
+    "source" : "UV_CY8dvg5GgoAlS7uyds$$4QyyutzcZ-1jNQDYRogfS",
+    "sourcePort" : "pyGBleqopuGx9Lb8XZgK_$$bZGsilcpCWvmJuYe2EHWO",
+    "target" : "8wPNlmgY4kP58EkQ9zv6-$$mnCu8fcrL3V_i4UCTC64m",
+    "targetPort" : "Dk3fQnUbm-JxhaB0yJj41$$a6UWb3OH1VbJL3S-YR8wN"
   } ],
   "processes" : {
-    "tb_jh4CGOHODXYmjBP0V9$$jjJuUgBbyTf0ReyuiWFcE" : {
-      "id" : "tb_jh4CGOHODXYmjBP0V9$$jjJuUgBbyTf0ReyuiWFcE",
-      "component" : "Target",
-      "metadata" : {
-        "label" : "MD_SER_NUM_STOCK_SGMNT_SWAP",
-        "slug" : "MD_SER_NUM_STOCK_SGMNT_SWAP",
-        "x" : 1080,
-        "y" : 200,
-        "phase" : 0,
-        "cache" : false,
-        "detailedStats" : false,
-        "isImported" : false
-      },
-      "ports" : {
-        "inputs" : [ {
-          "id" : "0HhIjxA-O9o2F2dxKuHSt$$5GR3Vg7XnQv64gozzHLLP",
-          "slug" : "in0",
-          "isStreaming" : false
-        } ],
-        "outputs" : [ ],
-        "selectedInputFields" : [ ],
-        "isCustomOutputSchema" : false
-      },
-      "properties" : {
-        "datasetId" : "datasets/DS_MD_SER_NUM_STOCK_SGMNT_SWAP"
-      }
-    },
     "UV_CY8dvg5GgoAlS7uyds$$4QyyutzcZ-1jNQDYRogfS" : {
       "id" : "UV_CY8dvg5GgoAlS7uyds$$4QyyutzcZ-1jNQDYRogfS",
       "component" : "Reformat",
@@ -303,7 +283,7 @@
             "sourceColumn" : "SRC_SYS_CD",
             "expression" : {
               "format" : "sql",
-              "expression" : "'$SRC_SYS_CD'"
+              "expression" : "'$sourceSystem'"
             }
           },
           "DropColumn" : {
@@ -527,7 +507,7 @@
             "sourceColumn" : "DAI_CRT_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "to_timestamp(current_timestamp(),'yyyy-MM-dd')"
+              "expression" : "current_timestamp()"
             }
           },
           "DropColumn" : {
@@ -543,7 +523,7 @@
             "sourceColumn" : "DAI_UPDT_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "to_timestamp(current_timestamp(),'yyyy-MM-dd')"
+              "expression" : "current_timestamp()"
             }
           },
           "DropColumn" : {
@@ -554,6 +534,33 @@
             "targetColumn" : ""
           }
         } ]
+      }
+    },
+    "8wPNlmgY4kP58EkQ9zv6-$$mnCu8fcrL3V_i4UCTC64m" : {
+      "id" : "8wPNlmgY4kP58EkQ9zv6-$$mnCu8fcrL3V_i4UCTC64m",
+      "component" : "Target",
+      "metadata" : {
+        "label" : "MD_SER_NUM_STOCK_SGMNT",
+        "slug" : "MD_SER_NUM_STOCK_SGMNT",
+        "x" : 1000,
+        "y" : 200,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Dk3fQnUbm-JxhaB0yJj41$$a6UWb3OH1VbJL3S-YR8wN",
+          "slug" : "in0",
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/MD_SER_NUM_STOCK_SGMNT"
       }
     },
     "GEoBbRKhHOpPlNMEQuzfZ$$8P28Yq9g1ojrqFzK_XV03" : {
