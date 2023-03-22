@@ -23,7 +23,7 @@ class Config(ConfigBase):
             COLUMNS: int=19, 
             DBNAME: str="bbn", 
             DAI_ETL_ID: int=0, 
-            BOM_VLD_TO_DTTM: str="to_timestamp(CAST(NULL AS string),'yyyyMMdd')"
+            BOM_VLD_TO_DTTM: str="cast(null as timestamp)"
     ):
         global prophecy_spark_context
         prophecy_spark_context = self.spark
