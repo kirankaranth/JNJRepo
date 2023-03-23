@@ -41,7 +41,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("DOC_COND_OWN_COND", trim(col("KNUMV")))\
         .withColumn("SHIPPING_COND_CD", trim(col("VSBED")))\
         .withColumn("FISC_YR", trim(col("GJAHR")))\
-        .withColumn("PSTNG_PER", trim(col("POPER")))\
+        .withColumn("PSTNG_PER", trim(col("POPER")).cast(IntegerType()))\
         .withColumn("CUST_GRP_CD", trim(col("KDGRP")))\
         .withColumn("INTNL_COM_CD", trim(col("INCO1")))\
         .withColumn("DEL_DPRT_PT_CD", trim(col("INCO2")))\
@@ -85,7 +85,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
           when((col("KURRF_DAT") == lit("00000000")), lit(None)).otherwise(to_timestamp(col("KURRF_DAT"), "yyyyMMdd"))
         )\
         .withColumn("PMT_REF", trim(col("KIDNO")))\
-        .withColumn("NUM_OF_PG", trim(col("NUMPG")))\
+        .withColumn("NUM_OF_PG", trim(col("NUMPG")).cast(IntegerType()))\
         .withColumn("PSTNG_BILL_STS_CD", trim(col("BUCHK")))\
         .withColumn("INVC_LIST_STS_CD", trim(col("RELIK")))\
         .withColumn("CUST_PRC_GRP", trim(col("KONDA")))\
