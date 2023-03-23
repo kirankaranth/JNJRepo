@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "l1_md_prophecy"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "deu"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "deu"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MD_DELV_LINE_6"
+      },
+      "connections" : [ {
+        "id" : "2b73267a-4003-4462-9ef7-dc8d82ac089d",
+        "source" : "ad04f938-8273-4b28-9f17-70ccedad6b24",
+        "sourcePort" : "a15dada6-7363-43f6-8e19-def2b9a9ce21",
+        "target" : "a2d5a6f8-b558-4510-9a08-334ee7123b71",
+        "targetPort" : "d9d5753c-118f-4fb3-a69a-01ff0afc5df2"
+      }, {
+        "id" : "847bcda9-9824-411d-8cbc-ff66b605a4cf",
+        "source" : "a0660c50-4a20-488d-b23c-c88bb7d1a753",
+        "sourcePort" : "deb98d9d-297a-4127-9b41-90d58ed6dac3",
+        "target" : "ad04f938-8273-4b28-9f17-70ccedad6b24",
+        "targetPort" : "4fc5fa11-b048-4eae-b1fe-b94bdbab7bfa"
+      } ],
+      "processes" : {
+        "a2d5a6f8-b558-4510-9a08-334ee7123b71" : {
+          "id" : "a2d5a6f8-b558-4510-9a08-334ee7123b71",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MD_DELV_LINE",
+            "slug" : "MD_DELV_LINE",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "d9d5753c-118f-4fb3-a69a-01ff0afc5df2",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MD_DELV_LINE"
+          }
+        },
+        "ad04f938-8273-4b28-9f17-70ccedad6b24" : {
+          "id" : "ad04f938-8273-4b28-9f17-70ccedad6b24",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "4fc5fa11-b048-4eae-b1fe-b94bdbab7bfa",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "a15dada6-7363-43f6-8e19-def2b9a9ce21",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'DELV_NUM',DELV_NUM,'DELV_LINE_NBR',DELV_LINE_NBR,'DELV_TYP_CD',DELV_TYP_CD,'CO_CD',CO_CD,'DOC_REF_NUM',DOC_REF_NUM,'ORDR_SFX',ORDR_SFX,'MATCH_TYPE',MATCH_TYPE,'SRC_TBL_NM',SRC_TBL_NM))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'DELV_NUM',DELV_NUM,'DELV_LINE_NBR',DELV_LINE_NBR,'DELV_TYP_CD',DELV_TYP_CD,'CO_CD',CO_CD,'DOC_REF_NUM',DOC_REF_NUM,'ORDR_SFX',ORDR_SFX,'MATCH_TYPE',MATCH_TYPE,'SRC_TBL_NM',SRC_TBL_NM)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "a0660c50-4a20-488d-b23c-c88bb7d1a753" : {
+          "id" : "a0660c50-4a20-488d-b23c-c88bb7d1a753",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MD_DELV_LINE",
+            "slug" : "sql_MD_DELV_LINE",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "deb98d9d-297a-4127-9b41-90d58ed6dac3",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    with mysub as (\n  SELECT\n    'F4211' AS SRC_TBL_NM,\n    F4211.SDDOC AS DELV_NUM,\n    F4211.SDLNID AS DELV_LINE_NBR,\n    F4211.SDDCTO AS DELV_TYP_CD,\n    F4211.SDKCOO AS CO_CD,\n    NULL AS MATL_SHRT_DESC,\n    NULL AS MATL_MVMT_TYPE_CD,\n    F4211.SDDOCO AS DOC_REF_NUM,\n    NULL AS PICK_CNTL_STS_CD,\n    NULL AS LINE_ITEM_CAT_CD,\n    NULL AS SPL_STK_TYPE_CD,\n    NULL AS PARNT_BTCH_SPLT_CNTR_NBR,\n    NULL AS PARNT_BOM_CNTR_NBR,\n    NULL AS FCTR_NMRTR_MEAS,\n    NULL AS FCTR_DNMNTR_MEAS,\n    NULL AS ACTL_GI_DTTM,\n    CAST (TRIM (F4211.SDSOQS) AS DECIMAL(18, 4)) AS ACTL_SLS_UNIT_DELV_QTY,\n    NULL AS ACTL_SKU_DELV_QTY,\n    NULL AS BASE_UOM_CD,\n    TRIM (F4211.SDLOTN) AS BTCH_NUM,\n    NULL AS BILL_ICMPT_STS_CD,\n    NULL AS CNFRM_STS_CD,\n    NULL AS MFG_DTTM,\n    NULL AS DELV_BILL_STS_CD,\n    NULL AS DELV_CMPLT_IND,\n    NULL AS DELV_ICMPT_STS_CD,\n    NULL AS DELV_STS_CD,\n    NULL AS DELV_TOT_STS_CD,\n    NULL AS EXP_DTTM,\n    NULL AS GM_ICMPT_STS_CD,\n    NULL AS GM_STS_CD,\n    NULL AS INTCO_BILL_STS_CD,\n    TRIM (F4211.SDLITM) AS MATL_NUM,\n    NULL AS ICMPT_STS_CD,\n    NULL AS NUM_OF_CNTNRS_CNT,\n    NULL AS ORDR_BILL_STS_CD,\n    NULL AS PACK_ICMPT_STS_CD,\n    NULL AS PACK_STS_CD,\n    NULL AS PICK_CNFRM_STS_CD,\n    NULL AS PICK_ICMPT_STS_CD,\n    NULL AS PICK_STS_CD,\n    NULL AS PRC_ICMPT_STS_CD,\n    NULL AS PRCSG_TOT_STS_CD,\n    NULL AS RECV_PLNT_CD,\n    NULL AS REF_STS_CD,\n    NULL AS REF_TOT_STS_CD,\n    NULL AS REJ_STS_CD,\n    TRIM (F4211.SDLNID) AS SLS_ORDR_LINE_NBR_REF,\n    NULL AS SLS_ORDR_TYPE_CD,\n    TRIM (F4211.SDUOM) AS SLS_UOM_CD,\n    TRIM (F4211.SDMCU) AS SHIPPING_PLNT_CD,\n    TRIM (F4211.SDLOCN) AS SLOC_CD,\n    NULL AS VEND_BTCH_NUM,\n    NULL AS WM_STS_CD,\n    NULL AS CRT_DTTM,\n    NULL AS ITM_TYPE,\n    NULL AS ITM_OF_REF_DOC,\n    NULL AS GRS_WT_MEAS,\n    NULL AS NET_WT_MEAS,\n    NULL AS WT_UOM_CD,\n    NULL AS VOL_MEAS,\n    NULL AS VOL_UOM_CD,\n    NULL AS NET_VAL_AMT,\n    NULL AS PROD_HIER_CD,\n    NULL AS MATL_GRP_4,\n    NULL AS MATL_GRP_4_DESC,\n    NULL AS DSTR_CHNL_CD,\n    NULL AS ITM_BILL_BLK_STS_CD,\n    NULL AS ITM_OVRL_DELV_BLK_STS_CD,\n    NULL AS ENT_MATL_NUM,\n    NULL AS DIVISION_CD,\n    NULL AS DOC_CAT_SD,\n    NULL AS MATL_GRP_CD,\n    NULL AS MATL_TYPE_CD,\n    NULL AS CUM_BTCH_QTY,\n    F4211.SDSFXO AS ORDR_SFX,\n    null AS MATCH_TYPE,\n    TRIM (F4211.SDLNTY) AS LINE_TYPE_DELV,\n NULL AS ORIG_QTY_DELV_ITM\n  from\n    {Config.sourceDatabase}.F4211 F4211\n  where\n    F4211._deleted_ = 'F'\n  UNION ALL\n  SELECT\n    'F43121' AS SRC_TBL_NM,\n    F43121.PRDOC AS DELV_NUM,\n    CONCAT(F43121.PRLNID, \\\" \\\", F43121.PRNLIN) AS DELV_LINE_NBR,\n    F43121.PRDCTO AS DELV_TYP_CD,\n    F43121.PRKCOO AS CO_CD,\n    NULL AS MATL_SHRT_DESC,\n    NULL AS MATL_MVMT_TYPE_CD,\n    F43121.PRDOCO AS DOC_REF_NUM,\n    NULL AS PICK_CNTL_STS_CD,\n    NULL AS LINE_ITEM_CAT_CD,\n    NULL AS SPL_STK_TYPE_CD,\n    NULL AS PARNT_BTCH_SPLT_CNTR_NBR,\n    NULL AS PARNT_BOM_CNTR_NBR,\n    NULL AS FCTR_NMRTR_MEAS,\n    NULL AS FCTR_DNMNTR_MEAS,\n    NULL AS ACTL_GI_DTTM,\n    CAST (TRIM (F43121.PRUREC) AS DECIMAL(18, 4)) AS ACTL_SLS_UNIT_DELV_QTY,\n    NULL AS ACTL_SKU_DELV_QTY,\n    NULL AS BASE_UOM_CD,\n    TRIM (F43121.PRLOTN) AS BTCH_NUM,\n    NULL AS BILL_ICMPT_STS_CD,\n    NULL AS CNFRM_STS_CD,\n    NULL AS MFG_DTTM,\n    NULL AS DELV_BILL_STS_CD,\n    NULL AS DELV_CMPLT_IND,\n    NULL AS DELV_ICMPT_STS_CD,\n    NULL AS DELV_STS_CD,\n    NULL AS DELV_TOT_STS_CD,\n    NULL AS EXP_DTTM,\n    NULL AS GM_ICMPT_STS_CD,\n    NULL AS GM_STS_CD,\n    NULL AS INTCO_BILL_STS_CD,\n    TRIM (F43121.PRLITM) AS MATL_NUM,\n    NULL AS ICMPT_STS_CD,\n    NULL AS NUM_OF_CNTNRS_CNT,\n    NULL AS ORDR_BILL_STS_CD,\n    NULL AS PACK_ICMPT_STS_CD,\n    NULL AS PACK_STS_CD,\n    NULL AS PICK_CNFRM_STS_CD,\n    NULL AS PICK_ICMPT_STS_CD,\n    NULL AS PICK_STS_CD,\n    NULL AS PRC_ICMPT_STS_CD,\n    NULL AS PRCSG_TOT_STS_CD,\n    NULL AS RECV_PLNT_CD,\n    NULL AS REF_STS_CD,\n    NULL AS REF_TOT_STS_CD,\n    NULL AS REJ_STS_CD,\n    TRIM (F43121.PRLNID) AS SLS_ORDR_LINE_NBR_REF,\n    NULL AS SLS_ORDR_TYPE_CD,\n    TRIM (F43121.PRUOM) AS SLS_UOM_CD,\n    TRIM (F43121.PRMCU) AS SHIPPING_PLNT_CD,\n    TRIM (F43121.PRLOCN) AS SLOC_CD,\n    NULL AS VEND_BTCH_NUM,\n    NULL AS WM_STS_CD,\n    NULL AS CRT_DTTM,\n    NULL AS ITM_TYPE,\n    NULL AS ITM_OF_REF_DOC,\n    NULL AS GRS_WT_MEAS,\n    NULL AS NET_WT_MEAS,\n    NULL AS WT_UOM_CD,\n    NULL AS VOL_MEAS,\n    NULL AS VOL_UOM_CD,\n    NULL AS NET_VAL_AMT,\n    NULL AS PROD_HIER_CD,\n    NULL AS MATL_GRP_4,\n    NULL AS MATL_GRP_4_DESC,\n    NULL AS DSTR_CHNL_CD,\n    NULL AS ITM_BILL_BLK_STS_CD,\n    NULL AS ITM_OVRL_DELV_BLK_STS_CD,\n    NULL AS ENT_MATL_NUM,\n    NULL AS DIVISION_CD,\n    NULL AS DOC_CAT_SD,\n    NULL AS MATL_GRP_CD,\n    NULL AS MATL_TYPE_CD,\n    NULL AS CUM_BTCH_QTY,\n    F43121.PRSFXO AS ORDR_SFX,\n    F43121.PRMATC AS MATCH_TYPE,\n    TRIM (F43121.PRLNTY) AS LINE_TYPE_DELV,\n NULL AS ORIG_QTY_DELV_ITM\n  from\n    {Config.sourceDatabase}.F43121 F43121\n  where\n    F43121._deleted_ = 'F'\n)\nSELECT\n  SRC_SYS_CD,\n  DELV_NUM,\n  DELV_LINE_NBR,\n  DELV_TYP_CD,\n  CO_CD,\n  MATL_SHRT_DESC,\n  MATL_MVMT_TYPE_CD,\n  DOC_REF_NUM,\n  PICK_CNTL_STS_CD,\n  LINE_ITEM_CAT_CD,\n  SPL_STK_TYPE_CD,\n  PARNT_BTCH_SPLT_CNTR_NBR,\n  PARNT_BOM_CNTR_NBR,\n  FCTR_NMRTR_MEAS,\n  FCTR_DNMNTR_MEAS,\n  ACTL_GI_DTTM,\n  ACTL_SLS_UNIT_DELV_QTY,\n  ACTL_SKU_DELV_QTY,\n  BASE_UOM_CD,\n  BTCH_NUM,\n  BILL_ICMPT_STS_CD,\n  CNFRM_STS_CD,\n  MFG_DTTM,\n  DELV_BILL_STS_CD,\n  DELV_CMPLT_IND,\n  DELV_ICMPT_STS_CD,\n  DELV_STS_CD,\n  DELV_TOT_STS_CD,\n  EXP_DTTM,\n  GM_ICMPT_STS_CD,\n  GM_STS_CD,\n  INTCO_BILL_STS_CD,\n  MATL_NUM,\n  ICMPT_STS_CD,\n  NUM_OF_CNTNRS_CNT,\n  ORDR_BILL_STS_CD,\n  PACK_ICMPT_STS_CD,\n  PACK_STS_CD,\n  PICK_CNFRM_STS_CD,\n  PICK_ICMPT_STS_CD,\n  PICK_STS_CD,\n  PRC_ICMPT_STS_CD,\n  PRCSG_TOT_STS_CD,\n  RECV_PLNT_CD,\n  REF_STS_CD,\n  REF_TOT_STS_CD,\n  REJ_STS_CD,\n  SLS_ORDR_LINE_NBR_REF,\n  SLS_ORDR_TYPE_CD,\n  SLS_UOM_CD,\n  SHIPPING_PLNT_CD,\n  SLOC_CD,\n  VEND_BTCH_NUM,\n  WM_STS_CD,\n  CRT_DTTM,\n  ITM_TYPE,\n  ITM_OF_REF_DOC,\n  GRS_WT_MEAS,\n  NET_WT_MEAS,\n  WT_UOM_CD,\n  VOL_MEAS,\n  VOL_UOM_CD,\n  NET_VAL_AMT,\n  PROD_HIER_CD,\n  MATL_GRP_4,\n  MATL_GRP_4_DESC,\n  DSTR_CHNL_CD,\n  ITM_BILL_BLK_STS_CD,\n  ITM_OVRL_DELV_BLK_STS_CD,\n  ENT_MATL_NUM,\n  DIVISION_CD,\n  DOC_CAT_SD,\n  MATL_GRP_CD,\n  MATL_TYPE_CD,\n  CUM_BTCH_QTY,\n  ORDR_SFX,\n  MATCH_TYPE,\n  LINE_TYPE_DELV,\n  SRC_TBL_NM,\n  ORIG_QTY_DELV_ITM\nFROM\n  (\n    select\n      *,\n      ROW_NUMBER() over (\n        partition by SRC_SYS_CD,\n        DELV_NUM,\n        DELV_LINE_NBR,\n        DELV_TYP_CD,\n        CO_CD,\n        DOC_REF_NUM,\n        ORDR_SFX,\n        MATCH_TYPE,\n        SRC_TBL_NM\n        order by\n          DELV_LINE_NBR\n      ) as rnk\n    from(\n        SELECT\n          DISTINCT '{Config.sourceSystem}'   AS SRC_SYS_CD,\n          mysub.DELV_NUM AS DELV_NUM,\n          mysub.DELV_LINE_NBR AS DELV_LINE_NBR,\n          mysub.DELV_TYP_CD AS DELV_TYP_CD,\n          mysub.CO_CD AS CO_CD,\n          mysub.MATL_SHRT_DESC AS MATL_SHRT_DESC,\n          mysub.MATL_MVMT_TYPE_CD AS MATL_MVMT_TYPE_CD,\n          mysub.DOC_REF_NUM AS DOC_REF_NUM,\n          mysub.PICK_CNTL_STS_CD AS PICK_CNTL_STS_CD,\n          mysub.LINE_ITEM_CAT_CD AS LINE_ITEM_CAT_CD,\n          mysub.SPL_STK_TYPE_CD AS SPL_STK_TYPE_CD,\n          mysub.PARNT_BTCH_SPLT_CNTR_NBR AS PARNT_BTCH_SPLT_CNTR_NBR,\n          mysub.PARNT_BOM_CNTR_NBR AS PARNT_BOM_CNTR_NBR,\n          mysub.FCTR_NMRTR_MEAS AS FCTR_NMRTR_MEAS,\n          mysub.FCTR_DNMNTR_MEAS AS FCTR_DNMNTR_MEAS,\n          mysub.ACTL_GI_DTTM AS ACTL_GI_DTTM,\n          CAST (mysub.ACTL_SLS_UNIT_DELV_QTY AS DECIMAL(18, 4)) AS ACTL_SLS_UNIT_DELV_QTY,\n          mysub.ACTL_SKU_DELV_QTY AS ACTL_SKU_DELV_QTY,\n          mysub.BASE_UOM_CD AS BASE_UOM_CD,\n          mysub.BTCH_NUM AS BTCH_NUM,\n          mysub.BILL_ICMPT_STS_CD AS BILL_ICMPT_STS_CD,\n          mysub.CNFRM_STS_CD AS CNFRM_STS_CD,\n          mysub.MFG_DTTM AS MFG_DTTM,\n          mysub.DELV_BILL_STS_CD AS DELV_BILL_STS_CD,\n          mysub.DELV_CMPLT_IND AS DELV_CMPLT_IND,\n          mysub.DELV_ICMPT_STS_CD AS DELV_ICMPT_STS_CD,\n          mysub.DELV_STS_CD AS DELV_STS_CD,\n          mysub.DELV_TOT_STS_CD AS DELV_TOT_STS_CD,\n          mysub.EXP_DTTM AS EXP_DTTM,\n          mysub.GM_ICMPT_STS_CD AS GM_ICMPT_STS_CD,\n          mysub.GM_STS_CD AS GM_STS_CD,\n          mysub.INTCO_BILL_STS_CD AS INTCO_BILL_STS_CD,\n          mysub.MATL_NUM AS MATL_NUM,\n          mysub.ICMPT_STS_CD AS ICMPT_STS_CD,\n          mysub.NUM_OF_CNTNRS_CNT AS NUM_OF_CNTNRS_CNT,\n          mysub.ORDR_BILL_STS_CD AS ORDR_BILL_STS_CD,\n          mysub.PACK_ICMPT_STS_CD AS PACK_ICMPT_STS_CD,\n          mysub.PACK_STS_CD AS PACK_STS_CD,\n          mysub.PICK_CNFRM_STS_CD AS PICK_CNFRM_STS_CD,\n          mysub.PICK_ICMPT_STS_CD AS PICK_ICMPT_STS_CD,\n          mysub.PICK_STS_CD AS PICK_STS_CD,\n          mysub.PRC_ICMPT_STS_CD AS PRC_ICMPT_STS_CD,\n          mysub.PRCSG_TOT_STS_CD AS PRCSG_TOT_STS_CD,\n          mysub.RECV_PLNT_CD AS RECV_PLNT_CD,\n          mysub.REF_STS_CD AS REF_STS_CD,\n          mysub.REF_TOT_STS_CD AS REF_TOT_STS_CD,\n          mysub.REJ_STS_CD AS REJ_STS_CD,\n          mysub.SLS_ORDR_LINE_NBR_REF AS SLS_ORDR_LINE_NBR_REF,\n          mysub.SLS_ORDR_TYPE_CD AS SLS_ORDR_TYPE_CD,\n          mysub.SLS_UOM_CD AS SLS_UOM_CD,\n          mysub.SHIPPING_PLNT_CD AS SHIPPING_PLNT_CD,\n          mysub.SLOC_CD AS SLOC_CD,\n          mysub.VEND_BTCH_NUM AS VEND_BTCH_NUM,\n          mysub.WM_STS_CD AS WM_STS_CD,\n          mysub.CRT_DTTM AS CRT_DTTM,\n          mysub.ITM_TYPE AS ITM_TYPE,\n          mysub.ITM_OF_REF_DOC AS ITM_OF_REF_DOC,\n          mysub.GRS_WT_MEAS AS GRS_WT_MEAS,\n          mysub.NET_WT_MEAS AS NET_WT_MEAS,\n          mysub.WT_UOM_CD AS WT_UOM_CD,\n          mysub.VOL_MEAS AS VOL_MEAS,\n          mysub.VOL_UOM_CD AS VOL_UOM_CD,\n          mysub.NET_VAL_AMT AS NET_VAL_AMT,\n          mysub.PROD_HIER_CD AS PROD_HIER_CD,\n          mysub.MATL_GRP_4 AS MATL_GRP_4,\n          mysub.MATL_GRP_4_DESC AS MATL_GRP_4_DESC,\n          mysub.DSTR_CHNL_CD AS DSTR_CHNL_CD,\n          mysub.ITM_BILL_BLK_STS_CD AS ITM_BILL_BLK_STS_CD,\n          mysub.ITM_OVRL_DELV_BLK_STS_CD AS ITM_OVRL_DELV_BLK_STS_CD,\n          mysub.ENT_MATL_NUM AS ENT_MATL_NUM,\n          mysub.DIVISION_CD AS DIVISION_CD,\n          mysub.DOC_CAT_SD AS DOC_CAT_SD,\n          mysub.MATL_GRP_CD AS MATL_GRP_CD,\n          mysub.MATL_TYPE_CD AS MATL_TYPE_CD,\n          mysub.CUM_BTCH_QTY AS CUM_BTCH_QTY,\n          mysub.ORDR_SFX AS ORDR_SFX,\n          COALESCE(mysub.MATCH_TYPE, 'NULL') AS MATCH_TYPE,\n          mysub.LINE_TYPE_DELV AS LINE_TYPE_DELV,\n          mysub.SRC_TBL_NM AS SRC_TBL_NM,\n    mysub.ORIG_QTY_DELV_ITM AS ORIG_QTY_DELV_ITM\n        from\n          mysub mysub\n      )\n  )\nWHERE\n  rnk = 1  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    

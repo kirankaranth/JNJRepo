@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "l1_md_prophecy"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "hm2"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "hm2"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MD_FCTRY_CAL_2"
+      },
+      "connections" : [ {
+        "id" : "40712d67-58fa-46d7-9780-ddd24cff61e6",
+        "source" : "fb4d2609-ce70-4936-8707-41776d8b4917",
+        "sourcePort" : "e1940c1a-e030-43fc-8a6b-c0bbc86290b8",
+        "target" : "562bf344-d1f8-4fb6-a1ef-27d420b735b6",
+        "targetPort" : "ec95b2c6-7d29-42ea-a6c4-14257d53a30f"
+      }, {
+        "id" : "5f633c57-270b-4c0c-9f9e-8cd5a3b6cdd9",
+        "source" : "0b8a30d0-41cc-4476-bf6f-6d8dfc654393",
+        "sourcePort" : "972c8a81-447e-4109-b7a0-b68f902a6457",
+        "target" : "fb4d2609-ce70-4936-8707-41776d8b4917",
+        "targetPort" : "0746fd73-8005-4fda-9e44-d885de2705b9"
+      } ],
+      "processes" : {
+        "562bf344-d1f8-4fb6-a1ef-27d420b735b6" : {
+          "id" : "562bf344-d1f8-4fb6-a1ef-27d420b735b6",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MD_FCTRY_CAL",
+            "slug" : "MD_FCTRY_CAL",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "ec95b2c6-7d29-42ea-a6c4-14257d53a30f",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MD_FCTRY_CAL"
+          }
+        },
+        "fb4d2609-ce70-4936-8707-41776d8b4917" : {
+          "id" : "fb4d2609-ce70-4936-8707-41776d8b4917",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "0746fd73-8005-4fda-9e44-d885de2705b9",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "e1940c1a-e030-43fc-8a6b-c0bbc86290b8",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'CAL_NUM',CAL_NUM,'CAL_YR',CAL_YR,'CAL_DATE',CAL_DATE))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'CAL_NUM',CAL_NUM,'CAL_YR',CAL_YR,'CAL_DATE',CAL_DATE)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "0b8a30d0-41cc-4476-bf6f-6d8dfc654393" : {
+          "id" : "0b8a30d0-41cc-4476-bf6f-6d8dfc654393",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MD_FCTRY_CAL",
+            "slug" : "sql_MD_FCTRY_CAL",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "972c8a81-447e-4109-b7a0-b68f902a6457",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    WITH MD_FCTRY_CAL AS (\n  SELECT\n    '{Config.sourceSystem}' AS  AS SRC_SYS_CD,\n    CAL_NUM,\n    CAL_YR,\n    CAL_DATE,\n    WORK_DAY,(BASIS + CUMSUM) AS FACTORY_DAY,\n CASE\n      WHEN WORK_DAY = 0 THEN (BASIS + CUMSUM + 1)\n      ELSE (BASIS + CUMSUM)\n    END AS FACTORY_DAY_NEXT\n  FROM\n    (\n      select\n        CAL_NUM,\n        CAL_YR,\n        CAL_DATE,\n        BASIS,\n        WORK_DAY,\n        SUM(WORK_DAY) over (\n          PARTITION BY (CAL_NUM, CAL_YR)\n          ORDER BY\n            CAL_NUM ROWS BETWEEN UNBOUNDED PRECEDING\n            AND CURRENT ROW\n        ) CUMSUM\n      from\n        (\n          WITH RAW_DATA AS (\n            SELECT\n              *\n            FROM\n              {Config.sourceDatabase}.tfacs tfacs\n            WHERE\n              tfacs._deleted_ = 'F'\n          ),\n          VALS_AS_COLS_1 AS (\n            SELECT\n              IDENT,\n              JAHR,\n              BASIS,\n              '01' AS MONTH,\n              SUBSTRING(MON01, 1, 1) AS Day_1,\n              SUBSTRING(MON01, 2, 1) AS Day_2,\n              SUBSTRING(MON01, 3, 1) AS Day_3,\n              SUBSTRING(MON01, 4, 1) AS Day_4,\n              SUBSTRING(MON01, 5, 1) AS Day_5,\n              SUBSTRING(MON01, 6, 1) AS Day_6,\n              SUBSTRING(MON01, 7, 1) AS Day_7,\n              SUBSTRING(MON01, 8, 1) AS Day_8,\n              SUBSTRING(MON01, 9, 1) AS Day_9,\n              SUBSTRING(MON01, 10, 1) AS Day_10,\n              SUBSTRING(MON01, 11, 1) AS Day_11,\n              SUBSTRING(MON01, 12, 1) AS Day_12,\n              SUBSTRING(MON01, 13, 1) AS Day_13,\n              SUBSTRING(MON01, 14, 1) AS Day_14,\n              SUBSTRING(MON01, 15, 1) AS Day_15,\n              SUBSTRING(MON01, 16, 1) AS Day_16,\n              SUBSTRING(MON01, 17, 1) AS Day_17,\n              SUBSTRING(MON01, 18, 1) AS Day_18,\n              SUBSTRING(MON01, 19, 1) AS Day_19,\n              SUBSTRING(MON01, 20, 1) AS Day_20,\n              SUBSTRING(MON01, 21, 1) AS Day_21,\n              SUBSTRING(MON01, 22, 1) AS Day_22,\n              SUBSTRING(MON01, 23, 1) AS Day_23,\n              SUBSTRING(MON01, 24, 1) AS Day_24,\n              SUBSTRING(MON01, 25, 1) AS Day_25,\n              SUBSTRING(MON01, 26, 1) AS Day_26,\n              SUBSTRING(MON01, 27, 1) AS Day_27,\n              SUBSTRING(MON01, 28, 1) AS Day_28,\n              SUBSTRING(MON01, 29, 1) AS Day_29,\n              SUBSTRING(MON01, 30, 1) AS Day_30,\n              SUBSTRING(MON01, 31, 1) AS Day_31\n            FROM\n              RAW_DATA\n          ),\n          TRANSPOSE_1 AS (\n            SELECT\n              IDENT,\n              JAHR,\n              MONTH,\n              BASIS,\n              row_number() OVER (\n                PARTITION BY JAHR,\n                MONTH,\n                IDENT\n                ORDER BY\n                  JAHR,\n                  MONTH,\n                  IDENT\n              ) Day,\n              STACK(\n                31,\n                Day_1,\n                Day_2,\n                Day_3,\n                Day_4,\n                Day_5,\n                Day_6,\n                Day_7,\n                Day_8,\n                Day_9,\n                Day_10,\n                Day_11,\n                Day_12,\n                Day_13,\n                Day_14,\n                Day_15,\n                Day_16,\n                Day_17,\n                Day_18,\n                Day_19,\n                Day_20,\n                Day_21,\n                Day_22,\n                Day_23,\n                Day_24,\n                Day_25,\n                Day_26,\n                Day_27,\n                Day_28,\n                Day_29,\n                Day_30,\n                Day_31\n              ) work_day\n            FROM\n              VALS_AS_COLS_1\n          ),\n          VALS_AS_COLS_2 AS (\n            SELECT\n              IDENT,\n              JAHR,\n              BASIS,\n              '02' AS MONTH,\n              SUBSTRING(MON02, 1, 1) AS Day_1,\n              SUBSTRING(MON02, 2, 1) AS Day_2,\n              SUBSTRING(MON02, 3, 1) AS Day_3,\n              SUBSTRING(MON02, 4, 1) AS Day_4,\n              SUBSTRING(MON02, 5, 1) AS Day_5,\n              SUBSTRING(MON02, 6, 1) AS Day_6,\n              SUBSTRING(MON02, 7, 1) AS Day_7,\n              SUBSTRING(MON02, 8, 1) AS Day_8,\n              SUBSTRING(MON02, 9, 1) AS Day_9,\n              SUBSTRING(MON02, 10, 1) AS Day_10,\n              SUBSTRING(MON02, 11, 1) AS Day_11,\n              SUBSTRING(MON02, 12, 1) AS Day_12,\n              SUBSTRING(MON02, 13, 1) AS Day_13,\n              SUBSTRING(MON02, 14, 1) AS Day_14,\n              SUBSTRING(MON02, 15, 1) AS Day_15,\n              SUBSTRING(MON02, 16, 1) AS Day_16,\n              SUBSTRING(MON02, 17, 1) AS Day_17,\n              SUBSTRING(MON02, 18, 1) AS Day_18,\n              SUBSTRING(MON02, 19, 1) AS Day_19,\n              SUBSTRING(MON02, 20, 1) AS Day_20,\n              SUBSTRING(MON02, 21, 1) AS Day_21,\n              SUBSTRING(MON02, 22, 1) AS Day_22,\n              SUBSTRING(MON02, 23, 1) AS Day_23,\n              SUBSTRING(MON02, 24, 1) AS Day_24,\n              SUBSTRING(MON02, 25, 1) AS Day_25,\n              SUBSTRING(MON02, 26, 1) AS Day_26,\n              SUBSTRING(MON02, 27, 1) AS Day_27,\n              SUBSTRING(MON02, 28, 1) AS Day_28,\n     CASE WHEN ((JAHR % 4 = 0 AND JAHR % 100 <> 0) OR JAHR % 400 = 0) THEN SUBSTRING(MON02, 29, 1) ELSE NULL END AS Day_29\n            FROM\n              RAW_DATA\n          ),\n          TRANSPOSE_2 AS (\n            SELECT\n              IDENT,\n              JAHR,\n              MONTH,\n              BASIS,\n              row_number() OVER (\n                PARTITION BY JAHR,\n                MONTH,\n                IDENT\n                ORDER BY\n                  JAHR,\n                  MONTH,\n                  IDENT\n              ) Day,\n              STACK(\n                29,\n                Day_1,\n                Day_2,\n                Day_3,\n                Day_4,\n                Day_5,\n                Day_6,\n                Day_7,\n                Day_8,\n                Day_9,\n                Day_10,\n                Day_11,\n                Day_12,\n                Day_13,\n                Day_14,\n                Day_15,\n                Day_16,\n                Day_17,\n                Day_18,\n                Day_19,\n                Day_20,\n                Day_21,\n                Day_22,\n                Day_23,\n                Day_24,\n                Day_25,\n                Day_26,\n                Day_27,\n                Day_28,\n    Day_29\n              ) work_day\n            FROM\n              VALS_AS_COLS_2\n          ),\n          VALS_AS_COLS_3 AS (\n            SELECT\n              IDENT,\n              JAHR,\n              BASIS,\n              '03' AS MONTH,\n              SUBSTRING(MON03, 1, 1) AS Day_1,\n              SUBSTRING(MON03, 2, 1) AS Day_2,\n              SUBSTRING(MON03, 3, 1) AS Day_3,\n              SUBSTRING(MON03, 4, 1) AS Day_4,\n              SUBSTRING(MON03, 5, 1) AS Day_5,\n              SUBSTRING(MON03, 6, 1) AS Day_6,\n              SUBSTRING(MON03, 7, 1) AS Day_7,\n              SUBSTRING(MON03, 8, 1) AS Day_8,\n              SUBSTRING(MON03, 9, 1) AS Day_9,\n              SUBSTRING(MON03, 10, 1) AS Day_10,\n              SUBSTRING(MON03, 11, 1) AS Day_11,\n              SUBSTRING(MON03, 12, 1) AS Day_12,\n              SUBSTRING(MON03, 13, 1) AS Day_13,\n              SUBSTRING(MON03, 14, 1) AS Day_14,\n              SUBSTRING(MON03, 15, 1) AS Day_15,\n              SUBSTRING(MON03, 16, 1) AS Day_16,\n              SUBSTRING(MON03, 17, 1) AS Day_17,\n              SUBSTRING(MON03, 18, 1) AS Day_18,\n              SUBSTRING(MON03, 19, 1) AS Day_19,\n              SUBSTRING(MON03, 20, 1) AS Day_20,\n              SUBSTRING(MON03, 21, 1) AS Day_21,\n              SUBSTRING(MON03, 22, 1) AS Day_22,\n              SUBSTRING(MON03, 23, 1) AS Day_23,\n              SUBSTRING(MON03, 24, 1) AS Day_24,\n              SUBSTRING(MON03, 25, 1) AS Day_25,\n              SUBSTRING(MON03, 26, 1) AS Day_26,\n              SUBSTRING(MON03, 27, 1) AS Day_27,\n              SUBSTRING(MON03, 28, 1) AS Day_28,\n              SUBSTRING(MON03, 29, 1) AS Day_29,\n              SUBSTRING(MON03, 30, 1) AS Day_30,\n              SUBSTRING(MON03, 31, 1) AS Day_31\n            FROM\n              RAW_DATA\n          ),\n          TRANSPOSE_3 AS (\n            SELECT\n              IDENT,\n              JAHR,\n              MONTH,\n              BASIS,\n              row_number() OVER (\n                PARTITION BY JAHR,\n                MONTH,\n                IDENT\n                ORDER BY\n                  JAHR,\n                  MONTH,\n                  IDENT\n              ) Day,\n              STACK(\n                31,\n                Day_1,\n                Day_2,\n                Day_3,\n                Day_4,\n                Day_5,\n                Day_6,\n                Day_7,\n                Day_8,\n                Day_9,\n                Day_10,\n                Day_11,\n                Day_12,\n                Day_13,\n                Day_14,\n                Day_15,\n                Day_16,\n                Day_17,\n                Day_18,\n                Day_19,\n                Day_20,\n                Day_21,\n                Day_22,\n                Day_23,\n                Day_24,\n                Day_25,\n                Day_26,\n                Day_27,\n                Day_28,\n                Day_29,\n                Day_30,\n                Day_31\n              ) work_day\n            FROM\n              VALS_AS_COLS_3\n          ),\n          VALS_AS_COLS_4 AS (\n            SELECT\n              IDENT,\n              JAHR,\n              BASIS,\n              '04' AS MONTH,\n              SUBSTRING(MON04, 1, 1) AS Day_1,\n              SUBSTRING(MON04, 2, 1) AS Day_2,\n              SUBSTRING(MON04, 3, 1) AS Day_3,\n              SUBSTRING(MON04, 4, 1) AS Day_4,\n              SUBSTRING(MON04, 5, 1) AS Day_5,\n              SUBSTRING(MON04, 6, 1) AS Day_6,\n              SUBSTRING(MON04, 7, 1) AS Day_7,\n              SUBSTRING(MON04, 8, 1) AS Day_8,\n              SUBSTRING(MON04, 9, 1) AS Day_9,\n              SUBSTRING(MON04, 10, 1) AS Day_10,\n              SUBSTRING(MON04, 11, 1) AS Day_11,\n              SUBSTRING(MON04, 12, 1) AS Day_12,\n              SUBSTRING(MON04, 13, 1) AS Day_13,\n              SUBSTRING(MON04, 14, 1) AS Day_14,\n              SUBSTRING(MON04, 15, 1) AS Day_15,\n              SUBSTRING(MON04, 16, 1) AS Day_16,\n              SUBSTRING(MON04, 17, 1) AS Day_17,\n              SUBSTRING(MON04, 18, 1) AS Day_18,\n              SUBSTRING(MON04, 19, 1) AS Day_19,\n              SUBSTRING(MON04, 20, 1) AS Day_20,\n              SUBSTRING(MON04, 21, 1) AS Day_21,\n              SUBSTRING(MON04, 22, 1) AS Day_22,\n              SUBSTRING(MON04, 23, 1) AS Day_23,\n              SUBSTRING(MON04, 24, 1) AS Day_24,\n              SUBSTRING(MON04, 25, 1) AS Day_25,\n              SUBSTRING(MON04, 26, 1) AS Day_26,\n              SUBSTRING(MON04, 27, 1) AS Day_27,\n              SUBSTRING(MON04, 28, 1) AS Day_28,\n              SUBSTRING(MON04, 29, 1) AS Day_29,\n              SUBSTRING(MON04, 30, 1) AS Day_30\n            FROM\n              RAW_DATA\n          ),\n          TRANSPOSE_4 AS (\n            SELECT\n              IDENT,\n              JAHR,\n              MONTH,\n              BASIS,\n              row_number() OVER (\n                PARTITION BY JAHR,\n                MONTH,\n                IDENT\n                ORDER BY\n                  JAHR,\n                  MONTH,\n                  IDENT\n              ) Day,\n              STACK(\n                30,\n                Day_1,\n                Day_2,\n                Day_3,\n                Day_4,\n                Day_5,\n                Day_6,\n                Day_7,\n                Day_8,\n                Day_9,\n                Day_10,\n                Day_11,\n                Day_12,\n                Day_13,\n                Day_14,\n                Day_15,\n                Day_16,\n                Day_17,\n                Day_18,\n                Day_19,\n                Day_20,\n                Day_21,\n                Day_22,\n                Day_23,\n                Day_24,\n                Day_25,\n                Day_26,\n                Day_27,\n                Day_28,\n                Day_29,\n                Day_30\n              ) work_day\n            FROM\n              VALS_AS_COLS_4\n          ),\n          VALS_AS_COLS_5 AS (\n            SELECT\n              IDENT,\n              JAHR,\n              BASIS,\n              '05' AS MONTH,\n              SUBSTRING(MON05, 1, 1) AS Day_1,\n              SUBSTRING(MON05, 2, 1) AS Day_2,\n              SUBSTRING(MON05, 3, 1) AS Day_3,\n              SUBSTRING(MON05, 4, 1) AS Day_4,\n              SUBSTRING(MON05, 5, 1) AS Day_5,\n              SUBSTRING(MON05, 6, 1) AS Day_6,\n              SUBSTRING(MON05, 7, 1) AS Day_7,\n              SUBSTRING(MON05, 8, 1) AS Day_8,\n              SUBSTRING(MON05, 9, 1) AS Day_9,\n              SUBSTRING(MON05, 10, 1) AS Day_10,\n              SUBSTRING(MON05, 11, 1) AS Day_11,\n              SUBSTRING(MON05, 12, 1) AS Day_12,\n              SUBSTRING(MON05, 13, 1) AS Day_13,\n              SUBSTRING(MON05, 14, 1) AS Day_14,\n              SUBSTRING(MON05, 15, 1) AS Day_15,\n              SUBSTRING(MON05, 16, 1) AS Day_16,\n              SUBSTRING(MON05, 17, 1) AS Day_17,\n              SUBSTRING(MON05, 18, 1) AS Day_18,\n              SUBSTRING(MON05, 19, 1) AS Day_19,\n              SUBSTRING(MON05, 20, 1) AS Day_20,\n              SUBSTRING(MON05, 21, 1) AS Day_21,\n              SUBSTRING(MON05, 22, 1) AS Day_22,\n              SUBSTRING(MON05, 23, 1) AS Day_23,\n              SUBSTRING(MON05, 24, 1) AS Day_24,\n              SUBSTRING(MON05, 25, 1) AS Day_25,\n              SUBSTRING(MON05, 26, 1) AS Day_26,\n              SUBSTRING(MON05, 27, 1) AS Day_27,\n              SUBSTRING(MON05, 28, 1) AS Day_28,\n              SUBSTRING(MON05, 29, 1) AS Day_29,\n              SUBSTRING(MON05, 30, 1) AS Day_30,\n              SUBSTRING(MON05, 31, 1) AS Day_31\n            FROM\n              RAW_DATA\n          ),\n          TRANSPOSE_5 AS (\n            SELECT\n              IDENT,\n              JAHR,\n              MONTH,\n              BASIS,\n              row_number() OVER (\n                PARTITION BY JAHR,\n                MONTH,\n                IDENT\n                ORDER BY\n                  JAHR,\n                  MONTH,\n                  IDENT\n              ) Day,\n              STACK(\n                31,\n                Day_1,\n                Day_2,\n                Day_3,\n                Day_4,\n                Day_5,\n                Day_6,\n                Day_7,\n                Day_8,\n                Day_9,\n                Day_10,\n                Day_11,\n                Day_12,\n                Day_13,\n                Day_14,\n                Day_15,\n                Day_16,\n                Day_17,\n                Day_18,\n                Day_19,\n                Day_20,\n                Day_21,\n                Day_22,\n                Day_23,\n                Day_24,\n                Day_25,\n                Day_26,\n                Day_27,\n                Day_28,\n                Day_29,\n                Day_30,\n                Day_31\n              ) work_day\n            FROM\n              VALS_AS_COLS_5\n          ),\n          VALS_AS_COLS_6 AS (\n            SELECT\n              IDENT,\n              JAHR,\n              BASIS,\n              '06' AS MONTH,\n              SUBSTRING(MON06, 1, 1) AS Day_1,\n              SUBSTRING(MON06, 2, 1) AS Day_2,\n              SUBSTRING(MON06, 3, 1) AS Day_3,\n              SUBSTRING(MON06, 4, 1) AS Day_4,\n              SUBSTRING(MON06, 5, 1) AS Day_5,\n              SUBSTRING(MON06, 6, 1) AS Day_6,\n              SUBSTRING(MON06, 7, 1) AS Day_7,\n              SUBSTRING(MON06, 8, 1) AS Day_8,\n              SUBSTRING(MON06, 9, 1) AS Day_9,\n              SUBSTRING(MON06, 10, 1) AS Day_10,\n              SUBSTRING(MON06, 11, 1) AS Day_11,\n              SUBSTRING(MON06, 12, 1) AS Day_12,\n              SUBSTRING(MON06, 13, 1) AS Day_13,\n              SUBSTRING(MON06, 14, 1) AS Day_14,\n              SUBSTRING(MON06, 15, 1) AS Day_15,\n              SUBSTRING(MON06, 16, 1) AS Day_16,\n              SUBSTRING(MON06, 17, 1) AS Day_17,\n              SUBSTRING(MON06, 18, 1) AS Day_18,\n              SUBSTRING(MON06, 19, 1) AS Day_19,\n              SUBSTRING(MON06, 20, 1) AS Day_20,\n              SUBSTRING(MON06, 21, 1) AS Day_21,\n              SUBSTRING(MON06, 22, 1) AS Day_22,\n              SUBSTRING(MON06, 23, 1) AS Day_23,\n              SUBSTRING(MON06, 24, 1) AS Day_24,\n              SUBSTRING(MON06, 25, 1) AS Day_25,\n              SUBSTRING(MON06, 26, 1) AS Day_26,\n              SUBSTRING(MON06, 27, 1) AS Day_27,\n              SUBSTRING(MON06, 28, 1) AS Day_28,\n              SUBSTRING(MON06, 29, 1) AS Day_29,\n              SUBSTRING(MON06, 30, 1) AS Day_30\n            FROM\n              RAW_DATA\n          ),\n          TRANSPOSE_6 AS (\n            SELECT\n              IDENT,\n              JAHR,\n              MONTH,\n              BASIS,\n              row_number() OVER (\n                PARTITION BY JAHR,\n                MONTH,\n                IDENT\n                ORDER BY\n                  JAHR,\n                  MONTH,\n                  IDENT\n              ) Day,\n              STACK(\n                30,\n                Day_1,\n                Day_2,\n                Day_3,\n                Day_4,\n                Day_5,\n                Day_6,\n                Day_7,\n                Day_8,\n                Day_9,\n                Day_10,\n                Day_11,\n                Day_12,\n                Day_13,\n                Day_14,\n                Day_15,\n                Day_16,\n                Day_17,\n                Day_18,\n                Day_19,\n                Day_20,\n                Day_21,\n                Day_22,\n                Day_23,\n                Day_24,\n                Day_25,\n                Day_26,\n                Day_27,\n                Day_28,\n                Day_29,\n                Day_30\n              ) work_day\n            FROM\n              VALS_AS_COLS_6\n          ),\n          VALS_AS_COLS_7 AS (\n            SELECT\n              IDENT,\n              JAHR,\n              BASIS,\n              '07' AS MONTH,\n              SUBSTRING(MON07, 1, 1) AS Day_1,\n              SUBSTRING(MON07, 2, 1) AS Day_2,\n              SUBSTRING(MON07, 3, 1) AS Day_3,\n              SUBSTRING(MON07, 4, 1) AS Day_4,\n              SUBSTRING(MON07, 5, 1) AS Day_5,\n              SUBSTRING(MON07, 6, 1) AS Day_6,\n              SUBSTRING(MON07, 7, 1) AS Day_7,\n              SUBSTRING(MON07, 8, 1) AS Day_8,\n              SUBSTRING(MON07, 9, 1) AS Day_9,\n              SUBSTRING(MON07, 10, 1) AS Day_10,\n              SUBSTRING(MON07, 11, 1) AS Day_11,\n              SUBSTRING(MON07, 12, 1) AS Day_12,\n              SUBSTRING(MON07, 13, 1) AS Day_13,\n              SUBSTRING(MON07, 14, 1) AS Day_14,\n              SUBSTRING(MON07, 15, 1) AS Day_15,\n              SUBSTRING(MON07, 16, 1) AS Day_16,\n              SUBSTRING(MON07, 17, 1) AS Day_17,\n              SUBSTRING(MON07, 18, 1) AS Day_18,\n              SUBSTRING(MON07, 19, 1) AS Day_19,\n              SUBSTRING(MON07, 20, 1) AS Day_20,\n              SUBSTRING(MON07, 21, 1) AS Day_21,\n              SUBSTRING(MON07, 22, 1) AS Day_22,\n              SUBSTRING(MON07, 23, 1) AS Day_23,\n              SUBSTRING(MON07, 24, 1) AS Day_24,\n              SUBSTRING(MON07, 25, 1) AS Day_25,\n              SUBSTRING(MON07, 26, 1) AS Day_26,\n              SUBSTRING(MON07, 27, 1) AS Day_27,\n              SUBSTRING(MON07, 28, 1) AS Day_28,\n              SUBSTRING(MON07, 29, 1) AS Day_29,\n              SUBSTRING(MON07, 30, 1) AS Day_30,\n              SUBSTRING(MON07, 31, 1) AS Day_31\n            FROM\n              RAW_DATA\n          ),\n          TRANSPOSE_7 AS (\n            SELECT\n              IDENT,\n              JAHR,\n              MONTH,\n              BASIS,\n              row_number() OVER (\n                PARTITION BY JAHR,\n                MONTH,\n                IDENT\n                ORDER BY\n                  JAHR,\n                  MONTH,\n                  IDENT\n              ) Day,\n              STACK(\n                31,\n                Day_1,\n                Day_2,\n                Day_3,\n                Day_4,\n                Day_5,\n                Day_6,\n                Day_7,\n                Day_8,\n                Day_9,\n                Day_10,\n                Day_11,\n                Day_12,\n                Day_13,\n                Day_14,\n                Day_15,\n                Day_16,\n                Day_17,\n                Day_18,\n                Day_19,\n                Day_20,\n                Day_21,\n                Day_22,\n                Day_23,\n                Day_24,\n                Day_25,\n                Day_26,\n                Day_27,\n                Day_28,\n                Day_29,\n                Day_30,\n                Day_31\n              ) work_day\n            FROM\n              VALS_AS_COLS_7\n          ),\n          VALS_AS_COLS_8 AS (\n            SELECT\n              IDENT,\n              JAHR,\n              BASIS,\n              '08' AS MONTH,\n              SUBSTRING(MON08, 1, 1) AS Day_1,\n              SUBSTRING(MON08, 2, 1) AS Day_2,\n              SUBSTRING(MON08, 3, 1) AS Day_3,\n              SUBSTRING(MON08, 4, 1) AS Day_4,\n              SUBSTRING(MON08, 5, 1) AS Day_5,\n              SUBSTRING(MON08, 6, 1) AS Day_6,\n              SUBSTRING(MON08, 7, 1) AS Day_7,\n              SUBSTRING(MON08, 8, 1) AS Day_8,\n              SUBSTRING(MON08, 9, 1) AS Day_9,\n              SUBSTRING(MON08, 10, 1) AS Day_10,\n              SUBSTRING(MON08, 11, 1) AS Day_11,\n              SUBSTRING(MON08, 12, 1) AS Day_12,\n              SUBSTRING(MON08, 13, 1) AS Day_13,\n              SUBSTRING(MON08, 14, 1) AS Day_14,\n              SUBSTRING(MON08, 15, 1) AS Day_15,\n              SUBSTRING(MON08, 16, 1) AS Day_16,\n              SUBSTRING(MON08, 17, 1) AS Day_17,\n              SUBSTRING(MON08, 18, 1) AS Day_18,\n              SUBSTRING(MON08, 19, 1) AS Day_19,\n              SUBSTRING(MON08, 20, 1) AS Day_20,\n              SUBSTRING(MON08, 21, 1) AS Day_21,\n              SUBSTRING(MON08, 22, 1) AS Day_22,\n              SUBSTRING(MON08, 23, 1) AS Day_23,\n              SUBSTRING(MON08, 24, 1) AS Day_24,\n              SUBSTRING(MON08, 25, 1) AS Day_25,\n              SUBSTRING(MON08, 26, 1) AS Day_26,\n              SUBSTRING(MON08, 27, 1) AS Day_27,\n              SUBSTRING(MON08, 28, 1) AS Day_28,\n              SUBSTRING(MON08, 29, 1) AS Day_29,\n              SUBSTRING(MON08, 30, 1) AS Day_30,\n              SUBSTRING(MON08, 31, 1) AS Day_31\n            FROM\n              RAW_DATA\n          ),\n          TRANSPOSE_8 AS (\n            SELECT\n              IDENT,\n              JAHR,\n              MONTH,\n              BASIS,\n              row_number() OVER (\n                PARTITION BY JAHR,\n                MONTH,\n                IDENT\n                ORDER BY\n                  JAHR,\n                  MONTH,\n                  IDENT\n              ) Day,\n              STACK(\n                31,\n                Day_1,\n                Day_2,\n                Day_3,\n                Day_4,\n                Day_5,\n                Day_6,\n                Day_7,\n                Day_8,\n                Day_9,\n                Day_10,\n                Day_11,\n                Day_12,\n                Day_13,\n                Day_14,\n                Day_15,\n                Day_16,\n                Day_17,\n                Day_18,\n                Day_19,\n                Day_20,\n                Day_21,\n                Day_22,\n                Day_23,\n                Day_24,\n                Day_25,\n                Day_26,\n                Day_27,\n                Day_28,\n                Day_29,\n                Day_30,\n                Day_31\n              ) work_day\n            FROM\n              VALS_AS_COLS_8\n          ),\n          VALS_AS_COLS_9 AS (\n            SELECT\n              IDENT,\n              JAHR,\n              BASIS,\n              '09' AS MONTH,\n              SUBSTRING(MON09, 1, 1) AS Day_1,\n              SUBSTRING(MON09, 2, 1) AS Day_2,\n              SUBSTRING(MON09, 3, 1) AS Day_3,\n              SUBSTRING(MON09, 4, 1) AS Day_4,\n              SUBSTRING(MON09, 5, 1) AS Day_5,\n              SUBSTRING(MON09, 6, 1) AS Day_6,\n              SUBSTRING(MON09, 7, 1) AS Day_7,\n              SUBSTRING(MON09, 8, 1) AS Day_8,\n              SUBSTRING(MON09, 9, 1) AS Day_9,\n              SUBSTRING(MON09, 10, 1) AS Day_10,\n              SUBSTRING(MON09, 11, 1) AS Day_11,\n              SUBSTRING(MON09, 12, 1) AS Day_12,\n              SUBSTRING(MON09, 13, 1) AS Day_13,\n              SUBSTRING(MON09, 14, 1) AS Day_14,\n              SUBSTRING(MON09, 15, 1) AS Day_15,\n              SUBSTRING(MON09, 16, 1) AS Day_16,\n              SUBSTRING(MON09, 17, 1) AS Day_17,\n              SUBSTRING(MON09, 18, 1) AS Day_18,\n              SUBSTRING(MON09, 19, 1) AS Day_19,\n              SUBSTRING(MON09, 20, 1) AS Day_20,\n              SUBSTRING(MON09, 21, 1) AS Day_21,\n              SUBSTRING(MON09, 22, 1) AS Day_22,\n              SUBSTRING(MON09, 23, 1) AS Day_23,\n              SUBSTRING(MON09, 24, 1) AS Day_24,\n              SUBSTRING(MON09, 25, 1) AS Day_25,\n              SUBSTRING(MON09, 26, 1) AS Day_26,\n              SUBSTRING(MON09, 27, 1) AS Day_27,\n              SUBSTRING(MON09, 28, 1) AS Day_28,\n              SUBSTRING(MON09, 29, 1) AS Day_29,\n              SUBSTRING(MON09, 30, 1) AS Day_30\n            FROM\n              RAW_DATA\n          ),\n          TRANSPOSE_9 AS (\n            SELECT\n              IDENT,\n              JAHR,\n              MONTH,\n              BASIS,\n              row_number() OVER (\n                PARTITION BY JAHR,\n                MONTH,\n                IDENT\n                ORDER BY\n                  JAHR,\n                  MONTH,\n                  IDENT\n              ) Day,\n              STACK(\n                30,\n                Day_1,\n                Day_2,\n                Day_3,\n                Day_4,\n                Day_5,\n                Day_6,\n                Day_7,\n                Day_8,\n                Day_9,\n                Day_10,\n                Day_11,\n                Day_12,\n                Day_13,\n                Day_14,\n                Day_15,\n                Day_16,\n                Day_17,\n                Day_18,\n                Day_19,\n                Day_20,\n                Day_21,\n                Day_22,\n                Day_23,\n                Day_24,\n                Day_25,\n                Day_26,\n                Day_27,\n                Day_28,\n                Day_29,\n                Day_30\n              ) work_day\n            FROM\n              VALS_AS_COLS_9\n          ),\n          VALS_AS_COLS_10 AS (\n            SELECT\n              IDENT,\n              JAHR,\n              BASIS,\n              '10' AS MONTH,\n              SUBSTRING(MON10, 1, 1) AS Day_1,\n              SUBSTRING(MON10, 2, 1) AS Day_2,\n              SUBSTRING(MON10, 3, 1) AS Day_3,\n              SUBSTRING(MON10, 4, 1) AS Day_4,\n              SUBSTRING(MON10, 5, 1) AS Day_5,\n              SUBSTRING(MON10, 6, 1) AS Day_6,\n              SUBSTRING(MON10, 7, 1) AS Day_7,\n              SUBSTRING(MON10, 8, 1) AS Day_8,\n              SUBSTRING(MON10, 9, 1) AS Day_9,\n              SUBSTRING(MON10, 10, 1) AS Day_10,\n              SUBSTRING(MON10, 11, 1) AS Day_11,\n              SUBSTRING(MON10, 12, 1) AS Day_12,\n              SUBSTRING(MON10, 13, 1) AS Day_13,\n              SUBSTRING(MON10, 14, 1) AS Day_14,\n              SUBSTRING(MON10, 15, 1) AS Day_15,\n              SUBSTRING(MON10, 16, 1) AS Day_16,\n              SUBSTRING(MON10, 17, 1) AS Day_17,\n              SUBSTRING(MON10, 18, 1) AS Day_18,\n              SUBSTRING(MON10, 19, 1) AS Day_19,\n              SUBSTRING(MON10, 20, 1) AS Day_20,\n              SUBSTRING(MON10, 21, 1) AS Day_21,\n              SUBSTRING(MON10, 22, 1) AS Day_22,\n              SUBSTRING(MON10, 23, 1) AS Day_23,\n              SUBSTRING(MON10, 24, 1) AS Day_24,\n              SUBSTRING(MON10, 25, 1) AS Day_25,\n              SUBSTRING(MON10, 26, 1) AS Day_26,\n              SUBSTRING(MON10, 27, 1) AS Day_27,\n              SUBSTRING(MON10, 28, 1) AS Day_28,\n              SUBSTRING(MON10, 29, 1) AS Day_29,\n              SUBSTRING(MON10, 30, 1) AS Day_30,\n              SUBSTRING(MON10, 31, 1) AS Day_31\n            FROM\n              RAW_DATA\n          ),\n          TRANSPOSE_10 AS (\n            SELECT\n              IDENT,\n              JAHR,\n              MONTH,\n              BASIS,\n              row_number() OVER (\n                PARTITION BY JAHR,\n                MONTH,\n                IDENT\n                ORDER BY\n                  JAHR,\n                  MONTH,\n                  IDENT\n              ) Day,\n              STACK(\n                31,\n                Day_1,\n                Day_2,\n                Day_3,\n                Day_4,\n                Day_5,\n                Day_6,\n                Day_7,\n                Day_8,\n                Day_9,\n                Day_10,\n                Day_11,\n                Day_12,\n                Day_13,\n                Day_14,\n                Day_15,\n                Day_16,\n                Day_17,\n                Day_18,\n                Day_19,\n                Day_20,\n                Day_21,\n                Day_22,\n                Day_23,\n                Day_24,\n                Day_25,\n                Day_26,\n                Day_27,\n                Day_28,\n                Day_29,\n                Day_30,\n                Day_31\n              ) work_day\n            FROM\n              VALS_AS_COLS_10\n          ),\n          VALS_AS_COLS_11 AS (\n            SELECT\n              IDENT,\n              JAHR,\n              BASIS,\n              '11' AS MONTH,\n              SUBSTRING(MON11, 1, 1) AS Day_1,\n              SUBSTRING(MON11, 2, 1) AS Day_2,\n              SUBSTRING(MON11, 3, 1) AS Day_3,\n              SUBSTRING(MON11, 4, 1) AS Day_4,\n              SUBSTRING(MON11, 5, 1) AS Day_5,\n              SUBSTRING(MON11, 6, 1) AS Day_6,\n              SUBSTRING(MON11, 7, 1) AS Day_7,\n              SUBSTRING(MON11, 8, 1) AS Day_8,\n              SUBSTRING(MON11, 9, 1) AS Day_9,\n              SUBSTRING(MON11, 10, 1) AS Day_10,\n              SUBSTRING(MON11, 11, 1) AS Day_11,\n              SUBSTRING(MON11, 12, 1) AS Day_12,\n              SUBSTRING(MON11, 13, 1) AS Day_13,\n              SUBSTRING(MON11, 14, 1) AS Day_14,\n              SUBSTRING(MON11, 15, 1) AS Day_15,\n              SUBSTRING(MON11, 16, 1) AS Day_16,\n              SUBSTRING(MON11, 17, 1) AS Day_17,\n              SUBSTRING(MON11, 18, 1) AS Day_18,\n              SUBSTRING(MON11, 19, 1) AS Day_19,\n              SUBSTRING(MON11, 20, 1) AS Day_20,\n              SUBSTRING(MON11, 21, 1) AS Day_21,\n              SUBSTRING(MON11, 22, 1) AS Day_22,\n              SUBSTRING(MON11, 23, 1) AS Day_23,\n              SUBSTRING(MON11, 24, 1) AS Day_24,\n              SUBSTRING(MON11, 25, 1) AS Day_25,\n              SUBSTRING(MON11, 26, 1) AS Day_26,\n              SUBSTRING(MON11, 27, 1) AS Day_27,\n              SUBSTRING(MON11, 28, 1) AS Day_28,\n              SUBSTRING(MON11, 29, 1) AS Day_29,\n              SUBSTRING(MON11, 30, 1) AS Day_30\n            FROM\n              RAW_DATA\n          ),\n          TRANSPOSE_11 AS (\n            SELECT\n              IDENT,\n              JAHR,\n        MONTH,\n              BASIS,\n              row_number() OVER (\n                PARTITION BY JAHR,\n                MONTH,\n                IDENT\n                ORDER BY\n                  JAHR,\n                  MONTH,\n                  IDENT\n              ) Day,\n              STACK(\n                30,\n                Day_1,\n                Day_2,\n                Day_3,\n                Day_4,\n                Day_5,\n                Day_6,\n                Day_7,\n                Day_8,\n                Day_9,\n                Day_10,\n                Day_11,\n                Day_12,\n                Day_13,\n                Day_14,\n                Day_15,\n                Day_16,\n                Day_17,\n                Day_18,\n                Day_19,\n                Day_20,\n                Day_21,\n                Day_22,\n                Day_23,\n                Day_24,\n                Day_25,\n                Day_26,\n                Day_27,\n                Day_28,\n                Day_29,\n                Day_30\n              ) work_day\n            FROM\n              VALS_AS_COLS_11\n          ),\n          VALS_AS_COLS_12 AS (\n            SELECT\n              IDENT,\n              JAHR,\n              BASIS,\n              '12' AS MONTH,\n              SUBSTRING(MON12, 1, 1) AS Day_1,\n              SUBSTRING(MON12, 2, 1) AS Day_2,\n              SUBSTRING(MON12, 3, 1) AS Day_3,\n              SUBSTRING(MON12, 4, 1) AS Day_4,\n              SUBSTRING(MON12, 5, 1) AS Day_5,\n              SUBSTRING(MON12, 6, 1) AS Day_6,\n              SUBSTRING(MON12, 7, 1) AS Day_7,\n              SUBSTRING(MON12, 8, 1) AS Day_8,\n              SUBSTRING(MON12, 9, 1) AS Day_9,\n              SUBSTRING(MON12, 10, 1) AS Day_10,\n              SUBSTRING(MON12, 11, 1) AS Day_11,\n              SUBSTRING(MON12, 12, 1) AS Day_12,\n              SUBSTRING(MON12, 13, 1) AS Day_13,\n              SUBSTRING(MON12, 14, 1) AS Day_14,\n              SUBSTRING(MON12, 15, 1) AS Day_15,\n              SUBSTRING(MON12, 16, 1) AS Day_16,\n              SUBSTRING(MON12, 17, 1) AS Day_17,\n              SUBSTRING(MON12, 18, 1) AS Day_18,\n              SUBSTRING(MON12, 19, 1) AS Day_19,\n              SUBSTRING(MON12, 20, 1) AS Day_20,\n              SUBSTRING(MON12, 21, 1) AS Day_21,\n              SUBSTRING(MON12, 22, 1) AS Day_22,\n              SUBSTRING(MON12, 23, 1) AS Day_23,\n              SUBSTRING(MON12, 24, 1) AS Day_24,\n              SUBSTRING(MON12, 25, 1) AS Day_25,\n              SUBSTRING(MON12, 26, 1) AS Day_26,\n              SUBSTRING(MON12, 27, 1) AS Day_27,\n              SUBSTRING(MON12, 28, 1) AS Day_28,\n              SUBSTRING(MON12, 29, 1) AS Day_29,\n              SUBSTRING(MON12, 30, 1) AS Day_30,\n              SUBSTRING(MON12, 31, 1) AS Day_31\n            FROM\n              RAW_DATA\n          ),\n          TRANSPOSE_12 AS (\n            SELECT\n              IDENT,\n              JAHR,\n     MONTH,\n              BASIS,\n              row_number() OVER (\n                PARTITION BY JAHR,\n                MONTH,\n                IDENT\n                ORDER BY\n                  JAHR,\n                  MONTH,\n                  IDENT\n              ) Day,\n              STACK(\n                31,\n                Day_1,\n                Day_2,\n                Day_3,\n                Day_4,\n                Day_5,\n                Day_6,\n                Day_7,\n                Day_8,\n                Day_9,\n                Day_10,\n                Day_11,\n                Day_12,\n                Day_13,\n                Day_14,\n                Day_15,\n                Day_16,\n                Day_17,\n                Day_18,\n                Day_19,\n                Day_20,\n                Day_21,\n                Day_22,\n                Day_23,\n                Day_24,\n                Day_25,\n                Day_26,\n                Day_27,\n                Day_28,\n                Day_29,\n                Day_30,\n                Day_31\n              ) work_day\n            FROM\n              VALS_AS_COLS_12\n          ),\n          UNION_ALL AS (\n            SELECT\n              *\n            FROM\n              TRANSPOSE_1\n            UNION\n            SELECT\n              *\n            FROM\n              TRANSPOSE_2\n            UNION\n            SELECT\n              *\n            FROM\n              TRANSPOSE_3\n            UNION\n            SELECT\n              *\n            FROM\n              TRANSPOSE_4\n            UNION\n            SELECT\n              *\n            FROM\n              TRANSPOSE_5\n            UNION\n            SELECT\n              *\n            FROM\n              TRANSPOSE_6\n            UNION\n            SELECT\n              *\n            FROM\n              TRANSPOSE_7\n            UNION\n            SELECT\n              *\n            FROM\n              TRANSPOSE_8\n            UNION\n            SELECT\n              *\n            FROM\n              TRANSPOSE_9\n            UNION\n            SELECT\n              *\n            FROM\n              TRANSPOSE_10\n            UNION\n            SELECT\n              *\n            FROM\n              TRANSPOSE_11\n            UNION\n            SELECT\n              *\n            FROM\n              TRANSPOSE_12\n          )\n          SELECT\n            IDENT AS CAL_NUM,\n            JAHR AS CAL_YR,\n            BASIS,\n            CASE\n              WHEN DAY < 10 THEN CONCAT(JAHR, MONTH, '0', DAY)\n              ELSE CONCAT (JAHR, MONTH, DAY)\n            END AS CAL_DATE,\n            work_day AS WORK_DAY\n          FROM\n            UNION_ALL\n   WHERE WORK_DAY IS NOT NULL\n          ORDER BY\n            IDENT,\n            JAHR,\n            MONTH,\n            Day\n        )\n    )\n)\nselect\n  a.SRC_SYS_CD,\n  a.CAL_NUM,\n  CAST(a.CAL_YR AS INT) AS CAL_YR,\n  CAST(a.CAL_DATE AS INT) AS CAL_DATE,\n  CAST(a.WORK_DAY AS INT) AS WORK_DAY,\n  CAST(a.FACTORY_DAY AS INT) AS FACTORY_DAY,\n  CASE\n    WHEN a.WORK_DAY = '1' then CAST(a.CAL_DATE AS INT)\n    ELSE CAST(MIN(b.CAL_DATE) AS INT)\n  END AS FACTORY_DATE,\n  CAST(a.FACTORY_DAY_NEXT AS INT) AS FACTORY_DAY_NEXT\nFROM\n  MD_FCTRY_CAL a\n  LEFT JOIN MD_FCTRY_CAL b ON b.CAL_NUM = a.CAL_NUM\n  AND b.CAL_DATE > a.CAL_DATE\n  AND b.WORK_DAY = '1'\nGROUP BY\n  a.SRC_SYS_CD,\n  a.CAL_NUM,\n  a.CAL_YR,\n  a.CAL_DATE,\n  a.WORK_DAY,\n  a.FACTORY_DAY,\n  a.FACTORY_DAY_NEXT\nORDER BY\n  a.CAL_NUM,\n  a.CAL_YR,\n  a.CAL_DATE  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    

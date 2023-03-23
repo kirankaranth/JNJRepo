@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "l1_md_prophecy"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "jet"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "jet"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MD_PO_LINE_9"
+      },
+      "connections" : [ {
+        "id" : "6b3396a6-64fd-480b-a35a-05c916cd12a0",
+        "source" : "b0556d1e-8ad6-4ca5-a02b-731577d645df",
+        "sourcePort" : "1277a585-2be3-4e77-bad2-97db2831a381",
+        "target" : "eefcedfd-d577-4394-9c3e-e9de093970ce",
+        "targetPort" : "7e1a5fa1-194c-48c2-95a2-09c8548fa5e4"
+      }, {
+        "id" : "89fc2b83-b320-4821-8e08-4f4844025d15",
+        "source" : "4755c9aa-4abb-435e-86ff-ae9623703654",
+        "sourcePort" : "52bb60ac-8e9d-454c-b1ba-083006b6c047",
+        "target" : "b0556d1e-8ad6-4ca5-a02b-731577d645df",
+        "targetPort" : "1fdd04c6-3114-4a5b-bf87-06e307ba8437"
+      } ],
+      "processes" : {
+        "eefcedfd-d577-4394-9c3e-e9de093970ce" : {
+          "id" : "eefcedfd-d577-4394-9c3e-e9de093970ce",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MD_PO_LINE",
+            "slug" : "MD_PO_LINE",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "7e1a5fa1-194c-48c2-95a2-09c8548fa5e4",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MD_PO_LINE"
+          }
+        },
+        "b0556d1e-8ad6-4ca5-a02b-731577d645df" : {
+          "id" : "b0556d1e-8ad6-4ca5-a02b-731577d645df",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "1fdd04c6-3114-4a5b-bf87-06e307ba8437",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "1277a585-2be3-4e77-bad2-97db2831a381",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'PO_NUM',PO_NUM,'PO_LINE_NBR',PO_LINE_NBR,'CO_CD',CO_CD,'PO_TYPE_CD',PO_TYPE_CD,'ORDER_SUF',ORDER_SUF))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'PO_NUM',PO_NUM,'PO_LINE_NBR',PO_LINE_NBR,'CO_CD',CO_CD,'PO_TYPE_CD',PO_TYPE_CD,'ORDER_SUF',ORDER_SUF)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "4755c9aa-4abb-435e-86ff-ae9623703654" : {
+          "id" : "4755c9aa-4abb-435e-86ff-ae9623703654",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MD_PO_LINE",
+            "slug" : "sql_MD_PO_LINE",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "52bb60ac-8e9d-454c-b1ba-083006b6c047",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT\n  '{Config.sourceSystem}'  AS SRC_SYS_CD,\n  f4311.pddoco AS PO_NUM,\n  f4311.pdlnid AS PO_LINE_NBR,\n  f4311.pdkcoo AS CO_CD,\n  f4311.pddcto AS PO_TYPE_CD,\n  NULL AS DEL_IND,\n  TRIM(f4311.pdlitm) AS MATL_NUM,\n  TRIM(f4311.pdmcu) AS PLNT_CD,\n  TRIM(f4311.pdlocn) AS SLOC_CD,\n  TRIM(f4311.pdvr01) AS INTRNL_REF_NUM,\n  CAST(TRIM(f4311.pduorg) AS DECIMAL(18, 4)) AS PO_LINE_QTY,\n  TRIM(f4311.pduom) AS PO_UOM_CD,\n  NULL AS STK_TYPE_CD,\n  NULL AS DELV_CMPLT_IND,\n  TRIM(f4311.pdlnty) AS LINE_ITEM_TYPE_CD,\n  NULL AS ACCT_ASGNMT_CAT_CD,\n  NULL AS PRIN_PRCH_AGMT_NUM,\n  NULL AS PRIN_PRCH_AGMT_LINE_NUM,\n  TRIM(f4311.pdan8) AS DELV_ADDR_NUM,\n  CAST(NULL AS DECIMAL(18, 4)) AS GR_LEAD_TIME_DAYS_QTY,\n  NULL AS SPL_STK_IND,\n  NULL AS CNFRM_CD,\n  NULL AS SUBCNTRC_IND,\n  NULL AS PR_NUM,\n  NULL AS PR_LINE_NBR,\n  NULL AS BRAZILIAN_NCM_CD,\n  NULL AS OUTB_DELV_CMPLT_IND,\n  NULL AS ISU_SLOC_CD,\n  TRIM(f4311.pdshan) AS CUST_NUM,\n  TRIM(f4311.pdmcu) AS SHIPPING_PT_NUM,\n  NULL AS EM_MATERIAL_CODE,\n  NULL AS BASE_UOM,\n  TRIM(f4311.pduom) AS PO_PRICE_UOM,\n  CAST(TRIM(f4311.pdprrc) AS DECIMAL(18, 2)) AS PO_LINE_PRICE,\n  CAST(NULL AS DECIMAL(18, 2)) AS DOCUMENT_CURRENCY_GROSS_AMOUNT,\n  CAST(NULL AS DECIMAL(18, 2)) AS DOCUMENT_CURRENCY_NET_AMOUNT,\n  CAST(NULL AS DECIMAL(18, 4)) AS NUMRTR_FOR_CONV_ORDR_UNIT,\n  CAST(NULL AS DECIMAL(18, 4)) AS DENOM_FOR_CONV_ORDR_UNIT,\n  CAST(NULL AS DECIMAL(18, 4)) AS PRICE_UNIT,\n  f4311.pdsfxo AS ORDER_SUF,\n  CASE WHEN LOWER(TRIM(f4311.pdtrdj)) = 'null' OR TRIM(f4311.pdtrdj) = '' OR TRIM(f4311.pdtrdj) = '0' THEN NULL \n  ELSE to_timestamp(substr(CAST(date_add(concat(substr(CAST(CAST(TRIM(f4311.pdtrdj) AS INT) + 1900000 AS STRING),1,4),'-01-01'), CAST(substr(CAST(CAST(TRIM(f4311.pdtrdj) AS INT) + 1900000 AS string),5) AS INT )-1) AS STRING), 1, 10),'yyyy-MM-dd')\n  END AS PO_LINE_DTTM,\n  TRIM(f4311.pdpqor) as PRMRY_QTY_ORD,\n  NULL as G_L_ACCT_NUM,\n  NULL as PRCHSNG_DOC_CRT_DTTM,\n  NULL as TAX_RPTG_CTRY_RGN,\n  NULL as TAX_ON_SLS,\nCAST(TRIM(f4311.pdurec) AS DECIMAL(18,4)) as STK_TFR_RECV_QTY,\nNULL AS CONCAT_OF_EBELN_AND_EBELP,                    \nNULL AS ORIG_OF_PRCHSNG_DOC_ITM,\nNULL AS PRCHSNG_DOC_ITM_CHG_DTTM,\nNULL AS SHRT_TEXT,\nNULL AS MATL_NUM1,\nNULL AS MATL_GRP,\nNULL AS NUM_OF_PRCHSNG_INFO_REC,\nNULL AS TRGT_QTY,\nNULL AS NUMRTR_CONV_ORDR_PRC_UNIT,\nNULL AS DENOM_CONV_ORDR_PRC_UNIT,\nNULL AS DEAD_FOR_SBMN_OF_BID,\nNULL AS GOODS_RCPT_PRCSG_TIME_IN_DAYS,\nNULL AS TAX_RT_VLD_FROM_DTTM,\nNULL AS DETRMNG_TAX_RT_DTTM,            \nNULL AS SETLM_GRP_1,\nNULL AS UPDT_INFO_REC_IN,\nNULL AS PRC_PRINTOUT,\nNULL AS EST_PRC_IN,\nNULL AS NUM_OF_REMNDR_EXPDTR,\nNULL AS NUM_OF_DAYS_FST_REMNDR,\nNULL AS NUM_OF_DAYS_SEC_REMNDR,                     \nNULL AS NUM_OF_DAYS_THIRD_RMNDR,                    \nNULL AS OVRDELV_TLRNC,                               \nNULL AS UNLMTD_OVRDELV_ALLW,                       \nNULL AS UNDRDELV_TLRNC,                              \nNULL AS VALUT_TYPE,\nNULL AS VALUT_CAT,\nNULL AS REJ_IN,\nNULL AS INTRNL_COMT_ON_QUTN,\nNULL AS FNL_INVC_IN,\nNULL AS CNSMPTN_PSTNG,\nNULL AS DSTN_IN_FOR_MLT_ACCT_ASGNMT,\nNULL AS PRTL_INVC_IN,\nNULL AS GOODS_RCPT_IN,\nNULL AS GOODS_RCPT_NVALUATED,\nNULL AS INVC_RCPT_IN,\nNULL AS GR_BAS_INVC_VERIF_IN,\nNULL AS ORDR_ACK_REQ,\nNULL AS ORDR_ACK_NUM,\nNULL AS AGR_CUM_QTY_RCNL_DTTM,\nNULL AS AGR_CUM_QTY,\nNULL AS FIRM_ZN,\nNULL AS TRADE_OFF_ZN,\nNULL AS FIRM_TRADE_OFF_ZN,\nNULL AS EXCLN_IN_OUTLINE_AGMT_ITM,\nNULL AS SHIPPING_INSTR,\nNULL AS TRGT_VAL_FOR_OUTLINE_AGMT,\nNULL AS NDEDT_INP_TAX,\nNULL AS STD_RLSE_ORDR_QTY,\nNULL AS PRC_DTRMN_DTTM,\nNULL AS PRCHSNG_DOC_CAT,\nNULL AS EFF_VAL_OF_ITM,\nNULL AS ITM_AFFCT_CMMT,\nNULL AS COND_GRP_WTH_SUP,\nNULL AS ITM_DONT_QUAL_FOR_CASH_DISC,\nNULL AS UPDT_GRP_FOR_STATS_UPDT,\nNULL AS NET_WT,\nNULL AS UNIT_OF_WT,\nNULL AS TAX_JURIS,\nNULL AS PRT_RLVNT_SCHED_LIN_EXIST,\nNULL AS SETLM_RESV_NUM,\nNULL AS ITM_NUM_OF_THE_SETLM_RESV,\nNULL AS QUAL_INSP_IN_CNNOT_BE_CHG,\nNULL AS CNTL_KEY_FOR_QUAL_MGMT,\nNULL AS INTNL_ARTCL_NUM,\nNULL AS PRFT_CTR,\nNULL AS GRS_WT,\nNULL AS VOL,\nNULL AS VOL_UNIT,\nNULL AS PKG_NUM,\nNULL AS CUR_NOT_USED,\nNULL AS HI_LVL_ITM_IN_PRCHSNG_DOC,\nNULL AS LTST_POSBL_GOODS_RCPT,\nNULL AS CNFG,\nNULL AS EVAL_RCPT_SETLM,\nNULL AS GR_BAS_SETLM_STRT_DTTM,\nNULL AS LAST_XMSN,\nNULL AS SEQ_NUM,\nNULL AS ALLC_TBL_ITM,\nNULL AS NUM_OF_PT,\nNULL AS MATL_LDGR_ACT_AT_MATL_LVL,\nNULL AS MIN_RMN_SHLF_LIF,\nNULL AS ITM_NUM_OF_RFQ,\nNULL AS MATL_TYPE,\nNULL AS SBTOT_1_FROM_PRC_PCDR,                       \nNULL AS SBTOT_2_FROM_PRC_PCDR,                       \nNULL AS SBTOT_3_FROM_PRC_PCDR,                       \nNULL AS SBTOT_4_FROM_PRC_PCDR,                       \nNULL AS SBTOT_5_FROM_PRC_PCDR,                       \nNULL AS SBTOT_6_FROM_PRC_PCDR,                       \nNULL AS PRCSG_KEY_FOR_SUB_ITM,                       \nNULL AS MAX_CUM_MATL_GO_AHEAD_QTY ,                  \nNULL AS MAX_CUM_PRDTN_GO_AHEAD_QTY,                 \nNULL AS RTRN_ITM,\nNULL AS DELV_TYPE_FOR_RTRN_TO_SUP,\nNULL AS NEXT_FCST_DELV_SCHED_XMSN,\nNULL AS NEXT_JIT_DELV_SCHED_XMSN,\nNULL AS VALUT_OF_SPL_STK,\nNULL AS REBT_BASIS_1,\nNULL AS INFLT_INDX_DTTM,\nNULL AS NM_OF_REQSNR1,\nNULL AS TIME_ZN_OF_RCPNT_LOC1,\nNULL AS MRP_AREA,\nNULL AS DOC_ITM,\nNULL AS WRK_BRKDWN_STRC_ELMNT1,\nNULL AS REQ_URGNCY,\nNULL AS REQ_PRIR,\nNULL AS CRM_SLS_ORDR_ITM_NUM,\nNULL AS CUM_GOODS_RECIPT,\nNULL AS NUM_OF_SER_NUM,\nNULL AS EXTRNL_SRT_NUM,\nNULL AS RETN_IN_PCT,\nNULL AS DOWN_PMT_PCT,\nNULL AS DOWN_PMT_AMT_IN_DOC_CRNCY,\nNULL AS DOWN_PMT_DUE_DTTM,\nNULL AS CENT_CNTRC_ITM_NUM,\nNULL AS INCO_LOC_1_PLACE_OF_DEST,\nNULL AS INCO_LOC_2_PLACE_OF_DELV,\nNULL AS INCO_DEVT_PLACE_OF_DEST,\nNULL AS STAT_VAL_FOR_FRGN_TRD,\nNULL AS PROD_TYPE_GRP,\nNULL AS ITM_NUM_FOR_RQST_FOR_QUTN,\nNULL AS TRGT_VAL_AT_ITM_LVL_IN_PRCM,\nNULL AS EXPTD_VAL_OF_OVRL_LMT,\nNULL AS OVRL_LMT,\nNULL AS WKA_WRK_PER_STRT_DTTM,\nNULL AS WKA_WRK_PER_END_DTTM,\nNULL AS WKA_PCT_OF_WG,\nNULL AS WRK_TIME_IN_HRS,\nNULL AS DATA_FIL_VAL_FOR_DATA_AGE,\nNULL AS CMT_QTY,\nNULL AS HI_LVL_ITM_IN_PRTL_QTY_REJ,\nNULL AS ANNXNG_PKG_KEY,\nNULL AS EXTD_KEY_FOR_ANNXNG_PKG,\nNULL AS BASE_DTTM,\nNULL AS ANNXNG_DT_TYPE,\nNULL AS ANNXNG_STRT_DTTM,\nNULL AS DEVT_PCT,\nNULL AS QUTN_ITM_NUM,\nNULL AS DELV_PRIR,\nNULL AS SLS_DOC_ITM,\nNULL AS VEND_CNFRM_TYPE,\nNULL AS DOC_DTTM,\nNULL AS ARUN_ORDR_PRIR,\nNULL AS WRK_BRKDWN_STRC_ELMNT2,\nNULL AS RSN_FOR_ORD\nFROM\n  {Config.sourceDatabase}.f4311\nWHERE\n  f4311._deleted_ = 'F'  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    

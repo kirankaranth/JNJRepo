@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "l1_md_prophecy"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "hmd"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "hmd"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MD_MATL_VALUT_11"
+      },
+      "connections" : [ {
+        "id" : "9576c1c7-1376-4b8a-919b-3012a591c85f",
+        "source" : "eaf6450c-dd6b-4e47-86ea-20509ed6661c",
+        "sourcePort" : "a3a93c9f-6f4a-4221-9da5-04f6ff1a5c95",
+        "target" : "e37d3736-900d-4ad9-8d3a-89ff0c42fa16",
+        "targetPort" : "2d4c4c85-fbd9-4d9a-9110-70bac760e6a8"
+      }, {
+        "id" : "4e89a2c0-ff14-474b-8d32-12eaed702581",
+        "source" : "cc9d652e-4c33-4752-ac82-e31ebaf71102",
+        "sourcePort" : "5fd0c4e2-900e-4737-bfdb-b0301d161cd3",
+        "target" : "eaf6450c-dd6b-4e47-86ea-20509ed6661c",
+        "targetPort" : "e6b11051-0ad9-470f-82d0-106107d15718"
+      } ],
+      "processes" : {
+        "e37d3736-900d-4ad9-8d3a-89ff0c42fa16" : {
+          "id" : "e37d3736-900d-4ad9-8d3a-89ff0c42fa16",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MD_MATL_VALUT",
+            "slug" : "MD_MATL_VALUT",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "2d4c4c85-fbd9-4d9a-9110-70bac760e6a8",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MD_MATL_VALUT"
+          }
+        },
+        "eaf6450c-dd6b-4e47-86ea-20509ed6661c" : {
+          "id" : "eaf6450c-dd6b-4e47-86ea-20509ed6661c",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "e6b11051-0ad9-470f-82d0-106107d15718",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "a3a93c9f-6f4a-4221-9da5-04f6ff1a5c95",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'MATL_NUM',MATL_NUM,'VALUT_AREA_CD',VALUT_AREA_CD,'VALUT_TYPE_CD',VALUT_TYPE_CD))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'MATL_NUM',MATL_NUM,'VALUT_AREA_CD',VALUT_AREA_CD,'VALUT_TYPE_CD',VALUT_TYPE_CD)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "cc9d652e-4c33-4752-ac82-e31ebaf71102" : {
+          "id" : "cc9d652e-4c33-4752-ac82-e31ebaf71102",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MD_MATL_VALUT",
+            "slug" : "sql_MD_MATL_VALUT",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "5fd0c4e2-900e-4737-bfdb-b0301d161cd3",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT\n    '{Config.sourceSystem}'   AS SRC_SYS_CD,\n MBEW.matnr AS MATL_NUM,\n MBEW.bwkey AS VALUT_AREA_CD,\n MBEW.bwtar AS VALUT_TYPE_CD,\n TRIM(MBEW.vprsv) AS PRC_CNTL_IND,\n CAST ((TRIM(MBEW.lbkum)) AS DECIMAL(18,4)) AS TOT_STK_QTY,\n CAST ((TRIM(MBEW.salk3)) AS DECIMAL(18,4)) AS TOT_VAL_AMT,\n CAST ((TRIM(MBEW.verpr)) AS DECIMAL(18,4)) AS MVG_AVG_PRC_AMT,\n CAST ((TRIM(MBEW.stprs)) AS DECIMAL(18,4)) AS PRC_AMT,\n CAST ((TRIM(MBEW.peinh)) AS DECIMAL(18,4)) AS PRC_UNIT_NBR,\n TRIM(MBEW.bklas) AS VALUT_CLS_CD,\n TRIM(MARA.meins) AS BASE_UOM_CD,\n TRIM(MBEW.lvorm) AS DEL_FL,\n TRIM(MBEW.mtuse) AS MATL_USG,\n TRIM(MBEW.mtorg) AS MATL_ORIG,\n TRIM(MBEW.ownpr) AS INHS_PRODCD,\n TRIM(MBEW.hrkft) AS CST_ELMNT_ORIG_GRP,\n TRIM(MBEW.kosgr) AS COST_OVHD_GRP,\n NULL AS VALUT_CLS_DESC,\n CASE WHEN MBEW.TIMESTAMP = '0' THEN CAST(NULL AS TIMESTAMP)\n ELSE To_timestamp(MBEW.TIMESTAMP,\\\"yyyyMMddHHmmss\\\") END AS TMST\n FROM {Config.sourceDatabase}.MBEW MBEW\n LEFT JOIN {Config.sourceDatabase}.MARA\n ON MBEW.MATNR = MARA.MATNR AND mara._deleted_='F' AND mara.MANDT=(SELECT L1_PARAMETERS.PARAM_VAL from l1_md_prophecy_config.l1_parameters L1_PARAMETERS WHERE L1_PARAMETERS.ENV_NM = '{env}' AND L1_PARAMETERS.PARAM_NM = 'mandt_filter')\n where mbew._deleted_='F' AND mbew.MANDT=(SELECT L1_PARAMETERS.PARAM_VAL from l1_md_prophecy_config.l1_parameters L1_PARAMETERS WHERE L1_PARAMETERS.ENV_NM = '{env}' AND L1_PARAMETERS.PARAM_NM = 'mandt_filter')\n   \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    

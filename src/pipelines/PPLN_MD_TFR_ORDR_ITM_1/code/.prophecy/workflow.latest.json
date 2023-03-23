@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "l1_md_prophecy"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "bba"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "bba"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MD_TFR_ORDR_ITM_1"
+      },
+      "connections" : [ {
+        "id" : "00bba1e2-b08f-4cb6-8468-0a59412b3582",
+        "source" : "26c5bd55-b1c9-4803-9458-e3db6362b5e7",
+        "sourcePort" : "a15ac326-0762-48e4-a50e-5ffac1121889",
+        "target" : "b61df24b-02d3-40f8-b472-82059f8cbb56",
+        "targetPort" : "177d70da-7c95-4988-97b6-ccdc164c85dc"
+      }, {
+        "id" : "c783fc17-6e78-4622-9941-a6d675be7a61",
+        "source" : "21143d76-3e29-4038-b580-9b614cd67281",
+        "sourcePort" : "cf87f5f8-41f1-4957-8ca0-e3e05c64d29f",
+        "target" : "26c5bd55-b1c9-4803-9458-e3db6362b5e7",
+        "targetPort" : "a0f95fa7-0de6-4f84-92f3-09cb8bbe4e80"
+      } ],
+      "processes" : {
+        "b61df24b-02d3-40f8-b472-82059f8cbb56" : {
+          "id" : "b61df24b-02d3-40f8-b472-82059f8cbb56",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MD_TFR_ORDR_ITM",
+            "slug" : "MD_TFR_ORDR_ITM",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "177d70da-7c95-4988-97b6-ccdc164c85dc",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MD_TFR_ORDR_ITM"
+          }
+        },
+        "26c5bd55-b1c9-4803-9458-e3db6362b5e7" : {
+          "id" : "26c5bd55-b1c9-4803-9458-e3db6362b5e7",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "a0f95fa7-0de6-4f84-92f3-09cb8bbe4e80",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "a15ac326-0762-48e4-a50e-5ffac1121889",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'WHSE_NUM',WHSE_NUM,'TFR_ORDR_NUM',TFR_ORDR_NUM,'TFR_ORDR_ITM',TFR_ORDR_ITM))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'WHSE_NUM',WHSE_NUM,'TFR_ORDR_NUM',TFR_ORDR_NUM,'TFR_ORDR_ITM',TFR_ORDR_ITM)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "21143d76-3e29-4038-b580-9b614cd67281" : {
+          "id" : "21143d76-3e29-4038-b580-9b614cd67281",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MD_TFR_ORDR_ITM",
+            "slug" : "sql_MD_TFR_ORDR_ITM",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "cf87f5f8-41f1-4957-8ca0-e3e05c64d29f",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT\n'{Config.sourceSystem}'   AS SRC_SYS_CD,\nLTAP.LGNUM AS  WHSE_NUM,\nLTAP.TANUM  AS TFR_ORDR_NUM,\nLTAP.TAPOS  AS TFR_ORDR_ITM,\nTRIM(LTAP.TBPOS) AS  TFR_REQ_ITM,\nTRIM(LTAP.POSNR) AS  ITM_NUM_OF_SD_DOC,\nTRIM(LTAP.MATNR) AS  MATL_NUM,\nTRIM(LTAP.WERKS) AS  PLNT,\nTRIM(LTAP.CHARG) AS  BTCH_NUM,\nTRIM(LTAP.BESTQ) AS  STK_CAT_IN_WM_SYS,\nTRIM(LTAP.SOBKZ) AS  SPL_STK_IN,\nTRIM(LTAP.SONUM) AS  SPL_STK_NUM,\nTRIM(LTAP.STOFF) AS  HAZ_MATL_NUM,\nTRIM(LTAP.MEINS) AS  BAS_UOM,\nTRIM(LTAP.ALTME) AS  ALT_UOM,\nCAST(TRIM(LTAP.UMREZ) AS DECIMAL(18,4))  AS  NUMRTR_FOR_CONV_TO_BAS_UOM,\nCAST(TRIM(LTAP.UMREN) AS DECIMAL(18,4)) AS  DENOM_FOR_CONV_TO_BAS_UOM,\nTRIM(LTAP.LETYP) AS  STRG_UNIT_TYPE,\nTRIM(LTAP.KZFEH) AS  PRE_ALC_STK_IN,\nTRIM(LTAP.LANUM) AS  SEQ_NUM,\nTRIM(LTAP.KZQUI) AS  CNFRM_REQ_IN,\nTRIM(LTAP.KZNKO) AS  EXEQ_ZERO_STK_CHK_IN,\nTRIM(LTAP.NULKO) AS  STS_OF_ZERO_STK_CHK,\nTRIM(LTAP.KZINV) AS  INV_IN,\nTRIM(LTAP.IVNUM) AS  NUM_OF_SYS_INV_REC,\nTRIM(LTAP.PQUIT) AS  CNFRM_CMPLT_IN,\nCASE WHEN LTAP.QDATU = '00000000' OR LTAP.QZEIT = '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE  TO_TIMESTAMP(CONCAT(LTAP.QDATU, LTAP.QZEIT),'yyyyMMddHHmmss') END AS  CNFRM_DTTM,\nTRIM(LTAP.QNAME) AS  USER_NM,\nCAST(TRIM(LTAP.BRGEW) AS DECIMAL(18,4)) AS  GRS_WT_OF_TFR_ORDR_ITM,\nTRIM(LTAP.GEWEI) AS  WT_UNIT,\nTRIM(LTAP.MBPOS) AS  ITM_IN_MATL_DOC,\nTRIM(LTAP.WEMPF) AS  GOODS_RCPNT,\nTRIM(LTAP.ABLAD) AS  UNLD_PT,\nCASE WHEN LTAP.WDATU = '00000000' THEN NULL ELSE TO_TIMESTAMP(LTAP.WDATU, \\\"yyyyMMdd\\\")  END AS  GR_DTTM,\nTRIM(LTAP.WENUM) AS  GR_NUM,\nTRIM(LTAP.WEPOS) AS  GR_ITM,\nTRIM(LTAP.ZEUGN) AS  CERT_NUM,\nTRIM(LTAP.LDEST) AS  NM_OF_PRTR,\nTRIM(LTAP.VORGA) AS  TFR_PCDR,\nTRIM(LTAP.VLTYP) AS  SRC_STRG_TYPE,\nTRIM(LTAP.VLBER) AS  SRC_STRG_SECTN,\nTRIM(LTAP.VLPLA) AS  SRC_STRG_BIN,\nTRIM(LTAP.VKDYN) AS  DYN_STRG_BIN_IN1,\nTRIM(LTAP.VPPOS) AS  POS_IN_SRC_STRG_BIN,\nCAST(TRIM(LTAP.VANZL) AS DECIMAL(18,4)) AS  NUM_OF_STRG_UNIT_TO_BE_TFR1,\nTRIM(LTAP.VANBR) AS  PRTL_PLLT_QTY_EXISTS_IN1,\nCAST(TRIM(LTAP.VSOLM) AS DECIMAL(18,4)) AS  SRC_TRGT_QTY,\nCAST(TRIM(LTAP.VISTM) AS DECIMAL(18,4)) AS  SRC_ACTL_QTY,\nCAST(TRIM(LTAP.VDIFM) AS DECIMAL(18,4)) AS  DIFF_SRC_STRG_BIN,\nCAST(TRIM(LTAP.VSOLA) AS DECIMAL(18,4)) AS  SRC_TRGT_QTY_IN_ALT_UNIT,\nCAST(TRIM(LTAP.VISTA) AS DECIMAL(18,4)) AS  SRC_ACTL_QTY_IN_ALT_UNIT,\nCAST(TRIM(LTAP.VDIFA) AS DECIMAL(18,4)) AS  DIFF_SRC_STRG_BIN_ALT_UNIT,\nTRIM(LTAP.VLQNR) AS  QUANT,\nTRIM(LTAP.VAPPC) AS  PAS_ON_SRC_ITM_TO_APPC_IN,\nTRIM(LTAP.NLTYP) AS  DEST_STRG_TYPE,\nTRIM(LTAP.NLBER) AS  DEST_STRG_SECTN,\nTRIM(LTAP.NLPLA) AS  DEST_STRG_BIN,\nTRIM(LTAP.NKDYN) AS  DYN_STRG_BIN_IN2,\nTRIM(LTAP.NPPOS) AS  POS_IN_DEST_STRG_BIN,\nCAST(TRIM(LTAP.NANZL) AS DECIMAL(18,4)) AS  NUM_OF_STRG_UNIT_TO_BE_TFR2,\nTRIM(LTAP.NANBR) AS  PRTL_PLLT_QTY_EXISTS_IN2,\nCAST(TRIM(LTAP.NSOLM) AS DECIMAL(18,4)) AS  DEST_TRGT_QTY,\nCAST(TRIM(LTAP.NISTM) AS DECIMAL(18,4)) AS  DEST_ACTL_QTY,\nCAST(TRIM(LTAP.NDIFM) AS DECIMAL(18,4)) AS  DEST_DIFF_QTY_IN_SKU,\nCAST(TRIM(LTAP.NSOLA) AS DECIMAL(18,4)) AS  DEST_TRGT_QTY_IN_ALT_UNIT,\nCAST(TRIM(LTAP.NISTA) AS DECIMAL(18,4)) AS  ACTL_DEST_QTY_IN_ALT_UNIT,\nCAST(TRIM(LTAP.NDIFA) AS DECIMAL(18,4)) AS  DEST_DIFF_QTY_IN_ALT_UNIT,\nTRIM(LTAP.NLQNR) AS  QUANT1,\nTRIM(LTAP.NAPPC) AS  PAS_ON_DEST_ITM_TO_APPC_IN,\nTRIM(LTAP.RLTYP) AS  RTN_STRG_TYPE,\nTRIM(LTAP.RLBER) AS  RTN_STRG_AREA,\nTRIM(LTAP.RLPLA) AS  RTN_STRG_BIN,\nTRIM(LTAP.RPPOS) AS  POS_IN_RTN_STRG_BIN,\nCAST(TRIM(LTAP.RSOLM) AS DECIMAL(18,4)) AS  RTN_TRGT_QTY_IN_SKU,\nCAST(TRIM(LTAP.RISTM) AS DECIMAL(18,4)) AS  ACTL_RTRN_QTY_IN_SKU,\nCAST(TRIM(LTAP.RDIFM) AS DECIMAL(18,4)) AS  RTN_DIFF_QTY_IN_SKU,\nCAST(TRIM(LTAP.RSOLA) AS DECIMAL(18,4)) AS  RTN_TRGT_QTY_IN_ALT_UNIT,\nCAST(TRIM(LTAP.RISTA) AS DECIMAL(18,4)) AS  ACTL_RTN_QTY_IN_ALT_UOM,\nCAST(TRIM(LTAP.RDIFA) AS DECIMAL(18,4)) AS  RTN_DIFF_QTY_IN_ALT_UNIT,\nTRIM(LTAP.RLQNR) AS  QUANT2,\nTRIM(LTAP.RAPPC) AS  PAS_ON_RTN_ITM_TO_APPC_IN,\nTRIM(LTAP.DLTYP) AS  DIFF_STRG_TYPE,\nTRIM(LTAP.DLPLA) AS  DIFF_STRG_BIN,\nTRIM(LTAP.DLQNR) AS  DIFF_QUANT,\nCAST(TRIM(LTAP.DMENG) AS DECIMAL(18,4)) AS  QTY_OF_DIFF_PSTNG_IN_SKU,\nCAST(TRIM(LTAP.DMENA) AS DECIMAL(18,4)) AS  DIFF_QTY_IN_ALT_UOM,\nTRIM(LTAP.KZDIF) AS  DIFF_IN,\nTRIM(LTAP.MAKTX) AS  MATL_DESC,\nTRIM(LTAP.DRUCK) AS  TFR_ORDR_ITM_IS_PRTD_IN,\nTRIM(LTAP.VLENR) AS  SRC_STRG_UNIT_NUM,\nTRIM(LTAP.NLENR) AS  DEST_STRG_UNIT_NUM,\nTRIM(LTAP.DLENR) AS  NUM_OF_STRG_UNIT_DIFF_QTY,\nTRIM(LTAP.VLEST) AS  STS_OF_SRC_STRG_UNIT,\nTRIM(LTAP.NLEST) AS  STS_OF_DEST_STRG_UNIT,\nTRIM(LTAP.LELAS) AS  PRT_STRG_UNIT_CNTNT_IN,\nTRIM(LTAP.HOMVE) AS  STK_RMV_OF_TOT_STRG_UNIT_IN,\nTRIM(LTAP.POSTY) AS  TYPE_OF_TFR_ORDR_ITM,\nTRIM(LTAP.ORPOS) AS  TO_ITM_FROM_CUR_TO_ITM_GEN,\nTRIM(LTAP.VSUMM) AS  LVL_OF_TOT_INFO_SRC,\nTRIM(LTAP.VBLCH) AS  BLK_WTH_MX_BTCH_SRC,\nTRIM(LTAP.NSUMM) AS  LVL_OF_TOT_INFO_DEST,\nTRIM(LTAP.NBLCH) AS  BLK_WTH_MX_BTCH_DEST,\nTRIM(LTAP.RSPOS) AS  ITM_NUM_OF_RESV,\nCASE WHEN LTAP.VFDAT = '00000000' OR LENGTH(LTAP.VFDAT) < 8 THEN NULL ELSE TO_TIMESTAMP(LTAP.VFDAT, \\\"yyyyMMdd\\\") END AS  SHLF_LIF_EXPN_DTTM,\nCAST(TRIM(LTAP.VKAPV) AS DECIMAL(18,4)) AS  CAPY_USG_OF_XFER_MATL,\nTRIM(LTAP.VKAPA) AS  CAPY_CHK_FOR_SRC_STRG_TYPE,\nTRIM(LTAP.NKAPA) AS  CAPY_CHK_FOR_DEST_STRG_TYPE,\nTRIM(LTAP.RKAPA) AS  CAPY_CHK_RTN_STRG_TYPE,\nTRIM(LTAP.KZSUB) AS  PAS_ON_TO_ITM_TO_SSYS_IN,\nTRIM(LTAP.QPLOS) AS  INSP_LOT_NUM,\nTRIM(LTAP.QPLOA) AS  INSP_LOT_ON_USG_DCSN_IS_BAS,\nTRIM(LTAP.KZSTI) AS  TFR_OF_INSP_SAMP_IN,\nTRIM(LTAP.RSART) AS  REC_TYPE,\nTRIM(LTAP.KZECH) AS  CNFRM_BTCH_TO_PP_IN,\nTRIM(LTAP.KOBER) AS  PICK_AREA,\nTRIM(LTAP.LGORT) AS  STRG_LOC,\nCAST(TRIM(LTAP.SOLPO) AS DECIMAL(18,4)) AS  PLAN_PROC_TIME_TFR_ORDR_ITM,\nTRIM(LTAP.ZEIEI) AS  TIME_UNIT_FOR_PERF_DATA,\nTRIM(LTAP.L2SKR) AS  RLVNC_FOR_2_STEP_PICK,\nCAST(TRIM(LTAP.VOLUM) AS DECIMAL(18,4)) AS  VOLUME,\nTRIM(LTAP.VOLEH) AS  VOL_UNIT,\nTRIM(LTAP.KZBEF) AS  INV_MGMT_ACT_IN,\nTRIM(LTAP.IMREL) AS  TRIGR_PSTNG_IN_INV_MGMT,\nCAST(TRIM(LTAP.NWIRM) AS DECIMAL(18,4)) AS  TFR_INGR_QTY,\nTRIM(LTAP.WIRME) AS  ACT_INGR_UOM,\nTRIM(LTAP.NPLEI) AS  DEST_STRG_BIN_CHG_CNFRM,\nTRIM(LTAP.KBNKZ) AS  KANBAN_IN,\nTRIM(LTAP.STOAN) AS  CNCL_RQST_FOR_TO_ITM,\nTRIM(LTAP.KGVNQ) AS  SEP_CNFRM_POSBL_IN,\nTRIM(LTAP.PVQUI) AS  MATL_PICK_CNFRM,\nCASE WHEN LTAP.EDATU= '00000000' OR LTAP.EZEIT = '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE  TO_TIMESTAMP(CONCAT(LTAP.EDATU, LTAP.EZEIT ),'yyyyMMddHHmmss') END AS PICK_CNFRM_DTTM,\nTRIM(LTAP.ENAME) AS  USER_NM_IN_PICK_CNFRM,\nTRIM(LTAP.KZFME) AS  LEAD_UOM_FOR_CMPLT_TRX,\nTRIM(LTAP.QUSUB) AS  CNFRM_IN,\nTRIM(LTAP.FHUTA) AS  TFR_ORDR_ITM_IS_HU_TO_ITM,\nTRIM(LTAP.VNEST) AS  INDCT_SRC_STRG_UNIT_NSTD_HU,\nTRIM(LTAP.VHILM) AS  PKGNG_MATL,\nTRIM(LTAP.VDUMM) AS  SRC_SU_PSEUD_SU_IN,\nTRIM(LTAP.NDUMM) AS  DEST_SU_PSEUD_SU_IN,\nTRIM(LTAP.VSERI) AS  SRC_SU_HU_WTH_SER_NUM_IN,\nTRIM(LTAP.HUPIK) AS  SRC_HU_SUGG_PICK_HU_IN,\nTRIM(LTAP.NXIDV) AS  EXTRNL_HU_ID,\nTRIM(LTAP.NOLIS) AS  DONT_UPDT_FL,\nTRIM(LTAP.NPIPO) AS  DONT_TFR_SU_PICK_PT_FL,\nTRIM(LTAP.PIPAR) AS  ASGNMT_OF_TO_ITM_TO_HU,\nTRIM(LTAP.PCKPF) AS  PACK_CNTL,\nTRIM(LTAP.KZTRM) AS  TRM_INTF_ACT,\nTRIM(LTAP.PASSD) AS  CNFRM_DATA_XFER_TO_DELV,\nTRIM(LTAP.VBELN) AS  DELIVERY,\nTRIM(LTAP.KZXDK) AS  CROSS_DK_INTF,\nTRIM(LTAP.KZVAS) AS  VAL_ADD_SRVC_INTF,\nTRIM(LTAP.FROM_INSP_GUID) AS  FROM_INSP_GUID,\nTRIM(LTAP.TO_INSP_GUID) AS  TO_INSP_GUID,\nTRIM(LTAP.DIFF_INSP_GUID) AS  DIFF_INSP_GUID,\nTRIM(LTAP.RETURN_INSP_GUID) AS  RTN_INSP_GUID,\nTRIM(LTAP.DCNUM) AS  CROSS_DK_DCSN_NUM,\nTRIM(LTAP.ZRSTG) AS  GENL_FL_1,\nTRIM(LTAP.TOVAS) AS  GENL_FL_2,\nTRIM(LTAP.SGT_SCAT) AS  STK_SGMNT\nFROM {Config.sourceDatabase}.LTAP LTAP\nWHERE LTAP._deleted_ = 'F'\nAND LTAP.mandt = '100'  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    

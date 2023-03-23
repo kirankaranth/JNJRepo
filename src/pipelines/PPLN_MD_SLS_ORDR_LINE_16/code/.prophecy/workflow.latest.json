@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "l1_md_prophecy"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "hm2"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "hm2"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MD_SLS_ORDR_LINE_16"
+      },
+      "connections" : [ {
+        "id" : "391bebea-32ae-4967-812d-ff6ec1fb4077",
+        "source" : "32876df9-9dc8-4f42-95c3-cf96bc1e8d2a",
+        "sourcePort" : "0deda340-b77e-46b5-80ac-e5a12e94637a",
+        "target" : "b60b7297-130d-4175-b01a-1162cad2c2cb",
+        "targetPort" : "dcd1f2e9-b830-4b28-a017-221362611026"
+      }, {
+        "id" : "2a44970f-805f-4095-8192-274fafc020e0",
+        "source" : "c7a8e5f3-06cd-4ef1-a759-d770ceedd722",
+        "sourcePort" : "f32db036-d7af-4238-b94b-05177199356c",
+        "target" : "32876df9-9dc8-4f42-95c3-cf96bc1e8d2a",
+        "targetPort" : "a69eb4d9-be42-4610-9d11-cfde41d6069c"
+      } ],
+      "processes" : {
+        "b60b7297-130d-4175-b01a-1162cad2c2cb" : {
+          "id" : "b60b7297-130d-4175-b01a-1162cad2c2cb",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MD_SLS_ORDR_LINE",
+            "slug" : "MD_SLS_ORDR_LINE",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "dcd1f2e9-b830-4b28-a017-221362611026",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MD_SLS_ORDR_LINE"
+          }
+        },
+        "32876df9-9dc8-4f42-95c3-cf96bc1e8d2a" : {
+          "id" : "32876df9-9dc8-4f42-95c3-cf96bc1e8d2a",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "a69eb4d9-be42-4610-9d11-cfde41d6069c",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "0deda340-b77e-46b5-80ac-e5a12e94637a",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'COMPANY_CD',COMPANY_CD,'SLS_ORDR_DOC_ID',SLS_ORDR_DOC_ID,'SLS_ORDR_LINE_NBR',SLS_ORDR_LINE_NBR,'SLS_ORDR_TYPE_CD',SLS_ORDR_TYPE_CD))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'COMPANY_CD',COMPANY_CD,'SLS_ORDR_DOC_ID',SLS_ORDR_DOC_ID,'SLS_ORDR_LINE_NBR',SLS_ORDR_LINE_NBR,'SLS_ORDR_TYPE_CD',SLS_ORDR_TYPE_CD)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "c7a8e5f3-06cd-4ef1-a759-d770ceedd722" : {
+          "id" : "c7a8e5f3-06cd-4ef1-a759-d770ceedd722",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MD_SLS_ORDR_LINE",
+            "slug" : "sql_MD_SLS_ORDR_LINE",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "f32db036-d7af-4238-b94b-05177199356c",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    with mandt_filter AS\n(\n    (SELECT L1_PARAMETERS.PARAM_VAL\n    from l1_md_prophecy_config.l1_parameters L1_PARAMETERS\n    WHERE L1_PARAMETERS.ENV_NM = '{env}' AND L1_PARAMETERS.PARAM_NM = 'mandt_filter')\n)\n    SELECT\n    '{Config.sourceSystem}'   AS SRC_SYS_CD,\nVBAK.bukrs_vf AS COMPANY_CD,\nVBAP.vbeln AS SLS_ORDR_DOC_ID,\nVBAP.posnr AS SLS_ORDR_LINE_NBR,\nVBAK.auart AS SLS_ORDR_TYPE_CD,\nTRIM(VBAP.abgru) AS REJ_RSN_CD,\nTRIM(VBAP.faksp) AS BILL_BLK_LINE_CD,\nTRIM(VBAP.fkrel) AS BILL_RLVNT_ID,\nCAST (TRIM(VBAP.kbmeng) AS DECIMAL(18,4)) AS CNFRM_QTY,\nCAST (TRIM(VBAP.kwmeng) AS DECIMAL(18,4)) AS SLS_UNIT_ORDR_QTY,\nTRIM(VBAP.lfrel) AS DELV_RLVNT_IND,\nTRIM(VBAP.lgort) AS SLOC_CD,\nTRIM(VBAP.matnr) AS MATL_NUM,\nCAST (TRIM(VBAP.netwr) AS DECIMAL(18,4)) AS NET_VAL_AMT,\nTRIM(VBAP.pstyv) AS LINE_ITEM_CAT_CD,\nTRIM(VBAP.route) AS RTE_ID,\nTRIM(VBAP.vrkme) AS SLS_UOM_CD,\nTRIM(VBAP.vstel) AS SHIPPING_PT_ID,\nTRIM(VBAP.waerk) AS SLS_ORDR_CRNCY_CD,\nTRIM(VBAP.spart) AS DIVISION_CD,\nTRIM(VBAP.werks) AS PLNT_CD,\nTRIM(VBKD.inco1) AS INTNL_COM_CD,\nTRIM(VBKD.inco2) AS DEL_DPRT_PT_CD,\nTRIM(VBAP.absta) AS REJ_STS_CD,\nTRIM(VBAP.besta) AS CNFRM_STS_CD,\nNULL AS INTCO_BILL_STS_CD,\nTRIM(VBAP.fksaa) AS ORDR_BILL_STS_CD,\nNULL AS DELV_BILL_STS_CD,\nTRIM(VBAP.gbsta) AS PRCSG_TOT_STS_CD,\nNULL AS PICK_CNFRM_STS_CD,\nNULL AS PICK_STS_CD,\nTRIM(VBAP.lfgsa) AS DELV_TOT_STS_CD,\nTRIM(VBAP.lfsta) AS DELV_STS_CD,\nNULL AS WM_STS_CD,\nNULL AS PACK_STS_CD,\nTRIM(VBAP.rfgsa) AS REF_TOT_STS_CD,\nTRIM(VBAP.rfsta) AS REF_STS_CD,\nTRIM(VBAP.uvall) AS ICMPT_STS_CD,\nTRIM(VBAP.uvfak) AS BILL_ICMPT_STS_CD,\nNULL AS PACK_ICMPT_STS_CD,\nNULL AS PICK_ICMPT_STS_CD,\nTRIM(VBAP.uvprs) AS PRC_ICMPT_STS_CD,\nTRIM(VBAP.uvvlk) AS DELV_ICMPT_STS_CD,\nNULL AS GM_ICMPT_STS_CD,\nTRIM(VBAP.wbsta) AS GM_STS_CD,\nCASE WHEN VBAK.fmbdat= '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(VBAK.fmbdat,'yyyyMMdd') END AS ORG_MTL_AVAL_DTTM,\nCASE WHEN VBAP.erdat= '00000000' or VBAP.erzet= '000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(concat(VBAP.erdat,VBAP.erzet),'yyyyMMddHHmmss') END AS CR_DTTM,\nTRIM(TVAGT.bezei) AS REJ_RSN_DESC,\nTRIM(TVAPT.vtext) AS LINE_ITEM_CAT_DESC,\nCAST (TRIM(VBAP.netpr) AS DECIMAL(18,4)) AS NET_PRC_AMT,\nTRIM(VBAP.matwa) AS ENT_MATL_NUM,\nTRIM(VBAP.meins) AS BASE_UOM_CD,\nTRIM(VBKD.bstkd) AS CUST_PO_NUM,\nCAST (TRIM(VBAP.umvkz) AS DECIMAL(18,4)) AS FCTR_NMRTR_MEAS,\nCAST (TRIM(VBAP.umvkn) AS DECIMAL(18,4)) AS FCTR_DNMNTR_MEAS,\nNULL AS AVAIL_TO_PROM_DTTM,\nNULL AS BKORD_CD,\nCAST (TRIM(VBAP.lsmeng) AS DECIMAL(18,4)) AS SLS_VOL_QTY,\nCASE WHEN VBAP.zz1_mbdat_sdi= '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(VBAP.zz1_mbdat_sdi,'yyyyMMdd') END AS FX_DMAND_DTTM,\nNULL AS INIT_CMMT_DTTM,\nCAST (TRIM(VBAP.brgew) AS DECIMAL(18,4)) AS GRS_WT_MEAS,\nTRIM(VBAP.gewei) AS WT_UOM_CD,\nCAST (TRIM(VBAP.ntgew) AS DECIMAL(18,4)) AS NET_WT_MEAS,\nTRIM(VBAP.kdmat) AS MATL_NUM_USED_BY_CUST,\nCAST (TRIM(VBAP.klmeng) AS DECIMAL(18,4)) AS CUM_CNFRM_QTY_BASE_UNIT,\nTRIM(VBAP.kztlf) AS PRTL_DELV_ITM_LVL,\nTRIM(VBAP.prodh) AS PROD_HIER_CD,\nTRIM(VBAP.stkey) AS BOM_ORIG,\nTRIM(VBAP.uepos) AS PARNT_BOM_CNTR_NBR,\nTRIM(VBAP.voleh) AS VOL_UOM_CD,\nCAST (TRIM(VBAP.volum) AS DECIMAL(18,4)) AS VOL_MEAS,\nCAST (TRIM(VBAP.wavwr) AS DECIMAL(18,4)) AS COST_IN_DOC_CRNCY,\nNULL AS INIT_RTE,\nNULL AS INIT_SHIPPING_PT,\nCAST (TRIM(VBAP.umziz) AS DECIMAL(18,4)) AS FACT_FOR_CNV_SLS_UNIT_TO_BASE_UNIT,\nTRIM(VBAP.arktx) AS MATL_SHRT_DESC,\nTRIM(VBAP.charg) AS BTCH_NUM,\nCAST (TRIM(VBAP.lfmng) AS DECIMAL(18,4)) AS MIN_DELV_QTY,\nCAST(NULL AS TIMESTAMP) AS ORIG_RQST_DELV_DTTM,\nTRIM(VBAP.lprio) AS DELV_PRIR,\nTRIM(VBAP.matkl) AS MATL_GRP_CD,\nTRIM(VBAP.zieme) AS TRGT_QTY_UOM,\nTRIM(VBAP.grkor) AS DELV_GRP,\nCASE WHEN VBAP.aedat= '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(VBAP.aedat,'yyyyMMdd') END AS CHG_DTTM,\nCAST (TRIM(VBAP.kzwi2) AS DECIMAL(18,4)) AS SBTOT_2_PRC_PCDR,\nCAST (TRIM(VBAP.kzwi3) AS DECIMAL(18,4)) AS SBTOT_3_PRC_PCDR,\nCAST (TRIM(VBAP.kzwi4) AS DECIMAL(18,4)) AS SBTOT_4_PRC_PCDR,\nCAST (TRIM(VBAP.kzwi5) AS DECIMAL(18,4)) AS SBTOT_5_PRC_PCDR,\nCAST (TRIM(VBAP.kzwi6) AS DECIMAL(18,4)) AS SBTOT_6_PRC_PCDR,\nCAST (TRIM(VBAP.awahr) AS INT) AS ORDR_PRBLTY_ITM,\nTRIM(VBAP.shkzg) AS RTRN_ITM,\nTRIM(VBAP.sktof) AS DR_CR_IN,\nCAST (TRIM(VBAP.zmeng) AS DECIMAL(18,4)) AS TRGT_QTY_SLS_UNIT,\nTRIM(VBAP.ernam) AS CRT_BY_NM,\nTRIM(VBAP.mvgr1) AS MATL_GRP_1,\nTRIM(TVM1T.bezei) AS MATL_GRP_1_DESC,\nTRIM(VBAP.mvgr2) AS MATL_GRP_2_MVGR2,\nTRIM(TVM2T.bezei) AS MATL_GRP_2_DESC,\nTRIM(VBAP.mvgr3) AS MATL_GRP_3,\nTRIM(TVM3T.bezei) AS MATL_GRP_3_DESC,\nTRIM(VBAP.mvgr4) AS MATL_GRP_4,\nTRIM(TVM4T.bezei) AS MATL_GRP_4_DESC,\nTRIM(VBAP.mvgr5) AS MATL_GRP_5,\nTRIM(TVM5T.bezei) AS MATL_GRP_5_DESC,\nTRIM(VBAP.aufnr) AS ORDR_NUM,\nCAST (TRIM(VBAP.kpein) AS DECIMAL(18,4)) AS COND_PRC_UNIT,\nNULL AS OVRD_PRC_RES_CD,\nTRIM(TVSTT.vtext) AS SHIPPING_PT_DESC,\nconcat(substr(trim(TVST.LOADTN),1,2),\\\":\\\",substr(trim(TVST.LOADTN),3,2),\\\":\\\",substr(trim(TVST.LOADTN),5,2))  as LD_TIME_WRK_HRS,\nconcat(substr(trim(TVST.PIPATN),1,2),\\\":\\\",substr(trim(TVST.PIPATN),3,2),\\\":\\\",substr(trim(TVST.PIPATN),5,2))  as PICK_PACK_TIME,\nTRIM(TVST.tstrid) AS WRK_TIMES,\nTRIM(TVST.fabkl) AS SHIPPING_PT_FCTRY_CAL,\nCAST (TRIM(TVST.loadtg) AS DECIMAL(18,4)) AS LD_TIME_WRK_DAYS,\nCAST (TRIM(TVST.pipatg) AS DECIMAL(18,4)) AS PICK_PACK_TIME_WRK_DAYS,\nTRIM(TVST.aland) AS SHIPPING_PT_CTRY,\nTRIM(TVRO.spfbk) AS RTE_FCTRY_CAL,\nTRIM(TVRO.tdvztd) AS TRSPN_LEAD_TIME_IN_CAL_DAYS,\nTRIM(TVRO.traztd) AS TRST_DUR_IN_CAL_DAYS,\nTRIM(TVROT.bezei) AS RTE_DESC,\nCASE WHEN TRIM(VBKD.bstdk)= '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(TRIM(VBKD.bstdk),'yyyyMMdd') END AS CUST_PO_DTTM,\nCAST (TRIM(VBAP.umzin) AS DECIMAL(18,4)) AS CONV_FACT,\nTRIM(VBAP.gsber) AS BUSN_AREA,\nTRIM(VBAP.taxm1) AS TAX_CLSN_FOR_MATL_1,\nTRIM(VBAP.taxm2) AS TAX_CLSN_FOR_MATL_2,\nTRIM(VBAP.taxm3) AS TAX_CLSN_FOR_MATL_3,\nTRIM(VBAP.kmein) AS COND_UOM,\nTRIM(VBAP.mtvfp) AS AVLBLTY_CHK_GRP,\nTRIM(VBAP.sumbd) AS RQR_SUM_UP,\nTRIM(VBAP.ktgrm) AS ACCT_ASGNMT_GRP,\nTRIM(VBAP.prsok) AS PRC_IS_OK,\nTRIM(VBAP.xchpf) AS BTCH_MGMT_REQ_IN,\nTRIM(VBAP.xchar) AS BTCH_MGMT_IN,\nTRIM(VBAP.stafo) AS STATS_UPDT_GRP,\nCAST (TRIM(VBAP.kzwi1) AS DECIMAL(18,4)) AS SBTOT_1_PRC_PCDR,\nCAST (TRIM(VBAP.stcur) AS DECIMAL(18,4)) AS STATS_EXCH_RT,\nTRIM(VBAP.ean11) AS EAN_CD,\nTRIM(VBAP.prctr) AS PRFT_CTR,\nTRIM(VBAP.paobjnr) AS PRFT_SGMNT_NUM,\nTRIM(VBAP.bedae) AS RQR_TYPE,\nCAST (TRIM(VBAP.cmpre) AS DECIMAL(18,4)) AS ITM_CR_PRC_CMPRE,\nTRIM(VBAP.berid) AS MRP_AREA,\nTRIM(VBAP.j_1btaxlw3) AS ISS_TAX_LAW,\nTRIM(VBAP.j_1btaxlw4) AS COFINS_TAX_LAW,\nTRIM(VBAP.j_1btaxlw5) AS PIS_TAX_LAW,\nTRIM(VBAP.vbelv) AS ORIG_DOC,\nTRIM(VBAP.posnv) AS ORIG_ITM,\nTRIM(VBAP.vgbel) AS REF_DOC_NUM,\nTRIM(VBAP.vgpos) AS REF_ITM_NUM,\nTRIM(TVST.rizbs) AS DTRMN_PICK_PACK_TIME,\nTRIM(TVST.vstel) AS SHIPPING_PT,\nTRIM(TVST.aland) AS CTRY_CD,\nTRIM(TVAPT.pstyv) AS ITEM_CAT_CD,\n\\\"#\\\" AS SRC_TBL_NM,\nTRIM(VBAP.upmat) AS MATL_PRC_REF,\nTRIM(VBAP.pmatn) AS PRC_REF_MATL,\nTRIM(VBAP.posar) AS ITM_TYPE,\nTRIM(VBAP.process_code) AS ITM_PRCSG_CD,\nTRIM(VBAP.grpos) AS ITM_ITM_ALT,\nTRIM(VBAP.prodh_univ_sales_parnt_nodid) AS NODE_ID_SALES,\nTRIM(VBAP.prodh_univ_sales_det_origin) AS DT_RLVNT_DTRMN_PROD_HIER_SALES,\nTRIM(VBAP.prodh_univ_batdet_parnt_nodid) AS NODE_ID_BATDET,\nTRIM(VBAP.prodh_univ_batdet_det_origin) AS DT_RLVNT_DTRMN_PROD_HIER_BATDET,\nCAST (TRIM(VBAP.zwert) AS DECIMAL(18,4)) AS TRGT_VAL_OUTLN_AGMT_DOC_CRNCY,\nTRIM(VBAP.substn_numerator) AS QTY_CONV_NUMRTR,\nTRIM(VBAP.substn_denominator) AS QTY_CONV_DENOM,\nCAST (TRIM(VBAP.smeng) AS DECIMAL(18,4)) AS SCALE_QTY_BASE_UNIT_MEAS,\nCAST (TRIM(VBAP.ablfz) AS DECIMAL(18,4)) AS RD_QTY_FOR_DELV,\nCASE WHEN VBAP.abdat= '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(VBAP.abdat,'yyyyMMdd') END AS RCNL_AGR_CUM_QTY_DTTM,\nCAST (TRIM(VBAP.absfz) AS DECIMAL(18,4)) AS ALLW_DEVT_QTY_ABS,\nTRIM(VBAP.posex) AS ITM_NUM_UNDRLY_PRCH_ORDR,\nTRIM(VBAP.kbver) AS ALLW_DEVT_QTY_PCT,\nTRIM(VBAP.kever) AS DAYS_QTY_CN_BE_SHFT,\nTRIM(VBAP.vkgru) AS REPAR_PRCSG_CLSN_ITM,\nTRIM(VBAP.vkaus) AS USG_IN,\nTRIM(VBAP.fmeng) AS QTY_IS_FX,\nTRIM(VBAP.uebtk) AS UNLTD_OVR_DELV_ALLW,\nCAST (TRIM(VBAP.uebto) AS DECIMAL(18,4)) AS OVR_DELV_TLRNC,\nCAST (TRIM(VBAP.untto) AS DECIMAL(18,4)) AS UND_DELV_TLRNC,\nTRIM(VBAP.atpkz) AS REPL_PART,\nTRIM(VBAP.rkfkf) AS METH_BILL_CO_PPC_ORD,\nTRIM(VBAP.antlf) AS MAX_NUM_PRTL_DELV_ALLW_PER_ITM,\nTRIM(VBAP.resource_id) AS RSRS_NM,\nTRIM(VBAP.chspl) AS BTCH_SPLT_ALLW,\nTRIM(VBAP.voref) AS CMPLT_REF_IN,\nTRIM(VBAP.upflu) AS UPDT_IN_DOC_FLOW_SLS_DOC,\nTRIM(VBAP.erlre) AS CMPLT_RULE_QUOT_CNTRC,\nCASE WHEN VBAP.stdat= '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(VBAP.stdat,'yyyyMMdd') END AS KEY_BILL_MATL_DTTM,\nTRIM(VBAP.stlnr) AS BILL_OF_MATL,\nTRIM(VBAP.stpos) AS BILL_OF_MATL_ITM_NUM_VBAP_NOT_USED,\nTRIM(VBAP.taxm4) AS TAX_CLSN_FOR_MATL_4,\nTRIM(VBAP.taxm5) AS TAX_CLSN_FOR_MATL_5,\nTRIM(VBAP.taxm6) AS TAX_CLSN_FOR_MATL_6,\nTRIM(VBAP.taxm7) AS TAX_CLSN_FOR_MATL_7,\nTRIM(VBAP.taxm8) AS TAX_CLSN_FOR_MATL_8,\nTRIM(VBAP.taxm9) AS TAX_CLSN_FOR_MATL_9,\nCAST (TRIM(VBAP.vbeaf) AS DECIMAL(18,4)) AS FX_SHIPPING_PRCSG_TIME_IN_DAYS,\nCAST (TRIM(VBAP.vbeav) AS DECIMAL(18,4)) AS VAR_SHIPPING_PRCSG_TIME_IN_DAYS,\nTRIM(VBAP.vgref) AS PRCDNG_DOC_RSULT_REF,\nTRIM(VBAP.kondm) AS MATL_PRC_GRP,\nTRIM(VBAP.bonus) AS VOL_REBT_GRP,\nTRIM(VBAP.provg) AS COMMSN_GRP,\nTRIM(VBAP.eannr) AS EUR_ARTCL_NUM_OBSOL,\nTRIM(VBAP.bwtar) AS VALUT_TYPE,\nTRIM(VBAP.bwtex) AS IN_SEP_VALUT,\nTRIM(VBAP.fixmg) AS DELV_DT_QTY_FX,\nCAST (TRIM(VBAP.kmpmg) AS DECIMAL(18,4)) AS CMPNT_QTY,\nTRIM(VBAP.sugrd) AS RSN_MATL_SUBST,\nTRIM(VBAP.sobkz) AS SPL_STK_IN,\nTRIM(VBAP.vpzuo) AS ALLC_IN,\nTRIM(VBAP.bob_fg_id) AS FREE_GOODS_ID_SLS_PROM,\nTRIM(VBAP.bob_promotion_id) AS ID_OMNCHNL_SLS_PROM,\nTRIM(VBAP.freeze_paobjnr) AS PRFT_SGMNT_DEPN_PRCDNG_DOC,\nTRIM(VBAP.ps_psp_pnr) AS WRK_BRKDWN_STRC_ELMNT,\nTRIM(VBAP.vpmat) AS PLNG_MATL,\nTRIM(VBAP.vpwrk) AS PLNG_PLNT,\nTRIM(VBAP.prbme) AS BASE_UNIT_MEAS_PROD_GRP,\nCAST (TRIM(VBAP.umref) AS DECIMAL(18,4)) AS CONV_FACT_QTY,\nTRIM(VBAP.knttp) AS ACCT_ASGNMT_CAT,\nTRIM(VBAP.kzvbr) AS CNSMPTN_PSTNG,\nTRIM(VBAP.sernr) AS BOM_EXPLS_NUM,\nTRIM(VBAP.objnr) AS OBJ_NUM_ITM_LVL,\nTRIM(VBAP.abgrs) AS RSLTS_ANAL_KEY,\nTRIM(VBAP.cmtfg) AS ID_PRTL_RLSE_ORDR_ITM_CR_BLK,\nTRIM(VBAP.cmpnt) AS ID_ITM_ACT_CR_FUNC_RLVNT_CR,\nCAST (TRIM(VBAP.cmkua) AS DECIMAL(18,4)) AS CR_DATA_EXCH_RT_FOR_RQST_DELV_DT,\nTRIM(VBAP.cuobj) AS CNFG,\nTRIM(VBAP.cuobj_ch) AS INTRNL_OBJ_NUM_BTCH_CLSN,\nTRIM(VBAP.cepok) AS STS_EXPTD_PRC,\nTRIM(VBAP.koupd) AS COND_UPDT,\nTRIM(VBAP.serail) AS SER_NUM_PRFL,\nTRIM(VBAP.anzsn) AS NUM_SER_NUM,\nTRIM(VBAP.nachl) AS CUST_HAS_NOT_PSTD_GOODS_RCPT,\nTRIM(VBAP.magrv) AS MATL_GRP_PKGNG_MATL,\nTRIM(VBAP.mprok) AS STS_MAN_PRC_CHG,\nTRIM(VBAP.vgtyp) AS DOC_CAT_PRCDNG_SD_DOC,\nTRIM(VBAP.prosa) AS ID_MATL_DTRMN,\nTRIM(VBAP.uepvw) AS ID_HI_LVL_ITM_USG,\nTRIM(VBAP.kalnr) AS COST_EST_NUM_COST_EST_QTY_STRC,\nTRIM(VBAP.klvar) AS COST_VRNT_KLVAR,\nTRIM(VBAP.sposn) AS BOM_ITM_NUM,\nTRIM(VBAP.kowrr) AS STAT_VAL,\nCASE WHEN VBAP.stadat= '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(VBAP.stadat,'yyyyMMdd') END AS STATS_DTTM,\nTRIM(VBAP.exart) AS BUSN_TRX_TYPE,\nTRIM(VBAP.prefe) AS CSTMS_PREF,\nTRIM(VBAP.knumh) AS NUM_COND_REC_FROM_BTCH_DTRMN,\nTRIM(VBAP.clint) AS INTRNL_CLS_NUM,\nTRIM(VBAP.chmvs) AS BTCH_EXIT_TO_QTY_PROPS,\nTRIM(VBAP.stlty) AS BOM_CAT,\nTRIM(VBAP.stlkn) AS BOM_ITM_NODE_NUM,\nTRIM(VBAP.stpoz) AS INTRNL_CNTR_STPOZ,\nTRIM(VBAP.stman) AS INCONS_CNFG,\nTRIM(VBAP.zschl_k) AS OVHD_KEY,\nTRIM(VBAP.kalsm_k) AS COST_SHT,\nTRIM(VBAP.kalvar) AS COST_VRNT_KALVAR,\nTRIM(VBAP.kosch) AS PROD_ALLC_DTRMN_PCDR,\nTRIM(VBAP.ukonm) AS MATL_PRC_GRP_MN_ITM,\nTRIM(VBAP.mfrgr) AS MATL_FRGHT_GRP,\nTRIM(VBAP.plavo) AS INSTR_PLNG_DELV_SCHED,\nTRIM(VBAP.kannr) AS KANBAN_SEQ_NUM,\nCAST (TRIM(VBAP.cmpre_flt) AS DECIMAL(18,4)) AS ITM_CR_PRC_CMPRE_FLT,\nTRIM(VBAP.abfor) AS FORM_PMT_GUAR,\nCAST (TRIM(VBAP.abges) AS DECIMAL(18,4)) AS GUARNTD,\nTRIM(VBAP.j_1bcfop) AS CFOP_CD_EXTN,\nTRIM(VBAP.j_1btaxlw1) AS TAX_LAW_ICMS,\nTRIM(VBAP.j_1btaxlw2) AS TAX_LAW_IPI,\nTRIM(VBAP.j_1btxsdc) AS SD_TAX_CD,\nTRIM(VBAP.wktnr) AS VAL_CNTRC_NO,\nTRIM(VBAP.wktps) AS VAL_CNTRC_ITM,\nTRIM(VBAP.skopf) AS ASRTMNT_MDLE,\nTRIM(VBAP.kzbws) AS VALUT_SPL_STK,\nTRIM(VBAP.wgru1) AS MATL_GRP_HIER_1,\nTRIM(VBAP.wgru2) AS MATL_GRP_HIER_2,\nTRIM(VBAP.knuma_pi) AS SLS_PROM,\nTRIM(VBAP.knuma_ag) AS SLS_DEAL,\nTRIM(VBAP.kzfme) AS ID_LEAD_UNIT_MEAS_CMPLT_TRX,\nTRIM(VBAP.lstanr) AS FREE_GOODS_DELV_CNTL,\nTRIM(VBAP.techs) AS PARM_VRNT_STD_VRNT,\nCAST (TRIM(VBAP.mwsbp) AS DECIMAL(18,4)) AS TAX_AMT_DOC_CRNCY,\nTRIM(VBAP.pctrf) AS PRFT_CTR_BILL,\nTRIM(VBAP.logsys_ext) AS LOGL_SYS,\nTRIM(VBAP.stockloc) AS FST_INV_MNG_LOC,\nTRIM(VBAP.sloctype) AS TYPE_FST_INV_MNG_LOC,\nTRIM(VBAP.msr_ret_reason) AS RTN_RSN,\nTRIM(VBAP.msr_refund_code) AS RTRN_RFND_CD,\nTRIM(VBAP.msr_approv_block) AS APPR_BLK,\nTRIM(VBAP.nrab_knumh) AS NUM_COND_REC,\nTRIM(VBAP.trmrisk_relevant) AS RISK_RLVNT_SLS,\nTRIM(VBAP.sgt_rcat) AS REQ_SGMNT,\nTRIM(VBAP.vbkd_posnr) AS SLS_DOC_ITM_VBKD,\nTRIM(VBAP.veda_posnr) AS SLS_DOC_ITM_VEDA,\nTRIM(VBAP.handoverloc) AS LOC_PHY_HANDOVR_GOODS,\nTRIM(VBAP.ext_ref_item_id) AS EXTRNL_ITM_ID,\nCASE WHEN VBAP.handoverdate= '00000000' or handovertime= '000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(concat(VBAP.handoverdate, VBAP.handovertime),'yyyyMMddHHmmss') END AS HANDOVR_LOC_DTTM,\nTRIM(VBAP.tc_aut_det) AS TAX_CD_AUTMT_DTRMN,\nTRIM(VBAP.manual_tc_reason) AS MAN_TAX_CD_RSN,\nTRIM(VBAP.fiscal_incentive) AS TAX_INCT_TYPE,\nTRIM(VBAP.tax_subject_st) AS TAX_SUBJ_SUBST_TRIB,\nTRIM(VBAP.cmppj) AS STS_CR_CHK_AGNST_EXPT_CR_INSR,\nTRIM(VBAP.costa) AS PRCHSNG_CNFRM_STS,\nTRIM(VBAP.dcsta) AS DELAY_STS,\nTRIM(VBAP.fssta) AS BILL_BLK_STS,\nTRIM(VBAP.lssta) AS OVRL_DELV_BLK_STS,\nTRIM(VBAP.manek) AS MAN_CMPLT_CNTRC,\nTRIM(VBAP.uvp01) AS CUST_RESV_1_ITM_STS,\nTRIM(VBAP.uvp02) AS CUST_RESV_2_ITM_STS,\nTRIM(VBAP.uvp03) AS ITM_RESV_3_ITM_STS,\nTRIM(VBAP.uvp04) AS ITM_RESV_4_ITM_STS,\nTRIM(VBAP.uvp05) AS CUST_RESV_5_ITM_STS,\nTRIM(VBAP.emcst) AS EMBARGO_STS,\nTRIM(VBAP.slcst) AS SCRN_STS,\nTRIM(VBAP.total_lccst) AS LEGAL_CNTL_STS,\nTRIM(VBAP.pcsta) AS PROD_MRKT_STS,\nTRIM(VBAP.dgsta) AS DNGRS_GOODS_STS,\nTRIM(VBAP.sdssta) AS SFTY_DATA_SHT_STS,\nTRIM(VBAP.dp_clear_sta_itm) AS DOWN_PMT_STS,\nTRIM(VBAP.deliv_reltd_billg_sta) AS DELV_RLTD_BILL_STS,\nTRIM(VBAP.lglc_lic_ind) AS LEGAL_CNTL_LIC_IN,\nCASE WHEN VBAP.cmtd_deliv_date= '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(VBAP.cmtd_deliv_date,'yyyyMMdd') END AS DELV_SUP_CMT_DTTM,\nCASE WHEN VBAP.cmtd_deliv_creadate= '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(VBAP.cmtd_deliv_creadate,'yyyyMMdd') END AS DELV_CRT_ORDR_MEET_CMT_DTTM,\nCAST (TRIM(VBAP.cmtd_deliv_qty_su) AS DECIMAL(18,4)) AS CMT_DELV_QTY_SLS_UNIT,\nTRIM(VBAP.delivery_date_type_rule) AS DELV_DT_RULE,\nCAST (TRIM(VBAP.reqqty_bu) AS DECIMAL(18,4)) AS RQST_ORDR_QTY_BASE_UNIT,\nTRIM(VBAP.handle) AS GUID_CHAR_FMT_UPCASE_HANDLE,\nTRIM(VBAP.pbs_state) AS ST_PROJ_BAS_SRVC,\nTRIM(VBAP.ifrs15_relevance) AS ITM_RLVNT_IFRS_15,\nCAST (TRIM(VBAP.ifrs15_total_ssp) AS DECIMAL(18,4)) AS IFRS_15_SA_SEL_PRC,\nTRIM(VBAP.revfp) AS RULE_TFR_RSLTS_AVLBLTY_CHK,\nCAST (TRIM(VBAP.capped_net_amount) AS DECIMAL(18,4)) AS NET_AMT_CAP,\nTRIM(VBAP.capped_net_amount_alert_thld) AS NTF_THRSH_EXCD_NET_AMT_CAP,\nTRIM(VBAP.cats_overtime_category) AS OT_CAT,\nCASE WHEN VBAP.session_creation_date= '00000000' or session_creation_time= '000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(concat(VBAP.session_creation_date, session_creation_time),'yyyyMMddHHmmss') END AS SESS_REC_CRT_DTTM,\nTRIM(VBAP.original_plant) AS ORIG_PLNT_IN_PLNT_SUBST,\nTRIM(VBAP.atp_abc_substitution_status) AS SUBST_STS_ALT_BAS_CNFRM,\nTRIM(VBAP.transit_plant) AS TRST_PLNT,\nTRIM(VBAP.vcm_chain_uuid) AS GUID_CHAR_FMT_UPCASE_VCM_CHAIN_UUID,\nTRIM(VBAP.vcm_chain_category) AS VAL_CHN_CAT,\nCASE WHEN VBAP.lmd_scheduled_delivery_date= '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(VBAP.lmd_scheduled_delivery_date,'yyyyMMdd') END AS LAST_MILE_DSTN_SCHD_DELV_DTTM,\nTRIM(VBAP.reason_code) AS RSN_FOR_RTN_EXPTD_DELV_QTY_CHG,\nTRIM(VBAP.dummy_slsdocitem_incl_eew_ps) AS DUMMY_FUNC_IN_LGTH_1,\nTRIM(VBAP.zz1_distributionchanel_sdi) AS DISTRIBUTIONCHANEL,\nCASE WHEN VBAP.zz1_createdon_sdi= '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(VBAP.zz1_createdon_sdi,'yyyyMMdd') END AS CRT_ON_DTTM,\nTRIM(VBAP.zz1_createdby_sdi) AS CRT_BY,\nTRIM(VBAP.zz1_netprice_sdi) AS NETPRICE,\nTRIM(VBAP.zz1_mvgr2_sdi) AS MATL_GRP_2_ZZ1_MVGR2_SDI,\nNULL AS DATA_ELMNT_PRODH4,\nTRIM(VBAP.zz1_install_req_sdi) AS ILA_REQ,\nCASE WHEN VBAP.zz1_ovrd_apprv_date_sdi= '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(VBAP.zz1_ovrd_apprv_date_sdi,'yyyyMMdd') END AS OVRD_APPR_RJCT_DTTM,\nNULL AS DATA_ELMNT_PRODH5,\nTRIM(VBAP.zz1_overridereasondesc_sdi) AS OVRD_RSN_DESC,\nTRIM(VBAP.zz1_override_approval_sdi) AS OVRD_APPR_RJCT_BY,\nTRIM(VBAP.zz1_overrideblockstat_sdi) AS PRC_OVRD_BLK_STS,\nTRIM(VBAP.zz1_priceoverridereas_sdi) AS PRC_OVRD_RSN,\nTRIM(VBAP.zz1_prcoverride_detail_sdi) AS DTL_PRC_OVRD,\nCAST (TRIM(VBAP.po_quan) AS DECIMAL(18,4)) AS PRCH_ORDR_QTY,\nTRIM(VBAP.po_unit) AS PRCH_ORDR_UNIT_OF_MEAS,\nTRIM(VBAP.mill_se_gposn) AS GLOBL_ITM,\nTRIM(VBAP.mill_batch_sel_f) AS CNTL_OF_BTCH_SLCT,\nTRIM(VBAP.vbtyp_ana) AS SD_DOC_CAT,\nTRIM(VBAP.auart_ana) AS SLS_DOC_TYPE,\nTRIM(VBAP.vkorg_ana) AS SLS_ORG,\nTRIM(VBAP.vtweg_ana) AS DSTN_CHNL,\nTRIM(VBAP.spart_ana) AS DIV,\nTRIM(VBAP.vkbur_ana) AS SLS_OFF,\nTRIM(VBAP.vkgrp_ana) AS SLS_GRP,\nTRIM(VBAP.augru_ana) AS ORDR_RSN,\nCASE WHEN VBAP.audat_ana= '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(VBAP.audat_ana,'yyyyMMdd') END AS DOC_DTTM,\nTRIM(VBAP.kvgr1_ana) AS CUST_GRP_1,\nTRIM(VBAP.kvgr2_ana) AS CUST_GRP_2,\nTRIM(VBAP.kvgr3_ana) AS CUST_GRP_3,\nTRIM(VBAP.kvgr4_ana) AS CUST_GRP_4,\nTRIM(VBAP.kvgr5_ana) AS CUST_GRP_5,\nCASE WHEN VBAP.vdatu_ana= '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(VBAP.vdatu_ana,'yyyyMMdd') END AS RQST_DELV_DTTM,\nTRIM(VBAP.vsbed_ana) AS SHIPPING_COND,\nTRIM(VBAP.kunnr_ana) AS SOLD_TO_PRTY,\nTRIM(VBAP.knumv_ana) AS NUM_DOC_COND,\nTRIM(VBAP.bzirk_ana) AS SLS_DSTRC,\nTRIM(VBAP.bstkd_ana) AS CUST_REF,\nTRIM(VBAP.kdgrp_ana) AS CUST_GRP,\nTRIM(VBAP.vsart_ana) AS SHIPPING_TYPE,\nCASE WHEN VBAP.fkdat_ana= '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(VBAP.fkdat_ana,'yyyyMMdd') END AS BILL_DTTM,\nTRIM(VBAP.fplnr_ana) AS BILL_PLAN_NUM_INVC_PLAN_NUM,\nTRIM(VBAP.kunwe_ana) AS SHIP_TO_PRTY,\nTRIM(VBAP.kunre_ana) AS BLLT_PRTY,\nTRIM(VBAP.perve_ana) AS SLS_EMP,\nTRIM(VBAP.perzm_ana) AS EMP_RESP,\nTRIM(VBAP.kunrg_ana) AS PYR,\nTRIM(VBAP.service_doc_id) AS SRVC_DOC_ID,\nTRIM(VBAP.service_doc_item_id) AS SRVC_DOC_ITM_ID,\nTRIM(VBAP.solution_order_id) AS SOLUT_ORDR,\nTRIM(VBAP.solution_order_itm_id) AS SOLUT_ORDR_ITM,\nTRIM(VBAP.glo_log_ref1_it) AS CMMDTY_CD_POL,\nTRIM(VBAP.txs_business_transaction) AS TAX_SRVC_BUSN_TRX,\nTRIM(VBAP.txs_material_usage) AS TAX_SRVC_MATL_USG,\nTRIM(VBAP.txs_usage_purpose) AS TAX_SRVC_USG_PRPS,\nCASE WHEN VBAP.cpd_updat= '00000000000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(VBAP.cpd_updat,'yyyyMMddHHmmss') END AS TIME_STMP_DTTM,\nTRIM(VBAP._dmbe_optionalitykey) AS DTL_NUM,\nTRIM(VBAP._dmbe_optionalityfor) AS OPT_FOR,\nTRIM(VBAP._dmbe_cimax2) AS MAX_CARBON_INTNS_VAL,\nCASE WHEN VBAP._dmbe_paymentdeemed= '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(VBAP._dmbe_paymentdeemed,'yyyyMMdd') END AS DM_PMT_DTTM,\nTRIM(VBAP._dmbe_item_type) AS DMBE_ITM_TYPE,\nCASE WHEN VBAP._dmbe_effectivedatefrom= '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(VBAP._dmbe_effectivedatefrom,'yyyyMMdd') END AS EFF_FROM_DTTM,\nCASE WHEN VBAP._dmbe_effectivedateto= '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(VBAP._dmbe_effectivedateto,'yyyyMMdd') END AS EFF_TO_DTTM,\nTRIM(VBAP._dmbe_optionof) AS OPT_OF_SD_ITM,\nTRIM(VBAP._dmbe_accounting_type) AS DTL_ACTG_TYPE,\nTRIM(VBAP._dmbe_fas_code) AS FIN_ACTG_STD_CD,\nTRIM(VBAP._dmbe_scheduling_desk) AS SCHDLNG_DESK,\nTRIM(VBAP._dmbe_componentfor) AS MX_PROD_MN_DTL_NUM,\nTRIM(VBAP._dmbe_mixedproduct) AS PROD,\nCASE WHEN VBAP._dmbe_posteddate= '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(VBAP._dmbe_posteddate,'yyyyMMdd') END AS PSTD_DEAL_DTTM,\nTRIM(VBAP._dmbe_deal_posted) AS DEAL_PSTD,\nTRIM(VBAP._dmbe_invoiceuom) AS INVC_UNIT_MEAS,\nTRIM(VBAP.zapcgki) AS ANNEX_PKG_KEY,\nTRIM(VBAP.apcgk_extendi) AS EXTD_KEY_ANNEX_PKG,\nCASE WHEN VBAP.zabdati= '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(VBAP.zabdati,'yyyyMMdd') END AS ANNEX_BASE_DTTM,\nTRIM(VBAP.aufpl_olc) AS RTG_NUM_OPS_ORDR_AUFPL_OLC,\nTRIM(VBAP.aplzl_olc) AS INTRNL_CNTR_APLZL_OLC,\nTRIM(VBAP._sopromet_kostl) AS COST_CTR_SOPROMET_KOSTL,\nTRIM(VBAP._sopromet_lresn) AS RESV,\nTRIM(VBAP._sopromet_noshp) AS FL_NO_SHIPPING,\nTRIM(VBAP._sopromet_posnr) AS POS,\nTRIM(VBAP._sopromet_kzlgb) AS MYMEDISET_FL_LN_FEE,\nTRIM(VBAP._bitmym_tray) AS TRAY,\nTRIM(VBAP._bitmym_moninr) AS MONIT_REC,\nTRIM(VBAP._bitmym_idnlf) AS MATL_NUM_USED_BY_VEND,\nCAST (TRIM(VBAP._bitmym_svalue) AS DECIMAL(18,4)) AS EQUIP_RSDL_VAL,\nCAST (TRIM(VBAP._bitmym_avalue) AS DECIMAL(18,4)) AS EQMNT_RSDL_VAL,\nTRIM(VBAP.ad01profnr) AS DYN_ITM_PROC_PRFL,\nTRIM(VBAP.admoi) AS MDL_ID_CD,\nTRIM(VBAP.adicc) AS INTCH_ABL_CD,\nTRIM(VBAP.adpri) AS ORDR_PRIR,\nTRIM(VBAP.addns) AS DO_NOT_SUBST,\nTRIM(VBAP.adacn) AS ACRFT_REGS_NUM,\nTRIM(VBAP.assignment_priority) AS ARUN_DMAND_PRIR,\nTRIM(VBAP.arun_group_prio) AS ARUN_DMAND_GRP_PRIR,\nTRIM(VBAP.labsg) AS IN_INB_FCST_JIT_DELV_SCHED,\nTRIM(VBAP.fabsg) AS IN_INB_FCST_DELV_SCHED_HDR,\nTRIM(VBAP.pr_l_l) AS PRFL_CMPR_FCST_DELV_SCHED,\nTRIM(VBAP.pr_f_f) AS PRFL_CMPR_JIT_DELV_SCHED,\nTRIM(VBAP.pr_f_l) AS PRFL_COMP_JIT_DELV_SCHED,\nTRIM(VBAP.ferc_ind) AS RGLT_IN,\nTRIM(VBAP.fsh_season_year) AS SEASN_YR,\nTRIM(VBAP.fsh_season) AS SEASN,\nTRIM(VBAP.fsh_collection) AS FSHN_CLCT,\nTRIM(VBAP.fsh_theme) AS FSHN_THEME,\nTRIM(VBAP.fsh_crsd) AS COND_REC_NUM_SEASN,\nTRIM(VBAP.fsh_searef) AS SEASN_DTRMN_REF_DOC,\nCASE WHEN VBAP.fsh_candate= '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(VBAP.fsh_candate,'yyyyMMdd') END AS CNCL_DTTM,\nTRIM(VBAP.fsh_psm_pfm_split) AS PSM_PFM_SPLT_ID,\nTRIM(VBAP.fsh_vas_rel) AS VAS_RLVNT,\nTRIM(VBAP.fsh_vas_prnt_id) AS ITM_NUM_SD_DOC,\nTRIM(VBAP.fsh_transaction) AS TRX_NUM,\nTRIM(VBAP.fsh_item_group) AS ITM_GRP,\nTRIM(VBAP.fsh_item) AS ITM_NUM,\nTRIM(VBAP.fsh_vasref) AS VAS_DTRMN_REF_DOC,\nTRIM(VBAP.fsh_grid_cond_rec) AS GRID_COND_REC_NUM,\nTRIM(VBAP.fsh_pqr_uepos) AS HI_LVL_ITM_PRTL_QTY_REJ,\nTRIM(VBAP.rfm_scc_indicator) AS SEASN_CMPLT_IN,\nTRIM(VBAP.kostl) AS COST_CTR_KOSTL,\nTRIM(VBAP.fonds) AS FUND,\nTRIM(VBAP.fistl) AS FUND_CTR,\nTRIM(VBAP.fkber) AS FUNC_AREA,\nTRIM(VBAP.grant_nbr) AS GRANT,\nTRIM(VBAP.budget_pd) AS BGT_PER,\nTRIM(VBAP.iuid_relevant) AS IUID_RLVNT_CUST,\nTRIM(VBAP.equnr) AS EQMNT_NUM,\nTRIM(VBAP.eqart) AS TYPE_TECH_OBJ,\nTRIM(VBAP.j_3glvart) AS ACTV_TYPE,\nCASE WHEN VBAP.j_3gdatvo= '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(VBAP.j_3gdatvo,'yyyyMMdd') END AS FROM_DTTM,\nCASE WHEN VBAP.j_3gdatbi= '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(VBAP.j_3gdatbi,'yyyyMMdd') END AS TO_DTTM,\nTRIM(VBAP.j_3gbelnri) AS DOC_NUM,\nTRIM(VBAP.j_3gposnri) AS DOC_ITM,\nTRIM(VBAP.prs_objnr) AS ENGAG_MGMT_OBJ_NUM,\nTRIM(VBAP.prs_sd_spsnr) AS STD_WBS_ELMNT_PROJ_INCPT_VIA_SD,\nTRIM(VBAP.prs_work_period) AS WRK_PER,\nTRIM(VBAP.tas) AS TRSRY_ACCT_SYM,\nTRIM(VBAP.betc) AS BUSN_EV_TYPE_CD,\nTRIM(VBAP.mod_allow) AS MOD_ALLW,\nTRIM(VBAP.cancel_allow) AS CNCL_ALLW,\nTRIM(VBAP.pay_method) AS LIST_RSPCT_PMT_METHDS,\nTRIM(VBAP.bpn) AS BUSN_PTNR_NUM,\nTRIM(VBAP.rep_freq) AS RPTG_FREQ,\nTRIM(VBAP.fmfgus_key) AS US_FED_GOVT_FLD,\nTRIM(VBAP.rfm_psst_rule) AS PSST_GRP_RULE,\nTRIM(VBAP.rfm_psst_group) AS PSST_GRP,\nTRIM(VBAP.pargb) AS TRAD_PTNR_BUSN_AREA,\nTRIM(VBAP.aufpl_oaa) AS RTG_NUM_OPS_ORDR_AUFPL_OAA,\nTRIM(VBAP.aplzl_oaa) AS INTRNL_CNTR,\nTRIM(VBAP.vlcendcu) AS END_CUST,\nTRIM(VBAP.wrf_charstc1) AS CHAR_VAL_1,\nTRIM(VBAP.wrf_charstc2) AS CHAR_VAL_2,\nTRIM(VBAP.wrf_charstc3) AS CHAR_VAL_3,\nTRIM(VBAP.arsnum) AS NUM_OF_RESV_DEPN_RQR,\nTRIM(VBAP.arspos) AS ITM_NUM_RESV_DEPN_RQR,\nTRIM(VBAP.wtysc_clmitem) AS CLM_ITM_NUM,\nCASE WHEN TRIM(VBKD.prsdt)= '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(TRIM(VBKD.prsdt),'yyyyMMdd') END AS PRC_AND_EXCH_RT_DTTM\nFROM {Config.sourceDatabase}.VBAP VBAP\nLEFT JOIN {Config.sourceDatabase}.VBAK  ON VBAP.VBELN=VBAK.VBELN AND VBAK._deleted_=\\\"F\\\" AND VBAK.MANDT=(SELECT param_val FROM mandt_filter)\nLEFT JOIN {Config.sourceDatabase}.VBKD  ON VBAP.VBELN=VBKD.VBELN AND VBAP.POSNR=VBKD.POSNR AND VBKD._deleted_=\\\"F\\\" AND VBKD.MANDT=(SELECT param_val FROM mandt_filter)\nLEFT JOIN {Config.sourceDatabase}.TVAGT ON VBAP.ABGRU=TVAGT.ABGRU AND TVAGT.SPRAS=\\\"E\\\"  AND TVAGT._deleted_=\\\"F\\\" AND TVAGT.MANDT=(SELECT param_val FROM mandt_filter)\nLEFT JOIN {Config.sourceDatabase}.TVAPT ON VBAP.PSTYV=TVAPT.PSTYV AND TVAPT.SPRAS=\\\"E\\\" AND TVAPT._deleted_=\\\"F\\\" AND TVAPT.MANDT=(SELECT param_val FROM mandt_filter)\nLEFT JOIN {Config.sourceDatabase}.TVM1T ON VBAP.MVGR1=TVM1T.MVGR1 AND TVM1T.SPRAS=\\\"E\\\" AND TVM1T._deleted_=\\\"F\\\" AND TVM1T.MANDT=(SELECT param_val FROM mandt_filter)\nLEFT JOIN {Config.sourceDatabase}.TVM2T ON VBAP.MVGR2=TVM2T.MVGR2 AND TVM2T.SPRAS=\\\"E\\\" AND TVM2T._deleted_=\\\"F\\\" AND TVM2T.MANDT=(SELECT param_val FROM mandt_filter)\nLEFT JOIN {Config.sourceDatabase}.TVM3T ON VBAP.MVGR3=TVM3T.MVGR3 AND TVM3T.SPRAS=\\\"E\\\" AND TVM3T._deleted_=\\\"F\\\" AND TVM3T.MANDT=(SELECT param_val FROM mandt_filter)\nLEFT JOIN {Config.sourceDatabase}.TVM4T ON VBAP.MVGR4=TVM4T.MVGR4 AND TVM4T.SPRAS=\\\"E\\\" AND TVM4T._deleted_=\\\"F\\\" AND TVM4T.MANDT=(SELECT param_val FROM mandt_filter)\nLEFT JOIN {Config.sourceDatabase}.TVM5T ON VBAP.MVGR5=TVM5T.MVGR5 AND TVM5T.SPRAS=\\\"E\\\" AND TVM5T._deleted_=\\\"F\\\" AND TVM5T.MANDT=(SELECT param_val FROM mandt_filter)\nLEFT JOIN {Config.sourceDatabase}.TVSTT ON VBAP.VSTEL=TVSTT.VSTEL AND TVSTT.SPRAS=\\\"E\\\" AND TVSTT._deleted_=\\\"F\\\" AND TVSTT.MANDT=(SELECT param_val FROM mandt_filter)\nLEFT JOIN {Config.sourceDatabase}.TVST  ON VBAP.VSTEL=TVST.VSTEL AND TVST._deleted_=\\\"F\\\" AND TVST.MANDT=(SELECT param_val FROM mandt_filter)\nLEFT JOIN {Config.sourceDatabase}.TVRO  ON VBAP.ROUTE=TVRO.ROUTE AND TVRO._deleted_=\\\"F\\\" AND TVRO.MANDT=(SELECT param_val FROM mandt_filter)\nLEFT JOIN {Config.sourceDatabase}.TVROT ON VBAP.ROUTE=TVROT.ROUTE AND TVROT.SPRAS=\\\"E\\\" AND TVROT._deleted_=\\\"F\\\" AND TVROT.MANDT=(SELECT param_val FROM mandt_filter)\nWHERE VBAP._deleted_=\\\"F\\\" AND VBAP.MANDT=(SELECT param_val FROM mandt_filter)  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    

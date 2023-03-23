@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "l1_md_prophecy"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "p01"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "p01"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MD_BOM_ITM_6"
+      },
+      "connections" : [ {
+        "id" : "16acd019-f4b5-4fe3-a76c-1ef4d348fd68",
+        "source" : "a3b09e45-e5bc-4241-b50e-36612ceebdaf",
+        "sourcePort" : "b7200897-ea8a-4eb2-8c11-54aaaa669115",
+        "target" : "e61e82ef-b7a2-4f4b-b048-d84aa071578a",
+        "targetPort" : "51353297-0af8-425e-bde8-c6cd4959540c"
+      }, {
+        "id" : "e9a160f8-1f98-452e-bbac-43a7a03ae73c",
+        "source" : "cbd05eeb-1acc-433a-9a17-cf212b403a55",
+        "sourcePort" : "83c35959-705f-475d-973b-93e18dd9647e",
+        "target" : "a3b09e45-e5bc-4241-b50e-36612ceebdaf",
+        "targetPort" : "b1ccf8e0-3e28-4a4e-b707-c9905ada0169"
+      } ],
+      "processes" : {
+        "e61e82ef-b7a2-4f4b-b048-d84aa071578a" : {
+          "id" : "e61e82ef-b7a2-4f4b-b048-d84aa071578a",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MD_BOM_ITM",
+            "slug" : "MD_BOM_ITM",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "51353297-0af8-425e-bde8-c6cd4959540c",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MD_BOM_ITM"
+          }
+        },
+        "a3b09e45-e5bc-4241-b50e-36612ceebdaf" : {
+          "id" : "a3b09e45-e5bc-4241-b50e-36612ceebdaf",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "b1ccf8e0-3e28-4a4e-b707-c9905ada0169",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "b7200897-ea8a-4eb2-8c11-54aaaa669115",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'BOM_CAT_CD',BOM_CAT_CD,'BOM_NUM',BOM_NUM,'BOM_ITM_NODE_NUM',BOM_ITM_NODE_NUM,'BOM_ITM_CNTR_NBR',BOM_ITM_CNTR_NBR))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'BOM_CAT_CD',BOM_CAT_CD,'BOM_NUM',BOM_NUM,'BOM_ITM_NODE_NUM',BOM_ITM_NODE_NUM,'BOM_ITM_CNTR_NBR',BOM_ITM_CNTR_NBR)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "cbd05eeb-1acc-433a-9a17-cf212b403a55" : {
+          "id" : "cbd05eeb-1acc-433a-9a17-cf212b403a55",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MD_BOM_ITM",
+            "slug" : "sql_MD_BOM_ITM",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "83c35959-705f-475d-973b-93e18dd9647e",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT\n  '{Config.sourceSystem}'  SRC_SYS_CD,\nstpo.stlty as BOM_CAT_CD,\nstpo.stlnr as BOM_NUM,\nstpo.stlkn as BOM_ITM_NODE_NUM,\nstpo.stpoz as BOM_ITM_CNTR_NBR,\ncase when stpo.datuv = '00000000' then null else to_timestamp(stpo.datuv,\\\"yyyyMMdd\\\") end AS BOM_ITM_VLD_FROM_DTTM,\ntrim(stpo.aennr) as CHG_NUM,\ntrim(stpo.lkenz) as DEL_IND,\ntrim(stpo.vgknt) as PREV_NODE_NUM,\ntrim(stpo.vgpzl) as PREV_ITM_CNTR_NBR,\ncase when stpo.andat = '00000000' then null else to_timestamp(stpo.andat,\\\"yyyyMMdd\\\") end AS CRT_DTTM,\ncase when stpo.aedat = '00000000' then null else to_timestamp(stpo.aedat,\\\"yyyyMMdd\\\") end AS CHG_DTTM,\ntrim(stpo.idnrk) as CMPNT_NUM,\ntrim(stpo.postp) as BOM_ITM_CAT_CD,\ntrim(stpo.posnr) as BOM_ITM_NUM,\ntrim(stpo.meins) as CMPNT_UOM_CD,\ncast(trim(stpo.menge) as decimal(18,4)) as CMPNT_QTY,\ntrim(stpo.fmeng) as FX_QTY_IND,\ncast(trim(stpo.ausch) as decimal(18,4)) as CMPNT_SCRAP_QTY_PCT,\ncast(trim(stpo.avoau) as decimal(18,4)) as OPR_SCRAP_QTY_PCT,\ntrim(stpo.schgt) as BOM_ITM_BULK_IND,\ncast(trim(stpo.nlfzt) as decimal(18,4)) as LEAD_TIME_OFFST_DAYS_QTY,\ntrim(stpo.verti) as DSTN_KEY_CD,\ntrim(stpo.alpos) as ALT_ITM_IND,\ncast(trim(stpo.ewahr) as decimal(18,4)) as ALT_ITM_QTY_PCT,\nconcat(stpo.potx1,\\\";\\\",stpo.potx2) as BOM_ITM_TXT,\ncast(trim(stpo.webaz) as decimal(18,4)) as GR_DAYS_LEAD_QTY,\ntrim(stpo.kzkup) as CO_PROD_IND,\ntrim(stpo.alpst) as ALT_ITM_STRTGY_CD,\ntrim(stpo.alprf) as ALT_ITM_RNKNG_NBR,\ntrim(stpo.alpgr) as ALT_ITM_GRP_CD,\nNULL AS  BOM_ITM_VLD_TO_DTTM,\ntrim(stpo.pswrk)  as ISU_PLNT,\ntrim(stpo.techv)  as TECH_STS_FROM,\ntrim(stpo.annam)  as USER_WHO_CRT_REC,\ntrim(stpo.aenam)  as NM_OF_PRSN_WHO_CHG_OBJ,\ntrim(stpo.sortf)  as SRT_STRNG,\ntrim(stpo.netau)  as NET_SCRAP_IN,\ntrim(stpo.beikz)  as MATL_PRVSN_IN,\ntrim(stpo.erskz)  as SPARE_PART_IN,\ntrim(stpo.rvrel)  as ITM_RLVNT_TO_SLS_IN,\ntrim(stpo.sanfe)  as ITM_RLVNT_TO_PRDTN_IN,\ntrim(stpo.sanin)  as ITM_RLVNT_TO_PLNT_MAINT_IN,\ntrim(stpo.sanka)  as FOR_RLVNC_TO_COST_IN,\ntrim(stpo.sanko)  as ITM_RLVNT_TO_ENGR_IN,\ntrim(stpo.sanvs)  as HIGH_LVL_CNFG_IN,\ntrim(stpo.stkkz)  as PM_ASBL_IN,\ntrim(stpo.rekri)  as BOM_IS_RCURSV_IN,\ntrim(stpo.rekrs)  as RCURSV_ALLW_IN,\ntrim(stpo.cadpo)  as CAD_IN,\ntrim(stpo.nfmat)  as FLLP_MATL_BOM_ITM,\ntrim(stpo.ekgrp)  as PRCHSNG_GRP,\ncast(trim(stpo.lifzt) as decimal(18,4)) as DELV_TIME_IN_DAYS,\ntrim(stpo.lifnr)  as ACCT_NUM_OF_SUP,\ncast(trim(stpo.preis) as decimal(18,4))  as PRICE,\ncast(trim(stpo.peinh) as decimal(18,4))  as PRC_UNIT,\ntrim(stpo.waers)  as CRNCY_KEY,\ntrim(stpo.sakto)  as COST_ELMNT,\ncast(trim(stpo.roanz) as decimal(18,4)) as REQ_NUM_OF_VAR_SIZE_ITM,\ncast(trim(stpo.roms1) as decimal(18,4)) as SIZE_1,\ncast(trim(stpo.roms2) as decimal(18,4)) as SIZE_2,\ncast(trim(stpo.roms3) as decimal(18,4)) as SIZE_3,\ntrim(stpo.romei)  as UNIT_OF_MEAS_FOR_SZ_1_TO_3,\ncast(trim(stpo.romen) as decimal(18,4)) as VAR_SZ_ITM_QTY_PER_PIECE,\ntrim(stpo.rform)  as FRML_KEY_FOR_VAR_SZ_ITM,\ntrim(stpo.upskz)  as SUB_ITM_EXIST_IN,\ntrim(stpo.valkz)  as ITM_IN_MORE_THN_ONE_ALT,\ntrim(stpo.ltxsp)  as LONG_TEXT_LANG,\ntrim(stpo.objty)  as OBJ_TYPE,\ntrim(stpo.matkl)  as MATL_GRP,\ntrim(stpo.dokar)  as DOC_TYPE,\ntrim(stpo.doknr)  as DOC_NUM,\ntrim(stpo.dokvr)  as DOC_VERS,\ntrim(stpo.doktl)  as DOC_PART,\ncast(trim(stpo.csstr) as decimal(18,4))  as AVG_MATL_PURITY_IN_PERCNT,\ntrim(stpo.class)  as CLS_NUM,\ntrim(stpo.klart)  as CLS_TYPE,\ntrim(stpo.potpr)  as RSLTNG_ITM_CAT,\ntrim(stpo.awakz)  as SLCT_IN_FOR_CNFG_BOM,\ntrim(stpo.inskz)  as INST_IN,\ntrim(stpo.vcekz)  as NOT_DSPL_IN_CNFG_EDITR_IN,\ntrim(stpo.vstkz)  as NOT_DSPL_IN_SNGL_LVL_CNFG,\ntrim(stpo.vackz)  as NOT_DSPL_IN_AUTO_CNFG_IN,\ntrim(stpo.ekorg)  as PRCHSNG_ORG,\ntrim(stpo.clobk)  as REQ_CMPNT,\ntrim(stpo.clmul)  as MLT_SLCT_ALLW,\ntrim(stpo.clalt)  as ALT_DSPLY_FMT,\ntrim(stpo.cview)  as ORG_AREA,\ntrim(stpo.knobj)  as NUM_OF_OBJ_WTH_ASGN_DPND,\ntrim(stpo.lgort)  as ISS_LOC_FOR_PRDTN_ORDR,\ntrim(stpo.intrm)  as INTRA_MATL,\ntrim(stpo.tpekz)  as RSTRC_EXIST_IN,\ntrim(stpo.stvkn)  as INHRT_NODE_NUM_OF_BOM_ITM,\ncase when stpo.dvdat = '00000000' then null else to_timestamp(stpo.dvdat,\\\"yyyyMMdd\\\") end AS LAST_DT_SHFT_DTTM,\ntrim(stpo.dvnam)  as NM_OF_THE_USER,\ntrim(stpo.dspst)  as EXPLS_TYPE,\ntrim(stpo.kznfp)  as FLLP_ITM_IN,\ntrim(stpo.nfgrp)  as FLLP_GRP,\ntrim(stpo.nfeag)  as DSCNT_GRP,\ntrim(stpo.kndvb)  as MAN_CHG_TO_SLS_ORDR_BOM_IN,\ntrim(stpo.kndbz)  as BOM_ITM_CHG_DPND_IN,\ntrim(stpo.kstty)  as BOM_CAT_OF_ORIG_SLS_ORDR,\ntrim(stpo.kstnr)  as BOM_FOR_ORIG_SLS_ORDR,\ntrim(stpo.kstkn)  as NODE_NUM_OF_ORIG_SLS_ORDR,\ntrim(stpo.kstpz)  as CNTR_FOR_ORIG_SLS_ORDR,\ntrim(stpo.clszu)  as CLSN_NUM,\ntrim(stpo.kzclb)  as CLSN_AS_SLCT_COND_IN,\ntrim(stpo.aehlp)  as DT_SHFT_HIER_IN,\ntrim(stpo.prvbe)  as PRDTN_SUPL_AREA,\ncast(trim(stpo.nlfzv) as decimal(18,4)) as LDTM_OFFST_FOR_OPR,\ntrim(stpo.nlfmv)  as UNIT_FOR_LDTM_OFFST_FOR_OPR,\ntrim(stpo.idpos)  as ITM_GRP,\ntrim(stpo.idhis)  as HIST_CNTR,\ntrim(stpo.idvar)  as CMPNT_VRNT,\ntrim(stpo.alekz)  as ALE_IN,\ntrim(stpo.itmid)  as EXTRNL_ID_OF_AN_ITM,\ntrim(stpo.guid )  as TEMP_NOT_USED,\ntrim(stpo.itsob)  as SPL_PRCMT_TYPE_FOR_BOM_ITM,\ntrim(stpo.rfpnt)  as REF_PT_FOR_BOM_TFR,\ntrim(stpo.guidx)  as GLOBL_ID_OF_AN_ITM_CHG_STS,\nNULL as SEG_MANTN_FOR_BOM_CMPNT,\nNULL as SEG_VAL,\nNULL AS  VALID_TO_DTTM,\nNULL AS CHG_NUM_TO,\nNULL AS CHG_NUM_TO_1,\nNULL as INHRT_NODE_NUM_OF_BOM_ITM_1,\nNULL as UTC_TIME_STMP_LONG_DTTM,\ntrim(stpo.cufactor) as NUM_OF_CU_INSTNCE,\nNULL AS DEVT_VAL_MANTN_FOR_CMPNT,\nNULL AS QTY_DSTN_PRFL,\nNULL AS REF_TO_QTY_DSTN_PRFL,\nNULL AS CRIT_CMPNT_IN,\nNULL AS CRIT_LVL_OF_A_CMPNT_IN_BOM,\ntrim(stpo.funcid) as FUNC_ID,\ntrim(stpo._sopromet_sernr) AS SER_NUM,\nNULL AS BTCH_NUM\nfrom {Config.sourceDatabase}.STPO STPO\nWHERE STPO._deleted_ = 'F' AND STPO.MANDT=\\\"020\\\"  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    

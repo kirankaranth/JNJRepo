@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "l1_md_prophecy"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "gmd"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "gmd"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MD_SLS_ORDR_11"
+      },
+      "connections" : [ {
+        "id" : "18f75dbb-b211-459b-a46f-362d0533853a",
+        "source" : "b84c852d-6d0d-49c1-b8af-ed9f692010b3",
+        "sourcePort" : "7038382f-4927-45eb-a992-afeebee2f96b",
+        "target" : "19b4f368-8a2a-42c5-88ce-a6189b9d06fe",
+        "targetPort" : "3d5a7f65-f286-440c-8b14-25e17845a518"
+      }, {
+        "id" : "986e0533-b3e4-47a2-bff0-281a462af40e",
+        "source" : "754f0269-8dde-4c79-9395-f35b8de63766",
+        "sourcePort" : "96e68ad0-d97b-4c53-86df-0383fd65df2e",
+        "target" : "b84c852d-6d0d-49c1-b8af-ed9f692010b3",
+        "targetPort" : "8a5033ba-f7ab-4325-a5dd-07016e081e15"
+      } ],
+      "processes" : {
+        "19b4f368-8a2a-42c5-88ce-a6189b9d06fe" : {
+          "id" : "19b4f368-8a2a-42c5-88ce-a6189b9d06fe",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MD_SLS_ORDR",
+            "slug" : "MD_SLS_ORDR",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "3d5a7f65-f286-440c-8b14-25e17845a518",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MD_SLS_ORDR"
+          }
+        },
+        "b84c852d-6d0d-49c1-b8af-ed9f692010b3" : {
+          "id" : "b84c852d-6d0d-49c1-b8af-ed9f692010b3",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "8a5033ba-f7ab-4325-a5dd-07016e081e15",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "7038382f-4927-45eb-a992-afeebee2f96b",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'COMPANY_CD',COMPANY_CD,'SLS_ORDR_DOC_ID',SLS_ORDR_DOC_ID,'SLS_ORDR_TYPE_CD',SLS_ORDR_TYPE_CD))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'COMPANY_CD',COMPANY_CD,'SLS_ORDR_DOC_ID',SLS_ORDR_DOC_ID,'SLS_ORDR_TYPE_CD',SLS_ORDR_TYPE_CD)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "754f0269-8dde-4c79-9395-f35b8de63766" : {
+          "id" : "754f0269-8dde-4c79-9395-f35b8de63766",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MD_SLS_ORDR",
+            "slug" : "sql_MD_SLS_ORDR",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "96e68ad0-d97b-4c53-86df-0383fd65df2e",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT\n '{Config.sourceSystem}'   AS SRC_SYS_CD,\n f4201.shkcoo AS COMPANY_CD,\n f4201.shdoco AS SLS_ORDR_DOC_ID,\n f4201.shdcto AS SLS_ORDR_TYPE_CD,\n NULL AS SLS_ORDR_TYPE_DESC,\n NULL AS SLS_ORDR_NUM_REF,\n NULL AS CRT_BY,\n NULL AS BILL_BLK_CD,\n NULL AS BILL_BLK_DESC,\n NULL AS DELV_BLK_CD,\n NULL AS DELV_BLK_DESC,\n NULL AS CR_CHK_TOT_STS_CD,\n CASE WHEN LOWER(TRIM(SHUPMJ, SHTDAY)) = 'null' OR TRIM(SHUPMJ, SHTDAY) = '' OR TRIM(SHUPMJ, SHTDAY) = '0' THEN CAST(NULL AS TIMESTAMP) ELSE to_timestamp(concat(substr(CAST(date_add(concat(substr(CAST(CAST(TRIM(f4201.SHUPMJ) AS INT) + 1900000 as string),1,4),'-01-01'), CAST(substr(CAST(CAST(TRIM(f4201.SHTDAY) AS INT) + 1900000 AS string),5) AS INT )-1) AS string), 1, 10),' ', lpad(TRIM(SHTDAY), 6, '0')), 'yyyy-MM-dd HHmmss') END  AS CHG_DTTM,\n TRIM(f4201.shzon) AS CUST_PO_TYPE_CD,\n CASE WHEN LOWER(TRIM(SHTRDJ)) = 'null' OR TRIM(SHTRDJ) = '' OR TRIM(SHTRDJ) = '0' THEN NULL ELSE to_timestamp(substr(CAST(date_add(concat(substr(CAST(CAST(TRIM(SHTRDJ) AS INT) + 1900000 AS STRING),1,4),'-01-01'), CAST(substr(CAST(CAST(TRIM(SHTRDJ) AS INT) + 1900000 AS string),5) AS INT )-1) AS STRING), 1, 10),'yyyy-MM-dd') END AS CRT_DTTM,\n CASE WHEN LOWER(TRIM(SHPEFJ)) = 'null' OR TRIM(SHPEFJ) = '' OR TRIM(SHPEFJ) = '0' THEN NULL ELSE to_timestamp(substr(CAST(date_add(concat(substr(CAST(CAST(TRIM(SHPEFJ) AS INT) + 1900000 AS STRING),1,4),'-01-01'), CAST(substr(CAST(CAST(TRIM(SHPEFJ) AS INT) + 1900000 AS string),5) AS INT )-1) AS STRING), 1, 10),'yyyy-MM-dd') END AS VALID_FROM_DTTM,\n NULL AS VALID_TO_DTTM,\n CASE WHEN LOWER(TRIM(SHDRQJ)) = 'null' OR TRIM(SHDRQJ) = '' OR TRIM(SHDRQJ) = '0' THEN NULL ELSE to_timestamp(substr(CAST(date_add(concat(substr(CAST(CAST(TRIM(SHDRQJ) AS INT) + 1900000 AS STRING),1,4),'-01-01'), CAST(substr(CAST(CAST(TRIM(SHDRQJ) AS INT) + 1900000 AS string),5) AS INT )-1) AS STRING), 1, 10),'yyyy-MM-dd') END  AS RQST_DELV_DTTM,\n NULL AS PRC_PCDR_CD,\n TRIM(f4201.shcrcd) AS SLS_ORDR_CRNCY_CD,\n CAST(NULL AS DECIMAL(18, 4)) AS NET_VAL_AMT,\n TRIM(f4201.shan8) AS SOLD_TO_CUST_NUM,\n NULL AS SALES_ORGANIZATION_CD,\n NULL AS SLORG_NM,\n NULL AS DSTR_CHNL_CD,\n NULL AS DSTR_CHNL_NM,\n NULL AS DIVISION_CD,\n NULL AS DIV_NM,\n NULL AS SHIPPING_COND_CD,\n NULL AS SHIPPING_COND_DESC,\n TRIM(f4201.shrorn) AS CUST_PO_NUM,\n NULL AS PTNR_REF_CD,\n NULL AS SLS_ORDR_CAT_CD,\n TRIM(f4201.shrcd) AS SALES_ORDER_REASON_CD,\n NULL AS SLS_ORDR_RSN_DESC,\n NULL AS SLS_TERR_ID,\n NULL AS SLS_GRP_CD,\n NULL AS ORIG_MATL_AVLBLTY_DTTM,\n NULL AS REJ_TOT_STS_CD,\n NULL AS CNFRM_STS_CD,\n NULL AS PSTNG_BILL_STS_CD,\n NULL AS INTCO_BILL_TOT_STS_CD,\n NULL AS ORDR_BILL_STS_CD,\n NULL AS BILL_STS_CD,\n NULL AS PRCSG_TOT_STS_CD,\n NULL AS PICK_CNFRM_STS_CD,\n NULL AS PICK_TOT_STS_CD,\n NULL AS DELV_STS_CD,\n NULL AS DELV_TOT_STS_CD,\n NULL AS WM_TOT_STS_CD,\n NULL AS PACK_TOT_STS_CD,\n NULL AS INVC_LIST_STS_CD,\n NULL AS REF_DOC_TOT_STS_CD,\n NULL AS REF_DOC_STS_CD,\n NULL AS TRNSP_PLAN_STS_CD,\n NULL AS ICMPT_TOT_STS_CD,\n NULL AS BILL_ICMPT_TOT_STS_CD,\n NULL AS PACKICMPT_STS_CD,\n NULL AS PACKICMPT_TOT_STS_CD,\n NULL AS PICKICMPT_STS_CD,\n NULL AS PICKICMPT_TOT_STS_CD,\n NULL AS PRCICMPT_STS_CD,\n NULL AS DELVICMPT_TOT_STS_CD,\n NULL AS GMICMPT_TOT_STS_CD,\n NULL AS GM_TOT_STS_CD,\n TRIM(f4201.shhold) AS DELV_BLK_STS_CD,\n NULL AS CMPLT_DELV_CD,\n NULL AS RLSE_DTTM,\n NULL AS RESV_CD,\n NULL AS OVRL_HDR_CD,\n NULL AS BILL_BLK_STS_CD,\n NULL AS OVRL_BLK_STS_CD,\n NULL AS PO_TYPE_DESC,\n NULL AS SRCH_ITM_PROD_PROPS,\n NULL AS RETRO_BILL,\n NULL AS DOC_DTTM,\n NULL AS BUSN_AREA,\n NULL AS BUSN_AREA_CC,\n NULL AS SD_DOC_IN,\n NULL AS ORDR_RLTD_BILL_TYPE,\n NULL AS CC_CD,\n NULL AS UPDT_GRP,\n NULL AS CUST_GRP_1,\n NULL AS CUST_GRP_1_DESC,\n NULL AS CUST_GRP_2,\n NULL AS CUST_GRP_2_DESC,\n NULL AS CUST_GRP_3,\n NULL AS CUST_GRP_3_DESC,\n NULL AS CUST_GRP_4,\n NULL AS CUST_GRP_4_DESC,\n NULL AS CUST_GRP_5,\n NULL AS CUST_GRP_5_DESC,\n NULL AS CNTL_AREA,\n NULL AS EXCH_RT_TYPE,\n NULL AS CR_CNTL_AREA,\n NULL AS CR_MGMT_RISK_CAT,\n NULL AS ALT_TAX_CLSN,\n NULL AS TAX_CLSN_2,\n NULL AS TAX_CLSN_3,\n NULL AS TAX_CLSN_4,\n NULL AS TAX_CLSN_5,\n NULL AS TAX_CLSN_6,\n NULL AS TAX_CLSN_7,\n NULL AS TAX_CLSN_8,\n NULL AS TAX_CLSN_9,\n NULL AS REF_DOC_NUM,\n NULL AS ORDR_NUM,\n NULL AS TAX_DEST_CTRY,\n NULL AS TAX_DPRT_CTRY,\n NULL AS IN_TRNGLR_DEAL_EU,\n NULL AS CO_CD_DESC,\n NULL AS CLS_OF_TRD,\n NULL AS FORBID_SLS_IN\nfrom\n{Config.sourceDatabase}.f4201 f4201\nwhere f4201._deleted_ = 'F'  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    

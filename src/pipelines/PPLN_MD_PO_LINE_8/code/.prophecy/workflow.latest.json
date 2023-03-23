@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "l1_md_prophecy"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "tai"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "tai"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MD_PO_LINE_8"
+      },
+      "connections" : [ {
+        "id" : "00e178b6-f5ac-44a3-9e6b-d4c751e39cc8",
+        "source" : "f1f23c21-05fc-4f7d-a852-65a2caee895d",
+        "sourcePort" : "1b6ef996-4489-4b1b-a428-795bcb8bdc60",
+        "target" : "756ac1f7-7626-46d3-b515-02a091e49a83",
+        "targetPort" : "387a448a-2355-414f-8202-126257e3c0b3"
+      }, {
+        "id" : "70617d9c-bab4-4f90-bae8-5c51b204c6b8",
+        "source" : "a75f6659-d01e-461a-b8f5-f79096ad624d",
+        "sourcePort" : "5d5e02e0-ae3b-4263-8cb2-a9afab5a5039",
+        "target" : "f1f23c21-05fc-4f7d-a852-65a2caee895d",
+        "targetPort" : "0a5e3c73-c248-47bc-bb51-b6a22277dd04"
+      } ],
+      "processes" : {
+        "756ac1f7-7626-46d3-b515-02a091e49a83" : {
+          "id" : "756ac1f7-7626-46d3-b515-02a091e49a83",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MD_PO_LINE",
+            "slug" : "MD_PO_LINE",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "387a448a-2355-414f-8202-126257e3c0b3",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MD_PO_LINE"
+          }
+        },
+        "f1f23c21-05fc-4f7d-a852-65a2caee895d" : {
+          "id" : "f1f23c21-05fc-4f7d-a852-65a2caee895d",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "0a5e3c73-c248-47bc-bb51-b6a22277dd04",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "1b6ef996-4489-4b1b-a428-795bcb8bdc60",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'PO_NUM',PO_NUM,'PO_LINE_NBR',PO_LINE_NBR,'CO_CD',CO_CD,'PO_TYPE_CD',PO_TYPE_CD,'ORDER_SUF',ORDER_SUF))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'PO_NUM',PO_NUM,'PO_LINE_NBR',PO_LINE_NBR,'CO_CD',CO_CD,'PO_TYPE_CD',PO_TYPE_CD,'ORDER_SUF',ORDER_SUF)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "a75f6659-d01e-461a-b8f5-f79096ad624d" : {
+          "id" : "a75f6659-d01e-461a-b8f5-f79096ad624d",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MD_PO_LINE",
+            "slug" : "sql_MD_PO_LINE",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "5d5e02e0-ae3b-4263-8cb2-a9afab5a5039",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT\n  '{Config.sourceSystem}'  AS SRC_SYS_CD,\n  EKPO.EBELN AS PO_NUM,\n  EKPO.EBELP AS PO_LINE_NBR,\n  EKKO.BUKRS AS CO_CD,\n  EKKO.BSART AS PO_TYPE_CD,\n  TRIM(EKPO.LOEKZ) AS DEL_IND,\n  TRIM(EKPO.MATNR) AS MATL_NUM,\n  TRIM(EKPO.WERKS) AS PLNT_CD,\n  TRIM(EKPO.LGORT) AS SLOC_CD,\n  TRIM(EKPO.BEDNR) AS INTRNL_REF_NUM,\n  CAST(TRIM(EKPO.MENGE) AS DECIMAL(18,4)) AS PO_LINE_QTY,\n  TRIM(EKPO.MEINS) AS PO_UOM_CD,\n  TRIM(EKPO.INSMK) AS STK_TYPE_CD,\n  TRIM(EKPO.ELIKZ) AS DELV_CMPLT_IND,\n  TRIM(EKPO.PSTYP) AS LINE_ITEM_TYPE_CD,\n  TRIM(EKPO.KNTTP) AS ACCT_ASGNMT_CAT_CD,\n  TRIM(EKPO.KONNR) AS PRIN_PRCH_AGMT_NUM,\n  TRIM(EKPO.KTPNR) AS PRIN_PRCH_AGMT_LINE_NUM,\n  TRIM(EKPO.ADRNR) AS DELV_ADDR_NUM,\n  CAST(TRIM(EKPO.PLIFZ) AS DECIMAL(18,4)) AS GR_LEAD_TIME_DAYS_QTY,\n  TRIM(EKPO.SOBKZ) AS SPL_STK_IND,\n  TRIM(EKPO.BSTAE) AS CNFRM_CD,\n  TRIM(EKPO.LBLKZ) AS SUBCNTRC_IND,\n  TRIM(EKPO.BANFN) AS PR_NUM,\n  TRIM(EKPO.BNFPO) AS PR_LINE_NBR,\n  TRIM(EKPO.J_1BNBM) AS BRAZILIAN_NCM_CD,\n  TRIM(EKPO.EGLKZ) AS OUTB_DELV_CMPLT_IND,\n  TRIM(EKPO.RESLO) AS ISU_SLOC_CD,\n  NULL AS CUST_NUM,\n  NULL AS SHIPPING_PT_NUM,\n  TRIM(EKPO.idnlf) AS EM_MATERIAL_CODE,\n  TRIM(EKPO.lmein) AS BASE_UOM,\n  TRIM(EKPO.bprme) AS PO_PRICE_UOM,\n  CAST(TRIM(EKPO.netpr) AS DECIMAL(18,2)) AS PO_LINE_PRICE,\n  CAST(TRIM(EKPO.brtwr) AS DECIMAL(18,2)) AS DOCUMENT_CURRENCY_GROSS_AMOUNT,\n  CAST(TRIM(EKPO.netwr) AS DECIMAL(18,2)) AS DOCUMENT_CURRENCY_NET_AMOUNT,\n  CAST(TRIM(EKPO.umrez) AS DECIMAL(18,4)) AS NUMRTR_FOR_CONV_ORDR_UNIT,\n  CAST(TRIM(EKPO.umren) AS DECIMAL(18,4)) AS DENOM_FOR_CONV_ORDR_UNIT,\n  CAST(TRIM(EKPO.peinh) AS DECIMAL(18,4)) AS PRICE_UNIT,\n  '#' AS ORDER_SUF,\n  NULL AS PO_LINE_DTTM,\n  NULL as PRMRY_QTY_ORD,\n  NULL as G_L_ACCT_NUM,\n  NULL as PRCHSNG_DOC_CRT_DTTM,\n  NULL as TAX_RPTG_CTRY_RGN,\n  TRIM(ekpo.mwskz) as TAX_ON_SLS,\nNULL AS STK_TFR_RECV_QTY,\nNULL AS CONCAT_OF_EBELN_AND_EBELP,\nTRIM(ekpo.statu) AS ORIG_OF_PRCHSNG_DOC_ITM,\ncase when ekpo.aedat = '00000000' then null\nelse to_timestamp(ekpo.aedat,\\\"yyyyMMdd\\\") end as PRCHSNG_DOC_ITM_CHG_DTTM,\nTRIM(ekpo.txz01) AS SHRT_TEXT,\nTRIM(ekpo.ematn) AS MATL_NUM1,\nTRIM(ekpo.matkl) AS MATL_GRP,\nTRIM(ekpo.infnr) AS NUM_OF_PRCHSNG_INFO_REC,\nCAST(TRIM(ekpo.ktmng) AS DECIMAL(18,4)) AS TRGT_QTY,\nCAST(TRIM(ekpo.bpumz) AS DECIMAL(18,4)) AS NUMRTR_CONV_ORDR_PRC_UNIT,\nCAST(TRIM(ekpo.bpumn) AS DECIMAL(18,4)) AS DENOM_CONV_ORDR_PRC_UNIT,\ncase when ekpo.agdat = '00000000' then null\nelse to_timestamp(ekpo.agdat,\\\"yyyyMMdd\\\") end as DEAD_FOR_SBMN_OF_BID,\nCAST(TRIM(ekpo.webaz) AS DECIMAL(18,4)) AS GOODS_RCPT_PRCSG_TIME_IN_DAYS,\nNULL AS TAX_RT_VLD_FROM_DTTM,\nNULL AS DETRMNG_TAX_RT_DTTM,\nTRIM(ekpo.bonus) AS SETLM_GRP_1,\nTRIM(ekpo.spinf) AS UPDT_INFO_REC_IN,\nTRIM(ekpo.prsdr) AS PRC_PRINTOUT,\nTRIM(ekpo.schpr) AS EST_PRC_IN,\nCAST(TRIM(ekpo.mahnz) AS DECIMAL(18,4)) AS NUM_OF_REMNDR_EXPDTR,\nCAST(TRIM(ekpo.mahn1) AS DECIMAL(18,4)) AS NUM_OF_DAYS_FST_REMNDR,\nCAST(TRIM(ekpo.mahn2) AS DECIMAL(18,4)) AS NUM_OF_DAYS_SEC_REMNDR,\nCAST(TRIM(ekpo.mahn3) AS DECIMAL(18,4)) AS NUM_OF_DAYS_THIRD_RMNDR,\nCAST(TRIM(ekpo.uebto) AS DECIMAL(18,4)) AS OVRDELV_TLRNC,\nTRIM(ekpo.uebtk) AS UNLMTD_OVRDELV_ALLW,\nCAST(TRIM(ekpo.untto) AS DECIMAL(18,4)) AS UNDRDELV_TLRNC,\nTRIM(ekpo.bwtar) AS VALUT_TYPE,\nTRIM(ekpo.bwtty) AS VALUT_CAT,\nTRIM(ekpo.abskz) AS REJ_IN,\nTRIM(ekpo.agmem) AS INTRNL_COMT_ON_QUTN,\nTRIM(ekpo.erekz) AS FNL_INVC_IN,\nTRIM(ekpo.kzvbr) AS CNSMPTN_PSTNG,\nTRIM(ekpo.vrtkz) AS DSTN_IN_FOR_MLT_ACCT_ASGNMT,\nTRIM(ekpo.twrkz) AS PRTL_INVC_IN,\nTRIM(ekpo.wepos) AS GOODS_RCPT_IN,\nTRIM(ekpo.weunb) AS GOODS_RCPT_NVALUATED,\nTRIM(ekpo.repos) AS INVC_RCPT_IN,\nTRIM(ekpo.webre) AS GR_BAS_INVC_VERIF_IN,\nTRIM(ekpo.kzabs) AS ORDR_ACK_REQ,\nTRIM(ekpo.labnr) AS ORDR_ACK_NUM,\ncase when EKPO.abdat = '00000000' then null\nelse to_timestamp(EKPO.abdat,\\\"yyyyMMdd\\\") end as AGR_CUM_QTY_RCNL_DTTM,\nCAST(TRIM(ekpo.abftz) AS DECIMAL(18,4)) AS AGR_CUM_QTY,\nCAST(TRIM(ekpo.etfz1) AS DECIMAL(18,4)) AS FIRM_ZN,\nCAST(TRIM(ekpo.etfz2) AS DECIMAL(18,4)) AS TRADE_OFF_ZN,\nTRIM(ekpo.kzstu) AS FIRM_TRADE_OFF_ZN,\nTRIM(ekpo.notkz) AS EXCLN_IN_OUTLINE_AGMT_ITM,\nTRIM(ekpo.evers) AS SHIPPING_INSTR,\nCAST(TRIM(ekpo.zwert) AS DECIMAL(18,4)) AS TRGT_VAL_FOR_OUTLINE_AGMT,\nCAST(TRIM(ekpo.navnw) AS DECIMAL(18,4)) AS NDEDT_INP_TAX,\nCAST(TRIM(ekpo.abmng) AS DECIMAL(18,4)) AS STD_RLSE_ORDR_QTY,\ncase when ekpo.prdat = '00000000' then null\nelse to_timestamp(ekpo.prdat,\\\"yyyyMMdd\\\") end as PRC_DTRMN_DTTM, \nTRIM(ekpo.bstyp) AS PRCHSNG_DOC_CAT,\nTRIM(ekpo.effwr) AS EFF_VAL_OF_ITM,\nTRIM(ekpo.xoblr) AS ITM_AFFCT_CMMT,\nTRIM(ekpo.ekkol) AS COND_GRP_WTH_SUP,\nTRIM(ekpo.sktof) AS ITM_DONT_QUAL_FOR_CASH_DISC,\nTRIM(ekpo.stafo) AS UPDT_GRP_FOR_STATS_UPDT,\nCAST(TRIM(ekpo.ntgew) AS DECIMAL(18,4)) AS NET_WT,\nTRIM(ekpo.gewei) AS UNIT_OF_WT,\nTRIM(ekpo.txjcd) AS TAX_JURIS,\nTRIM(ekpo.etdrk) AS PRT_RLVNT_SCHED_LIN_EXIST,\nTRIM(ekpo.arsnr) AS SETLM_RESV_NUM,\nTRIM(ekpo.arsps) AS ITM_NUM_OF_THE_SETLM_RESV,\nTRIM(ekpo.insnc) AS QUAL_INSP_IN_CNNOT_BE_CHG,\nTRIM(ekpo.ssqss) AS CNTL_KEY_FOR_QUAL_MGMT,\nTRIM(ekpo.ean11) AS INTNL_ARTCL_NUM,\nTRIM(ekpo.ko_prctr) AS PRFT_CTR,\nCAST(TRIM(ekpo.brgew) AS DECIMAL(18,4)) AS GRS_WT,\nCAST(TRIM(ekpo.volum) AS DECIMAL(18,4)) AS VOL,\nTRIM(ekpo.voleh) AS VOL_UNIT,\nTRIM(ekpo.packno) AS PKG_NUM,\nCAST(TRIM(ekpo.gnetwr) AS DECIMAL(18,4)) AS CUR_NOT_USED,\nTRIM(ekpo.uebpo) AS HI_LVL_ITM_IN_PRCHSNG_DOC,\ncase when ekpo.lewed = '00000000' then null\nelse to_timestamp(ekpo.lewed,\\\"yyyyMMdd\\\") end as LTST_POSBL_GOODS_RCPT,\ntrim(ekpo.cuobj) AS CNFG,\ntrim(ekpo.xersy) AS EVAL_RCPT_SETLM,\ncase when ekpo.eildt = '00000000' then null\nelse to_timestamp(ekpo.eildt,\\\"yyyyMMdd\\\") end as GR_BAS_SETLM_STRT_DTTM,\ncase when ekpo.drdat = '00000000' then null\nelse to_timestamp(ekpo.drdat,\\\"yyyyMMdd\\\") end as  LAST_XMSN,\nTRIM(ekpo.drunr) AS SEQ_NUM,\nTRIM(ekpo.abelp) AS ALLC_TBL_ITM,\nCAST(TRIM(ekpo.anzpu) AS DECIMAL(18,4)) AS NUM_OF_PT,\nTRIM(ekpo.mlmaa) AS MATL_LDGR_ACT_AT_MATL_LVL,\nCAST(TRIM(ekpo.mhdrz) AS DECIMAL(18,4)) AS MIN_RMN_SHLF_LIF,\nTRIM(ekpo.anfps) AS ITM_NUM_OF_RFQ,\nTRIM(ekpo.mtart) AS MATL_TYPE,\nCAST(TRIM(ekpo.kzwi1) AS DECIMAL(18,4)) AS SBTOT_1_FROM_PRC_PCDR,\nCAST(TRIM(ekpo.kzwi2) AS DECIMAL(18,4)) AS SBTOT_2_FROM_PRC_PCDR,\nCAST(TRIM(ekpo.kzwi3) AS DECIMAL(18,4)) AS SBTOT_3_FROM_PRC_PCDR,\nCAST(TRIM(ekpo.kzwi4) AS DECIMAL(18,4)) AS SBTOT_4_FROM_PRC_PCDR,\nCAST(TRIM(ekpo.kzwi5) AS DECIMAL(18,4)) AS SBTOT_5_FROM_PRC_PCDR,\nCAST(TRIM(ekpo.kzwi6) AS DECIMAL(18,4)) AS SBTOT_6_FROM_PRC_PCDR,\nTRIM(ekpo.sikgr) AS PRCSG_KEY_FOR_SUB_ITM,\nCAST(TRIM(ekpo.mfzhi) AS DECIMAL(18,4)) AS MAX_CUM_MATL_GO_AHEAD_QTY,\nCAST(TRIM(ekpo.ffzhi) AS DECIMAL(18,4)) AS MAX_CUM_PRDTN_GO_AHEAD_QTY,\nTRIM(ekpo.retpo) AS RTRN_ITM,\nTRIM(ekpo.lfret) AS DELV_TYPE_FOR_RTRN_TO_SUP,\ncase when ekpo.nlabd = '00000000' then null\nelse to_timestamp(ekpo.nlabd,\\\"yyyyMMdd\\\") end as NEXT_FCST_DELV_SCHED_XMSN,\ncase when ekpo.nfabd = '00000000' then null\nelse to_timestamp(ekpo.nfabd,\\\"yyyyMMdd\\\") end as NEXT_JIT_DELV_SCHED_XMSN,\nTRIM(ekpo.kzbws) AS VALUT_OF_SPL_STK,\nCAST(TRIM(ekpo.bonba) AS DECIMAL(18,4)) AS REBT_BASIS_1,\ncase when ekpo.j_1aidatep = '00000000' then null\nelse to_timestamp(ekpo.j_1aidatep,\\\"yyyyMMdd\\\") end as INFLT_INDX_DTTM,\nTRIM(ekpo.afnam) AS NM_OF_REQSNR1,\nTRIM(ekpo.tzonrc) AS TIME_ZN_OF_RCPNT_LOC1,\nTRIM(ekpo.berid) AS MRP_AREA,\nTRIM(ekpo.kblpos) AS DOC_ITM,\nNULL AS WRK_BRKDWN_STRC_ELMNT1,\nTRIM(ekpo.prio_urg) AS REQ_URGNCY,\nTRIM(ekpo.prio_req)AS REQ_PRIR,\nTRIM(ekpo.spe_crm_so_item) AS CRM_SLS_ORDR_ITM_NUM,\nCAST(TRIM(ekpo.cqu_sar) AS DECIMAL(18,4)) AS CUM_GOODS_RECIPT,\nNULL AS NUM_OF_SER_NUM,\nNULL AS EXTRNL_SRT_NUM,\nNULL AS RETN_IN_PCT,\nNULL AS DOWN_PMT_PCT,\nNULL AS DOWN_PMT_AMT_IN_DOC_CRNCY,\nNULL as DOWN_PMT_DUE_DTTM,\nNULL AS CENT_CNTRC_ITM_NUM,\nNULL AS INCO_LOC_1_PLACE_OF_DEST,\nNULL AS INCO_LOC_2_PLACE_OF_DELV,\nNULL AS INCO_DEVT_PLACE_OF_DEST,\nNULL AS STAT_VAL_FOR_FRGN_TRD,\nNULL AS PROD_TYPE_GRP,\nNULL AS ITM_NUM_FOR_RQST_FOR_QUTN,\nNULL AS TRGT_VAL_AT_ITM_LVL_IN_PRCM,\nNULL AS EXPTD_VAL_OF_OVRL_LMT,\nNULL AS OVRL_LMT,\nNULL as WKA_WRK_PER_STRT_DTTM,\nNULL as WKA_WRK_PER_END_DTTM,\nNULL AS WKA_PCT_OF_WG,\nNULL AS WRK_TIME_IN_HRS,\nNULL AS DATA_FIL_VAL_FOR_DATA_AGE,\nNULL  AS CMT_QTY,\nNULL AS HI_LVL_ITM_IN_PRTL_QTY_REJ,\nNULL AS ANNXNG_PKG_KEY,\nNULL AS EXTD_KEY_FOR_ANNXNG_PKG,\nNULL as BASE_DTTM,\nNULL AS ANNXNG_DT_TYPE,\nNULL as ANNXNG_STRT_DTTM,\nNULL AS DEVT_PCT,\nNULL AS QUTN_ITM_NUM,\nNULL AS DELV_PRIR,\nNULL AS SLS_DOC_ITM,\nNULL AS VEND_CNFRM_TYPE,\nNULL AS DOC_DTTM,\nNULL AS ARUN_ORDR_PRIR,\nNULL AS WRK_BRKDWN_STRC_ELMNT2,\nTRIM(ekpo.bsgru) AS RSN_FOR_ORD\nFROM\n  {Config.sourceDatabase}.EKPO\n  LEFT JOIN {Config.sourceDatabase}.EKKO ON EKPO.EBELN = EKKO.EBELN\n  AND EKKO._deleted_ = 'F' AND EKKO.MANDT=\\\"800\\\"\nWHERE\n  EKPO._deleted_ = 'F' AND EKPO.MANDT=\\\"800\\\"  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    

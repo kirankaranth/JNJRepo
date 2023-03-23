@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "l1_md_prophecy"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "hm2"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "hm2"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MD_BUSN_PTNR_1"
+      },
+      "connections" : [ {
+        "id" : "57a89fe4-18a1-4e9c-bb50-c837e8165cf0",
+        "source" : "51a65165-5c83-4ab4-a030-8845fc85b1bd",
+        "sourcePort" : "2a9d75e4-7474-41cb-aa49-a09b835f7bde",
+        "target" : "8ba93b18-b840-4cf8-90b8-9aadb4be7033",
+        "targetPort" : "c390bb70-1987-450e-9d01-fc8c6b908735"
+      }, {
+        "id" : "cff88b14-0fef-4e1f-9a57-5a22612122b4",
+        "source" : "c5e96a42-826e-4ea3-8d70-c07a80672d8a",
+        "sourcePort" : "c449506a-9c1f-460e-818d-923ea31b38e2",
+        "target" : "51a65165-5c83-4ab4-a030-8845fc85b1bd",
+        "targetPort" : "db49d3eb-3875-4e6e-9578-4a5002b20fa7"
+      } ],
+      "processes" : {
+        "8ba93b18-b840-4cf8-90b8-9aadb4be7033" : {
+          "id" : "8ba93b18-b840-4cf8-90b8-9aadb4be7033",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MD_BUSN_PTNR",
+            "slug" : "MD_BUSN_PTNR",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "c390bb70-1987-450e-9d01-fc8c6b908735",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MD_BUSN_PTNR"
+          }
+        },
+        "51a65165-5c83-4ab4-a030-8845fc85b1bd" : {
+          "id" : "51a65165-5c83-4ab4-a030-8845fc85b1bd",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "db49d3eb-3875-4e6e-9578-4a5002b20fa7",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "2a9d75e4-7474-41cb-aa49-a09b835f7bde",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'BUSN_PTNR_NUM',BUSN_PTNR_NUM))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'BUSN_PTNR_NUM',BUSN_PTNR_NUM)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "c5e96a42-826e-4ea3-8d70-c07a80672d8a" : {
+          "id" : "c5e96a42-826e-4ea3-8d70-c07a80672d8a",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MD_BUSN_PTNR",
+            "slug" : "sql_MD_BUSN_PTNR",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "c449506a-9c1f-460e-818d-923ea31b38e2",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT\n'{Config.sourceSystem}'   AS SRC_SYS_CD,\nTRIM(BUT000.partner) AS BUSN_PTNR_NUM,\nTRIM(BUT000.type) AS BUSN_PTNR_CAT,\nTRIM(BUT000.bpkind) AS BUSN_PTNR_TYPE,\nTRIM(BUT000.bu_group) AS BUSN_PTNR_GRP,\nTRIM(BUT000.bpext) AS BUSN_PTNR_NUM_EXTRNL_SYS,\nTRIM(BUT000.bu_sort1) AS BUSN_PTNR_SRCH_1,\nTRIM(BUT000.bu_sort2) AS BUSN_PTNR_SRCH_2,\nTRIM(BUT000.source) AS DATA_ORIG_TYPES,\nTRIM(BUT000.title) AS ADDR_FORM_KEY,\nTRIM(BUT000.xdele) AS CENT_ARCH_FL,\nTRIM(BUT000.xblck) AS BUSN_PTNR_CENT_BLK,\nTRIM(BUT000.augrp) AS AUTH_GRP,\nTRIM(BUT000.title_let) AS BUSN_PTNR_SALN,\nTRIM(BUT000.bu_logsys) AS LOGL_SYS,\nTRIM(BUT000.contact) AS BUSN_PTNR_PRMSSN,\nTRIM(BUT000.not_released) AS NOT_RELS_IN,\nTRIM(BUT000.not_lg_competent) AS NOT_LEGALLY_CMPTN_IN,\nTRIM(BUT000.print_mode) AS BUSN_PTNR_PRT_FMT,\nTRIM(BUT000.rate) AS COST_RT_REVN,\nTRIM(BUT000.name_org1) AS ORG_NM_1,\nTRIM(BUT000.name_org2) AS ORG_NM_2,\nTRIM(BUT000.name_org3) AS ORG_NM_3,\nTRIM(BUT000.name_org4) AS ORG_NM_4,\nTRIM(BUT000.legal_enty) AS LEGAL_FORM_OF_ORG,\nTRIM(BUT000.ind_sector) AS INDSTR_SECTR,\nTRIM(BUT000.legal_org) AS LEGAL_ENTITY_OF_ORG,\nCASE\n        WHEN BUT000.found_dat = '00000000' THEN NULL\n        ELSE to_timestamp(BUT000.found_dat, 'yyyyMMdd')\nEND AS ORG_FOUNDED_DTTM,\nCASE\n        WHEN BUT000.liquid_dat = '00000000' THEN NULL\n        ELSE to_timestamp(BUT000.liquid_dat, 'yyyyMMdd')\nEND AS ORG_LQDTE_DTTM,\nCAST (TRIM(BUT000.location_1) AS INT) AS INTNL_LOC_NUM_1,\nCAST (TRIM(BUT000.location_2) AS INT) AS INTNL_LOC_NUM_2,\nCAST (TRIM(BUT000.location_3) AS INT) AS INTNL_LOC_NUM_3,\nTRIM(BUT000.name_last) AS BUSN_PTNR_LAST_NM,\nTRIM(BUT000.name_first) AS BUSN_PTNR_FST_NM,\nTRIM(BUT000.name_lst2) AS OTHER_LAST_NM,\nTRIM(BUT000.name_last2) AS BUSN_PTNR_NM_AT_BIRTH,\nTRIM(BUT000.namemiddle) AS MIDDLE_NM,\nTRIM(BUT000.title_aca1) AS ACDMC_TITLE,\nTRIM(BUT000.title_aca2) AS SEC_ACDMC_TITLE,\nTRIM(BUT000.title_royl) AS NOBLE_TITLE,\nTRIM(BUT000.prefix1) AS NM_PREFIX_1,\nTRIM(BUT000.prefix2) AS NM_PREFIX_2,\nTRIM(BUT000.name1_text) AS BUSN_PTNR_FULL_NM,\nTRIM(BUT000.nickname) AS BUSN_PTNR_NNM,\nTRIM(BUT000.initials) AS BUSN_PTNR_MI,\nTRIM(BUT000.nameformat) AS NM_FMT,\nTRIM(BUT000.namcountry) AS NM_CTRY,\nTRIM(BUT000.langu_corr) AS BUNS_PTNR_CRSP_LANG,\nTRIM(BUT000.birthpl) AS BUSN_PTNR_BIRTHPLACE,\nTRIM(BUT000.marst) AS BUSN_PTNR_MRTL_STS,\nTRIM(BUT000.emplo) AS EMPLR_NM,\nTRIM(BUT000.jobgr) AS OCCP_GRP,\nTRIM(BUT000.natio) AS NTLTY,\nTRIM(BUT000.cndsc) AS CTRY_OF_ORIG,\nTRIM(BUT000.persnumber) AS PRSN_NUM,\nTRIM(BUT000.bu_langu) AS BUSN_PTNR_LANG,\nTRIM(BUT000.gender) AS BUSN_PTNR_GNDR,\nCASE\n        WHEN BUT000.birthdt = '00000000' THEN NULL\n        ELSE to_timestamp(BUT000.birthdt, 'yyyyMMdd')\nEND AS BUSN_PTNR_DOB_DTTM,\nCASE\n        WHEN BUT000.deathdt = '00000000' THEN NULL\n        ELSE to_timestamp(BUT000.deathdt, 'yyyyMMdd')\nEND AS BUSN_PTNR_DT_OF_DEATH_DTTM,\nCAST (TRIM(BUT000.perno) AS INT) AS PERS_NUM,\nTRIM(BUT000.partgrptyp) AS BUSN_PTNR_GRP_TYPE,\nTRIM(BUT000.name_grp1) AS GRP_NM_1,\nTRIM(BUT000.name_grp2) AS GRP_NM_2,\nTRIM(BUT000.mc_name1) AS SRCH_NM_1,\nTRIM(BUT000.mc_name2) AS SRCH_NM_2,\nTRIM(BUT000.crusr) AS OBJ_CRT_USER,\nCASE\n        WHEN BUT000.crdat = '00000000' THEN NULL\n        ELSE to_timestamp(CONCAT(BUT000.crdat,' ',BUT000.crtim),'yyyyMMdd HHmmss')\nEND AS OBJ_CRT_DT_TIME_DTTM,\nTRIM(BUT000.chusr) AS OBJ_CHG_USER,\nCASE\n        WHEN BUT000.chdat = '00000000' THEN NULL\n        ELSE to_timestamp(CONCAT(BUT000.chdat,' ',BUT000.chtim),'yyyyMMdd HHmmss')\nEND AS OBJ_CHG_DT_TIME_DTTM,\nTRIM(BUT000.addrcomm) AS ADDR_NUM,\nTRIM(BUT000.td_switch) AS CHG_DOC_CNV,\nTRIM(BUT000.is_org_centre) AS BUSN_PTNR_ORG_CTR_IN,\nCASE\n        WHEN BUT000.valid_from = '00000000000000' THEN NULL\n        ELSE to_timestamp(BUT000.valid_from,'yyyyMMddHHmmss')\nEND AS BUSN_PTNR_VLD_STRT_DTTM,\nCASE\n        WHEN BUT000.valid_to = '00000000000000' THEN NULL\n        ELSE to_timestamp(BUT000.valid_to,'yyyyMMddHHmmss')\nEND AS BUSN_PTNR_VLD_END_DTTM,\nTRIM(BUT000.xpcpt) AS BUSN_PRPS_CMPLT_FL,\nTRIM(BUT000.natpers) AS BUSN_PTNR_NTRL_PRSN,\nTRIM(BUT000.milve) AS MIL_ID,\nTRIM(BUT000.nuc_sec) AS NUCLR_SECT_IN,\nTRIM(BUT000.par_rel) AS BUSN_PTNR_RELS,\nTRIM(BUT000.kbanks) AS CTRY_RGN_BANK_KEY,\nTRIM(BUT000.KBANKL) AS BANK_KEYS,\nNULL AS LEGIT_TYPE,\nNULL AS LEGIT_DOC_ID_NUM,\nNULL AS RESP_LCL_COURT,\nNULL AS COMML_REGS_ENT,\nNULL AS BUSN_PTNR_REGS_ENT,\nNULL AS REGS_OF_COOP_ENT,\nNULL AS TRD_REGS_ENT_DTTM,\nNULL AS CR_VAL,\nNULL AS CR_VAL_SET_DTTM\nFROM {Config.sourceDatabase}.BUT000 BUT000\nWHERE BUT000._deleted_ = 'F'\nAND BUT000.CLIENT=(SELECT L1_PARAMETERS.PARAM_VAL from l1_md_prophecy_config.l1_parameters L1_PARAMETERS\n WHERE L1_PARAMETERS.ENV_NM = '{env}' AND L1_PARAMETERS.PARAM_NM = 'mandt_filter');  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    

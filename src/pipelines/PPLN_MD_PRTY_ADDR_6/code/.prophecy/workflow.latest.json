@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "l1_md_prophecy"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "atl"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "atl"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MD_PRTY_ADDR_6"
+      },
+      "connections" : [ {
+        "id" : "dad68dec-d8b0-4275-bc1b-e720d2f17b26",
+        "source" : "52bc064a-6bdd-4fb4-a7e3-93e6c9b5dda5",
+        "sourcePort" : "cabba3eb-d280-44bd-b862-21421e3a171a",
+        "target" : "47e736de-5e51-4789-bb96-bb9aad03d213",
+        "targetPort" : "1058acea-540a-4f9a-9cd0-a6576589a1b6"
+      }, {
+        "id" : "98578752-7229-4404-b9ca-f26f719d260b",
+        "source" : "156a387f-4a87-4951-af6d-488b6e28ac47",
+        "sourcePort" : "6709876d-de36-489b-a397-b6b410b21e24",
+        "target" : "52bc064a-6bdd-4fb4-a7e3-93e6c9b5dda5",
+        "targetPort" : "ea3a7f23-a3e1-48bb-aa83-4e4bd79f83a3"
+      } ],
+      "processes" : {
+        "47e736de-5e51-4789-bb96-bb9aad03d213" : {
+          "id" : "47e736de-5e51-4789-bb96-bb9aad03d213",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MD_PRTY_ADDR",
+            "slug" : "MD_PRTY_ADDR",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "1058acea-540a-4f9a-9cd0-a6576589a1b6",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MD_PRTY_ADDR"
+          }
+        },
+        "52bc064a-6bdd-4fb4-a7e3-93e6c9b5dda5" : {
+          "id" : "52bc064a-6bdd-4fb4-a7e3-93e6c9b5dda5",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "ea3a7f23-a3e1-48bb-aa83-4e4bd79f83a3",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "cabba3eb-d280-44bd-b862-21421e3a171a",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'INTNL_ADDR_VERS_CD',INTNL_ADDR_VERS_CD,'PARTY_ADDRESS_ID',PARTY_ADDRESS_ID,'VLD_FROM_DTTM',VLD_FROM_DTTM))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'INTNL_ADDR_VERS_CD',INTNL_ADDR_VERS_CD,'PARTY_ADDRESS_ID',PARTY_ADDRESS_ID,'VLD_FROM_DTTM',VLD_FROM_DTTM)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "156a387f-4a87-4951-af6d-488b6e28ac47" : {
+          "id" : "156a387f-4a87-4951-af6d-488b6e28ac47",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MD_PRTY_ADDR",
+            "slug" : "sql_MD_PRTY_ADDR",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "6709876d-de36-489b-a397-b6b410b21e24",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT\n'{Config.sourceSystem}'   SRC_SYS_CD,\nADRC.NATION AS INTNL_ADDR_VERS_CD,\nADRC.ADDRNUMBER AS PARTY_ADDRESS_ID,\nTRIM(ADRC.COUNTRY) AS CTRY_CD,\nTRIM(ADRC.CITY2) AS DISTRICT_CD,\nTRIM(ADRC.POST_CODE1) AS POSTAL_CODE_NUM,\nTRIM(ADRC.REGION) AS REGION_CD,\nTRIM(ADRC.NAME1) AS PRTY_ADDR_NM1,\nTRIM(ADRC.HOUSE_NUM1) AS HS_NUM1_TXT,\nTRIM(ADRC.HOUSE_NUM2) AS HS_NUM2_TXT,\nTRIM(ADRC.BUILDING) AS BLDG_NUM,\nTRIM(ADRC.CITY1) AS CITY_NM,\nCASE\n    WHEN ADRC.DATE_FROM = '00000000' THEN NULL\n    ELSE to_timestamp(ADRC.DATE_FROM, 'yyyyMMdd')\nEND AS VLD_FROM_DTTM,\nCASE\n    WHEN ADRC.DATE_TO = '00000000' THEN NULL\n    ELSE to_timestamp(ADRC.DATE_TO, 'yyyyMMdd')\nEND AS VLD_TO_DTTM,\nTRIM(ADRC.LANGU) AS LANG_CD,\nTRIM(ADRC.NAME_CO) AS CNTCT_NM,\nTRIM(ADRC.PO_BOX) AS PO_BOX_NUM,\nTRIM(ADRC.SORT2) AS ADDR_SHRT_DESC,\nTRIM(ADRC.STREET) AS ADDR_LINE1_TXT,\nTRIM(ADRC.STR_SUPPL1) AS ADDR_LINE2_TXT,\nTRIM(ADRC.STR_SUPPL2) AS ADDR_LINE3_TXT,\nTRIM(ADRC.STR_SUPPL3) AS ADDR_LINE4_TXT,\nTRIM(ADRC.TAXJURCODE) AS TAX_JURIS_CD,\nTRIM(ADRC.TEL_NUMBER) AS PHN_NUM,\nTRIM(ADRC.TIME_ZONE) AS TIME_ZN_CD,\nTRIM(ADRC.NAME2) AS PRTY_ADDR_NM2,\nTRIM(ADRC.NAME3) AS PRTY_ADDR_NM3,\nTRIM(T005U.BEZEI) AS DESC_RGN,\nNULL AS CNTY_CD,\nNULL AS DESC_CNTY_TEXT,\nTRIM(ADRC.SORT1) AS SRCH_TERM_1,\nTRIM(T005U.LAND1) AS CTRY_KEY_TAX,\nNULL AS CTRY_KEY_CNTY,\nTRIM(ADRC.LOCATION) AS STREET_5,\nNULL AS COUNTY,\nNULL AS LONG_NBR,\nNULL AS LAT_NBR,\nTRIM(ADRC.TITLE) AS FORM_ADDR_KEY,\nTRIM(ADRC.NAME4) AS PRTY_ADDR_NM4,\nTRIM(ADRC.NAME_TEXT) AS CNV_NM_FLD,\nTRIM(ADRC.CITY_CODE) AS CITY_CD_CITY_STREET_FILE,\nTRIM(ADRC.CITYP_CODE) AS DSTRC_CD_CITY_STREET_FILE,\nTRIM(ADRC.HOME_CITY) AS CITY,\nTRIM(ADRC.CITYH_CODE) AS DIFF_CITY_CITY_STREET_FILE,\nTRIM(ADRC.CHCKSTATUS) AS CITY_FILE_TEST_STS,\nTRIM(ADRC.REGIOGROUP) AS REGN_STRC_GRP,\nTRIM(ADRC.POST_CODE2) AS PO_BOX_PSTL_CD,\nTRIM(ADRC.POST_CODE3) AS CO_PSTL_CD,\nTRIM(ADRC.PCODE1_EXT) AS CITY_PSTL_CD_EXTN,\nTRIM(ADRC.PCODE2_EXT) AS PO_BOX_PSTL_CD_EXTN,\nTRIM(ADRC.PCODE3_EXT) AS MAJ_CUST_PSTL_CD_EXTN,\nTRIM(ADRC.DONT_USE_P) AS PO_BOX_ADDR_UNDLD_FL,\nTRIM(ADRC.PO_BOX_NUM) AS FL_PO_BOX_WOUT_NUM,\nTRIM(ADRC.PO_BOX_LOC) AS PO_BOX_CITY,\nTRIM(ADRC.CITY_CODE2) AS CITY_PO_BOX_CD,\nTRIM(ADRC.PO_BOX_REG) AS RGN_PO_BOX,\nTRIM(ADRC.PO_BOX_CTY) AS PO_BOX_CTRY_RGN,\nTRIM(ADRC.POSTALAREA) AS POST_DELV_DSTRC,\nTRIM(ADRC.TRANSPZONE) AS TRSPN_ZN_GOODS_DELV,\nTRIM(ADRC.DONT_USE_S) AS STREET_ADDR_UNDVD_FL,\nTRIM(ADRC.STREETCODE) AS STREET_NUM_CITY_STREET_FILE,\nTRIM(ADRC.STREETABBR) AS ABBR_STREET_NM,\nTRIM(ADRC.HOUSE_NUM3) AS HS_NUM_RNG,\nTRIM(ADRC.FLOOR)  AS FLOOR_IN_BLDG,\nTRIM(ADRC.ROOMNUMBER) AS RM_APT_NUM,\nTRIM(ADRC.ADDR_GROUP) AS ADDR_GRP,\nTRIM(ADRC.FLAGGROUPS) AS FL_ADDR_GRP_ASGN,\nTRIM(ADRC.PERS_ADDR) AS FL_PERSL_ADDR,\nTRIM(ADRC.SORT_PHN) AS PHNTC_SRCH_SRT_FLD,\nTRIM(ADRC.DEFLT_COMM) AS COMM_METH,\nTRIM(ADRC.TEL_EXTENS) AS FST_PHN_EXTN,\nTRIM(ADRC.FAX_NUMBER) AS FST_FAX_AREA_CD_NUM,\nTRIM(ADRC.FAX_EXTENS) AS FST_FAX_EXTN,\nTRIM(ADRC.FLAGCOMM2) AS FL_PHN_NUM_DEFIN,\nTRIM(ADRC.FLAGCOMM3) AS FL_FAX_NUM_DEFIN,\nTRIM(ADRC.FLAGCOMM4) AS FL_TELETEX_NUM_DEFIN,\nTRIM(ADRC.FLAGCOMM5) AS FL_TELEX_NUM_DEFIN,\nTRIM(ADRC.FLAGCOMM6) AS FL_EMAIL_ADDR_DEFIN,\nTRIM(ADRC.FLAGCOMM7) AS FL_RML_ADDR_DEFIN,\nTRIM(ADRC.FLAGCOMM8) AS FL_X_400_ADDR_DEFIN,\nTRIM(ADRC.FLAGCOMM9) AS FL_RFC_DEST_DEFIN,\nTRIM(ADRC.FLAGCOMM10) AS FL_PRTR_DEFIN,\nTRIM(ADRC.FLAGCOMM11) AS FL_SSF_DEFIN,\nTRIM(ADRC.FLAGCOMM12) AS FL_URI_FTP_ADDR_DEFIN,\nTRIM(ADRC.FLAGCOMM13) AS FL_PGR_ADDR_DEFIN,\nTRIM(ADRC.ADDRORIGIN) AS ADDR_DATA_SRC,\nTRIM(ADRC.MC_NAME1) AS NM_UP_CASE_SRCH_HELP,\nTRIM(ADRC.MC_CITY1) AS CITY_NM_UP_CASE_SRCH_HELP,\nTRIM(ADRC.MC_STREET) AS STREET_NM_UP_CASE_SRCH_HELP,\nTRIM(ADRC.EXTENSION1) AS EXTN_DATA_CONV_DATA_LINE,\nTRIM(ADRC.EXTENSION2) AS EXTN_DATA_CONV_TELEBOX,\nTRIM(ADRC.ADDRESS_ID) AS PHY_ADDR_ID,\nTRIM(ADRC.LANGU_CREA) AS ADDR_REC_CRT_ORIG_LANG,\nNULL AS UUID_USED_ADDR,\nNULL AS IN_UUID_CRT_LATER,\nNULL AS CAT_ADDR_ID,\nNULL AS ERR_STS_ADDR,\nTRIM(ADRC.PO_BOX_LOBBY) AS PO_BOX_LBY,\nTRIM(ADRC.DELI_SERV_TYPE) AS TYPE_DELV_SRVC,\nTRIM(ADRC.DELI_SERV_NUMBER) AS NUM_DELV_SRVC,\nNULL   AS TWN_SHIP_CD,\nNULL   AS TWN_SHIP,\nNULL   AS CNTY_NM_UP_CASE_SRCH_HELP,\nNULL   AS TWN_SHIP_NM_UP_CASE_SRCH_HELP,\nNULL   AS BUSN_PRPS_CMPLT_FL,\nNULL   AS DATA_FIL_VAL_DATA_AGE_DTTM,\nNULL   AS DB_NUM,\nNULL   AS DUNS_4_NUM\nFROM {Config.sourceDatabase}.ADRC ADRC\nleft join {Config.sourceDatabase}.T005U T005U\nON  ADRC.COUNTRY=T005U.LAND1 AND ADRC.REGION=T005U.BLAND\nAND T005U.SPRAS=\\\"E\\\" AND  T005U._deleted_='F' AND T005U.MANDT=\\\"100\\\"\nWHERE ADRC._deleted_='F'\nAND ADRC.CLIENT = \\\"100\\\"  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    

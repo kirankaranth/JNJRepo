@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "l1_md_prophecy"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "hm2"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "hm2"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MD_BILL_DOC_HDR_1"
+      },
+      "connections" : [ {
+        "id" : "84b54f26-3326-4a31-8b43-77bc459426a6",
+        "source" : "99d9a95c-5f4d-488f-adea-e178e81fbc0b",
+        "sourcePort" : "a426c8a2-4b7f-4ec3-927d-96812ff2abfc",
+        "target" : "43fd692d-0b00-4c2b-a281-d109f2c0a2bc",
+        "targetPort" : "b37d559b-d4f3-4d00-aee0-6387bcffe841"
+      }, {
+        "id" : "91c6787c-7404-4bb1-8a94-23832a025362",
+        "source" : "4c4d17d5-b9c4-42a5-b0a5-b24adc2f4ba7",
+        "sourcePort" : "e1251bd0-5583-4809-8c80-bf7ff79d6be1",
+        "target" : "99d9a95c-5f4d-488f-adea-e178e81fbc0b",
+        "targetPort" : "766fef5a-fce7-47db-8f15-21c9fc22ce70"
+      } ],
+      "processes" : {
+        "43fd692d-0b00-4c2b-a281-d109f2c0a2bc" : {
+          "id" : "43fd692d-0b00-4c2b-a281-d109f2c0a2bc",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MD_BILL_DOC_HDR",
+            "slug" : "MD_BILL_DOC_HDR",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "b37d559b-d4f3-4d00-aee0-6387bcffe841",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MD_BILL_DOC_HDR"
+          }
+        },
+        "99d9a95c-5f4d-488f-adea-e178e81fbc0b" : {
+          "id" : "99d9a95c-5f4d-488f-adea-e178e81fbc0b",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "766fef5a-fce7-47db-8f15-21c9fc22ce70",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "a426c8a2-4b7f-4ec3-927d-96812ff2abfc",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct())"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct()))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "4c4d17d5-b9c4-42a5-b0a5-b24adc2f4ba7" : {
+          "id" : "4c4d17d5-b9c4-42a5-b0a5-b24adc2f4ba7",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MD_BILL_DOC_HDR",
+            "slug" : "sql_MD_BILL_DOC_HDR",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "e1251bd0-5583-4809-8c80-bf7ff79d6be1",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    with cte_mandt_filter AS\n(\n select param_val\n    from l1_md_prophecy_config.l1_parameters l1_parameters\n    WHERE l1_parameters.env_nm = '{env}' AND l1_parameters.param_nm = 'mandt_filter'\n)\nSELECT\n    '{Config.sourceSystem}'   AS SRC_SYS_CD,\nVBRK.vbeln AS BILL_DOC,\nTRIM(VBRK.vkorg) AS SLORG_CD,\nTRIM(TVKOT.vtext) AS SLORG_DESC,\nTRIM(VBRK.vtweg) AS DSTR_CHNL_CD,\nTRIM(TVTWT.vtext) AS DSTR_CHNL_DESC,\nTRIM(VBRK.spart) AS SLS_DIV_CD,\nTRIM(TSPAT.vtext) AS SLS_DIV_DESC,\nTRIM(VBRK.fkart) AS BILL_TYPE_CD,\nTRIM(TVFKT.vtext) AS BILL_TYPE_DESC,\nTRIM(VBRK.fktyp) AS BILL_CAT,\nTRIM(VBRK.vbtyp) AS DOC_CAT,\nTRIM(VBRK.kunrg) AS PYR,\nTRIM(VBRK.kunag) AS SOLD_TO,\nTRIM(VBRK.kunwe) AS SHIP_TO,\nCASE WHEN VBRK.erdat= '00000000' OR VBRK.erzet = '00000000'  THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(CONCAT(VBRK.erdat,'',VBRK.erzet),'yyyyMMddHHmmss') END AS CRT_DTTM,\nCASE WHEN VBRK.fkdat= '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(VBRK.fkdat,'yyyyMMdd') END AS BILL_DTTM,\nCASE WHEN VBRK.fkdat_rl= '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(VBRK.fkdat_rl,'yyyyMMdd') END AS BILL_INVC_DTTM,\nTRIM(VBRK.waerk) AS CRNCY_CD,\nTRIM(VBRK.ernam) AS CRT_BY,\nTRIM(VBRK.kalsm) AS PRC_PCDR_CD,\nTRIM(VBRK.knumv) AS DOC_COND_OWN_COND,\nTRIM(VBRK.vsbed) AS SHIPPING_COND_CD,\nTRIM(VBRK.gjahr) AS FISC_YR,\nCAST (TRIM(VBRK.poper) AS INT) AS PSTNG_PER,\nTRIM(VBRK.kdgrp) AS CUST_GRP_CD,\nTRIM(VBRK.inco1) AS INTNL_COM_CD,\nTRIM(VBRK.inco2) AS DEL_DPRT_PT_CD,\nTRIM(VBRK.rfbsk) AS PSTNG_STS,\nCAST (TRIM(VBRK.kurrf) AS DECIMAL (18,4)) AS EXCH_RT_FIN_PSTNG,\nTRIM(VBRK.valtg) AS ADDL_VAL_DAYS,\nCASE WHEN VBRK.valdt= '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(VBRK.valdt,'yyyyMMdd') END AS FX_VAL_DTTM,\nTRIM(VBRK.zterm) AS PMT_TERM_CD,\nTRIM(VBRK.ktgrd) AS ACCT_ASGNMT_GRP,\nTRIM(VBRK.land1) AS CTRY_CD,\nTRIM(VBRK.regio) AS REGION_CD,\nTRIM(VBRK.bukrs) AS CO_CD,\nTRIM(VBRK.taxk1) AS TAX_CLSN_1,\nCAST (TRIM(VBRK.netwr) AS DECIMAL (18,4)) AS NET_VAL_AMT,\nTRIM(VBRK.zukri) AS COMB_CRITA,\nTRIM(VBRK.stwae) AS STATS_CRNCY,\nCASE WHEN VBRK.aedat= '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(VBRK.aedat,'yyyyMMdd') END AS CHG_DTTM,\nTRIM(VBRK.fkart_rl) AS INVC_LIST_TYPE,\nTRIM(VBRK.kkber) AS CNTL_AREA_CD,\nTRIM(VBRK.knkli) AS CR_ACCT,\nTRIM(VBRK.cmwae) AS CRNCY_CR_CNTL_AREA,\nCAST(TRIM(VBRK.cmkuf) AS DECIMAL (18,4)) AS CR_DX_RT,\nTRIM(VBRK.hityp_pr) AS HIER_TYPE_PRC,\nTRIM(VBRK.bstnk_vf) AS CUST_PO_NUM,\nTRIM(VBRK.vbund) AS TRAD_PTNR_CO_CD,\nTRIM(VBRK.landtx) AS TAX_DPRT_CTRY,\nTRIM(VBRK.stceg_h) AS ORIG_VAT_NUM,\nTRIM(VBRK.stceg_l) AS CTRY_VAT_NUM,\nTRIM(VBRK.xblnr) AS REF_DOC_NUM,\nTRIM(VBRK.zuonr) AS ASGNMT_NUM,\nCAST(TRIM(VBRK.mwsbk) AS DECIMAL (18,4)) AS TAX_AMT,\nTRIM(VBRK.logsys) AS LOGL_SYS,\nCASE WHEN VBRK.kurrf_dat= '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(VBRK.kurrf_dat,'yyyyMMdd') END AS TRNL_DTTM,\nTRIM(VBRK.kidno) AS PMT_REF,\nCAST( TRIM(VBRK.numpg) AS INT) AS NUM_OF_PG,\nTRIM(VBRK.buchk) AS PSTNG_BILL_STS_CD,\nTRIM(VBRK.relik) AS INVC_LIST_STS_CD,\nTRIM(VBRK.konda) AS CUST_PRC_GRP,\nTRIM(VBRK.bzirk) AS SLS_DSTRC,\nTRIM(VBRK.pltyp) AS PRC_LIST_TYPE,\nTRIM(VBRK.taxk2) AS TAX_CLSN_2,\nTRIM(VBRK.taxk3) AS TAX_CLSN_3,\nTRIM(VBRK.taxk4) AS TAX_CLSN_4,\nTRIM(VBRK.taxk5) AS TAX_CLSN_5,\nTRIM(VBRK.taxk6) AS TAX_CLSN_6,\nTRIM(VBRK.taxk7) AS TAX_CLSN_7,\nTRIM(VBRK.taxk8) AS TAX_CLSN_8,\nTRIM(VBRK.taxk9) AS TAX_CLSN_9,\nNULL AS INDSTR_CD_1,\nNULL AS INDSTR_CD_2,\nNULL AS PRCH_ORDR_TYPE\nFROM {Config.sourceDatabase}.VBRK VBRK\nLEFT JOIN {Config.sourceDatabase}.TVKOT TVKOT ON VBRK.VKORG=TVKOT.VKORG AND TVKOT.SPRAS='E' AND TVKOT._deleted_ = 'F' AND  TVKOT.MANDT =  ( SELECT param_val FROM cte_mandt_filter)\nLEFT JOIN {Config.sourceDatabase}.TVTWT TVTWT ON VBRK.VTWEG=TVTWT.VTWEG AND TVTWT.SPRAS='E' AND TVTWT._deleted_ = 'F' AND  TVTWT.MANDT =  ( SELECT param_val FROM cte_mandt_filter)\nLEFT JOIN {Config.sourceDatabase}.TSPAT TSPAT ON VBRK.SPART=TSPAT.SPART AND TSPAT.SPRAS='E' AND TSPAT._deleted_ = 'F' AND  TSPAT.MANDT =  ( SELECT param_val FROM cte_mandt_filter)\nLEFT JOIN {Config.sourceDatabase}.TVFKT TVFKT ON VBRK.FKART=TVFKT.FKART AND TVFKT.SPRAS='E' AND TVFKT._deleted_ = 'F' AND  TVFKT.MANDT =  ( SELECT param_val FROM cte_mandt_filter)\nLEFT JOIN {Config.sourceDatabase}.VBAK VBAK   ON VBRK.VBELN=VBAK.VBELN  AND VBAK._deleted_ = 'F' AND  VBAK.MANDT =  ( SELECT param_val FROM cte_mandt_filter)\nWHERE VBRK._deleted_ = 'F' AND  VBRK.MANDT =  ( SELECT param_val FROM cte_mandt_filter)  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    

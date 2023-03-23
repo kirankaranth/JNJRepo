@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "l1_md_prophecy"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "deu"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "deu"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MD_BOM_ITM_13"
+      },
+      "connections" : [ {
+        "id" : "c209624b-e695-43ac-ae54-9d6514b071d1",
+        "source" : "fd6b47d6-d051-4fad-b581-e40d288783f4",
+        "sourcePort" : "a857029a-2aa9-4fed-8d64-37864a79bc9c",
+        "target" : "919a8cf1-a328-419c-a13d-5fa87b09a9fa",
+        "targetPort" : "d911f107-b802-433e-a45b-60296f98f1fa"
+      }, {
+        "id" : "a6ee61b9-d4a3-4814-a53c-358c6b66273b",
+        "source" : "f256b804-cfaa-4bcc-81bd-202091126a95",
+        "sourcePort" : "5bfc1fa0-9595-4329-a95f-a7134b2887b4",
+        "target" : "fd6b47d6-d051-4fad-b581-e40d288783f4",
+        "targetPort" : "7f307a1d-4ab3-49b3-8405-376fc90f7613"
+      } ],
+      "processes" : {
+        "919a8cf1-a328-419c-a13d-5fa87b09a9fa" : {
+          "id" : "919a8cf1-a328-419c-a13d-5fa87b09a9fa",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MD_BOM_ITM",
+            "slug" : "MD_BOM_ITM",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "d911f107-b802-433e-a45b-60296f98f1fa",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MD_BOM_ITM"
+          }
+        },
+        "fd6b47d6-d051-4fad-b581-e40d288783f4" : {
+          "id" : "fd6b47d6-d051-4fad-b581-e40d288783f4",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "7f307a1d-4ab3-49b3-8405-376fc90f7613",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "a857029a-2aa9-4fed-8d64-37864a79bc9c",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'BOM_CAT_CD',BOM_CAT_CD,'BOM_NUM',BOM_NUM,'BOM_ITM_NODE_NUM',BOM_ITM_NODE_NUM,'BOM_ITM_CNTR_NBR',BOM_ITM_CNTR_NBR))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'BOM_CAT_CD',BOM_CAT_CD,'BOM_NUM',BOM_NUM,'BOM_ITM_NODE_NUM',BOM_ITM_NODE_NUM,'BOM_ITM_CNTR_NBR',BOM_ITM_CNTR_NBR)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "f256b804-cfaa-4bcc-81bd-202091126a95" : {
+          "id" : "f256b804-cfaa-4bcc-81bd-202091126a95",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MD_BOM_ITM",
+            "slug" : "sql_MD_BOM_ITM",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "5bfc1fa0-9595-4329-a95f-a7134b2887b4",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n      SELECT\n'{Config.sourceSystem}'   SRC_SYS_CD,\nF3002.ixtbm AS BOM_CAT_CD,\nconcat(F3002.ixkit,\\\";\\\",F3002.ixmmcu,\\\";\\\",F3002.ixtbm,\\\";\\\",F3002.ixbqty,\\\";\\\",F3002.ixcoby,\\\";\\\",F3002.ixcpnt,\\\";\\\",F3002.ixsbnt) AS BOM_NUM,\nF3002.ixitm AS BOM_ITM_NODE_NUM,\nconcat(F3002.ixcpnt,\\\".\\\",F3002.ixsbnt) AS BOM_ITM_CNTR_NBR,\nCASE WHEN LOWER(TRIM(ixefff)) = 'null' OR TRIM(ixefff) = '' OR TRIM(ixefff) = '0' THEN NULL ELSE to_timestamp(substr(CAST(date_add(concat(substr(CAST(CAST(TRIM(ixefff) AS INT) + 1900000 AS STRING),1,4),'-01-01'), CAST(substr(CAST(CAST(TRIM(ixefff) AS INT) + 1900000 AS string),5) AS INT )-1) AS STRING), 1, 10),'yyyy-MM-dd') END AS BOM_ITM_VLD_FROM_DTTM,\nTRIM(F3002.ixrvno) AS CHG_NUM,\nNULL AS DEL_IND,\nNULL AS PREV_NODE_NUM,\nNULL AS PREV_ITM_CNTR_NBR,\nCASE WHEN LOWER(TRIM(ixefff)) = 'null' OR TRIM(ixefff) = '' OR TRIM(ixefff) = '0' THEN NULL ELSE to_timestamp(substr(CAST(date_add(concat(substr(CAST(CAST(TRIM(ixefff) AS INT) + 1900000 AS STRING),1,4),'-01-01'), CAST(substr(CAST(CAST(TRIM(ixefff) AS INT) + 1900000 AS string),5) AS INT )-1) AS STRING), 1, 10),'yyyy-MM-dd') END AS CRT_DTTM,\nCASE WHEN LOWER(TRIM(ixupmj)) = 'null' OR TRIM(ixupmj) = '' OR TRIM(ixupmj) = '0' THEN CAST(NULL AS TIMESTAMP) ELSE to_timestamp(concat(substr(CAST(date_add(concat(substr(CAST(CAST(TRIM(F3002.ixupmj) AS INT) + 1900000 as string),1,4),'-01-01'), CAST(substr(CAST(CAST(TRIM(F3002.ixupmj) AS INT) + 1900000 AS string),5) AS INT )-1) AS string), 1, 10),' ', lpad(TRIM(ixtday), 6, '0')), \\\"yyyy-MM-dd HHmmss\\\") END AS CHG_DTTM,\nTRIM(F3002.ixlitm) AS CMPNT_NUM,\nNULL AS BOM_ITM_CAT_CD,\nTRIM(F3002.ixcpnt) AS BOM_ITM_NUM,\nTRIM(F3002.ixum) AS CMPNT_UOM_CD,\ncast(TRIM(F3002.ixqnty) as decimal(18,4)) AS CMPNT_QTY,\nTRIM(F3002.ixfvbt) AS FX_QTY_IND,\ncast(TRIM(F3002.ixscrp) as decimal(18,4)) AS CMPNT_SCRAP_QTY_PCT,\ncast(TRIM(F3002.ixstpp) as decimal(18,4)) AS OPR_SCRAP_QTY_PCT,\nNULL  AS BOM_ITM_BULK_IND,\ncast(TRIM(F3002.ixlovd) as decimal(18,4)) AS LEAD_TIME_OFFST_DAYS_QTY,\nNULL AS DSTN_KEY_CD,\nNULL AS ALT_ITM_IND,\nNULL AS ALT_ITM_QTY_PCT,\nTRIM(F3002.ixdsc1) AS BOM_ITM_TXT,\nNULL AS GR_DAYS_LEAD_QTY,\nNULL AS CO_PROD_IND,\nNULL AS ALT_ITM_STRTGY_CD,\nTRIM(F3002.ixsbnt) AS ALT_ITM_RNKNG_NBR,\nNULL AS ALT_ITM_GRP_CD,\nCASE WHEN LOWER(TRIM(ixefft)) = 'null' OR TRIM(ixefft) = '' OR TRIM(ixefft) = '0' THEN NULL ELSE to_timestamp(substr(CAST(date_add(concat(substr(CAST(CAST(TRIM(ixefft) AS INT) + 1900000 AS STRING),1,4),'-01-01'), CAST(substr(CAST(CAST(TRIM(ixefft) AS INT) + 1900000 AS string),5) AS INT )-1) AS STRING), 1, 10),'yyyy-MM-dd') END AS BOM_ITM_VLD_TO_DTTM,\nTRIM(F3002.ixcmcu) AS ISU_PLNT,\nNULL AS TECH_STS_FROM,\nNULL AS USER_WHO_CRT_REC,\nNULL AS NM_OF_PRSN_WHO_CHG_OBJ,\nNULL AS SRT_STRNG,\nNULL AS NET_SCRAP_IN,\nNULL AS MATL_PRVSN_IN,\nNULL AS SPARE_PART_IN,\nNULL AS ITM_RLVNT_TO_SLS_IN,\nNULL AS ITM_RLVNT_TO_PRDTN_IN,\nNULL AS ITM_RLVNT_TO_PLNT_MAINT_IN,\nNULL AS FOR_RLVNC_TO_COST_IN,\nNULL AS ITM_RLVNT_TO_ENGR_IN,\nNULL AS HIGH_LVL_CNFG_IN,\nNULL AS PM_ASBL_IN,\nNULL AS BOM_IS_RCURSV_IN,\nNULL AS RCURSV_ALLW_IN,\nNULL AS CAD_IN,\nNULL AS FLLP_MATL_BOM_ITM,\nNULL AS PRCHSNG_GRP,\nNULL AS DELV_TIME_IN_DAYS,\nNULL AS ACCT_NUM_OF_SUP,\nNULL AS PRICE,\nNULL AS PRC_UNIT,\nNULL AS CRNCY_KEY,\nNULL AS COST_ELMNT,\nNULL AS REQ_NUM_OF_VAR_SIZE_ITM,\nNULL AS SIZE_1,\nNULL AS SIZE_2,\nNULL AS SIZE_3,\nNULL AS UNIT_OF_MEAS_FOR_SZ_1_TO_3,\nNULL AS VAR_SZ_ITM_QTY_PER_PIECE,\nNULL AS FRML_KEY_FOR_VAR_SZ_ITM,\nNULL AS SUB_ITM_EXIST_IN,\nNULL AS ITM_IN_MORE_THN_ONE_ALT,\nNULL AS LONG_TEXT_LANG,\nNULL AS OBJ_TYPE,\nNULL AS MATL_GRP,\nNULL AS DOC_TYPE,\nNULL AS DOC_NUM ,\nNULL AS DOC_VERS,\nNULL AS DOC_PART,\nNULL AS AVG_MATL_PURITY_IN_PERCNT,\nNULL AS CLS_NUM,\nNULL AS CLS_TYPE,\nNULL AS RSLTNG_ITM_CAT,\nNULL AS SLCT_IN_FOR_CNFG_BOM,\nNULL AS INST_IN,\nNULL AS NOT_DSPL_IN_CNFG_EDITR_IN,\nNULL AS NOT_DSPL_IN_SNGL_LVL_CNFG,\nNULL AS NOT_DSPL_IN_AUTO_CNFG_IN,\nNULL AS PRCHSNG_ORG,\nNULL AS REQ_CMPNT,\nNULL AS MLT_SLCT_ALLW,\nNULL AS ALT_DSPLY_FMT,\nNULL AS ORG_AREA,\nNULL AS NUM_OF_OBJ_WTH_ASGN_DPND,\nNULL AS ISS_LOC_FOR_PRDTN_ORDR,\nNULL AS INTRA_MATL,\nNULL AS RSTRC_EXIST_IN,\nNULL AS INHRT_NODE_NUM_OF_BOM_ITM,\nNULL AS LAST_DT_SHFT_DTTM,\nNULL AS NM_OF_THE_USER,\nNULL AS EXPLS_TYPE,\nNULL AS FLLP_ITM_IN,\nNULL AS FLLP_GRP,\nNULL AS DSCNT_GRP,\nNULL AS MAN_CHG_TO_SLS_ORDR_BOM_IN,\nNULL AS BOM_ITM_CHG_DPND_IN,\nNULL AS BOM_CAT_OF_ORIG_SLS_ORDR,\nNULL AS BOM_FOR_ORIG_SLS_ORDR,\nNULL AS NODE_NUM_OF_ORIG_SLS_ORDR,\nNULL AS CNTR_FOR_ORIG_SLS_ORDR,\nNULL AS CLSN_NUM,\nNULL AS CLSN_AS_SLCT_COND_IN,\nNULL AS DT_SHFT_HIER_IN,\nNULL AS PRDTN_SUPL_AREA,\nNULL AS LDTM_OFFST_FOR_OPR,\nNULL AS UNIT_FOR_LDTM_OFFST_FOR_OPR ,\nNULL AS ITM_GRP,\nNULL AS HIST_CNTR,\nNULL AS CMPNT_VRNT,\nNULL AS ALE_IN,\nNULL AS EXTRNL_ID_OF_AN_ITM,\nNULL AS TEMP_NOT_USED,\nNULL AS SPL_PRCMT_TYPE_FOR_BOM_ITM,\nNULL AS REF_PT_FOR_BOM_TFR,\nNULL AS GLOBL_ID_OF_AN_ITM_CHG_STS,\nNULL AS SEG_MANTN_FOR_BOM_CMPNT,\nNULL AS SEG_VAL,\nNULL AS VALID_TO_DTTM,\nNULL AS CHG_NUM_TO,\nNULL AS CHG_NUM_TO_1,\nNULL AS INHRT_NODE_NUM_OF_BOM_ITM_1,\nNULL AS UTC_TIME_STMP_LONG_DTTM,\nNULL AS NUM_OF_CU_INSTNCE,\nNULL AS DEVT_VAL_MANTN_FOR_CMPNT,\nNULL AS QTY_DSTN_PRFL,\nNULL AS REF_TO_QTY_DSTN_PRFL,\nNULL AS CRIT_CMPNT_IN,\nNULL AS CRIT_LVL_OF_A_CMPNT_IN_BOM,\nNULL AS FUNC_ID,\nNULL AS SER_NUM,\nNULL AS BTCH_NUM\nfrom {Config.sourceDatabase}.F3002 F3002\nWHERE F3002._deleted_ = 'F'  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    

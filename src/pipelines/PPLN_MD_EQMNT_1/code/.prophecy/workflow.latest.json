@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "l1_md_prophecy"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "hm2"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "hm2"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MD_EQMNT_1"
+      },
+      "connections" : [ {
+        "id" : "805a6f2d-4e27-407d-a293-1d1fd5af51ad",
+        "source" : "a5652cc3-f92e-40f1-a46e-707547bfd076",
+        "sourcePort" : "abc040eb-da19-45fa-9d91-b0b6ea85661a",
+        "target" : "f8ab35e9-e039-4674-92f6-b702a609abc2",
+        "targetPort" : "eb1388b8-29c3-430f-9407-a6a6e6c96a17"
+      }, {
+        "id" : "d2bb34e4-c8d9-46c0-ae0d-1966d7577add",
+        "source" : "397d7f1e-b551-4e86-b1a6-50649b84acfa",
+        "sourcePort" : "28d6aaba-6f46-411f-8b32-46cee8d4e745",
+        "target" : "a5652cc3-f92e-40f1-a46e-707547bfd076",
+        "targetPort" : "362975ed-0b9e-43e5-8777-a79909581ecc"
+      } ],
+      "processes" : {
+        "f8ab35e9-e039-4674-92f6-b702a609abc2" : {
+          "id" : "f8ab35e9-e039-4674-92f6-b702a609abc2",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MD_EQMNT",
+            "slug" : "MD_EQMNT",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "eb1388b8-29c3-430f-9407-a6a6e6c96a17",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MD_EQMNT"
+          }
+        },
+        "a5652cc3-f92e-40f1-a46e-707547bfd076" : {
+          "id" : "a5652cc3-f92e-40f1-a46e-707547bfd076",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "362975ed-0b9e-43e5-8777-a79909581ecc",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "abc040eb-da19-45fa-9d91-b0b6ea85661a",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'EQMNT_NUM',EQMNT_NUM))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'EQMNT_NUM',EQMNT_NUM)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "397d7f1e-b551-4e86-b1a6-50649b84acfa" : {
+          "id" : "397d7f1e-b551-4e86-b1a6-50649b84acfa",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MD_EQMNT",
+            "slug" : "sql_MD_EQMNT",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "28d6aaba-6f46-411f-8b32-46cee8d4e745",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT\n    '{Config.sourceSystem}'   AS SRC_SYS_CD,\nEQUI.equnr AS EQMNT_NUM,\nNULL AS EQMNT_DESC,\nCASE WHEN EQUI.erdat= '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(EQUI.erdat,'yyyyMMdd') END AS CRT_DTTM,\nCASE WHEN EQUI.aedat= '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(EQUI.aedat,'yyyyMMdd') END AS CHG_DTTM,\nTRIM(EQUI.begru) AS AUTH_GRP_CD,\nTRIM(EQUI.eqtyp) AS EQMNT_CAT_CD,\nTRIM(EQUI.eqart) AS EQMNT_TYPE_CD,\nCASE WHEN EQUI.ansdt= '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(EQUI.ansdt,'yyyyMMdd') END AS ACQ_DTTM,\nTRIM(EQUI.herst) AS SUP_MFR_NUM,\nTRIM(EQUI.serge) AS MFR_SER_NUM,\nTRIM(EQUI.typbz) AS MFR_MDL_NUM,\nTRIM(EQUI.baujj) AS MFG_YR,\nTRIM(EQUI.baumm) AS MFG_MO,\nTRIM(EQUI.aplkz) AS MFG_RTG_IND,\nCASE WHEN EQUI.inbdt= '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(EQUI.inbdt,'yyyyMMdd') END AS STRT_DTTM,\nTRIM(EQUI.matnr) AS MATL_NUM,\nTRIM(EQUI.sernr) AS MATL_SER_NUM,\nTRIM(EQUI.werk) AS PLNT_CD,\nTRIM(EQUI.lager) AS SLOC_CD,\nTRIM(EQUI.warpl) AS MAINT_PLAN_NUM,\nTRIM(EQUI.s_equi) AS EQMNT_DATA_IND,\nNULL AS EQMNT_NUM_SHRT_TEXT,\nTRIM(EQUI.charge) AS BTCH_NUM\nFROM {Config.sourceDatabase}.EQUI EQUI\nWHERE EQUI._deleted_ = 'F' AND  EQUI.MANDT =(SELECT L1_PARAMETERS.PARAM_VAL from l1_md_prophecy_config.l1_parameters L1_PARAMETERS\n WHERE L1_PARAMETERS.ENV_NM = '{env}' AND L1_PARAMETERS.PARAM_NM = 'mandt_filter');  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    

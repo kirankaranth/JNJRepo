@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "l1_md_prophecy"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "hm2"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "hm2"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MD_RESV_HIST_LOG_TBL_1"
+      },
+      "connections" : [ {
+        "id" : "6c32d19c-1dbe-4263-8fd6-9f7ab8a083f4",
+        "source" : "9f927c3d-596b-45cc-b04b-7996560993b5",
+        "sourcePort" : "71a6072b-5cbc-4462-bc6b-42ae4955f8a3",
+        "target" : "3d68ac59-86ba-494e-9292-50ad9caccc3c",
+        "targetPort" : "f59b2484-5d4a-4255-a537-db559a24a469"
+      }, {
+        "id" : "cacec2bc-e5a1-4cbd-a5e2-433d91fd72eb",
+        "source" : "da9fecc3-5f8c-4023-b8bb-0f0872d40eba",
+        "sourcePort" : "d2366889-777f-424b-a5b7-985cb7dd20f3",
+        "target" : "9f927c3d-596b-45cc-b04b-7996560993b5",
+        "targetPort" : "f7a6ba8d-cbcf-4deb-befa-f233986073ab"
+      } ],
+      "processes" : {
+        "3d68ac59-86ba-494e-9292-50ad9caccc3c" : {
+          "id" : "3d68ac59-86ba-494e-9292-50ad9caccc3c",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MD_RESV_HIST_LOG_TBL",
+            "slug" : "MD_RESV_HIST_LOG_TBL",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "f59b2484-5d4a-4255-a537-db559a24a469",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MD_RESV_HIST_LOG_TBL"
+          }
+        },
+        "9f927c3d-596b-45cc-b04b-7996560993b5" : {
+          "id" : "9f927c3d-596b-45cc-b04b-7996560993b5",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "f7a6ba8d-cbcf-4deb-befa-f233986073ab",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "71a6072b-5cbc-4462-bc6b-42ae4955f8a3",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct())"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct()))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "da9fecc3-5f8c-4023-b8bb-0f0872d40eba" : {
+          "id" : "da9fecc3-5f8c-4023-b8bb-0f0872d40eba",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MD_RESV_HIST_LOG_TBL",
+            "slug" : "sql_MD_RESV_HIST_LOG_TBL",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "d2366889-777f-424b-a5b7-985cb7dd20f3",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    select\n '{Config.sourceSystem}'   AS SRC_SYS_CD,\n_SOPROMET_ELOG.EQUNR AS EQMNT_NUM ,\n_SOPROMET_ELOG.VBELN AS SLS_ORDR_DOC_ID ,\n_SOPROMET_ELOG.MBLNR AS MATL_DOC_NUM ,\nCAST(_SOPROMET_ELOG.MJAHR AS INT) AS MATL_DOC_YR ,\nCAST(_SOPROMET_ELOG.PRCHY AS INT) AS MATL_LDGR_DOC ,\n_SOPROMET_ELOG.PRCHB AS MATL_LDGR_DOC_NUM ,\n_SOPROMET_ELOG.AWTYP AS REF_PCDR ,\n_SOPROMET_ELOG.AWREF AS REF_DOC_NUM ,\n_SOPROMET_ELOG.AWORG AS REF_ORG_UNIT,\nCASE\n  WHEN _SOPROMET_ELOG.ERDAT = '00000000' or _SOPROMET_ELOG.UZEIT = '000000' THEN CAST(NULL AS TIMESTAMP)\n  ELSE TO_TIMESTAMP(CONCAT(_SOPROMET_ELOG.ERDAT, _SOPROMET_ELOG.UZEIT), 'yyyyMMddHHmmss')\nEND AS CRT_DTTM,\ntrim(_SOPROMET_ELOG.ERNAM) AS  CRT_BY ,\ntrim(_SOPROMET_ELOG.WBSTK) AS GOODS_MVMT_STS ,\ntrim(_SOPROMET_ELOG.VGART) AS LNSET_ACTV ,\ntrim(_SOPROMET_ELOG.AUART) AS SLS_ORDR_TYPE_CD ,\ntrim(TVAKT.BEZEI) AS SLS_ORDR_TYPE_DESC ,\ntrim(_SOPROMET_ELOG.LRESN) AS RESV_CD ,\nCAST(trim(_SOPROMET_ELOG.RFWRT) AS DECIMAL(18, 4)) AS REF_VAL ,\ntrim(_SOPROMET_ELOG.WAERS) AS CRNCY_CD ,\ntrim(_SOPROMET_ELOG.VKORG) AS SLORG_NUM ,\ntrim(_SOPROMET_ELOG.VBELN_VL) AS DELV_DOC_NUM ,\ntrim(_SOPROMET_ELOG.WAERS_LC) AS CRNCY_KEY_CD ,\nCAST(trim(_SOPROMET_ELOG.AMOUNT_LC) AS DECIMAL(18, 4)) AS PSTNG_AMT_LCL_CRNCY ,\ntrim(_SOPROMET_ELOG.AUFNR) AS ORDR_NUM\nfrom {Config.sourceDatabase}._SOPROMET_ELOG _SOPROMET_ELOG\nleft join {Config.sourceDatabase}.TVAKT on _SOPROMET_ELOG.AUART=TVAKT.AUART AND TVAKT.SPRAS='E'\nAND  TVAKT._deleted_='F' and TVAKT.mandt =(\n    SELECT\n      L1_PARAMETERS.PARAM_VAL\n    FROM\n      CONFIG.L1_PARAMETERS L1_PARAMETERS\n    WHERE\n      L1_PARAMETERS.ENV_NM = '{env}'\n      AND L1_PARAMETERS.PARAM_NM = 'mandt_filter'\n  )\nWHERE _SOPROMET_ELOG._deleted_ = 'F'\nAND _SOPROMET_ELOG.mandt =(\n    SELECT\n      L1_PARAMETERS.PARAM_VAL\n    FROM\n      CONFIG.L1_PARAMETERS L1_PARAMETERS\n    WHERE\n      L1_PARAMETERS.ENV_NM = '{env}'\n      AND L1_PARAMETERS.PARAM_NM = 'mandt_filter'\n  )\n  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    
