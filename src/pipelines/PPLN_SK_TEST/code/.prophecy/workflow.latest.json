@@ -30,6 +30,13 @@
             "value" : "atl"
           },
           "optional" : false
+        }, {
+          "name" : "sourceDatabase",
+          "kind" : {
+            "type" : "string",
+            "value" : "atl"
+          },
+          "optional" : false
         } ]
       },
       "oldCommon" : {
@@ -64,15 +71,9 @@
     "target" : "BBO6R4uxqSuIaYC21h7B-$$7chkc4Rt8xofs4yT5wjVV",
     "targetPort" : "_a5ThhT0UbZcG9jULu2Y3$$Z1Iz-IvSmY06t2-ECimgd"
   }, {
-    "id" : "pez6kdKq147Xo92nI97JO",
+    "id" : "3g-hqmJ4M6Jx_aMWUX0hn",
     "source" : "3AjEowht0R1n6sP3x22pl$$-T1-mkyXKt1Wia4eJmMGl",
     "sourcePort" : "mSrL4HwIHjq7j8gU0gTg1$$RoqmijFr5HMSX7xq07esU",
-    "target" : "CUazMKcma1NbbXWyDZxlO$$ZGq9NN4QeSPJDU5jVYXLj",
-    "targetPort" : "LoTSvDcZlgRGUGiX1Z-A9$$2vuX26is262j4SMBrzUhc"
-  }, {
-    "id" : "Lm87PhuKBYv19Jr-Ib1SA",
-    "source" : "CUazMKcma1NbbXWyDZxlO$$ZGq9NN4QeSPJDU5jVYXLj",
-    "sourcePort" : "F-7xOmNd_rDy0htQtDJjM$$AQpDqEwEOeBA45ZqqzBef",
     "target" : "JGoctfyLkUaEKvRnaoJ_t$$NApXNhIH7PK0hFKQ6a-wz",
     "targetPort" : "3T-AB7T4OZDFCKt5vHy8x$$dbBV2YEyqquejYCW2sYUl"
   } ],
@@ -110,7 +111,7 @@
       "metadata" : {
         "label" : "SchemaTransform_1",
         "slug" : "SchemaTransform_1",
-        "x" : -720,
+        "x" : -780,
         "y" : -400,
         "phase" : 0,
         "cache" : false,
@@ -140,6 +141,54 @@
             "expression" : {
               "format" : "sql",
               "expression" : "'$sourceSystem'"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_pk_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "to_json(named_struct('field1_name', 'val1', 'field2_name', 'val2'))"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_pk_md5_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "md5(to_json(named_struct('field1_name', 'val1', 'field2_name', 'val2')))"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_l1_upt_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "current_timestamp()"
             }
           },
           "DropColumn" : {
@@ -2304,48 +2353,9 @@
         "isCustomOutputSchema" : true
       },
       "properties" : {
-        "script" : "out0 = spark.sql(f\"\"\"\n    SELECT * \n    \n    FROM {Config.sourceSystem}.mara\n    limit 10\n\"\"\")",
+        "script" : "out0 = spark.sql(f\"\"\"\n    SELECT mara._upt_ as _l0_upt_ \n    \n    FROM {Config.sourceSystem}.mara mara\n    limit 10\n\"\"\")",
         "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
         "scriptMethodFooter" : "    return out0"
-      }
-    },
-    "CUazMKcma1NbbXWyDZxlO$$ZGq9NN4QeSPJDU5jVYXLj" : {
-      "id" : "CUazMKcma1NbbXWyDZxlO$$ZGq9NN4QeSPJDU5jVYXLj",
-      "component" : "Reformat",
-      "metadata" : {
-        "label" : "Reformat_1",
-        "slug" : "Reformat_1",
-        "x" : -880,
-        "y" : -400,
-        "phase" : 0,
-        "cache" : false,
-        "detailedStats" : false,
-        "isImported" : false
-      },
-      "ports" : {
-        "inputs" : [ {
-          "id" : "LoTSvDcZlgRGUGiX1Z-A9$$2vuX26is262j4SMBrzUhc",
-          "slug" : "in0",
-          "isStreaming" : false
-        } ],
-        "outputs" : [ {
-          "id" : "F-7xOmNd_rDy0htQtDJjM$$AQpDqEwEOeBA45ZqqzBef",
-          "slug" : "out",
-          "isStreaming" : false
-        } ],
-        "selectedInputFields" : [ ],
-        "isCustomOutputSchema" : false
-      },
-      "properties" : {
-        "columnsSelector" : [ "LoTSvDcZlgRGUGiX1Z-A9$$2vuX26is262j4SMBrzUhc##MATNR" ],
-        "expressions" : [ {
-          "target" : "MATL_NUM",
-          "expression" : {
-            "format" : "sql",
-            "expression" : "MATNR"
-          },
-          "description" : ""
-        } ]
       }
     }
   },

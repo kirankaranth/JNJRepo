@@ -12,7 +12,6 @@ def pipeline(spark: SparkSession) -> None:
     df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_MANDT_Filter_Parameter)
     df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS_RENAME_FORMAT)
     MD_SER_NUM_STOCK_SGMNT_SWAP(spark, df_SET_FIELD_ORDER_REFORMAT)
-    Target_1(spark)
 
 def main():
     spark = SparkSession.builder\

@@ -7,9 +7,9 @@ from ppln_sk_test.udfs.UDFs import *
 
 def Script_1(spark: SparkSession) -> DataFrame:
     out0 = spark.sql(f"""
-    SELECT * 
+    SELECT mara._upt_ as _l0_upt_ 
     
-    FROM {Config.sourceSystem}.mara
+    FROM {Config.sourceSystem}.mara mara
     limit 10
 """)
 

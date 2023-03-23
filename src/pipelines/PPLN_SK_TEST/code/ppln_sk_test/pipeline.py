@@ -8,8 +8,7 @@ from ppln_sk_test.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_Script_1 = Script_1(spark)
-    df_Reformat_1 = Reformat_1(spark, df_Script_1)
-    df_SchemaTransform_1 = SchemaTransform_1(spark, df_Reformat_1)
+    df_SchemaTransform_1 = SchemaTransform_1(spark, df_Script_1)
     MD_MATL(spark, df_SchemaTransform_1)
 
 def main():
