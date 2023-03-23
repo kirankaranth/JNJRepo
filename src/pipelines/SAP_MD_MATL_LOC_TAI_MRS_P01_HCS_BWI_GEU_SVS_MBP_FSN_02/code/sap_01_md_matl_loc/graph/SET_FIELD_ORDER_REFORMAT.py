@@ -53,10 +53,6 @@ def SET_FIELD_ORDER_REFORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("vint2").cast(DecimalType(18, 4)).alias("FRWD_CNSMPTN_DAYS_CNT"), 
         trim(col("vrmod")).alias("CNSMPTN_MODE_CD"), 
         trim(col("ekgrp")).alias("PRCHSNG_GRP_CD"), 
-        trim(col("zzmmsficlass")).alias("MMS_FIN_CLSN_CD"), 
-        trim(col("zzsmiind")).alias("VMI_IND"), 
-        trim(col("zzmpfamily")).alias("MSTR_PLNG_FMLY_CD"), 
-        trim(col("zzmtomtsind")).alias("MTS_MTO_FL"), 
         lit(Config.DAI_ETL_ID).alias("DAI_ETL_ID"), 
         current_timestamp().alias("DAI_CRT_DTTM"), 
         current_timestamp().alias("DAI_UPDT_DTTM")
