@@ -66,21 +66,21 @@
         "topLevelPackage" : "PPLN_MD_MATL_18"
       },
       "connections" : [ {
-        "id" : "897dddde-9cb3-4ede-b4f1-6dbcba99689b",
-        "source" : "def9fe6b-6b92-4e88-a4c9-9e79b31f698f",
-        "sourcePort" : "e3cc5a86-6f29-4340-a860-1b4adbc6ff54",
-        "target" : "8acc8ecb-879e-4745-9111-f471dff43d1f",
-        "targetPort" : "dea41cf8-2d5c-4a81-93d2-35d0b1be756a"
+        "id" : "8b43db65-20a5-43be-8491-76b4af478341",
+        "source" : "f861131c-627b-45ee-9d58-8ac71de29a2a",
+        "sourcePort" : "09de8064-8336-4a1d-9dc5-673b95db322c",
+        "target" : "f87669b9-a405-4b84-b24f-154a282f63c7",
+        "targetPort" : "0d36b89a-4441-499e-a457-04b43538254c"
       }, {
-        "id" : "aad5dba1-b260-492d-8fab-55d35ed09f68",
-        "source" : "36fbe0f6-2bc2-4603-820c-56ea43775c80",
-        "sourcePort" : "c6af1b17-3dcf-45e8-b5cc-7f8a9df286ac",
-        "target" : "def9fe6b-6b92-4e88-a4c9-9e79b31f698f",
-        "targetPort" : "5951d995-019f-435c-ae7b-5ea0bf22de30"
+        "id" : "b6ee40a7-61dc-413f-a740-ef55f26cd605",
+        "source" : "1e94e131-2f1f-4be6-91a5-37cc4ca45d9b",
+        "sourcePort" : "801eac6d-2959-4cd3-9157-9bdc8dde55c5",
+        "target" : "f861131c-627b-45ee-9d58-8ac71de29a2a",
+        "targetPort" : "f2bcaa36-2f33-44b5-82f0-f9fcfb4f89ac"
       } ],
       "processes" : {
-        "8acc8ecb-879e-4745-9111-f471dff43d1f" : {
-          "id" : "8acc8ecb-879e-4745-9111-f471dff43d1f",
+        "f87669b9-a405-4b84-b24f-154a282f63c7" : {
+          "id" : "f87669b9-a405-4b84-b24f-154a282f63c7",
           "component" : "Target",
           "metadata" : {
             "label" : "MD_MATL",
@@ -94,7 +94,7 @@
           },
           "ports" : {
             "inputs" : [ {
-              "id" : "dea41cf8-2d5c-4a81-93d2-35d0b1be756a",
+              "id" : "0d36b89a-4441-499e-a457-04b43538254c",
               "slug" : "in0",
               "isStreaming" : false
             } ],
@@ -106,8 +106,8 @@
             "datasetId" : "datasets/MD_MATL"
           }
         },
-        "def9fe6b-6b92-4e88-a4c9-9e79b31f698f" : {
-          "id" : "def9fe6b-6b92-4e88-a4c9-9e79b31f698f",
+        "f861131c-627b-45ee-9d58-8ac71de29a2a" : {
+          "id" : "f861131c-627b-45ee-9d58-8ac71de29a2a",
           "component" : "SchemaTransform",
           "metadata" : {
             "label" : "addL1fields",
@@ -121,12 +121,12 @@
           },
           "ports" : {
             "inputs" : [ {
-              "id" : "5951d995-019f-435c-ae7b-5ea0bf22de30",
+              "id" : "f2bcaa36-2f33-44b5-82f0-f9fcfb4f89ac",
               "slug" : "in0",
               "isStreaming" : false
             } ],
             "outputs" : [ {
-              "id" : "e3cc5a86-6f29-4340-a860-1b4adbc6ff54",
+              "id" : "09de8064-8336-4a1d-9dc5-673b95db322c",
               "slug" : "out",
               "isStreaming" : false
             } ],
@@ -202,8 +202,8 @@
             } ]
           }
         },
-        "36fbe0f6-2bc2-4603-820c-56ea43775c80" : {
-          "id" : "36fbe0f6-2bc2-4603-820c-56ea43775c80",
+        "1e94e131-2f1f-4be6-91a5-37cc4ca45d9b" : {
+          "id" : "1e94e131-2f1f-4be6-91a5-37cc4ca45d9b",
           "component" : "Script",
           "metadata" : {
             "label" : "sql_MD_MATL",
@@ -218,7 +218,7 @@
           "ports" : {
             "inputs" : [ ],
             "outputs" : [ {
-              "id" : "c6af1b17-3dcf-45e8-b5cc-7f8a9df286ac",
+              "id" : "801eac6d-2959-4cd3-9157-9bdc8dde55c5",
               "slug" : "out0",
               "schema" : {
                 "type" : "struct",
@@ -239,7 +239,7 @@
             "isCustomOutputSchema" : true
           },
           "properties" : {
-            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT\n  '{Config.sourceSystem}'  AS SRC_SYS_CD,\n  MARA.matnr AS MATL_NUM,\n  TRIM(MARA.mtart) AS MATL_TYPE_CD,\n  NULL AS BRND_CD,\n  TRIM(MARA.spart) AS FRANCHISE_CD,\n  TRIM(MARA.labor) AS LCL_PLNG_SUB_FRAN_CD,\n  TRIM(MARA.ekwsl) AS PRCHSNG_VAL_KEY_CD,\n  TRIM(MARA.lvorm) AS DEL_IND,\n  TRIM(MARA.matkl) AS MATL_GRP_CD,\n  TRIM(MARA.mbrsh) AS INDSTR_SECTR_CD,\n  TRIM(MARA.meins) AS BASE_UOM_CD,\n  CAST(TRIM(MARA.mhdhb) AS DECIMAL(18, 4)) AS TOT_SHLF_LIF_DAYS_CNT,\n  CAST(TRIM(MARA.mhdrz) AS DECIMAL(18, 4)) AS MIN_SHLF_RMN_LIF_DAYS_CNT,\n  TRIM(MARA.mstae) AS MATL_STS_CD,\n  TRIM(MARA.mstav) AS DSTN_CHN_STS_CD,\n  CAST(TRIM(MARA.ntgew) AS DECIMAL(18, 4)) AS NET_WT_MEAS,\n  TRIM(MARA.prdha) AS PROD_HIER_CD,\n  TRIM(MARA.qmpur) AS PRCMT_QUAL_MGMT_IND,\n  TRIM(MARA.raube) AS STRG_CONDS_CD,\n  TRIM(MARA.tempb) AS LBL_TEMP_RNG,\n  TRIM(MARA.tragr) AS TRSPN_GRP_CD,\n  TRIM(MARA.xchpf) AS BTCH_MNG_IND,\n  TRIM(MARA.zeinr) AS MATL_DOC_NUM,\n  TRIM(MARA.zeivr) AS MATL_DOC_VERS_NUM,\n  TRIM(MAKT.maktx) AS MATL_SHRT_DESC,\n  NULL AS MMS_SURGERY_TYPE_CD,\n  NULL AS MMS_MATL_TYPE_CD,\n  NULL AS PRMRY_PLNT_CD,\n  NULL AS MMS_FIN_CLSN_CD,\n  NULL AS MMS_STERILIZATION_IND,\n  NULL AS MATL_CATLG_NUM,\n  NULL AS SRC_SECTR_CD,\n  NULL AS MATL_PARNT_CD,\n  NULL AS MATL_SUB_TYPE_CD,\n  NULL AS FIN_HIER_BASE_CD,\n  NULL AS IMPLNT_INSTM_IND,\n  NULL AS MATL_MOD_CD,\n  NULL AS KIT_IND,\n  NULL AS MMS_TEMP_SENS_IND,\n  NULL AS DIR_PART_MRKNG_CD,\n  TRIM(MARA.mtpos_mara) AS MATL_CAT_GRP_CD,\n  NULL AS PLNG_HIER3_CD,\n  NULL AS MATL_SPEC_NUM,\n  NULL AS MATL_SPEC_VERS_NUM,\n  TRIM(MARA.AENAM) AS CHG_BY,\n  TRIM(MARA.AESZN) AS DOC_CHG_NUM,\n  NULL AS CNTNR_REQ,\n  TRIM(MARA.BISMT) AS OLD_MATL_NUM,\n  CAST(TRIM(MARA.BRGEW) AS DECIMAL(18,4)) AS GRS_WT,\n  TRIM(MARA.BSTME) AS ORDR_UNIT_PUR_UOM,\n  NULL AS CHEM_CMPLI,\n  TRIM(MARA.ERNAM) AS CRT_BY,\n  CASE\n    WHEN MARA.ERSDA = '00000000' THEN CAST(NULL AS TIMESTAMP)\n    ELSE TO_TIMESTAMP(MARA.ERSDA, "yyyyMMdd")\n  END AS CRT_ON_DTTM,\n  TRIM(MARA.ETIAR) AS LBL_TYPE,\n  TRIM(MARA.ETIFO) AS LBL_FORM,\n  TRIM(MARA.EXTWG) AS EXTRNL_MATL_GRP,\n  TRIM(MARA.FUELG) AS MAX_LVL,\n  TRIM(MARA.GEWEI) AS WT_UNIT,\n  TRIM(MARA.GROES) AS SIZE_DIM,\n  TRIM(MARA.IPRKZ) AS PER_IN,\n  CASE\n    WHEN MARA.LAEDA = '00000000' THEN CAST(NULL AS TIMESTAMP)\n    ELSE TO_TIMESTAMP(MARA.LAEDA, "yyyyMMdd")\n  END AS LAST_CHG_DT_TIME_DTTM,\n  TRIM(MARA.MAGRV) AS MATL_GRP_PKGNG_MATL,\n  NULL AS MATL_EXTRNL,\n  TRIM(MARA.MHDLP) AS STRG_PCT,\n  CASE\n    WHEN MARA.MSTDE = '00000000' THEN CAST(NULL AS TIMESTAMP)\n    ELSE TO_TIMESTAMP(MARA.MSTDE, "yyyyMMdd")\n  END AS VAL_FROM_XPLNT_DTTM,\n  CASE\n    WHEN MARA.MSTDV = '00000000' THEN CAST(NULL AS TIMESTAMP)\n    ELSE To_timestamp(MARA.MSTDV, "yyyyMMdd")\n  END AS VAL_FROM_XDC_DTTM,\n  TRIM(MARA.NORMT) AS INDSTR_STD_DESC,\n  TRIM(MARA.RDMHD) AS RD_RUL_SLED,\n  TRIM(MARA.SERLV) AS SER_LVL,\n  NULL AS MATL_HAZ_CD,\n  TRIM(MARA.VABME) AS VAR_ORDR_UNT,\n  TRIM(MARA.VHART) AS PKGNG_MATL_TYPE,\n  TRIM(MARA.VOLEH) AS VOL_UNIT,\n  CAST(TRIM(MARA.VOLUM) AS DECIMAL(18,4)) AS VOL,\n  TRIM(MARA.WRKST) AS BSC_MATL,\n  TRIM(MARA.ZEIAR) AS DOC_TYPE,\n  TRIM(MARA.ZEIFO) AS DOC_PG_FMT,\n  TRIM(MARA.EAN11) AS EAN_UPC,\n  TRIM(MARA.NUMTP) AS EAN_CAT,\n  NULL AS MFR_BOOK_PART_NUM,\n  NULL AS DIR_SHP_FL,\n  NULL AS FIN_PLNT,\n  NULL AS MAIN_STRG_LOC,\n  NULL AS PCS_PER_SLS_UNT,\n  NULL AS PROD_LINE,\n  NULL AS MAKE_BUY_IN,\n  NULL AS STRT_PLNT,\n  NULL AS MATL_SHRT_DESC_UP_CASE,\n  NULL AS MATL_TYPE_DESC,\n  NULL AS FRAN_CD_DESC,\n  NULL AS BASE_UOM_DESC,\n  NULL AS OBJ_NUM,\n  NULL AS TYPE_OF_MATERIAL,\n  NULL AS STERILE,\n  NULL AS BRAVO_MINOR_CODE,\n  NULL AS BRAVO_MINOR_CODE_DESC,\n  NULL AS NDL_SLS_TYPE,\n  NULL AS SUTURE_LENGTH_INCH,\n  NULL AS SER_TYPE,\n  NULL AS GTIN_VRNT,\n  NULL AS MATL_GRP_DESC,\n  NULL AS MATL_GRP_DESC_2,\n  '#' AS SHRT_MATL_NUM,\n  NULL AS CMMDTY,\n  NULL AS NDL_COLOR,\n  NULL AS NDL_ALLOY,\n  NULL AS SUTURE_USP,\n  CASE\n    WHEN (LENGTH(TRIM(MARA.EAN11)) > 0 AND LENGTH(TRIM(MARA.EAN11)) < 14) THEN LPAD(TRIM(MARA.EAN11), 14, 0)\n    ELSE TRIM(MARA.EAN11)\n  END AS EAN_UPC_HRMZD\nFROM\n  {Config.sourceDatabase}.MARA MARA\n  LEFT JOIN {Config.sourceDatabase}.MAKT MAKT on MARA.matnr = MAKT.matnr\n  and MAKT.spras = 'E'\n  and MAKT._deleted_ = 'F'\n  and MAKT.MANDT = '600'\nWHERE\n  MARA._deleted_ = 'F'\n  and MARA.MANDT = '600'  \n \n\"\"\")",
+            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT\n  '{Config.sourceSystem}'  AS SRC_SYS_CD,\n  MARA.matnr AS MATL_NUM,\n  TRIM(MARA.mtart) AS MATL_TYPE_CD,\n  NULL AS BRND_CD,\n  TRIM(MARA.spart) AS FRANCHISE_CD,\n  TRIM(MARA.labor) AS LCL_PLNG_SUB_FRAN_CD,\n  TRIM(MARA.ekwsl) AS PRCHSNG_VAL_KEY_CD,\n  TRIM(MARA.lvorm) AS DEL_IND,\n  TRIM(MARA.matkl) AS MATL_GRP_CD,\n  TRIM(MARA.mbrsh) AS INDSTR_SECTR_CD,\n  TRIM(MARA.meins) AS BASE_UOM_CD,\n  CAST(TRIM(MARA.mhdhb) AS DECIMAL(18, 4)) AS TOT_SHLF_LIF_DAYS_CNT,\n  CAST(TRIM(MARA.mhdrz) AS DECIMAL(18, 4)) AS MIN_SHLF_RMN_LIF_DAYS_CNT,\n  TRIM(MARA.mstae) AS MATL_STS_CD,\n  TRIM(MARA.mstav) AS DSTN_CHN_STS_CD,\n  CAST(TRIM(MARA.ntgew) AS DECIMAL(18, 4)) AS NET_WT_MEAS,\n  TRIM(MARA.prdha) AS PROD_HIER_CD,\n  TRIM(MARA.qmpur) AS PRCMT_QUAL_MGMT_IND,\n  TRIM(MARA.raube) AS STRG_CONDS_CD,\n  TRIM(MARA.tempb) AS LBL_TEMP_RNG,\n  TRIM(MARA.tragr) AS TRSPN_GRP_CD,\n  TRIM(MARA.xchpf) AS BTCH_MNG_IND,\n  TRIM(MARA.zeinr) AS MATL_DOC_NUM,\n  TRIM(MARA.zeivr) AS MATL_DOC_VERS_NUM,\n  TRIM(MAKT.maktx) AS MATL_SHRT_DESC,\n  NULL AS MMS_SURGERY_TYPE_CD,\n  NULL AS MMS_MATL_TYPE_CD,\n  NULL AS PRMRY_PLNT_CD,\n  NULL AS MMS_FIN_CLSN_CD,\n  NULL AS MMS_STERILIZATION_IND,\n  NULL AS MATL_CATLG_NUM,\n  NULL AS SRC_SECTR_CD,\n  NULL AS MATL_PARNT_CD,\n  NULL AS MATL_SUB_TYPE_CD,\n  NULL AS FIN_HIER_BASE_CD,\n  NULL AS IMPLNT_INSTM_IND,\n  NULL AS MATL_MOD_CD,\n  NULL AS KIT_IND,\n  NULL AS MMS_TEMP_SENS_IND,\n  NULL AS DIR_PART_MRKNG_CD,\n  TRIM(MARA.mtpos_mara) AS MATL_CAT_GRP_CD,\n  NULL AS PLNG_HIER3_CD,\n  NULL AS MATL_SPEC_NUM,\n  NULL AS MATL_SPEC_VERS_NUM,\n  TRIM(MARA.AENAM) AS CHG_BY,\n  TRIM(MARA.AESZN) AS DOC_CHG_NUM,\n  NULL AS CNTNR_REQ,\n  TRIM(MARA.BISMT) AS OLD_MATL_NUM,\n  CAST(TRIM(MARA.BRGEW) AS DECIMAL(18,4)) AS GRS_WT,\n  TRIM(MARA.BSTME) AS ORDR_UNIT_PUR_UOM,\n  NULL AS CHEM_CMPLI,\n  TRIM(MARA.ERNAM) AS CRT_BY,\n  CASE\n    WHEN MARA.ERSDA = '00000000' THEN CAST(NULL AS TIMESTAMP)\n    ELSE TO_TIMESTAMP(MARA.ERSDA, \"yyyyMMdd\")\n  END AS CRT_ON_DTTM,\n  TRIM(MARA.ETIAR) AS LBL_TYPE,\n  TRIM(MARA.ETIFO) AS LBL_FORM,\n  TRIM(MARA.EXTWG) AS EXTRNL_MATL_GRP,\n  TRIM(MARA.FUELG) AS MAX_LVL,\n  TRIM(MARA.GEWEI) AS WT_UNIT,\n  TRIM(MARA.GROES) AS SIZE_DIM,\n  TRIM(MARA.IPRKZ) AS PER_IN,\n  CASE\n    WHEN MARA.LAEDA = '00000000' THEN CAST(NULL AS TIMESTAMP)\n    ELSE TO_TIMESTAMP(MARA.LAEDA, \"yyyyMMdd\")\n  END AS LAST_CHG_DT_TIME_DTTM,\n  TRIM(MARA.MAGRV) AS MATL_GRP_PKGNG_MATL,\n  NULL AS MATL_EXTRNL,\n  TRIM(MARA.MHDLP) AS STRG_PCT,\n  CASE\n    WHEN MARA.MSTDE = '00000000' THEN CAST(NULL AS TIMESTAMP)\n    ELSE TO_TIMESTAMP(MARA.MSTDE, \"yyyyMMdd\")\n  END AS VAL_FROM_XPLNT_DTTM,\n  CASE\n    WHEN MARA.MSTDV = '00000000' THEN CAST(NULL AS TIMESTAMP)\n    ELSE To_timestamp(MARA.MSTDV, \"yyyyMMdd\")\n  END AS VAL_FROM_XDC_DTTM,\n  TRIM(MARA.NORMT) AS INDSTR_STD_DESC,\n  TRIM(MARA.RDMHD) AS RD_RUL_SLED,\n  TRIM(MARA.SERLV) AS SER_LVL,\n  NULL AS MATL_HAZ_CD,\n  TRIM(MARA.VABME) AS VAR_ORDR_UNT,\n  TRIM(MARA.VHART) AS PKGNG_MATL_TYPE,\n  TRIM(MARA.VOLEH) AS VOL_UNIT,\n  CAST(TRIM(MARA.VOLUM) AS DECIMAL(18,4)) AS VOL,\n  TRIM(MARA.WRKST) AS BSC_MATL,\n  TRIM(MARA.ZEIAR) AS DOC_TYPE,\n  TRIM(MARA.ZEIFO) AS DOC_PG_FMT,\n  TRIM(MARA.EAN11) AS EAN_UPC,\n  TRIM(MARA.NUMTP) AS EAN_CAT,\n  NULL AS MFR_BOOK_PART_NUM,\n  NULL AS DIR_SHP_FL,\n  NULL AS FIN_PLNT,\n  NULL AS MAIN_STRG_LOC,\n  NULL AS PCS_PER_SLS_UNT,\n  NULL AS PROD_LINE,\n  NULL AS MAKE_BUY_IN,\n  NULL AS STRT_PLNT,\n  NULL AS MATL_SHRT_DESC_UP_CASE,\n  NULL AS MATL_TYPE_DESC,\n  NULL AS FRAN_CD_DESC,\n  NULL AS BASE_UOM_DESC,\n  NULL AS OBJ_NUM,\n  NULL AS TYPE_OF_MATERIAL,\n  NULL AS STERILE,\n  NULL AS BRAVO_MINOR_CODE,\n  NULL AS BRAVO_MINOR_CODE_DESC,\n  NULL AS NDL_SLS_TYPE,\n  NULL AS SUTURE_LENGTH_INCH,\n  NULL AS SER_TYPE,\n  NULL AS GTIN_VRNT,\n  NULL AS MATL_GRP_DESC,\n  NULL AS MATL_GRP_DESC_2,\n  '#' AS SHRT_MATL_NUM,\n  NULL AS CMMDTY,\n  NULL AS NDL_COLOR,\n  NULL AS NDL_ALLOY,\n  NULL AS SUTURE_USP,\n  CASE\n    WHEN (LENGTH(TRIM(MARA.EAN11)) > 0 AND LENGTH(TRIM(MARA.EAN11)) < 14) THEN LPAD(TRIM(MARA.EAN11), 14, 0)\n    ELSE TRIM(MARA.EAN11)\n  END AS EAN_UPC_HRMZD\nFROM\n  {Config.sourceDatabase}.MARA MARA\n  LEFT JOIN {Config.sourceDatabase}.MAKT MAKT on MARA.matnr = MAKT.matnr\n  and MAKT.spras = 'E'\n  and MAKT._deleted_ = 'F'\n  and MAKT.MANDT = '600'\nWHERE\n  MARA._deleted_ = 'F'\n  and MARA.MANDT = '600'  \n \n\"\"\")",
             "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
             "scriptMethodFooter" : "    return out0"
           }
