@@ -65,21 +65,21 @@
         "topLevelPackage" : "PPLN_MD_MATL_15"
       },
       "connections" : [ {
-        "id" : "d18658a1-2a17-4c07-9c98-54be07e5493c",
-        "source" : "e2ca48b0-1fdb-4434-911e-b246b8bc7430",
-        "sourcePort" : "3a9fcfeb-3930-415f-b4b4-280327f11520",
-        "target" : "8c7330f1-a34c-485c-b667-9cfada303ac6",
-        "targetPort" : "510e2452-3db0-4618-8b2e-4c26f1b1d3b8"
+        "id" : "c81c1ada-5351-4eb7-a262-94fecd25eea0",
+        "source" : "26cb9346-2a84-4eb0-aafa-90761449b4db",
+        "sourcePort" : "90c79e9e-0fbb-4fde-9db6-9b62961f685a",
+        "target" : "762fcfef-b99d-4e88-ac06-d2147fe1ad00",
+        "targetPort" : "5777a283-90ed-4330-8bb2-ebb8ec16121d"
       }, {
-        "id" : "6ba5983b-ebbb-4624-8e35-c56d271d6db2",
-        "source" : "dc30360c-54d0-4033-8605-bb1b93b917ea",
-        "sourcePort" : "94461dfc-89a1-4a74-94b2-9643a380009d",
-        "target" : "e2ca48b0-1fdb-4434-911e-b246b8bc7430",
-        "targetPort" : "67b3245c-0f56-445d-82c1-b79fe11a47cd"
+        "id" : "569ff252-6c18-4f2e-971b-5c057304986d",
+        "source" : "2f42b1d8-8112-422a-a876-9ff14f11e03e",
+        "sourcePort" : "094e2323-e624-436d-addf-f8708b5c628a",
+        "target" : "26cb9346-2a84-4eb0-aafa-90761449b4db",
+        "targetPort" : "fead577e-be90-4447-901c-175b9a4e3b8c"
       } ],
       "processes" : {
-        "8c7330f1-a34c-485c-b667-9cfada303ac6" : {
-          "id" : "8c7330f1-a34c-485c-b667-9cfada303ac6",
+        "762fcfef-b99d-4e88-ac06-d2147fe1ad00" : {
+          "id" : "762fcfef-b99d-4e88-ac06-d2147fe1ad00",
           "component" : "Target",
           "metadata" : {
             "label" : "MD_MATL",
@@ -93,7 +93,7 @@
           },
           "ports" : {
             "inputs" : [ {
-              "id" : "510e2452-3db0-4618-8b2e-4c26f1b1d3b8",
+              "id" : "5777a283-90ed-4330-8bb2-ebb8ec16121d",
               "slug" : "in0",
               "isStreaming" : false
             } ],
@@ -105,8 +105,8 @@
             "datasetId" : "datasets/MD_MATL"
           }
         },
-        "e2ca48b0-1fdb-4434-911e-b246b8bc7430" : {
-          "id" : "e2ca48b0-1fdb-4434-911e-b246b8bc7430",
+        "26cb9346-2a84-4eb0-aafa-90761449b4db" : {
+          "id" : "26cb9346-2a84-4eb0-aafa-90761449b4db",
           "component" : "SchemaTransform",
           "metadata" : {
             "label" : "addL1fields",
@@ -120,12 +120,12 @@
           },
           "ports" : {
             "inputs" : [ {
-              "id" : "67b3245c-0f56-445d-82c1-b79fe11a47cd",
+              "id" : "fead577e-be90-4447-901c-175b9a4e3b8c",
               "slug" : "in0",
               "isStreaming" : false
             } ],
             "outputs" : [ {
-              "id" : "3a9fcfeb-3930-415f-b4b4-280327f11520",
+              "id" : "90c79e9e-0fbb-4fde-9db6-9b62961f685a",
               "slug" : "out",
               "isStreaming" : false
             } ],
@@ -201,8 +201,8 @@
             } ]
           }
         },
-        "dc30360c-54d0-4033-8605-bb1b93b917ea" : {
-          "id" : "dc30360c-54d0-4033-8605-bb1b93b917ea",
+        "2f42b1d8-8112-422a-a876-9ff14f11e03e" : {
+          "id" : "2f42b1d8-8112-422a-a876-9ff14f11e03e",
           "component" : "Script",
           "metadata" : {
             "label" : "sql_MD_MATL",
@@ -217,7 +217,7 @@
           "ports" : {
             "inputs" : [ ],
             "outputs" : [ {
-              "id" : "94461dfc-89a1-4a74-94b2-9643a380009d",
+              "id" : "094e2323-e624-436d-addf-f8708b5c628a",
               "slug" : "out0",
               "schema" : {
                 "type" : "struct",
@@ -238,7 +238,7 @@
             "isCustomOutputSchema" : true
           },
           "properties" : {
-            "script" : "out0 = spark.sql(f\"\"\"\n    select\n '{Config.sourceSystem}'  AS SRC_SYS_CD,\nf4101_adt.imlitm AS MATL_NUM,\nTRIM (f4101_adt.imsrp6) AS MATL_TYPE_CD,\n\nTRIM (f4101_adt.imsrp2) AS FRANCHISE_CD,\n\n\n\nTRIM(f4101_adt.imprp2) AS MATL_GRP_CD,\n\nTRIM (f4101_adt.imuom1) AS BASE_UOM_CD,\nCAST (TRIM(f4101_adt.imsld)   AS decimal(18,4)) AS TOT_SHLF_LIF_DAYS_CNT,\n\nTRIM(f4101_adt.imstkt) AS MATL_STS_CD,\n\n\ntrim(f4101_adt.imprp4) AS PROD_HIER_CD,\n\nTRIM (f4101_adt.imprp7) AS STRG_CONDS_CD,\n\n\nTRIM (f4101_adt.imsrce) AS BTCH_MNG_IND,\nTRIM (f4101_adt.imdraw) AS MATL_DOC_NUM,\nTRIM (f4101_adt.imrvno) AS MATL_DOC_VERS_NUM,\nTRIM(f4101_adt.imdsc1) AS MATL_SHRT_DESC,\n\n\n\n\n\nTRIM (f4101_adt.imaitm) AS MATL_CATLG_NUM,\n\n\nTRIM (f4101_adt.imsrp1) AS MATL_SUB_TYPE_CD,\nTRIM (f4101_adt.imglpt) AS FIN_HIER_BASE_CD,\n\n\nTRIM (f4101_adt.imsrp0) AS KIT_IND,\n\n\nTRIM(f4101_adt.imsrp8) AS MATL_CAT_GRP_CD,\nTRIM(f4101_adt.imprp0) AS PLNG_HIER3_CD,\n\n\nTRIM(f4101_adt.imuser) AS CHG_BY,\n\n\n\n\n\n\n\n\n\n\n\n\nTRIM(f4101_adt.imuwum) AS WT_UNIT,\n\n\nCASE\n    WHEN LENGTH(F4101_ADT.imtday) = 6 THEN TO_TIMESTAMP(\n      CONCAT(\n        DATE_ADD(\n          CAST(\n            SUBSTRING(F4101_ADT.IMUPMJ + 1900000, 1, 4) AS DATE\n          ),\n          CAST(SUBSTRING(F4101_ADT.IMUPMJ, 4, 3) AS INT) -1\n        ),\n        \\\"\\\"\\\"\\\",\n        F4101_ADT.imtday\n      ),\n      'yyyy-MM-ddHHmmss'\n    )\n    WHEN LENGTH(F4101_ADT.imtday) = 5 THEN TO_TIMESTAMP(\n      CONCAT(\n        DATE_ADD(\n          CAST(\n            SUBSTRING(F4101_ADT.IMUPMJ + 1900000, 1, 4) AS DATE\n          ),\n          CAST(SUBSTRING(F4101_ADT.IMUPMJ, 4, 3) AS INT) -1\n        ),\n        \\\"\\\"\\\"\\\",\n        concat(0, F4101_ADT.imtday)\n      ),\n      'yyyy-MM-ddHHmmss'\n    )\n    ELSE TO_TIMESTAMP(\n      DATE_ADD(\n        CAST(SUBSTRING(F4101_ADT.IMUPMJ + 1900000, 1, 4) AS Date),\n        CAST(SUBSTRING(F4101_ADT.IMUPMJ, 4, 3) as INT) -1\n      )\n    )\nEND AS LAST_CHG_DT_TIME_DTTM,\n\n\n\n\n\n\n\n\n\n\n\nTRIM(f4101_adt.imuvm1) AS VOL_UNIT,\nCAST(TRIM(f4101_adt.imvcud) AS DECIMAL(18,4))  AS VOL,\n\nTRIM(f4101_adt.imlnty) AS DOC_TYPE,\n\nTRIM(f4101_adt.imprp1) AS EAN_UPC,\n\n\n\n\n\n\n\nTRIM(f4101_adt.imprp6) AS MAKE_BUY_IN,\n\n\nTRIM(f0005_06.drdl01) AS MATL_TYPE_DESC,\n\n\n\n\n\nTRIM(f4101_adt.imsrp7) AS BRAVO_MINOR_CODE,\nTRIM(f0005_07.drdl01) AS BRAVO_MINOR_CODE_DESC,\n\n\n\n\nTRIM(f0005_p2.drdl01) AS MATL_GRP_DESC,\n\nf4101_adt.imitm AS SHRT_MATL_NUM,\n\n\n\n\n\nFROM {Config.sourceDatabase}.f4101_adt f4101_adt\nLEFT JOIN {Config.sourceDatabase}.f0005 f0005_06 \nON F4101_ADT.IMSRP6 = TRIM(f0005_06.DRKY) \nAND TRIM(f0005_06.DRSY) = '41'\nAND f0005_06.DRRT = '06'\nAND f0005_06._deleted_ = 'F'\nLEFT JOIN {Config.sourceDatabase}.f0005 f0005_07 \nON F4101_ADT.IMSRP7 = TRIM(f0005_07.DRKY) \nAND TRIM(f0005_07.DRSY) = '41'\nAND f0005_07.DRRT = '07'\nAND f0005_07._deleted_ = 'F'\nLEFT JOIN {Config.sourceDatabase}.f0005 f0005_p2\nON F4101_ADT.IMPRP2 = TRIM(f0005_p2.DRKY)\nAND TRIM(f0005_p2.DRSY) = '41'\nAND f0005_p2.DRRT = 'P2'\nAND f0005_p2._deleted_ = 'F'\nWHERE  f4101_adt._deleted_ = 'F'  \n \n\"\"\")",
+            "script" : "out0 = spark.sql(f\"\"\"\n    select\n '{Config.sourceSystem}'  AS SRC_SYS_CD,\nf4101_adt.imlitm AS MATL_NUM,\nTRIM (f4101_adt.imsrp6) AS MATL_TYPE_CD,\nNULL AS BRND_CD,\nTRIM (f4101_adt.imsrp2) AS FRANCHISE_CD,\nNULL AS LCL_PLNG_SUB_FRAN_CD,\nNULL AS PRCHSNG_VAL_KEY_CD,\nNULL AS DEL_IND,\nTRIM(f4101_adt.imprp2) AS MATL_GRP_CD,\nNULL AS INDSTR_SECTR_CD,\nTRIM (f4101_adt.imuom1) AS BASE_UOM_CD,\nCAST (TRIM(f4101_adt.imsld)   AS decimal(18,4)) AS TOT_SHLF_LIF_DAYS_CNT,\nNULL AS MIN_SHLF_RMN_LIF_DAYS_CNT,\nTRIM(f4101_adt.imstkt) AS MATL_STS_CD,\nNULL AS DSTN_CHN_STS_CD,\nNULL AS NET_WT_MEAS,\ntrim(f4101_adt.imprp4) AS PROD_HIER_CD,\nNULL AS PRCMT_QUAL_MGMT_IND,\nTRIM (f4101_adt.imprp7) AS STRG_CONDS_CD,\nNULL AS LBL_TEMP_RNG,\nNULL AS TRSPN_GRP_CD,\nTRIM (f4101_adt.imsrce) AS BTCH_MNG_IND,\nTRIM (f4101_adt.imdraw) AS MATL_DOC_NUM,\nTRIM (f4101_adt.imrvno) AS MATL_DOC_VERS_NUM,\nTRIM(f4101_adt.imdsc1) AS MATL_SHRT_DESC,\nNULL AS MMS_SURGERY_TYPE_CD,\nNULL AS MMS_MATL_TYPE_CD,\nNULL AS PRMRY_PLNT_CD,\nNULL AS MMS_FIN_CLSN_CD,\nNULL AS MMS_STERILIZATION_IND,\nTRIM (f4101_adt.imaitm) AS MATL_CATLG_NUM,\nNULL AS SRC_SECTR_CD,\nNULL AS MATL_PARNT_CD,\nTRIM (f4101_adt.imsrp1) AS MATL_SUB_TYPE_CD,\nTRIM (f4101_adt.imglpt) AS FIN_HIER_BASE_CD,\nNULL AS IMPLNT_INSTM_IND,\nNULL AS MATL_MOD_CD,\nTRIM (f4101_adt.imsrp0) AS KIT_IND,\nNULL AS MMS_TEMP_SENS_IND,\nNULL AS DIR_PART_MRKNG_CD,\nTRIM(f4101_adt.imsrp8) AS MATL_CAT_GRP_CD,\nTRIM(f4101_adt.imprp0) AS PLNG_HIER3_CD,\nNULL AS MATL_SPEC_NUM,\nNULL AS MATL_SPEC_VERS_NUM,\nTRIM(f4101_adt.imuser) AS CHG_BY,\nNULL AS DOC_CHG_NUM,\nNULL AS CNTNR_REQ,\nNULL AS OLD_MATL_NUM,\nNULL AS GRS_WT,\nNULL AS ORDR_UNIT_PUR_UOM,\nNULL AS CHEM_CMPLI,\nNULL AS CRT_BY,\nNULL AS CRT_ON_DTTM,\nNULL AS LBL_TYPE,\nNULL AS LBL_FORM,\nNULL AS EXTRNL_MATL_GRP,\nNULL AS MAX_LVL,\nTRIM(f4101_adt.imuwum) AS WT_UNIT,\nNULL AS SIZE_DIM,\nNULL AS PER_IN,\nCASE\n    WHEN LENGTH(F4101_ADT.imtday) = 6 THEN TO_TIMESTAMP(\n      CONCAT(\n        DATE_ADD(\n          CAST(\n            SUBSTRING(F4101_ADT.IMUPMJ + 1900000, 1, 4) AS DATE\n          ),\n          CAST(SUBSTRING(F4101_ADT.IMUPMJ, 4, 3) AS INT) -1\n        ),\n        \\\"\\\"\\\"\\\",\n        F4101_ADT.imtday\n      ),\n      'yyyy-MM-ddHHmmss'\n    )\n    WHEN LENGTH(F4101_ADT.imtday) = 5 THEN TO_TIMESTAMP(\n      CONCAT(\n        DATE_ADD(\n          CAST(\n            SUBSTRING(F4101_ADT.IMUPMJ + 1900000, 1, 4) AS DATE\n          ),\n          CAST(SUBSTRING(F4101_ADT.IMUPMJ, 4, 3) AS INT) -1\n        ),\n        \\\"\\\"\\\"\\\",\n        concat(0, F4101_ADT.imtday)\n      ),\n      'yyyy-MM-ddHHmmss'\n    )\n    ELSE TO_TIMESTAMP(\n      DATE_ADD(\n        CAST(SUBSTRING(F4101_ADT.IMUPMJ + 1900000, 1, 4) AS Date),\n        CAST(SUBSTRING(F4101_ADT.IMUPMJ, 4, 3) as INT) -1\n      )\n    )\nEND AS LAST_CHG_DT_TIME_DTTM,\nNULL AS MATL_GRP_PKGNG_MATL,\nNULL AS MATL_EXTRNL,\nNULL AS STRG_PCT,\nNULL AS VAL_FROM_XPLNT_DTTM,\nNULL AS VAL_FROM_XDC_DTTM,\nNULL AS INDSTR_STD_DESC,\nNULL AS RD_RUL_SLED,\nNULL AS SER_LVL,\nNULL AS MATL_HAZ_CD,\nNULL AS VAR_ORDR_UNT,\nNULL AS PKGNG_MATL_TYPE,\nTRIM(f4101_adt.imuvm1) AS VOL_UNIT,\nCAST(TRIM(f4101_adt.imvcud) AS DECIMAL(18,4))  AS VOL,\nNULL AS BSC_MATL,\nTRIM(f4101_adt.imlnty) AS DOC_TYPE,\nNULL AS DOC_PG_FMT,\nTRIM(f4101_adt.imprp1) AS EAN_UPC,\nNULL AS EAN_CAT,\nNULL AS MFR_BOOK_PART_NUM,\nNULL AS DIR_SHP_FL,\nNULL AS FIN_PLNT,\nNULL AS MAIN_STRG_LOC,\nNULL AS PCS_PER_SLS_UNT,\nNULL AS PROD_LINE,\nTRIM(f4101_adt.imprp6) AS MAKE_BUY_IN,\nNULL AS STRT_PLNT,\nNULL AS MATL_SHRT_DESC_UP_CASE,\nTRIM(f0005_06.drdl01) AS MATL_TYPE_DESC,\nNULL AS FRAN_CD_DESC,\nNULL AS BASE_UOM_DESC,\nNULL AS OBJ_NUM,\nNULL AS TYPE_OF_MATERIAL,\nNULL AS STERILE,\nTRIM(f4101_adt.imsrp7) AS BRAVO_MINOR_CODE,\nTRIM(f0005_07.drdl01) AS BRAVO_MINOR_CODE_DESC,\nNULL AS NDL_SLS_TYPE,\nNULL AS SUTURE_LENGTH_INCH,\nNULL AS SER_TYPE,\nNULL AS GTIN_VRNT,\nTRIM(f0005_p2.drdl01) AS MATL_GRP_DESC,\nNULL AS MATL_GRP_DESC_2,\nf4101_adt.imitm AS SHRT_MATL_NUM,\nNULL AS CMMDTY,\nNULL AS NDL_COLOR,\nNULL AS NDL_ALLOY,\nNULL AS SUTURE_USP,\nNULL AS EAN_UPC_HRMZD\nFROM {Config.sourceDatabase}.f4101_adt f4101_adt\nLEFT JOIN {Config.sourceDatabase}.f0005 f0005_06 \nON F4101_ADT.IMSRP6 = TRIM(f0005_06.DRKY) \nAND TRIM(f0005_06.DRSY) = '41'\nAND f0005_06.DRRT = '06'\nAND f0005_06._deleted_ = 'F'\nLEFT JOIN {Config.sourceDatabase}.f0005 f0005_07 \nON F4101_ADT.IMSRP7 = TRIM(f0005_07.DRKY) \nAND TRIM(f0005_07.DRSY) = '41'\nAND f0005_07.DRRT = '07'\nAND f0005_07._deleted_ = 'F'\nLEFT JOIN {Config.sourceDatabase}.f0005 f0005_p2\nON F4101_ADT.IMPRP2 = TRIM(f0005_p2.DRKY)\nAND TRIM(f0005_p2.DRSY) = '41'\nAND f0005_p2.DRRT = 'P2'\nAND f0005_p2._deleted_ = 'F'\nWHERE  f4101_adt._deleted_ = 'F'  \n \n\"\"\")",
             "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
             "scriptMethodFooter" : "    return out0"
           }
