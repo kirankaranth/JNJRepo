@@ -104,5 +104,5 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("PRCH_ORDR_TYPE", lit(None).cast(StringType()))\
         .withColumn("BILL_DOC_IS_CAN", trim(col("FKSTO")))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
-        .withColumn("DAI_CRT_DTTM", to_timestamp(current_timestamp(), "yyyy-MM-dd"))\
-        .withColumn("DAI_UPDT_DTTM", to_timestamp(current_timestamp(), "yyyy-MM-dd"))
+        .withColumn("DAI_CRT_DTTM", current_timestamp())\
+        .withColumn("DAI_UPDT_DTTM", current_timestamp())
