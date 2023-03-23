@@ -7,8 +7,8 @@ from prophecy.utils import *
 from jde_01_deu_f0401.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    df_DS_JDE_01_F0401 = DS_JDE_01_F0401(spark)
     df_DS_JDE_01_F0101 = DS_JDE_01_F0101(spark)
+    df_DS_JDE_01_F0401 = DS_JDE_01_F0401(spark)
     df_Join_F0404_F0101 = Join_F0404_F0101(spark, df_DS_JDE_01_F0401, df_DS_JDE_01_F0101)
     df_ST_Join_F0404_F0101 = ST_Join_F0404_F0101(spark, df_Join_F0404_F0101)
 
