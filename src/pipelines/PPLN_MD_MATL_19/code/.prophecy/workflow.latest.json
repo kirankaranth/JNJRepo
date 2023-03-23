@@ -1,0 +1,257 @@
+
+    {
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "l1_md_prophecy"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "deu"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "deu"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MD_MATL_19"
+      },
+      "connections" : [ {
+        "id" : "def46eec-54ab-4458-8c45-26fb10c22da5",
+        "source" : "74f2a209-a0e2-4aa4-8ccc-302f25e37d14",
+        "sourcePort" : "561c93bc-3052-4993-973a-367f701e5b48",
+        "target" : "568aa10d-d62a-4d08-9137-14335d2bd84d",
+        "targetPort" : "4f1712a0-b752-4674-b989-4923b8e98e2b"
+      }, {
+        "id" : "fb679a63-3ad7-4ddb-9f39-4a6612c5ce12",
+        "source" : "8e3ad3b9-328f-4edc-86ab-51c83da6d718",
+        "sourcePort" : "de810553-73ba-4c7c-953c-ed61b3bc88f4",
+        "target" : "74f2a209-a0e2-4aa4-8ccc-302f25e37d14",
+        "targetPort" : "61dbd201-a005-4a34-94eb-47f3136ad033"
+      } ],
+      "processes" : {
+        "568aa10d-d62a-4d08-9137-14335d2bd84d" : {
+          "id" : "568aa10d-d62a-4d08-9137-14335d2bd84d",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MD_MATL",
+            "slug" : "MD_MATL",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "4f1712a0-b752-4674-b989-4923b8e98e2b",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MD_MATL"
+          }
+        },
+        "74f2a209-a0e2-4aa4-8ccc-302f25e37d14" : {
+          "id" : "74f2a209-a0e2-4aa4-8ccc-302f25e37d14",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "61dbd201-a005-4a34-94eb-47f3136ad033",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "561c93bc-3052-4993-973a-367f701e5b48",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'MATL_NUM',MATL_NUM))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'MATL_NUM',MATL_NUM)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "8e3ad3b9-328f-4edc-86ab-51c83da6d718" : {
+          "id" : "8e3ad3b9-328f-4edc-86ab-51c83da6d718",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MD_MATL",
+            "slug" : "sql_MD_MATL",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "de810553-73ba-4c7c-953c-ed61b3bc88f4",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    select\n  '{Config.sourceSystem}'  AS SRC_SYS_CD,\n  f4101.imlitm AS MATL_NUM,\n  TRIM (f4101.imprp1) AS MATL_TYPE_CD,\n  TRIM (f4101.imsrp2) AS BRND_CD,\n  NULL AS FRANCHISE_CD,\n  TRIM (f4101.imsrp7) AS LCL_PLNG_SUB_FRAN_CD,\n  NULL AS PRCHSNG_VAL_KEY_CD,\n  NULL AS DEL_IND,\n  TRIM (f4101.imprp4) AS MATL_GRP_CD,\n  NULL AS INDSTR_SECTR_CD,\n  TRIM (f4101.imuom1) AS BASE_UOM_CD,\n  CAST (TRIM(f4101.imsld) AS decimal(18, 4)) AS TOT_SHLF_LIF_DAYS_CNT,\n  NULL AS MIN_SHLF_RMN_LIF_DAYS_CNT,\n  TRIM(f4101.imstkt) AS MATL_STS_CD,\n  NULL AS DSTN_CHN_STS_CD,\n  NULL AS NET_WT_MEAS,\n  TRIM (f4101.imsrp4) AS PROD_HIER_CD,\n  NULL AS PRCMT_QUAL_MGMT_IND,\n  NULL AS STRG_CONDS_CD,\n  NULL AS LBL_TEMP_RNG,\n  NULL AS TRSPN_GRP_CD,\n  TRIM (f4101.imsrce) AS BTCH_MNG_IND,\n  TRIM (f4101.imdraw) AS MATL_DOC_NUM,\n  TRIM (f4101.imrvno) AS MATL_DOC_VERS_NUM,\n  TRIM(f4101.imdsc1) AS MATL_SHRT_DESC,\n  NULL AS MMS_SURGERY_TYPE_CD,\n  NULL AS MMS_MATL_TYPE_CD,\n  NULL AS PRMRY_PLNT_CD,\n  NULL AS MMS_FIN_CLSN_CD,\n  NULL AS MMS_STERILIZATION_IND,\n  TRIM (f4101.imaitm) AS MATL_CATLG_NUM,\n  TRIM (f4101.imsrp2) AS SRC_SECTR_CD,\n  NULL AS MATL_PARNT_CD,\n  TRIM (f4101.imsrp8) AS MATL_SUB_TYPE_CD,\n  TRIM (f4101.imglpt) AS FIN_HIER_BASE_CD,\n  NULL AS IMPLNT_INSTM_IND,\n  NULL AS MATL_MOD_CD,\n  NULL AS KIT_IND,\n  NULL AS MMS_TEMP_SENS_IND,\n  NULL AS DIR_PART_MRKNG_CD,\n  NULL AS MATL_CAT_GRP_CD,\n  TRIM (f4101.imsrp3) AS PLNG_HIER3_CD,\n  NULL AS MATL_SPEC_NUM,\n  NULL AS MATL_SPEC_VERS_NUM,\n  TRIM (f4101.imuser) AS CHG_BY,\n  NULL AS DOC_CHG_NUM,\n  NULL AS CNTNR_REQ,\n  NULL AS OLD_MATL_NUM,\n  NULL AS GRS_WT,\n  NULL AS ORDR_UNIT_PUR_UOM,\n  NULL AS CHEM_CMPLI,\n  NULL AS CRT_BY,\n  NULL AS CRT_ON_DTTM,\n  NULL AS LBL_TYPE,\n  NULL AS LBL_FORM,\n  NULL AS EXTRNL_MATL_GRP,\n  NULL AS MAX_LVL,\n  TRIM(f4101.imuwum) AS WT_UNIT,\n  NULL AS SIZE_DIM,\n  NULL AS PER_IN,\n  CASE\n    WHEN LENGTH(f4101.imtday) = 6 THEN TO_TIMESTAMP(\n      CONCAT(\n        DATE_ADD(\n          CAST(\n            SUBSTRING(f4101.imupmj + 1900000, 1, 4) AS DATE\n          ),\n          CAST(SUBSTRING(f4101.imupmj, 4, 3) AS INT) -1\n        ),\n        """",\n        f4101.imtday\n      ),\n      'yyyy-MM-ddHHmmss'\n    )\n    WHEN LENGTH(f4101.imtday) = 5 THEN TO_TIMESTAMP(\n      CONCAT(\n        DATE_ADD(\n          CAST(\n            SUBSTRING(f4101.imupmj + 1900000, 1, 4) AS DATE\n          ),\n          CAST(SUBSTRING(f4101.imupmj, 4, 3) AS INT) -1\n        ),\n        """",\n        concat(0, f4101.imtday)\n      ),\n      'yyyy-MM-ddHHmmss'\n    )\n    ELSE TO_TIMESTAMP(\n      DATE_ADD(\n        CAST(SUBSTRING(f4101.imupmj + 1900000, 1, 4) AS Date),\n        CAST(SUBSTRING(f4101.imupmj, 4, 3) as INT) -1\n      )\n    )\n  END AS LAST_CHG_DT_TIME_DTTM,\n  NULL AS MATL_GRP_PKGNG_MATL,\n  NULL AS MATL_EXTRNL,\n  NULL AS STRG_PCT,\n  NULL AS VAL_FROM_XPLNT_DTTM,\n  NULL AS VAL_FROM_XDC_DTTM,\n  NULL AS INDSTR_STD_DESC,\n  NULL AS RD_RUL_SLED,\n  NULL AS SER_LVL,\n  NULL AS MATL_HAZ_CD,\n  NULL AS VAR_ORDR_UNT,\n  NULL AS PKGNG_MATL_TYPE,\n  TRIM(f4101.imuvm1) AS VOL_UNIT,\n  CAST(TRIM(f4101.imvcud) AS DECIMAL(18, 4)) AS VOL,\n  NULL AS BSC_MATL,\n  TRIM(f4101.imlnty) AS DOC_TYPE,\n  NULL AS DOC_PG_FMT,\n  NULL AS EAN_UPC,\n  NULL AS EAN_CAT,\n  NULL AS MFR_BOOK_PART_NUM,\n  NULL AS DIR_SHP_FL,\n  NULL AS FIN_PLNT,\n  NULL AS MAIN_STRG_LOC,\n  NULL AS PCS_PER_SLS_UNT,\n  TRIM (f4101.imsrp1) AS PROD_LINE,\n  NULL AS MAKE_BUY_IN,\n  NULL AS STRT_PLNT,\n  NULL AS MATL_SHRT_DESC_UP_CASE,\n  TRIM(f0005_p1.drdl01) AS MATL_TYPE_DESC,\n  NULL AS FRAN_CD_DESC,\n  NULL AS BASE_UOM_DESC,\n  NULL AS OBJ_NUM,\n  TRIM(f4101.imsrp6) AS TYPE_OF_MATERIAL,\n  NULL AS STERILE,\n  TRIM(f4101.imsrp0) AS BRAVO_MINOR_CODE,\n  TRIM(f0005_10.drdl01) AS BRAVO_MINOR_CODE_DESC,\n  NULL AS NDL_SLS_TYPE,\n  NULL AS SUTURE_LENGTH_INCH,\n  NULL AS SER_TYPE,\n  NULL AS GTIN_VRNT,\n  TRIM(f0005_p4.drdl01) AS MATL_GRP_DESC,\n  NULL AS MATL_GRP_DESC_2,\n  f4101.imitm AS SHRT_MATL_NUM,\n  NULL AS CMMDTY,\n  NULL AS NDL_COLOR,\n  NULL AS NDL_ALLOY,\n  NULL AS SUTURE_USP,\n  NULL AS EAN_UPC_HRMZD\nFROM\n  {Config.sourceDatabase}.f4101 f4101\n  LEFT JOIN {Config.sourceDatabase}.f0005 f0005_p1 ON f4101.IMPRP1 = TRIM(f0005_p1.DRKY)\n  AND TRIM(f0005_p1.DRSY) = '41'\n  AND f0005_p1.DRRT = 'P1'\n  AND f0005_p1._deleted_ = 'F'\n  LEFT JOIN {Config.sourceDatabase}.f0005 f0005_10 ON f4101.IMSRP0 = TRIM(f0005_10.DRKY)\n  AND TRIM(f0005_10.DRSY) = '41'\n  AND f0005_10.DRRT = '10'\n  AND f0005_10._deleted_ = 'F'\n  LEFT JOIN {Config.sourceDatabase}.f0005 f0005_p4 ON f4101.IMPRP4 = TRIM(f0005_p4.DRKY)\n  AND TRIM(f0005_p4.DRSY) = '41'\n  AND f0005_p4.DRRT = 'P4'\n  AND f0005_p4._deleted_ = 'F'\nWHERE\n  f4101._deleted_ = 'F'  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    
