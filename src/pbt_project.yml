@@ -646,18 +646,18 @@ pipelines:
       - datasets/STRCT_MES_MD_PROD_RVSN_BASE
     dependencies: {}
   pipelines/SAP_01_MD_MATL_LOC:
-    name: SAP_01_MD_MATL_LOC
-    description: Pipeline to all SAP systems for MD_MATL_LOC
+    name: SAP_01_MD_MATL_LOC_bba_bbl_bbn
+    description: Pipeline to bba_bbl_bbn SAP systems for MD_MATL_LOC
     author: ggrilo1@its.jnj.com
     mode: batch
     language: python
     createdAt: '2023-03-17 17:58:14'
-    modifiedAt: '2023-03-22 16:50:53'
+    modifiedAt: '2023-03-23 15:22:01'
     datasets:
       inputs:
       - datasets/DS_SAP_01_MARC
       outputs:
-      - datasets/MD_MATL_LOC_SWAP
+      - datasets/MD_MATL_LOC
     dependencies: {}
   pipelines/JDE_01_MD_MATL_LOC:
     name: JDE_01_MD_MATL_LOC
@@ -672,6 +672,20 @@ pipelines:
       - datasets/DS_JDE_MD_MATL_LOC
       outputs:
       - datasets/MD_MATL_LOC_SWAP
+    dependencies: {}
+  pipelines/SAP_01_MD_MATL_LOC_tai_mrs_p01_hcs_bwi_geu_svs_mbp_fsn:
+    name: SAP_01_MD_MATL_LOC_tai_mrs_p01_hcs_bwi_geu_svs_mbp_fsn
+    description: Pipeline to tai_mrs_p01_hcs_bwi_geu_svs_mbp_fsn systems  for MD_MATL_LOC
+    author: ggrilo1@its.jnj.com
+    mode: batch
+    language: python
+    createdAt: '2023-03-23 14:49:45'
+    modifiedAt: '2023-03-23 15:19:17'
+    datasets:
+      inputs:
+      - datasets/DS_SAP_01_MARC
+      outputs:
+      - datasets/MD_MATL_LOC
     dependencies: {}
 datasets:
   datasets/STRCT_MD_HU_SER:
@@ -3169,7 +3183,7 @@ datasets:
     description: ''
     author: skostadi@its.jnj.com
     createdAt: '2023-03-20 18:20:04'
-    modifiedAt: '2023-03-20 18:20:04'
+    modifiedAt: '2023-03-22 18:32:52'
     mode: batch
     physicalDatasets:
       CDL_L1_Dev:
@@ -3184,7 +3198,7 @@ datasets:
     description: ''
     author: skostadi@its.jnj.com
     createdAt: '2023-03-20 18:20:04'
-    modifiedAt: '2023-03-20 18:20:04'
+    modifiedAt: '2023-03-23 14:46:24'
     mode: batch
     physicalDatasets:
       CDL_L1_Dev:
@@ -5944,35 +5958,10 @@ jobs:
     createdAt: '2023-03-21 18:50:06'
     modifiedAt: '2023-03-22 17:30:52'
     author: skostadi@its.jnj.com
-  jobs/JOB_SAP_01_MD_MATL_LOC:
-    name: JOB_SAP_01_MD_MATL_LOC
-    description: job to run all sap systems for MD_MATL_LOC
-    fabricUID: 32
-    scheduler:
-      Databricks: {}
-    cloudProvider: null
-    jobSize: Prophecy_Small
-    scheduleCron: 0 0 0 1 * ? *
-    timeout: null
-    alerting:
-      emails: ''
-      onStart: false
-      onSuccess: false
-      onFailure: false
-    pipelines:
-    - pipelines/SAP_01_MD_MATL_LOC
-    jobClusterMode:
-      clusterMode:
-        Single: {}
-      clusterId: null
-    enabled: null
-    createdAt: '2023-03-21 14:58:14'
-    modifiedAt: '2023-03-21 15:32:25'
-    author: ggrilo1@its.jnj.com
 libraries: []
 subgraphs: {}
 sqlModels: {}
 sqlPipeline: null
-dependencies: '[]'
+dependencies: []
 projectDependencies: {}
 pipelineConfigurations: {}

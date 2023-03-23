@@ -22,9 +22,9 @@ def main():
                 .getOrCreate()\
                 .newSession()
     Utils.initializeFromArgs(spark, parse_args())
-    spark.conf.set("prophecy.metadata.pipeline.uri", "pipelines/SAP_01_MD_MATL_LOC")
+    spark.conf.set("prophecy.metadata.pipeline.uri", "pipelines/SAP_01_MD_MATL_LOC_tai_mrs_p01_hcs_bwi_geu_svs_mbp_fsn")
     
-    MetricsCollector.start(spark = spark, pipelineId = "pipelines/SAP_01_MD_MATL_LOC")
+    MetricsCollector.start(spark = spark, pipelineId = "pipelines/SAP_01_MD_MATL_LOC_tai_mrs_p01_hcs_bwi_geu_svs_mbp_fsn")
     pipeline(spark)
     MetricsCollector.end(spark)
 

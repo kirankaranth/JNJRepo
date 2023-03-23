@@ -5,5 +5,5 @@ from prophecy.libs import typed_lit
 from sap_01_md_matl_loc.config.ConfigStore import *
 from sap_01_md_matl_loc.udfs.UDFs import *
 
-def MANDT_FILTER(spark: SparkSession, in0: DataFrame) -> DataFrame:
-    return in0.filter((col("MANDT") == lit(Config.MANDT)))
+def SAP_MARC(spark: SparkSession) -> DataFrame:
+    return spark.sql(f"SELECT * FROM {Config.DBNAME}.{Config.TABLENAME} WHERE _deleted_ = 'F'")
