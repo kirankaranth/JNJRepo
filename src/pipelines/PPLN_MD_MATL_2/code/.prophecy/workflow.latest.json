@@ -1,5 +1,4 @@
-
-    {
+{
       "metainfo" : {
         "id" : "1",
         "language" : "python",
@@ -66,21 +65,21 @@
         "topLevelPackage" : "PPLN_MD_MATL_2"
       },
       "connections" : [ {
-        "id" : "41185dc6-b051-4b1a-9b27-ed89345121c9",
-        "source" : "00d55449-cbe4-4305-9f35-5828fd0f5768",
-        "sourcePort" : "f246d872-2e6f-4f64-8450-8076797d5e5d",
-        "target" : "21e71c47-d2df-4725-8607-76557a7d081b",
-        "targetPort" : "147e086f-001b-46dd-8c6f-800b4d8ef21d"
+        "id" : "acb7d970-81cf-4aa9-b165-2df87a47100c",
+        "source" : "53068666-5ee4-4348-ac13-32cd5073893d",
+        "sourcePort" : "367e60d3-77bb-40eb-bf76-e01b63a023c9",
+        "target" : "09ff9ef9-b529-4921-968f-2195f1ece6cc",
+        "targetPort" : "b2ad56f4-6a31-4de6-acf4-93466b63171f"
       }, {
-        "id" : "5c09e841-57f6-4a81-849e-451c2591b78a",
-        "source" : "79e6d3c7-5802-4c0c-9d00-fdcb5cec2621",
-        "sourcePort" : "0210ba6e-08fd-476b-ade9-d76a4d68789b",
-        "target" : "00d55449-cbe4-4305-9f35-5828fd0f5768",
-        "targetPort" : "aea6cb2d-fa56-4deb-9893-58026da241d1"
+        "id" : "821faf97-978d-4ab8-aac0-bfbee2d47327",
+        "source" : "bd1e3333-bd24-4aeb-8995-e736cbcea0b7",
+        "sourcePort" : "38999b02-191f-4f61-9664-7ecef4058e93",
+        "target" : "53068666-5ee4-4348-ac13-32cd5073893d",
+        "targetPort" : "7bf79786-ff41-412c-8404-49033550fe85"
       } ],
       "processes" : {
-        "21e71c47-d2df-4725-8607-76557a7d081b" : {
-          "id" : "21e71c47-d2df-4725-8607-76557a7d081b",
+        "09ff9ef9-b529-4921-968f-2195f1ece6cc" : {
+          "id" : "09ff9ef9-b529-4921-968f-2195f1ece6cc",
           "component" : "Target",
           "metadata" : {
             "label" : "MD_MATL",
@@ -94,7 +93,7 @@
           },
           "ports" : {
             "inputs" : [ {
-              "id" : "147e086f-001b-46dd-8c6f-800b4d8ef21d",
+              "id" : "b2ad56f4-6a31-4de6-acf4-93466b63171f",
               "slug" : "in0",
               "isStreaming" : false
             } ],
@@ -106,8 +105,8 @@
             "datasetId" : "datasets/MD_MATL"
           }
         },
-        "00d55449-cbe4-4305-9f35-5828fd0f5768" : {
-          "id" : "00d55449-cbe4-4305-9f35-5828fd0f5768",
+        "53068666-5ee4-4348-ac13-32cd5073893d" : {
+          "id" : "53068666-5ee4-4348-ac13-32cd5073893d",
           "component" : "SchemaTransform",
           "metadata" : {
             "label" : "addL1fields",
@@ -121,12 +120,12 @@
           },
           "ports" : {
             "inputs" : [ {
-              "id" : "aea6cb2d-fa56-4deb-9893-58026da241d1",
+              "id" : "7bf79786-ff41-412c-8404-49033550fe85",
               "slug" : "in0",
               "isStreaming" : false
             } ],
             "outputs" : [ {
-              "id" : "f246d872-2e6f-4f64-8450-8076797d5e5d",
+              "id" : "367e60d3-77bb-40eb-bf76-e01b63a023c9",
               "slug" : "out",
               "isStreaming" : false
             } ],
@@ -202,8 +201,8 @@
             } ]
           }
         },
-        "79e6d3c7-5802-4c0c-9d00-fdcb5cec2621" : {
-          "id" : "79e6d3c7-5802-4c0c-9d00-fdcb5cec2621",
+        "bd1e3333-bd24-4aeb-8995-e736cbcea0b7" : {
+          "id" : "bd1e3333-bd24-4aeb-8995-e736cbcea0b7",
           "component" : "Script",
           "metadata" : {
             "label" : "sql_MD_MATL",
@@ -218,7 +217,7 @@
           "ports" : {
             "inputs" : [ ],
             "outputs" : [ {
-              "id" : "0210ba6e-08fd-476b-ade9-d76a4d68789b",
+              "id" : "38999b02-191f-4f61-9664-7ecef4058e93",
               "slug" : "out0",
               "schema" : {
                 "type" : "struct",
@@ -239,7 +238,7 @@
             "isCustomOutputSchema" : true
           },
           "properties" : {
-            "script" : "out0 = spark.sql(f\"\"\"\n    WITH cte_atwrt AS\n  (SELECT objek,\n          atwrt_material_spec,\n          atwrt_spec_rev_level\n   FROM\n     (SELECT inob.objek,\n             ausp.atwrt,\n             cabn.atnam\n      FROM {Config.sourceDatabase}.inob\n      INNER JOIN {Config.sourceDatabase}.ausp ON ausp.objek = inob.cuobj\n      INNER JOIN {Config.sourceDatabase}.cabn ON cabn.atinn = ausp.atinn\n      WHERE inob.obtab = 'MARA'\n        AND inob.klart = '001'\n        AND UPPER(cabn.atnam) IN ('MATERIAL_SPEC',\n                                  'SPEC_REV_LEVEL')\n		AND inob._deleted_ = 'F' AND inob.MANDT = '100'\n        AND ausp._deleted_ = 'F' AND ausp.MANDT = '100'\n        AND cabn._deleted_ = 'F' AND cabn.MANDT = '100' ) PIVOT(MAX(atwrt) FOR atnam IN ('MATERIAL_SPEC' AS atwrt_material_spec, 'SPEC_REV_LEVEL' AS atwrt_spec_rev_level)))     \nSELECT\n    '{Config.sourceSystem}'   AS SRC_SYS_CD\n,MARA.matnr AS MATL_NUM\n,TRIM(MARA.mtart) AS MATL_TYPE_CD\n,NULL AS BRND_CD\n,TRIM(MARA.spart) AS FRANCHISE_CD\n,TRIM(MARA.labor) AS LCL_PLNG_SUB_FRAN_CD\n,TRIM(MARA.ekwsl) AS PRCHSNG_VAL_KEY_CD\n,TRIM(MARA.lvorm) AS DEL_IND\n,TRIM(MARA.matkl) AS MATL_GRP_CD\n,TRIM(MARA.mbrsh) AS INDSTR_SECTR_CD\n,TRIM(MARA.meins) AS BASE_UOM_CD\n,CAST(MARA.mhdhb AS DECIMAL(18,4)) AS TOT_SHLF_LIF_DAYS_CNT\n,CAST(MARA.mhdrz AS DECIMAL(18,4)) AS MIN_SHLF_RMN_LIF_DAYS_CNT\n,TRIM(MARA.mstae) AS MATL_STS_CD\n,TRIM(MARA.mstav) AS DSTN_CHN_STS_CD\n,CAST(MARA.ntgew AS DECIMAL(18,4)) AS NET_WT_MEAS\n,TRIM(MARA.prdha) AS PROD_HIER_CD\n,TRIM(MARA.qmpur) AS PRCMT_QUAL_MGMT_IND\n,TRIM(MARA.raube) AS STRG_CONDS_CD\n,TRIM(MARA.tempb) AS LBL_TEMP_RNG\n,TRIM(MARA.tragr) AS TRSPN_GRP_CD\n,TRIM(MARA.xchpf) AS BTCH_MNG_IND\n,TRIM(MARA.zeinr) AS MATL_DOC_NUM\n,TRIM(MARA.zeivr) AS MATL_DOC_VERS_NUM\n,TRIM(MAKT.maktx) AS MATL_SHRT_DESC\n,TRIM(MARA.zzmmssurgtype) AS MMS_SURGERY_TYPE_CD\n,TRIM(MARA.zzmmstype) AS MMS_MATL_TYPE_CD\n,TRIM(MARA.zzwerks) AS PRMRY_PLNT_CD\n,TRIM(MARA.zzmmsficlass) AS MMS_FIN_CLSN_CD\n,TRIM(MARA.zzmmsterile) AS MMS_STERILIZATION_IND\n,TRIM(MARA.zzcatnumber) AS MATL_CATLG_NUM\n,TRIM(MARA.zzsector) AS SRC_SECTR_CD\n,TRIM(MARA.zzp2_basecode) AS MATL_PARNT_CD\n,TRIM(MARA.zzmatsub_type) AS MATL_SUB_TYPE_CD\n,NULL AS FIN_HIER_BASE_CD\n,TRIM(MARA.zzprod_cat1) AS IMPLNT_INSTM_IND\n,TRIM(MARA.zzvariant) AS MATL_MOD_CD\n,TRIM(MARA.zzkit_ind) AS KIT_IND\n,TRIM(MARA.zzmmsts) AS MMS_TEMP_SENS_IND\n,NULL AS DIR_PART_MRKNG_CD\n,TRIM(MARA.mtpos_mara) AS MATL_CAT_GRP_CD\n,TRIM(MARA.zzp3_low_level) AS PLNG_HIER3_CD\n,TRIM(cte_atwrt.atwrt_material_spec) AS MATL_SPEC_NUM\n,TRIM(cte_atwrt.atwrt_spec_rev_level) AS MATL_SPEC_VERS_NUM\n,NULL AS CHG_BY\n,NULL AS DOC_CHG_NUM\n,NULL AS CNTNR_REQ\n,NULL AS OLD_MATL_NUM\n,NULL AS GRS_WT\n,NULL AS ORDR_UNIT_PUR_UOM\n,NULL AS CHEM_CMPLI\n,NULL AS CRT_BY\n,NULL AS CRT_ON_DTTM\n,NULL AS LBL_TYPE\n,NULL AS LBL_FORM\n,NULL AS EXTRNL_MATL_GRP\n,NULL AS MAX_LVL\n,NULL AS WT_UNIT\n,NULL AS SIZE_DIM\n,NULL AS PER_IN\n,NULL AS LAST_CHG_DT_TIME_DTTM\n,NULL AS MATL_GRP_PKGNG_MATL\n,NULL AS MATL_EXTRNL\n,NULL AS STRG_PCT\n,NULL AS VAL_FROM_XPLNT_DTTM\n,NULL AS VAL_FROM_XDC_DTTM\n,NULL AS INDSTR_STD_DESC\n,NULL AS RD_RUL_SLED\n,NULL AS SER_LVL\n,NULL AS MATL_HAZ_CD\n,NULL AS VAR_ORDR_UNT\n,NULL AS PKGNG_MATL_TYPE\n,NULL AS VOL_UNIT\n,NULL AS VOL\n,NULL AS BSC_MATL\n,NULL AS DOC_TYPE\n,NULL AS DOC_PG_FMT\n,NULL AS EAN_UPC\n,NULL AS EAN_CAT\n,NULL AS MFR_BOOK_PART_NUM\n,NULL AS DIR_SHP_FL\n,NULL AS FIN_PLNT\n,NULL AS MAIN_STRG_LOC\n,NULL AS PCS_PER_SLS_UNT\n,NULL AS PROD_LINE\n,NULL AS MAKE_BUY_IN\n,NULL AS STRT_PLNT\n,NULL AS MATL_SHRT_DESC_UP_CASE\n,NULL AS MATL_TYPE_DESC\n,NULL AS FRAN_CD_DESC\n,NULL AS BASE_UOM_DESC\n,NULL AS OBJ_NUM\n,NULL AS TYPE_OF_MATERIAL\n,NULL AS STERILE\n,NULL AS BRAVO_MINOR_CODE\n,NULL AS BRAVO_MINOR_CODE_DESC\n,NULL AS NDL_SLS_TYPE\n,NULL AS SUTURE_LENGTH_INCH\n,NULL AS SER_TYPE\n,NULL AS GTIN_VRNT\n,NULL AS MATL_GRP_DESC\n,NULL AS MATL_GRP_DESC_2\n,'#' AS SHRT_MATL_NUM\n,NULL AS CMMDTY\n,NULL AS NDL_COLOR\n,NULL AS NDL_ALLOY\n,NULL AS SUTURE_USP\n,NULL AS EAN_UPC_HRMZD\nFROM\n  {Config.sourceDatabase}.MARA MARA\n  LEFT JOIN {Config.sourceDatabase}.MAKT MAKT on MARA.matnr = MAKT.matnr\n  and MAKT.spras = 'E' and MAKT._deleted_ = 'F' and MAKT.MANDT = '100'\n  left join (\n        select\n          INOB.OBJEK,\n		  row_number() OVER (PARTITION BY OBJEK order by OBJEK DESC) AS row_num\n		from\n          {Config.sourceDatabase}.INOB INOB\n        where\n          INOB.KLART = 001\n          AND INOB.OBTAB='MARA'\n          AND INOB._deleted_ = 'F'\n          AND INOB.MANDT =\\\"100\\\"\n      ) INOB on MARA.MATNR = INOB.OBJEK	\n		and INOB.row_num = 1\n  LEFT JOIN cte_atwrt ON cte_atwrt.objek = MARA.matnr\nWHERE\n   MARA._deleted_ = 'F' and MARA.MANDT ='100'  \n \n\"\"\")",
+            "script" : "out0 = spark.sql(f\"\"\"\n    WITH cte_atwrt AS\n  (SELECT objek,\n          atwrt_material_spec,\n          atwrt_spec_rev_level\n   FROM\n     (SELECT inob.objek,\n             ausp.atwrt,\n             cabn.atnam\n      FROM {Config.sourceDatabase}.inob\n      INNER JOIN {Config.sourceDatabase}.ausp ON ausp.objek = inob.cuobj\n      INNER JOIN {Config.sourceDatabase}.cabn ON cabn.atinn = ausp.atinn\n      WHERE inob.obtab = 'MARA'\n        AND inob.klart = '001'\n        AND UPPER(cabn.atnam) IN ('MATERIAL_SPEC',\n                                  'SPEC_REV_LEVEL')\n  AND inob._deleted_ = 'F' AND inob.MANDT = '100'\n        AND ausp._deleted_ = 'F' AND ausp.MANDT = '100'\n        AND cabn._deleted_ = 'F' AND cabn.MANDT = '100' ) PIVOT(MAX(atwrt) FOR atnam IN ('MATERIAL_SPEC' AS atwrt_material_spec, 'SPEC_REV_LEVEL' AS atwrt_spec_rev_level)))     \nSELECT\n    '{Config.sourceSystem}'   AS SRC_SYS_CD\n,MARA.matnr AS MATL_NUM\n,TRIM(MARA.mtart) AS MATL_TYPE_CD\n,NULL AS BRND_CD\n,TRIM(MARA.spart) AS FRANCHISE_CD\n,TRIM(MARA.labor) AS LCL_PLNG_SUB_FRAN_CD\n,TRIM(MARA.ekwsl) AS PRCHSNG_VAL_KEY_CD\n,TRIM(MARA.lvorm) AS DEL_IND\n,TRIM(MARA.matkl) AS MATL_GRP_CD\n,TRIM(MARA.mbrsh) AS INDSTR_SECTR_CD\n,TRIM(MARA.meins) AS BASE_UOM_CD\n,CAST(MARA.mhdhb AS DECIMAL(18,4)) AS TOT_SHLF_LIF_DAYS_CNT\n,CAST(MARA.mhdrz AS DECIMAL(18,4)) AS MIN_SHLF_RMN_LIF_DAYS_CNT\n,TRIM(MARA.mstae) AS MATL_STS_CD\n,TRIM(MARA.mstav) AS DSTN_CHN_STS_CD\n,CAST(MARA.ntgew AS DECIMAL(18,4)) AS NET_WT_MEAS\n,TRIM(MARA.prdha) AS PROD_HIER_CD\n,TRIM(MARA.qmpur) AS PRCMT_QUAL_MGMT_IND\n,TRIM(MARA.raube) AS STRG_CONDS_CD\n,TRIM(MARA.tempb) AS LBL_TEMP_RNG\n,TRIM(MARA.tragr) AS TRSPN_GRP_CD\n,TRIM(MARA.xchpf) AS BTCH_MNG_IND\n,TRIM(MARA.zeinr) AS MATL_DOC_NUM\n,TRIM(MARA.zeivr) AS MATL_DOC_VERS_NUM\n,TRIM(MAKT.maktx) AS MATL_SHRT_DESC\n,TRIM(MARA.zzmmssurgtype) AS MMS_SURGERY_TYPE_CD\n,TRIM(MARA.zzmmstype) AS MMS_MATL_TYPE_CD\n,TRIM(MARA.zzwerks) AS PRMRY_PLNT_CD\n,TRIM(MARA.zzmmsficlass) AS MMS_FIN_CLSN_CD\n,TRIM(MARA.zzmmsterile) AS MMS_STERILIZATION_IND\n,TRIM(MARA.zzcatnumber) AS MATL_CATLG_NUM\n,TRIM(MARA.zzsector) AS SRC_SECTR_CD\n,TRIM(MARA.zzp2_basecode) AS MATL_PARNT_CD\n,TRIM(MARA.zzmatsub_type) AS MATL_SUB_TYPE_CD\n,NULL AS FIN_HIER_BASE_CD\n,TRIM(MARA.zzprod_cat1) AS IMPLNT_INSTM_IND\n,TRIM(MARA.zzvariant) AS MATL_MOD_CD\n,TRIM(MARA.zzkit_ind) AS KIT_IND\n,TRIM(MARA.zzmmsts) AS MMS_TEMP_SENS_IND\n,NULL AS DIR_PART_MRKNG_CD\n,TRIM(MARA.mtpos_mara) AS MATL_CAT_GRP_CD\n,TRIM(MARA.zzp3_low_level) AS PLNG_HIER3_CD\n,TRIM(cte_atwrt.atwrt_material_spec) AS MATL_SPEC_NUM\n,TRIM(cte_atwrt.atwrt_spec_rev_level) AS MATL_SPEC_VERS_NUM\n,NULL AS CHG_BY\n,NULL AS DOC_CHG_NUM\n,NULL AS CNTNR_REQ\n,NULL AS OLD_MATL_NUM\n,NULL AS GRS_WT\n,NULL AS ORDR_UNIT_PUR_UOM\n,NULL AS CHEM_CMPLI\n,NULL AS CRT_BY\n,NULL AS CRT_ON_DTTM\n,NULL AS LBL_TYPE\n,NULL AS LBL_FORM\n,NULL AS EXTRNL_MATL_GRP\n,NULL AS MAX_LVL\n,NULL AS WT_UNIT\n,NULL AS SIZE_DIM\n,NULL AS PER_IN\n,NULL AS LAST_CHG_DT_TIME_DTTM\n,NULL AS MATL_GRP_PKGNG_MATL\n,NULL AS MATL_EXTRNL\n,NULL AS STRG_PCT\n,NULL AS VAL_FROM_XPLNT_DTTM\n,NULL AS VAL_FROM_XDC_DTTM\n,NULL AS INDSTR_STD_DESC\n,NULL AS RD_RUL_SLED\n,NULL AS SER_LVL\n,NULL AS MATL_HAZ_CD\n,NULL AS VAR_ORDR_UNT\n,NULL AS PKGNG_MATL_TYPE\n,NULL AS VOL_UNIT\n,NULL AS VOL\n,NULL AS BSC_MATL\n,NULL AS DOC_TYPE\n,NULL AS DOC_PG_FMT\n,NULL AS EAN_UPC\n,NULL AS EAN_CAT\n,NULL AS MFR_BOOK_PART_NUM\n,NULL AS DIR_SHP_FL\n,NULL AS FIN_PLNT\n,NULL AS MAIN_STRG_LOC\n,NULL AS PCS_PER_SLS_UNT\n,NULL AS PROD_LINE\n,NULL AS MAKE_BUY_IN\n,NULL AS STRT_PLNT\n,NULL AS MATL_SHRT_DESC_UP_CASE\n,NULL AS MATL_TYPE_DESC\n,NULL AS FRAN_CD_DESC\n,NULL AS BASE_UOM_DESC\n,NULL AS OBJ_NUM\n,NULL AS TYPE_OF_MATERIAL\n,NULL AS STERILE\n,NULL AS BRAVO_MINOR_CODE\n,NULL AS BRAVO_MINOR_CODE_DESC\n,NULL AS NDL_SLS_TYPE\n,NULL AS SUTURE_LENGTH_INCH\n,NULL AS SER_TYPE\n,NULL AS GTIN_VRNT\n,NULL AS MATL_GRP_DESC\n,NULL AS MATL_GRP_DESC_2\n,'#' AS SHRT_MATL_NUM\n,NULL AS CMMDTY\n,NULL AS NDL_COLOR\n,NULL AS NDL_ALLOY\n,NULL AS SUTURE_USP\n,NULL AS EAN_UPC_HRMZD\nFROM\n  {Config.sourceDatabase}.MARA MARA\n  LEFT JOIN {Config.sourceDatabase}.MAKT MAKT on MARA.matnr = MAKT.matnr\n  and MAKT.spras = 'E' and MAKT._deleted_ = 'F' and MAKT.MANDT = '100'\n  left join (\n        select\n          INOB.OBJEK,\n    row_number() OVER (PARTITION BY OBJEK order by OBJEK DESC) AS row_num\n  from\n          {Config.sourceDatabase}.INOB INOB\n        where\n          INOB.KLART = 001\n          AND INOB.OBTAB='MARA'\n          AND INOB._deleted_ = 'F'\n          AND INOB.MANDT =\\\"100\\\"\n      ) INOB on MARA.MATNR = INOB.OBJEK \n  and INOB.row_num = 1\n  LEFT JOIN cte_atwrt ON cte_atwrt.objek = MARA.matnr\nWHERE\n   MARA._deleted_ = 'F' and MARA.MANDT ='100'  \n \n\"\"\")",
             "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
             "scriptMethodFooter" : "    return out0"
           }
