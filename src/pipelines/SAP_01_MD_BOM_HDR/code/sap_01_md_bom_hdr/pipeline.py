@@ -11,7 +11,7 @@ def pipeline(spark: SparkSession) -> None:
     df_STKO_MANDT_FILTER = STKO_MANDT_FILTER(spark, df_SAP_STKO)
     df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_STKO_MANDT_FILTER)
     df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS_RENAME_FORMAT)
-    MD_BOM_HDR(spark, df_SET_FIELD_ORDER_REFORMAT)
+    Target_1(spark, df_SET_FIELD_ORDER_REFORMAT)
 
 def main():
     spark = SparkSession.builder\
