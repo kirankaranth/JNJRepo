@@ -65,21 +65,21 @@
         "topLevelPackage" : "PPLN_MD_MATL_11"
       },
       "connections" : [ {
-        "id" : "2b5625e4-bada-46d4-bfcd-2e14f7867ee1",
-        "source" : "b229c280-474a-4267-8757-f6997b8d6814",
-        "sourcePort" : "4ddd8970-8726-48c8-aa57-0b5aef0ebc32",
-        "target" : "ef4cf8b1-6f20-4d83-899a-e8c8ee7de655",
-        "targetPort" : "552ace21-a0b0-4304-96ae-572b71f073bb"
+        "id" : "a4fe8884-076d-4207-b9ff-967d0fa25b8e",
+        "source" : "aca6c694-2595-48d9-b9cd-2d3980a9aea2",
+        "sourcePort" : "fd7039f4-645b-4c3d-99b6-72b5f700b080",
+        "target" : "35a903ba-c071-4e96-8de7-a0492c6da27e",
+        "targetPort" : "35d58ebb-903c-4f85-a27f-82237d2af4ba"
       }, {
-        "id" : "cfeac687-27c7-4111-9009-1279a4fd4513",
-        "source" : "81ae59d3-20ba-4259-a3c2-8f2de3f2616c",
-        "sourcePort" : "29e150c8-0ce7-4d61-a822-e86ebc570209",
-        "target" : "b229c280-474a-4267-8757-f6997b8d6814",
-        "targetPort" : "b14d14d4-0fee-416e-acd0-c00020ffb3ba"
+        "id" : "b4d67c54-f260-4cae-816e-94b477fcdc04",
+        "source" : "eae2b858-8ef9-4fa8-9224-95f07edd4be5",
+        "sourcePort" : "1149b57f-51fe-4d25-9b1f-cb8200b69562",
+        "target" : "aca6c694-2595-48d9-b9cd-2d3980a9aea2",
+        "targetPort" : "5fa16cb5-d2ae-4a7c-8c7d-35ac0468c6f3"
       } ],
       "processes" : {
-        "ef4cf8b1-6f20-4d83-899a-e8c8ee7de655" : {
-          "id" : "ef4cf8b1-6f20-4d83-899a-e8c8ee7de655",
+        "35a903ba-c071-4e96-8de7-a0492c6da27e" : {
+          "id" : "35a903ba-c071-4e96-8de7-a0492c6da27e",
           "component" : "Target",
           "metadata" : {
             "label" : "MD_MATL",
@@ -93,7 +93,7 @@
           },
           "ports" : {
             "inputs" : [ {
-              "id" : "552ace21-a0b0-4304-96ae-572b71f073bb",
+              "id" : "35d58ebb-903c-4f85-a27f-82237d2af4ba",
               "slug" : "in0",
               "isStreaming" : false
             } ],
@@ -105,8 +105,8 @@
             "datasetId" : "datasets/MD_MATL"
           }
         },
-        "b229c280-474a-4267-8757-f6997b8d6814" : {
-          "id" : "b229c280-474a-4267-8757-f6997b8d6814",
+        "aca6c694-2595-48d9-b9cd-2d3980a9aea2" : {
+          "id" : "aca6c694-2595-48d9-b9cd-2d3980a9aea2",
           "component" : "SchemaTransform",
           "metadata" : {
             "label" : "addL1fields",
@@ -120,12 +120,12 @@
           },
           "ports" : {
             "inputs" : [ {
-              "id" : "b14d14d4-0fee-416e-acd0-c00020ffb3ba",
+              "id" : "5fa16cb5-d2ae-4a7c-8c7d-35ac0468c6f3",
               "slug" : "in0",
               "isStreaming" : false
             } ],
             "outputs" : [ {
-              "id" : "4ddd8970-8726-48c8-aa57-0b5aef0ebc32",
+              "id" : "fd7039f4-645b-4c3d-99b6-72b5f700b080",
               "slug" : "out",
               "isStreaming" : false
             } ],
@@ -201,8 +201,8 @@
             } ]
           }
         },
-        "81ae59d3-20ba-4259-a3c2-8f2de3f2616c" : {
-          "id" : "81ae59d3-20ba-4259-a3c2-8f2de3f2616c",
+        "eae2b858-8ef9-4fa8-9224-95f07edd4be5" : {
+          "id" : "eae2b858-8ef9-4fa8-9224-95f07edd4be5",
           "component" : "Script",
           "metadata" : {
             "label" : "sql_MD_MATL",
@@ -217,7 +217,7 @@
           "ports" : {
             "inputs" : [ ],
             "outputs" : [ {
-              "id" : "29e150c8-0ce7-4d61-a822-e86ebc570209",
+              "id" : "1149b57f-51fe-4d25-9b1f-cb8200b69562",
               "slug" : "out0",
               "schema" : {
                 "type" : "struct",
@@ -238,7 +238,7 @@
             "isCustomOutputSchema" : true
           },
           "properties" : {
-            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT\n    '{Config.sourceSystem}'   AS SRC_SYS_CD\n,MARA.matnr AS MATL_NUM\n,TRIM(MARA.mtart) AS MATL_TYPE_CD\n,NULL AS BRND_CD\n,TRIM(MARA.spart) AS FRANCHISE_CD\n,TRIM(MARA.labor) AS LCL_PLNG_SUB_FRAN_CD\n,TRIM(MARA.ekwsl) AS PRCHSNG_VAL_KEY_CD\n,TRIM(MARA.lvorm) AS DEL_IND\n,TRIM(MARA.matkl) AS MATL_GRP_CD\n,TRIM(MARA.mbrsh) AS INDSTR_SECTR_CD\n,TRIM(MARA.meins) AS BASE_UOM_CD\n,CAST(MARA.mhdhb AS DECIMAL(18,4)) AS TOT_SHLF_LIF_DAYS_CNT\n,CAST(MARA.mhdrz AS DECIMAL(18,4)) AS MIN_SHLF_RMN_LIF_DAYS_CNT\n,TRIM(MARA.mstae) AS MATL_STS_CD\n,TRIM(MARA.mstav) AS DSTN_CHN_STS_CD\n,CAST(TRIM(MARA.ntgew) AS DECIMAL(18,4)) AS NET_WT_MEAS\n,TRIM(MARA.prdha) AS PROD_HIER_CD\n,TRIM(MARA.qmpur) AS PRCMT_QUAL_MGMT_IND\n,TRIM(MARA.raube) AS STRG_CONDS_CD\n,TRIM(MARA.tempb) AS LBL_TEMP_RNG\n,TRIM(MARA.tragr) AS TRSPN_GRP_CD\n,TRIM(MARA.xchpf) AS BTCH_MNG_IND\n,TRIM(MARA.zeinr) AS MATL_DOC_NUM\n,TRIM(MARA.zeivr) AS MATL_DOC_VERS_NUM\n,TRIM(MAKT.maktx) AS MATL_SHRT_DESC\n,NULL AS MMS_SURGERY_TYPE_CD\n,NULL AS MMS_MATL_TYPE_CD\n,NULL AS PRMRY_PLNT_CD\n,NULL AS MMS_FIN_CLSN_CD\n,NULL AS MMS_STERILIZATION_IND\n,NULL AS MATL_CATLG_NUM\n,NULL AS SRC_SECTR_CD\n,NULL AS MATL_PARNT_CD\n,NULL AS MATL_SUB_TYPE_CD\n,NULL AS FIN_HIER_BASE_CD\n,NULL AS IMPLNT_INSTM_IND\n,NULL AS MATL_MOD_CD\n,NULL AS KIT_IND\n,NULL AS MMS_TEMP_SENS_IND\n,NULL AS DIR_PART_MRKNG_CD\n,TRIM(MARA.mtpos_mara) AS MATL_CAT_GRP_CD\n,NULL AS PLNG_HIER3_CD\n,NULL AS MATL_SPEC_NUM\n,NULL AS MATL_SPEC_VERS_NUM\n,NULL AS CHG_BY\n,NULL AS DOC_CHG_NUM\n,NULL AS CNTNR_REQ\n,NULL AS OLD_MATL_NUM\n,NULL AS GRS_WT\n,NULL AS ORDR_UNIT_PUR_UOM\n,NULL AS CHEM_CMPLI\n,NULL AS CRT_BY\n,NULL AS CRT_ON_DTTM\n,NULL AS LBL_TYPE\n,NULL AS LBL_FORM\n,NULL AS EXTRNL_MATL_GRP\n,NULL AS MAX_LVL\n,NULL AS WT_UNIT\n,NULL AS SIZE_DIM\n,NULL AS PER_IN\n,NULL AS LAST_CHG_DT_TIME_DTTM\n,NULL AS MATL_GRP_PKGNG_MATL\n,NULL AS MATL_EXTRNL\n,NULL AS STRG_PCT\n,NULL AS VAL_FROM_XPLNT_DTTM\n,NULL AS VAL_FROM_XDC_DTTM\n,NULL AS INDSTR_STD_DESC\n,NULL AS RD_RUL_SLED\n,NULL AS SER_LVL\n,NULL AS MATL_HAZ_CD\n,NULL AS VAR_ORDR_UNT\n,NULL AS PKGNG_MATL_TYPE\n,NULL AS VOL_UNIT\n,NULL AS VOL\n,NULL AS BSC_MATL\n,NULL AS DOC_TYPE\n,NULL AS DOC_PG_FMT\n,NULL AS EAN_UPC\n,NULL AS EAN_CAT\n,NULL AS MFR_BOOK_PART_NUM\n,NULL AS DIR_SHP_FL\n,NULL AS FIN_PLNT\n,NULL AS MAIN_STRG_LOC\n,NULL AS PCS_PER_SLS_UNT\n,NULL AS PROD_LINE\n,NULL AS MAKE_BUY_IN\n,NULL AS STRT_PLNT\n,NULL AS MATL_SHRT_DESC_UP_CASE\n,NULL AS MATL_TYPE_DESC\n,NULL AS FRAN_CD_DESC\n,NULL AS BASE_UOM_DESC\n,NULL AS OBJ_NUM\n,NULL AS TYPE_OF_MATERIAL\n,NULL AS STERILE\n,NULL AS BRAVO_MINOR_CODE\n,NULL AS BRAVO_MINOR_CODE_DESC\n,NULL AS NDL_SLS_TYPE\n,NULL AS SUTURE_LENGTH_INCH\n,NULL AS SER_TYPE\n,NULL AS GTIN_VRNT\n,NULL AS MATL_GRP_DESC\n,NULL AS MATL_GRP_DESC_2\n,'#' AS SHRT_MATL_NUM\n,NULL AS CMMDTY\n,NULL AS NDL_COLOR\n,NULL AS NDL_ALLOY\n,NULL AS SUTURE_USP\n,NULL AS EAN_UPC_HRMZD\nFROM\n  {Config.sourceDatabase}.MARA MARA\n  LEFT JOIN {Config.sourceDatabase}.MAKT MAKT on MARA.matnr = MAKT.matnr\n  and MAKT.spras = 'E' and MAKT._deleted_ = 'F' and MAKT.MANDT = '100'\n  WHERE MARA._deleted_ = 'F' and MARA.MANDT = '100'  \n \n\"\"\")",
+            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT\n    '{Config.sourceSystem}'   AS SRC_SYS_CD\n,MARA.matnr AS MATL_NUM\n,TRIM(MARA.mtart) AS MATL_TYPE_CD\n\n,TRIM(MARA.spart) AS FRANCHISE_CD\n,TRIM(MARA.labor) AS LCL_PLNG_SUB_FRAN_CD\n,TRIM(MARA.ekwsl) AS PRCHSNG_VAL_KEY_CD\n,TRIM(MARA.lvorm) AS DEL_IND\n,TRIM(MARA.matkl) AS MATL_GRP_CD\n,TRIM(MARA.mbrsh) AS INDSTR_SECTR_CD\n,TRIM(MARA.meins) AS BASE_UOM_CD\n,CAST(MARA.mhdhb AS DECIMAL(18,4)) AS TOT_SHLF_LIF_DAYS_CNT\n,CAST(MARA.mhdrz AS DECIMAL(18,4)) AS MIN_SHLF_RMN_LIF_DAYS_CNT\n,TRIM(MARA.mstae) AS MATL_STS_CD\n,TRIM(MARA.mstav) AS DSTN_CHN_STS_CD\n,CAST(TRIM(MARA.ntgew) AS DECIMAL(18,4)) AS NET_WT_MEAS\n,TRIM(MARA.prdha) AS PROD_HIER_CD\n,TRIM(MARA.qmpur) AS PRCMT_QUAL_MGMT_IND\n,TRIM(MARA.raube) AS STRG_CONDS_CD\n,TRIM(MARA.tempb) AS LBL_TEMP_RNG\n,TRIM(MARA.tragr) AS TRSPN_GRP_CD\n,TRIM(MARA.xchpf) AS BTCH_MNG_IND\n,TRIM(MARA.zeinr) AS MATL_DOC_NUM\n,TRIM(MARA.zeivr) AS MATL_DOC_VERS_NUM\n,TRIM(MAKT.maktx) AS MATL_SHRT_DESC\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n,TRIM(MARA.mtpos_mara) AS MATL_CAT_GRP_CD\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n,'#' AS SHRT_MATL_NUM\n\n\n\n\n\nFROM\n  {Config.sourceDatabase}.MARA MARA\n  LEFT JOIN {Config.sourceDatabase}.MAKT MAKT on MARA.matnr = MAKT.matnr\n  and MAKT.spras = 'E' and MAKT._deleted_ = 'F' and MAKT.MANDT = '100'\n  WHERE MARA._deleted_ = 'F' and MARA.MANDT = '100'  \n \n\"\"\")",
             "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
             "scriptMethodFooter" : "    return out0"
           }
