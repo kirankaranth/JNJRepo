@@ -9,8 +9,8 @@ def MD_PRCH_INFO(spark: SparkSession, in0: DataFrame):
     in0.write\
         .format("delta")\
         .option("optimizeWrite", True)\
-        .option("overwriteSchema", True)\
+        .option("mergeSchema", True)\
         .option("path", f"/mnt/{Config.targetEnv}_curdelta/{Config.targetApp}/{Config.targetDomain}/MD_PRCH_INFO")\
-        .mode("overwrite")\
+        .mode("append")\
         .partitionBy("SRC_SYS_CD")\
         .saveAsTable(f"{Config.targetSchema}.MD_PRCH_INFO")

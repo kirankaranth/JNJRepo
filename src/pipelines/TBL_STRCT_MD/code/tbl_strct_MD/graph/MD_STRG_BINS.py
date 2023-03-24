@@ -9,8 +9,8 @@ def MD_STRG_BINS(spark: SparkSession, in0: DataFrame):
     in0.write\
         .format("delta")\
         .option("optimizeWrite", True)\
-        .option("overwriteSchema", True)\
+        .option("mergeSchema", True)\
         .option("path", f"/mnt/{Config.targetEnv}_curdelta/{Config.targetApp}/{Config.targetDomain}/MD_STRG_BINS")\
-        .mode("overwrite")\
+        .mode("append")\
         .partitionBy("SRC_SYS_CD")\
         .saveAsTable(f"{Config.targetSchema}.MD_STRG_BINS")

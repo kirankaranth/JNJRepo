@@ -8,6 +8,9 @@ from tbl_strct_MD_WORKCENTER.udfs.UDFs import *
 def MD_WRK_CTR(spark: SparkSession, in0: DataFrame):
     in0.write\
         .format("delta")\
+        .option("optimizeWrite", True)\
+        .option("mergeSchema", True)\
         .option("path", f"/mnt/{Config.targetEnv}_curdelta/{Config.targetApp}/{Config.targetDomain}/MD_WRK_CTR")\
-        .mode("overwrite")\
+        .mode("append")\
+        .partitionBy("SRC_SYS_CD")\
         .saveAsTable(f"{Config.targetSchema}.MD_WRK_CTR")

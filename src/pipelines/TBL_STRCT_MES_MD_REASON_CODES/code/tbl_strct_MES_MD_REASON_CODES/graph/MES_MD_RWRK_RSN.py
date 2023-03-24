@@ -9,8 +9,8 @@ def MES_MD_RWRK_RSN(spark: SparkSession, in0: DataFrame):
     in0.write\
         .format("delta")\
         .option("optimizeWrite", True)\
-        .option("overwriteSchema", True)\
+        .option("mergeSchema", True)\
         .option("path", f"/mnt/{Config.targetEnv}_curdelta/{Config.targetApp}/{Config.targetDomain}/MES_MD_RWRK_RSN")\
-        .mode("overwrite")\
+        .mode("append")\
         .partitionBy("SRC_SYS_CD")\
         .saveAsTable(f"{Config.targetSchema}.MES_MD_RWRK_RSN")
