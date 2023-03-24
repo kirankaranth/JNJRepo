@@ -1,32 +1,32 @@
 from prophecy.config import ConfigBase
-prophecy_spark_context = None
 
 
 class Config(ConfigBase):
 
     def __init__(
             self,
-            sourceSystem: str=None, 
-            targetSchema: str=None, 
-            MANDT: str=None, 
-            COLUMNS: int=None, 
-            DBNAME: str=None, 
-            DAI_ETL_ID: int=None
+            sourceSystem: str=None,
+            targetSchema: str=None,
+            MANDT: str=None,
+            COLUMNS: int=None,
+            DBNAME: str=None,
+            DAI_ETL_ID: int=None,
+            **kwargs
     ):
         self.spark = None
         self.update(sourceSystem, targetSchema, MANDT, COLUMNS, DBNAME, DAI_ETL_ID)
 
     def update(
             self,
-            sourceSystem: str="hm2", 
-            targetSchema: str="l1_md_prophecy", 
-            MANDT: str="100", 
-            COLUMNS: int=134, 
-            DBNAME: str="pqa_hm2", 
-            DAI_ETL_ID: int=0
+            sourceSystem: str="hm2",
+            targetSchema: str="l1_md_prophecy",
+            MANDT: str="100",
+            COLUMNS: int=134,
+            DBNAME: str="pqa_hm2",
+            DAI_ETL_ID: int=0,
+            **kwargs
     ):
-        global prophecy_spark_context
-        prophecy_spark_context = self.spark
+        prophecy_spark = self.spark
         self.sourceSystem = sourceSystem
         self.targetSchema = targetSchema
         self.MANDT = MANDT
