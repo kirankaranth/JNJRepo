@@ -13,7 +13,7 @@ def pipeline(spark: SparkSession) -> None:
     df_TRANSFORM = TRANSFORM(spark, df_JOIN)
     df_ROW_NUM_TEST = ROW_NUM_TEST(spark, df_TRANSFORM)
     df_SET_FIELD_ORDER = SET_FIELD_ORDER(spark, df_ROW_NUM_TEST)
-    Target_1(spark, df_SET_FIELD_ORDER)
+    MD_MATL_INV(spark, df_SET_FIELD_ORDER)
     df_DEDUPLICATE = DEDUPLICATE(spark, df_TRANSFORM)
 
 def main():
