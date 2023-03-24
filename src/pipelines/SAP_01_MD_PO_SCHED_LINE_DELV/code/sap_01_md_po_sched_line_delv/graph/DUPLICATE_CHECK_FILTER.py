@@ -5,5 +5,5 @@ from prophecy.libs import typed_lit
 from sap_01_md_po_sched_line_delv.config.ConfigStore import *
 from sap_01_md_po_sched_line_delv.udfs.UDFs import *
 
-def Filter_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
+def DUPLICATE_CHECK_FILTER(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0.filter((col("PK_COUNT") > lit(1)))

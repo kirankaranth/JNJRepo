@@ -30,6 +30,44 @@ class NEW_FIELDSTest(BaseTestCase):
             self.maxUnequalRowsToShow
         )
 
+    def test_unit_test_1(self):
+        dfIn0 = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/sap_01_md_po_sched_line_delv/graph/NEW_FIELDS/in0/schema.json',
+            'test/resources/data/sap_01_md_po_sched_line_delv/graph/NEW_FIELDS/in0/data/test_unit_test_1.json',
+            'in0'
+        )
+        dfOut = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/sap_01_md_po_sched_line_delv/graph/NEW_FIELDS/out/schema.json',
+            'test/resources/data/sap_01_md_po_sched_line_delv/graph/NEW_FIELDS/out/data/test_unit_test_1.json',
+            'out'
+        )
+        dfOutComputed = NEW_FIELDS(self.spark, dfIn0)
+        assertDFEquals(
+            dfOut.select(
+              "SCHD_QTY",
+              "RECV_QTY",
+              "STK_TFR_RECV_QTY",
+              "MRP_ADJ_QTY",
+              "CMT_QTY",
+              "PREV_QTY",
+              "CAT_OF_DELV_DT",
+              "BTCH_NUM"
+            ),
+            dfOutComputed.select(
+              "SCHD_QTY",
+              "RECV_QTY",
+              "STK_TFR_RECV_QTY",
+              "MRP_ADJ_QTY",
+              "CMT_QTY",
+              "PREV_QTY",
+              "CAT_OF_DELV_DT",
+              "BTCH_NUM"
+            ),
+            self.maxUnequalRowsToShow
+        )
+
     def setUp(self):
         BaseTestCase.setUp(self)
         import os
