@@ -8,9 +8,12 @@ from tbl_strct_MES_MD_BATCH_LOT.udfs.UDFs import *
 def MES_MD_CNTNR_ASSN_HIST_CHI(spark: SparkSession, in0: DataFrame):
     in0.write\
         .format("delta")\
+        .option("optimizeWrite", True)\
+        .option("mergeSchema", True)\
         .option(
           "path",
           f"/mnt/{Config.targetEnv}_curdelta/{Config.targetApp}/{Config.targetDomain}/MES_MD_CNTNR_ASSN_HIST_CHI"
         )\
-        .mode("overwrite")\
+        .mode("append")\
+        .partitionBy("SRC_SYS_CD")\
         .saveAsTable(f"{Config.targetSchema}.MES_MD_CNTNR_ASSN_HIST_CHI")

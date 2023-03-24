@@ -1,22 +1,28 @@
 from prophecy.config import ConfigBase
-prophecy_spark_context = None
 
 
 class Config(ConfigBase):
 
-    def __init__(self, targetSchema: str=None, targetEnv: str=None, targetDomain: str=None, targetApp: str=None):
+    def __init__(
+            self,
+            targetSchema: str=None,
+            targetEnv: str=None,
+            targetDomain: str=None,
+            targetApp: str=None,
+            **kwargs
+    ):
         self.spark = None
         self.update(targetSchema, targetEnv, targetDomain, targetApp)
 
     def update(
             self,
-            targetSchema: str="l1_md_prophecy", 
-            targetEnv: str="dev", 
-            targetDomain: str="MES_MD_GENEOLOGY", 
-            targetApp: str="md_l1"
+            targetSchema: str="l1_md_prophecy",
+            targetEnv: str="dev",
+            targetDomain: str="MES_MD_GENEOLOGY",
+            targetApp: str="md_l1",
+            **kwargs
     ):
-        global prophecy_spark_context
-        prophecy_spark_context = self.spark
+        prophecy_spark = self.spark
         self.targetSchema = targetSchema
         self.targetEnv = targetEnv
         self.targetDomain = targetDomain

@@ -1,2 +1,2 @@
-from .sql_MD_TFR_ORDR_ITM import *
-from .MD_TFR_ORDR_ITM import *
+from .sql_MD_TFR_ORDR_ITM import sql_MD_TFR_ORDR_ITM
+from .MD_TFR_ORDR_ITM import MD_TFR_ORDR_ITM

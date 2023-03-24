@@ -1,2 +1,2 @@
-from .MD_SLS_DOC_HIER import *
-from .sql_MD_SLS_DOC_HIER import *
+from .MD_SLS_DOC_HIER import MD_SLS_DOC_HIER
+from .sql_MD_SLS_DOC_HIER import sql_MD_SLS_DOC_HIER
