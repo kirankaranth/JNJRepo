@@ -27,7 +27,7 @@ def pipeline(spark: SparkSession) -> None:
     )
     df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_Join_1)
     df_SET_FIELD_ORDER_FORMAT = SET_FIELD_ORDER_FORMAT(spark, df_NEW_FIELDS_RENAME_FORMAT)
-    MD_NEWTABLE_SWAP(spark, df_SET_FIELD_ORDER_FORMAT)
+    MD_BILL_DOC_HDR(spark, df_SET_FIELD_ORDER_FORMAT)
 
 def main():
     spark = SparkSession.builder\

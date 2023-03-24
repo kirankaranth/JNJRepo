@@ -78,7 +78,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("REF_DOC_NUM", trim(col("XBLNR")))\
         .withColumn("ASGNMT_NUM", trim(col("ZUONR")))\
         .withColumn("TAX_AMT", trim(col("MWSBK")).cast(DecimalType(18, 4)))\
-        .withColumn("LOGL_SYS\r\n", trim(col("LOGSYS")))\
+        .withColumn("LOGL_SYS", trim(col("LOGSYS")))\
         .withColumn(
           "TRNL_DTTM",
           when((col("KURRF_DAT") == lit("00000000")), lit(None)).otherwise(to_timestamp(col("KURRF_DAT"), "yyyyMMdd"))
