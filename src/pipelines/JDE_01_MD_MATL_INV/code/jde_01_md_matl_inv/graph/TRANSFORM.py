@@ -7,7 +7,7 @@ from jde_01_md_matl_inv.udfs.UDFs import *
 
 def TRANSFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
-        .withColumn("SRC_SYS_CD", lit(Config.SRC_SYS_CD))\
+        .withColumn("SRC_SYS_CD", lit(Config.sourceSystem))\
         .withColumn("SRC_TBL_NM", lit(Config.DBTABLE1))\
         .withColumn(
           "MATL_NUM",
