@@ -50,6 +50,26 @@ class NEW_FIELDS_RENAME_FORMATTest(BaseTestCase):
             self.maxUnequalRowsToShow
         )
 
+    def test_trim(self):
+        dfIn0 = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/sap_01_md_bill_doc_hdr/graph/NEW_FIELDS_RENAME_FORMAT/in0/schema.json',
+            'test/resources/data/sap_01_md_bill_doc_hdr/graph/NEW_FIELDS_RENAME_FORMAT/in0/data/test_trim.json',
+            'in0'
+        )
+        dfOut = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/sap_01_md_bill_doc_hdr/graph/NEW_FIELDS_RENAME_FORMAT/out/schema.json',
+            'test/resources/data/sap_01_md_bill_doc_hdr/graph/NEW_FIELDS_RENAME_FORMAT/out/data/test_trim.json',
+            'out'
+        )
+        dfOutComputed = NEW_FIELDS_RENAME_FORMAT(self.spark, dfIn0)
+        assertDFEquals(
+            dfOut.select("BILL_DOC", "SLORG_DESC", "INDSTR_CD_1", "BILL_DOC_IS_CAN"),
+            dfOutComputed.select("BILL_DOC", "SLORG_DESC", "INDSTR_CD_1", "BILL_DOC_IS_CAN"),
+            self.maxUnequalRowsToShow
+        )
+
     def setUp(self):
         BaseTestCase.setUp(self)
         import os
