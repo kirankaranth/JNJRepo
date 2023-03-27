@@ -30,6 +30,26 @@ class SET_FIELDS_ORDER_REFORMATTest(BaseTestCase):
             self.maxUnequalRowsToShow
         )
 
+    def test_unit_test_1(self):
+        dfIn0 = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/sap_01_md_matl_loc/graph/SET_FIELDS_ORDER_REFORMAT/in0/schema.json',
+            'test/resources/data/sap_01_md_matl_loc/graph/SET_FIELDS_ORDER_REFORMAT/in0/data/test_unit_test_1.json',
+            'in0'
+        )
+        dfOut = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/sap_01_md_matl_loc/graph/SET_FIELDS_ORDER_REFORMAT/out/schema.json',
+            'test/resources/data/sap_01_md_matl_loc/graph/SET_FIELDS_ORDER_REFORMAT/out/data/test_unit_test_1.json',
+            'out'
+        )
+        dfOutComputed = SET_FIELDS_ORDER_REFORMAT(self.spark, dfIn0)
+        assertDFEquals(
+            dfOut.select("SRC_SYS_CD", "MATL_NUM", "PLNT_CD"),
+            dfOutComputed.select("SRC_SYS_CD", "MATL_NUM", "PLNT_CD"),
+            self.maxUnequalRowsToShow
+        )
+
     def setUp(self):
         BaseTestCase.setUp(self)
         import os
