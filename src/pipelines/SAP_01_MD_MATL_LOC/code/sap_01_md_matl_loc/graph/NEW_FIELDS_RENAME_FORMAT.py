@@ -56,12 +56,6 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("FRWD_CNSMPTN_DAYS_CNT", trim(col("VINT2")).cast(DecimalType(18, 4)))\
         .withColumn("CNSMPTN_MODE_CD", trim(col("VRMOD")))\
         .withColumn("PRCHSNG_GRP_CD", trim(col("EKGRP")))\
-        .withColumn("MMS_FIN_CLSN_CD", lit(None).cast(StringType()))\
-        .withColumn("VMI_IND", lit(None).cast(StringType()))\
-        .withColumn("MSTR_PLNG_FMLY_CD", lit(None).cast(StringType()))\
-        .withColumn("ENTR_SPEC_MATL_PLNT_STS_CD", lit(None).cast(StringType()))\
-        .withColumn("ENTR_PRCMT_TYPE_CD", lit(None).cast(StringType()))\
-        .withColumn("MATL_HAZ_CD", lit(None).cast(StringType()))\
         .withColumn("VALUT_CAT", trim(col("BWTTY")))\
         .withColumn("BTCH_MGMT_IN_INTRNL", trim(col("XCHAR")))\
         .withColumn("MRP_PRFL", trim(col("DISPR")))\
