@@ -106,8 +106,8 @@
     "interimModeEnabled" : true,
     "visualCodeInterimMode" : "Disabled",
     "recordsLimit" : {
-      "enabled" : true,
-      "value" : 100
+      "enabled" : false,
+      "value" : 1000
     },
     "topLevelPackage" : "jde_01_md_matl_inv",
     "configurationVersion" : "v1"
@@ -137,23 +137,23 @@
     "target" : "NUwLnRxfZZykOhJDhrNM2$$d_lYdifMTvbQgA0go8HKe",
     "targetPort" : "gWaKzncYiRoedP8N3DjLW$$P8PHqGabRs6_aGZoQMJdu"
   }, {
-    "id" : "QdzMAcA4kEBmhf_IrMLT-",
-    "source" : "6RTPsyPHJ0sWf47pu8GpG$$2D_fJFNxkJfVJ2G622sL7",
-    "sourcePort" : "MgOxEkYISTc7-LX2Fz_lW$$apIwGNx_rdXAIACiuviTc",
-    "target" : "cvwBu3IzDI-9_21GUDFHP$$65PIH-lb814jNoG9hAMAo",
-    "targetPort" : "zJRF9Ypmw3j9S7_hG7u1b$$WzjdT0QuAx8BjUsqxNRwU"
-  }, {
-    "id" : "-7CPWdcaLk2VGeg3zRBmF$$_yQ1wNTF6Moz2vZefTpmV",
-    "source" : "cvwBu3IzDI-9_21GUDFHP$$65PIH-lb814jNoG9hAMAo",
-    "sourcePort" : "Hg8eTvVKTzQ3tVUGsRIxd$$FOc2A5owkboOAx9aP2YKk",
-    "target" : "eocfCGB_Ntnf-mPShLDUL$$OSsJliJS0uB5U--nSZvGI",
-    "targetPort" : "maBkeW9nupLwg0_hnwNDe$$Okbk4czIg4Z6cSd9gx-36"
-  }, {
     "id" : "UKPUeTxp73ot493KkxpCu$$R9FLUmSMiY3SrZd4Dles5",
     "source" : "eocfCGB_Ntnf-mPShLDUL$$OSsJliJS0uB5U--nSZvGI",
     "sourcePort" : "b46Ffqs-8HbCWzHvxvAmg$$W2KWWaiMsXop1XLVR4F8y",
     "target" : "EKMJaA8PpwNzeMQka3Wl8$$ls7lQ9dNCb_f970NugcOn",
     "targetPort" : "OfNQFfZOU2fipRYYERPjL$$pD2HSl5uQg48xHouCkrOw"
+  }, {
+    "id" : "i1-aohc75N3WsO53tLCJe$$LdB2Jvw_PyYwpdf8KqQsQ",
+    "source" : "NUwLnRxfZZykOhJDhrNM2$$d_lYdifMTvbQgA0go8HKe",
+    "sourcePort" : "thXiZPTcVhdGglL0i6xfR$$pXL4TCZiJKyDw2kpf7NnR",
+    "target" : "eocfCGB_Ntnf-mPShLDUL$$OSsJliJS0uB5U--nSZvGI",
+    "targetPort" : "maBkeW9nupLwg0_hnwNDe$$Okbk4czIg4Z6cSd9gx-36"
+  }, {
+    "id" : "srLy-8KZ-patnkDmtHkRa",
+    "source" : "6RTPsyPHJ0sWf47pu8GpG$$2D_fJFNxkJfVJ2G622sL7",
+    "sourcePort" : "MgOxEkYISTc7-LX2Fz_lW$$apIwGNx_rdXAIACiuviTc",
+    "target" : "cvwBu3IzDI-9_21GUDFHP$$65PIH-lb814jNoG9hAMAo",
+    "targetPort" : "zJRF9Ypmw3j9S7_hG7u1b$$WzjdT0QuAx8BjUsqxNRwU"
   } ],
   "processes" : {
     "0Lhszmn7DhrOVbS6PTGma$$d5Kj6tlMD5fUdmVz8b70W" : {
@@ -541,7 +541,7 @@
           "path" : "out",
           "id" : "Hg8eTvVKTzQ3tVUGsRIxd$$FOc2A5owkboOAx9aP2YKk",
           "language" : "sql",
-          "content" : "SELECT \r\n    * \r\nFROM \r\n    (SELECT \r\n        *,\r\n        row_number() OVER(PARTITION BY SRC_SYS_CD, MATL_NUM, PLNT_CD, SLOC_CD, BTCH_NUM, BTCH_STS_CD \r\n        ORDER BY SRC_SYS_CD, MATL_NUM, PLNT_CD, SLOC_CD, BTCH_NUM, BTCH_STS_CD) rank_no\r\n    FROM\r\n        in0) a\r\nWHERE rank_no = 1"
+          "content" : "SELECT \r\n    * \r\nFROM \r\n    (SELECT \r\n        *,\r\n        row_number() OVER(PARTITION BY SRC_SYS_CD, SRC_TBL_NM, MATL_NUM, PLNT_CD, SLOC_CD, BTCH_NUM, BTCH_STS_CD, SPCL_STCK_IND, \r\n        PRTY_NUM \r\n        ORDER BY SRC_SYS_CD, SRC_TBL_NM, MATL_NUM, PLNT_CD, SLOC_CD, BTCH_NUM, BTCH_STS_CD, SPCL_STCK_IND, \r\n        PRTY_NUM) rank_no\r\n    FROM\r\n        in0) a\r\nWHERE rank_no = 1"
         } ],
         "inputPortNames" : [ "in0" ]
       }
@@ -3392,7 +3392,7 @@
       "metadata" : {
         "label" : "SET_FIELD_ORDER",
         "slug" : "SET_FIELD_ORDER",
-        "x" : -1660,
+        "x" : -1680,
         "y" : -620,
         "phase" : 0,
         "cache" : false,
@@ -3724,15 +3724,6 @@
               "name" : "DAI_UPDT_DTTM",
               "type" : "timestamp",
               "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "rank_no",
-              "type" : "integer",
-              "nullable" : false,
               "metadata" : {
                 "description" : "",
                 "mappings" : [ ],
@@ -4289,9 +4280,15 @@
           "colName" : "SLOC_CD"
         }, {
           "colName" : "BTCH_NUM"
+        }, {
+          "colName" : "BTCH_STS_CD"
+        }, {
+          "colName" : "SPCL_STCK_IND"
+        }, {
+          "colName" : "PRTY_NUM"
         } ],
         "dedupType" : "first",
-        "columnsSelector" : [ "gWaKzncYiRoedP8N3DjLW$$P8PHqGabRs6_aGZoQMJdu##SRC_TBL_NM", "gWaKzncYiRoedP8N3DjLW$$P8PHqGabRs6_aGZoQMJdu##SLOC_CD", "gWaKzncYiRoedP8N3DjLW$$P8PHqGabRs6_aGZoQMJdu##SRC_SYS_CD", "gWaKzncYiRoedP8N3DjLW$$P8PHqGabRs6_aGZoQMJdu##PLNT_CD", "gWaKzncYiRoedP8N3DjLW$$P8PHqGabRs6_aGZoQMJdu##BTCH_NUM", "gWaKzncYiRoedP8N3DjLW$$P8PHqGabRs6_aGZoQMJdu##MATL_NUM" ],
+        "columnsSelector" : [ "gWaKzncYiRoedP8N3DjLW$$P8PHqGabRs6_aGZoQMJdu##BTCH_NUM", "gWaKzncYiRoedP8N3DjLW$$P8PHqGabRs6_aGZoQMJdu##SLOC_CD", "gWaKzncYiRoedP8N3DjLW$$P8PHqGabRs6_aGZoQMJdu##SPCL_STCK_IND", "gWaKzncYiRoedP8N3DjLW$$P8PHqGabRs6_aGZoQMJdu##PLNT_CD", "gWaKzncYiRoedP8N3DjLW$$P8PHqGabRs6_aGZoQMJdu##PRTY_NUM", "gWaKzncYiRoedP8N3DjLW$$P8PHqGabRs6_aGZoQMJdu##MATL_NUM", "gWaKzncYiRoedP8N3DjLW$$P8PHqGabRs6_aGZoQMJdu##BTCH_STS_CD", "gWaKzncYiRoedP8N3DjLW$$P8PHqGabRs6_aGZoQMJdu##SRC_TBL_NM", "gWaKzncYiRoedP8N3DjLW$$P8PHqGabRs6_aGZoQMJdu##SRC_SYS_CD" ],
         "orders" : [ ],
         "useOrderBy" : false
       }

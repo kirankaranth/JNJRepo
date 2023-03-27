@@ -11,7 +11,17 @@ def DEDUPLICATE(spark: SparkSession, in0: DataFrame) -> DataFrame:
           "row_number",
           row_number()\
             .over(Window\
-            .partitionBy("SRC_SYS_CD", "SRC_TBL_NM", "MATL_NUM", "PLNT_CD", "SLOC_CD", "BTCH_NUM")\
+            .partitionBy(
+              "SRC_SYS_CD", 
+              "SRC_TBL_NM", 
+              "MATL_NUM", 
+              "PLNT_CD", 
+              "SLOC_CD", 
+              "BTCH_NUM", 
+              "BTCH_STS_CD", 
+              "SPCL_STCK_IND", 
+              "PRTY_NUM"
+            )\
             .orderBy(lit(1))\
             .rowsBetween(Window.unboundedPreceding, Window.currentRow))
         )\
