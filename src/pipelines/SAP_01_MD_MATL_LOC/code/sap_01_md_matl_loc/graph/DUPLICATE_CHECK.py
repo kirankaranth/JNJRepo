@@ -5,5 +5,7 @@ from prophecy.libs import typed_lit
 from sap_01_md_matl_loc.config.ConfigStore import *
 from sap_01_md_matl_loc.udfs.UDFs import *
 
-def SAP_T024(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM {Config.DBNAME}.t024 WHERE _deleted_ = 'F'")
+def DUPLICATE_CHECK(spark: SparkSession, in0: DataFrame) -> DataFrame:
+    df1 = in0.groupBy(col("SRC_SYS_CD"), col("MATL_NUM"), col("PLNT_CD"))
+
+    return df1.agg(count(lit(1)).alias("PK_COUNT"))
