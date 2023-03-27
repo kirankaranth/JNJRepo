@@ -10,9 +10,9 @@
   } ],
   "request" : {
     "format" : "MULTI_TASK",
-    "name" : "HCS_PIPELINE_JOB",
+    "name" : "DEV_HCS_PIPELINE_JOB",
     "job_clusters" : [ {
-      "job_cluster_key" : "HCS_PIPELINE_JOB_default_Prophecy_Small",
+      "job_cluster_key" : "DEV_HCS_PIPELINE_JOB_default_Prophecy_Small",
       "new_cluster" : {
         "spark_version" : "11.3.x-scala2.12",
         "node_type_id" : "Standard_D12_v2",
@@ -24,7 +24,8 @@
           "prophecy.execution.service.url" : "wss://prophecy.jnj.com/execution/eventws",
           "prophecy.packages.path" : "{\"pipelines/SAP_02_MD_SER_NUM_STOCK_SGMNT\":\"dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_SER_NUM_STOCK_SGMNT_HCS_MBP_P01_SVS-1.0-py3-none-any.whl\"}",
           "prophecy.metadata.job.branch" : "__PROJECT_RELEASE_VERSION_PLACEHOLDER__",
-          "prophecy.metadata.url" : "__PROPHECY_URL_PLACEHOLDER__"
+          "prophecy.metadata.url" : "__PROPHECY_URL_PLACEHOLDER__",
+          "prophecy.execution.metrics.disabled" : false
         },
         "num_workers" : 3,
         "azure_attributes" : {
@@ -37,19 +38,19 @@
     "email_notifications" : { },
     "tasks" : [ {
       "task_key" : "MD_SER_NUM_STOCK_SGMNT",
-      "job_cluster_key" : "HCS_PIPELINE_JOB_default_Prophecy_Small",
+      "job_cluster_key" : "DEV_HCS_PIPELINE_JOB_default_Prophecy_Small",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_SER_NUM_STOCK_SGMNT_HCS_MBP_P01_SVS",
         "entry_point" : "main",
-        "parameters" : [ "-i", "HCS" ]
+        "parameters" : [ "-i", "HCS", "-O", "{}" ]
       },
       "libraries" : [ {
         "maven" : {
-          "coordinates" : "io.prophecy:prophecy-libs_2.12:3.3.0-7.0.7"
+          "coordinates" : "io.prophecy:prophecy-libs_2.12:3.3.0-7.0.12"
         }
       }, {
         "pypi" : {
-          "package" : "prophecy-libs==1.4.2"
+          "package" : "prophecy-libs==1.4.7"
         }
       }, {
         "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_SER_NUM_STOCK_SGMNT_HCS_MBP_P01_SVS-1.0-py3-none-any.whl"
@@ -59,7 +60,7 @@
     } ],
     "max_concurrent_runs" : 1,
     "schedule" : {
-      "quartz_cron_expression" : "0 30 2 * * ? *",
+      "quartz_cron_expression" : "0 30 2 ? * 7 *",
       "timezone_id" : "GMT",
       "pause_status" : "PAUSED"
     }

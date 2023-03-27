@@ -22,4 +22,9 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("OWN_STOCK", lit(None).cast(StringType()))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
-        .withColumn("DAI_UPDT_DTTM", current_timestamp())
+        .withColumn("DAI_UPDT_DTTM", current_timestamp())\
+        .withColumn("_l0_upt_", col("_upt_"))\
+        .withColumn("_pk_", to_json(expr("named_struct('SRC_SYS_CD', SRC_SYS_CD, 'EQMNT_NUM', EQMNT_NUM)")))\
+        .withColumn("_pk_md5_", md5(to_json(expr("named_struct('SRC_SYS_CD', SRC_SYS_CD, 'EQMNT_NUM', EQMNT_NUM)"))))\
+        .withColumn("_l1_upt_", current_timestamp())\
+        .withColumn("_deleted_", lit("F"))
