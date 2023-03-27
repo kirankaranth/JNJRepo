@@ -99,9 +99,6 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("TAX_CLSN_7", trim(col("TAXK7")))\
         .withColumn("TAX_CLSN_8", trim(col("TAXK8")))\
         .withColumn("TAX_CLSN_9", trim(col("TAXK9")))\
-        .withColumn("INDSTR_CD_1", lit(None).cast(StringType()))\
-        .withColumn("INDSTR_CD_2", lit(None).cast(StringType()))\
-        .withColumn("PRCH_ORDR_TYPE", lit(None).cast(StringType()))\
         .withColumn("BILL_DOC_IS_CAN", trim(col("FKSTO")))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\

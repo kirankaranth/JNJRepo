@@ -65,8 +65,8 @@ class NEW_FIELDS_RENAME_FORMATTest(BaseTestCase):
         )
         dfOutComputed = NEW_FIELDS_RENAME_FORMAT(self.spark, dfIn0)
         assertDFEquals(
-            dfOut.select("BILL_DOC", "SLORG_DESC", "INDSTR_CD_1", "BILL_DOC_IS_CAN"),
-            dfOutComputed.select("BILL_DOC", "SLORG_DESC", "INDSTR_CD_1", "BILL_DOC_IS_CAN"),
+            dfOut.select("BILL_DOC", "SLORG_DESC", "BILL_DOC_IS_CAN"),
+            dfOutComputed.select("BILL_DOC", "SLORG_DESC", "BILL_DOC_IS_CAN"),
             self.maxUnequalRowsToShow
         )
 
