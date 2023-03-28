@@ -43,18 +43,10 @@
           "optional" : false,
           "isWorkflowNodeConfiguration" : false
         }, {
-          "name" : "COLUMNS",
-          "kind" : {
-            "type" : "long",
-            "value" : 134
-          },
-          "optional" : false,
-          "isWorkflowNodeConfiguration" : false
-        }, {
-          "name" : "DBNAME",
+          "name" : "sourceDatabase",
           "kind" : {
             "type" : "string",
-            "value" : "pqa_hm2"
+            "value" : "hm2"
           },
           "optional" : false,
           "isWorkflowNodeConfiguration" : false
@@ -66,6 +58,14 @@
           },
           "optional" : false,
           "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "ConfigDatabase",
+          "kind" : {
+            "type" : "string",
+            "value" : " "
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
         } ]
       },
       "oldCommon" : {
@@ -74,7 +74,7 @@
       },
       "fabrics" : { },
       "instances" : { },
-      "selected" : "default",
+      "selected" : "HM2",
       "nonEditable" : [ ],
       "isSubscribedPipelineWithPipelineConfigs" : false
     },
@@ -366,7 +366,7 @@
       "metadata" : {
         "label" : "SET_FIELDS_ORDER_REFORMAT",
         "slug" : "SET_FIELDS_ORDER_REFORMAT",
-        "x" : -700,
+        "x" : -640,
         "y" : 180,
         "phase" : 0,
         "cache" : false,
@@ -1488,6 +1488,24 @@
               }
             }, {
               "name" : "PSTAT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "NSDM_V_MARC_UPT_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "NSDM_V_MARC_PK_",
               "type" : "string",
               "nullable" : true,
               "metadata" : {
@@ -2647,6 +2665,42 @@
                 "mappings" : [ ],
                 "tags" : [ ]
               }
+            }, {
+              "name" : "_l0_upt_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_pk_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_pk_md5_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_l1_upt_",
+              "type" : "timestamp",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
             } ]
           },
           "isStreaming" : false
@@ -2659,7 +2713,7 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##CUR_PER", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##PLNT_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##CO_PROD_IN", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##CMMDTY_CD_UOM", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##STRG_COST_PCT_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MATL_STS_DESC", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##NEG_STK_PLNT", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##VAR_CNTL_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##INSP_INTV", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##SEQ_NUM", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MRP_TYPE_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##SRC_SYS_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##KEY_TASK_LIST", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##DEL_IND", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MIN_SFTY_STK_QTY", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##CNSMPTN_MODE_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##FISC_YR_VRNT", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##COST_LOT_SIZE_VAL", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##CMPNT_SCRAP_PCT", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##RESET_FCST_MDL", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MATL_PLNR_NM", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##CONFIG_MATL", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##SERIZATION_PRFL_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##QUAL_MGMT_CNTL_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##BKWRD_CNSMPTN_DAYS_CNT", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##PROD_SCHDLNG_PRFL", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MRP_GRP", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##BTCH_MGMT_PLNT_IN", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##ALT_BOM_METH", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MATL_FRGHT_GRP", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##DEPN_REQ_IN", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##PHY_INV_CC", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##PRDTN_SUPR_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##CMMDTY_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MATL_CFOP_CAT", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##UND_DELV_TLRNC", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##BOM_USG", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##BULK_MATL_IN", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MAX_STRG_PER", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##AVLBLTY_CHK_IND", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##DOC_REQ_IN", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##FLLP_MATL", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##REORDR_QTY", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##PRDTN_SUPR_NM", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##BTCH_MGMT_IN_INTRNL", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##STRG_LOC_EXTRNL_PRCMT", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##DO_NOT_COST_IN", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##EXPT_IMPT_GRP", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##SPEC_MATL_PLNT_STS_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##PLAN_DELV_DAYS_CNT", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##RGN_OF_ORIG_OF_MATL", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##SFTY_TIME_DAYS_CNT", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##PRCMT_TYPE_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##GOOD_RCPT_LEAD_DAYS_QTY", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##DAI_ETL_ID", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##DAI_UPDT_DTTM", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##ALT_BOM", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##CNTL_CODE", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##VALUT_CAT", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MATL_AUTH_QM", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##CERT_TYPE", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MATL_ABC_CLSN_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##STK_DTRMN_GRP", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##UNIT_FOR_MAX_STRG", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##PLNG_STRTGY_GRP_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##ISS_STRG_LOC", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##INHS_PRDTN_DAYS_CNT", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##GRP_CNTR", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##DSCNT_IN", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##ORIG_CTRY_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##SPEC_MATL_PLNT_STS_DTTM", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MIX_MRP_IN", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##PRCTR_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##FIX_CC_IN", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##INSP_SETUP_FOR_MATL", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##PRCHSNG_GRP_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##SPL_PRCMT_TYPE_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##CNSMPTN_MODE", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##FRWD_CNSMPTN_DAYS_CNT", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##ORIG_BATCH_REF_MATL", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##RD_VAL_QTY", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##OVR_DELV_TLRNC", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##PER_IN", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##PRCHSNG_GRP_DESC", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##LD_GRP_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##LOT_SIZE_FX_QTY", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MTS_MTO_FL", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##EFF_OUT_DTTM", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MATL_PLNR_NUM", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##ORIG_BATCH_MGMT", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##UNIT_OF_ISS", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##SFTY_STK_QTY", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##CVGE_PRFL_RNG", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##SCHDLNG_MRGN_KEY", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##PLNG_CYC", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MAX_STK_LVL_QTY", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##SRVC_LVL", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##LOT_SIZE_MIN_QTY", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##PLNG_TIME_FENCE_DAYS_CNT", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##BASE_QTY", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##SRC_LIST_IND", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##TOT_REPLN_LT", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##DAI_CRT_DTTM", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##EXPT_CERT_DTTM", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##REP_MFG_PRFL", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##SCRAP_PCT", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MATL_NUM", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MM_DFLT_SUPP_AREA", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##EXPT_CERT_NUM", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##UNLTD_OVER_DELV_IN", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##LOT_SIZE_MAX_QTY", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##SPL_PRCMT_TYPE_COST", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##RQR_GRP_IN", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MRP_PRFL", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##AUTO_PO_IND", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##INSP_STK", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##VERS_IN", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##REP_MFG_IN", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MAINT_STS", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##BTCH_ENT_PO", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##SFTY_TIME_IND", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##EXCSE_TAX_RLVNCE", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##RD_PRFL", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##DUAL_SRCNG_WIP", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##BACKFLUSH_IN", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##ACT_PUSH", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##LOT_SIZE_VAL", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##PRDTN_UOM_CD" ],
+        "columnsSelector" : [ "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##CUR_PER", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##PLNT_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##CO_PROD_IN", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##CMMDTY_CD_UOM", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##STRG_COST_PCT_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MATL_STS_DESC", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##NEG_STK_PLNT", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##VAR_CNTL_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##INSP_INTV", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##SEQ_NUM", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MRP_TYPE_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##SRC_SYS_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##KEY_TASK_LIST", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##DEL_IND", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MIN_SFTY_STK_QTY", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##CNSMPTN_MODE_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##FISC_YR_VRNT", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##COST_LOT_SIZE_VAL", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##CMPNT_SCRAP_PCT", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##RESET_FCST_MDL", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MATL_PLNR_NM", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##CONFIG_MATL", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##SERIZATION_PRFL_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##QUAL_MGMT_CNTL_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##BKWRD_CNSMPTN_DAYS_CNT", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##PROD_SCHDLNG_PRFL", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MRP_GRP", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##BTCH_MGMT_PLNT_IN", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##ALT_BOM_METH", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MATL_FRGHT_GRP", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##DEPN_REQ_IN", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##PHY_INV_CC", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##PRDTN_SUPR_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##CMMDTY_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MATL_CFOP_CAT", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##UND_DELV_TLRNC", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##BOM_USG", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##BULK_MATL_IN", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MAX_STRG_PER", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##AVLBLTY_CHK_IND", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##DOC_REQ_IN", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##FLLP_MATL", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##REORDR_QTY", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##PRDTN_SUPR_NM", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##BTCH_MGMT_IN_INTRNL", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##STRG_LOC_EXTRNL_PRCMT", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##DO_NOT_COST_IN", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##EXPT_IMPT_GRP", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##SPEC_MATL_PLNT_STS_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##PLAN_DELV_DAYS_CNT", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##RGN_OF_ORIG_OF_MATL", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##SFTY_TIME_DAYS_CNT", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##PRCMT_TYPE_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##GOOD_RCPT_LEAD_DAYS_QTY", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##DAI_ETL_ID", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##DAI_UPDT_DTTM", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##ALT_BOM", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##CNTL_CODE", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##VALUT_CAT", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MATL_AUTH_QM", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##CERT_TYPE", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MATL_ABC_CLSN_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##STK_DTRMN_GRP", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##UNIT_FOR_MAX_STRG", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##PLNG_STRTGY_GRP_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##ISS_STRG_LOC", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##INHS_PRDTN_DAYS_CNT", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##GRP_CNTR", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##DSCNT_IN", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##ORIG_CTRY_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##SPEC_MATL_PLNT_STS_DTTM", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##_pk_md5_", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MIX_MRP_IN", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##PRCTR_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##FIX_CC_IN", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##INSP_SETUP_FOR_MATL", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##PRCHSNG_GRP_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##SPL_PRCMT_TYPE_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##CNSMPTN_MODE", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##FRWD_CNSMPTN_DAYS_CNT", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##ORIG_BATCH_REF_MATL", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##RD_VAL_QTY", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##OVR_DELV_TLRNC", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##PER_IN", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##PRCHSNG_GRP_DESC", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##_l1_upt_", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##LD_GRP_CD", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##LOT_SIZE_FX_QTY", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MTS_MTO_FL", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##EFF_OUT_DTTM", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MATL_PLNR_NUM", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##ORIG_BATCH_MGMT", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##_pk_", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##UNIT_OF_ISS", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##SFTY_STK_QTY", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##CVGE_PRFL_RNG", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##SCHDLNG_MRGN_KEY", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##PLNG_CYC", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MAX_STK_LVL_QTY", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##SRVC_LVL", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##_l0_upt_", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##LOT_SIZE_MIN_QTY", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##PLNG_TIME_FENCE_DAYS_CNT", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##BASE_QTY", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##SRC_LIST_IND", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##TOT_REPLN_LT", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##DAI_CRT_DTTM", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##EXPT_CERT_DTTM", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##REP_MFG_PRFL", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##SCRAP_PCT", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MATL_NUM", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MM_DFLT_SUPP_AREA", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##EXPT_CERT_NUM", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##UNLTD_OVER_DELV_IN", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##LOT_SIZE_MAX_QTY", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##SPL_PRCMT_TYPE_COST", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##RQR_GRP_IN", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MRP_PRFL", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##AUTO_PO_IND", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##INSP_STK", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##VERS_IN", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##REP_MFG_IN", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##MAINT_STS", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##BTCH_ENT_PO", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##SFTY_TIME_IND", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##EXCSE_TAX_RLVNCE", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##RD_PRFL", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##DUAL_SRCNG_WIP", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##BACKFLUSH_IN", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##ACT_PUSH", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##LOT_SIZE_VAL", "qS6zbVC_hwnuvQbwJ_WkI$$iatQHgDIjS9LZZqTadEbq##PRDTN_UOM_CD" ],
         "expressions" : [ {
           "target" : "SRC_SYS_CD",
           "expression" : {
@@ -3556,6 +3610,34 @@
             "expression" : "DAI_UPDT_DTTM"
           },
           "description" : ""
+        }, {
+          "target" : "_l0_upt_",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "_l0_upt_"
+          },
+          "description" : ""
+        }, {
+          "target" : "_pk_",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "_pk_"
+          },
+          "description" : ""
+        }, {
+          "target" : "_pk_md5_",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "_pk_md5_"
+          },
+          "description" : ""
+        }, {
+          "target" : "_l1_upt_",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "_l1_upt_"
+          },
+          "description" : ""
         } ]
       }
     },
@@ -3617,8 +3699,8 @@
       "metadata" : {
         "label" : "DUPLICATE_FILTER",
         "slug" : "DUPLICATE_FILTER",
-        "x" : -380,
-        "y" : -60,
+        "x" : -260,
+        "y" : -100,
         "phase" : 0,
         "cache" : false,
         "detailedStats" : false,
@@ -3691,8 +3773,8 @@
       "metadata" : {
         "label" : "DUPLICATE_CHECK",
         "slug" : "DUPLICATE_CHECK",
-        "x" : -560,
-        "y" : -60,
+        "x" : -460,
+        "y" : -100,
         "phase" : 0,
         "cache" : false,
         "detailedStats" : false,
@@ -4849,6 +4931,42 @@
               }
             }, {
               "name" : "DAI_UPDT_DTTM",
+              "type" : "timestamp",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_l0_upt_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_pk_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_pk_md5_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_l1_upt_",
               "type" : "timestamp",
               "nullable" : false,
               "metadata" : {
@@ -6046,6 +6164,24 @@
                 "mappings" : [ ],
                 "tags" : [ ]
               }
+            }, {
+              "name" : "NSDM_V_MARC_UPT_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "NSDM_V_MARC_PK_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
             } ]
           },
           "isStreaming" : false
@@ -6058,7 +6194,7 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##HERKR", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##AUTRU", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##PERKZ", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##PLIFZ", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##DZEIT", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##LGPRO", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##KZDKZ", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##VINT1", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##PRENO", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##BESKZ", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##BWTTY", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##WZEIT", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##VRMOD", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##AUSDT", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##STRGR", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##STLAL", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##FEVOR", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##KZECH", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##APLAL", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##AUSME", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##DISPR", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##LAGPR", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##DISLS", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##BASMG", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##SHZET", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##DISMM", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##KAUTB", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##XCHAR", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##LFMON", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##BSTMI", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##MFRGR", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##VSPVB", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##ZZ1_DUAL_SRC_WIP_PROJ_PLT", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##MTVER", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##INSMK", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##SBDKZ", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##PRCTR", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##LOSGR", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##KZAUS", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##EISBE", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##SAUFT", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##EKNAM", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##LADGR", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##LFRHY", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##KZKUP", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##PSTAT", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##KZBED", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##QMATV", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##RGEKZ", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##WEBAZ", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##MAABC", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##QZGTP", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##PLNNR", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##MTVFP", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##ZZ1_ACTIVATE_PUSH_PLT", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##UCMAT", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##ABCIN", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##ZZ1_SEQUENCE_NUMBER_PLT", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##SHFLG", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##KAUSF", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##MAXLZ", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##EPRIO", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##RDPRF", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##LGFSB", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##SFEPR", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##PREND", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##HERKL", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##SOBSL", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##SERNP", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##KORDB", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##STEUC", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##DISPO", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##DSNAM", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##TXT", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##MINBE", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##UEETO", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##INDUS", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##MMSTA", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##PRFRQ", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##BSTFE", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##EXCISE_TAX_RLVNCE", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##LGRAD", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##XMCNG", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##NCOST", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##LVORM", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##VERKZ", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##BSTRF", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##XCHPF", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##FHORI", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##ZZ1_CONSUMPTION_MODE_PLT", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##UCHKZ", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##FXHOR", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##UNETO", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##SSQSS", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##MABST", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##LZEIH", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##CCFIX", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##EISLO", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##VINT2", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##STDPD", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##ZZ1_MTS_MTO_FLAG_PLT", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##ALTSL", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##MISKZ", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##FRTME", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##RWPRO", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##EXPME", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##MMSTD", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##BSTMA", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##UEETK", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##NSDM_V_MARC_WERKS", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##STAWN", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##STLAN", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##QMATA", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##SCHGT", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##NSDM_V_MARC_MATNR", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##SOBSK", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##NFMAT", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##AUSSS", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##MTSTB", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##EKGRP", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##DISGR", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##AWSLS", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##PERIV", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##SFCPF" ],
+        "columnsSelector" : [ "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##HERKR", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##AUTRU", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##PERKZ", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##PLIFZ", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##DZEIT", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##LGPRO", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##KZDKZ", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##VINT1", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##PRENO", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##BESKZ", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##BWTTY", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##WZEIT", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##VRMOD", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##AUSDT", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##STRGR", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##STLAL", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##FEVOR", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##KZECH", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##APLAL", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##AUSME", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##DISPR", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##LAGPR", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##DISLS", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##BASMG", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##SHZET", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##DISMM", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##KAUTB", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##XCHAR", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##LFMON", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##BSTMI", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##MFRGR", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##VSPVB", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##ZZ1_DUAL_SRC_WIP_PROJ_PLT", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##MTVER", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##INSMK", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##SBDKZ", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##PRCTR", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##LOSGR", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##KZAUS", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##EISBE", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##SAUFT", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##EKNAM", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##LADGR", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##LFRHY", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##KZKUP", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##PSTAT", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##KZBED", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##QMATV", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##RGEKZ", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##WEBAZ", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##MAABC", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##QZGTP", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##PLNNR", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##NSDM_V_MARC_UPT_", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##ZZ1_ACTIVATE_PUSH_PLT", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##MTVFP", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##UCMAT", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##ABCIN", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##ZZ1_SEQUENCE_NUMBER_PLT", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##SHFLG", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##KAUSF", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##MAXLZ", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##EPRIO", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##RDPRF", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##LGFSB", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##SFEPR", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##PREND", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##HERKL", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##SOBSL", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##SERNP", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##KORDB", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##STEUC", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##DISPO", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##DSNAM", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##TXT", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##MINBE", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##UEETO", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##INDUS", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##MMSTA", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##PRFRQ", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##BSTFE", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##EXCISE_TAX_RLVNCE", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##LGRAD", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##XMCNG", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##NCOST", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##LVORM", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##VERKZ", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##BSTRF", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##XCHPF", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##FHORI", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##ZZ1_CONSUMPTION_MODE_PLT", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##UCHKZ", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##FXHOR", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##UNETO", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##SSQSS", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##MABST", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##LZEIH", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##CCFIX", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##EISLO", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##VINT2", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##STDPD", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##ZZ1_MTS_MTO_FLAG_PLT", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##ALTSL", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##MISKZ", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##FRTME", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##RWPRO", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##EXPME", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##MMSTD", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##BSTMA", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##UEETK", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##NSDM_V_MARC_WERKS", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##STAWN", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##STLAN", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##QMATA", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##SCHGT", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##NSDM_V_MARC_MATNR", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##SOBSK", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##NFMAT", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##AUSSS", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##MTSTB", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##EKGRP", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##DISGR", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##AWSLS", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##PERIV", "DH6tlCFjYxzGkivF_T-oK$$MTssg8d0PlAm73Za_gT8D##SFCPF" ],
         "transformations" : [ {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
@@ -8095,6 +8231,70 @@
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
             "sourceColumn" : "DAI_UPDT_DTTM",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "current_timestamp()"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_l0_upt_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "NSDM_V_MARC_UPT_"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_pk_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "to_json(named_struct('MATL_NUM',MATL_NUM,'PLNT_CD',PLNT_CD))"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_pk_md5_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "md5(to_json(named_struct('MATL_NUM',MATL_NUM,'PLNT_CD',PLNT_CD)))"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_l1_upt_",
             "expression" : {
               "format" : "sql",
               "expression" : "current_timestamp()"
@@ -12997,6 +13197,22 @@
           },
           "description" : "",
           "_row_id" : null
+        }, {
+          "target" : "NSDM_V_MARC_UPT_",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "in0._upt_"
+          },
+          "description" : "",
+          "_row_id" : null
+        }, {
+          "target" : "NSDM_V_MARC_PK_",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "in0._pk_"
+          },
+          "description" : "",
+          "_row_id" : null
         } ],
         "hints" : [ {
           "id" : "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9",
@@ -13025,8 +13241,8 @@
           "propagateColumns" : false
         } ],
         "allIn1" : null,
-        "activeTab" : "conditions",
-        "columnsSelector" : [ "0XNxhfFlsQ-VxeZEIumEW$$ZAsOoHD2BDNtkBqBqqS12##EKGRP", "3YCX686BZg0a58T0Q9QH8$$LKGkeF6BvczogZnMt3Mmn##WERKS", "xw6B66qjajIzaPXyeKMzX$$KE2ETcEqb294jxqPVJe5q##MMSTA", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##EKGRP", "AKCm-NaeUOwYK4iwZKUJB$$eFyX6cWMOa-X7kJtJCIED##DISPO", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##DISPO", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##MMSTA", "AKCm-NaeUOwYK4iwZKUJB$$eFyX6cWMOa-X7kJtJCIED##WERKS", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##FEVOR", "3YCX686BZg0a58T0Q9QH8$$LKGkeF6BvczogZnMt3Mmn##FEVOR", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##WERKS", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##LAGPR", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##LFMON", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##LZEIH", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##VSPVB", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##HERKR", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##EXPME", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##BASMG", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##LVORM", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##SFEPR", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##NCOST", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##ZZ1_SEQUENCE_NUMBER_PLT", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##SFCPF", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##UEETK", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##INDUS", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##XMCNG", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##STLAL", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##RGEKZ", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##MFRGR", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##STEUC", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##SBDKZ", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##EISBE", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##KZKUP", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##MATNR", "0XNxhfFlsQ-VxeZEIumEW$$ZAsOoHD2BDNtkBqBqqS12##EKNAM", "AKCm-NaeUOwYK4iwZKUJB$$eFyX6cWMOa-X7kJtJCIED##DSNAM", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##MISKZ", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##SCHGT", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##AUSSS", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##RDPRF", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##PRENO", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##SOBSL", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##QMATV", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##LGRAD", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##PRCTR", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##UNETO", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##DISPR", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##PERIV", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##KORDB", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##SHFLG", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##STDPD", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##AUSDT", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##LFRHY", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##RWPRO", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##LGPRO", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##SSQSS", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##HERKL", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##WEBAZ", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##PSTAT", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##DISMM", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##MAABC", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##DISPO", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##KZAUS", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##ZZ1_CONSUMPTION_MODE_PLT", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##FXHOR", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##KZECH", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##EXCISE_TAX_RLVNCE", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##DISLS", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##EKGRP", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##SOBSK", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##QZGTP", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##QMATA", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##SHZET", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##LGFSB", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##DISGR", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##DZEIT", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##NFMAT", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##MABST", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##UEETO", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##ZZ1_MTS_MTO_FLAG_PLT", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##SERNP", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##ALTSL", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##PREND", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##VERKZ", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##MAXLZ", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##BSTMI", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##MTVER", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##VINT2", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##KAUTB", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##UCMAT", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##PLIFZ", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##KAUSF", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##EISLO", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##MTVFP", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##STRGR", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##APLAL", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##SAUFT", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##BWTTY", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##BSTRF", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##BESKZ", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##CCFIX", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##FEVOR", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##STAWN", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##INSMK", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##MMSTD", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##BSTFE", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##WERKS", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##ABCIN", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##XCHAR", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##LOSGR", "xw6B66qjajIzaPXyeKMzX$$KE2ETcEqb294jxqPVJe5q##MTSTB", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##KZDKZ", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##EPRIO", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##FRTME", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##VINT1", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##MMSTA", "3YCX686BZg0a58T0Q9QH8$$LKGkeF6BvczogZnMt3Mmn##TXT", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##FHORI", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##AUSME", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##PERKZ", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##PRFRQ", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##MINBE", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##KZBED", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##AUTRU", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##ZZ1_ACTIVATE_PUSH_PLT", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##WZEIT", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##PLNNR", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##AWSLS", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##UCHKZ", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##LADGR", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##BSTMA", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##XCHPF", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##STLAN", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##ZZ1_DUAL_SRC_WIP_PROJ_PLT", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##VRMOD" ],
+        "activeTab" : "expressions",
+        "columnsSelector" : [ "0XNxhfFlsQ-VxeZEIumEW$$ZAsOoHD2BDNtkBqBqqS12##EKGRP", "3YCX686BZg0a58T0Q9QH8$$LKGkeF6BvczogZnMt3Mmn##WERKS", "xw6B66qjajIzaPXyeKMzX$$KE2ETcEqb294jxqPVJe5q##MMSTA", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##EKGRP", "AKCm-NaeUOwYK4iwZKUJB$$eFyX6cWMOa-X7kJtJCIED##DISPO", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##DISPO", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##MMSTA", "AKCm-NaeUOwYK4iwZKUJB$$eFyX6cWMOa-X7kJtJCIED##WERKS", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##FEVOR", "3YCX686BZg0a58T0Q9QH8$$LKGkeF6BvczogZnMt3Mmn##FEVOR", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##WERKS", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##LAGPR", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##LFMON", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##LZEIH", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##VSPVB", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##HERKR", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##EXPME", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##BASMG", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##LVORM", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##SFEPR", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##NCOST", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##ZZ1_SEQUENCE_NUMBER_PLT", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##SFCPF", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##UEETK", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##INDUS", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##XMCNG", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##STLAL", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##_pk_", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##RGEKZ", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##MFRGR", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##STEUC", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##SBDKZ", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##EISBE", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##KZKUP", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##MATNR", "0XNxhfFlsQ-VxeZEIumEW$$ZAsOoHD2BDNtkBqBqqS12##EKNAM", "AKCm-NaeUOwYK4iwZKUJB$$eFyX6cWMOa-X7kJtJCIED##DSNAM", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##MISKZ", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##SCHGT", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##AUSSS", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##_upt_", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##RDPRF", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##PRENO", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##SOBSL", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##QMATV", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##LGRAD", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##PRCTR", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##UNETO", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##DISPR", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##PERIV", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##KORDB", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##SHFLG", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##STDPD", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##AUSDT", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##LFRHY", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##RWPRO", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##LGPRO", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##SSQSS", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##HERKL", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##WEBAZ", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##PSTAT", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##DISMM", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##MAABC", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##DISPO", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##KZAUS", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##ZZ1_CONSUMPTION_MODE_PLT", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##FXHOR", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##KZECH", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##EXCISE_TAX_RLVNCE", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##DISLS", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##EKGRP", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##SOBSK", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##QZGTP", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##QMATA", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##SHZET", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##LGFSB", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##DISGR", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##DZEIT", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##NFMAT", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##MABST", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##UEETO", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##ZZ1_MTS_MTO_FLAG_PLT", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##SERNP", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##ALTSL", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##PREND", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##VERKZ", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##MAXLZ", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##BSTMI", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##MTVER", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##VINT2", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##KAUTB", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##UCMAT", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##PLIFZ", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##KAUSF", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##EISLO", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##MTVFP", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##STRGR", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##APLAL", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##SAUFT", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##BWTTY", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##BSTRF", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##BESKZ", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##CCFIX", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##FEVOR", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##STAWN", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##INSMK", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##MMSTD", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##BSTFE", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##WERKS", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##ABCIN", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##XCHAR", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##LOSGR", "xw6B66qjajIzaPXyeKMzX$$KE2ETcEqb294jxqPVJe5q##MTSTB", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##KZDKZ", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##EPRIO", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##FRTME", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##VINT1", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##MMSTA", "3YCX686BZg0a58T0Q9QH8$$LKGkeF6BvczogZnMt3Mmn##TXT", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##FHORI", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##AUSME", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##PERKZ", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##PRFRQ", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##MINBE", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##KZBED", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##AUTRU", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##ZZ1_ACTIVATE_PUSH_PLT", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##WZEIT", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##PLNNR", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##AWSLS", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##UCHKZ", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##LADGR", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##BSTMA", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##XCHPF", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##STLAN", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##ZZ1_DUAL_SRC_WIP_PROJ_PLT", "4bAuoIswtU1XxVaHkWCQn$$rBIcFUvhlifZgLiBYnxw9##VRMOD" ],
         "allIn0" : null,
         "whereClause" : null,
         "headAlias" : "in0"
@@ -15972,7 +16188,7 @@
       "metadata" : {
         "label" : "SAP_MD_MATL_LOC",
         "slug" : "SAP_MD_MATL_LOC",
-        "x" : -560,
+        "x" : -440,
         "y" : 180,
         "phase" : 0,
         "cache" : false,
@@ -17130,6 +17346,42 @@
               }
             }, {
               "name" : "DAI_UPDT_DTTM",
+              "type" : "timestamp",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_l0_upt_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_pk_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_pk_md5_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_l1_upt_",
               "type" : "timestamp",
               "nullable" : false,
               "metadata" : {
