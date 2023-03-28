@@ -5,5 +5,5 @@ from prophecy.libs import typed_lit
 from sap_01_md_sls_ordr_line.config.ConfigStore import *
 from sap_01_md_sls_ordr_line.udfs.UDFs import *
 
-def SAP_TVAGT(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM bbl.TVAGT WHERE _deleted_ = 'F' and Spras = 'E'")
+def MANDT_FILTER_1_1_1_2_1_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
+    return in0.filter((col("MANDT") == lit(Config.MANDT)))
