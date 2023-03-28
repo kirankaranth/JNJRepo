@@ -5,5 +5,5 @@ from prophecy.libs import typed_lit
 from sap_01_md_bill_doc_hdr.config.ConfigStore import *
 from sap_01_md_bill_doc_hdr.udfs.UDFs import *
 
-def SAP_VBRK(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM {Config.sourceDatabase}.VBRK WHERE _deleted_ = 'F'")
+def DUPLICATE_CHECK_FILTER(spark: SparkSession, in0: DataFrame) -> DataFrame:
+    return in0.filter((col("PK_COUNT") > lit(1)))

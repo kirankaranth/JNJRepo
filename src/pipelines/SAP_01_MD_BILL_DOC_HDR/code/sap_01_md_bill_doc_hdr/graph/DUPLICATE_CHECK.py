@@ -5,5 +5,7 @@ from prophecy.libs import typed_lit
 from sap_01_md_bill_doc_hdr.config.ConfigStore import *
 from sap_01_md_bill_doc_hdr.udfs.UDFs import *
 
-def SAP_VBRK(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM {Config.sourceDatabase}.VBRK WHERE _deleted_ = 'F'")
+def DUPLICATE_CHECK(spark: SparkSession, in0: DataFrame) -> DataFrame:
+    df1 = in0.groupBy(col("SRC_SYS_CD"), col("BILL_DOC"))
+
+    return df1.agg(count(lit(1)).alias("PK_COUNT"))

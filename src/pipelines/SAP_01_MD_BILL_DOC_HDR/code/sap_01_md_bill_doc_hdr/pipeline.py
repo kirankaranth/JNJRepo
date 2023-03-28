@@ -27,7 +27,9 @@ def pipeline(spark: SparkSession) -> None:
     )
     df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_Join_1)
     df_SET_FIELD_ORDER_FORMAT = SET_FIELD_ORDER_FORMAT(spark, df_NEW_FIELDS_RENAME_FORMAT)
+    df_DUPLICATE_CHECK = DUPLICATE_CHECK(spark, df_SET_FIELD_ORDER_FORMAT)
     MD_BILL_DOC_HDR(spark, df_SET_FIELD_ORDER_FORMAT)
+    df_DUPLICATE_CHECK_FILTER = DUPLICATE_CHECK_FILTER(spark, df_DUPLICATE_CHECK)
 
 def main():
     spark = SparkSession.builder\
