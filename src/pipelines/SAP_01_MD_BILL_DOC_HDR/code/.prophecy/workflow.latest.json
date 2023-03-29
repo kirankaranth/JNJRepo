@@ -179,6 +179,12 @@
     "sourcePort" : "lO0LGUOBjBH2sPU6SIEOS$$nSFF8bxogn2Oq2WBsCF4Y",
     "target" : "gGnEyWOJxuI_XmM_mqhdG$$vG1WfIRsd_EcUF1mj4krG",
     "targetPort" : "suvQiAihI5dwF5gkyD346$$RsMIkr3SUOo8xbv4fb3dY"
+  }, {
+    "id" : "AIZgXEXmNI6WlyZngTkfn$$uxGtuoZ5HCUx0QZnm8x0A",
+    "source" : "gGnEyWOJxuI_XmM_mqhdG$$vG1WfIRsd_EcUF1mj4krG",
+    "sourcePort" : "rNkgp8YJsMSGrdsYR7kzj$$gbyr5XHKU6dwyflOCJaFw",
+    "target" : "DRlxCG47iy9hrdDb9STjj$$KBV7fRVWSwIR3Dvvh6MtG",
+    "targetPort" : "68kLX7zjJOv6-as7kX8mU$$VmCpg3U5ncUe8TEZUluV1"
   } ],
   "processes" : {
     "VvaO9fWnm5o7Xc10hN8V1$$jsQHHYOVMz6MfW0w3a9kZ" : {
@@ -6400,6 +6406,71 @@
         "condition" : {
           "format" : "sql",
           "expression" : "MANDT = '$MANDT'"
+        }
+      }
+    },
+    "DRlxCG47iy9hrdDb9STjj$$KBV7fRVWSwIR3Dvvh6MtG" : {
+      "id" : "DRlxCG47iy9hrdDb9STjj$$KBV7fRVWSwIR3Dvvh6MtG",
+      "component" : "Filter",
+      "metadata" : {
+        "label" : "DUPLICATE_CHECK_FILTER",
+        "slug" : "DUPLICATE_CHECK_FILTER",
+        "x" : 1540,
+        "y" : 220,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "68kLX7zjJOv6-as7kX8mU$$VmCpg3U5ncUe8TEZUluV1",
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "SRC_SYS_CD",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BILL_DOC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PK_COUNT",
+              "type" : "long",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "_yNmeNALDv7D6_3s3Q12t$$I5U0d41gJb_ZaOJIyrJfr",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ "68kLX7zjJOv6-as7kX8mU$$VmCpg3U5ncUe8TEZUluV1##PK_COUNT" ],
+        "condition" : {
+          "format" : "sql",
+          "expression" : "PK_COUNT > 1"
         }
       }
     },
