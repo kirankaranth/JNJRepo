@@ -1,6 +1,0 @@
-from .sql_MD_EQMNT_BOM_LINK import sql_MD_EQMNT_BOM_LINK
-from .sql_MD_EQMNT import sql_MD_EQMNT
-from .sql_MD_SER_NUM_STOCK_SGMNT import sql_MD_SER_NUM_STOCK_SGMNT
-from .MD_EQMNT import MD_EQMNT
-from .MD_EQMNT_BOM_LINK import MD_EQMNT_BOM_LINK
-from .MD_SER_NUM_STOCK_SGMNT import MD_SER_NUM_STOCK_SGMNT

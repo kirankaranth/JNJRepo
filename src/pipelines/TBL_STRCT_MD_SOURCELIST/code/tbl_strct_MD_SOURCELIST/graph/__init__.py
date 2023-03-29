@@ -1,2 +1,0 @@
-from .sql_MD_MATL_LOC_SRC_LIST import sql_MD_MATL_LOC_SRC_LIST
-from .MD_MATL_LOC_SRC_LIST import MD_MATL_LOC_SRC_LIST

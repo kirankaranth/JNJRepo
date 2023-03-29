@@ -1,4 +1,0 @@
-from .MD_TCKG_DATA_HDR import MD_TCKG_DATA_HDR
-from .MD_TCKG_DATA_ITM import MD_TCKG_DATA_ITM
-from .sql_MD_TCKG_DATA_HDR import sql_MD_TCKG_DATA_HDR
-from .sql_MD_TCKG_DATA_ITM import sql_MD_TCKG_DATA_ITM
