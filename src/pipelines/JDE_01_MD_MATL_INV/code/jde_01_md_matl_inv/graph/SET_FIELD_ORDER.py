@@ -28,6 +28,7 @@ def SET_FIELD_ORDER(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("PLNT_IN_TRNST_QTY"), 
         col("FISC_YR_OF_CUR_PER"), 
         col("CUR_PER"), 
+        col("SHRT_MATL_NUM"), 
         col("DAI_ETL_ID"), 
         col("DAI_CRT_DTTM"), 
         col("DAI_UPDT_DTTM")
