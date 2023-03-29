@@ -21,7 +21,7 @@ class Config(ConfigBase):
     def update(
             self,
             sourceSystem: str="gmd",
-            targetSchema: str="l1_md_prophecy",
+            targetSchema: str="dev_md_l1",
             DBNAME: str="gmd",
             DBTABLE: str="f4101  ",
             DBTABLE1: str="f41021  ",
