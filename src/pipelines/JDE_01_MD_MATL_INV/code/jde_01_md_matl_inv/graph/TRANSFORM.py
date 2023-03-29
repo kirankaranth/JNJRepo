@@ -52,15 +52,8 @@ def TRANSFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
             .otherwise(lit(0))\
             .cast(DecimalType(18, 4))
         )\
-        .withColumn("BLCKD_STCK", lit(None).cast(DecimalType(18, 4)))\
-        .withColumn("CRT_DTTM", to_timestamp(lit(None)))\
-        .withColumn("RTRNS", lit(None).cast(DecimalType(18, 4)))\
         .withColumn("BASE_UOM_CD", trim(col("IMUOM1")))\
-        .withColumn("STO_IN_TRNST_QTY", lit(None).cast(DecimalType(18, 4)))\
-        .withColumn("PLNT_IN_TRNST_QTY", lit(None).cast(DecimalType(18, 4)))\
-        .withColumn("FISC_YR_OF_CUR_PER", lit(None).cast(IntegerType()))\
-        .withColumn("CUR_PER", lit(None).cast(IntegerType()))\
         .withColumn("SHRT_MATL_NUM", trim(col("LIITM")))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
-        .withColumn("DAI_CRT_DTTM", to_timestamp(current_timestamp(), "yyyy-MM-dd"))\
-        .withColumn("DAI_UPDT_DTTM", to_timestamp(current_timestamp(), "yyyy-MM-dd"))
+        .withColumn("DAI_CRT_DTTM", current_timestamp())\
+        .withColumn("DAI_UPDT_DTTM", current_timestamp())
