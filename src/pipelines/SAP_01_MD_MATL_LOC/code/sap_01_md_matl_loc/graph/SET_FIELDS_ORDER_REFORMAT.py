@@ -138,5 +138,6 @@ def SET_FIELDS_ORDER_REFORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("_l0_upt_"), 
         col("_pk_"), 
         col("_pk_md5_"), 
-        col("_l1_upt_")
+        col("_l1_upt_"), 
+        col("`_deleted_   `").alias("_deleted_   ")
     )
