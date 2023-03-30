@@ -1,0 +1,496 @@
+# Thi file is only used as placeholder for all existing keywords
+*** Settings ***
+Documentation       Tests for checking L1 curration Bill of Material  MATL_BOM  Jira-ID: AGON-***
+Force Tags          TAGS
+Suite Setup  		Connect to CDL Databricks->for tables or Connect to CDL VIEW Databricks-> for Views
+Suite Teardown  	Disconnect from Databricks
+Test Setup          Setup Test
+Resource		    Tests/Support.robot
+Resource            Support-Level1Updated.robot
+Variables           Data/data_level_1/variable_file_name.py
+
+*** Test Cases ***
+AGON-Jira_ID_01 SIT ${table} Test to check that the table has the correct number of columns
+    [Documentation]   Validate that table: ${system}.${table} has the correct number of columns
+    [Tags]   AGON-Jira_ID_01
+    Given I have access to Databricks database    table
+    When I check that the requirements are implemented correctly
+    Then I expect that the target table contains required number of columns
+
+
+# primary keys should be declared as List in variable file
+# like that LIST__PRIMARY_KEYS = {"SRC_SYS_CD, MATL_NUM"}
+
+AGON-Jira_ID_02 SIT ${table} Test to check the uniqueness of the primary keys
+    [Documentation]   Validate that the curated table: ${system}.${table} contains unique primary keys
+    [Tags]   AGON-Jira_ID_02
+    Given I have access to Databricks database    table
+    When I check that the requirements are implemented correctly
+    Then I expect that table contains only unique primary keys
+
+AGON-Jira_ID_03 SIT ${table} Test the datatypes of the columns
+    [Documentation]   Validate that the columns are of correct datatype for ${system}.${table}
+    [Tags]   AGON-Jira_ID_03
+    Given I have access to Databricks database    table
+    When I check that the requirements are implemented correctly
+    Then I expect that columns are of the correct datatype     ${table}
+
+
+AGON-Jira_ID_04 SIT ${table} Test that the EDM is created in the correct location
+    [Documentation]   Validate that the ${system}.${table}'s underlying files are in the correct ADLS location
+    [Tags]   AGON-Jira_ID_04
+    Given I have access to Databricks database    table
+    When I check that the requirements are implemented correctly
+    Then I expect that the EDM location is correct
+
+------------------UTC-----------------------------------------
+# These test cases need to be used  for UTC checkes without filters
+# Can be used for one source or multiple with any sets/lists of columns
+AGON-Jira_ID_05 SIT ${table} Test that the columns contains a date in UTC
+    [Documentation]   Validate that the columns marked as Follow UTC for ${system}.${table} contain a date in UTC format only
+    [Tags]        AGON-Jira_ID_05
+    [Template]    Validate that the columns marked as Follow UTC contain a date in UTC format
+    # ${sets of sources} or one source     ${sets of columns}
+    atlas                ${UTC_COLUMNS_ATLAS}     ${table}    table
+    ${UTC_SOURCES_1}     ${UTC_COLUMNS_1}         ${table}    table
+    ${UTC_SOURCES_2}     ${UTC_COLUMNS_2}         ${table}    table
+
+# Can be used  for UTC checks with filters
+# Can be used for one source or multiple with any sets/lists of columns
+AGON-Jira_ID_06 SIT ${table} Test that the columns contains a date in UTC or contains nulls as per filter requirement
+    [Documentation]   Validate that the columns for  ${system}.${table} are Follow UTC or contains nulls as per filter requirement
+    ...               Filter pattern: "case when 'column_name' = '00000000' then null else to_timestamp('column_name', ""yyyyMMdd"") end - Follow UTC"
+    [Tags]        AGON-Jira_ID_06
+    [Template]    Validate that columns Follow UTC Format or contain nulls as per the filter requirement
+ #   source or list of sources       #list of columns or column
+    ${source_system}    ${UTC_COLUMNS_WITH_NULL}   ${table}    table
+    ${source_system2}    ${UTC_COLUMNS_WITH_NULL2}   ${table}    table
+
+##### For single line scenario(i.e. one source only, multiple source but one set of utc)#####################################################################
+AGON-Jira_ID_07 SIT ${table} Test that the columns contains a date in UTC
+    [Documentation]   Validate that the columns marked as Follow UTC for ${system}.${table} contain a date in UTC format only
+    [Tags]        AGON-Jira_ID_07
+    Given I have access to Databricks database     table
+    When I check that the requirements are implemented correctly
+    Then I expect that columns which are marked as Follow UTC don't contain null     ${UTC_COLUMNS_ATLAS}    atlas    ${table}
+    And I expect that these columns contain a date in UTC format                     ${UTC_COLUMNS_ATLAS}    atlas    ${table}
+
+AGON-Jira_ID_08 SIT ${table} Test that the columns contains a date in UTC or contains nulls as per filter requirement
+    [Documentation]   Validate that the columns for  ${system}.${table} are Follow UTC or contains nulls as per filter requirement
+    ...               Filter pattern: "case when 'column_name' = '00000000' then null else to_timestamp('column_name', ""yyyyMMdd"") end - Follow UTC"
+    [Tags]        AGON-Jira_ID_08
+    Given I have access to Databricks database    table
+    When I check that the requirements are implemented correctly
+    Then I expect that columns Follow UTC Format or contain nulls as per the filter requirement    ${source}    ${UTC_COLUMNS_WITH_NULL}   ${table}
+
+#################################################################################################################
+
+------------------------ trim validation---------------------------------------
+AGON-Jira_ID_09 SIT ${table} Test that specified columns for source systems contain all whitespace removed
+    [Documentation]  Validate that for l1.${table} columns contain all whitespace removed as per trim requirement.
+    [Tags]       AGON-Jira_ID_09
+    [Template]   Validate that trim implemented correctly for all listed columns per source
+#   source or list of sources       #list of columns or column
+    ${ALL_WHITESPACE_SOURCES}       ${WHITESPACE_COLUMNS}      ${table}    table
+    ${ALL_WHITESPACE_SOURCES_2}     ${WHITESPACE_COLUMNS_2}    ${table}    table
+
+##### For single line scenario(i.e. one source only, multiple source but one set of whitespaces)#####################################################################
+AGON-Jira_ID_10 SIT ${table} Test that specified columns for source systems contain all whitespace removed
+    [Documentation]  Validate that for l1.${table} columns contain all whitespace removed as per trim requirement.
+    [Tags]       AGON-Jira_ID_010
+    Given I have access to Databricks database    table
+    When I check that the requirements are implemented correctly
+    Then I expect that all whitespaces removed from columns    ${ALL_WHITESPACE_SOURCES}       ${WHITESPACE_COLUMNS}      ${table}
+
+##########################################
+--------------------------Populate as null validation--------------------------------
+#Can be used for Populate as null validation
+AGON-Jira_ID_11 SIT ${table} Test that specified columns for source systems contain all nulls
+    [Documentation]   Validate that for l1.${table} columns contains all nulls
+    [Tags]       AGON-Jira_ID_11
+    [Template]  Validate that Populate as null for all listed columns implemented correctly per source
+#   source or list of sources       #list of columns or column
+    ${ALL_NULL_SOURCES}       ${NULL_COLUMNS}      ${table}    table
+    ${ALL_NULL_SOURCES_2}     ${NULL_COLUMNS_2}    ${table}    table
+
+AGON-Jira_ID_12 SIT ${table} Test that the columns contain all null values or contains values as per filter requirement
+    [Documentation]   Validate that the columns for  ${system}.${table} contain  all null values or contain values as per filter requirement
+    [Tags]        AGON-Jira_ID_12
+    [Template]    Validate that the columns contain null values or values as per filter requirement
+ #   source or list of sources       #list of columns or column
+    ${ALL_NULL_SOURCES}       ${NULL_COLUMNS}      ${table}    table
+    ${ALL_NULL_SOURCES2}       ${NULL_COLUMNS2}      ${table}    table
+
+#Can be used for tables when there are columns with Populate as null condition by providing filter condition available between multiple unions.
+...(filter conditions can be provided in the variable file which will append to the query being triggered)
+AGON-Jira_ID_12_b ${table} Test that specified columns for source systems contain all nulls when filter conditions are provided between multiple unions
+    [Documentation]   Validate that the columns for  ${system}.${table} contain  all null values or contain values as per filter requirement being provided between multiple unions.
+    [Tags]   AGON-Jira_ID_12_b
+    [Template]   Validate that columns contain nulls after providing filter conditions of multiple unions
+#   Source                 List of the null columns      mention the specific filter condition      ${table}    table
+    ${source_system}       ${NULL_COLUMNS}               ${NULL_FILTER_CONDITION}                   ${table}    table
+    ${source_system}       ${NULL_COLUMNS_2}   ${NULL_FILTER_CONDITION_2}    ${table}    table
+
+###############Single line scenario#################
+AGON-Jira_ID_13 SIT ${table} Test that specified columns for source systems contain all nulls
+    [Documentation]   Validate that for l1.${table} columns contains all nulls
+    [Tags]       AGON-Jira_ID_13
+    Given I have access to Databricks database    table
+    When I check that the requirements are implemented correctly
+    Then I expect that listed columns contains all nulls values  ${ALL_NULL_SOURCES}       ${NULL_COLUMNS}      ${table}
+
+AGON-Jira_ID_14 SIT ${table} Test that the columns contain all null values or contains values as per filter requirement
+    [Documentation]   Validate that the columns for  ${system}.${table} contain  all null values or contain values as per filter requirement
+    [Tags]        AGON-Jira_ID_14
+    Given I have access to Databricks database    table
+    When I check that the requirements are implemented correctly
+    Then I expect that listed columns contains a null values or values as per filter requirement   ${ALL_NULL_SOURCES}       ${NULL_COLUMNS}      ${table}
+
+#Can be used for tables when there are columns with Populate as null condition by providing filter condition available between multiple unions.
+...(filter conditions can be provided in the variable file which will append to the query being triggered)
+AGON-Jira_ID_14_b ${table} Test that specified columns for source systems contain all nulls when filter conditions are provided between multiple unions
+    [Documentation]   Validate that the columns for  ${system}.${table} contain  all null values or contain values as per filter requirement being provided between multiple unions.
+    [Tags]        AGON-Jira_ID_14_b
+    Given I have access to Databricks database    table
+    When I check that the requirements are implemented correctly
+    Then I expect that the listed columns contains all nulls values after providing the filter conditions of multiple unions   ${source_list}       ${column_list}    ${null_filter_condition}     ${table}
+########################################################
+--------------------------------Populate as # -----------------------
+#multiple lines
+AGON-Jira_ID_15 SIT ${table} Test that specified columns for source system contain all hashtag values
+    [Documentation]   Validate that the columns marked as Populate as hashtag for ${system}.${table} contain hashtag values only
+    [Tags]    AGON-Jira_ID_15
+    [Template]   Validate that the columns marked as Populate as hashtag contain hashtag values
+    #   source or list of sources       #list of columns or column
+    taishan                   ${HASHTAG_COLUMNS}     ${table}    table
+    ${HASTAG_SOURCES}         ${HASHTAG_COLUMNS2}    ${table}    table
+
+AGON-Jira_ID_16 SIT ${table} Test that the columns contain all hashtag values or contains values as per filter requirement
+    [Documentation]   Validate that the columns for  ${system}.${table} contain  all hashtag values or contain values as per filter requirement
+    [Tags]        AGON-Jira_ID_16
+    [Template]    Validate that the columns contain hashtag values or values as per filter requirement
+ #   source or list of sources       #list of columns or column
+    ${HASTAG_SOURCES}          ${HASHTAG_COLUMNS}    ${table}    table
+    ${HASTAG_SOURCES2}         ${HASHTAG_COLUMNS2}    ${table}    table
+
+#####################Single line scenario#################
+AGON-Jira_ID_17 SIT  ${table} Test that specified columns for source system contain all hashtag values
+    [Documentation]   Validate that the columns marked as Populate as hashtag for ${system}.${table} contain hashtag values only
+    [Tags]    AGON-Jira_ID_17
+    Given I have access to Databricks database    table
+    When I check that the requirements are implemented correctly
+    Then I expect that listed columns contains a hashtag values for source systems     ${HASTAG_SOURCES}         ${HASHTAG_COLUMNS2}    ${table}
+
+AGON-Jira_ID_18 SIT ${table} Test that the columns contain all hashtag values or contains values as per filter requirement
+    [Documentation]   Validate that the columns for  ${system}.${table} contain  all hashtag values or contain values as per filter requirement
+    [Tags]        AGON-Jira_ID_18
+    Given I have access to Databricks database    table
+    When I check that the requirements are implemented correctly
+    Then I expect that listed columns contains a hashtag values or values as per filter requirement   ${HASTAG_SOURCES}         ${HASHTAG_COLUMNS2}    ${table}
+####################################################
+
+----------------------Predefined values for table-----------------------
+#Can be used for Predefined value validation for 1 or many values
+# for 1 value variable should be declared like that DICT__COLUMNS_WITH_PREDEFINED_VALUES = {"CAPA_INV_ACTN_SRC_SYS_CD" : "eti"}
+# for multiple values like that DICT__COLUMNS_WITH_PREDEFINED_VALUES = {"RSLT_STS": ["Authorized","Entered","Modified","Not Entered","Rejected","Canceled"]}
+# for multiple columns per source   LIST__COLUMNS_WITH_PREDEFINED_VALUES = {"SRC_SYS_CD:llj", "DATA_SRC:LW5 US",
+                                                                            "RSLT_STS:['Authorized','Entered','Modified','Not Entered','Rejected','Canceled']"}
+
+DICT__COLUMNS_WITH_PREDEFINED_VALUES_SRC_SYS_CD = {"SRC_SYS_CD" : "llv"}
+
+
+AGON-Jira_ID_19 SIT ${table} Test that specified columns for source systems contain predefined values
+    [Documentation]    Validate that ${system}.${table}  columns contain predefined values
+    [Tags]   AGON-Jira_ID_19
+    [Template]    Validate that columns contain all predefined values
+    etq_instinct         ${COLUMNS_WITH_PREDEFINED_VALUES}    ${table}    table
+    ${source_system}     ${COLUMNS_WITH_PREDEFINED_VALUES}    ${table}    table
+
+AGON-Jira_ID_19_b SIT ${table} Test that specified columns for source systems contain predefined values
+    [Documentation]    Validate that ${system}.${table}  columns contain predefined values or values from original table
+    [Tags]  AGON-22549_06
+    [Template]     Validate that columns contain predefined values or values from original table
+    trackwise      ${COLUMNS_WITH_PREDEFINED_VALUES_OR_V}    ${table}    table
+
+# use for single line scenario
+AGON-Jira_ID_20 SIT ${table} Test that specified columns for source systems contain predefined values
+    [Documentation]    Validate that ${system}.${table}  columns contain predefined values
+    [Tags]   AGON-Jira_ID_20
+    Given I have access to Databricks database        table
+    When I check that the requirements are implemented correctly
+    Then I expect that the columns contain all predefined values       ${source_system}     ${COLUMNS_WITH_PREDEFINED_VALUES}    ${table}
+
+AGON-Jira_ID_20_b SIT ${table} Test that specified columns for source systems contain predefined values
+    [Documentation]    Validate that ${system}.${table}  columns contain predefined values or values from original table
+    [Tags]   AGON-Jira_ID_20_b
+    Given I have access to Databricks database    table
+    When I check that the requirements are implemented correctly
+    Then I expect that the columns contain predefined values or values from original table    ${source_system}     ${COLUMNS_WITH_PREDEFINED_VALUES}    ${table}
+# use when  multiple sources and same column with multiple values
+#LIST__COLUMNS_WITH_PREDEFINED_VALUES_PER_SOURCE = {
+    "bbl [SRC_SYS_CD:bbl]",
+    "bbn [SRC_SYS_CD:bbn]",
+    "mbp [SRC_SYS_CD:mbp]"}
+     and sources:  source_system = {"btb_latam", "btb_na", "mbp"}
+
+AGON-Jira_ID_07 SIT ${table} Test that specified columns for source systems contain predefined values
+    [Documentation]    Validate that ${system}.${table}  columns contain predefined values
+    [Tags]   AGON-Jira_ID_07
+    [Template]    Validate that columns contain all predefined values for list of sources
+    ${source_system}    ${COLUMNS_WITH_PREDEFINED_VALUES_PER_SOURCE}       ${table}    table
+    ${source_system2}    ${COLUMNS_WITH_PREDEFINED_VALUES_PER_SOURCE2}     ${table}    table
+
+#for single line:
+AGON-Jira_ID_07 SIT ${table} Test that specified columns for source systems contain predefined values
+    [Documentation]    Validate that ${system}.${table}  columns contain predefined values
+    [Tags]   AGON-Jira_ID_07
+    Given I have access to Databricks database   table
+    When I check that the requirements are implemented correctly
+    Then I check that columns contain all predefined values for list of sources    ${source_list}    ${column_predef_val_list}   ${table}
+
+--------------------Custom Views---------------------------------
+AGON-Jira_ID_21 SIT ${view} Test to check that the view has the correct number of columns
+    [Documentation]     Validate that view: ${view} has the correct number of columns
+    [Tags]   AGON-Jira_ID_21
+    Given I have access to Databricks database    view
+    When I check that the requirements are implemented correctly
+    Then I expect that the target view has correct number of columns
+
+AGON-Jira_ID_22 SIT ${view} Test the datatypes of the columns
+    [Documentation]    Validate that the columns are of correct datatype for ${view}
+    [Tags]  AGON-Jira_ID_22
+    Given I have access to Databricks database    view
+    When I check that the requirements are implemented correctly
+    Then I expect that columns are of the correct datatype     ${view}
+
+----------------------UTC for Views------------------------------
+#multiple lines test
+AGON-Jira_ID_23 SIT ${view} Test that the columns contains a date in UTC
+    [Documentation]   Validate that the columns marked as Follow UTC for ${view} contain a date in UTC format only
+    [Tags]        AGON-Jira_ID_23
+    [Template]    Validate that the columns marked as Follow UTC contain a date in UTC format
+    # ${sets of sources} or one source     ${sets of columns}
+    ${source_system}     ${UTC_COLUMNS}    ${view}    view
+    ${source_system2}    ${UTC_COLUMNS2}    ${view}    view
+
+AGON-Jira_ID_24 SIT ${view} Test that the columns contains a date in UTC or contains nulls as per filter requirement
+    [Documentation]   Validate that the columns for  ${view}  are Follow UTC or contains nulls as per filter requirement
+    ...               Filter pattern: "case when 'column_name' = '00000000' then null else to_timestamp('column_name', ""yyyyMMdd"") end - Follow UTC"
+    [Tags]        AGON-Jira_ID_24
+    [Template]    Validate that columns Follow UTC Format or contain nulls as per the filter requirement
+ #   source or list of sources       #list of columns or column
+     ${source_system}     ${UTC_COLUMNS_WITH_NULL}      ${view}    view
+     ${source_system2}    ${UTC_COLUMNS_WITH_NULL2}     ${view}    view
+
+##### For single line scenario(i.e. one source only, multiple source but one set of utc)#####################################################################
+    AGON-Jira_ID_25 SIT ${view} Test that the columns contains a date in UTC
+    [Documentation]   Validate that the columns marked as Follow UTC for ${system}.${view} contain a date in UTC format only
+    [Tags]        AGON-Jira_ID_25
+    Given I have access to Databricks database     view
+    When I check that the requirements are implemented correctly
+    Then I expect that columns which are marked as Follow UTC don't contain null      ${UTC_COLUMNS_ATLAS}    atlas     ${view}
+    And I expect that these columns contain a date in UTC format                      ${UTC_COLUMNS_ATLAS}   atlas     ${view}
+
+AGON-Jira_ID_26 SIT ${view} Test that the columns contains a date in UTC or contains nulls as per filter requirement
+    [Documentation]   Validate that the columns for  ${system}.${view} are Follow UTC or contains nulls as per filter requirement
+    ...               Filter pattern: "case when 'column_name' = '00000000' then null else to_timestamp('column_name', ""yyyyMMdd"") end - Follow UTC"
+    [Tags]        AGON-Jira_ID_26
+    Given I have access to Databricks database    view
+    When I check that the requirements are implemented correctly
+    Then I expect that columns Follow UTC Format or contain nulls as per the filter requirement    ${source}    ${UTC_COLUMNS_WITH_NULL}   ${view}
+###########################################################
+-------------------------Predefined values validation views----------------------------
+AGON-Jira_ID_27 SIT ${view} Test that specified columns for source systems contain predefined values
+    [Documentation]    Validate that ${view}  columns contain predefined values
+    [Tags]   AGON-Jira_ID_27
+    [Template]    Validate that columns contain all predefined values
+    ${source_system}      ${COLUMNS_WITH_PREDEFINED_VALUES}    ${view}    view
+    ${source_system}      ${COLUMNS_WITH_PREDEFINED_VALUES}    ${view}    view
+
+#################### use for single line scenario###############################
+AGON-Jira_ID_28 SIT ${view} Test that specified columns for source systems contain predefined values
+    [Documentation]    Validate that ${view}  columns contain predefined values
+    [Tags]   AGON-Jira_ID_28
+    Given I have access to Databricks database        view
+    When I check that the requirements are implemented correctly
+    Then I expect that the columns contain all predefined values       ${source_system}     ${COLUMNS_WITH_PREDEFINED_VALUES}    ${view}
+############################################################################
+AGON-Jira_ID_27_b SIT ${view} Test that specified columns for source systems contain predefined values
+    [Documentation]    Validate that ${view}  columns contain predefined values or values from original table
+    [Tags]  AGON-22549_06
+    [Template]     Validate that columns contain predefined values or values from original table
+    trackwise      ${COLUMNS_WITH_PREDEFINED_VALUES_OR_V}    ${view}    view
+
+AGON-Jira_ID_29 SIT ${view} Test to check data count for view
+#################### use for single line scenario###############################
+AGON-Jira_ID_28 SIT ${view} Test that specified columns for source systems contain predefined values
+    [Documentation]    Validate that ${view}  columns contain predefined values
+    [Tags]   AGON-Jira_ID_28
+    Given I have access to Databricks database        view
+    When I check that the requirements are implemented correctly
+    Then I expect that the columns contain all predefined values       ${source_system}     ${COLUMNS_WITH_PREDEFINED_VALUES}    ${view}
+
+AGON-Jira_ID_28_b SIT ${view} Test that specified columns for source systems contain predefined values
+    [Documentation]    Validate that ${view} columns contain predefined values or values from original table
+    [Tags]  AGON-Jira_ID_28_b
+    Given I have access to Databricks database    view
+    When I check that the requirements are implemented correctly
+    Then I expect that the columns contain predefined values or values from original table    ${source_system}     ${COLUMNS_WITH_PREDEFINED_VALUES}    ${view}
+# use when  multiple sources and same column with multiple values
+#LIST__COLUMNS_WITH_PREDEFINED_VALUES_PER_SOURCE = {
+    "bbl [SRC_SYS_CD:bbl]",
+    "bbn [SRC_SYS_CD:bbn]",
+    "mbp [SRC_SYS_CD:mbp]"}
+     and sources:  source_system = {"btb_latam", "btb_na", "mbp"}
+
+AGON-Jira_ID_07 SIT ${view} Test that specified columns for source systems contain predefined values
+    [Documentation]    Validate that ${view} columns contain predefined values
+    [Tags]   AGON-Jira_ID_07
+    [Template]    Validate that columns contain all predefined values for list of sources
+    ${source_system}    ${COLUMNS_WITH_PREDEFINED_VALUES_PER_SOURCE}       ${view}    view
+    ${source_system2}    ${COLUMNS_WITH_PREDEFINED_VALUES_PER_SOURCE2}     ${view}    view
+
+#for single line:
+AGON-Jira_ID_07 SIT ${view} Test that specified columns for source systems contain predefined values
+    [Documentation]    Validate that ${view}  columns contain predefined values
+    [Tags]   AGON-Jira_ID_07
+    Given I have access to Databricks database   view
+    When I check that the requirements are implemented correctly
+    Then I check that columns contain all predefined values for list of sources    ${source_list}    ${column_predef_val_list}   ${view}
+
+############################################################################
+
+AGON-Jira_ID_29 SIT ${view} Test to check data count for view
+    [Documentation]     Validate that data count for view ${view} not below expected amount ${DATA_COUNT}
+    [Tags]   AGON-Jira_ID_29
+    Given I have access to Databricks database    view
+    When I check that the requirements are implemented correctly
+    Then I expect that data count is not below expected amount
+----------------------------Trim validation views-----------------------------
+####Multiple lines( ie fdew sources has different list to validate##############
+AGON-Jira_ID_30 SIT ${view} Test that specified columns for source systems contain all whitespace removed
+    [Documentation]  Validate that for ${view} columns contain all whitespace removed as per trim requirement.
+    [Tags]       AGON-Jira_ID_30
+    [Template]   Validate that trim implemented correctly for all listed columns per source
+#   source or list of sources       #list of columns or column
+    hmd     ${WHITESPACE_COLUMNS_hmd}   ${view}    view
+    ${SOUCES}     ${WHITESPACE_COLUMNS_hmd}   ${view}    view
+
+##### For single line scenario(i.e. one source only, multiple source but one set of whitespaces)#####################################################################
+AGON-Jira_ID_31 ${table} Test that specified columns for source systems contain all whitespace removed
+    [Documentation]  Validate that for l1.${table} columns contain all whitespace removed as per trim requirement.
+    [Tags]       AGON-Jira_ID_31
+    Given I have access to Databricks database    table
+    When I check that the requirements are implemented correctly
+    Then I expect that all whitespaces removed from columns    ${ALL_WHITESPACE_SOURCES}       ${WHITESPACE_COLUMNS}      ${table}
+#######################################################
+--------------Populata as null view--------------------------
+###multiple lines:
+AGON-Jira_ID_32 ${view} Test that specified columns for source systems contain all nulls
+    [Documentation]   Validate that for ${view} columns contains all nulls
+    [Tags]      AGON-Jira_ID_32
+    [Template]  Validate that Populate as null for all listed columns implemented correctly per source
+#   source or list of sources       #list of columns or column
+    ${SAP_SOURCES}         ${NULL_COLUMNS_SAP}    ${view}    view
+    ${ALL_NULL_SOURCES}    ${NULL_COLUMNS}        ${view}    view
+
+AGON-Jira_ID_33 SIT ${view} Test that the columns contain all null values or contains values as per filter requirement
+    [Documentation]   Validate that the columns for  ${view} contain  all null values or contain values as per filter requirement
+    [Tags]        AGON-Jira_ID_33
+    [Template]    Validate that the columns contain null values or values as per filter requirement
+ #   source or list of sources       #list of columns or column
+     ${ALL_NULL_SOURCES}       ${NULL_COLUMNS}      ${view}    view
+     ${ALL_NULL_SOURCES2}       ${NULL_COLUMNS2}      ${view}    view
+#################### single line scenario######################
+AGON-Jira_ID_34 ${view} Test that specified columns for source systems contain all nulls
+    [Documentation]   Validate that for ${view} columns contains all nulls
+    [Tags]      AGON-Jira_ID_34
+    Given I have access to Databricks database    view
+    When I check that the requirements are implemented correctly
+    Then I expect that listed columns contains all nulls values   ${ALL_NULL_SOURCES}    ${NULL_COLUMNS}        ${view}
+
+AGON-Jira_ID_35 SIT ${view} Test that the columns contain all null values or contains values as per filter requirement
+    [Documentation]   Validate that the columns for  ${view} contain  all null values or contain values as per filter requirement
+    [Tags]        AGON-Jira_ID_35
+    Given I have access to Databricks database   view
+    When I check that the requirements are implemented correctly
+    Then I expect that listed columns contains a null values or values as per filter requirement  ${ALL_NULL_SOURCES2}       ${NULL_COLUMNS2}      ${view}
+
+#########################################################
+
+------------------Populate as # for View------------------------
+#multiple lines
+AGON-Jira_ID_36 SIT ${view} Test that specified columns for source system contain all hashtag values
+    [Documentation]   Validate that the columns marked as Populate as hashtag for ${view} contain hashtag values only
+    [Tags]   AGON-Jira_ID_36
+    [Template]   Validate that the columns marked as Populate as hashtag contain hashtag values
+    #   source or list of sources       #list of columns or column
+    taishan                   ${HASHTAG_COLUMNS}    ${view}    view
+    ${HASTAG_SOURCES}         ${HASHTAG_COLUMNS2}   ${view}    view
+
+AGON-Jira_ID_37 SIT ${view} Test that the columns contain all hashtag values or contains values as per filter requirement
+    [Documentation]   Validate that the columns for  ${view} contain  all hashtag values or contain values as per filter requirement
+    ...       Validation is made for columns: ${HASHTAG_COLUMNS} for sources/source  ${source_system}
+    [Tags]        AGON-Jira_ID_37
+    [Template]    Validate that the columns contain hashtag values or values as per filter requirement
+ #   source or list of sources       #list of columns or column
+    ${HASTAG_SOURCES}         ${HASHTAG_COLUMNS}    ${view}    view
+    ${HASTAG_SOURCES2}         ${HASHTAG_COLUMNS2}    ${view}    view
+#############Single line scenario####################
+AGON-Jira_ID_38 SIT ${view} Test that specified columns for source system contain all hashtag values
+    [Documentation]   Validate that the columns marked as Populate as hashtag for ${view} contain hashtag values only
+    [Tags]   AGON-Jira_ID_38
+    Given I have access to Databricks database   view
+    When I check that the requirements are implemented correctly
+    Then I expect that listed columns contains a hashtag values for source systems    ${HASTAG_SOURCES}         ${HASHTAG_COLUMNS2}   ${view}
+
+AGON-Jira_ID_39 SIT ${view} Test that the columns contain all hashtag values or contains values as per filter requirement
+    [Documentation]   Validate that the columns for  ${view} contain  all hashtag values or contain values as per filter requirement
+    ...       Validation is made for columns: ${HASHTAG_COLUMNS} for sources/source  ${source_system}
+    [Tags]        AGON-Jira_ID_39
+    Given I have access to Databricks database   view
+    When I check that the requirements are implemented correctly
+    Then I expect that listed columns contains a hashtag values or values as per filter requirement   ${HASTAG_SOURCES2}    ${HASHTAG_COLUMNS2}    ${view}
+ #############################################
+AGON-Jira_ID_40 ${view} Test that the view is returning data for all sources
+    [Documentation]   Validate that the view ${view} is returning data for the source systems ${source_system}
+    [Tags]   AGON-Jira_ID_40
+    Given I have access to Databricks database    view
+    When I check that the requirements are implemented correctly
+    Then I expect that view is returning data for all the sources     ${source_system}
+
+----------------------- 1:1 views------------------------------------------------
+AGON-Jira_ID_41 SIT ${view} Test that the count of table and View match
+    [Documentation]   Validate that the row count of view ${view} and underlying table ${underlying_table} are the same
+    [Tags]   AGON-Jira_ID_41
+    Given I have access to Databricks database    view
+    When I check that the requirements are implemented correctly
+    Then I expect that the row count of view should match the underlying table
+
+AGON-Jira_ID_42 SIT ${view} Test to check that the view has the correct number of columns
+    [Documentation]     Validate that view: ${view} has the correct number of columns
+    [Tags]   AGON-Jira_ID_42
+    Given I have access to Databricks database    view
+    When I check that the requirements are implemented correctly
+    Then I expect that the target view has correct number of columns
+
+AGON-Jira_ID_43 SIT ${view} Test the datatypes of the columns
+    [Documentation]    Validate that the columns are of correct datatype for ${view}
+    [Tags]  AGON-Jira_ID_43
+    Given I have access to Databricks database    view
+    When I check that the requirements are implemented correctly
+    Then I expect that columns are of the correct datatype     ${view}
+
+AGON-Jira_ID_44 SIT ${view} Test that the view is returning data for all sources
+    [Documentation]   Validate that the view ${view} is returning data for the source systems ${source_system}
+    [Tags]   AGON-Jira_ID_44
+    Given I have access to Databricks database    view
+    When I check that the requirements are implemented correctly
+    Then I expect that view is returning data for all the sources     ${source_system}
+
+AGON-Jira_ID_45 SIT ${view} Test to check data count for view
+    [Documentation]     Validate that data count for view ${view} not below expected amount ${DATA_COUNT}
+    [Tags]   AGON-Jira_ID_45
+    Given I have access to Databricks database    view
+    When I check that the requirements are implemented correctly
+    Then I expect that data count is not below expected amount
