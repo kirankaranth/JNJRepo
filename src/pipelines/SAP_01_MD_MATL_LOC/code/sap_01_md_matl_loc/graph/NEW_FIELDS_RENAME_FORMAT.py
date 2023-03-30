@@ -157,4 +157,4 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
           md5(to_json(expr("named_struct('SRC_SYS_CD', SRC_SYS_CD, 'MATL_NUM', MATL_NUM, 'PLNT_CD', PLNT_CD)")))
         )\
         .withColumn("_l1_upt_", current_timestamp())\
-        .withColumn("_deleted_   ", lit("F"))
+        .withColumn("_deleted_", lit("F"))

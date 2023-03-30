@@ -25,8 +25,8 @@ class SET_FIELDS_ORDER_REFORMATTest(BaseTestCase):
         )
         dfOutComputed = SET_FIELDS_ORDER_REFORMAT(self.spark, dfIn0)
         assertDFEquals(
-            dfOut.select("MATL_NUM", "LOT_SIZE_FX_QTY"),
-            dfOutComputed.select("MATL_NUM", "LOT_SIZE_FX_QTY"),
+            dfOut.select("SRC_SYS_CD", "MATL_NUM", "PLNT_CD"),
+            dfOutComputed.select("SRC_SYS_CD", "MATL_NUM", "PLNT_CD"),
             self.maxUnequalRowsToShow
         )
 
@@ -44,11 +44,23 @@ class SET_FIELDS_ORDER_REFORMATTest(BaseTestCase):
             'out'
         )
         dfOutComputed = SET_FIELDS_ORDER_REFORMAT(self.spark, dfIn0)
-        assertDFEquals(
-            dfOut.select("SRC_SYS_CD", "MATL_NUM", "PLNT_CD"),
-            dfOutComputed.select("SRC_SYS_CD", "MATL_NUM", "PLNT_CD"),
-            self.maxUnequalRowsToShow
+        assertDFEquals(dfOut.select("REORDR_QTY"), dfOutComputed.select("REORDR_QTY"), self.maxUnequalRowsToShow)
+
+    def test_unit_test_2(self):
+        dfIn0 = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/sap_01_md_matl_loc/graph/SET_FIELDS_ORDER_REFORMAT/in0/schema.json',
+            'test/resources/data/sap_01_md_matl_loc/graph/SET_FIELDS_ORDER_REFORMAT/in0/data/test_unit_test_2.json',
+            'in0'
         )
+        dfOut = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/sap_01_md_matl_loc/graph/SET_FIELDS_ORDER_REFORMAT/out/schema.json',
+            'test/resources/data/sap_01_md_matl_loc/graph/SET_FIELDS_ORDER_REFORMAT/out/data/test_unit_test_2.json',
+            'out'
+        )
+        dfOutComputed = SET_FIELDS_ORDER_REFORMAT(self.spark, dfIn0)
+        assertDFEquals(dfOut.select("CUR_PER"), dfOutComputed.select("CUR_PER"), self.maxUnequalRowsToShow)
 
     def setUp(self):
         BaseTestCase.setUp(self)
