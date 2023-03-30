@@ -7,7 +7,7 @@ from prophecy.utils import *
 from sap_01_md_matl_inv.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    df_Source_0 = Source_0(spark)
+    df_DS_SAP_01_NSDM_V_MARD = DS_SAP_01_NSDM_V_MARD(spark)
 
 def main():
     spark = SparkSession.builder\
