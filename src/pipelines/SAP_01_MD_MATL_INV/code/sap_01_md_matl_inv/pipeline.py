@@ -8,6 +8,7 @@ from sap_01_md_matl_inv.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_DS_SAP_01_NSDM_V_MARD = DS_SAP_01_NSDM_V_MARD(spark)
+    df_DS_SAP_01_NSDM_V_MCHB = DS_SAP_01_NSDM_V_MCHB(spark)
 
 def main():
     spark = SparkSession.builder\
