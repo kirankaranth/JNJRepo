@@ -6,4 +6,4 @@ from sap_01_md_matl_loc.config.ConfigStore import *
 from sap_01_md_matl_loc.udfs.UDFs import *
 
 def SAP_MARC(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM {Config.sourceSystem}.{Config.TABLENAME} WHERE _deleted_ = 'F'")
+    return spark.sql(f"SELECT * FROM {Config.sourceSystem}.{Config.sourceTable} WHERE _deleted_ = 'F'")

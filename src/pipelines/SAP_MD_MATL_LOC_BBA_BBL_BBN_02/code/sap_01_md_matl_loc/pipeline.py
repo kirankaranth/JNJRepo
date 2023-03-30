@@ -9,7 +9,8 @@ from sap_01_md_matl_loc.graph import *
 def pipeline(spark: SparkSession) -> None:
     df_SAP_MARC = SAP_MARC(spark)
     df_MANDT_FILTER = MANDT_FILTER(spark, df_SAP_MARC)
-    df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_MANDT_FILTER)
+    df_NEW_FIELDS_PK = NEW_FIELDS_PK(spark, df_MANDT_FILTER)
+    df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS_PK)
     MD_MATL_LOC(spark, df_SET_FIELD_ORDER_REFORMAT)
 
 def main():
