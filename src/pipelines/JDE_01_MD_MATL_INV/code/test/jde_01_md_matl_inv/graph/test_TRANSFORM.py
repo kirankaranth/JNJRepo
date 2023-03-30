@@ -24,7 +24,11 @@ class TRANSFORMTest(BaseTestCase):
             'out'
         )
         dfOutComputed = TRANSFORM(self.spark, dfIn0)
-        assertDFEquals(dfOut.select("MATL_NUM"), dfOutComputed.select("MATL_NUM"), self.maxUnequalRowsToShow)
+        assertDFEquals(
+            dfOut.select("RSTRCTD_STCK", "UNRSTRCTD_STCK"),
+            dfOutComputed.select("RSTRCTD_STCK", "UNRSTRCTD_STCK"),
+            self.maxUnequalRowsToShow
+        )
 
     def setUp(self):
         BaseTestCase.setUp(self)
