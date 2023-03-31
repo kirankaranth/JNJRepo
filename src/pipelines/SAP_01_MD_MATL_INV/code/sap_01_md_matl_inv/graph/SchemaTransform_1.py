@@ -49,8 +49,8 @@ def SchemaTransform_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
         )\
         .withColumn("RTRNS  ", col("RETME").cast(DecimalType(18, 4)))\
         .withColumn("BASE_UOM_CD", lookup("LU_MARA_MEINS", col("MATNR")).getField("MEINS"))\
-        .withColumn("STO_IN_TRNST_QTY", lit(None))\
-        .withColumn("PLNT_IN_TRNST_QTY", lit(None))\
+        .withColumn("STO_IN_TRNST_QTY", lit(None).cast(DecimalType(18, 4)))\
+        .withColumn("PLNT_IN_TRNST_QTY", lit(None).cast(DecimalType(18, 4)))\
         .withColumn("FISC_YR_OF_CUR_PER", lit(None).cast(IntegerType()))\
         .withColumn("CUR_PER", lit(None).cast(IntegerType()))\
         .withColumn("SHRT_MATL_NUM", lit(None))\

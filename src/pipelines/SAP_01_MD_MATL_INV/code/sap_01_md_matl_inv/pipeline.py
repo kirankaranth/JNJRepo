@@ -12,10 +12,10 @@ def pipeline(spark: SparkSession) -> None:
     df_DS_SAP_01_NSDM_V_MARD = DS_SAP_01_NSDM_V_MARD(spark)
     df_SchemaTransform_1 = SchemaTransform_1(spark, df_DS_SAP_01_NSDM_V_MARD)
     df_DS_SAP_01_NSDM_V_MSKU = DS_SAP_01_NSDM_V_MSKU(spark)
-    df_SchemaTransform_3 = SchemaTransform_3(spark, df_DS_SAP_01_NSDM_V_MSKU)
+    df_SchemaTransform_1_2 = SchemaTransform_1_2(spark, df_DS_SAP_01_NSDM_V_MSKU)
     df_DS_SAP_01_NSDM_V_MCHB = DS_SAP_01_NSDM_V_MCHB(spark)
     df_SchemaTransform_1_1 = SchemaTransform_1_1(spark, df_DS_SAP_01_NSDM_V_MCHB)
-    df_SetOperation_1 = SetOperation_1(spark, df_SchemaTransform_1, df_SchemaTransform_1_1, df_SchemaTransform_3)
+    df_SetOperation_1 = SetOperation_1(spark, df_SchemaTransform_1, df_SchemaTransform_1_1, df_SchemaTransform_1_2)
 
 def main():
     spark = SparkSession.builder\
