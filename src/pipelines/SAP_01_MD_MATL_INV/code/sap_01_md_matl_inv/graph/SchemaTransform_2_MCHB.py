@@ -5,19 +5,14 @@ from prophecy.libs import typed_lit
 from sap_01_md_matl_inv.config.ConfigStore import *
 from sap_01_md_matl_inv.udfs.UDFs import *
 
-def SchemaTransform_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
+def SchemaTransform_2_MCHB(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
         .withColumn("SRC_SYS_CD", lit(Config.sourceSystem))\
         .withColumn("SRC_TBL_NM", lit(Config.DBTABLE1))\
         .withColumn("MATL_NUM", col("MATNR"))\
         .withColumn("PLNT_CD", col("WERKS"))\
         .withColumn("SLOC_CD", col("LGORT"))\
-        .withColumn(
-          "BTCH_NUM",
-          lit(
-            "#"
-          )
-        )\
+        .withColumn("BTCH_NUM", col("CHARG"))\
         .withColumn(
           "BTCH_STS_CD",
           lit(
@@ -36,18 +31,18 @@ def SchemaTransform_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
             "#"
           )
         )\
-        .withColumn("UNRSTRCTD_STCK", col("LABST").cast(DecimalType(18, 4)))\
-        .withColumn("IN_TRNSFR_STCK ", col("UMLME").cast(DecimalType(18, 4)))\
-        .withColumn("QLTY_INSP_STCK ", col("INSME").cast(DecimalType(18, 4)))\
-        .withColumn("RSTRCTD_STCK", col("EINME").cast(DecimalType(18, 4)))\
-        .withColumn("BLCKD_STCK", col("SPEME").cast(DecimalType(18, 4)))\
+        .withColumn("UNRSTRCTD_STCK", col("CLABS").cast(DecimalType(18, 4)))\
+        .withColumn("IN_TRNSFR_STCK ", col("CUMLM").cast(DecimalType(18, 4)))\
+        .withColumn("QLTY_INSP_STCK ", col("CINSM").cast(DecimalType(18, 4)))\
+        .withColumn("RSTRCTD_STCK", col("CEINM").cast(DecimalType(18, 4)))\
+        .withColumn("BLCKD_STCK", col("CSPEM").cast(DecimalType(18, 4)))\
         .withColumn(
           "CRT_DTTM",
           when((col("ERSDA") == lit("00000000")), lit(None))\
             .when((length(col("ERSDA")) < lit(8)), lit(None))\
             .otherwise(to_timestamp(col("ERSDA"), "yyyMMdd"))
         )\
-        .withColumn("RTRNS  ", col("RETME").cast(DecimalType(18, 4)))\
+        .withColumn("RTRNS  ", col("CRETM").cast(DecimalType(18, 4)))\
         .withColumn("BASE_UOM_CD", lookup("LU_MARA_MEINS", col("MATNR")).getField("MEINS"))\
         .withColumn("STO_IN_TRNST_QTY", lit(None).cast(DecimalType(18, 4)))\
         .withColumn("PLNT_IN_TRNST_QTY", lit(None).cast(DecimalType(18, 4)))\
