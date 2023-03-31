@@ -10,13 +10,13 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("SRC_SYS_CD", lit(Config.sourceSystem))\
         .withColumn("BILL_DOC", col("VBELN"))\
         .withColumn("SLORG_CD", trim(col("VKORG")))\
-        .withColumn("SLORG_DESC", trim(col("TVKOT_VTEXT")))\
+        .withColumn("SLORG_DESC", lookup("LU_SAP_TVKOT", col("VKORG")).getField("VTEXT"))\
         .withColumn("DSTR_CHNL_CD", trim(col("VTWEG")))\
-        .withColumn("DSTR_CHNL_DESC", trim(col("TVTWT_VTEXT")))\
+        .withColumn("DSTR_CHNL_DESC", lookup("LU_SAP_TVTWT", col("VTWEG")).getField("VTEXT"))\
         .withColumn("SLS_DIV_CD", trim(col("SPART")))\
-        .withColumn("SLS_DIV_DESC", trim(col("TSPAT_VTEXT")))\
+        .withColumn("SLS_DIV_DESC", lookup("LU_SAP_TSPAT", col("SPART")).getField("VTEXT"))\
         .withColumn("BILL_TYPE_CD", trim(col("FKART")))\
-        .withColumn("BILL_TYPE_DESC", trim(col("TVFKT_VTEXT")))\
+        .withColumn("BILL_TYPE_DESC", lookup("LU_SAP_TVFKT", col("FKART")).getField("VTEXT"))\
         .withColumn("BILL_CAT", trim(col("FKTYP")))\
         .withColumn("DOC_CAT", trim(col("VBTYP")))\
         .withColumn("PYR", trim(col("KUNRG")))\

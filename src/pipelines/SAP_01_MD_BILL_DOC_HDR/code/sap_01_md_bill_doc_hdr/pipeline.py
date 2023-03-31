@@ -7,25 +7,21 @@ from prophecy.utils import *
 from sap_01_md_bill_doc_hdr.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    df_SAP_VBRK = SAP_VBRK(spark)
-    df_MANDT_FILTER = MANDT_FILTER(spark, df_SAP_VBRK)
-    df_SAP_TVKOT = SAP_TVKOT(spark)
-    df_MANDT_FILTER_TVKOT = MANDT_FILTER_TVKOT(spark, df_SAP_TVKOT)
-    df_SAP_TVTWT = SAP_TVTWT(spark)
-    df_MANDT_FILTER_TVTWT = MANDT_FILTER_TVTWT(spark, df_SAP_TVTWT)
     df_SAP_TSPAT = SAP_TSPAT(spark)
     df_MANDT_FILTER_TSPAT = MANDT_FILTER_TSPAT(spark, df_SAP_TSPAT)
+    LU_SAP_TSPAT(spark, df_MANDT_FILTER_TSPAT)
+    df_SAP_TVKOT = SAP_TVKOT(spark)
+    df_MANDT_FILTER_TVKOT = MANDT_FILTER_TVKOT(spark, df_SAP_TVKOT)
+    LU_SAP_TVKOT(spark, df_MANDT_FILTER_TVKOT)
+    df_SAP_TVTWT = SAP_TVTWT(spark)
+    df_MANDT_FILTER_TVTWT = MANDT_FILTER_TVTWT(spark, df_SAP_TVTWT)
+    LU_SAP_TVTWT(spark, df_MANDT_FILTER_TVTWT)
     df_SAP_TVFKT = SAP_TVFKT(spark)
     df_MANDT_FILTER_TVFKT = MANDT_FILTER_TVFKT(spark, df_SAP_TVFKT)
-    df_Join_1 = Join_1(
-        spark, 
-        df_MANDT_FILTER, 
-        df_MANDT_FILTER_TVKOT, 
-        df_MANDT_FILTER_TVTWT, 
-        df_MANDT_FILTER_TSPAT, 
-        df_MANDT_FILTER_TVFKT
-    )
-    df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_Join_1)
+    LU_SAP_TVFKT(spark, df_MANDT_FILTER_TVFKT)
+    df_SAP_VBRK = SAP_VBRK(spark)
+    df_MANDT_FILTER = MANDT_FILTER(spark, df_SAP_VBRK)
+    df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_MANDT_FILTER)
     df_SET_FIELD_ORDER_FORMAT = SET_FIELD_ORDER_FORMAT(spark, df_NEW_FIELDS_RENAME_FORMAT)
     df_DUPLICATE_CHECK = DUPLICATE_CHECK(spark, df_SET_FIELD_ORDER_FORMAT)
     MD_BILL_DOC_HDR(spark, df_SET_FIELD_ORDER_FORMAT)
