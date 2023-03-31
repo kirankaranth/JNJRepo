@@ -11,7 +11,7 @@ ${Prod_env}           prd
 I have access to Databricks database
     [Arguments]      ${databricks_name}
     Successfully logging in to the Databricks platform     ${databricks_name}
-    log    Connected to ${databricks_name}
+
 
 Successfully logging in to the Databricks platform
     [Arguments]       ${databricks_name}

@@ -16,6 +16,7 @@ JEKT-0024_01 SIT ${table} Test to check the uniqueness of the primary keys
     When I check that the requirements are implemented correctly
     Then I expect that table contains only unique primary keys
 
+
 JEKT-0024_02 SIT ${table} Test that the columns contains a date in UTC
     [Documentation]   Validate that the columns marked as Follow UTC for ${system}.${table} contain a date in UTC format only
     ...    Validation is done for column/columns: ${UTC_COLUMNS} for source/sources ${source_system}
