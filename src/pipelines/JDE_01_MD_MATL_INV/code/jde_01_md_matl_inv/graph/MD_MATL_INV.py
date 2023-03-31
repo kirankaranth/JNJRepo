@@ -9,5 +9,5 @@ def MD_MATL_INV(spark: SparkSession, in0: DataFrame):
     in0.write\
         .format("delta")\
         .option("replaceWhere", f"SRC_SYS_CD = '{Config.sourceSystem}'")\
-        .mode("append")\
+        .mode("overwrite")\
         .saveAsTable(f"{Config.targetSchema}.MD_MATL_INV")
