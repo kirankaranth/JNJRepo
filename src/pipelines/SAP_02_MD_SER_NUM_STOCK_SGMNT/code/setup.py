@@ -1,13 +1,13 @@
 from setuptools import setup, find_packages
 setup(
-    name = 'SAP_02_MD_SER_NUM_STOCK_SGMNT',
+    name = 'SAP_MD_SER_NUM_STOCK_SGMNT_HCS_MBP_P01_SVS',
     version = '1.0',
     packages = find_packages(include = ('sap_02_md_ser_num_stock_sgmnt*', )) + ["prophecy_config_instances"],
     package_dir = {'prophecy_config_instances' : 'configs/resources/config'},
     package_data = {'prophecy_config_instances' : ['*.json', '*.py']},
     description = 'workflow',
     install_requires = [
-'prophecy-libs==1.4.2'],
+'prophecy-libs==1.4.7'],
     entry_points = {
 'console_scripts' : [
 'main = sap_02_md_ser_num_stock_sgmnt.pipeline:main'], },

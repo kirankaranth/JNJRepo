@@ -5,7 +5,7 @@ from argparse import Namespace
 from prophecy.test import BaseTestCase
 from prophecy.test.utils import *
 from sap_01_md_ser_num_stock_sgmnt.graph.NEW_FIELDS_RENAME_FORMAT import *
-import sap_01_md_ser_num_stock_sgmnt.config.ConfigStore as ConfigStore
+from sap_01_md_ser_num_stock_sgmnt.config.ConfigStore import *
 
 
 class NEW_FIELDS_RENAME_FORMATTest(BaseTestCase):
@@ -60,7 +60,12 @@ class NEW_FIELDS_RENAME_FORMATTest(BaseTestCase):
         BaseTestCase.setUp(self)
         import os
         fabricName = os.environ['FABRIC_NAME']
-        ConfigStore.Utils.initializeFromArgs(
+        Utils.initializeFromArgs(
             self.spark,
-            Namespace(file = f"configs/resources/config/{fabricName}.json", config = None, overrideJson = None)
+            Namespace(
+              file = f"configs/resources/config/{fabricName}.json",
+              config = None,
+              overrideJson = None,
+              defaultConfFile = None
+            )
         )
