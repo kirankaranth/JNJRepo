@@ -7,7 +7,7 @@ from prophecy.utils import *
 from sap_md_delv_line_hm2.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    pass
+    df_Source_0 = Source_0(spark)
 
 def main():
     spark = SparkSession.builder\
