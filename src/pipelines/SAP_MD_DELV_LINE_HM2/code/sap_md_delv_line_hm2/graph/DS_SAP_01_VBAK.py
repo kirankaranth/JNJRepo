@@ -6,4 +6,4 @@ from sap_md_delv_line_hm2.config.ConfigStore import *
 from sap_md_delv_line_hm2.udfs.UDFs import *
 
 def DS_SAP_01_VBAK(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM pqa_hm2.vbak WHERE _deleted_ = 'F'")
+    return spark.sql(f"SELECT * FROM {Config.sourceDatabase}.vbak WHERE _deleted_ = 'F'")
