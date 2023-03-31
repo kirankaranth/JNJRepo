@@ -5,29 +5,32 @@ class Config(ConfigBase):
 
     def __init__(
             self,
-            SRC_SYS_CD: str=None,
-            DBNAME: str=None,
-            TABLENAME: str=None,
+            sourceSystem: str=None,
+            sourceDatabase: str=None,
+            sourceTable: str=None,
             DAI_ETL_ID: int=None,
-            COLUMNS: int=None,
+            targetSchema: str=None,
+            ConfigDatabase: str=None,
             **kwargs
     ):
         self.spark = None
-        self.update(SRC_SYS_CD, DBNAME, TABLENAME, DAI_ETL_ID, COLUMNS)
+        self.update(sourceSystem, sourceDatabase, sourceTable, DAI_ETL_ID, targetSchema, ConfigDatabase)
 
     def update(
             self,
-            SRC_SYS_CD: str="jes",
-            DBNAME: str="jes",
-            TABLENAME: str="f4311",
+            sourceSystem: str="jes",
+            sourceDatabase: str="jes",
+            sourceTable: str="f4311",
             DAI_ETL_ID: int=0,
-            COLUMNS: int=21,
+            targetSchema: str="dev_l1_md",
+            ConfigDatabase: str=" ",
             **kwargs
     ):
         prophecy_spark = self.spark
-        self.SRC_SYS_CD = SRC_SYS_CD
-        self.DBNAME = DBNAME
-        self.TABLENAME = TABLENAME
+        self.sourceSystem = sourceSystem
+        self.sourceDatabase = sourceDatabase
+        self.sourceTable = sourceTable
         self.DAI_ETL_ID = self.get_int_value(DAI_ETL_ID)
-        self.COLUMNS = self.get_int_value(COLUMNS)
+        self.targetSchema = targetSchema
+        self.ConfigDatabase = ConfigDatabase
         pass

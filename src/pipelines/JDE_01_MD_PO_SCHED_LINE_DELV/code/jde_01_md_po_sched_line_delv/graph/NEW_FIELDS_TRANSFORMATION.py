@@ -7,7 +7,7 @@ from jde_01_md_po_sched_line_delv.udfs.UDFs import *
 
 def NEW_FIELDS_TRANSFORMATION(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
-        .withColumn("SRC_SYS_CD", lit(Config.SRC_SYS_CD))\
+        .withColumn("sourceSystem", lit(Config.sourceSystem))\
         .withColumn("PO_NUM", col("pddoco"))\
         .withColumn("PO_LINE_NBR", col("pdlnid"))\
         .withColumn(
@@ -70,4 +70,24 @@ def NEW_FIELDS_TRANSFORMATION(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("BTCH_NUM", lit(None))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_date())\
-        .withColumn("DAI_UPDT_DTTM", current_timestamp())
+        .withColumn("DAI_UPDT_DTTM", current_timestamp())\
+        .withColumn("_l0_upt", col("_upt_"))\
+        .withColumn(
+          "_pk_   ",
+          to_json(
+            expr(
+              "named_struct('sourceSystem', sourceSystem, 'PO_NUM', PO_NUM, 'PO_LINE_NBR', PO_LINE_NBR, 'DELV_SCHED_CNT_NBR', DELV_SCHED_CNT_NBR)"
+            )
+          )
+        )\
+        .withColumn(
+          "_pk_md_",
+          md5(
+            to_json(
+              expr(
+                "named_struct('sourceSystem', sourceSystem, 'PO_NUM', PO_NUM, 'PO_LINE_NBR', PO_LINE_NBR, 'DELV_SCHED_CNT_NBR', DELV_SCHED_CNT_NBR)"
+              )
+            )
+          )
+        )\
+        .withColumn("_l1_upt_", current_timestamp())

@@ -10,4 +10,4 @@ def md_po_sched_line_delv_swap(spark: SparkSession, in0: DataFrame):
         .format("delta")\
         .option("path", "dbfs:/mnt/dev_curdelta/l1_prophecy/md_po_sched_line_delv_swap")\
         .mode("error")\
-        .saveAsTable(f"l1_md_prophecy.md_po_sched_line_delv_swap")
+        .saveAsTable(f"{Config.targetSchema}.MD_PO_SCHED_LINE_DELV_SWAP")
