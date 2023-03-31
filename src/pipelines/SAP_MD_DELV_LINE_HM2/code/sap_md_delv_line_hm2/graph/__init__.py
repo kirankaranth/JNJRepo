@@ -1,1 +1,5 @@
+from .DS_SAP_01_LIKP import DS_SAP_01_LIKP
+from .DS_SAP_01_VBAP import DS_SAP_01_VBAP
+from .DS_SAP_01_TVM4T import DS_SAP_01_TVM4T
+from .DS_SAP_01_VBAK import DS_SAP_01_VBAK
 from .DS_SAP_01_LIPS import DS_SAP_01_LIPS
