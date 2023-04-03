@@ -9,8 +9,9 @@ from sap_01_md_sls_doc_ptnr_func.graph import *
 def pipeline(spark: SparkSession) -> None:
     df_SAP_VBPA = SAP_VBPA(spark)
     df_SAP_VBAK = SAP_VBAK(spark)
-    df_MANDT_VBPA = MANDT_VBPA(spark, df_SAP_VBPA)
     df_MANDT_VBAK = MANDT_VBAK(spark, df_SAP_VBAK)
+    df_MANDT_VBPA = MANDT_VBPA(spark, df_SAP_VBPA)
+    df_Join_1 = Join_1(spark, df_MANDT_VBPA, df_MANDT_VBAK)
 
 def main():
     spark = SparkSession.builder\
