@@ -73,7 +73,7 @@ def NEW_FIELDS_TRANSFORMATION(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("DAI_UPDT_DTTM", current_timestamp())\
         .withColumn("_l0_upt", col("_upt_"))\
         .withColumn(
-          "_pk_   ",
+          "_pk_",
           to_json(
             expr(
               "named_struct('SRC_SYS_CD', sourceSystem, 'PO_NUM', PO_NUM, 'PO_LINE_NBR', PO_LINE_NBR, 'DELV_SCHED_CNT_NBR', DELV_SCHED_CNT_NBR, 'ORDER_TYPE', ORDER_TYPE, 'ORDER_CO', ORDER_CO, 'ORDER_SUF', ORDER_SUF)"
