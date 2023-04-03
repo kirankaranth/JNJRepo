@@ -16,7 +16,14 @@ def pipeline(spark: SparkSession) -> None:
     df_SET_FIELD_ORDER = SET_FIELD_ORDER(spark, df_SchemaTransform_1_MARD)
     df_DS_SAP_01_NSDM_V_MCHB = DS_SAP_01_NSDM_V_MCHB(spark)
     df_SchemaTransform_2_MCHB = SchemaTransform_2_MCHB(spark, df_DS_SAP_01_NSDM_V_MCHB)
-    df_SetOperation_1_Union = SetOperation_1_Union(spark, df_SchemaTransform_2_MCHB, df_SchemaTransform_3_MSKU)
+    df_SET_FIELD_ORDER_2 = SET_FIELD_ORDER_2(spark, df_SchemaTransform_2_MCHB)
+    df_SET_FIELD_ORDER_1 = SET_FIELD_ORDER_1(spark, df_SchemaTransform_3_MSKU)
+    df_SetOperation_1_Union = SetOperation_1_Union(
+        spark, 
+        df_SET_FIELD_ORDER, 
+        df_SET_FIELD_ORDER_2, 
+        df_SET_FIELD_ORDER_1
+    )
 
 def main():
     spark = SparkSession.builder\
