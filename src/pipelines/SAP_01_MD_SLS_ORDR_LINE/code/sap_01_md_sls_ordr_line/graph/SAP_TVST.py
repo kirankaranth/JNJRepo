@@ -6,5 +6,4 @@ from sap_01_md_sls_ordr_line.config.ConfigStore import *
 from sap_01_md_sls_ordr_line.udfs.UDFs import *
 
 def SAP_TVST(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM bbl.tvst WHERE _deleted_ = 'F' and spras  = 'E'
-")
+    return spark.sql(f"SELECT * FROM bbl.tvst WHERE _deleted_ = 'F' and spras  = 'E'")

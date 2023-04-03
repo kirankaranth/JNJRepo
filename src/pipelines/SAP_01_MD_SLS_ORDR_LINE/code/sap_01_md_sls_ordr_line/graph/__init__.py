@@ -5,7 +5,6 @@ from .MANDT_FILTER_1_1_1_2_1 import MANDT_FILTER_1_1_1_2_1
 from .SAP_TVM1T import SAP_TVM1T
 from .MANDT_FILTER_1_1_1_2_1_1 import MANDT_FILTER_1_1_1_2_1_1
 from .MANDT_FILTER_1_1_1_1 import MANDT_FILTER_1_1_1_1
-from .Join_1 import Join_1
 from .MANDT_FILTER_1_1_1_2_1_1_1_1_1_1_1 import MANDT_FILTER_1_1_1_2_1_1_1_1_1_1_1
 from .SAP_TVRO import SAP_TVRO
 from .MANDT_FILTER_1_1_1_2_1_1_1_1 import MANDT_FILTER_1_1_1_2_1_1_1_1
