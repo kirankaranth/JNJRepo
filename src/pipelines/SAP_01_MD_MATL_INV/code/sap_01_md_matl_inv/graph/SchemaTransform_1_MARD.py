@@ -37,8 +37,8 @@ def SchemaTransform_1_MARD(spark: SparkSession, in0: DataFrame) -> DataFrame:
           )
         )\
         .withColumn("UNRSTRCTD_STCK", col("LABST").cast(DecimalType(18, 4)))\
-        .withColumn("IN_TRNSFR_STCK ", col("UMLME").cast(DecimalType(18, 4)))\
-        .withColumn("QLTY_INSP_STCK ", col("INSME").cast(DecimalType(18, 4)))\
+        .withColumn("IN_TRNSFR_STCK", col("UMLME").cast(DecimalType(18, 4)))\
+        .withColumn("QLTY_INSP_STCK", col("INSME").cast(DecimalType(18, 4)))\
         .withColumn("RSTRCTD_STCK", col("EINME").cast(DecimalType(18, 4)))\
         .withColumn("BLCKD_STCK", col("SPEME").cast(DecimalType(18, 4)))\
         .withColumn(

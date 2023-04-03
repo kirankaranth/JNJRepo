@@ -32,8 +32,8 @@ def SchemaTransform_2_MCHB(spark: SparkSession, in0: DataFrame) -> DataFrame:
           )
         )\
         .withColumn("UNRSTRCTD_STCK", col("CLABS").cast(DecimalType(18, 4)))\
-        .withColumn("IN_TRNSFR_STCK ", col("CUMLM").cast(DecimalType(18, 4)))\
-        .withColumn("QLTY_INSP_STCK ", col("CINSM").cast(DecimalType(18, 4)))\
+        .withColumn("IN_TRNSFR_STCK", col("CUMLM").cast(DecimalType(18, 4)))\
+        .withColumn("QLTY_INSP_STCK", col("CINSM").cast(DecimalType(18, 4)))\
         .withColumn("RSTRCTD_STCK", col("CEINM").cast(DecimalType(18, 4)))\
         .withColumn("BLCKD_STCK", col("CSPEM").cast(DecimalType(18, 4)))\
         .withColumn(

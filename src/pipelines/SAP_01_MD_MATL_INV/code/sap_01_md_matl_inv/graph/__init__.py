@@ -3,7 +3,7 @@ from .DS_SAP_01_MARA import DS_SAP_01_MARA
 from .DS_SAP_01_NSDM_V_MSKU import DS_SAP_01_NSDM_V_MSKU
 from .SchemaTransform_1_MARD import SchemaTransform_1_MARD
 from .SchemaTransform_2_MCHB import SchemaTransform_2_MCHB
-from .Reformat_1 import Reformat_1
+from .SET_FIELD_ORDER import SET_FIELD_ORDER
 from .DS_SAP_01_NSDM_V_MCHB import DS_SAP_01_NSDM_V_MCHB
 from .SetOperation_1_Union import SetOperation_1_Union
 from .Lookup_1_MARA import Lookup_1_MARA
