@@ -15,12 +15,8 @@ def pipeline(spark: SparkSession) -> None:
     df_SchemaTransform_3_MSKU = SchemaTransform_3_MSKU(spark, df_DS_SAP_01_NSDM_V_MSKU)
     df_DS_SAP_01_NSDM_V_MCHB = DS_SAP_01_NSDM_V_MCHB(spark)
     df_SchemaTransform_2_MCHB = SchemaTransform_2_MCHB(spark, df_DS_SAP_01_NSDM_V_MCHB)
-    df_SetOperation_1_Union = SetOperation_1_Union(
-        spark, 
-        df_SchemaTransform_1_MARD, 
-        df_SchemaTransform_2_MCHB, 
-        df_SchemaTransform_3_MSKU
-    )
+    df_SetOperation_1_Union = SetOperation_1_Union(spark, df_SchemaTransform_2_MCHB, df_SchemaTransform_3_MSKU)
+    df_Reformat_1 = Reformat_1(spark, df_SchemaTransform_1_MARD)
 
 def main():
     spark = SparkSession.builder\
