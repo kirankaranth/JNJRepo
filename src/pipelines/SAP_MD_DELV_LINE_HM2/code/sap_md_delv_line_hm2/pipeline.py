@@ -7,11 +7,16 @@ from prophecy.utils import *
 from sap_md_delv_line_hm2.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    df_DS_SAP_01_LIKP = DS_SAP_01_LIKP(spark)
     df_DS_SAP_01_LIPS = DS_SAP_01_LIPS(spark)
-    df_DS_SAP_01_TVM4T = DS_SAP_01_TVM4T(spark)
-    df_DS_SAP_01_VBAP = DS_SAP_01_VBAP(spark)
+    df_MANDT_FILTER_LIPS = MANDT_FILTER_LIPS(spark, df_DS_SAP_01_LIPS)
+    df_DS_SAP_01_LIKP = DS_SAP_01_LIKP(spark)
+    df_MANDT_FILTER_LIKP = MANDT_FILTER_LIKP(spark, df_DS_SAP_01_LIKP)
     df_DS_SAP_01_VBAK = DS_SAP_01_VBAK(spark)
+    df_Filter_3 = Filter_3(spark, df_DS_SAP_01_VBAK)
+    df_DS_SAP_01_TVM4T = DS_SAP_01_TVM4T(spark)
+    df_Filter_5 = Filter_5(spark, df_DS_SAP_01_TVM4T)
+    df_DS_SAP_01_VBAP = DS_SAP_01_VBAP(spark)
+    df_Filter_4 = Filter_4(spark, df_DS_SAP_01_VBAP)
 
 def main():
     spark = SparkSession.builder\
