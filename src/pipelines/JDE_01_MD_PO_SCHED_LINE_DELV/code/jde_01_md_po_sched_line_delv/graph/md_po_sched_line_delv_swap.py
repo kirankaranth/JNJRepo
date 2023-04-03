@@ -8,6 +8,6 @@ from jde_01_md_po_sched_line_delv.udfs.UDFs import *
 def md_po_sched_line_delv_swap(spark: SparkSession, in0: DataFrame):
     in0.write\
         .format("delta")\
-        .option("path", "dbfs:/mnt/dev_curdelta/l1_prophecy/md_po_sched_line_delv_swap")\
-        .mode("error")\
-        .saveAsTable(f"{Config.targetSchema}.MD_PO_SCHED_LINE_DELV_SWAP")
+        .option("replaceWhere", f"SRC_SYS_CD = '{Config.sourceSystem}'")\
+        .mode("overwrite")\
+        .saveAsTable(f"{Config.targetSchema}.MD_PO_SCHED_LINE_DELV")
