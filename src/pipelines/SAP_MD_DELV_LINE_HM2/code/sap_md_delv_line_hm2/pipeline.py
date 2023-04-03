@@ -13,10 +13,18 @@ def pipeline(spark: SparkSession) -> None:
     df_MANDT_FILTER_LIKP = MANDT_FILTER_LIKP(spark, df_DS_SAP_01_LIKP)
     df_DS_SAP_01_VBAK = DS_SAP_01_VBAK(spark)
     df_MANDT_FILTER_VBAK = MANDT_FILTER_VBAK(spark, df_DS_SAP_01_VBAK)
-    df_DS_SAP_01_TVM4T = DS_SAP_01_TVM4T(spark)
-    df_MANDT_FILTER_TVM4T = MANDT_FILTER_TVM4T(spark, df_DS_SAP_01_TVM4T)
     df_DS_SAP_01_VBAP = DS_SAP_01_VBAP(spark)
     df_MANDT_FILTER_VBAP = MANDT_FILTER_VBAP(spark, df_DS_SAP_01_VBAP)
+    df_DS_SAP_01_TVM4T = DS_SAP_01_TVM4T(spark)
+    df_MANDT_FILTER_TVM4T = MANDT_FILTER_TVM4T(spark, df_DS_SAP_01_TVM4T)
+    df_Join_1 = Join_1(
+        spark, 
+        df_MANDT_FILTER_LIPS, 
+        df_MANDT_FILTER_LIKP, 
+        df_MANDT_FILTER_VBAK, 
+        df_MANDT_FILTER_VBAP, 
+        df_MANDT_FILTER_TVM4T
+    )
 
 def main():
     spark = SparkSession.builder\
