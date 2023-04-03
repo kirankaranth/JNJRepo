@@ -8,6 +8,7 @@ class Config(ConfigBase):
             sourceSystem: str=None,
             targetSchema: str=None,
             DBNAME: str=None,
+            MANDT: str=None,
             DBTABLE1: str=None,
             DBTABLE2: str=None,
             DBTABLE3: str=None,
@@ -17,13 +18,25 @@ class Config(ConfigBase):
             **kwargs
     ):
         self.spark = None
-        self.update(sourceSystem, targetSchema, DBNAME, DBTABLE1, DBTABLE2, DBTABLE3, DBTABLE4, COLUMNS, DAI_ETL_ID)
+        self.update(
+            sourceSystem, 
+            targetSchema, 
+            DBNAME, 
+            MANDT, 
+            DBTABLE1, 
+            DBTABLE2, 
+            DBTABLE3, 
+            DBTABLE4, 
+            COLUMNS, 
+            DAI_ETL_ID
+        )
 
     def update(
             self,
             sourceSystem: str="hm2",
             targetSchema: str="dev_md_l1",
             DBNAME: str="hm2",
+            MANDT: str="500",
             DBTABLE1: str="nsdm_v_mard",
             DBTABLE2: str="nsdm_v_mchb",
             DBTABLE3: str="nsdm_v_msku",
@@ -36,6 +49,7 @@ class Config(ConfigBase):
         self.sourceSystem = sourceSystem
         self.targetSchema = targetSchema
         self.DBNAME = DBNAME
+        self.MANDT = MANDT
         self.DBTABLE1 = DBTABLE1
         self.DBTABLE2 = DBTABLE2
         self.DBTABLE3 = DBTABLE3
