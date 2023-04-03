@@ -2,8 +2,8 @@ from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from prophecy.libs import typed_lit
-from sap_01_md_bill_doc_hdr.config.ConfigStore import *
-from sap_01_md_bill_doc_hdr.udfs.UDFs import *
+from md_bill_doc_hdr_bbl.config.ConfigStore import *
+from md_bill_doc_hdr_bbl.udfs.UDFs import *
 
 def SET_FIELD_ORDER_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0.select(
@@ -79,7 +79,6 @@ def SET_FIELD_ORDER_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("TAX_CLSN_9"), 
         col("INDSTR_CD_1"), 
         col("INDSTR_CD_2"), 
-        col("PRCH_ORDR_TYPE"), 
         col("BILL_DOC_IS_CAN"), 
         col("DAI_ETL_ID"), 
         col("DAI_CRT_DTTM"), 
