@@ -6,4 +6,4 @@ from sap_01_md_sls_doc_ptnr_func.config.ConfigStore import *
 from sap_01_md_sls_doc_ptnr_func.udfs.UDFs import *
 
 def SAP_VBAK(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM bbl.vbak WHERE _deleted_ = 'F'")
+    return spark.sql(f"SELECT * FROM {Config.sourceDatabase}.vbak WHERE _deleted_ = 'F'")
