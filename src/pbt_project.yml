@@ -818,7 +818,7 @@ pipelines:
     artefactID: ''
     language: python
     createdAt: '2023-03-24 11:12:00'
-    modifiedAt: '2023-03-24 11:32:27'
+    modifiedAt: '2023-04-03 10:09:00'
     datasets:
       inputs:
       - datasets/DS_JDE_MD_MATL_LOC
@@ -827,14 +827,14 @@ pipelines:
     subgraphs: []
     dependencies: {}
   pipelines/JDE_MD_MATL_BW2:
-    name: JDE_MD_MATL_BW2
-    description: Pipeline to bba_bbl_bbn SAP systems for MD_MATL_LOC
+    name: JDE_MD_MATL_LOC_BW2
+    description: Pipeline to JDE bw2 system for MD_MATL_LOC
     author: ggrilo1@its.jnj.com
     mode: batch
     artefactID: ''
     language: python
     createdAt: '2023-03-24 11:33:25'
-    modifiedAt: '2023-03-24 11:38:05'
+    modifiedAt: '2023-03-31 09:41:13'
     datasets:
       inputs:
       - datasets/DS_JDE_MD_MATL_LOC
@@ -850,7 +850,7 @@ pipelines:
     artefactID: ''
     language: python
     createdAt: '2023-03-24 11:39:27'
-    modifiedAt: '2023-03-24 11:44:58'
+    modifiedAt: '2023-04-03 10:06:20'
     datasets:
       inputs:
       - datasets/DS_JDE_MD_MATL_LOC
@@ -866,7 +866,7 @@ pipelines:
     artefactID: ''
     language: python
     createdAt: '2023-03-24 11:59:11'
-    modifiedAt: '2023-03-24 13:53:36'
+    modifiedAt: '2023-04-03 09:50:54'
     datasets:
       inputs:
       - datasets/DS_JDE_4102
@@ -882,7 +882,7 @@ pipelines:
     artefactID: ''
     language: python
     createdAt: '2023-03-24 13:55:47'
-    modifiedAt: '2023-03-24 13:57:40'
+    modifiedAt: '2023-04-03 09:47:40'
     datasets:
       inputs:
       - datasets/DS_JDE_4102
@@ -898,7 +898,7 @@ pipelines:
     artefactID: ''
     language: python
     createdAt: '2023-03-24 14:00:43'
-    modifiedAt: '2023-03-24 14:04:37'
+    modifiedAt: '2023-04-03 09:43:54'
     datasets:
       inputs:
       - datasets/DS_JDE_4102
@@ -914,7 +914,7 @@ pipelines:
     artefactID: ''
     language: python
     createdAt: '2023-03-24 14:10:54'
-    modifiedAt: '2023-03-24 14:19:46'
+    modifiedAt: '2023-04-03 09:12:58'
     datasets:
       inputs:
       - datasets/DS_JDE_4102
@@ -930,7 +930,7 @@ pipelines:
     artefactID: ''
     language: python
     createdAt: '2023-03-24 14:21:28'
-    modifiedAt: '2023-03-24 14:24:55'
+    modifiedAt: '2023-04-03 09:08:46'
     datasets:
       inputs:
       - datasets/DS_JDE_4102
@@ -946,7 +946,7 @@ pipelines:
     artefactID: ''
     language: python
     createdAt: '2023-03-24 14:28:06'
-    modifiedAt: '2023-03-24 14:30:05'
+    modifiedAt: '2023-04-03 09:04:31'
     datasets:
       inputs:
       - datasets/DS_JDE_4102
@@ -962,7 +962,7 @@ pipelines:
     artefactID: ''
     language: python
     createdAt: '2023-03-24 14:30:57'
-    modifiedAt: '2023-03-30 09:11:28'
+    modifiedAt: '2023-03-31 09:34:33'
     datasets:
       inputs:
       - datasets/DS_JDE_4102
@@ -3481,7 +3481,7 @@ datasets:
     description: ''
     author: skostadi@its.jnj.com
     createdAt: '2023-03-20 18:20:04'
-    modifiedAt: '2023-03-30 10:39:11'
+    modifiedAt: '2023-04-03 10:09:00'
     mode: batch
     physicalDatasets:
       CDL_L1_Dev:
@@ -6166,7 +6166,7 @@ datasets:
     description: 'datasource to get JDE F4102_ADT table '
     author: ggrilo1@its.jnj.com
     createdAt: '2023-03-22 10:37:49'
-    modifiedAt: '2023-03-24 13:46:23'
+    modifiedAt: '2023-03-31 09:35:07'
     mode: batch
     physicalDatasets:
       CDL_L1_Dev:
@@ -6181,7 +6181,7 @@ datasets:
     description: ''
     author: ggrilo1@its.jnj.com
     createdAt: '2023-03-24 13:52:45'
-    modifiedAt: '2023-03-24 13:53:36'
+    modifiedAt: '2023-03-31 08:58:23'
     mode: batch
     physicalDatasets:
       CDL_L1_Dev:
@@ -6256,6 +6256,41 @@ jobs:
     createdAt: '2023-03-21 18:50:06'
     modifiedAt: '2023-03-22 17:30:52'
     author: skostadi@its.jnj.com
+  jobs/JOB_MD_MATL_LOC:
+    name: JOB_MD_MATL_LOC
+    description: ''
+    fabricUID: 4
+    scheduler:
+      Databricks: {}
+    cloudProvider: null
+    jobSize: small
+    scheduleCron: 0 0 0 1/1 * ? *
+    timeout: null
+    alerting:
+      emails: ''
+      onStart: false
+      onSuccess: false
+      onFailure: false
+    pipelines:
+    - pipelines/JDE_MD_MATL_BW2
+    - pipelines/JDE_MD_MATL_LOC_DEU
+    - pipelines/JDE_MD_MATL_LOC_GMD
+    - pipelines/JDE_MD_MATL_LOC_MTR
+    - pipelines/JDE_MD_MATL_LOC_SJD
+    - pipelines/JDE_MD_MATL_LOC_JEM
+    - pipelines/SAP_MD_MATL_LOC_TAI_MRS_P01_HCS_BWI_GEU_SVS_MBP_FSN_02
+    - pipelines/JDE_MD_MATL_LOC_JSW
+    - pipelines/SAP_MD_MATL_LOC_BBA_BBL_BBN_02
+    - pipelines/JDE_MD_MATL_LOC_JES
+    - pipelines/JDE_MD_MATL_LOC_JET
+    jobClusterMode:
+      clusterMode:
+        Single: {}
+      clusterId: null
+    enabled: null
+    createdAt: '2023-04-03 10:09:49'
+    modifiedAt: '2023-04-03 10:29:12'
+    author: ggrilo1@its.jnj.com
 functions:
   author: null
   createdAt: '2023-03-24 11:10:59'

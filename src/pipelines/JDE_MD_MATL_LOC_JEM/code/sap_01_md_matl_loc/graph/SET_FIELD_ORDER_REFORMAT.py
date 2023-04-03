@@ -33,5 +33,11 @@ def SET_FIELD_ORDER_REFORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         trim(col("ibprp2")).alias("MTS_MTO_FL"), 
         lit(Config.DAI_ETL_ID).alias("DAI_ETL_ID"), 
         current_timestamp().alias("DAI_CRT_DTTM"), 
-        current_timestamp().alias("DAI_UPDT_DTTM")
+        current_timestamp().alias("DAI_UPDT_DTTM"), 
+        col("_upt_").alias("_l0_upt_"), 
+        to_json(expr("named_struct('SCR_SYS_CD', SRC_SYS_CD, 'MATL_NUM', MATL_NUM, 'PLNT_CD', PLNT_CD)")).alias("_pk_"), 
+        md5(to_json(expr("named_struct('SCR_SYS_CD', SRC_SYS_CD, 'MATL_NUM', MATL_NUM, 'PLNT_CD', PLNT_CD)")))\
+          .alias("_pk_md5_"), 
+        current_timestamp().alias("_l1_upt_"), 
+        lit("F").alias("_deleted_")
     )
