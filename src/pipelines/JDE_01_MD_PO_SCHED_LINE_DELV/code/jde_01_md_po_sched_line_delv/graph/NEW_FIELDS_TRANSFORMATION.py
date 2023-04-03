@@ -17,10 +17,10 @@ def NEW_FIELDS_TRANSFORMATION(spark: SparkSession, in0: DataFrame) -> DataFrame:
           )
         )\
         .withColumn("DELV_DTTM", lit(None))\
-        .withColumn("SCHD_QTY", trim(col("pduorg")))\
-        .withColumn("RECV_QTY", lit(None))\
-        .withColumn("STK_TFR_RECV_QTY", trim(col("pdurec")))\
-        .withColumn("MRP_ADJ_QTY", lit(None))\
+        .withColumn("SCHD_QTY", trim(col("pduorg")).cast(DecimalType(18, 4)))\
+        .withColumn("RECV_QTY", lit(None).cast(DecimalType(18, 4)))\
+        .withColumn("STK_TFR_RECV_QTY", trim(col("pdurec")).cast(DecimalType(18, 4)))\
+        .withColumn("MRP_ADJ_QTY", lit(None).cast(DecimalType(18, 4)))\
         .withColumn(
           "STAT_DELV_DTTM",
           when(
@@ -45,7 +45,7 @@ def NEW_FIELDS_TRANSFORMATION(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("ORDER_TYPE", col("pddcto"))\
         .withColumn("ORDER_CO", col("pdkcoo"))\
         .withColumn("ORDER_SUF", col("pdsfxo"))\
-        .withColumn("PREV_QTY", lit(None))\
+        .withColumn("PREV_QTY", lit(None).cast(DecimalType(18, 4)))\
         .withColumn(
           "CMT_DTTM",
           when(

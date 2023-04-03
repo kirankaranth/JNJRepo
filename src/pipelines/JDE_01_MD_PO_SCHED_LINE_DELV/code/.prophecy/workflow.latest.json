@@ -2074,7 +2074,7 @@
             "sourceColumn" : "SCHD_QTY",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(pduorg)"
+              "expression" : "CAST (trim(pduorg) AS decimal(18,4))"
             }
           },
           "DropColumn" : {
@@ -2090,7 +2090,7 @@
             "sourceColumn" : "RECV_QTY",
             "expression" : {
               "format" : "sql",
-              "expression" : "NULL"
+              "expression" : "CAST (NULL AS decimal(18,4))"
             }
           },
           "DropColumn" : {
@@ -2106,7 +2106,7 @@
             "sourceColumn" : "STK_TFR_RECV_QTY",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(pdurec)"
+              "expression" : "CAST (trim(pdurec) AS decimal(18,4))"
             }
           },
           "DropColumn" : {
@@ -2122,7 +2122,7 @@
             "sourceColumn" : "MRP_ADJ_QTY",
             "expression" : {
               "format" : "sql",
-              "expression" : "NULL"
+              "expression" : "CAST (NULL AS decimal (18,4))"
             }
           },
           "DropColumn" : {
@@ -2138,7 +2138,7 @@
             "sourceColumn" : "STAT_DELV_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "\r\n    CASE\r\n        WHEN LOWER(TRIM(pdopdj)) IS NULL OR TRIM(pddrqj) = '' OR TRIM(pddrqj) = '0' THEN NULL \r\n        ELSE to_timestamp(\r\n            CONCAT(\r\n                CAST(SUBSTR(TRIM(pddrqj), 1, 4) AS VARCHAR(4)),\r\n                '-',\r\n                CAST(SUBSTR(TRIM(pddrqj), 5, 2) AS VARCHAR(2)),\r\n                '-',\r\n                CAST(SUBSTR(TRIM(pddrqj), 7, 2) AS VARCHAR(2))\r\n            ),\r\n            'yyyy-MM-dd'\r\n        )\r\n    END\r\n"
+              "expression" : "    CASE\r\n        WHEN LOWER(TRIM(pdopdj)) IS NULL OR TRIM(pddrqj) = '' OR TRIM(pddrqj) = '0' THEN NULL \r\n        ELSE to_timestamp(\r\n            CONCAT(\r\n                CAST(SUBSTR(TRIM(pddrqj), 1, 4) AS VARCHAR(4)),\r\n                '-',\r\n                CAST(SUBSTR(TRIM(pddrqj), 5, 2) AS VARCHAR(2)),\r\n                '-',\r\n                CAST(SUBSTR(TRIM(pddrqj), 7, 2) AS VARCHAR(2))\r\n            ),\r\n            'yyyy-MM-dd'\r\n        )\r\n    END"
             }
           },
           "DropColumn" : {
@@ -2218,7 +2218,7 @@
             "sourceColumn" : "PREV_QTY",
             "expression" : {
               "format" : "sql",
-              "expression" : "NULL"
+              "expression" : "CAST (NULL AS decimal(18,4))"
             }
           },
           "DropColumn" : {
@@ -2234,7 +2234,7 @@
             "sourceColumn" : "CMT_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "\r\n    CASE\r\n        WHEN LOWER(TRIM(pdopdj)) IS NULL OR TRIM(pdopdj) = '' OR TRIM(pdopdj) = '0' THEN NULL \r\n        ELSE to_timestamp(\r\n            CONCAT(\r\n                CAST(SUBSTR(TRIM(pdopdj), 1, 4) AS VARCHAR(4)),\r\n                '-',\r\n                CAST(SUBSTR(TRIM(pdopdj), 5, 2) AS VARCHAR(2)),\r\n                '-',\r\n                CAST(SUBSTR(TRIM(pdopdj), 7, 2) AS VARCHAR(2))\r\n            ),\r\n            'yyyy-MM-dd'\r\n        )\r\n    END"
+              "expression" : "    CASE\r\n        WHEN LOWER(TRIM(pdopdj)) IS NULL OR TRIM(pdopdj) = '' OR TRIM(pdopdj) = '0' THEN NULL \r\n        ELSE to_timestamp(\r\n            CONCAT(\r\n                CAST(SUBSTR(TRIM(pdopdj), 1, 4) AS VARCHAR(4)),\r\n                '-',\r\n                CAST(SUBSTR(TRIM(pdopdj), 5, 2) AS VARCHAR(2)),\r\n                '-',\r\n                CAST(SUBSTR(TRIM(pdopdj), 7, 2) AS VARCHAR(2))\r\n            ),\r\n            'yyyy-MM-dd'\r\n        )\r\n    END"
             }
           },
           "DropColumn" : {
@@ -2457,7 +2457,7 @@
               }
             }, {
               "name" : "SCHD_QTY",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -2466,7 +2466,7 @@
               }
             }, {
               "name" : "RECV_QTY",
-              "type" : "void",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -2475,7 +2475,7 @@
               }
             }, {
               "name" : "STK_TFR_RECV_QTY",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -2484,7 +2484,7 @@
               }
             }, {
               "name" : "MRP_ADJ_QTY",
-              "type" : "void",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -2529,7 +2529,7 @@
               }
             }, {
               "name" : "PREV_QTY",
-              "type" : "void",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -4525,7 +4525,7 @@
               }
             }, {
               "name" : "SCHD_QTY",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -4534,7 +4534,7 @@
               }
             }, {
               "name" : "RECV_QTY",
-              "type" : "void",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -4543,7 +4543,7 @@
               }
             }, {
               "name" : "STK_TFR_RECV_QTY",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -4552,7 +4552,7 @@
               }
             }, {
               "name" : "MRP_ADJ_QTY",
-              "type" : "void",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -4606,7 +4606,7 @@
               }
             }, {
               "name" : "PREV_QTY",
-              "type" : "void",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -4987,5 +4987,166 @@
     "outputs" : [ ],
     "selectedInputFields" : [ ],
     "isCustomOutputSchema" : false
-  }
+  },
+  "diagnostics" : [ {
+    "property" : "$.workflow.processes.XvO7xwnnjgMK3FX-y5qnW$$8UmCaF7agjgm4XSNZZRiN.test.unitTests[0].data.I8XdmcHWcszLyMC0Plv0r$$m_gxKHEqP5zZQBrFrtbIO.schema.fields[5].dataType",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "Data type of in0.SCHD_QTY is not correct in the test Unit Test 0.",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.XvO7xwnnjgMK3FX-y5qnW$$8UmCaF7agjgm4XSNZZRiN.test.unitTests[0].data.I8XdmcHWcszLyMC0Plv0r$$m_gxKHEqP5zZQBrFrtbIO.schema.fields[6].dataType",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "Data type of in0.RECV_QTY is not correct in the test Unit Test 0.",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.XvO7xwnnjgMK3FX-y5qnW$$8UmCaF7agjgm4XSNZZRiN.test.unitTests[0].data.I8XdmcHWcszLyMC0Plv0r$$m_gxKHEqP5zZQBrFrtbIO.schema.fields[7].dataType",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "Data type of in0.STK_TFR_RECV_QTY is not correct in the test Unit Test 0.",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.XvO7xwnnjgMK3FX-y5qnW$$8UmCaF7agjgm4XSNZZRiN.test.unitTests[0].data.I8XdmcHWcszLyMC0Plv0r$$m_gxKHEqP5zZQBrFrtbIO.schema.fields[8].dataType",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "Data type of in0.MRP_ADJ_QTY is not correct in the test Unit Test 0.",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.XvO7xwnnjgMK3FX-y5qnW$$8UmCaF7agjgm4XSNZZRiN.test.unitTests[0].data.I8XdmcHWcszLyMC0Plv0r$$m_gxKHEqP5zZQBrFrtbIO.schema.fields[13].dataType",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "Data type of in0.PREV_QTY is not correct in the test Unit Test 0.",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.XvO7xwnnjgMK3FX-y5qnW$$8UmCaF7agjgm4XSNZZRiN.test.unitTests[0].data.IbLewQEzTESMj0SDRJ7RH$$6W-q5M6Yn8z3uWFB5jwZv.schema.fields[5].dataType",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "Data type of out.SCHD_QTY is not correct in the test Unit Test 0.",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.XvO7xwnnjgMK3FX-y5qnW$$8UmCaF7agjgm4XSNZZRiN.test.unitTests[0].data.IbLewQEzTESMj0SDRJ7RH$$6W-q5M6Yn8z3uWFB5jwZv.schema.fields[6].dataType",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "Data type of out.RECV_QTY is not correct in the test Unit Test 0.",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.XvO7xwnnjgMK3FX-y5qnW$$8UmCaF7agjgm4XSNZZRiN.test.unitTests[0].data.IbLewQEzTESMj0SDRJ7RH$$6W-q5M6Yn8z3uWFB5jwZv.schema.fields[7].dataType",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "Data type of out.STK_TFR_RECV_QTY is not correct in the test Unit Test 0.",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.XvO7xwnnjgMK3FX-y5qnW$$8UmCaF7agjgm4XSNZZRiN.test.unitTests[0].data.IbLewQEzTESMj0SDRJ7RH$$6W-q5M6Yn8z3uWFB5jwZv.schema.fields[8].dataType",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "Data type of out.MRP_ADJ_QTY is not correct in the test Unit Test 0.",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.XvO7xwnnjgMK3FX-y5qnW$$8UmCaF7agjgm4XSNZZRiN.test.unitTests[0].data.IbLewQEzTESMj0SDRJ7RH$$6W-q5M6Yn8z3uWFB5jwZv.schema.fields[13].dataType",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "Data type of out.PREV_QTY is not correct in the test Unit Test 0.",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  } ]
 }
