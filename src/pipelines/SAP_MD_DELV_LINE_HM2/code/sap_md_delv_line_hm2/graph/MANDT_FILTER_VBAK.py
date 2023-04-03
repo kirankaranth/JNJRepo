@@ -5,5 +5,5 @@ from prophecy.libs import typed_lit
 from sap_md_delv_line_hm2.config.ConfigStore import *
 from sap_md_delv_line_hm2.udfs.UDFs import *
 
-def Filter_4(spark: SparkSession, in0: DataFrame) -> DataFrame:
-    return in0.filter(lit(True))
+def MANDT_FILTER_VBAK(spark: SparkSession, in0: DataFrame) -> DataFrame:
+    return in0.filter((col("MANDT") == lit(Config.MANDT)))
