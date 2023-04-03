@@ -26,5 +26,9 @@ def SET_FIELD_ORDER_REFORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("BTCH_NUM"), 
         col("DAI_ETL_ID"), 
         col("DAI_CRT_DTTM"), 
-        col("DAI_UPDT_DTTM")
+        col("DAI_UPDT_DTTM"), 
+        col("_l0_upt"), 
+        col("_l1_upt_"), 
+        col("`_pk_   `").alias("_pk_   "), 
+        col("_pk_md_")
     )
