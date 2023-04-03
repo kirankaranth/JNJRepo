@@ -10,7 +10,9 @@ def pipeline(spark: SparkSession) -> None:
     df_JDE_F4311 = JDE_F4311(spark)
     df_NEW_FIELDS_TRANSFORMATION = NEW_FIELDS_TRANSFORMATION(spark, df_JDE_F4311)
     df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS_TRANSFORMATION)
-    md_po_sched_line_delv_swap(spark, df_SET_FIELD_ORDER_REFORMAT)
+    df_GET_DUP = GET_DUP(spark, df_SET_FIELD_ORDER_REFORMAT)
+    df_DUP_FILTER = DUP_FILTER(spark, df_GET_DUP)
+    md_po_sched_line_delv_swap(spark, df_DUP_FILTER)
 
 def main():
     spark = SparkSession.builder\
