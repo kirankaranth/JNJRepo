@@ -25,7 +25,7 @@ def pipeline(spark: SparkSession) -> None:
         df_MANDT_FILTER_VBAP, 
         df_MANDT_FILTER_TVM4T
     )
-    df_SchemaTransform_1 = SchemaTransform_1(spark, df_Join_1)
+    df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_Join_1)
 
 def main():
     spark = SparkSession.builder\

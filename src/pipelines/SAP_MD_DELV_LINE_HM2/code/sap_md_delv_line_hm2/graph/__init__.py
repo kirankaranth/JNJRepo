@@ -3,7 +3,6 @@ from .MANDT_FILTER_VBAK import MANDT_FILTER_VBAK
 from .MANDT_FILTER_LIPS import MANDT_FILTER_LIPS
 from .Join_1 import Join_1
 from .DS_SAP_01_LIKP import DS_SAP_01_LIKP
-from .SchemaTransform_1 import SchemaTransform_1
 from .DS_SAP_01_VBAP import DS_SAP_01_VBAP
 from .DS_SAP_01_TVM4T import DS_SAP_01_TVM4T
 from .MANDT_FILTER_LIKP import MANDT_FILTER_LIKP
