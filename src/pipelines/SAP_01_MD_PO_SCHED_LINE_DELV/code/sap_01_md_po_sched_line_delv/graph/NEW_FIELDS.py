@@ -57,7 +57,7 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
           "_pk_",
           to_json(
             expr(
-              "named_struct('SRC_SYS_CD', SRC_SYS_CD, 'PO_NUM', PO_NUM, 'PO_LINE_NBR', PO_LINE_NBR, 'DELV_SCHED_CNT_NBR', DELV_SCHED_CNT_NBR, 'ORDER_TYPE', ORDER_TYPE, 'CMT_DTTM', CMT_DTTM, 'CAT_OF_DELV_DT', CAT_OF_DELV_DT, 'BTCH_NUM', BTCH_NUM)"
+              "named_struct('SRC_SYS_CD', SRC_SYS_CD, 'PO_NUM', PO_NUM, 'PO_LINE_NBR', PO_LINE_NBR, 'DELV_SCHED_CNT_NBR', DELV_SCHED_CNT_NBR, 'ORDER_TYPE', ORDER_TYPE, 'ORDER_CO', ORDER_CO, 'ORDER_SUF', ORDER_SUF)"
             )
           )
         )\
@@ -66,7 +66,7 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
           md5(
             to_json(
               expr(
-                "named_struct('SRC_SYS_CD', SRC_SYS_CD, 'PO_NUM', PO_NUM, 'PO_LINE_NBR', PO_LINE_NBR, 'DELV_SCHED_CNT_NBR', DELV_SCHED_CNT_NBR, 'ORDER_TYPE', ORDER_TYPE, 'CMT_DTTM', CMT_DTTM, 'CAT_OF_DELV_DT', CAT_OF_DELV_DT, 'BTCH_NUM', BTCH_NUM)"
+                "named_struct('SRC_SYS_CD', SRC_SYS_CD, 'PO_NUM', PO_NUM, 'PO_LINE_NBR', PO_LINE_NBR, 'DELV_SCHED_CNT_NBR', DELV_SCHED_CNT_NBR, 'ORDER_TYPE', ORDER_TYPE, 'ORDER_CO', ORDER_CO, 'ORDER_SUF', ORDER_SUF)"
               )
             )
           )
