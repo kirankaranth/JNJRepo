@@ -51,8 +51,8 @@ def SchemaTransform_1_MARD(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("BASE_UOM_CD", lookup("LU_MARA_MEINS", col("MATNR")).getField("MEINS"))\
         .withColumn("STO_IN_TRNST_QTY", lit(None).cast(DecimalType(18, 4)))\
         .withColumn("PLNT_IN_TRNST_QTY", lit(None).cast(DecimalType(18, 4)))\
-        .withColumn("FISC_YR_OF_CUR_PER", lit(None).cast(IntegerType()))\
-        .withColumn("CUR_PER", lit(None).cast(IntegerType()))\
+        .withColumn("FISC_YR_OF_CUR_PER", col("LFGJA").cast(IntegerType()))\
+        .withColumn("CUR_PER", col("LFMON").cast(IntegerType()))\
         .withColumn("SHRT_MATL_NUM", lit(None))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
