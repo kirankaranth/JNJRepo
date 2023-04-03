@@ -26,6 +26,7 @@ def pipeline(spark: SparkSession) -> None:
         df_MANDT_FILTER_TVM4T
     )
     df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_Join_1)
+    df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS_RENAME_FORMAT)
 
 def main():
     spark = SparkSession.builder\
