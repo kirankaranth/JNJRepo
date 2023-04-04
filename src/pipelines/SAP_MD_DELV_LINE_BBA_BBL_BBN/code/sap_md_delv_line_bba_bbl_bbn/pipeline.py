@@ -7,12 +7,12 @@ from prophecy.utils import *
 from sap_md_delv_line_bba_bbl_bbn.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    df_DS_SAP_01_LIPS = DS_SAP_01_LIPS(spark)
-    df_MANDT_FILTER_LIPS = MANDT_FILTER_LIPS(spark, df_DS_SAP_01_LIPS)
-    df_DS_SAP_01_LIKP = DS_SAP_01_LIKP(spark)
-    df_MANDT_FILTER_LIKP = MANDT_FILTER_LIKP(spark, df_DS_SAP_01_LIKP)
-    df_DS_SAP_01_VBAK = DS_SAP_01_VBAK(spark)
-    df_MANDT_FILTER_VBAK = MANDT_FILTER_VBAK(spark, df_DS_SAP_01_VBAK)
+    df_DS_SAP_02_LIPS = DS_SAP_02_LIPS(spark)
+    df_MANDT_FILTER_LIPS = MANDT_FILTER_LIPS(spark, df_DS_SAP_02_LIPS)
+    df_DS_SAP_02_LIKP = DS_SAP_02_LIKP(spark)
+    df_MANDT_FILTER_LIKP = MANDT_FILTER_LIKP(spark, df_DS_SAP_02_LIKP)
+    df_DS_SAP_02_VBAK = DS_SAP_02_VBAK(spark)
+    df_MANDT_FILTER_VBAK = MANDT_FILTER_VBAK(spark, df_DS_SAP_02_VBAK)
     df_DS_SAP_01_VBUP = DS_SAP_01_VBUP(spark)
     df_MANDT_FILTER_VBUP = MANDT_FILTER_VBUP(spark, df_DS_SAP_01_VBUP)
     df_Join_1 = Join_1(spark, df_MANDT_FILTER_LIPS, df_MANDT_FILTER_LIKP, df_MANDT_FILTER_VBAK, df_MANDT_FILTER_VBUP)
