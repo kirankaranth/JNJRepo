@@ -23,7 +23,7 @@ class Config(ConfigBase):
             sourceTable: str="f4311",
             DAI_ETL_ID: int=0,
             targetSchema: str="dev_l1_md",
-            ConfigDatabase: str=" ",
+            ConfigDatabase: str=None,
             **kwargs
     ):
         prophecy_spark = self.spark
