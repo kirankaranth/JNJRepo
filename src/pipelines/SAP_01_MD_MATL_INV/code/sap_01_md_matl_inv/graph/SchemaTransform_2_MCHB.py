@@ -40,7 +40,7 @@ def SchemaTransform_2_MCHB(spark: SparkSession, in0: DataFrame) -> DataFrame:
           "CRT_DTTM",
           when((col("ERSDA") == lit("00000000")), lit(None))\
             .when((length(col("ERSDA")) < lit(8)), lit(None))\
-            .otherwise(to_timestamp(col("ERSDA"), "yyyMMdd"))
+            .otherwise(to_timestamp(col("ERSDA"), "yyyyMMdd"))
         )\
         .withColumn("RTRNS", col("CRETM").cast(DecimalType(18, 4)))\
         .withColumn("BASE_UOM_CD", lookup("LU_MARA_MEINS", col("MATNR")).getField("MEINS"))\
