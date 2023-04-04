@@ -5,7 +5,7 @@ from prophecy.libs import typed_lit
 from jde_01_deu_f0401.config.ConfigStore import *
 from jde_01_deu_f0401.udfs.UDFs import *
 
-def RF_FIELDS_SELECT(spark: SparkSession, in0: DataFrame) -> DataFrame:
+def SET_FIELD_ORDER_REFORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0.select(
         col("SRC_SYS_CD"), 
         col("SUP_NUM"), 

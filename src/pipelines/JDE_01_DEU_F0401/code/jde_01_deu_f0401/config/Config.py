@@ -10,10 +10,11 @@ class Config(ConfigBase):
             MANDT: str=None,
             sourceDatabase: str=None,
             DAI_ETL_ID: int=None,
+            ConfigDatabase: str=None,
             **kwargs
     ):
         self.spark = None
-        self.update(sourceSystem, targetSchema, MANDT, sourceDatabase, DAI_ETL_ID)
+        self.update(sourceSystem, targetSchema, MANDT, sourceDatabase, DAI_ETL_ID, ConfigDatabase)
 
     def update(
             self,
@@ -22,6 +23,7 @@ class Config(ConfigBase):
             MANDT: str="100",
             sourceDatabase: str="due",
             DAI_ETL_ID: int=0,
+            ConfigDatabase: str=None,
             **kwargs
     ):
         prophecy_spark = self.spark
@@ -30,4 +32,5 @@ class Config(ConfigBase):
         self.MANDT = MANDT
         self.sourceDatabase = sourceDatabase
         self.DAI_ETL_ID = self.get_int_value(DAI_ETL_ID)
+        self.ConfigDatabase = ConfigDatabase
         pass

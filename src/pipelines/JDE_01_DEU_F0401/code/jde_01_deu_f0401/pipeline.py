@@ -7,12 +7,12 @@ from prophecy.utils import *
 from jde_01_deu_f0401.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    df_DS_JDE_01_F0101 = DS_JDE_01_F0101(spark)
-    df_DS_JDE_01_F0401 = DS_JDE_01_F0401(spark)
-    df_Join_F0404_F0101 = Join_F0404_F0101(spark, df_DS_JDE_01_F0401, df_DS_JDE_01_F0101)
-    df_ST_Join_F0404_F0101 = ST_Join_F0404_F0101(spark, df_Join_F0404_F0101)
-    df_RF_FIELDS_SELECT = RF_FIELDS_SELECT(spark, df_ST_Join_F0404_F0101)
-    MD_SUP_PRCHSNG_ORG(spark, df_RF_FIELDS_SELECT)
+    df_JDE_F0101 = JDE_F0101(spark)
+    df_JDE_F0401 = JDE_F0401(spark)
+    df_JOIN_F0404_F0101 = JOIN_F0404_F0101(spark, df_JDE_F0401, df_JDE_F0101)
+    df_NEW_FIELDS_TRANSFORMATION = NEW_FIELDS_TRANSFORMATION(spark, df_JOIN_F0404_F0101)
+    df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS_TRANSFORMATION)
+    MD_SUP_PRCHSNG_ORG(spark, df_SET_FIELD_ORDER_REFORMAT)
 
 def main():
     spark = SparkSession.builder\

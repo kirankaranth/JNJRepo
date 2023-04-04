@@ -5,7 +5,7 @@ from prophecy.libs import typed_lit
 from jde_01_deu_f0401.config.ConfigStore import *
 from jde_01_deu_f0401.udfs.UDFs import *
 
-def ST_Join_F0404_F0101(spark: SparkSession, in0: DataFrame) -> DataFrame:
+def NEW_FIELDS_TRANSFORMATION(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
         .withColumn("SRC_SYS_CD", lit(Config.sourceSystem))\
         .withColumnRenamed("A6AN8", "SUP_NUM")\
@@ -58,4 +58,5 @@ def ST_Join_F0404_F0101(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("SHIPPING_COND_CD", lit(None))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
-        .withColumn("DAI_UPDT_DTTM", current_timestamp())
+        .withColumn("DAI_UPDT_DTTM", current_timestamp())\
+        .withColumn("_deleted_", lit("F"))
