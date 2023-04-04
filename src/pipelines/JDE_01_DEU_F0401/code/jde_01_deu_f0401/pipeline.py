@@ -13,6 +13,8 @@ def pipeline(spark: SparkSession) -> None:
     df_NEW_FIELDS_TRANSFORMATION = NEW_FIELDS_TRANSFORMATION(spark, df_JOIN_F0404_F0101)
     df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS_TRANSFORMATION)
     MD_SUP_PRCHSNG_ORG(spark, df_SET_FIELD_ORDER_REFORMAT)
+    df_GET_DUP = GET_DUP(spark, df_SET_FIELD_ORDER_REFORMAT)
+    df_DUP_FILTER = DUP_FILTER(spark, df_GET_DUP)
 
 def main():
     spark = SparkSession.builder\

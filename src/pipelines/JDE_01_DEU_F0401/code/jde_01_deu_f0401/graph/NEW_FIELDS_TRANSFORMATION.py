@@ -9,7 +9,12 @@ def NEW_FIELDS_TRANSFORMATION(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
         .withColumn("SRC_SYS_CD", lit(Config.sourceSystem))\
         .withColumnRenamed("A6AN8", "SUP_NUM")\
-        .withColumn("PRCHSNG_ORG_NUM", lit(None))\
+        .withColumn(
+          "PRCHSNG_ORG_NUM",
+          lit(
+            "#"
+          )
+        )\
         .withColumn(
           "CRT_ON_DTTM",
           when(
@@ -59,4 +64,20 @@ def NEW_FIELDS_TRANSFORMATION(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
         .withColumn("DAI_UPDT_DTTM", current_timestamp())\
+        .withColumn("_l0_upt_", col("_upt_"))\
+        .withColumn(
+          "_pk_",
+          to_json(
+            expr("named_struct('SRC_SYS_CD', SRC_SYS_CD, 'SUP_NUM', SUP_NUM, 'PRCHSNG_ORG_NUM', PRCHSNG_ORG_NUM)")
+          )
+        )\
+        .withColumn(
+          "_pk_md5_",
+          md5(
+            to_json(
+              expr("named_struct('SRC_SYS_CD', SRC_SYS_CD, 'SUP_NUM', SUP_NUM, 'PRCHSNG_ORG_NUM', PRCHSNG_ORG_NUM)")
+            )
+          )
+        )\
+        .withColumn("_l1_upt_", current_timestamp())\
         .withColumn("_deleted_", lit("F"))
