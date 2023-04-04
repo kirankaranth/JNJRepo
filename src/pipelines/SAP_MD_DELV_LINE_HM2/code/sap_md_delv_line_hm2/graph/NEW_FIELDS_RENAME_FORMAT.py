@@ -30,20 +30,27 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("ACTL_SKU_DELV_QTY", trim(col("LGMNG")).cast(DecimalType(18, 4)))\
         .withColumn("BASE_UOM_CD", trim(col("MEINS")))\
         .withColumn("BTCH_NUM", trim(col("CHARG")))\
+        .withColumn("BILL_ICMPT_STS_CD", trim(col("UVFAK")))\
+        .withColumn("CNFRM_STS_CD", trim(col("BESTA")))\
         .withColumn(
           "MFG_DTTM",
           when((col("HSDAT") == lit("00000000")), lit(None)).otherwise(to_timestamp(col("HSDAT"), "yyyyMMdd"))
         )\
+        .withColumn("DELV_BILL_STS_CD", trim(col("DELIV_RELTD_BILLG_STA")))\
         .withColumn("DELV_CMPLT_IND", trim(col("SPE_GEN_ELIKZ")))\
+        .withColumn("DELV_ICMPT_STS_CD", trim(col("UVVLK")))\
         .withColumn("DELV_STS_CD", trim(col("LFSTA")))\
         .withColumn("DELV_TOT_STS_CD", trim(col("LFGSA")))\
         .withColumn(
           "EXP_DTTM",
           when((col("VFDAT") == lit("00000000")), lit(None)).otherwise(to_timestamp(col("VFDAT"), "yyyyMMdd"))
         )\
+        .withColumn("GM_STS_CD", trim(col("WBSTA")))\
         .withColumn("MATL_NUM", trim(col("MATNR")))\
+        .withColumn("ICMPT_STS_CD", trim(col("UVALL")))\
         .withColumn("ORDR_BILL_STS_CD", trim(col("FKSAA")))\
         .withColumn("PRC_ICMPT_STS_CD", trim(col("UVPRS")))\
+        .withColumn("PRCSG_TOT_STS_CD", trim(col("GBSTA")))\
         .withColumn("RECV_PLNT_CD", trim(col("UMWRK")))\
         .withColumn("REF_STS_CD", trim(col("RFSTA")))\
         .withColumn("REF_TOT_STS_CD", trim(col("RFGSA")))\
