@@ -7,7 +7,7 @@ from jde_01_deu_f0401.udfs.UDFs import *
 
 def ST_Join_F0404_F0101(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
-        .withColumn("SRC_SYS_CD", lit("check it later"))\
+        .withColumn("SRC_SYS_CD", lit(Config.sourceSystem))\
         .withColumnRenamed("A6AN8", "SUP_NUM")\
         .withColumn("PRCHSNG_ORG_NUM", lit(None))\
         .withColumn(
@@ -41,4 +41,21 @@ def ST_Join_F0404_F0101(spark: SparkSession, in0: DataFrame) -> DataFrame:
         )\
         .withColumn("PRCH_BLK_IND", lit(None))\
         .withColumn("DEL_IND", lit(None))\
-        .withColumn("CRNCY_CD", trim(col("A6CRRP")))
+        .withColumn("CRNCY_CD", trim(col("A6CRRP")))\
+        .withColumn("PMT_TERM_CD", lit(None))\
+        .withColumn("INCOTERM1_CD", trim(col("A6FRTH")))\
+        .withColumn("INCOTERM2_CD", col("F0101_ABMCU"))\
+        .withColumn("PRC_PCDR_CD", lit(None))\
+        .withColumn("PRC_CNTL_CD", lit(None))\
+        .withColumn("EVAL_RCPT_SETLM_CD", trim(col("A6AVCH")))\
+        .withColumn("RTRN_VEND_IND", lit(None))\
+        .withColumn("CNFRM_CD", lit(None))\
+        .withColumn("NM_OF_PRSN_RESP_CREAT_OBJ", lit(None))\
+        .withColumn("GR_BAS_INVC_VERIF", lit(None))\
+        .withColumn("AUTO_GNR_OF_PO_ALLW", lit(None))\
+        .withColumn("AUTO_EVAL_RCPT_SETLM", lit(None))\
+        .withColumn("OWN_EXPLN_OF_TERM_OF_PMT", lit(None))\
+        .withColumn("SHIPPING_COND_CD", lit(None))\
+        .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
+        .withColumn("DAI_CRT_DTTM", current_timestamp())\
+        .withColumn("DAI_UPDT_DTTM", current_timestamp())

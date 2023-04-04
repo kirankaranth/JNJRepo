@@ -1,19 +1,33 @@
 from prophecy.config import ConfigBase
-prophecy_spark_context = None
 
 
 class Config(ConfigBase):
 
-    def __init__(self, SRC_SYS_C: str=None, MANDT: str=None, COLUMNS: int=None, DBNAME: str=None, DAI_ETL_ID: int=None):
+    def __init__(
+            self,
+            sourceSystem: str=None,
+            targetSchema: str=None,
+            MANDT: str=None,
+            sourceDatabase: str=None,
+            DAI_ETL_ID: int=None,
+            **kwargs
+    ):
         self.spark = None
-        self.update(SRC_SYS_C, MANDT, COLUMNS, DBNAME, DAI_ETL_ID)
+        self.update(sourceSystem, targetSchema, MANDT, sourceDatabase, DAI_ETL_ID)
 
-    def update(self, SRC_SYS_C: str="bbl", MANDT: str="100", COLUMNS: int=30, DBNAME: str="bbl", DAI_ETL_ID: int=0):
-        global prophecy_spark_context
-        prophecy_spark_context = self.spark
-        self.SRC_SYS_C = SRC_SYS_C
+    def update(
+            self,
+            sourceSystem: str="due",
+            targetSchema: str="dev_md_l1",
+            MANDT: str="100",
+            sourceDatabase: str="due",
+            DAI_ETL_ID: int=0,
+            **kwargs
+    ):
+        prophecy_spark = self.spark
+        self.sourceSystem = sourceSystem
+        self.targetSchema = targetSchema
         self.MANDT = MANDT
-        self.COLUMNS = self.get_int_value(COLUMNS)
-        self.DBNAME = DBNAME
+        self.sourceDatabase = sourceDatabase
         self.DAI_ETL_ID = self.get_int_value(DAI_ETL_ID)
         pass

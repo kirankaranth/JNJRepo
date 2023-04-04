@@ -11,6 +11,8 @@ def pipeline(spark: SparkSession) -> None:
     df_DS_JDE_01_F0401 = DS_JDE_01_F0401(spark)
     df_Join_F0404_F0101 = Join_F0404_F0101(spark, df_DS_JDE_01_F0401, df_DS_JDE_01_F0101)
     df_ST_Join_F0404_F0101 = ST_Join_F0404_F0101(spark, df_Join_F0404_F0101)
+    df_RF_FIELDS_SELECT = RF_FIELDS_SELECT(spark, df_ST_Join_F0404_F0101)
+    MD_SUP_PRCHSNG_ORG(spark, df_RF_FIELDS_SELECT)
 
 def main():
     spark = SparkSession.builder\
