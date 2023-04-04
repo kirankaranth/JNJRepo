@@ -1,10 +1,10 @@
 from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
-from jde_md_bom_hdr_bw2.config.ConfigStore import *
-from jde_md_bom_hdr_bw2.udfs.UDFs import *
+from jde_md_bom_hdr_deu_sjd_mtr_gmd_jem_jsw_bw2_jes_jet.config.ConfigStore import *
+from jde_md_bom_hdr_deu_sjd_mtr_gmd_jem_jsw_bw2_jes_jet.udfs.UDFs import *
 from prophecy.utils import *
-from jde_md_bom_hdr_bw2.graph import *
+from jde_md_bom_hdr_deu_sjd_mtr_gmd_jem_jsw_bw2_jes_jet.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_JDE_F3002_ADT = JDE_F3002_ADT(spark)
