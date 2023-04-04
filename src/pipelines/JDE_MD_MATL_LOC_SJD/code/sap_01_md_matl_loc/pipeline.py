@@ -10,7 +10,8 @@ def pipeline(spark: SparkSession) -> None:
     df_JDE_F4102 = JDE_F4102(spark)
     df_NEW_FIELDS_PK = NEW_FIELDS_PK(spark, df_JDE_F4102)
     df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS_PK)
-    MD_MATL_LOC(spark, df_SET_FIELD_ORDER_REFORMAT)
+    df_Deduplicate_1 = Deduplicate_1(spark, df_SET_FIELD_ORDER_REFORMAT)
+    MD_MATL_LOC(spark, df_Deduplicate_1)
 
 def main():
     spark = SparkSession.builder\
