@@ -37,7 +37,7 @@ def SchemaTransform_3_MSKU(spark: SparkSession, in0: DataFrame) -> DataFrame:
             .when((length(col("ERSDA")) < lit(8)), lit(None))\
             .otherwise(to_timestamp(col("ERSDA"), "yyyMMdd"))
         )\
-        .withColumn("RTRNS  ", lit(None).cast(DecimalType(18, 4)))\
+        .withColumn("RTRNS", lit(None).cast(DecimalType(18, 4)))\
         .withColumn("BASE_UOM_CD", lookup("LU_MARA_MEINS", col("MATNR")).getField("MEINS"))\
         .withColumn("STO_IN_TRNST_QTY", lit(None).cast(DecimalType(18, 4)))\
         .withColumn("PLNT_IN_TRNST_QTY", lit(None).cast(DecimalType(18, 4)))\
