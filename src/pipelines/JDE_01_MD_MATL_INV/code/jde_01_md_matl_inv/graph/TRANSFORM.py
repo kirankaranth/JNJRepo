@@ -53,7 +53,7 @@ def TRANSFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
             .cast(DecimalType(18, 4))
         )\
         .withColumn("BASE_UOM_CD", trim(col("IMUOM1")))\
-        .withColumn("SHRT_MATL_NUM", trim(col("LIITM")))\
+        .withColumn("SHRT_MATL_NUM", col("LIITM"))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
         .withColumn("DAI_UPDT_DTTM", current_timestamp())\
