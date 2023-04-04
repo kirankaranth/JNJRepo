@@ -119,8 +119,112 @@
     "sourcePort" : "03hTSgV4879cHzl8WDWfE$$iuZSAIVU4G-LTj9rv6x05",
     "target" : "oB4u9Fs0aHopzEUSguCTl$$mmPM3eagOsShJBdn33dVu",
     "targetPort" : "cYiqOLEUmVN5lh8RVtlJZ$$MPPLuVsG1VBjIo5u1lMZ0"
+  }, {
+    "id" : "Qm2TdprSH0Q6abLzrutWE",
+    "source" : "VpYiYbRh_mlN2PLVfdoB7$$wwRjWHTsuV_Z6KOKrcq3R",
+    "sourcePort" : "U1We3gvPbxDdP08PBmCCG$$EnbCkukiNqv3Q63ljBzKC",
+    "target" : "q_rQvN9dZULALpK1wrj7S$$Ym_JAlLrViwF7wBreFKjC",
+    "targetPort" : "WeMI4bKGmFBQM6oy6tBoW$$Qb_qp32DBAENkKfWM3DIB"
+  }, {
+    "id" : "OB9WtuGS_Gkl2OLC-PiIB$$y7M_cDmZ70E6G-HXjnzc9",
+    "source" : "q_rQvN9dZULALpK1wrj7S$$Ym_JAlLrViwF7wBreFKjC",
+    "sourcePort" : "Vys9_4n0e2pvIaq6FuKqV$$9OHgY5FLGsc8cH43_-OJd",
+    "target" : "HHobQjn3bgytR4scK33Ts$$hJ9FX8fIc4cD-unM5lbft",
+    "targetPort" : "HUS508kt2v-4bhIZiyRXc$$sSola384Psr-HgrGJgEvf"
   } ],
   "processes" : {
+    "HHobQjn3bgytR4scK33Ts$$hJ9FX8fIc4cD-unM5lbft" : {
+      "id" : "HHobQjn3bgytR4scK33Ts$$hJ9FX8fIc4cD-unM5lbft",
+      "component" : "Filter",
+      "metadata" : {
+        "label" : "PK_GT_1",
+        "slug" : "PK_GT_1",
+        "x" : 1500,
+        "y" : 60,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "HUS508kt2v-4bhIZiyRXc$$sSola384Psr-HgrGJgEvf",
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "SRC_SYS_CD",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BOM_CAT_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BOM_NUM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ALT_BOM_NUM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BOM_CNTR_NBR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PK_COUNT",
+              "type" : "long",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "KsFlHyLvW2mW4n-SmdYHY$$w_kLkLG4_zc23Oh7rv7fT",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ "HUS508kt2v-4bhIZiyRXc$$sSola384Psr-HgrGJgEvf##PK_COUNT" ],
+        "condition" : {
+          "format" : "sql",
+          "expression" : "PK_COUNT > 1"
+        }
+      }
+    },
     "VpYiYbRh_mlN2PLVfdoB7$$wwRjWHTsuV_Z6KOKrcq3R" : {
       "id" : "VpYiYbRh_mlN2PLVfdoB7$$wwRjWHTsuV_Z6KOKrcq3R",
       "component" : "Reformat",
@@ -2154,6 +2258,303 @@
       },
       "properties" : {
         "datasetId" : "datasets/SAP_02_STKO"
+      }
+    },
+    "q_rQvN9dZULALpK1wrj7S$$Ym_JAlLrViwF7wBreFKjC" : {
+      "id" : "q_rQvN9dZULALpK1wrj7S$$Ym_JAlLrViwF7wBreFKjC",
+      "component" : "Aggregate",
+      "metadata" : {
+        "label" : "PK_COUNT",
+        "slug" : "PK_COUNT",
+        "x" : 1300,
+        "y" : 60,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "WeMI4bKGmFBQM6oy6tBoW$$Qb_qp32DBAENkKfWM3DIB",
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "SRC_SYS_CD",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BOM_CAT_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BOM_NUM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ALT_BOM_NUM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BOM_CNTR_NBR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BOM_VLD_FROM_DTTM",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CHG_NUM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PREV_HDR_CNTR_NBR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CRT_DTTM",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CHG_DTTM",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BOM_UOM_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BOM_TXT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BOM_STS_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DEL_IND",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BOM_BASE_QTY",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DAI_ETL_ID",
+              "type" : "integer",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DAI_CRT_DTTM",
+              "type" : "timestamp",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DAI_UPDT_DTTM",
+              "type" : "timestamp",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_l0_upt_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_pk_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_pk_md5_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_l1_upt_",
+              "type" : "timestamp",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_deleted_",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Vys9_4n0e2pvIaq6FuKqV$$9OHgY5FLGsc8cH43_-OJd",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "allIns" : false,
+        "doPivot" : false,
+        "aggregate" : [ {
+          "target" : "PK_COUNT",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "count(*)"
+          },
+          "description" : "",
+          "_row_id" : ""
+        } ],
+        "allowSelection" : true,
+        "pivotColumn" : null,
+        "pivotValues" : [ ],
+        "activeTab" : "groupBy",
+        "columnsSelector" : [ "WeMI4bKGmFBQM6oy6tBoW$$Qb_qp32DBAENkKfWM3DIB##BOM_CNTR_NBR", "WeMI4bKGmFBQM6oy6tBoW$$Qb_qp32DBAENkKfWM3DIB##ALT_BOM_NUM", "WeMI4bKGmFBQM6oy6tBoW$$Qb_qp32DBAENkKfWM3DIB##BOM_CAT_CD", "WeMI4bKGmFBQM6oy6tBoW$$Qb_qp32DBAENkKfWM3DIB##BOM_NUM", "WeMI4bKGmFBQM6oy6tBoW$$Qb_qp32DBAENkKfWM3DIB##SRC_SYS_CD" ],
+        "groupBy" : [ {
+          "target" : "SRC_SYS_CD",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "SRC_SYS_CD"
+          },
+          "description" : "",
+          "_row_id" : null
+        }, {
+          "target" : "BOM_CAT_CD",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "BOM_CAT_CD"
+          },
+          "description" : "",
+          "_row_id" : null
+        }, {
+          "target" : "BOM_NUM",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "BOM_NUM"
+          },
+          "description" : "",
+          "_row_id" : null
+        }, {
+          "target" : "ALT_BOM_NUM",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "ALT_BOM_NUM"
+          },
+          "description" : "",
+          "_row_id" : null
+        }, {
+          "target" : "BOM_CNTR_NBR",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "BOM_CNTR_NBR"
+          },
+          "description" : "",
+          "_row_id" : null
+        } ]
       }
     }
   },
