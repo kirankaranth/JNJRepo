@@ -12,7 +12,9 @@ def pipeline(spark: SparkSession) -> None:
     df_MANDT_VBAK = MANDT_VBAK(spark, df_SAP_VBAK)
     df_MANDT_VBPA = MANDT_VBPA(spark, df_SAP_VBPA)
     df_Join_1 = Join_1(spark, df_MANDT_VBPA, df_MANDT_VBAK)
-    df_SchemaTransform_1 = SchemaTransform_1(spark, df_Join_1)
+    df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_Join_1)
+    df_SET_FIELDS_ORDER_REFORMAT = SET_FIELDS_ORDER_REFORMAT(spark, df_NEW_FIELDS_RENAME_FORMAT)
+    MD_SLS_DOC_PTNR_FUNC(spark, df_SET_FIELDS_ORDER_REFORMAT)
 
 def main():
     spark = SparkSession.builder\
