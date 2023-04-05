@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "dev_md_l1"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "mec"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "mec"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MES_MD_WRKF_BASE_1"
+      },
+      "connections" : [ {
+        "id" : "475d4631-e459-4196-8f8e-fec2a0fd8975",
+        "source" : "c20ec97a-b92f-43b6-86be-2da45e23d6ec",
+        "sourcePort" : "6936a24e-ae86-4dc3-ae74-f1834993b595",
+        "target" : "6fb75ecb-540d-4f41-ac21-f35c1ec996a1",
+        "targetPort" : "06183f7b-162b-438f-89c9-cf524f4e9071"
+      }, {
+        "id" : "8f63134c-f417-49c3-8b91-3858875ef36c",
+        "source" : "fc26af92-ab2f-4611-8c13-11818069ee48",
+        "sourcePort" : "926f8420-444d-40e8-990f-514532bf6d2e",
+        "target" : "c20ec97a-b92f-43b6-86be-2da45e23d6ec",
+        "targetPort" : "0c1d6e5f-6af3-4c30-adfb-0d4e815d517f"
+      } ],
+      "processes" : {
+        "6fb75ecb-540d-4f41-ac21-f35c1ec996a1" : {
+          "id" : "6fb75ecb-540d-4f41-ac21-f35c1ec996a1",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MES_MD_WRKF_BASE",
+            "slug" : "MES_MD_WRKF_BASE",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "06183f7b-162b-438f-89c9-cf524f4e9071",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MES_MD_WRKF_BASE"
+          }
+        },
+        "c20ec97a-b92f-43b6-86be-2da45e23d6ec" : {
+          "id" : "c20ec97a-b92f-43b6-86be-2da45e23d6ec",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "0c1d6e5f-6af3-4c30-adfb-0d4e815d517f",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "6936a24e-ae86-4dc3-ae74-f1834993b595",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'WRKF_BASE_ID',WRKF_BASE_ID))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'WRKF_BASE_ID',WRKF_BASE_ID)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "fc26af92-ab2f-4611-8c13-11818069ee48" : {
+          "id" : "fc26af92-ab2f-4611-8c13-11818069ee48",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MES_MD_WRKF_BASE",
+            "slug" : "sql_MES_MD_WRKF_BASE",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "926f8420-444d-40e8-990f-514532bf6d2e",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT\n   '{Config.sourceSystem}' AS SRC_SYS_CD\n, TRIM(WorkflowBase.WORKFLOWBASEID) as WRKF_BASE_ID\n, CAST(WorkflowBase.CHANGECOUNT as INT) as CHG_CNT\n, TRIM(WorkflowBase.ICONID) as ICON_ID\n, TRIM(WorkflowBase.CDOTYPEID) as OBJ_TYPE_ID\n, TRIM(WorkflowBase.REVOFRCDID) as RVSN_ID\n, TRIM(WorkflowBase.WORKFLOWNAME) as WRKF_NM\nFROM  {Config.sourceDatabase}.WorkflowBase as WorkflowBase  WHERE WorkflowBase._deleted_ = 'F'   \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    
