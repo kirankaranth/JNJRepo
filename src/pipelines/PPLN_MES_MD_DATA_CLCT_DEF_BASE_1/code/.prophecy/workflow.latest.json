@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "dev_md_l1"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "mec"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "mec"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MES_MD_DATA_CLCT_DEF_BASE_1"
+      },
+      "connections" : [ {
+        "id" : "a22e3b57-ecf7-4a5f-a131-002b087a6c0b",
+        "source" : "41ec7dc0-9dcf-44f1-979c-8e8e24bb928a",
+        "sourcePort" : "1b91ebe6-bab6-4f0f-96fb-afd0da8ad9c4",
+        "target" : "5733574c-078e-4f6d-a278-a530db315193",
+        "targetPort" : "19c93a7e-e5d5-44be-83fa-1ecc6e2fdb94"
+      }, {
+        "id" : "52a5299d-6fdb-4a3b-ab95-dcd2d7377158",
+        "source" : "8ced32c6-1fe8-4f98-a97e-8f4374036a03",
+        "sourcePort" : "e6b194a2-b88c-468d-b780-2f0073ee7777",
+        "target" : "41ec7dc0-9dcf-44f1-979c-8e8e24bb928a",
+        "targetPort" : "0781ee22-3549-4f5d-bc11-f26a0399ab82"
+      } ],
+      "processes" : {
+        "5733574c-078e-4f6d-a278-a530db315193" : {
+          "id" : "5733574c-078e-4f6d-a278-a530db315193",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MES_MD_DATA_CLCT_DEF_BASE",
+            "slug" : "MES_MD_DATA_CLCT_DEF_BASE",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "19c93a7e-e5d5-44be-83fa-1ecc6e2fdb94",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MES_MD_DATA_CLCT_DEF_BASE"
+          }
+        },
+        "41ec7dc0-9dcf-44f1-979c-8e8e24bb928a" : {
+          "id" : "41ec7dc0-9dcf-44f1-979c-8e8e24bb928a",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "0781ee22-3549-4f5d-bc11-f26a0399ab82",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "1b91ebe6-bab6-4f0f-96fb-afd0da8ad9c4",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'DATA_CLCT_DEF_BASE_ID',DATA_CLCT_DEF_BASE_ID))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'DATA_CLCT_DEF_BASE_ID',DATA_CLCT_DEF_BASE_ID)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "8ced32c6-1fe8-4f98-a97e-8f4374036a03" : {
+          "id" : "8ced32c6-1fe8-4f98-a97e-8f4374036a03",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MES_MD_DATA_CLCT_DEF_BASE",
+            "slug" : "sql_MES_MD_DATA_CLCT_DEF_BASE",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "e6b194a2-b88c-468d-b780-2f0073ee7777",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT\n  '{Config.sourceSystem}' AS SRC_SYS_CD\n,trim(DataCollectionDefBase.DATACOLLECTIONDEFBASEID) AS DATA_CLCT_DEF_BASE_ID\n,CAST(DataCollectionDefBase.CHANGECOUNT AS INT) AS CHG_CNT\n,trim(DataCollectionDefBase.DATACOLLECTIONDEFNAME) AS DATA_CLCT_DEF_NM\n,trim(DataCollectionDefBase.ICONID) AS ICON_ID\n,trim(DataCollectionDefBase.CDOTYPEID) AS OBJ_TYPE_ID\n,trim(DataCollectionDefBase.REVOFRCDID) AS RVSN_ID\nfrom {Config.sourceDatabase}.DataCollectionDefBase DataCollectionDefBase\nWHERE DataCollectionDefBase._deleted_='F'  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    
