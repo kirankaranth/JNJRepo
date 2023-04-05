@@ -7,9 +7,11 @@ from prophecy.utils import *
 from md_matl_alt_uom_atl_bba_bbl_bbn_bwi_fsn_geu_hcs_mbp_mrs_p01_svs_tai.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    Lookup_1(spark)
-    df_DS_SAP_01_MARM = DS_SAP_01_MARM(spark)
     df_DS_SAP_MARA_01 = DS_SAP_MARA_01(spark)
+    df_Filter_2 = Filter_2(spark, df_DS_SAP_MARA_01)
+    Lookup_1(spark, df_Filter_2)
+    df_DS_SAP_01_MARM = DS_SAP_01_MARM(spark)
+    df_Filter_1 = Filter_1(spark, df_DS_SAP_01_MARM)
 
 def main():
     spark = SparkSession.builder\
