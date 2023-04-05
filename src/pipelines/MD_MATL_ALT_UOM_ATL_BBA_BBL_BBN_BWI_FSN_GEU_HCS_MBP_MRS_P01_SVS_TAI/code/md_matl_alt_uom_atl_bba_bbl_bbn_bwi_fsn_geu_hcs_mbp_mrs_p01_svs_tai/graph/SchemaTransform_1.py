@@ -18,4 +18,11 @@ def SchemaTransform_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("GTIN_NUM", trim(col("EAN11")))\
         .withColumn("GTIN_CAT_CD", trim(col("NUMTP")))\
         .withColumn("WDTH_MEAS", col("BREIT").cast(DecimalType(18, 4)))\
-        .withColumn("DIM_UOM_CD", trim(col("MEABM")))
+        .withColumn("DIM_UOM_CD", trim(col("MEABM")))\
+        .withColumn("GRS_WT_MEAS", col("BRGEW").cast(DecimalType(18, 4)))\
+        .withColumn("WT_UOM_CD", trim(col("GEWEI")))\
+        .withColumn("LGTH_MEAS", col("LAENG").cast(DecimalType(18, 4)))\
+        .withColumn("HGHT_MEAS", col("HOEHE").cast(DecimalType(18, 4)))\
+        .withColumn("VOL_MEAS", col("VOLUM").cast(DecimalType(18, 4)))\
+        .withColumn("GTIN_NUM_HRMZD", when((length(trim(col("EAN11"))) == lit(0)), lit(""))\
+        .otherwise(concat(expr("substring('00000000000000', 1, (14 - length(trim(EAN11))))"), trim(col("EAN11")))))
