@@ -7,7 +7,7 @@ from jde_01_md_po_sched_line_delv.udfs.UDFs import *
 
 def SET_FIELD_ORDER_REFORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0.select(
-        col("sourceSystem").alias("SRC_SYS_CD"), 
+        col("SRC_SYS_CD"), 
         col("PO_NUM"), 
         col("PO_LINE_NBR"), 
         col("DELV_SCHED_CNT_NBR"), 
@@ -27,9 +27,9 @@ def SET_FIELD_ORDER_REFORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("DAI_ETL_ID"), 
         col("DAI_CRT_DTTM"), 
         col("DAI_UPDT_DTTM"), 
-        col("_l0_upt"), 
-        col("_pk_").alias("_pk_   "), 
-        col("_pk_md_"), 
+        col("_l0_upt_"), 
+        col("_pk_"), 
+        col("_pk_md5_"), 
         col("_l1_upt_"), 
         col("_deleted_")
     )
