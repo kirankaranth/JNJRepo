@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "dev_md_l1"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "cmw"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "cmw"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MES_MD_BTCH_STRT_HIST_DTL_2"
+      },
+      "connections" : [ {
+        "id" : "90bd8381-3536-4f55-8dc4-2d5b9a8a7f94",
+        "source" : "7004bca8-a0cd-4781-b44c-fec792a231db",
+        "sourcePort" : "2147f10a-756f-49f1-a940-4a749268b276",
+        "target" : "ead432db-d322-45be-a015-d038b4a510bb",
+        "targetPort" : "e88e9b4d-f38f-4272-8a4b-deda29d3492f"
+      }, {
+        "id" : "441fc7ed-a937-4068-a65f-a55d155656e0",
+        "source" : "e2f49e70-489e-4340-bef8-616ff1a6f01e",
+        "sourcePort" : "ef962427-3fa5-436d-ae99-6340684664d1",
+        "target" : "7004bca8-a0cd-4781-b44c-fec792a231db",
+        "targetPort" : "ef3d0ca9-f891-4d58-85c5-1011a0ddda8a"
+      } ],
+      "processes" : {
+        "ead432db-d322-45be-a015-d038b4a510bb" : {
+          "id" : "ead432db-d322-45be-a015-d038b4a510bb",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MES_MD_BTCH_STRT_HIST_DTL",
+            "slug" : "MES_MD_BTCH_STRT_HIST_DTL",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "e88e9b4d-f38f-4272-8a4b-deda29d3492f",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MES_MD_BTCH_STRT_HIST_DTL"
+          }
+        },
+        "7004bca8-a0cd-4781-b44c-fec792a231db" : {
+          "id" : "7004bca8-a0cd-4781-b44c-fec792a231db",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "ef3d0ca9-f891-4d58-85c5-1011a0ddda8a",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "2147f10a-756f-49f1-a940-4a749268b276",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'BTCH_STRT_HIST_DTL_ID',BTCH_STRT_HIST_DTL_ID))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'BTCH_STRT_HIST_DTL_ID',BTCH_STRT_HIST_DTL_ID)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "e2f49e70-489e-4340-bef8-616ff1a6f01e" : {
+          "id" : "e2f49e70-489e-4340-bef8-616ff1a6f01e",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MES_MD_BTCH_STRT_HIST_DTL",
+            "slug" : "sql_MES_MD_BTCH_STRT_HIST_DTL",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "ef962427-3fa5-436d-ae99-6340684664d1",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT\n   '{Config.sourceSystem}' AS SRC_SYS_CD\n, TRIM(StartHistoryDetail.STARTHISTORYDETAILID) as BTCH_STRT_HIST_DTL_ID\n, TRIM(StartHistoryDetail.CONTAINERID) as CNTNR_ID\n, TRIM(StartHistoryDetail.PRIORITYCODEID) as CNTNR_PRIR_ID\n, TRIM(StartHistoryDetail.MFGORDERID) as MFG_ORDR_ID\n, TRIM(StartHistoryDetail.ccfAncillaryJob) as ANCIL_JOB_ID\n, TRIM(StartHistoryDetail.BATCHCOMMENTS) as BTCH_COMT_TXT\n, TRIM(StartHistoryDetail.BATCHID) as BTCH_ID\n, TRIM(StartHistoryDetail.cscBatchNumber) as BTCH_NUM\n, TRIM(StartHistoryDetail.cscBatchRecipeId) as BTCH_RECIPE_ID\n, TRIM(StartHistoryDetail.BATCHSTATUSID) as BTCH_STS_ID\n, TRIM(StartHistoryDetail.cscBatchTypeId) as BTCH_TYPE_ID\n, TRIM(StartHistoryDetail.BILLOFPROCESSID) as BILL_OF_PRCS_ID\n, CAST(NULL AS STRING) as BULK_PACK_TYPE_CD\n, TRIM(StartHistoryDetail.CARRIERID) as CARR_ID\n, CAST(NULL AS STRING) as CTN_VERIF_DETAIN_STS_CD\n, CAST(NULL AS TIMESTAMP) as CASE_LBL_RCNL_DTTM\n, CAST(NULL AS TIMESTAMP) as CASE_VERIF_DTTM\n, INT(StartHistoryDetail.CHANGECOUNT) as CHG_CNT\n, INT(StartHistoryDetail.CHILDCOUNT) as CHILD_CNT\n, CAST(NULL AS STRING) as COLL_DHR_LINE_12_CD\n, TRIM(StartHistoryDetail.CONTAINERCOMMENTS) as CNTNR_COMT_TXT\n, CAST(NULL AS STRING) as CNV_PARNT_LOT_NM\n, CAST(StartHistoryDetail.QTY2 AS DECIMAL(18,4)) as CUR_2_QTY\n, CAST(StartHistoryDetail.QTY AS DECIMAL(18,4)) as CUR_QTY\n, TRIM(StartHistoryDetail.CUSTOMERID) as CUST_ID\n, CAST(NULL AS STRING) as DVC_ID\n, case when starthistorydetail.duedate = '00000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(starthistorydetail.duedate,\\\"yyyymmdd\\\") end as DUE_DTTM\n, case when starthistorydetail.duedategmt = '00000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(starthistorydetail.duedategmt,\\\"yyyymmdd\\\") end as DUE_GMT_DTTM\n, TRIM(StartHistoryDetail.cscEquipmentId) as EQMNT_ID\n, INT(StartHistoryDetail.cscEquipmentRunNumber) as EQMNT_RUN_NBR\n, case when starthistorydetail.expirationdate = '00000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(starthistorydetail.expirationdate,\\\"yyyymmdd\\\") end as EXPN_DTTM\n, case when starthistorydetail.expirationdategmt = '00000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(starthistorydetail.expirationdategmt,\\\"yyyymmdd\\\") end as EXPN_GMT_DTTM\n, CAST(NULL AS TIMESTAMP) as EXPN_UDI_DTTM\n, CAST(NULL AS STRING) as EXPT_IMPT_KEY_VAL\n, CAST(NULL AS STRING) as FOIL_STS_CD\n, TRIM(StartHistoryDetail.HISTORYID) as HIST_ID\n, TRIM(StartHistoryDetail.HISTORYMAINLINEID) as HIST_MNLINE_ID\n, CAST(NULL AS BOOLEAN) as IN_QC_IND\n, CAST(NULL AS BOOLEAN) as IS_AUTH_FOR_DESTRUCTION_IND\n, CAST(NULL AS BOOLEAN) as IS_AUTO_STRT_IND\n, CAST(NULL AS BOOLEAN) as IS_CARR_IND\n, CAST(NULL AS BOOLEAN) as IS_DSTRY_IND\n, CAST(NULL AS BOOLEAN) as IS_FAIL_IND\n, CAST(NULL AS BOOLEAN) as IS_INIT_RECON_CMPLT_IND\n, CAST(NULL AS BOOLEAN) as IS_INTRO_IND\n, CAST(NULL AS BOOLEAN) as IS_INV_LOC_IND\n, CAST(NULL AS BOOLEAN) as IS_LAST_SPLT_IND\n, CAST(NULL AS BOOLEAN) as IS_LOT_ABRT_IND\n, CAST(NULL AS BOOLEAN) as IS_LOT_CNV_IND\n, CAST(NULL AS BOOLEAN) as IS_LOT_REV_CMPLT_IND\n, CAST(NULL AS BOOLEAN) as IS_MSTR_LOT_IND\n, CAST(NULL AS BOOLEAN) as IS_PLC_VERS_REQ_IND\n, CAST(NULL AS BOOLEAN) as IS_RCNLD_IND\n, CAST(NULL AS BOOLEAN) as IS_RTRN_FOR_DESTRUCTION_IND\n, CAST(NULL AS TIMESTAMP) as JLN_DTTM\n, CAST(NULL AS BOOLEAN) as LBLS_RCNLD_IND\n, TRIM(StartHistoryDetail.ccfLastParentId) as LAST_PARNT_ID\n, TRIM(StartHistoryDetail.LOCATIONID) as LOC_ID\n, TRIM(StartHistoryDetail.ccfMaintenanceReqId) as MAINT_REQ_ID\n, TRIM(StartHistoryDetail.ccfMaintenanceStatusId) as MAINT_STS_ID\n, CAST(NULL AS TIMESTAMP) as MFG_DTTM\n, CAST(NULL AS TIMESTAMP) as MFG_GMT_DTTM\n, CAST(NULL AS TIMESTAMP) as MFG_UDI_DTTM\n, CAST(NULL AS STRING) as MSTR_LOT_NM\n, TRIM(StartHistoryDetail.MASTERRECIPEID) as MSTR_RECIPE_ID\n, TRIM(StartHistoryDetail.CDOTYPEID) as OBJ_TYPE_ID\n, TRIM(StartHistoryDetail.OPERATIONID) as OPR_ID\n, TRIM(StartHistoryDetail.OWNERID) as OWN_ID\n, CAST(StartHistoryDetail.PLANNEDQTY AS DECIMAL(18,4)) as PLAN_QTY\n, TRIM(StartHistoryDetail.PLANNEDQTYUOMID) as PLAN_QTY_UOM_ID\n, CAST(StartHistoryDetail.PLANNEDQTY2 AS DECIMAL(18,4)) as PLAN_2_QTY\n, TRIM(StartHistoryDetail.PLANNEDQTYUOM2ID) as PLAN_2_QTY_UOM_ID\n, TRIM(StartHistoryDetail.PLANNEDPRODUCTID) as PLAN_PROD_ID\n, case when starthistorydetail.plannedstartdate = '00000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(starthistorydetail.plannedstartdate,\\\"yyyymmdd\\\") end as PLAN_STRT_DTTM\n, case when starthistorydetail.plannedstartdategmt = '00000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(starthistorydetail.plannedstartdategmt,\\\"yyyymmdd\\\") end as PLAN_STRT_GMT_DTTM\n, CAST(NULL AS BOOLEAN) as PLCDHR_MSMCH_IND\n, CAST(NULL AS BOOLEAN) as PLCDHR_NO_DATA_IND\n, TRIM(StartHistoryDetail.PRODUCTID) as PROD_ID\n, CAST(NULL AS STRING) as PRDTN_ID\n, TRIM(StartHistoryDetail.RECIPELISTID) as RECIPE_LIST_ID\n, CAST(NULL AS INT) as RECON_CNT\n, case when starthistorydetail.requestdate = '00000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(starthistorydetail.requestdate,\\\"yyyymmdd\\\") end as RQST_DTTM\n, TRIM(StartHistoryDetail.RESOURCEID) as RSRS_ID\n, CAST(NULL AS STRING) as RWRK_CASE_VRFY_CD\n, CAST(NULL AS INT) as RUN_SEQ_NBR\n, TRIM(StartHistoryDetail.SALESORDERID) as SLS_ORDR_ID\n, CAST(NULL AS STRING) as SMPLG_LOT_ID\n, CAST(StartHistoryDetail.SAMPLINGREQUIRED as BOOLEAN ) as SMPLG_REQ_IND\n, TRIM(StartHistoryDetail.cscSamplingResult) as SMPLG_RSULT_CD\n, INT(StartHistoryDetail.ccfSequence) as SEQ_NBR\n, TRIM(StartHistoryDetail.STARTREASONID) as STRT_RSN_ID\n, CAST(NULL AS DECIMAL(18,4)) as STRT_QTY\n, CAST(StartHistoryDetail.cscTotalPendingQty AS DECIMAL(18,4)) as TOT_PEND_QTY\n, CAST(StartHistoryDetail.cscTotalQty AS DECIMAL(18,4)) as TOT_QTY\n, CAST(StartHistoryDetail.ccfTotalThruputQty AS DECIMAL(18,4)) as TOT_THRUPUT_QTY\n, CAST(StartHistoryDetail.ccfTotalThruputQty2 AS DECIMAL(18,4)) as TOT_THRUPUT_2_QTY\n, TRIM(StartHistoryDetail.TXNID) as TXN_ID\n, CAST(NULL AS STRING) as UDI_CD\n, INT(StartHistoryDetail.UNITCOUNT) as UNIT_CNT\n, TRIM(StartHistoryDetail.UOMID) as UOM_ID\n, TRIM(StartHistoryDetail.UOM2ID) as UOM_2_ID\n, TRIM(StartHistoryDetail.VENDORITEMID) as VEND_ITM_ID\n, CAST(NULL AS STRING) as WIP_STS_CD\n, CAST(NULL AS STRING) as WRK_STN_ID\n, TRIM(StartHistoryDetail.WORKFLOWSTEPID) as WRKF_STEP_ID\n, CAST(NULL AS INT) as YR_NBR\nFROM  {Config.sourceDatabase}.StartHistoryDetail as StartHistoryDetail\nWHERE StartHistoryDetail._deleted_ = 'F'\n  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    
