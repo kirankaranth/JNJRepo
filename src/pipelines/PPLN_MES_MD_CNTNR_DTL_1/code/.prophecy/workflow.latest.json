@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "dev_md_l1"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "mec"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "mec"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MES_MD_CNTNR_DTL_1"
+      },
+      "connections" : [ {
+        "id" : "5f89bdee-5db0-4fa0-a27d-e003d63266cc",
+        "source" : "dc4ab201-5af2-4a04-8121-70bb1dc7b2e6",
+        "sourcePort" : "6c37e8ef-b883-43b2-95a3-87659ee53f7a",
+        "target" : "881833f2-322e-4298-b37d-38c93ad96b9b",
+        "targetPort" : "11c49eba-34f3-498c-a1c2-c98454a7734e"
+      }, {
+        "id" : "6c658e5c-9206-4649-a210-347a77640369",
+        "source" : "0a3934c0-df0f-4292-8b8c-0d47ead4180b",
+        "sourcePort" : "6deeb993-f6d3-4eef-a3cf-92c1aed91781",
+        "target" : "dc4ab201-5af2-4a04-8121-70bb1dc7b2e6",
+        "targetPort" : "1a39c649-0a64-4e24-8455-757288cdb2eb"
+      } ],
+      "processes" : {
+        "881833f2-322e-4298-b37d-38c93ad96b9b" : {
+          "id" : "881833f2-322e-4298-b37d-38c93ad96b9b",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MES_MD_CNTNR_DTL",
+            "slug" : "MES_MD_CNTNR_DTL",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "11c49eba-34f3-498c-a1c2-c98454a7734e",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MES_MD_CNTNR_DTL"
+          }
+        },
+        "dc4ab201-5af2-4a04-8121-70bb1dc7b2e6" : {
+          "id" : "dc4ab201-5af2-4a04-8121-70bb1dc7b2e6",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "1a39c649-0a64-4e24-8455-757288cdb2eb",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "6c37e8ef-b883-43b2-95a3-87659ee53f7a",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'CNTNR_DTL_ID',CNTNR_DTL_ID))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'CNTNR_DTL_ID',CNTNR_DTL_ID)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "0a3934c0-df0f-4292-8b8c-0d47ead4180b" : {
+          "id" : "0a3934c0-df0f-4292-8b8c-0d47ead4180b",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MES_MD_CNTNR_DTL",
+            "slug" : "sql_MES_MD_CNTNR_DTL",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "6deeb993-f6d3-4eef-a3cf-92c1aed91781",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT\n   '{Config.sourceSystem}' as SRC_SYS_CD\n, TRIM(ContainerDetail.CONTAINERDETAILID) as CNTNR_DTL_ID\n, TRIM(ContainerDetail.CDOTYPEID) as OBJ_TYPE_ID\n, INT(ContainerDetail.CHANGECOUNT) as CHG_CNT\n, TRIM(ContainerDetail.CONTAINERID) as CNTNR_ID\n, CAST(ContainerDetail.ETHAMBIENTEXPNCRCREATED as BOOLEAN ) as AMBNT_EXP_NCR_CRT_IND\n, CAST(ContainerDetail.ETHDRYEXPNCRCREATED as BOOLEAN ) as DRY_EXP_NCR_CRT_IND\n, CAST(ContainerDetail.ETHELAPSEDAMBIENTEXPTIME as DECIMAL(18,4)) as ELAP_AMBNT_EXP_TM\n, CAST(ContainerDetail.ETHELAPSEDDRYEXPTIME as DECIMAL(18,4)) as ELAP_DRY_EXP_TM\n, CAST(ContainerDetail.ETHELAPSEDLIGHTEXPTIME as DECIMAL(18,4)) as ELAP_LGT_EXP_TM\n, CAST(ContainerDetail.ETHELAPSEDNITROGENEXPTIME as DECIMAL(18,4)) as ELAP_NITROGEN_EXP_TM\n, CAST(ContainerDetail.ETHELAPSEDPOSTEXPTIME as DECIMAL(18,4)) as ELAP_POST_EXP_TM\n, CAST(ContainerDetail.ETHELAPSEDPREEXPTIME as DECIMAL(18,4)) as ELAP_PRE_EXP_TM\n, TRIM(ContainerDetail.ETHEXTRUSIONLOTID) as EXTRUSION_LOT_ID\n, TRIM(ContainerDetail.ETHFEEDERSPOOL) as FDR_SPOOL_CD\n, to_date(concat(ContainerDetail.ETHYEAR, '-',lpad(ContainerDetail.ETHJULIANDAY, 3, '0')),'yyyy-DDD') as JLN_DTTM\n, TRIM(ContainerDetail.ETHKNOTS) as KNOTS_VAL\n, case when containerdetail.ethlastambientexpstart = '0000000000' then CAST(NULL as TIMESTAMP) else to_timestamp(left(containerdetail.ethlastambientexpstart,8),\\\"yyyymmdd\\\") end as LAST_AMBNT_EXP_STRT_DTTM\n, case when containerdetail.ethlastdryexpstart = '0000000000' then CAST(NULL as TIMESTAMP) else to_timestamp(left(containerdetail.ethlastdryexpstart,8),\\\"yyyymmdd\\\") end as LAST_DRY_EXP_STRT_DTTM\n, case when containerdetail.ethlastlightexpstart = '0000000000' then CAST(NULL as TIMESTAMP) else to_timestamp(left(containerdetail.ethlastlightexpstart,8),\\\"yyyymmdd\\\") end as LAST_LGT_EXP_STRT_DTTM\n, case when containerdetail.ethlastnitrogenexpstart = '0000000000' then CAST(NULL as TIMESTAMP) else to_timestamp(left(containerdetail.ethlastnitrogenexpstart,8),\\\"yyyymmdd\\\") end as LAST_NITROGEN_EXP_STRT_DTTM\n, case when containerdetail.ethlastopcompletdatetime = '0000000000' then CAST(NULL as TIMESTAMP) else to_timestamp(left(containerdetail.ethlastopcompletdatetime,8),\\\"yyyymmdd\\\") end as LAST_OP_CMPLT_DTTM\n, case when containerdetail.ethlastpostexpstart = '0000000000' then CAST(NULL as TIMESTAMP) else to_timestamp(left(containerdetail.ethlastpostexpstart,8),\\\"yyyymmdd\\\") end as LAST_POST_EXP_STRT_DTTM\n, case when ContainerDetail.ETHLASTPREEXPSTART = '0000000000' then CAST(NULL as TIMESTAMP) else to_timestamp(left(ContainerDetail.ETHLASTPREEXPSTART ,14),\\\"yyyymmddhhmmss\\\") end as LAST_PRE_EXP_STRT_DTTM\n, CAST(ContainerDetail.ETHLIGHTEXPNCRCREATED as BOOLEAN ) as LGT_EXPN_CR_CRT_IND\n, CAST(ContainerDetail.ETHLIMSSAMPLEPASSED as BOOLEAN ) as LIMS_SAMP_PASED_IND\n, CAST(ContainerDetail.ETHLIMSTESTPASSED as BOOLEAN ) as LIMS_TEST_PASED_IND\n, TRIM(ContainerDetail.ETHLOTTYPE) as LOT_TYPE_CD\n, CAST(ContainerDetail.ETHNITROGENEXPNCRCREATED as BOOLEAN ) as NITROGEN_EXPN_CR_CRT_IND\n, INT(ContainerDetail.ETHNUMBERSPOOLSVERIFIED) as SPOOLS_VRFY_CNT\n, CAST(ContainerDetail.ETHOPERATIONSTARTQTY as DECIMAL(18,4)) as OPR_STRT_QTY\n, INT(ContainerDetail.ETHORLINE) as ORNTN_LINE_NBR\n, CAST(ContainerDetail.ETHPOSTEXPNCRCREATED as BOOLEAN ) as POST_EXPN_CR_CRT_IND\n, CAST(ContainerDetail.ETHPREEXPNCRCREATED as BOOLEAN ) as PRE_EXPN_CR_CRT_IND\n, INT(ContainerDetail.ETHRUNSEQUENCE) as RUN_SEQ_NBR\n, TRIM(ContainerDetail.ETHSAMPLESPOOLNUMBER) as SAMP_SPOOL_NUM\n, case when containerdetail.ETHSEALDATE = '0000000000' then CAST(NULL as TIMESTAMP) else to_timestamp(left(ContainerDetail.ETHSEALDATE ,14),\\\"yyyymmddhhmmss\\\") end as SEAL_DTTM\n, TRIM(ContainerDetail.ETHSTATIMATSPECSTEPID) as STATIMAT_SPEC_STEP_ID\n, TRIM(ContainerDetail.ETHSTATIMATTESTRESULTSID) as STATIMAT_TEST_RSLTS_ID\n, TRIM(ContainerDetail.ETHSTATIMATWORKFLOWID) as STATIMAT_WRKF_ID\n, CAST(ContainerDetail.ETHTOTALSCANNEDQTY as DECIMAL(18,4)) as TOT_SCANNED_QTY\n, INT(ContainerDetail.ETHYARDS) as YD_CNT\n, TRIM(ContainerDetail.EXPORTIMPORTKEY) as EXPT_IMPT_KEY_VAL\n, TRIM(ContainerDetail.LASTREVTXNID) as LAST_REVERSABLE_TXN_ID\nFROM {Config.sourceDatabase}.ContainerDetail as ContainerDetail\nWHERE ContainerDetail._deleted_ = 'F'  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    
