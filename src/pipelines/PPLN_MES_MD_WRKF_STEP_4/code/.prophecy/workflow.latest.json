@@ -1,256 +1,1068 @@
 {
-      "metainfo" : {
-        "id" : "1",
-        "language" : "python",
-        "fabricId" : "32",
-        "frontEndLanguage" : "sql",
-        "mode" : "batch",
-        "udfs" : {
-          "language" : "python",
-          "udfs" : [ ]
-        },
-        "udafs" : {
-          "language" : "python",
-          "code" : ""
-        },
-        "configuration" : {
-          "common" : {
-            "type" : "record",
-            "fields" : [ {
-              "name" : "targetSchema",
-              "kind" : {
-                "type" : "string",
-                "value" : "l1_md_prophecy"
-              },
-              "optional" : false
-            }, {
-              "name" : "sourceSystem",
-              "kind" : {
-                "type" : "string",
-                "value" : "mem"
-              },
-              "optional" : false
-            }, {
-              "name" : "sourceDatabase",
-              "kind" : {
-                "type" : "string",
-                "value" : "mem"
-              },
-              "optional" : false
-            } ]
+  "metainfo" : {
+    "id" : "1",
+    "language" : "python",
+    "fabricId" : "32",
+    "frontEndLanguage" : "sql",
+    "mode" : "batch",
+    "udfs" : {
+      "language" : "python",
+      "udfs" : [ ],
+      "functionPackageName" : "cdl_l1_team.cdl_md_l1.functions",
+      "sharedFunctionPackageNames" : [ ]
+    },
+    "udafs" : {
+      "language" : "python",
+      "code" : ""
+    },
+    "configuration" : {
+      "common" : {
+        "type" : "record",
+        "fields" : [ {
+          "name" : "targetSchema",
+          "kind" : {
+            "type" : "string",
+            "value" : "l1_md_prophecy"
           },
-          "oldCommon" : {
-            "type" : "record",
-            "fields" : [ ]
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "sourceSystem",
+          "kind" : {
+            "type" : "string",
+            "value" : "mem"
           },
-          "fabrics" : { },
-          "instances" : { },
-          "selected" : "default",
-          "nonEditable" : [ ],
-          "isSubscribedPipelineWithPipelineConfigs" : false
-        },
-        "sparkConf" : [ ],
-        "hadoopConf" : [ ],
-        "codeMode" : "sparse",
-        "buildSystem" : "maven",
-        "externalDependencies" : [ ],
-        "isImported" : false,
-        "interimMode" : "Full",
-        "interimModeEnabled" : true,
-        "visualCodeInterimMode" : "Disabled",
-        "recordsLimit" : {
-          "enabled" : false,
-          "value" : 1000
-        },
-        "topLevelPackage" : "PPLN_MES_MD_WRKF_STEP_4"
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "sourceDatabase",
+          "kind" : {
+            "type" : "string",
+            "value" : "mem"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        } ]
       },
-      "connections" : [ {
-        "id" : "40202f5d-8dc6-49d4-9f9f-0ef8275d287d",
-        "source" : "839aec93-07c5-4c85-86c8-d25970331a17",
-        "sourcePort" : "457e7ec3-6093-4c60-a72b-6ea4b33ec6af",
-        "target" : "85618e52-2cfc-4c85-8f30-b6b13aec1c57",
-        "targetPort" : "35bfd0c1-f904-4851-b49f-a064f0bde1ab"
-      }, {
-        "id" : "6b1bb324-05e4-4744-ba35-619b9e51c1bf",
-        "source" : "bfb54c4c-4ccc-48bd-99d3-4aeb3f35628f",
-        "sourcePort" : "33bed474-ec8e-4ea5-acfd-310eb6be9d74",
-        "target" : "839aec93-07c5-4c85-86c8-d25970331a17",
-        "targetPort" : "6fa3d99a-2682-4e43-9e24-5f0184a2a572"
-      } ],
-      "processes" : {
-        "85618e52-2cfc-4c85-8f30-b6b13aec1c57" : {
-          "id" : "85618e52-2cfc-4c85-8f30-b6b13aec1c57",
-          "component" : "Target",
-          "metadata" : {
-            "label" : "MES_MD_WRKF_STEP",
-            "slug" : "MES_MD_WRKF_STEP",
-            "x" : -540,
-            "y" : -400,
-            "phase" : 0,
-            "cache" : false,
-            "detailedStats" : false,
-            "isImported" : false
-          },
-          "ports" : {
-            "inputs" : [ {
-              "id" : "35bfd0c1-f904-4851-b49f-a064f0bde1ab",
-              "slug" : "in0",
-              "isStreaming" : false
-            } ],
-            "outputs" : [ ],
-            "selectedInputFields" : [ ],
-            "isCustomOutputSchema" : false
-          },
-          "properties" : {
-            "datasetId" : "datasets/MES_MD_WRKF_STEP"
-          }
-        },
-        "839aec93-07c5-4c85-86c8-d25970331a17" : {
-          "id" : "839aec93-07c5-4c85-86c8-d25970331a17",
-          "component" : "SchemaTransform",
-          "metadata" : {
-            "label" : "addL1fields",
-            "slug" : "addL1fields",
-            "x" : -780,
-            "y" : -400,
-            "phase" : 0,
-            "cache" : false,
-            "detailedStats" : false,
-            "isImported" : false
-          },
-          "ports" : {
-            "inputs" : [ {
-              "id" : "6fa3d99a-2682-4e43-9e24-5f0184a2a572",
-              "slug" : "in0",
-              "isStreaming" : false
-            } ],
-            "outputs" : [ {
-              "id" : "457e7ec3-6093-4c60-a72b-6ea4b33ec6af",
-              "slug" : "out",
-              "isStreaming" : false
-            } ],
-            "selectedInputFields" : [ ],
-            "isCustomOutputSchema" : false
-          },
-          "properties" : {
-            "columnsSelector" : [ ],
-            "transformations" : [ {
-              "kind" : "AddReplaceColumn",
-              "AddReplaceColumn" : {
-                "sourceColumn" : "SRC_SYS_CD",
-                "expression" : {
-                  "format" : "sql",
-                  "expression" : "'$sourceSystem'"
-                }
-              },
-              "DropColumn" : {
-                "sourceColumn" : ""
-              },
-              "RenameColumn" : {
-                "sourceColumn" : "",
-                "targetColumn" : ""
-              }
-            }, {
-              "kind" : "AddReplaceColumn",
-              "AddReplaceColumn" : {
-                "sourceColumn" : "_pk_",
-                "expression" : {
-                  "format" : "sql",
-                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'WRKF_STEP_ID',WRKF_STEP_ID))"
-                }
-              },
-              "DropColumn" : {
-                "sourceColumn" : ""
-              },
-              "RenameColumn" : {
-                "sourceColumn" : "",
-                "targetColumn" : ""
-              }
-            }, {
-              "kind" : "AddReplaceColumn",
-              "AddReplaceColumn" : {
-                "sourceColumn" : "_pk_md5_",
-                "expression" : {
-                  "format" : "sql",
-                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'WRKF_STEP_ID',WRKF_STEP_ID)))"
-                }
-              },
-              "DropColumn" : {
-                "sourceColumn" : ""
-              },
-              "RenameColumn" : {
-                "sourceColumn" : "",
-                "targetColumn" : ""
-              }
-            }, {
-              "kind" : "AddReplaceColumn",
-              "AddReplaceColumn" : {
-                "sourceColumn" : "_l1_upt_",
-                "expression" : {
-                  "format" : "sql",
-                  "expression" : "current_timestamp()"
-                }
-              },
-              "DropColumn" : {
-                "sourceColumn" : ""
-              },
-              "RenameColumn" : {
-                "sourceColumn" : "",
-                "targetColumn" : ""
-              }
-            } ]
-          }
-        },
-        "bfb54c4c-4ccc-48bd-99d3-4aeb3f35628f" : {
-          "id" : "bfb54c4c-4ccc-48bd-99d3-4aeb3f35628f",
-          "component" : "Script",
-          "metadata" : {
-            "label" : "sql_MES_MD_WRKF_STEP",
-            "slug" : "sql_MES_MD_WRKF_STEP",
-            "x" : -1060,
-            "y" : -400,
-            "phase" : 0,
-            "cache" : false,
-            "detailedStats" : false,
-            "isImported" : false
-          },
-          "ports" : {
-            "inputs" : [ ],
-            "outputs" : [ {
-              "id" : "33bed474-ec8e-4ea5-acfd-310eb6be9d74",
-              "slug" : "out0",
-              "schema" : {
-                "type" : "struct",
-                "fields" : [ {
-                  "name" : "_deleted_",
-                  "type" : "string",
-                  "nullable" : true,
-                  "metadata" : {
-                    "description" : "",
-                    "mappings" : [ ],
-                    "tags" : [ ]
-                  } 
-                } ]
-              },
-              "isStreaming" : false
-            } ],
-            "selectedInputFields" : [ ],
-            "isCustomOutputSchema" : true
-          },
-          "properties" : {
-            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT\n   '{Config.sourceSystem}' AS SRC_SYS_CD\n, TRIM(WorkflowStep.WORKFLOWSTEPID) as WRKF_STEP_ID\n, TRIM(WorkflowStep.WORKFLOWID) as WRKF_ID\n, TRIM(WorkflowStep.gdnAltBOMRouteStepId) as ALT_BOM_RTE_STEP_ID\n, INT(WorkflowStep.CHANGECOUNT) as CHG_CNT\n, TRIM(WorkflowStep.DEFAULTPATHID) as DFLT_PATH_ID\n, TRIM(WorkflowStep.EXPORTIMPORTKEY) as EXPT_IMPT_KEY_VAL\n, TRIM(WorkflowStep.ICONID) as ICON_ID\n, CAST(WorkflowStep.ISFROZEN AS BOOLEAN) as IS_FRZN_IND\n, CAST(WorkflowStep.ISLASTSTEP AS BOOLEAN) as IS_LAST_STEP_IND\n, NULL as JDE_INV_STEP_IND\n, TRIM(WorkflowStep.NOTES) as NOTES_TXT\n, TRIM(WorkflowStep.CDOTYPEID) as OBJ_TYPE_ID\n, TRIM(WorkflowStep.ONDEFAULTROUTE) as ON_DFLT_RTE_ID\n, TRIM(WorkflowStep.ROUTESTEPID) as RTE_STEP_ID\n, TRIM(WorkflowStep.SCHEDULINGDETAILID) as SCHDLNG_DTL_ID\n, INT(WorkflowStep.SEQUENCE) as SEQ_NBR\n, TRIM(WorkflowStep.SPECBASEID) as SPEC_BASE_ID\n, TRIM(WorkflowStep.SPECID) as SPEC_ID\n, NULL as STEP_CMPLT_REQ_IND\n, NULL as STEP_STRT_REQ_IND\n, TRIM(WorkflowStep.STEPTYPE) as STEP_TYPE_CD\n, TRIM(WorkflowStep.SUBWORKFLOWBASEID) as SUB_WRKF_BASE_ID\n, TRIM(WorkflowStep.SUBWORKFLOWID) as SUB_WRKF_ID\n, TRIM(WorkflowStep.WIPMSGLABEL) as WIP_MSG_LBL_ID\n, TRIM(WorkflowStep.DESCRIPTION) as WRKF_STEP_DESC\n, TRIM(WorkflowStep.WORKFLOWSTEPNAME) as WRKF_STEP_NM\n, TRIM(WorkflowStep.XLOCATION) as X_LOC_VAL\n, TRIM(WorkflowStep.YLOCATION) as Y_LOC_VAL\nFROM  {Config.sourceDatabase}.WorkflowStep as WorkflowStep  WHERE WorkflowStep._deleted_ = 'F'\n  \n \n\"\"\")",
-            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
-            "scriptMethodFooter" : "    return out0"
-          }
-        }
+      "oldCommon" : {
+        "type" : "record",
+        "fields" : [ ]
+      },
+      "fabrics" : { },
+      "instances" : { },
+      "selected" : "default",
+      "nonEditable" : [ ],
+      "isSubscribedPipelineWithPipelineConfigs" : false
+    },
+    "sparkConf" : [ ],
+    "hadoopConf" : [ ],
+    "codeMode" : "sparse",
+    "buildSystem" : "maven",
+    "externalDependencies" : [ ],
+    "dependentProjectExternalDependencies" : [ ],
+    "isImported" : false,
+    "interimMode" : "Full",
+    "interimModeEnabled" : true,
+    "visualCodeInterimMode" : "Disabled",
+    "recordsLimit" : {
+      "enabled" : false,
+      "value" : 1000
+    },
+    "topLevelPackage" : "PPLN_MES_MD_WRKF_STEP_4",
+    "configurationVersion" : "v1"
+  },
+  "connections" : [ {
+    "id" : "40202f5d-8dc6-49d4-9f9f-0ef8275d287d",
+    "source" : "839aec93-07c5-4c85-86c8-d25970331a17",
+    "sourcePort" : "457e7ec3-6093-4c60-a72b-6ea4b33ec6af",
+    "target" : "85618e52-2cfc-4c85-8f30-b6b13aec1c57",
+    "targetPort" : "35bfd0c1-f904-4851-b49f-a064f0bde1ab"
+  }, {
+    "id" : "6b1bb324-05e4-4744-ba35-619b9e51c1bf",
+    "source" : "bfb54c4c-4ccc-48bd-99d3-4aeb3f35628f",
+    "sourcePort" : "33bed474-ec8e-4ea5-acfd-310eb6be9d74",
+    "target" : "839aec93-07c5-4c85-86c8-d25970331a17",
+    "targetPort" : "6fa3d99a-2682-4e43-9e24-5f0184a2a572"
+  } ],
+  "processes" : {
+    "85618e52-2cfc-4c85-8f30-b6b13aec1c57" : {
+      "id" : "85618e52-2cfc-4c85-8f30-b6b13aec1c57",
+      "component" : "Target",
+      "metadata" : {
+        "label" : "MES_MD_WRKF_STEP",
+        "slug" : "MES_MD_WRKF_STEP",
+        "x" : -540,
+        "y" : -400,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
       },
       "ports" : {
-        "inputs" : [ ],
+        "inputs" : [ {
+          "id" : "35bfd0c1-f904-4851-b49f-a064f0bde1ab",
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "SRC_SYS_CD",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WRKF_STEP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WRKF_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ALT_BOM_RTE_STEP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CHG_CNT",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DFLT_PATH_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "EXPT_IMPT_KEY_VAL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ICON_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IS_FRZN_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IS_LAST_STEP_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "JDE_INV_STEP_IND",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "NOTES_TXT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "OBJ_TYPE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ON_DFLT_RTE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RTE_STEP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SCHDLNG_DTL_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SEQ_NBR",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPEC_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPEC_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "STEP_CMPLT_REQ_IND",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "STEP_STRT_REQ_IND",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "STEP_TYPE_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SUB_WRKF_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SUB_WRKF_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WIP_MSG_LBL_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WRKF_STEP_DESC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WRKF_STEP_NM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "X_LOC_VAL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "Y_LOC_VAL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_pk_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_pk_md5_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_l1_upt_",
+              "type" : "timestamp",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
         "outputs" : [ ],
         "selectedInputFields" : [ ],
         "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/MES_MD_WRKF_STEP"
+      }
+    },
+    "839aec93-07c5-4c85-86c8-d25970331a17" : {
+      "id" : "839aec93-07c5-4c85-86c8-d25970331a17",
+      "component" : "SchemaTransform",
+      "metadata" : {
+        "label" : "addL1fields",
+        "slug" : "addL1fields",
+        "x" : -780,
+        "y" : -400,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "6fa3d99a-2682-4e43-9e24-5f0184a2a572",
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "SRC_SYS_CD",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WRKF_STEP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WRKF_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ALT_BOM_RTE_STEP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CHG_CNT",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DFLT_PATH_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "EXPT_IMPT_KEY_VAL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ICON_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IS_FRZN_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IS_LAST_STEP_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "JDE_INV_STEP_IND",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "NOTES_TXT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "OBJ_TYPE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ON_DFLT_RTE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RTE_STEP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SCHDLNG_DTL_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SEQ_NBR",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPEC_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPEC_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "STEP_CMPLT_REQ_IND",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "STEP_STRT_REQ_IND",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "STEP_TYPE_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SUB_WRKF_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SUB_WRKF_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WIP_MSG_LBL_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WRKF_STEP_DESC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WRKF_STEP_NM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "X_LOC_VAL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "Y_LOC_VAL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "457e7ec3-6093-4c60-a72b-6ea4b33ec6af",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "transformations" : [ {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "SRC_SYS_CD",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "'$sourceSystem'"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_pk_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'WRKF_STEP_ID',WRKF_STEP_ID))"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_pk_md5_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'WRKF_STEP_ID',WRKF_STEP_ID)))"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_l1_upt_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "current_timestamp()"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        } ]
+      }
+    },
+    "bfb54c4c-4ccc-48bd-99d3-4aeb3f35628f" : {
+      "id" : "bfb54c4c-4ccc-48bd-99d3-4aeb3f35628f",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "sql_MES_MD_WRKF_STEP",
+        "slug" : "sql_MES_MD_WRKF_STEP",
+        "x" : -1060,
+        "y" : -400,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "33bed474-ec8e-4ea5-acfd-310eb6be9d74",
+          "slug" : "out0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "SRC_SYS_CD",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WRKF_STEP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WRKF_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ALT_BOM_RTE_STEP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CHG_CNT",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DFLT_PATH_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "EXPT_IMPT_KEY_VAL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ICON_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IS_FRZN_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IS_LAST_STEP_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "JDE_INV_STEP_IND",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "NOTES_TXT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "OBJ_TYPE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ON_DFLT_RTE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RTE_STEP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SCHDLNG_DTL_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SEQ_NBR",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPEC_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPEC_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "STEP_CMPLT_REQ_IND",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "STEP_STRT_REQ_IND",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "STEP_TYPE_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SUB_WRKF_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SUB_WRKF_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WIP_MSG_LBL_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WRKF_STEP_DESC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WRKF_STEP_NM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "X_LOC_VAL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "Y_LOC_VAL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true
+      },
+      "properties" : {
+        "script" : "out0 = spark.sql(f\"\"\"\n    SELECT\n   '{Config.sourceSystem}' AS SRC_SYS_CD\n, TRIM(WorkflowStep.WORKFLOWSTEPID) as WRKF_STEP_ID\n, TRIM(WorkflowStep.WORKFLOWID) as WRKF_ID\n, TRIM(WorkflowStep.gdnAltBOMRouteStepId) as ALT_BOM_RTE_STEP_ID\n, INT(WorkflowStep.CHANGECOUNT) as CHG_CNT\n, TRIM(WorkflowStep.DEFAULTPATHID) as DFLT_PATH_ID\n, TRIM(WorkflowStep.EXPORTIMPORTKEY) as EXPT_IMPT_KEY_VAL\n, TRIM(WorkflowStep.ICONID) as ICON_ID\n, CAST(WorkflowStep.ISFROZEN AS BOOLEAN) as IS_FRZN_IND\n, CAST(WorkflowStep.ISLASTSTEP AS BOOLEAN) as IS_LAST_STEP_IND\n, NULL as JDE_INV_STEP_IND\n, TRIM(WorkflowStep.NOTES) as NOTES_TXT\n, TRIM(WorkflowStep.CDOTYPEID) as OBJ_TYPE_ID\n, TRIM(WorkflowStep.ONDEFAULTROUTE) as ON_DFLT_RTE_ID\n, TRIM(WorkflowStep.ROUTESTEPID) as RTE_STEP_ID\n, TRIM(WorkflowStep.SCHEDULINGDETAILID) as SCHDLNG_DTL_ID\n, INT(WorkflowStep.SEQUENCE) as SEQ_NBR\n, TRIM(WorkflowStep.SPECBASEID) as SPEC_BASE_ID\n, TRIM(WorkflowStep.SPECID) as SPEC_ID\n, NULL as STEP_CMPLT_REQ_IND\n, NULL as STEP_STRT_REQ_IND\n, TRIM(WorkflowStep.STEPTYPE) as STEP_TYPE_CD\n, TRIM(WorkflowStep.SUBWORKFLOWBASEID) as SUB_WRKF_BASE_ID\n, TRIM(WorkflowStep.SUBWORKFLOWID) as SUB_WRKF_ID\n, TRIM(WorkflowStep.WIPMSGLABEL) as WIP_MSG_LBL_ID\n, TRIM(WorkflowStep.DESCRIPTION) as WRKF_STEP_DESC\n, TRIM(WorkflowStep.WORKFLOWSTEPNAME) as WRKF_STEP_NM\n, TRIM(WorkflowStep.XLOCATION) as X_LOC_VAL\n, TRIM(WorkflowStep.YLOCATION) as Y_LOC_VAL\nFROM  {Config.sourceDatabase}.WorkflowStep as WorkflowStep  WHERE WorkflowStep._deleted_ = 'F'\n  \n \n\"\"\")",
+        "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+        "scriptMethodFooter" : "    return out0"
       }
     }
-
-
-    
+  },
+  "ports" : {
+    "inputs" : [ ],
+    "outputs" : [ ],
+    "selectedInputFields" : [ ],
+    "isCustomOutputSchema" : false
+  }
+}
