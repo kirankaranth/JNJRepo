@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "dev_md_l1"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "cmw"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "cmw"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MES_MD_CNTNR_2"
+      },
+      "connections" : [ {
+        "id" : "5e56e9ea-ef75-420c-a605-dbf298d8722e",
+        "source" : "189a1af7-13a1-405f-a85e-3a5f9786b579",
+        "sourcePort" : "baef4906-a18e-4a6a-b899-7692b7c67613",
+        "target" : "fc276810-e3c4-447b-8433-006fe3163b1d",
+        "targetPort" : "2ee9c246-a789-4af4-961f-fe2b1bad009a"
+      }, {
+        "id" : "e99640ee-638e-4672-af6b-6ed1baac8d64",
+        "source" : "fd1ef62b-adf1-4cca-861b-a70d55577c12",
+        "sourcePort" : "3ca16aec-4156-4ee5-ab10-dfaa2534f2e8",
+        "target" : "189a1af7-13a1-405f-a85e-3a5f9786b579",
+        "targetPort" : "568f0473-3ab8-4c3e-907d-ba453de562c6"
+      } ],
+      "processes" : {
+        "fc276810-e3c4-447b-8433-006fe3163b1d" : {
+          "id" : "fc276810-e3c4-447b-8433-006fe3163b1d",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MES_MD_CNTNR",
+            "slug" : "MES_MD_CNTNR",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "2ee9c246-a789-4af4-961f-fe2b1bad009a",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MES_MD_CNTNR"
+          }
+        },
+        "189a1af7-13a1-405f-a85e-3a5f9786b579" : {
+          "id" : "189a1af7-13a1-405f-a85e-3a5f9786b579",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "568f0473-3ab8-4c3e-907d-ba453de562c6",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "baef4906-a18e-4a6a-b899-7692b7c67613",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'CNTNR_ID',CNTNR_ID))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'CNTNR_ID',CNTNR_ID)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "fd1ef62b-adf1-4cca-861b-a70d55577c12" : {
+          "id" : "fd1ef62b-adf1-4cca-861b-a70d55577c12",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MES_MD_CNTNR",
+            "slug" : "sql_MES_MD_CNTNR",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "3ca16aec-4156-4ee5-ab10-dfaa2534f2e8",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT\n   '{Config.sourceSystem}' AS SRC_SYS_CD\n, TRIM(container.CONTAINERID) as CNTNR_ID\n, TRIM(container.CURRENTSTATUSID) as CNTNR_STS_ID\n, TRIM(container.MFGORDERID) as MFG_ORDR_ID\n, TRIM(container.PRODUCTID) as PROD_ID\n, CAST(container.ccfAncillaryJob AS BOOLEAN) as ANCIL_JOB_IND\n, NULL as ARCH_STS_CD\n, TRIM(container.BATCHCOMMENTS) as BTCH_COMT_TXT\n, TRIM(container.cscBatchDisposition) as BTCH_DSPO_CD\n, TRIM(container.BATCHID) as BTCH_ID\n, TRIM(container.BATCHSTATUS) as BTCH_STS_CD\n, TRIM(container.cscBatchStatus) as BTCH_STS_2_CD\n, TRIM(container.BILLOFPROCESSID) as BILL_OF_PRCS_ID\n, TRIM(container.BOMID) as BOM_ID\n, NULL as BULK_PACK_TYPE_CD\n, NULL as CALC_QTY_REQ_IND\n, NULL as CTN_STS_CD\n, NULL as CTN_VERIF_DETAIN_STS_CD\n, NULL as CASE_LBL_RCNL_DTTM\n, NULL as CASE_VERIF_DTTM\n, INT(container.CHANGECOUNT) as CHG_CNT\n, INT(container.CHILDCOUNT) as CHILD_CNT\n, NULL as COLL_DHR_LINE_12_CD\n, TRIM(container.CONTAINERCOMMENTS) as CNTNR_COMT_TXT\n, CAST(container.THISCONTAINERLOST AS BOOLEAN) as CNTNR_LOST_IND\n, TRIM(container.CONTAINERNAME) as CNTNR_NM\n, CAST(container.QTY2 AS DECIMAL(18, 4)) as CNTNR_2_QTY\n, NULL as CNTNR_PARNT_PROXY_ID\n, NULL as CNV_PARNT_LOT_NM\n, NULL as CNTED_FOR_STERILIZATION_IND\n, INT(container.CURRENTHOLDCOUNT) as CUR_HOLD_CNT\n, CAST(container.QTY AS DECIMAL(18, 4)) as CUR_QTY\n, INT(container.CURRENTTHRUPUTCHILDCOUNT) as CUR_THRUPUT_CHILD_CNT\n, CAST(container.CURRENTTHRUPUTQTY AS DECIMAL(18, 4)) as CUR_THRUPUT_QTY\n, CAST(container.CURRENTTHRUPUTQTY2 AS DECIMAL(18, 4)) as CUR_THRUPUT_2_QTY\n, INT(container.CURRENTTHRUPUTUNITCOUNT) as CUR_THRUPUT_UNIT_CNT\n, TRIM(container.cscCurrentlyAssignedBatchId) as CURLY_ASGN_BTCH_ID\n, TRIM(container.CUSTOMERID) as CUST_ID\n, TRIM(container.DETAILID) as DTL_ID\n, NULL as DVC_ID\n, NULL as DHR_DATA_COLLD_IND\n, INT(container.ccfDocumentCount) as DOC_CNT\n, case when container.duedate = '0000000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(left(container.duedate,8),\\\"yyyyMMdd\\\") end as DUE_DTTM\n, case when container.duedategmt = '0000000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(left(container.duedategmt,8),\\\"yyyyMMdd\\\") end as DUE_GMT_DTTM\n, TRIM(container.cscEquipmentId) as EQMNT_ID\n, TRIM(container.cscEquipmentRunNumber) as EQMNT_RUN_NUM\n, case when container.expirationdate = '0000000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(left(container.expirationdate,14), \\\"yyyyMMddHHmmss\\\") end as EXPN_DTTM\n, case when container.expirationdategmt = '0000000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(left(container.expirationdategmt,14),\\\"yyyyMMddHHmmss\\\") end as EXPN_GMT_DTTM\n, NULL as EXPN_UDI_DTTM\n, case when container.factorystartdate = '0000000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(left(container.factorystartdate,14),\\\"yyyyMMddHHmmss\\\") end as FCTRY_STRT_DTTM\n, case when container.factorystartdategmt = '0000000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(left(container.factorystartdategmt,14),\\\"yyyyMMddHHmmss\\\") end as FCTRY_STRT_GMT_DTTM\n, CAST(container.FACTORYSTARTQTY AS DECIMAL(18, 4)) as FCTRY_STRT_QTY\n, CAST(container.FACTORYSTARTQTY2 AS DECIMAL(18, 4)) as FCTRY_STRT_2_QTY\n, TRIM(container.FACTORYSTARTUOMID) as FCTRY_STRT_UOM_ID\n, TRIM(container.FACTORYSTARTUOM2ID) as FCTRY_STRT_UOM_2_ID\n, NULL as FOIL_STS_CD\n, NULL as GEL_LOT_NUM\n, TRIM(container.HOLDREASONID) as HOLD_RSN_ID\n, NULL as IN_QC_IND\n, NULL as INTRO_UNSTERILIZED_SPLT_LOT_IN\n, NULL as IS_AUTH_FOR_DESTRUCTION_IND\n, NULL as IS_AUTO_STRT_IND\n, NULL as IS_CARR_IND\n, NULL as IS_CLSE_AS_ORPHAN_IND\n, NULL as IS_DSTRY_IND\n, NULL as IS_FAIL_IND\n, NULL as IS_IN_PRCS_SPLT_IND\n, NULL as IS_INIT_RECON_CMPLT_IND\n, NULL as IS_INTRO_IND\n, NULL as IS_INV_LOC_IND\n, NULL as IS_JDE_CMPLT_IND\n, NULL as IS_LBL_RECONCLID_IND\n, NULL as IS_LAST_SPLT_IND\n, NULL as IS_LGCY_APP_ABSR_IND\n, NULL as IS_LOT_ABRT_IND\n, NULL as IS_LOT_CNV_IND\n, NULL as IS_LOT_REV_CMPLT_IND\n, NULL as IS_MSTR_LOT_IND\n, NULL as IS_PLC_VERS_REQ_IND\n, NULL as IS_READY_TO_RECON_IND\n, NULL as IS_RCNLD_IND\n, NULL as IS_RELS_IND\n, NULL as IS_RTRN_FOR_DESTRUCTION_IND\n, NULL as IS_STERILIZATION_PAS_IND\n, NULL as IS_TOTLY_CNV_IND\n, TRIM(container.ISSUEDTOCONTAINERID) as ISS_TO_CNTNR_ID\n, TRIM(container.ccfJobEquipProdStatusId) as JOB_EQUIP_PROD_STS_ID\n, case when container.lastactivitydate = '0000000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(left(container.lastactivitydate,14),\\\"yyyyMMddHHmmss\\\") end as LAST_ACTV_DTTM\n, case when container.lastactivitydategmt = '0000000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(left(container.lastactivitydategmt,14),\\\"yyyyMMddHHmmss\\\") end as LAST_ACTV_GMT_DTTM\n, case when container.lastcompletiondate = '0000000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(left(container.lastcompletiondate,14),\\\"yyyyMMddHHmmss\\\") end as LAST_CMPLT_DTTM\n, case when container.lastcompletiondategmt = '0000000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(left(container.lastcompletiondategmt,14),\\\"yyyyMMddHHmmss\\\") end as LAST_CMPLT_GMT_DTTM\n, TRIM(container.ccfLastParentId) as LAST_PARNT_ID\n, TRIM(container.LASTREVTXNID) as LAST_REV_TXN_ID\n, TRIM(container.LEVELID) as LVL_ID\n, NULL as LOT_END_RSN_ID\n, NULL as LOT_STRT_RSN_ID\n, NULL as MFG_DTTM\n, NULL as MFG_GMT_DTTM\n, NULL as MFG_UDI_DTTM\n, TRIM(container.ccfMaintenanceReqId) as MAINT_REQ_ID\n, TRIM(container.ccfMaintenanceStatusId) as MAINT_STS_ID\n, NULL as MSTR_LOT_NM\n, TRIM(container.MASTERRECIPEID) as MSTR_RECIPE_ID\n, NULL as MOV_TO_QC_TIME_IND\n, NULL as NC_REF_ID\n, TRIM(container.CDOTypeID) as OBJ_TYPE_ID\n, case when container.onholddate = '0000000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(left(container.onholddate,14),\\\"yyyyMMddHHmmss\\\") end as ON_HOLD_DTTM\n, TRIM(container.ORIGINALCONTAINERID) as ORIG_CNTNR_ID\n, TRIM(container.ORIGINALFACTORYID) as ORIG_FCTRY_ID\n, CAST(container.ORIGINALQTY AS DECIMAL(18, 4)) as ORIG_QTY\n, CAST(container.ORIGINALQTY2 AS DECIMAL(18, 4)) as ORIG_2_QTY\n, case when container.originalstartdate = '0000000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(left(container.originalstartdate,14),\\\"yyyyMMddHHmmss\\\") end as ORIG_STRT_DTTM\n, case when container.originalstartdategmt = '0000000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(left(container.originalstartdategmt,14),\\\"yyyyMMddHHmmss\\\") end as ORIG_STRT_GMT_DTTM\n, TRIM(container.ORIGINALUOMID) as ORIG_UOM_ID\n, TRIM(container.ORIGINALUOM2ID) as ORIG_UOM_2_ID\n, TRIM(container.OWNERID) as OWN_ID\n, NULL as PLLT_ID\n, TRIM(container.PARENTCONTAINERID) as PARNT_CNTNR_ID\n, NULL as PDDC_STS_CD\n, TRIM(container.PLANNEDPRODUCTID) as PLAN_PROD_ID\n, CAST(container.PLANNEDQTY AS DECIMAL(18, 4)) as PLAN_QTY\n, TRIM(container.PLANNEDQTYUOMID) as PLAN_QTY_UOM_ID\n, CAST(container.PLANNEDQTY2 AS DECIMAL(18, 4)) as PLAN_2_QTY\n, TRIM(container.PLANNEDQTYUOM2ID) as PLAN_2_QTY_UOM_ID\n, case when container.plannedstartdate = '0000000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(left(container.plannedstartdate,14),\\\"yyyyMMddHHmmss\\\") end as PLAN_STRT_DTTM\n, case when container.plannedstartdategmt = '0000000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(left(container.plannedstartdategmt,14),\\\"yyyyMMddHHmmss\\\") end as PLAN_STRT_GMT_DTTM\n, NULL as PLC_VERS_STS_CD\n, NULL as PLCDHR_MSMCH_IND\n, NULL as PLCDHR_NO_DATA_IND\n, TRIM(container.PRIORITYCODEID) as PRIR_CD\n, NULL as PROD_CONV_LOT_STS_CD\n, NULL as PRDTN_ID\n, NULL as RACK_ID\n, NULL as RECON_CNT\n, case when container.requestdate = '0000000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(left(container.requestdate,14),\\\"yyyyMMddHHmmss\\\") end as RQST_DTTM\n, case when container.requestdategmt = '0000000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(left(container.requestdategmt,14),\\\"yyyyMMddHHmmss\\\") end as RQST_GMT_DTTM\n, INT(container.RELATIVEPRIORITY) as REL_PRIR_NBR\n, NULL as RWRK_CASE_VRFY_CD\n, TRIM(container.SALESORDERID) as SLS_ORDR_ID\n, NULL as SMPLG_LOT_ID\n, CAST(container.SAMPLINGPASSED AS BOOLEAN) as SMPLG_PASED_IND\n, CAST(container.SAMPLINGREQUIRED AS BOOLEAN) as SMPLG_REQ_IND\n, CAST(container.cscSamplingResult AS DECIMAL(18, 4)) as SMPLG_RSULT_QTY\n, TRIM(container.cscSamplingStatus) as SMPLG_STS_CD\n, CAST(container.cscSamplingTestStatusPassed AS BOOLEAN) as SMPLG_TEST_STS_PASED_IND\n, INT(container.ccfSequence) as SEQ_NBR\n, TRIM(container.SPECSTATUSID) as SPEC_STS_ID\n, TRIM(container.SPLITFROMID) as SPLT_FROM_ID\n, TRIM(container.STARTREASONID) as STRT_RSN_ID\n, CAST(NULL AS DECIMAL(18,4)) as STRT_QTY\n, TRIM(container.STATUS) as STS_CD\n, NULL as STERILIZATION_CNT\n, NULL as STERILIZATION_DTTM\n, CAST(NULL as DECIMAL(18,4)) as STERILIZATION_TM\n, NULL as STERILIZATION_LINE_ID\n, NULL as STERILIZATION_RUN_ID\n, INT(container.THRUPUTADJUSTMENTCHILDCOUNT) as THRUPUT_ADJ_CHILD_CNT\n, CAST(container.THRUPUTADJUSTMENTQTY AS DECIMAL(18, 4)) as THRUPUT_ADJ_QTY\n, CAST(container.THRUPUTADJUSTMENTQTY2 AS DECIMAL(18, 4)) as THRUPUT_ADJ_2_QTY\n, INT(container.THRUPUTADJUSTMENTUNITCOUNT) as THRUPUT_ADJ_UNIT_CNT\n, CAST(container.cscTotalPendingQty AS DECIMAL(18, 4)) as TOT_PEND_QTY\n, CAST(container.ccfTotalThruputQty AS DECIMAL(18, 4)) as TOT_THRUPUT_QTY\n, CAST(container.ccfTotalThruputQty2 AS DECIMAL(18, 4)) as TOT_THRUPUT_2_QTY\n, NULL as UDI_CD\n, INT(container.UNITCOUNT) as UNIT_CNT\n, TRIM(container.UOMID) as UOM_ID\n, TRIM(container.UOM2ID) as UOM_2_ID\n, TRIM(container.VENDORITEMID) as VEND_ITM_ID\n, TRIM(container.WIPMSGDEFMGRID) as WIP_MSG_DEF_MGR_ID\n, NULL as WIP_STS_CD\nFROM  {Config.sourceDatabase}.container as container  WHERE container._deleted_ = 'F'\n  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    
