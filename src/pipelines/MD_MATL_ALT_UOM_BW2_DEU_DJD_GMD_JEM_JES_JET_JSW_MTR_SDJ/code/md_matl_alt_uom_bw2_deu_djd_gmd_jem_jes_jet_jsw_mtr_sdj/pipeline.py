@@ -10,8 +10,8 @@ def pipeline(spark: SparkSession) -> None:
     df_DS_JDE_01_F4101 = DS_JDE_01_F4101(spark)
     df_DS_JDE_01_F41002 = DS_JDE_01_F41002(spark)
     df_SELECT_FIELDS_1 = SELECT_FIELDS_1(spark, df_DS_JDE_01_F4101)
-    df_Join_1 = Join_1(spark)
     df_SELECT_FIELDS = SELECT_FIELDS(spark, df_DS_JDE_01_F41002)
+    df_Join_1 = Join_1(spark, df_SELECT_FIELDS, df_SELECT_FIELDS_1)
 
 def main():
     spark = SparkSession.builder\
