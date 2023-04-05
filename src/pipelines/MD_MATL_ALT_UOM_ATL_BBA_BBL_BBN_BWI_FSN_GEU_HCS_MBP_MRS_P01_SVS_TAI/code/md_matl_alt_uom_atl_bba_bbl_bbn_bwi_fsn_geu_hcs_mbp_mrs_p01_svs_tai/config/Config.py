@@ -12,10 +12,11 @@ class Config(ConfigBase):
             DBTABLE: str=None,
             COLUMNS: int=None,
             DAI_ETL_ID: int=None,
+            DBTABLE1: str=None,
             **kwargs
     ):
         self.spark = None
-        self.update(sourceSystem, targetSchema, MANDT, DBNAME, DBTABLE, COLUMNS, DAI_ETL_ID)
+        self.update(sourceSystem, targetSchema, MANDT, DBNAME, DBTABLE, COLUMNS, DAI_ETL_ID, DBTABLE1)
 
     def update(
             self,
@@ -26,6 +27,7 @@ class Config(ConfigBase):
             DBTABLE: str="marm",
             COLUMNS: int=28,
             DAI_ETL_ID: int=0,
+            DBTABLE1: str="mara",
             **kwargs
     ):
         prophecy_spark = self.spark
@@ -36,4 +38,5 @@ class Config(ConfigBase):
         self.DBTABLE = DBTABLE
         self.COLUMNS = self.get_int_value(COLUMNS)
         self.DAI_ETL_ID = self.get_int_value(DAI_ETL_ID)
+        self.DBTABLE1 = DBTABLE1
         pass
