@@ -14,4 +14,10 @@ def SchemaTransform_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("STD_UOM_CD", col("IMUOM1"))\
         .withColumn("FACT_NUMRTR_MEAS", (col("UMCONV") / lit(10000000)).cast(DecimalType(18, 4)))\
         .withColumn("_deleted_", lit("F"))\
-        .withColumn("_l0_upt_", col("f41002_upt_"))
+        .withColumn("_l0_upt_", col("f41002_upt_"))\
+        .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
+        .withColumn("DAI_CRT_DTTM", current_timestamp())\
+        .withColumn("DAI_UPDT_DTTM", current_timestamp())\
+        .withColumn("_pk_", to_json(expr("named_struct('SRC_SYS_CD', SRC_SYS_CD, 'ALT_UOM_CD', ALT_UOM_CD)")))\
+        .withColumn("_pk_md5_", md5(to_json(expr("named_struct('SRC_SYS_CD', SRC_SYS_CD, 'ALT_UOM_CD', ALT_UOM_CD)"))))\
+        .withColumn("_l1_upt_", current_timestamp())
