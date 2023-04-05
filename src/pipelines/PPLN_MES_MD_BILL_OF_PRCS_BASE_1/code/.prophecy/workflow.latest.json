@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "dev_md_l1"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "mer"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "mer"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MES_MD_BILL_OF_PRCS_BASE_1"
+      },
+      "connections" : [ {
+        "id" : "46590956-f422-4ca8-a459-2b2f9d2fbdac",
+        "source" : "c368676f-7fa0-4396-a2f4-4b8663e31e87",
+        "sourcePort" : "5b8411dc-6092-4e71-9f3c-8e8be773eef1",
+        "target" : "de940b53-0661-45e1-8082-b9f79ba74c1c",
+        "targetPort" : "3928d604-6298-4d1a-b733-2042b51a9a38"
+      }, {
+        "id" : "56afcffc-c19c-47c3-8b75-b5c3a058b562",
+        "source" : "b48f071d-0b70-433c-94eb-c317433ab5b7",
+        "sourcePort" : "a1467ba2-492a-4db5-be3d-25e038f8ce3e",
+        "target" : "c368676f-7fa0-4396-a2f4-4b8663e31e87",
+        "targetPort" : "98c002bc-8e3c-4ea4-a1f6-a3282fd94078"
+      } ],
+      "processes" : {
+        "de940b53-0661-45e1-8082-b9f79ba74c1c" : {
+          "id" : "de940b53-0661-45e1-8082-b9f79ba74c1c",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MES_MD_BILL_OF_PRCS_BASE",
+            "slug" : "MES_MD_BILL_OF_PRCS_BASE",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "3928d604-6298-4d1a-b733-2042b51a9a38",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MES_MD_BILL_OF_PRCS_BASE"
+          }
+        },
+        "c368676f-7fa0-4396-a2f4-4b8663e31e87" : {
+          "id" : "c368676f-7fa0-4396-a2f4-4b8663e31e87",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "98c002bc-8e3c-4ea4-a1f6-a3282fd94078",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "5b8411dc-6092-4e71-9f3c-8e8be773eef1",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'BILL_OF_PRCS_BASE_ID',BILL_OF_PRCS_BASE_ID))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'BILL_OF_PRCS_BASE_ID',BILL_OF_PRCS_BASE_ID)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "b48f071d-0b70-433c-94eb-c317433ab5b7" : {
+          "id" : "b48f071d-0b70-433c-94eb-c317433ab5b7",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MES_MD_BILL_OF_PRCS_BASE",
+            "slug" : "sql_MES_MD_BILL_OF_PRCS_BASE",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "a1467ba2-492a-4db5-be3d-25e038f8ce3e",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT '{Config.sourceSystem}' AS SRC_SYS_CD\n, TRIM(BILLOFPROCESSBASE.BillOfProcessBaseId) as BILL_OF_PRCS_BASE_ID\n, TRIM(BILLOFPROCESSBASE.BillOfProcessName) as BILL_OF_PRCS_NM\n, INT(BILLOFPROCESSBASE.ChangeCount) as CHG_CNT\n, TRIM(BILLOFPROCESSBASE.IconId) as ICON_ID\n, TRIM(BILLOFPROCESSBASE.CDOTypeId) as OBJ_TYPE_ID\n, TRIM(BILLOFPROCESSBASE.RevOfRcdId) as RVSN_ID\nFROM  {Config.sourceDatabase}.BILLOFPROCESSBASE as BILLOFPROCESSBASE WHERE BILLOFPROCESSBASE._deleted_ =  'F'\n  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    
