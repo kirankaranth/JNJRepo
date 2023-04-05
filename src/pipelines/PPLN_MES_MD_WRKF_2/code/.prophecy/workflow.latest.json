@@ -1,256 +1,1662 @@
 {
-      "metainfo" : {
-        "id" : "1",
-        "language" : "python",
-        "fabricId" : "32",
-        "frontEndLanguage" : "sql",
-        "mode" : "batch",
-        "udfs" : {
-          "language" : "python",
-          "udfs" : [ ]
-        },
-        "udafs" : {
-          "language" : "python",
-          "code" : ""
-        },
-        "configuration" : {
-          "common" : {
-            "type" : "record",
-            "fields" : [ {
-              "name" : "targetSchema",
-              "kind" : {
-                "type" : "string",
-                "value" : "dev_md_l1"
-              },
-              "optional" : false
-            }, {
-              "name" : "sourceSystem",
-              "kind" : {
-                "type" : "string",
-                "value" : "mvc"
-              },
-              "optional" : false
-            }, {
-              "name" : "sourceDatabase",
-              "kind" : {
-                "type" : "string",
-                "value" : "mvc"
-              },
-              "optional" : false
-            } ]
+  "metainfo" : {
+    "id" : "1",
+    "language" : "python",
+    "fabricId" : "32",
+    "frontEndLanguage" : "sql",
+    "mode" : "batch",
+    "udfs" : {
+      "language" : "python",
+      "udfs" : [ ],
+      "functionPackageName" : "cdl_l1_team.cdl_md_l1.functions",
+      "sharedFunctionPackageNames" : [ ]
+    },
+    "udafs" : {
+      "language" : "python",
+      "code" : ""
+    },
+    "configuration" : {
+      "common" : {
+        "type" : "record",
+        "fields" : [ {
+          "name" : "targetSchema",
+          "kind" : {
+            "type" : "string",
+            "value" : "dev_md_l1"
           },
-          "oldCommon" : {
-            "type" : "record",
-            "fields" : [ ]
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "sourceSystem",
+          "kind" : {
+            "type" : "string",
+            "value" : "mvc"
           },
-          "fabrics" : { },
-          "instances" : { },
-          "selected" : "default",
-          "nonEditable" : [ ],
-          "isSubscribedPipelineWithPipelineConfigs" : false
-        },
-        "sparkConf" : [ ],
-        "hadoopConf" : [ ],
-        "codeMode" : "sparse",
-        "buildSystem" : "maven",
-        "externalDependencies" : [ ],
-        "isImported" : false,
-        "interimMode" : "Full",
-        "interimModeEnabled" : true,
-        "visualCodeInterimMode" : "Disabled",
-        "recordsLimit" : {
-          "enabled" : false,
-          "value" : 1000
-        },
-        "topLevelPackage" : "PPLN_MES_MD_WRKF_2"
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "sourceDatabase",
+          "kind" : {
+            "type" : "string",
+            "value" : "mvc"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        } ]
       },
-      "connections" : [ {
-        "id" : "f775192e-06f3-49d7-864a-5f3f298bb998",
-        "source" : "4a8657d4-a07d-47e2-8255-e85b43db409d",
-        "sourcePort" : "cd2a4a2a-af35-400f-b912-8f8381f13103",
-        "target" : "438728d3-7f9a-42bb-9dec-f79a257e0524",
-        "targetPort" : "bccda6f9-18d6-47f0-bd22-60a1bcbaf7d5"
-      }, {
-        "id" : "dbb6c4c4-9fc0-4c79-b288-99fe714675c8",
-        "source" : "83ffc49f-db57-4e8f-8fa8-f32ba00bb581",
-        "sourcePort" : "3a171ad9-94d5-4c76-9308-bc67066d8934",
-        "target" : "4a8657d4-a07d-47e2-8255-e85b43db409d",
-        "targetPort" : "67885d17-2ea7-4010-a6a2-b98e44ec483f"
-      } ],
-      "processes" : {
-        "438728d3-7f9a-42bb-9dec-f79a257e0524" : {
-          "id" : "438728d3-7f9a-42bb-9dec-f79a257e0524",
-          "component" : "Target",
-          "metadata" : {
-            "label" : "MES_MD_WRKF",
-            "slug" : "MES_MD_WRKF",
-            "x" : -540,
-            "y" : -400,
-            "phase" : 0,
-            "cache" : false,
-            "detailedStats" : false,
-            "isImported" : false
-          },
-          "ports" : {
-            "inputs" : [ {
-              "id" : "bccda6f9-18d6-47f0-bd22-60a1bcbaf7d5",
-              "slug" : "in0",
-              "isStreaming" : false
-            } ],
-            "outputs" : [ ],
-            "selectedInputFields" : [ ],
-            "isCustomOutputSchema" : false
-          },
-          "properties" : {
-            "datasetId" : "datasets/MES_MD_WRKF"
-          }
-        },
-        "4a8657d4-a07d-47e2-8255-e85b43db409d" : {
-          "id" : "4a8657d4-a07d-47e2-8255-e85b43db409d",
-          "component" : "SchemaTransform",
-          "metadata" : {
-            "label" : "addL1fields",
-            "slug" : "addL1fields",
-            "x" : -780,
-            "y" : -400,
-            "phase" : 0,
-            "cache" : false,
-            "detailedStats" : false,
-            "isImported" : false
-          },
-          "ports" : {
-            "inputs" : [ {
-              "id" : "67885d17-2ea7-4010-a6a2-b98e44ec483f",
-              "slug" : "in0",
-              "isStreaming" : false
-            } ],
-            "outputs" : [ {
-              "id" : "cd2a4a2a-af35-400f-b912-8f8381f13103",
-              "slug" : "out",
-              "isStreaming" : false
-            } ],
-            "selectedInputFields" : [ ],
-            "isCustomOutputSchema" : false
-          },
-          "properties" : {
-            "columnsSelector" : [ ],
-            "transformations" : [ {
-              "kind" : "AddReplaceColumn",
-              "AddReplaceColumn" : {
-                "sourceColumn" : "SRC_SYS_CD",
-                "expression" : {
-                  "format" : "sql",
-                  "expression" : "'$sourceSystem'"
-                }
-              },
-              "DropColumn" : {
-                "sourceColumn" : ""
-              },
-              "RenameColumn" : {
-                "sourceColumn" : "",
-                "targetColumn" : ""
-              }
-            }, {
-              "kind" : "AddReplaceColumn",
-              "AddReplaceColumn" : {
-                "sourceColumn" : "_pk_",
-                "expression" : {
-                  "format" : "sql",
-                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'WRKF_ID',WRKF_ID))"
-                }
-              },
-              "DropColumn" : {
-                "sourceColumn" : ""
-              },
-              "RenameColumn" : {
-                "sourceColumn" : "",
-                "targetColumn" : ""
-              }
-            }, {
-              "kind" : "AddReplaceColumn",
-              "AddReplaceColumn" : {
-                "sourceColumn" : "_pk_md5_",
-                "expression" : {
-                  "format" : "sql",
-                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'WRKF_ID',WRKF_ID)))"
-                }
-              },
-              "DropColumn" : {
-                "sourceColumn" : ""
-              },
-              "RenameColumn" : {
-                "sourceColumn" : "",
-                "targetColumn" : ""
-              }
-            }, {
-              "kind" : "AddReplaceColumn",
-              "AddReplaceColumn" : {
-                "sourceColumn" : "_l1_upt_",
-                "expression" : {
-                  "format" : "sql",
-                  "expression" : "current_timestamp()"
-                }
-              },
-              "DropColumn" : {
-                "sourceColumn" : ""
-              },
-              "RenameColumn" : {
-                "sourceColumn" : "",
-                "targetColumn" : ""
-              }
-            } ]
-          }
-        },
-        "83ffc49f-db57-4e8f-8fa8-f32ba00bb581" : {
-          "id" : "83ffc49f-db57-4e8f-8fa8-f32ba00bb581",
-          "component" : "Script",
-          "metadata" : {
-            "label" : "sql_MES_MD_WRKF",
-            "slug" : "sql_MES_MD_WRKF",
-            "x" : -1060,
-            "y" : -400,
-            "phase" : 0,
-            "cache" : false,
-            "detailedStats" : false,
-            "isImported" : false
-          },
-          "ports" : {
-            "inputs" : [ ],
-            "outputs" : [ {
-              "id" : "3a171ad9-94d5-4c76-9308-bc67066d8934",
-              "slug" : "out0",
-              "schema" : {
-                "type" : "struct",
-                "fields" : [ {
-                  "name" : "_deleted_",
-                  "type" : "string",
-                  "nullable" : true,
-                  "metadata" : {
-                    "description" : "",
-                    "mappings" : [ ],
-                    "tags" : [ ]
-                  } 
-                } ]
-              },
-              "isStreaming" : false
-            } ],
-            "selectedInputFields" : [ ],
-            "isCustomOutputSchema" : true
-          },
-          "properties" : {
-            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT\n   '{Config.sourceSystem}' AS SRC_SYS_CD\n, TRIM(Workflow.WORKFLOWID) as WRKF_ID\n, TRIM(Workflow.WORKFLOWBASEID) as WRKF_BASE_ID\n, TRIM(Workflow.CARTONLABELCOLLECTIONSTEPID) as CTN_LBL_CLCT_STEP_ID\n, TRIM(Workflow.CARTONOPERATIONID) as CTN_OPR_ID\n, TRIM(Workflow.CASELABELRECONSTEPID) as CASE_LBL_RECON_STEP_ID\n, INT(Workflow.CHANGECOUNT) as CHG_CNT\n, TRIM(Workflow.CHANGEHISTORYID) as CHG_HIST_ID\n, TRIM(Workflow.CHECKLISTHEATSEALID) as CKLST_HEAT_SEAL_ID\n, TRIM(Workflow.CHECKLISTHYDRATIONID) as CKLST_HYDRATION_ID\n, TRIM(Workflow.CHECKLISTINJECTIONMOLDINGID) as CKLST_INJECTION_MOLDING_ID\n, TRIM(Workflow.CHECKLISTLENSFABRICATIONID) as CKLST_LEN_FABRICATION_ID\n, TRIM(Workflow.CHECKLISTPOSTHYDRATIONID) as CKLST_POST_HYDRATION_ID\n, TRIM(Workflow.CHECKLISTQAID) as CKLST_QA_ID\n, TRIM(Workflow.CHECKLISTSECONDARYPACKINGID) as CKLST_SEC_PACK_ID\n, TRIM(Workflow.CHECKLISTSTERILIZATIONID) as CKLST_STERILIZATION_ID\n, TRIM(Workflow.DATACOLLECTIONDEFCARTONLABELID) as DATA_CLCT_DEF_CTN_LBL_ID\n, TRIM(Workflow.DATACOLLECTIONDEFFOILLABBASEID) as DATA_CLCT_DEF_FOIL_LAB_BASE_ID\n, TRIM(Workflow.DATACOLLECTIONDEFFOILLABELID) as DATA_CLCT_DEF_FOIL_LBL_ID\n, TRIM(Workflow.DATACOLLECTIONDEFPLCVERID) as DATA_CLCT_DEF_PLC_VER_ID\n, TRIM(Workflow.DATACOLLECTIONDEFPLCVERBASEID) as DATA_CLCT_DEF_PLC_VERS_BASE_ID\n, TRIM(Workflow.DATACOLLECTIONDEFPLCDHRBASEID) as DATA_CLCT_DEF_PLCDHR_BASE_ID\n, TRIM(Workflow.DATACOLLECTIONDEFPLCDHRID) as DATA_CLCT_DEF_PLCDHR_ID\n, TRIM(Workflow.DATACOLLECTIONDEFPOSTHYDBASEID) as DATA_CLCT_DEF_POST_HYD_BASE_ID\n, TRIM(Workflow.DATACOLLECTIONDEFPOSTHYDID) as DATA_CLCT_DEF_POST_HYD_ID\n, TRIM(Workflow.ECO) as ENGR_CHG_ORDR_NUM\n, TRIM(Workflow.ERPROUTEBASEID) as ERP_RTE_BASE_ID\n, TRIM(Workflow.ERPROUTEID) as ERP_RTE_ID\n, TRIM(Workflow.EXCLUSIVEMASTERLOTCHECKLISTID) as EXCLV_MSTR_LOT_CKLST_ID\n, TRIM(Workflow.FIRSTSTEPID) as FST_STEP_ID\n, TRIM(Workflow.FOILOPERATIONID) as FOIL_OPR_ID\n, CAST(NULL AS BOOLEAN) as GSL_WRKF_IND\n, TRIM(Workflow.ICONID) as ICON_ID\n, TRIM(Workflow.IMAGE) as IMG_TXT\n, CAST(TRIM(Workflow.ISEXCLUSIVECHECK) AS BOOLEAN) AS IS_EXCLV_CHK_IND\n, CAST(TRIM(Workflow.ISFROZEN) AS BOOLEAN) AS IS_FRZN_IND\n, TRIM(Workflow.LASTINPROCESSSTEPCHECKLISTID) as LAST_IN_PRCS_STEP_CKLST_ID\n, TRIM(Workflow.LOCATIONRETURNFROMDISTRIBUTION) as LOC_RTN_FROM_DSTN_TXT\n, TRIM(Workflow.NOTES) as NOTES_TXT\n, TRIM(Workflow.CDOTYPEID) as OBJ_TYPE_ID\n, TRIM(Workflow.PRODUCTCONVMULTISTEPNAME) as PROD_CONV_MULTI_STEP_NM\n, TRIM(Workflow.WORKFLOWREVISION) as RVSN_ID\n, TRIM(Workflow.REWORKSTEPNAME) as RWRK_STEP_NM\n, TRIM(Workflow.SPLITLOTINTROHSSTEP) as SPLT_LOT_INTRO_HS_STEP_ID\n, TRIM(Workflow.SPLITLOTINTROSTEPNAME) as SPLT_LOT_INTRO_STEP_NM\n, NULL as SPLT_MOVE_TO_SPEC_ID\n, TRIM(Workflow.STATUS) as STS_CD\n, CAST(Workflow.TOTALCYCLETIME AS DECIMAL(18, 4)) as TOT_CYC_TIME_QTY\n, CAST(Workflow.TOTALYIELD AS DECIMAL(18, 4)) as TOT_YLD_QTY\n, TRIM(Workflow.WIPMSGDEFMGRID) as WIP_MSG_DEF_MGR_ID\n, TRIM(Workflow.DESCRIPTION) as WRKF_DESC\nFROM  {Config.sourceDatabase}.Workflow as Workflow  WHERE Workflow._deleted_ = 'F'  \n \n\"\"\")",
-            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
-            "scriptMethodFooter" : "    return out0"
-          }
-        }
+      "oldCommon" : {
+        "type" : "record",
+        "fields" : [ ]
+      },
+      "fabrics" : { },
+      "instances" : { },
+      "selected" : "default",
+      "nonEditable" : [ ],
+      "isSubscribedPipelineWithPipelineConfigs" : false
+    },
+    "sparkConf" : [ ],
+    "hadoopConf" : [ ],
+    "codeMode" : "sparse",
+    "buildSystem" : "maven",
+    "externalDependencies" : [ ],
+    "dependentProjectExternalDependencies" : [ ],
+    "isImported" : false,
+    "interimMode" : "Full",
+    "interimModeEnabled" : true,
+    "visualCodeInterimMode" : "Disabled",
+    "recordsLimit" : {
+      "enabled" : false,
+      "value" : 1000
+    },
+    "topLevelPackage" : "PPLN_MES_MD_WRKF_2",
+    "configurationVersion" : "v1"
+  },
+  "connections" : [ {
+    "id" : "f775192e-06f3-49d7-864a-5f3f298bb998",
+    "source" : "4a8657d4-a07d-47e2-8255-e85b43db409d",
+    "sourcePort" : "cd2a4a2a-af35-400f-b912-8f8381f13103",
+    "target" : "438728d3-7f9a-42bb-9dec-f79a257e0524",
+    "targetPort" : "bccda6f9-18d6-47f0-bd22-60a1bcbaf7d5"
+  }, {
+    "id" : "dbb6c4c4-9fc0-4c79-b288-99fe714675c8",
+    "source" : "83ffc49f-db57-4e8f-8fa8-f32ba00bb581",
+    "sourcePort" : "3a171ad9-94d5-4c76-9308-bc67066d8934",
+    "target" : "4a8657d4-a07d-47e2-8255-e85b43db409d",
+    "targetPort" : "67885d17-2ea7-4010-a6a2-b98e44ec483f"
+  } ],
+  "processes" : {
+    "438728d3-7f9a-42bb-9dec-f79a257e0524" : {
+      "id" : "438728d3-7f9a-42bb-9dec-f79a257e0524",
+      "component" : "Target",
+      "metadata" : {
+        "label" : "MES_MD_WRKF",
+        "slug" : "MES_MD_WRKF",
+        "x" : -540,
+        "y" : -400,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
       },
       "ports" : {
-        "inputs" : [ ],
+        "inputs" : [ {
+          "id" : "bccda6f9-18d6-47f0-bd22-60a1bcbaf7d5",
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "SRC_SYS_CD",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WRKF_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WRKF_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CTN_LBL_CLCT_STEP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CTN_OPR_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CASE_LBL_RECON_STEP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CHG_CNT",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CHG_HIST_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CKLST_HEAT_SEAL_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CKLST_HYDRATION_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CKLST_INJECTION_MOLDING_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CKLST_LEN_FABRICATION_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CKLST_POST_HYDRATION_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CKLST_QA_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CKLST_SEC_PACK_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CKLST_STERILIZATION_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DATA_CLCT_DEF_CTN_LBL_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DATA_CLCT_DEF_FOIL_LAB_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DATA_CLCT_DEF_FOIL_LBL_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DATA_CLCT_DEF_PLC_VER_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DATA_CLCT_DEF_PLC_VERS_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DATA_CLCT_DEF_PLCDHR_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DATA_CLCT_DEF_PLCDHR_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DATA_CLCT_DEF_POST_HYD_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DATA_CLCT_DEF_POST_HYD_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ENGR_CHG_ORDR_NUM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ERP_RTE_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ERP_RTE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "EXCLV_MSTR_LOT_CKLST_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "FST_STEP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "FOIL_OPR_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "GSL_WRKF_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ICON_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IMG_TXT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IS_EXCLV_CHK_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IS_FRZN_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LAST_IN_PRCS_STEP_CKLST_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LOC_RTN_FROM_DSTN_TXT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "NOTES_TXT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "OBJ_TYPE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PROD_CONV_MULTI_STEP_NM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RVSN_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RWRK_STEP_NM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPLT_LOT_INTRO_HS_STEP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPLT_LOT_INTRO_STEP_NM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPLT_MOVE_TO_SPEC_ID",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "STS_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "TOT_CYC_TIME_QTY",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "TOT_YLD_QTY",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WIP_MSG_DEF_MGR_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WRKF_DESC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_pk_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_pk_md5_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_l1_upt_",
+              "type" : "timestamp",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
         "outputs" : [ ],
         "selectedInputFields" : [ ],
         "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/MES_MD_WRKF"
+      }
+    },
+    "4a8657d4-a07d-47e2-8255-e85b43db409d" : {
+      "id" : "4a8657d4-a07d-47e2-8255-e85b43db409d",
+      "component" : "SchemaTransform",
+      "metadata" : {
+        "label" : "addL1fields",
+        "slug" : "addL1fields",
+        "x" : -780,
+        "y" : -400,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "67885d17-2ea7-4010-a6a2-b98e44ec483f",
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "SRC_SYS_CD",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WRKF_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WRKF_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CTN_LBL_CLCT_STEP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CTN_OPR_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CASE_LBL_RECON_STEP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CHG_CNT",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CHG_HIST_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CKLST_HEAT_SEAL_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CKLST_HYDRATION_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CKLST_INJECTION_MOLDING_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CKLST_LEN_FABRICATION_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CKLST_POST_HYDRATION_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CKLST_QA_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CKLST_SEC_PACK_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CKLST_STERILIZATION_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DATA_CLCT_DEF_CTN_LBL_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DATA_CLCT_DEF_FOIL_LAB_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DATA_CLCT_DEF_FOIL_LBL_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DATA_CLCT_DEF_PLC_VER_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DATA_CLCT_DEF_PLC_VERS_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DATA_CLCT_DEF_PLCDHR_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DATA_CLCT_DEF_PLCDHR_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DATA_CLCT_DEF_POST_HYD_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DATA_CLCT_DEF_POST_HYD_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ENGR_CHG_ORDR_NUM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ERP_RTE_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ERP_RTE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "EXCLV_MSTR_LOT_CKLST_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "FST_STEP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "FOIL_OPR_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "GSL_WRKF_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ICON_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IMG_TXT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IS_EXCLV_CHK_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IS_FRZN_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LAST_IN_PRCS_STEP_CKLST_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LOC_RTN_FROM_DSTN_TXT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "NOTES_TXT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "OBJ_TYPE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PROD_CONV_MULTI_STEP_NM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RVSN_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RWRK_STEP_NM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPLT_LOT_INTRO_HS_STEP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPLT_LOT_INTRO_STEP_NM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPLT_MOVE_TO_SPEC_ID",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "STS_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "TOT_CYC_TIME_QTY",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "TOT_YLD_QTY",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WIP_MSG_DEF_MGR_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WRKF_DESC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "cd2a4a2a-af35-400f-b912-8f8381f13103",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "transformations" : [ {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "SRC_SYS_CD",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "'$sourceSystem'"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_pk_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'WRKF_ID',WRKF_ID))"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_pk_md5_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'WRKF_ID',WRKF_ID)))"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_l1_upt_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "current_timestamp()"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        } ]
+      }
+    },
+    "83ffc49f-db57-4e8f-8fa8-f32ba00bb581" : {
+      "id" : "83ffc49f-db57-4e8f-8fa8-f32ba00bb581",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "sql_MES_MD_WRKF",
+        "slug" : "sql_MES_MD_WRKF",
+        "x" : -1060,
+        "y" : -400,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "3a171ad9-94d5-4c76-9308-bc67066d8934",
+          "slug" : "out0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "SRC_SYS_CD",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WRKF_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WRKF_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CTN_LBL_CLCT_STEP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CTN_OPR_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CASE_LBL_RECON_STEP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CHG_CNT",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CHG_HIST_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CKLST_HEAT_SEAL_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CKLST_HYDRATION_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CKLST_INJECTION_MOLDING_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CKLST_LEN_FABRICATION_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CKLST_POST_HYDRATION_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CKLST_QA_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CKLST_SEC_PACK_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CKLST_STERILIZATION_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DATA_CLCT_DEF_CTN_LBL_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DATA_CLCT_DEF_FOIL_LAB_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DATA_CLCT_DEF_FOIL_LBL_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DATA_CLCT_DEF_PLC_VER_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DATA_CLCT_DEF_PLC_VERS_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DATA_CLCT_DEF_PLCDHR_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DATA_CLCT_DEF_PLCDHR_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DATA_CLCT_DEF_POST_HYD_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DATA_CLCT_DEF_POST_HYD_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ENGR_CHG_ORDR_NUM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ERP_RTE_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ERP_RTE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "EXCLV_MSTR_LOT_CKLST_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "FST_STEP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "FOIL_OPR_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "GSL_WRKF_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ICON_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IMG_TXT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IS_EXCLV_CHK_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IS_FRZN_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LAST_IN_PRCS_STEP_CKLST_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LOC_RTN_FROM_DSTN_TXT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "NOTES_TXT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "OBJ_TYPE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PROD_CONV_MULTI_STEP_NM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RVSN_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RWRK_STEP_NM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPLT_LOT_INTRO_HS_STEP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPLT_LOT_INTRO_STEP_NM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPLT_MOVE_TO_SPEC_ID",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "STS_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "TOT_CYC_TIME_QTY",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "TOT_YLD_QTY",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WIP_MSG_DEF_MGR_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WRKF_DESC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true
+      },
+      "properties" : {
+        "script" : "out0 = spark.sql(f\"\"\"\n    SELECT\n   '{Config.sourceSystem}' AS SRC_SYS_CD\n, TRIM(Workflow.WORKFLOWID) as WRKF_ID\n, TRIM(Workflow.WORKFLOWBASEID) as WRKF_BASE_ID\n, TRIM(Workflow.CARTONLABELCOLLECTIONSTEPID) as CTN_LBL_CLCT_STEP_ID\n, TRIM(Workflow.CARTONOPERATIONID) as CTN_OPR_ID\n, TRIM(Workflow.CASELABELRECONSTEPID) as CASE_LBL_RECON_STEP_ID\n, INT(Workflow.CHANGECOUNT) as CHG_CNT\n, TRIM(Workflow.CHANGEHISTORYID) as CHG_HIST_ID\n, TRIM(Workflow.CHECKLISTHEATSEALID) as CKLST_HEAT_SEAL_ID\n, TRIM(Workflow.CHECKLISTHYDRATIONID) as CKLST_HYDRATION_ID\n, TRIM(Workflow.CHECKLISTINJECTIONMOLDINGID) as CKLST_INJECTION_MOLDING_ID\n, TRIM(Workflow.CHECKLISTLENSFABRICATIONID) as CKLST_LEN_FABRICATION_ID\n, TRIM(Workflow.CHECKLISTPOSTHYDRATIONID) as CKLST_POST_HYDRATION_ID\n, TRIM(Workflow.CHECKLISTQAID) as CKLST_QA_ID\n, TRIM(Workflow.CHECKLISTSECONDARYPACKINGID) as CKLST_SEC_PACK_ID\n, TRIM(Workflow.CHECKLISTSTERILIZATIONID) as CKLST_STERILIZATION_ID\n, TRIM(Workflow.DATACOLLECTIONDEFCARTONLABELID) as DATA_CLCT_DEF_CTN_LBL_ID\n, TRIM(Workflow.DATACOLLECTIONDEFFOILLABBASEID) as DATA_CLCT_DEF_FOIL_LAB_BASE_ID\n, TRIM(Workflow.DATACOLLECTIONDEFFOILLABELID) as DATA_CLCT_DEF_FOIL_LBL_ID\n, TRIM(Workflow.DATACOLLECTIONDEFPLCVERID) as DATA_CLCT_DEF_PLC_VER_ID\n, TRIM(Workflow.DATACOLLECTIONDEFPLCVERBASEID) as DATA_CLCT_DEF_PLC_VERS_BASE_ID\n, TRIM(Workflow.DATACOLLECTIONDEFPLCDHRBASEID) as DATA_CLCT_DEF_PLCDHR_BASE_ID\n, TRIM(Workflow.DATACOLLECTIONDEFPLCDHRID) as DATA_CLCT_DEF_PLCDHR_ID\n, TRIM(Workflow.DATACOLLECTIONDEFPOSTHYDBASEID) as DATA_CLCT_DEF_POST_HYD_BASE_ID\n, TRIM(Workflow.DATACOLLECTIONDEFPOSTHYDID) as DATA_CLCT_DEF_POST_HYD_ID\n, TRIM(Workflow.ECO) as ENGR_CHG_ORDR_NUM\n, TRIM(Workflow.ERPROUTEBASEID) as ERP_RTE_BASE_ID\n, TRIM(Workflow.ERPROUTEID) as ERP_RTE_ID\n, TRIM(Workflow.EXCLUSIVEMASTERLOTCHECKLISTID) as EXCLV_MSTR_LOT_CKLST_ID\n, TRIM(Workflow.FIRSTSTEPID) as FST_STEP_ID\n, TRIM(Workflow.FOILOPERATIONID) as FOIL_OPR_ID\n, CAST(NULL AS BOOLEAN) as GSL_WRKF_IND\n, TRIM(Workflow.ICONID) as ICON_ID\n, TRIM(Workflow.IMAGE) as IMG_TXT\n, CAST(TRIM(Workflow.ISEXCLUSIVECHECK) AS BOOLEAN) AS IS_EXCLV_CHK_IND\n, CAST(TRIM(Workflow.ISFROZEN) AS BOOLEAN) AS IS_FRZN_IND\n, TRIM(Workflow.LASTINPROCESSSTEPCHECKLISTID) as LAST_IN_PRCS_STEP_CKLST_ID\n, TRIM(Workflow.LOCATIONRETURNFROMDISTRIBUTION) as LOC_RTN_FROM_DSTN_TXT\n, TRIM(Workflow.NOTES) as NOTES_TXT\n, TRIM(Workflow.CDOTYPEID) as OBJ_TYPE_ID\n, TRIM(Workflow.PRODUCTCONVMULTISTEPNAME) as PROD_CONV_MULTI_STEP_NM\n, TRIM(Workflow.WORKFLOWREVISION) as RVSN_ID\n, TRIM(Workflow.REWORKSTEPNAME) as RWRK_STEP_NM\n, TRIM(Workflow.SPLITLOTINTROHSSTEP) as SPLT_LOT_INTRO_HS_STEP_ID\n, TRIM(Workflow.SPLITLOTINTROSTEPNAME) as SPLT_LOT_INTRO_STEP_NM\n, NULL as SPLT_MOVE_TO_SPEC_ID\n, TRIM(Workflow.STATUS) as STS_CD\n, CAST(Workflow.TOTALCYCLETIME AS DECIMAL(18, 4)) as TOT_CYC_TIME_QTY\n, CAST(Workflow.TOTALYIELD AS DECIMAL(18, 4)) as TOT_YLD_QTY\n, TRIM(Workflow.WIPMSGDEFMGRID) as WIP_MSG_DEF_MGR_ID\n, TRIM(Workflow.DESCRIPTION) as WRKF_DESC\nFROM  {Config.sourceDatabase}.Workflow as Workflow  WHERE Workflow._deleted_ = 'F'  \n \n\"\"\")",
+        "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+        "scriptMethodFooter" : "    return out0"
       }
     }
-
-
-    
+  },
+  "ports" : {
+    "inputs" : [ ],
+    "outputs" : [ ],
+    "selectedInputFields" : [ ],
+    "isCustomOutputSchema" : false
+  }
+}
