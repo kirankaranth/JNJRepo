@@ -5,7 +5,7 @@ from prophecy.libs import typed_lit
 from jde_01_md_po_sched_line_delv.config.ConfigStore import *
 from jde_01_md_po_sched_line_delv.udfs.UDFs import *
 
-def md_po_sched_line_delv_swap(spark: SparkSession, in0: DataFrame):
+def MD_PO_SCHED_LINE_DELV(spark: SparkSession, in0: DataFrame):
     in0.write\
         .format("delta")\
         .option("replaceWhere", f"SRC_SYS_CD = '{Config.sourceSystem}'")\

@@ -12,7 +12,7 @@ def pipeline(spark: SparkSession) -> None:
     df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS_TRANSFORMATION)
     df_GET_DUP = GET_DUP(spark, df_SET_FIELD_ORDER_REFORMAT)
     df_DUP_FILTER = DUP_FILTER(spark, df_GET_DUP)
-    md_po_sched_line_delv_swap(spark, df_SET_FIELD_ORDER_REFORMAT)
+    MD_PO_SCHED_LINE_DELV(spark, df_SET_FIELD_ORDER_REFORMAT)
 
 def main():
     spark = SparkSession.builder\
