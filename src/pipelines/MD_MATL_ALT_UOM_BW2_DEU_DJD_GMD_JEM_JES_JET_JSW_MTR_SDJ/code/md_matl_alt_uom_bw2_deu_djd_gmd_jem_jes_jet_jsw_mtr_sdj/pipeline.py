@@ -9,6 +9,9 @@ from md_matl_alt_uom_bw2_deu_djd_gmd_jem_jes_jet_jsw_mtr_sdj.graph import *
 def pipeline(spark: SparkSession) -> None:
     df_DS_JDE_01_F4101 = DS_JDE_01_F4101(spark)
     df_DS_JDE_01_F41002 = DS_JDE_01_F41002(spark)
+    df_SELECT_FIELDS_1 = SELECT_FIELDS_1(spark, df_DS_JDE_01_F4101)
+    df_Join_1 = Join_1(spark)
+    df_SELECT_FIELDS = SELECT_FIELDS(spark, df_DS_JDE_01_F41002)
 
 def main():
     spark = SparkSession.builder\
