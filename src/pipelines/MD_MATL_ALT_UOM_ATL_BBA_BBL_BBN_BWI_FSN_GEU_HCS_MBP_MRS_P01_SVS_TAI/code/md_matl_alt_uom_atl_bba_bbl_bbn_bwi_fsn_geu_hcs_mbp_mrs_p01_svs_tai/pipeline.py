@@ -12,6 +12,7 @@ def pipeline(spark: SparkSession) -> None:
     MEINS_LU(spark, df_MANDT1)
     df_DS_SAP_01_MARM = DS_SAP_01_MARM(spark)
     df_MANDT = MANDT(spark, df_DS_SAP_01_MARM)
+    df_SchemaTransform_1 = SchemaTransform_1(spark, df_MANDT)
 
 def main():
     spark = SparkSession.builder\
