@@ -1,256 +1,1986 @@
 {
-      "metainfo" : {
-        "id" : "1",
-        "language" : "python",
-        "fabricId" : "32",
-        "frontEndLanguage" : "sql",
-        "mode" : "batch",
-        "udfs" : {
-          "language" : "python",
-          "udfs" : [ ]
-        },
-        "udafs" : {
-          "language" : "python",
-          "code" : ""
-        },
-        "configuration" : {
-          "common" : {
-            "type" : "record",
-            "fields" : [ {
-              "name" : "targetSchema",
-              "kind" : {
-                "type" : "string",
-                "value" : "dev_md_l1"
-              },
-              "optional" : false
-            }, {
-              "name" : "sourceSystem",
-              "kind" : {
-                "type" : "string",
-                "value" : "cmw"
-              },
-              "optional" : false
-            }, {
-              "name" : "sourceDatabase",
-              "kind" : {
-                "type" : "string",
-                "value" : "cmw"
-              },
-              "optional" : false
-            } ]
+  "metainfo" : {
+    "id" : "1",
+    "language" : "python",
+    "fabricId" : "32",
+    "frontEndLanguage" : "sql",
+    "mode" : "batch",
+    "udfs" : {
+      "language" : "python",
+      "udfs" : [ ],
+      "functionPackageName" : "cdl_l1_team.cdl_md_l1.functions",
+      "sharedFunctionPackageNames" : [ ]
+    },
+    "udafs" : {
+      "language" : "python",
+      "code" : ""
+    },
+    "configuration" : {
+      "common" : {
+        "type" : "record",
+        "fields" : [ {
+          "name" : "targetSchema",
+          "kind" : {
+            "type" : "string",
+            "value" : "dev_md_l1"
           },
-          "oldCommon" : {
-            "type" : "record",
-            "fields" : [ ]
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "sourceSystem",
+          "kind" : {
+            "type" : "string",
+            "value" : "cmw"
           },
-          "fabrics" : { },
-          "instances" : { },
-          "selected" : "default",
-          "nonEditable" : [ ],
-          "isSubscribedPipelineWithPipelineConfigs" : false
-        },
-        "sparkConf" : [ ],
-        "hadoopConf" : [ ],
-        "codeMode" : "sparse",
-        "buildSystem" : "maven",
-        "externalDependencies" : [ ],
-        "isImported" : false,
-        "interimMode" : "Full",
-        "interimModeEnabled" : true,
-        "visualCodeInterimMode" : "Disabled",
-        "recordsLimit" : {
-          "enabled" : false,
-          "value" : 1000
-        },
-        "topLevelPackage" : "PPLN_MES_MD_SPEC_2"
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "sourceDatabase",
+          "kind" : {
+            "type" : "string",
+            "value" : "cmw"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        } ]
       },
-      "connections" : [ {
-        "id" : "3086593d-9eb9-4379-8b71-f79472a488e2",
-        "source" : "44bc6a80-c6e4-4243-9ce0-54d6aca8b2e8",
-        "sourcePort" : "14ccd39c-f412-45d3-87e9-590b37639d51",
-        "target" : "bd7dd1e7-1629-4fc1-b918-195dd275e623",
-        "targetPort" : "0b277154-d72d-4897-9058-8cdec4d73018"
-      }, {
-        "id" : "172b3097-2933-49d6-a3fa-f79ced1d8d59",
-        "source" : "cf27b0a7-75a4-4f31-b866-d3e50e0d4077",
-        "sourcePort" : "c7878f3c-1adb-4b05-9460-63a9719cc436",
-        "target" : "44bc6a80-c6e4-4243-9ce0-54d6aca8b2e8",
-        "targetPort" : "f36b52eb-f3d6-4624-b5fb-27f2fc7dd393"
-      } ],
-      "processes" : {
-        "bd7dd1e7-1629-4fc1-b918-195dd275e623" : {
-          "id" : "bd7dd1e7-1629-4fc1-b918-195dd275e623",
-          "component" : "Target",
-          "metadata" : {
-            "label" : "MES_MD_SPEC",
-            "slug" : "MES_MD_SPEC",
-            "x" : -540,
-            "y" : -400,
-            "phase" : 0,
-            "cache" : false,
-            "detailedStats" : false,
-            "isImported" : false
-          },
-          "ports" : {
-            "inputs" : [ {
-              "id" : "0b277154-d72d-4897-9058-8cdec4d73018",
-              "slug" : "in0",
-              "isStreaming" : false
-            } ],
-            "outputs" : [ ],
-            "selectedInputFields" : [ ],
-            "isCustomOutputSchema" : false
-          },
-          "properties" : {
-            "datasetId" : "datasets/MES_MD_SPEC"
-          }
-        },
-        "44bc6a80-c6e4-4243-9ce0-54d6aca8b2e8" : {
-          "id" : "44bc6a80-c6e4-4243-9ce0-54d6aca8b2e8",
-          "component" : "SchemaTransform",
-          "metadata" : {
-            "label" : "addL1fields",
-            "slug" : "addL1fields",
-            "x" : -780,
-            "y" : -400,
-            "phase" : 0,
-            "cache" : false,
-            "detailedStats" : false,
-            "isImported" : false
-          },
-          "ports" : {
-            "inputs" : [ {
-              "id" : "f36b52eb-f3d6-4624-b5fb-27f2fc7dd393",
-              "slug" : "in0",
-              "isStreaming" : false
-            } ],
-            "outputs" : [ {
-              "id" : "14ccd39c-f412-45d3-87e9-590b37639d51",
-              "slug" : "out",
-              "isStreaming" : false
-            } ],
-            "selectedInputFields" : [ ],
-            "isCustomOutputSchema" : false
-          },
-          "properties" : {
-            "columnsSelector" : [ ],
-            "transformations" : [ {
-              "kind" : "AddReplaceColumn",
-              "AddReplaceColumn" : {
-                "sourceColumn" : "SRC_SYS_CD",
-                "expression" : {
-                  "format" : "sql",
-                  "expression" : "'$sourceSystem'"
-                }
-              },
-              "DropColumn" : {
-                "sourceColumn" : ""
-              },
-              "RenameColumn" : {
-                "sourceColumn" : "",
-                "targetColumn" : ""
-              }
-            }, {
-              "kind" : "AddReplaceColumn",
-              "AddReplaceColumn" : {
-                "sourceColumn" : "_pk_",
-                "expression" : {
-                  "format" : "sql",
-                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'SPEC_ID',SPEC_ID))"
-                }
-              },
-              "DropColumn" : {
-                "sourceColumn" : ""
-              },
-              "RenameColumn" : {
-                "sourceColumn" : "",
-                "targetColumn" : ""
-              }
-            }, {
-              "kind" : "AddReplaceColumn",
-              "AddReplaceColumn" : {
-                "sourceColumn" : "_pk_md5_",
-                "expression" : {
-                  "format" : "sql",
-                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'SPEC_ID',SPEC_ID)))"
-                }
-              },
-              "DropColumn" : {
-                "sourceColumn" : ""
-              },
-              "RenameColumn" : {
-                "sourceColumn" : "",
-                "targetColumn" : ""
-              }
-            }, {
-              "kind" : "AddReplaceColumn",
-              "AddReplaceColumn" : {
-                "sourceColumn" : "_l1_upt_",
-                "expression" : {
-                  "format" : "sql",
-                  "expression" : "current_timestamp()"
-                }
-              },
-              "DropColumn" : {
-                "sourceColumn" : ""
-              },
-              "RenameColumn" : {
-                "sourceColumn" : "",
-                "targetColumn" : ""
-              }
-            } ]
-          }
-        },
-        "cf27b0a7-75a4-4f31-b866-d3e50e0d4077" : {
-          "id" : "cf27b0a7-75a4-4f31-b866-d3e50e0d4077",
-          "component" : "Script",
-          "metadata" : {
-            "label" : "sql_MES_MD_SPEC",
-            "slug" : "sql_MES_MD_SPEC",
-            "x" : -1060,
-            "y" : -400,
-            "phase" : 0,
-            "cache" : false,
-            "detailedStats" : false,
-            "isImported" : false
-          },
-          "ports" : {
-            "inputs" : [ ],
-            "outputs" : [ {
-              "id" : "c7878f3c-1adb-4b05-9460-63a9719cc436",
-              "slug" : "out0",
-              "schema" : {
-                "type" : "struct",
-                "fields" : [ {
-                  "name" : "_deleted_",
-                  "type" : "string",
-                  "nullable" : true,
-                  "metadata" : {
-                    "description" : "",
-                    "mappings" : [ ],
-                    "tags" : [ ]
-                  } 
-                } ]
-              },
-              "isStreaming" : false
-            } ],
-            "selectedInputFields" : [ ],
-            "isCustomOutputSchema" : true
-          },
-          "properties" : {
-            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT '{Config.sourceSystem}' AS SRC_SYS_CD\n, TRIM(SPEC.SPECID) as SPEC_ID\n, TRIM(SPEC.OPERATIONID) as OPR_ID\n, TRIM(SPEC.SPECBASEID) as SPEC_BASE_ID\n, CAST(SPEC.ALLOWOVERRIDES as BOOLEAN ) as ALLW_OVRDS_IND\n, TRIM(SPEC.ALLOWREWORKTO) as ALLW_RWRK_TO_TXT\n, CAST(NULL AS BOOLEAN) as ALWAYS_OVRD_EXPN_DT_IND\n, CAST(NULL AS BOOLEAN) as ASGN_UDI_IND\n, CAST(NULL AS BOOLEAN) as ASGN_UDI_1_IND\n, CAST(NULL AS STRING) as BP_SCALE_GRP_ID\n, CAST(NULL AS STRING) as CARR_AUTO_MODE_CD\n, INT(SPEC.CHANGECOUNT) as CHG_CNT\n, TRIM(SPEC.CHANGEHISTORYID) as CHG_HIST_ID\n, CAST(NULL AS STRING) as DFLT_RUN_LVL_ID\n, CAST(NULL AS STRING) as DFLT_RUN_MC_BASE_ID\n, CAST(NULL AS STRING) as DFLT_RUN_RMC_ID\n, TRIM(SPEC.DOCUMENTSETID) as DOC_SET_ID\n, TRIM(SPEC.ELECTRONICPROCEDUREID) as ELCTRNC_PCDR_ID\n, TRIM(SPEC.ELECTRONICPROCEDUREBASEID) as ELCTRNC_PCDR_BASE_ID\n, TRIM(SPEC.ECO) as ENGR_CHG_ORDR_NUM\n, CAST(NULL AS STRING) as ESIG_TXN_MAP_GRP_ID\n, CAST(NULL AS STRING) as EXPN_PER_UOM_CD\n, CAST(NULL AS STRING) as EXPN_PER_VAL\n, CAST(NULL AS TIMESTAMP) as EXPN_TRX_DTTM\n, CAST(NULL AS STRING) as GSL_WRKF_ID\n, TRIM(SPEC.ICONID) as ICON_ID\n, CAST(SPEC.ISFROZEN as BOOLEAN ) as IS_FRZN_IND\n, CAST(NULL AS BOOLEAN) as IS_LD_CARR_IND\n, CAST(NULL AS BOOLEAN) as IS_UNLD_CARR_IND\n, CAST(NULL AS BOOLEAN) as KEP_RSRS_ASGNMT_IND\n, CAST(NULL AS STRING) as LBL_PRT_MSG_1_TXT\n, CAST(NULL AS STRING) as LBL_PRT_MSG_2_TXT\n, CAST(NULL AS STRING) as LBL_TXN_MAP_GRP_ID\n, CAST(NULL AS TIMESTAMP) as MFG_TRX_DTTM\n, TRIM(SPEC.ccfMaxProcessTime) as MAX_PRCS_TIME_VAL\n, TRIM(SPEC.MAXQUEUETIMEACTION) as MAX_QUE_TIME_ACTN_CD\n, TRIM(SPEC.MAXQUEUETIME) as MAX_QUE_TIME_VAL\n, TRIM(SPEC.ccfMinProcessTime) as MIN_PRCS_TIME_VAL\n, TRIM(SPEC.ccfMinQueueTime) as MIN_QUE_TIME_VAL\n, TRIM(SPEC.NOTES) as NOTES_TXT\n, TRIM(SPEC.CDOTYPEID) as OBJ_TYPE_ID\n, TRIM(SPEC.RECIPEFILEBASEID) as RECIPE_FILE_BASE_ID\n, TRIM(SPEC.RECIPEFILEID) as RECIPE_FILE_ID\n, TRIM(SPEC.RESOURCEGROUPID) as RSRS_GRP_ID\n, TRIM(SPEC.ccfResourceLineGroupAvailabili) as RSRS_LINE_GRP_AVLBLTY_TXT\n, CAST(SPEC.ccfResourceLineGroupMaintChk as BOOLEAN ) as RSRS_LINE_GRP_MNT_CHK_IND\n, TRIM(SPEC.SCHEDULINGDETAILID) as SCHDLNG_DTL_ID\n, TRIM(SPEC.SETUPBASEID) as SETUP_BASE_ID\n, TRIM(SPEC.SETUPID) as SETUP_ID\n, TRIM(SPEC.DESCRIPTION) as SPEC_DESC\n, TRIM(SPEC.SPECREVISION) as SPEC_RVSN_ID\n, TRIM(SPEC.STATUS) as STS_CD\n, TRIM(SPEC.TRAININGREQGROUPID) as TRNG_REQ_GRP_ID\n, CAST(NULL AS STRING) as USER_DEFIN_STRNG_TXT\n, CAST(NULL AS BOOLEAN) as VLD_LOT_SMPLG_CMPLT_IND\n, CAST(SPEC.VALIDATEMATERIALCONSUMPTION as BOOLEAN ) as VLD_MATL_CNSMPTN_IND\n, CAST(NULL AS BOOLEAN) as VLD_PDDC_IND\n, CAST(NULL AS BOOLEAN) as VLD_PLC_VERS_IND\n, CAST(NULL AS BOOLEAN) as VLD_UDI_IND\n, CAST(NULL AS STRING) as VLD_PCDR_BASE_ID\n, CAST(NULL AS STRING) as VLD_PCDR_ID\n, TRIM(SPEC.WARNINGQUEUETIME) as WARN_QUE_TIME_VAL\n, TRIM(SPEC.WIPMSGDEFMGRID) as WIP_MSG_DEF_MGR_ID\nFROM  {Config.sourceDatabase}.SPEC as SPEC WHERE SPEC._deleted_ =  'F'\n  \n \n\"\"\")",
-            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
-            "scriptMethodFooter" : "    return out0"
-          }
-        }
+      "oldCommon" : {
+        "type" : "record",
+        "fields" : [ ]
+      },
+      "fabrics" : { },
+      "instances" : { },
+      "selected" : "default",
+      "nonEditable" : [ ],
+      "isSubscribedPipelineWithPipelineConfigs" : false
+    },
+    "sparkConf" : [ ],
+    "hadoopConf" : [ ],
+    "codeMode" : "sparse",
+    "buildSystem" : "maven",
+    "externalDependencies" : [ ],
+    "dependentProjectExternalDependencies" : [ ],
+    "isImported" : false,
+    "interimMode" : "Full",
+    "interimModeEnabled" : true,
+    "visualCodeInterimMode" : "Disabled",
+    "recordsLimit" : {
+      "enabled" : false,
+      "value" : 1000
+    },
+    "topLevelPackage" : "PPLN_MES_MD_SPEC_2",
+    "configurationVersion" : "v1"
+  },
+  "connections" : [ {
+    "id" : "3086593d-9eb9-4379-8b71-f79472a488e2",
+    "source" : "44bc6a80-c6e4-4243-9ce0-54d6aca8b2e8",
+    "sourcePort" : "14ccd39c-f412-45d3-87e9-590b37639d51",
+    "target" : "bd7dd1e7-1629-4fc1-b918-195dd275e623",
+    "targetPort" : "0b277154-d72d-4897-9058-8cdec4d73018"
+  }, {
+    "id" : "172b3097-2933-49d6-a3fa-f79ced1d8d59",
+    "source" : "cf27b0a7-75a4-4f31-b866-d3e50e0d4077",
+    "sourcePort" : "c7878f3c-1adb-4b05-9460-63a9719cc436",
+    "target" : "44bc6a80-c6e4-4243-9ce0-54d6aca8b2e8",
+    "targetPort" : "f36b52eb-f3d6-4624-b5fb-27f2fc7dd393"
+  } ],
+  "processes" : {
+    "bd7dd1e7-1629-4fc1-b918-195dd275e623" : {
+      "id" : "bd7dd1e7-1629-4fc1-b918-195dd275e623",
+      "component" : "Target",
+      "metadata" : {
+        "label" : "MES_MD_SPEC",
+        "slug" : "MES_MD_SPEC",
+        "x" : -540,
+        "y" : -400,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
       },
       "ports" : {
-        "inputs" : [ ],
+        "inputs" : [ {
+          "id" : "0b277154-d72d-4897-9058-8cdec4d73018",
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "SRC_SYS_CD",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPEC_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "OPR_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPEC_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ALLW_OVRDS_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ALLW_RWRK_TO_TXT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ALWAYS_OVRD_EXPN_DT_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ASGN_UDI_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ASGN_UDI_1_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BP_SCALE_GRP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CARR_AUTO_MODE_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CHG_CNT",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CHG_HIST_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DFLT_RUN_LVL_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DFLT_RUN_MC_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DFLT_RUN_RMC_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DOC_SET_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ELCTRNC_PCDR_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ELCTRNC_PCDR_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ENGR_CHG_ORDR_NUM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ESIG_TXN_MAP_GRP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "EXPN_PER_UOM_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "EXPN_PER_VAL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "EXPN_TRX_DTTM",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "GSL_WRKF_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ICON_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IS_FRZN_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IS_LD_CARR_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IS_UNLD_CARR_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "KEP_RSRS_ASGNMT_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LBL_PRT_MSG_1_TXT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LBL_PRT_MSG_2_TXT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LBL_TXN_MAP_GRP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MFG_TRX_DTTM",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MAX_PRCS_TIME_VAL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MAX_QUE_TIME_ACTN_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MAX_QUE_TIME_VAL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MIN_PRCS_TIME_VAL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MIN_QUE_TIME_VAL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "NOTES_TXT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "OBJ_TYPE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RECIPE_FILE_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RECIPE_FILE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RSRS_GRP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RSRS_LINE_GRP_AVLBLTY_TXT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RSRS_LINE_GRP_MNT_CHK_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SCHDLNG_DTL_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SETUP_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SETUP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPEC_DESC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPEC_RVSN_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "STS_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "TRNG_REQ_GRP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "USER_DEFIN_STRNG_TXT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VLD_LOT_SMPLG_CMPLT_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VLD_MATL_CNSMPTN_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VLD_PDDC_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VLD_PLC_VERS_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VLD_UDI_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VLD_PCDR_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VLD_PCDR_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WARN_QUE_TIME_VAL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WIP_MSG_DEF_MGR_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_pk_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_pk_md5_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_l1_upt_",
+              "type" : "timestamp",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
         "outputs" : [ ],
         "selectedInputFields" : [ ],
         "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/MES_MD_SPEC"
+      }
+    },
+    "44bc6a80-c6e4-4243-9ce0-54d6aca8b2e8" : {
+      "id" : "44bc6a80-c6e4-4243-9ce0-54d6aca8b2e8",
+      "component" : "SchemaTransform",
+      "metadata" : {
+        "label" : "addL1fields",
+        "slug" : "addL1fields",
+        "x" : -780,
+        "y" : -400,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "f36b52eb-f3d6-4624-b5fb-27f2fc7dd393",
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "SRC_SYS_CD",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPEC_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "OPR_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPEC_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ALLW_OVRDS_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ALLW_RWRK_TO_TXT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ALWAYS_OVRD_EXPN_DT_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ASGN_UDI_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ASGN_UDI_1_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BP_SCALE_GRP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CARR_AUTO_MODE_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CHG_CNT",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CHG_HIST_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DFLT_RUN_LVL_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DFLT_RUN_MC_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DFLT_RUN_RMC_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DOC_SET_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ELCTRNC_PCDR_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ELCTRNC_PCDR_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ENGR_CHG_ORDR_NUM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ESIG_TXN_MAP_GRP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "EXPN_PER_UOM_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "EXPN_PER_VAL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "EXPN_TRX_DTTM",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "GSL_WRKF_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ICON_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IS_FRZN_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IS_LD_CARR_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IS_UNLD_CARR_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "KEP_RSRS_ASGNMT_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LBL_PRT_MSG_1_TXT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LBL_PRT_MSG_2_TXT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LBL_TXN_MAP_GRP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MFG_TRX_DTTM",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MAX_PRCS_TIME_VAL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MAX_QUE_TIME_ACTN_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MAX_QUE_TIME_VAL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MIN_PRCS_TIME_VAL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MIN_QUE_TIME_VAL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "NOTES_TXT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "OBJ_TYPE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RECIPE_FILE_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RECIPE_FILE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RSRS_GRP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RSRS_LINE_GRP_AVLBLTY_TXT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RSRS_LINE_GRP_MNT_CHK_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SCHDLNG_DTL_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SETUP_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SETUP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPEC_DESC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPEC_RVSN_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "STS_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "TRNG_REQ_GRP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "USER_DEFIN_STRNG_TXT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VLD_LOT_SMPLG_CMPLT_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VLD_MATL_CNSMPTN_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VLD_PDDC_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VLD_PLC_VERS_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VLD_UDI_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VLD_PCDR_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VLD_PCDR_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WARN_QUE_TIME_VAL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WIP_MSG_DEF_MGR_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "14ccd39c-f412-45d3-87e9-590b37639d51",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "transformations" : [ {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "SRC_SYS_CD",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "'$sourceSystem'"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_pk_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'SPEC_ID',SPEC_ID))"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_pk_md5_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'SPEC_ID',SPEC_ID)))"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_l1_upt_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "current_timestamp()"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        } ]
+      }
+    },
+    "cf27b0a7-75a4-4f31-b866-d3e50e0d4077" : {
+      "id" : "cf27b0a7-75a4-4f31-b866-d3e50e0d4077",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "sql_MES_MD_SPEC",
+        "slug" : "sql_MES_MD_SPEC",
+        "x" : -1060,
+        "y" : -400,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "c7878f3c-1adb-4b05-9460-63a9719cc436",
+          "slug" : "out0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "SRC_SYS_CD",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPEC_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "OPR_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPEC_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ALLW_OVRDS_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ALLW_RWRK_TO_TXT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ALWAYS_OVRD_EXPN_DT_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ASGN_UDI_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ASGN_UDI_1_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BP_SCALE_GRP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CARR_AUTO_MODE_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CHG_CNT",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CHG_HIST_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DFLT_RUN_LVL_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DFLT_RUN_MC_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DFLT_RUN_RMC_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DOC_SET_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ELCTRNC_PCDR_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ELCTRNC_PCDR_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ENGR_CHG_ORDR_NUM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ESIG_TXN_MAP_GRP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "EXPN_PER_UOM_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "EXPN_PER_VAL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "EXPN_TRX_DTTM",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "GSL_WRKF_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ICON_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IS_FRZN_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IS_LD_CARR_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IS_UNLD_CARR_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "KEP_RSRS_ASGNMT_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LBL_PRT_MSG_1_TXT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LBL_PRT_MSG_2_TXT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LBL_TXN_MAP_GRP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MFG_TRX_DTTM",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MAX_PRCS_TIME_VAL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MAX_QUE_TIME_ACTN_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MAX_QUE_TIME_VAL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MIN_PRCS_TIME_VAL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MIN_QUE_TIME_VAL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "NOTES_TXT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "OBJ_TYPE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RECIPE_FILE_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RECIPE_FILE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RSRS_GRP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RSRS_LINE_GRP_AVLBLTY_TXT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RSRS_LINE_GRP_MNT_CHK_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SCHDLNG_DTL_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SETUP_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SETUP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPEC_DESC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPEC_RVSN_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "STS_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "TRNG_REQ_GRP_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "USER_DEFIN_STRNG_TXT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VLD_LOT_SMPLG_CMPLT_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VLD_MATL_CNSMPTN_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VLD_PDDC_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VLD_PLC_VERS_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VLD_UDI_IND",
+              "type" : "boolean",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VLD_PCDR_BASE_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VLD_PCDR_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WARN_QUE_TIME_VAL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WIP_MSG_DEF_MGR_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true
+      },
+      "properties" : {
+        "script" : "out0 = spark.sql(f\"\"\"\n    SELECT '{Config.sourceSystem}' AS SRC_SYS_CD\n, TRIM(SPEC.SPECID) as SPEC_ID\n, TRIM(SPEC.OPERATIONID) as OPR_ID\n, TRIM(SPEC.SPECBASEID) as SPEC_BASE_ID\n, CAST(SPEC.ALLOWOVERRIDES as BOOLEAN ) as ALLW_OVRDS_IND\n, TRIM(SPEC.ALLOWREWORKTO) as ALLW_RWRK_TO_TXT\n, CAST(NULL AS BOOLEAN) as ALWAYS_OVRD_EXPN_DT_IND\n, CAST(NULL AS BOOLEAN) as ASGN_UDI_IND\n, CAST(NULL AS BOOLEAN) as ASGN_UDI_1_IND\n, CAST(NULL AS STRING) as BP_SCALE_GRP_ID\n, CAST(NULL AS STRING) as CARR_AUTO_MODE_CD\n, INT(SPEC.CHANGECOUNT) as CHG_CNT\n, TRIM(SPEC.CHANGEHISTORYID) as CHG_HIST_ID\n, CAST(NULL AS STRING) as DFLT_RUN_LVL_ID\n, CAST(NULL AS STRING) as DFLT_RUN_MC_BASE_ID\n, CAST(NULL AS STRING) as DFLT_RUN_RMC_ID\n, TRIM(SPEC.DOCUMENTSETID) as DOC_SET_ID\n, TRIM(SPEC.ELECTRONICPROCEDUREID) as ELCTRNC_PCDR_ID\n, TRIM(SPEC.ELECTRONICPROCEDUREBASEID) as ELCTRNC_PCDR_BASE_ID\n, TRIM(SPEC.ECO) as ENGR_CHG_ORDR_NUM\n, CAST(NULL AS STRING) as ESIG_TXN_MAP_GRP_ID\n, CAST(NULL AS STRING) as EXPN_PER_UOM_CD\n, CAST(NULL AS STRING) as EXPN_PER_VAL\n, CAST(NULL AS TIMESTAMP) as EXPN_TRX_DTTM\n, CAST(NULL AS STRING) as GSL_WRKF_ID\n, TRIM(SPEC.ICONID) as ICON_ID\n, CAST(SPEC.ISFROZEN as BOOLEAN ) as IS_FRZN_IND\n, CAST(NULL AS BOOLEAN) as IS_LD_CARR_IND\n, CAST(NULL AS BOOLEAN) as IS_UNLD_CARR_IND\n, CAST(NULL AS BOOLEAN) as KEP_RSRS_ASGNMT_IND\n, CAST(NULL AS STRING) as LBL_PRT_MSG_1_TXT\n, CAST(NULL AS STRING) as LBL_PRT_MSG_2_TXT\n, CAST(NULL AS STRING) as LBL_TXN_MAP_GRP_ID\n, CAST(NULL AS TIMESTAMP) as MFG_TRX_DTTM\n, TRIM(SPEC.ccfMaxProcessTime) as MAX_PRCS_TIME_VAL\n, TRIM(SPEC.MAXQUEUETIMEACTION) as MAX_QUE_TIME_ACTN_CD\n, TRIM(SPEC.MAXQUEUETIME) as MAX_QUE_TIME_VAL\n, TRIM(SPEC.ccfMinProcessTime) as MIN_PRCS_TIME_VAL\n, TRIM(SPEC.ccfMinQueueTime) as MIN_QUE_TIME_VAL\n, TRIM(SPEC.NOTES) as NOTES_TXT\n, TRIM(SPEC.CDOTYPEID) as OBJ_TYPE_ID\n, TRIM(SPEC.RECIPEFILEBASEID) as RECIPE_FILE_BASE_ID\n, TRIM(SPEC.RECIPEFILEID) as RECIPE_FILE_ID\n, TRIM(SPEC.RESOURCEGROUPID) as RSRS_GRP_ID\n, TRIM(SPEC.ccfResourceLineGroupAvailabili) as RSRS_LINE_GRP_AVLBLTY_TXT\n, CAST(SPEC.ccfResourceLineGroupMaintChk as BOOLEAN ) as RSRS_LINE_GRP_MNT_CHK_IND\n, TRIM(SPEC.SCHEDULINGDETAILID) as SCHDLNG_DTL_ID\n, TRIM(SPEC.SETUPBASEID) as SETUP_BASE_ID\n, TRIM(SPEC.SETUPID) as SETUP_ID\n, TRIM(SPEC.DESCRIPTION) as SPEC_DESC\n, TRIM(SPEC.SPECREVISION) as SPEC_RVSN_ID\n, TRIM(SPEC.STATUS) as STS_CD\n, TRIM(SPEC.TRAININGREQGROUPID) as TRNG_REQ_GRP_ID\n, CAST(NULL AS STRING) as USER_DEFIN_STRNG_TXT\n, CAST(NULL AS BOOLEAN) as VLD_LOT_SMPLG_CMPLT_IND\n, CAST(SPEC.VALIDATEMATERIALCONSUMPTION as BOOLEAN ) as VLD_MATL_CNSMPTN_IND\n, CAST(NULL AS BOOLEAN) as VLD_PDDC_IND\n, CAST(NULL AS BOOLEAN) as VLD_PLC_VERS_IND\n, CAST(NULL AS BOOLEAN) as VLD_UDI_IND\n, CAST(NULL AS STRING) as VLD_PCDR_BASE_ID\n, CAST(NULL AS STRING) as VLD_PCDR_ID\n, TRIM(SPEC.WARNINGQUEUETIME) as WARN_QUE_TIME_VAL\n, TRIM(SPEC.WIPMSGDEFMGRID) as WIP_MSG_DEF_MGR_ID\nFROM  {Config.sourceDatabase}.SPEC as SPEC WHERE SPEC._deleted_ =  'F'\n  \n \n\"\"\")",
+        "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+        "scriptMethodFooter" : "    return out0"
       }
     }
-
-
-    
+  },
+  "ports" : {
+    "inputs" : [ ],
+    "outputs" : [ ],
+    "selectedInputFields" : [ ],
+    "isCustomOutputSchema" : false
+  }
+}
