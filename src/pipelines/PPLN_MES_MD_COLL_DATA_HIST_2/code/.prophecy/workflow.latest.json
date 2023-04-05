@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "dev_md_l1"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "mej"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "mej"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MES_MD_COLL_DATA_HIST_2"
+      },
+      "connections" : [ {
+        "id" : "c4a7ca8c-9f70-40dd-8790-c0f27dbcdc2b",
+        "source" : "266fee6c-86ca-4e91-b523-b8666e03d449",
+        "sourcePort" : "553f0303-1710-4f94-a9a9-87a376eb67a0",
+        "target" : "6cb74681-28d3-45f6-8a71-720d3f2fdb22",
+        "targetPort" : "779a8b40-d2f7-49f6-86d9-b13f253040b0"
+      }, {
+        "id" : "f58a6e97-4ccf-4c9f-91aa-90f5c4dae190",
+        "source" : "4c5c85f5-fac5-4e6e-a7cf-dec543a4bee8",
+        "sourcePort" : "126a0195-b448-43cd-aa87-abd4c65a08ad",
+        "target" : "266fee6c-86ca-4e91-b523-b8666e03d449",
+        "targetPort" : "36c7d6b6-8551-4835-9ea7-18ee12063b53"
+      } ],
+      "processes" : {
+        "6cb74681-28d3-45f6-8a71-720d3f2fdb22" : {
+          "id" : "6cb74681-28d3-45f6-8a71-720d3f2fdb22",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MES_MD_COLL_DATA_HIST",
+            "slug" : "MES_MD_COLL_DATA_HIST",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "779a8b40-d2f7-49f6-86d9-b13f253040b0",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MES_MD_COLL_DATA_HIST"
+          }
+        },
+        "266fee6c-86ca-4e91-b523-b8666e03d449" : {
+          "id" : "266fee6c-86ca-4e91-b523-b8666e03d449",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "36c7d6b6-8551-4835-9ea7-18ee12063b53",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "553f0303-1710-4f94-a9a9-87a376eb67a0",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'COLL_DATA_HIST_ID',COLL_DATA_HIST_ID))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'COLL_DATA_HIST_ID',COLL_DATA_HIST_ID)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "4c5c85f5-fac5-4e6e-a7cf-dec543a4bee8" : {
+          "id" : "4c5c85f5-fac5-4e6e-a7cf-dec543a4bee8",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MES_MD_COLL_DATA_HIST",
+            "slug" : "sql_MES_MD_COLL_DATA_HIST",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "126a0195-b448-43cd-aa87-abd4c65a08ad",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT '{Config.sourceSystem}' AS SRC_SYS_CD\n, TRIM(COLLECTDATAHISTORY.COLLECTDATAHISTORYID) as COLL_DATA_HIST_ID\n, TRIM(COLLECTDATAHISTORY.HISTORYMAINLINEID) as HIST_MNLINE_ID\n, INT(COLLECTDATAHISTORY.CHANGECOUNT) as CHG_CNT\n, TRIM(COLLECTDATAHISTORY.DATACOLLECTIONDEFID) as DATA_CLCT_DEF_ID\n, CAST(NULL AS STRING) as EXPT_IMPT_KEY_VAL\n, TRIM(COLLECTDATAHISTORY.HISTORYID) as HIST_ID\n, TRIM(COLLECTDATAHISTORY.cscMachineToReadId) as MACH_TO_READ_ID\n, TRIM(COLLECTDATAHISTORY.cscMachineToWriteId) as MACH_TO_WRITE_ID\n, TRIM(COLLECTDATAHISTORY.CDOTYPEID) as OBJ_TYPE_ID\n, TRIM(COLLECTDATAHISTORY.RESOURCEID) as RSRS_ID\n, TRIM(COLLECTDATAHISTORY.TXNID) as TXN_ID\nFROM {Config.sourceDatabase}.COLLECTDATAHISTORY as COLLECTDATAHISTORY WHERE COLLECTDATAHISTORY._deleted_ =  'F'  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    
