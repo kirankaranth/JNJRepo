@@ -5846,7 +5846,7 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "lZwXqfZpbZMY5CN5Upwya$$TcdJWVYftJbhawjTvp0N8##VOLUM", "lZwXqfZpbZMY5CN5Upwya$$TcdJWVYftJbhawjTvp0N8##BREIT", "lZwXqfZpbZMY5CN5Upwya$$TcdJWVYftJbhawjTvp0N8##MATNR", "lZwXqfZpbZMY5CN5Upwya$$TcdJWVYftJbhawjTvp0N8##LAENG", "lZwXqfZpbZMY5CN5Upwya$$TcdJWVYftJbhawjTvp0N8##MEINH", "lZwXqfZpbZMY5CN5Upwya$$TcdJWVYftJbhawjTvp0N8##GEWEI", "lZwXqfZpbZMY5CN5Upwya$$TcdJWVYftJbhawjTvp0N8##UMREN", "lZwXqfZpbZMY5CN5Upwya$$TcdJWVYftJbhawjTvp0N8##EAN11", "lZwXqfZpbZMY5CN5Upwya$$TcdJWVYftJbhawjTvp0N8##UMREZ", "lZwXqfZpbZMY5CN5Upwya$$TcdJWVYftJbhawjTvp0N8##MEABM", "lZwXqfZpbZMY5CN5Upwya$$TcdJWVYftJbhawjTvp0N8##NUMTP", "lZwXqfZpbZMY5CN5Upwya$$TcdJWVYftJbhawjTvp0N8##HOEHE", "lZwXqfZpbZMY5CN5Upwya$$TcdJWVYftJbhawjTvp0N8##BRGEW" ],
+        "columnsSelector" : [ "lZwXqfZpbZMY5CN5Upwya$$TcdJWVYftJbhawjTvp0N8##VOLUM", "lZwXqfZpbZMY5CN5Upwya$$TcdJWVYftJbhawjTvp0N8##BREIT", "lZwXqfZpbZMY5CN5Upwya$$TcdJWVYftJbhawjTvp0N8##MATNR", "lZwXqfZpbZMY5CN5Upwya$$TcdJWVYftJbhawjTvp0N8##LAENG", "lZwXqfZpbZMY5CN5Upwya$$TcdJWVYftJbhawjTvp0N8##MEINH", "lZwXqfZpbZMY5CN5Upwya$$TcdJWVYftJbhawjTvp0N8##GEWEI", "lZwXqfZpbZMY5CN5Upwya$$TcdJWVYftJbhawjTvp0N8##UMREN", "lZwXqfZpbZMY5CN5Upwya$$TcdJWVYftJbhawjTvp0N8##_upt_", "lZwXqfZpbZMY5CN5Upwya$$TcdJWVYftJbhawjTvp0N8##EAN11", "lZwXqfZpbZMY5CN5Upwya$$TcdJWVYftJbhawjTvp0N8##UMREZ", "lZwXqfZpbZMY5CN5Upwya$$TcdJWVYftJbhawjTvp0N8##MEABM", "lZwXqfZpbZMY5CN5Upwya$$TcdJWVYftJbhawjTvp0N8##NUMTP", "lZwXqfZpbZMY5CN5Upwya$$TcdJWVYftJbhawjTvp0N8##HOEHE", "lZwXqfZpbZMY5CN5Upwya$$TcdJWVYftJbhawjTvp0N8##BRGEW" ],
         "transformations" : [ {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
@@ -6126,6 +6126,134 @@
             "expression" : {
               "format" : "sql",
               "expression" : "CASE WHEN length(Trim(EAN11)) = 0 THEN '' ELSE Concat(Substring('00000000000000',1,14-length(Trim(EAN11))),Trim(EAN11)) END"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "DAI_ETL_ID",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "'$DAI_ETL_ID'"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "DAI_CRT_DTTM",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "current_timestamp()"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "DAI_UPT_DTTM",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "current_timestamp()"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_l0_upt_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "_upt_"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_pk_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'ALT_UOM_CD',ALT_UOM_CD))"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_pk_md5_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'ALT_UOM_CD',ALT_UOM_CD)))"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_l1_upt_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "current_timestamp()"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_deleted_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "'F'"
             }
           },
           "DropColumn" : {

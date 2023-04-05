@@ -24,5 +24,16 @@ def SchemaTransform_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("LGTH_MEAS", col("LAENG").cast(DecimalType(18, 4)))\
         .withColumn("HGHT_MEAS", col("HOEHE").cast(DecimalType(18, 4)))\
         .withColumn("VOL_MEAS", col("VOLUM").cast(DecimalType(18, 4)))\
-        .withColumn("GTIN_NUM_HRMZD", when((length(trim(col("EAN11"))) == lit(0)), lit(""))\
-        .otherwise(concat(expr("substring('00000000000000', 1, (14 - length(trim(EAN11))))"), trim(col("EAN11")))))
+        .withColumn(
+          "GTIN_NUM_HRMZD",
+          when((length(trim(col("EAN11"))) == lit(0)), lit(""))\
+            .otherwise(concat(expr("substring('00000000000000', 1, (14 - length(trim(EAN11))))"), trim(col("EAN11"))))
+        )\
+        .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
+        .withColumn("DAI_CRT_DTTM", current_timestamp())\
+        .withColumn("DAI_UPT_DTTM", current_timestamp())\
+        .withColumn("_l0_upt_", col("_upt_"))\
+        .withColumn("_pk_", to_json(expr("named_struct('SRC_SYS_CD', SRC_SYS_CD, 'ALT_UOM_CD', ALT_UOM_CD)")))\
+        .withColumn("_pk_md5_", md5(to_json(expr("named_struct('SRC_SYS_CD', SRC_SYS_CD, 'ALT_UOM_CD', ALT_UOM_CD)"))))\
+        .withColumn("_l1_upt_", current_timestamp())\
+        .withColumn("_deleted_", lit("F"))
