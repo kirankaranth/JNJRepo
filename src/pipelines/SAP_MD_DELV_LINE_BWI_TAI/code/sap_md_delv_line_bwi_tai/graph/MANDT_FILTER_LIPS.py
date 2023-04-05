@@ -5,5 +5,5 @@ from prophecy.libs import typed_lit
 from sap_md_delv_line_bwi_tai.config.ConfigStore import *
 from sap_md_delv_line_bwi_tai.udfs.UDFs import *
 
-def DS_SAP_02_LIKP(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM {Config.sourceDatabase}.likp WHERE _deleted_ = 'F'")
+def MANDT_FILTER_LIPS(spark: SparkSession, in0: DataFrame) -> DataFrame:
+    return in0.filter((col("MANDT") == lit(Config.MANDT)))
