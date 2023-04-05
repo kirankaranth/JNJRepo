@@ -52,7 +52,7 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
         .withColumn("DAI_UPDT_DTTM", current_timestamp())\
-        .withColumn("_l0_upt", col("_upt_"))\
+        .withColumn("_l0_upt_", col("_upt_"))\
         .withColumn(
           "_pk_",
           to_json(
