@@ -70,6 +70,7 @@ def SET_FIELD_ORDER_REFORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("NET_VAL_AMT"), 
         col("PROD_HIER_CD"), 
         col("MATL_GRP_4"), 
+        col("MATL_GRP_4_DESC"), 
         col("DSTR_CHNL_CD"), 
         col("ITM_BILL_BLK_STS_CD"), 
         col("ITM_OVRL_DELV_BLK_STS_CD"), 

@@ -83,6 +83,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("NET_VAL_AMT", trim(col("NETWR")).cast(DecimalType(18, 4)))\
         .withColumn("PROD_HIER_CD", trim(col("PRODH")))\
         .withColumn("MATL_GRP_4", trim(col("MVGR4")))\
+        .withColumn("MATL_GRP_4_DESC", trim(col("BEZEI")))\
         .withColumn("DSTR_CHNL_CD", trim(col("VTWEG")))\
         .withColumn("ITM_BILL_BLK_STS_CD", trim(col("FSSTA")))\
         .withColumn("ITM_OVRL_DELV_BLK_STS_CD", trim(col("LSSTA")))\
