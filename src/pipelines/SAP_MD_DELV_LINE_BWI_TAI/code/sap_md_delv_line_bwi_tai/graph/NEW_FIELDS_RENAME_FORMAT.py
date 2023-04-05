@@ -50,7 +50,6 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("INTCO_BILL_STS_CD", trim(col("FKIVP")))\
         .withColumn("MATL_NUM", trim(col("MATNR")))\
         .withColumn("ICMPT_STS_CD", trim(col("UVALL")))\
-        .withColumn("NUM_OF_CNTNRS_CNT", trim(col("ZZCONTAINER")))\
         .withColumn("ORDR_BILL_STS_CD", trim(col("FKSAA")))\
         .withColumn("PACK_ICMPT_STS_CD", trim(col("UVPAK")))\
         .withColumn("PACK_STS_CD", trim(col("PKSTA")))\
