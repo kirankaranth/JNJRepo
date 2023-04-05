@@ -6,4 +6,4 @@ from sap_md_delv_line_fsn_geu_hcs_mrs_p01_svs_atl.config.ConfigStore import *
 from sap_md_delv_line_fsn_geu_hcs_mrs_p01_svs_atl.udfs.UDFs import *
 
 def DS_SAP_02_TVM4T(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM fsn.tvm4t WHERE _deleted_ = 'F' and SPRAS = 'E'")
+    return spark.sql(f"SELECT * FROM {Config.sourceDatabase}.tvm4t WHERE _deleted_ = 'F' and SPRAS = 'E'")
