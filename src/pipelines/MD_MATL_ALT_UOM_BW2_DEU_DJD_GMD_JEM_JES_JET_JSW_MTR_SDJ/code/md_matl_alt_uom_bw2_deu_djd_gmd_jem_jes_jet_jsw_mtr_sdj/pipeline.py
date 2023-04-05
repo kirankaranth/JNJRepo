@@ -12,6 +12,7 @@ def pipeline(spark: SparkSession) -> None:
     df_SELECT_FIELDS_1 = SELECT_FIELDS_1(spark, df_DS_JDE_01_F4101)
     df_SELECT_FIELDS = SELECT_FIELDS(spark, df_DS_JDE_01_F41002)
     df_Join_1 = Join_1(spark, df_SELECT_FIELDS, df_SELECT_FIELDS_1)
+    df_SchemaTransform_1 = SchemaTransform_1(spark, df_Join_1)
 
 def main():
     spark = SparkSession.builder\
