@@ -23,7 +23,7 @@ class Config(ConfigBase):
             MANDT: str="100",
             sourceDatabase: str="bbl",
             DAI_ETL_ID: int=0,
-            targetSchema: str="l1_md_prophecy",
+            targetSchema: str="dev_md_l1",
             sourceTable: str="eket",
             configDatabase: str=" ",
             **kwargs
