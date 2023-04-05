@@ -10,10 +10,9 @@ ${Prod_env}           prd
 *** Keywords ***
 I have access to Databricks database
     [Arguments]      ${databricks_name}
-    Successfully logging in to the Databricks platform     ${databricks_name}
+    Get connection to Databricks     ${databricks_name}
 
-
-Successfully logging in to the Databricks platform
+Get connection to Databricks
     [Arguments]       ${databricks_name}
     Run keyword if    '${databricks_name}'=='view'    Check the user has successful connection to Databricks views
     Run keyword if    '${databricks_name}'=='table'   Check the user has successful connection to Databricks
@@ -60,11 +59,12 @@ Validate that the target table contains required number of columns
     log test to report per step     ${jira_id_tag}
 
 I expect that table contains only unique primary keys
-    Validate Uniqueness Of The Primary Keys Are As Expected For The Curated Table    ${PRIMARY_KEYS}
+    [Arguments]               ${table}  ${PRIMARY_KEYS}
+    Validate Uniqueness Of The Primary Keys Are As Expected For The Curated Table    ${table}    ${PRIMARY_KEYS}
     Log    Primary key list:${PRIMARY_KEYS}
 
 Validate Uniqueness Of The Primary Keys Are As Expected For The Curated Table
-    [Arguments]               ${Primary_Key_List}
+    [Arguments]               ${table}  ${Primary_Key_List}
     ${Primary_Key_List}       Convert To String     ${Primary_Key_List}
     ${Primary_Key_List}       Remove String    ${Primary_Key_List}    {    }   '    [    ]
     ${primary_key_check}      return_primary_check    ${system}.${table}    ${Primary_Key_List}
@@ -676,7 +676,84 @@ Data not available
      Run Keyword And Continue On Failure     Should Be Equal As Strings   ${execution_status}     PASS
      set test variable   ${data}  FAIL
 
-# Templates to be used for UTC, Whitespaces, Nulls or Hashtags
+# TESTS FOR VIEWS VALIDATION
+I expect that the target view has correct number of columns
+    Validate that the target view contains required number of columns    ${COLUMN_COUNT}
+    Log     Required column number: ${COLUMN_COUNT}
+
+Validate that the target view contains required number of columns
+    [Arguments]     ${number_of_columns}
+    ${columns}=    get columns from view   ${system}.${table}
+    ${column_count}=   get length  ${columns}
+    Add result to report   Validate that the target view: ${system}.${view} contains required number of columns
+    Add result to report   Expected columns number : ${number_of_columns}
+    Add result to report   Actual columns number : ${column_count}
+    ${status}       Run Keyword And Return Status    Should be equal as numbers     ${column_count}     ${number_of_columns}
+    Run keyword if  ${status}==True       Add result to report    Test PASSED : The ${system}.${view} contains required columns number ${number_of_columns}
+    Run keyword if  ${status}==False      Add result to report    !Test FAILED: The ${system}.${view} expected ${number_of_columns} columns but contains ${column_count} columns
+    Run keyword if  ${status}==False      Set test variable    ${execution_status}    FAIL
+    log test to report per step     ${jira_id_tag}
+
+I expect that the row count of view should match the underlying table
+    The rowcounts of view and underlying table are the same
+
+The rowcounts of view and underlying table are the same
+    ${table_count}=    return count of table  ${underlying_l1_db_for_vw}.${underlying_table}
+    ${view_count}=     return count of table  ${system}.${table}
+    run keyword     add result to report    Expected = ${table_count}
+    run keyword if  ${table_count}!=${view_count}     set test variable   ${execution_status}  FAIL
+    run keyword if  ${table_count}==${view_count}     add result to report  Test Passed : View ${system}.${table} contains the same number of rows as table ${underlying_l1_db_for_vw}.${underlying_table}
+    run keyword if  "${execution_status}"=="FAIL"  add result to report      Test Failed: View ${system}.${table} does not contain the same number of rows as table ${underlying_l1_db_for_vw}.${underlying_table}
+    run keyword and continue on failure     should be equal as strings  ${execution_status}  PASS
+    log test to report per step     ${jira_id_tag}
+
+Validate that columns contain all predefined values for list of sources
+    [Arguments]    ${source_list}    ${column_predef_val_list}   ${target}     ${databrick_name}
+    Given I have access to Databricks database    ${databrick_name}
+    When I check that the requirements are implemented correctly
+    Then I check that columns contain all predefined values for list of sources    ${source_list}    ${column_predef_val_list}   ${target}
+
+I check that columns contain all predefined values for list of sources
+    [Arguments]    ${source_list}    ${column_predef_val_list}   ${target}
+    FOR  ${i}  IN  @{source_system}
+        ${alias}   get from dictionary     ${TABLE_ALIAS}     ${i}
+        set test variable    ${alias}
+        FOR  ${j}  IN  @{column_predef_val_list}
+        ${predef_val_list}   Convert to string   ${j}
+        ${source}=    Fetch From Left     ${predef_val_list}    [
+        ${value}=     Fetch From Right    ${predef_val_list}    [
+        ${value}      Remove String    ${value}    	]
+        ${result}  run keyword and return status        Should contain   ${source}     ${alias}
+        run keyword if    ${result}==True     Check predifined value for specific source    ${alias}   ${value}    ${target}
+        Exit For Loop IF    ${result}==True
+        END
+    END
+    log test to report per step     ${jira_id_tag}
+
+Check predifined value for specific source
+    [Arguments]   ${alias}    ${ColumnValue}    ${target}
+    ${column}=    Fetch From Left    ${ColumnValue}    :
+    ${value}=     Fetch From Right   ${ColumnValue}    :
+    run Keyword If    ${Connection}==False and '${databrick_connection_Type}'=='Table'    Connect to CDL Databricks    ELSE IF    ${Connection}==False and '${databrick_connection_Type}'=='View'    Connect to CDL VIEW Databricks
+    Set test variable    ${column_name}   ${column}
+    ${value}=     Remove String    ${value}    }
+    ${value_is_list}=    run keyword and return status   Should Contain      ${value}   [
+    run keyword if  ${value_is_list}==True     Get count of table with multiple predefined values     ${alias}    ${column}    ${value}    ${target}
+    run keyword if  ${value_is_list}==False    Get count of table with single predefined value        ${alias}   ${column}     ${value}    ${target}
+
+# Templates
+Validate that table has the correct number of columns
+    [Arguments]     ${table}      ${COLUMN_COUNT}    ${databrick_name}
+    Given I have access to Databricks database     ${databrick_name}
+    When I check that the requirements are implemented correctly
+    Then I expect that the target table contains required number of columns        ${table}      ${COLUMN_COUNT}
+
+Validate that the curated table contains unique primary keys
+    [Arguments]     ${table}     ${PRIMARY_KEYS}    ${databrick_name}
+    Given I have access to Databricks database      ${databrick_name}
+    When I check that the requirements are implemented correctly
+    Then I expect that table contains only unique primary keys     ${table}     ${PRIMARY_KEYS}
+
 Validate that the columns marked as Follow UTC contain a date in UTC format
     [Arguments]    ${sources}     ${columns}    ${target}   ${databricks_name}
     Given I have access to Databricks database     ${databricks_name}
@@ -744,67 +821,3 @@ Validate that columns contain predefined values or values from original table
     When I check that the requirements are implemented correctly
     Then I expect that the columns contain predefined values or values from original table     ${source_list}    ${column_predef_val_list}     ${target}
 
-# TESTS FOR VIEWS VALIDATION
-I expect that the target view has correct number of columns
-    Validate that the target view contains required number of columns    ${COLUMN_COUNT}
-    Log     Required column number: ${COLUMN_COUNT}
-
-Validate that the target view contains required number of columns
-    [Arguments]     ${number_of_columns}
-    ${columns}=    get columns from view   ${system}.${table}
-    ${column_count}=   get length  ${columns}
-    Add result to report   Validate that the target view: ${system}.${view} contains required number of columns
-    Add result to report   Expected columns number : ${number_of_columns}
-    Add result to report   Actual columns number : ${column_count}
-    ${status}       Run Keyword And Return Status    Should be equal as numbers     ${column_count}     ${number_of_columns}
-    Run keyword if  ${status}==True       Add result to report    Test PASSED : The ${system}.${view} contains required columns number ${number_of_columns}
-    Run keyword if  ${status}==False      Add result to report    !Test FAILED: The ${system}.${view} expected ${number_of_columns} columns but contains ${column_count} columns
-    Run keyword if  ${status}==False      Set test variable    ${execution_status}    FAIL
-    log test to report per step     ${jira_id_tag}
-
-I expect that the row count of view should match the underlying table
-    The rowcounts of view and underlying table are the same
-
-The rowcounts of view and underlying table are the same
-    ${table_count}=    return count of table  ${underlying_l1_db_for_vw}.${underlying_table}
-    ${view_count}=     return count of table  ${system}.${table}
-    run keyword     add result to report    Expected = ${table_count}
-    run keyword if  ${table_count}!=${view_count}     set test variable   ${execution_status}  FAIL
-    run keyword if  ${table_count}==${view_count}     add result to report  Test Passed : View ${system}.${table} contains the same number of rows as table ${underlying_l1_db_for_vw}.${underlying_table}
-    run keyword if  "${execution_status}"=="FAIL"  add result to report      Test Failed: View ${system}.${table} does not contain the same number of rows as table ${underlying_l1_db_for_vw}.${underlying_table}
-    run keyword and continue on failure     should be equal as strings  ${execution_status}  PASS
-    log test to report per step     ${jira_id_tag}
-
-Validate that columns contain all predefined values for list of sources
-    [Arguments]    ${source_list}    ${column_predef_val_list}   ${target}     ${databrick_name}
-    Given I have access to Databricks database    ${databrick_name}
-    When I check that the requirements are implemented correctly
-    Then I check that columns contain all predefined values for list of sources    ${source_list}    ${column_predef_val_list}   ${target}
-
-I check that columns contain all predefined values for list of sources
-    [Arguments]    ${source_list}    ${column_predef_val_list}   ${target}
-    FOR  ${i}  IN  @{source_system}
-        ${alias}   get from dictionary     ${TABLE_ALIAS}     ${i}
-        set test variable    ${alias}
-        FOR  ${j}  IN  @{column_predef_val_list}
-        ${predef_val_list}   Convert to string   ${j}
-        ${source}=    Fetch From Left     ${predef_val_list}    [
-        ${value}=     Fetch From Right    ${predef_val_list}    [
-        ${value}      Remove String    ${value}    	]
-        ${result}  run keyword and return status        Should contain   ${source}     ${alias}
-        run keyword if    ${result}==True     Check predifined value for specific source    ${alias}   ${value}    ${target}
-        Exit For Loop IF    ${result}==True
-        END
-    END
-    log test to report per step     ${jira_id_tag}
-
-Check predifined value for specific source
-    [Arguments]   ${alias}    ${ColumnValue}    ${target}
-    ${column}=    Fetch From Left    ${ColumnValue}    :
-    ${value}=     Fetch From Right   ${ColumnValue}    :
-    run Keyword If    ${Connection}==False and '${databrick_connection_Type}'=='Table'    Connect to CDL Databricks    ELSE IF    ${Connection}==False and '${databrick_connection_Type}'=='View'    Connect to CDL VIEW Databricks
-    Set test variable    ${column_name}   ${column}
-    ${value}=     Remove String    ${value}    }
-    ${value_is_list}=    run keyword and return status   Should Contain      ${value}   [
-    run keyword if  ${value_is_list}==True     Get count of table with multiple predefined values     ${alias}    ${column}    ${value}    ${target}
-    run keyword if  ${value_is_list}==False    Get count of table with single predefined value        ${alias}   ${column}     ${value}    ${target}
