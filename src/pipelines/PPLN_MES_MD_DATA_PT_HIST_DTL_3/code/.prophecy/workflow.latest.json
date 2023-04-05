@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "dev_md_l1"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "meb"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "meb"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MES_MD_DATA_PT_HIST_DTL_3"
+      },
+      "connections" : [ {
+        "id" : "53c484ae-fe5f-46dc-a4ae-4c518b935210",
+        "source" : "4f6db80f-8a75-4f82-b389-9d8f89732610",
+        "sourcePort" : "ec40118a-f7fc-4eb6-968f-650e31549a13",
+        "target" : "49439ed9-aecc-4ff5-9ff5-703ea64903bf",
+        "targetPort" : "1b8b96b5-2217-4ae9-8e27-3dc7770b4216"
+      }, {
+        "id" : "32ce30df-63aa-48af-abbb-5f6eef4549bd",
+        "source" : "680a99a6-15fd-4ac3-8710-ea894d530346",
+        "sourcePort" : "d5a69b83-fa00-4692-ad77-fdf4e4e040ab",
+        "target" : "4f6db80f-8a75-4f82-b389-9d8f89732610",
+        "targetPort" : "62ad5134-8df2-451a-8529-00174f5b3632"
+      } ],
+      "processes" : {
+        "49439ed9-aecc-4ff5-9ff5-703ea64903bf" : {
+          "id" : "49439ed9-aecc-4ff5-9ff5-703ea64903bf",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MES_MD_DATA_PT_HIST_DTL",
+            "slug" : "MES_MD_DATA_PT_HIST_DTL",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "1b8b96b5-2217-4ae9-8e27-3dc7770b4216",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MES_MD_DATA_PT_HIST_DTL"
+          }
+        },
+        "4f6db80f-8a75-4f82-b389-9d8f89732610" : {
+          "id" : "4f6db80f-8a75-4f82-b389-9d8f89732610",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "62ad5134-8df2-451a-8529-00174f5b3632",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "ec40118a-f7fc-4eb6-968f-650e31549a13",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'DATA_PT_HIST_DTL_ID',DATA_PT_HIST_DTL_ID))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'DATA_PT_HIST_DTL_ID',DATA_PT_HIST_DTL_ID)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "680a99a6-15fd-4ac3-8710-ea894d530346" : {
+          "id" : "680a99a6-15fd-4ac3-8710-ea894d530346",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MES_MD_DATA_PT_HIST_DTL",
+            "slug" : "sql_MES_MD_DATA_PT_HIST_DTL",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "d5a69b83-fa00-4692-ad77-fdf4e4e040ab",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT\n   '{Config.sourceSystem}' AS SRC_SYS_CD\n, TRIM(DataPointHistoryDetail.DATAPOINTHISTORYDETAILID) as DATA_PT_HIST_DTL_ID\n, TRIM(DataPointHistoryDetail.DATACOLLECTIONDEFID) as DATA_CLCT_DEF_ID\n, TRIM(DataPointHistoryDetail.DATAPOINTID) as DATA_PT_ID\n, TRIM(DataPointHistoryDetail.DATAPOINTHISTORYID) as DATA_PT_HIST_ID\n, TRIM(DataPointHistoryDetail.ATTRIBUTENAME) as ATTR_NM\n, TRIM(DataPointHistoryDetail.BOOLEANVALUE) as BOOL_VAL\n, INT(DataPointHistoryDetail.CHANGECOUNT) as CHG_CNT\n, TRIM(DataPointHistoryDetail.COMMENTS) as COMT_TXT\n, TRIM(DataPointHistoryDetail.DATANAME) as DATA_NM\n, TRIM(DataPointHistoryDetail.DATATYPE) as DATA_TYPE_CD\n, TRIM(DataPointHistoryDetail.DATAVALUE) as DATA_VAL\n, TRIM(DataPointHistoryDetail.DECIMALVALUE) as DEC_VAL\n, TRIM(DataPointHistoryDetail.ENUMERATIONVALUE) as ENUM_VAL\n, CAST(NULL AS STRING) as ETH_QRY_NM\n, CAST(NULL AS STRING) as ETH_QRY_TYPE_CD\n, TRIM(DataPointHistoryDetail.ExportImportKey) as EXPT_IMPT_KEY_VAL\n, TRIM(DataPointHistoryDetail.FIXEDVALUE) as FX_VAL\n, TRIM(DataPointHistoryDetail.FLOATVALUE) as FLOAT_VAL\n, TRIM(DataPointHistoryDetail.HISTORYID) as HIST_ID\n, TRIM(DataPointHistoryDetail.INTEGERVALUE) as INTGR_VAL\n, CAST(DataPointHistoryDetail.ISLIMITOVERRIDE as BOOLEAN ) as IS_LMT_OVRD_IND\n, CAST(DataPointHistoryDetail.ISLIMITOVERRIDEALLOWED as BOOLEAN ) as IS_LMT_OVRD_ALLW_IND\n, CAST(DataPointHistoryDetail.ISLIMITVIOLATION as BOOLEAN ) as IS_LMT_VIOLA_IND\n, CAST(DataPointHistoryDetail.ISREQUIRED as BOOLEAN ) as IS_REQ_IND\n, CAST(DataPointHistoryDetail.ccfIsWarningViolation as BOOLEAN ) as IS_WARN_VIOLA_IND\n, TRIM(DataPointHistoryDetail.LOWERLIMIT) as LWR_LMT_VAL\n, TRIM(DataPointHistoryDetail.ccfLowerWarningLimit) as LWR_WARN_LMT_VAL\n, CAST(DataPointHistoryDetail.MAPTOUSERATTRIBUTE as BOOLEAN ) as MAP_TO_USER_ATTR_IND\n, TRIM(DataPointHistoryDetail.NDOVALUEID) as NDO_VAL_ID\n, TRIM(DataPointHistoryDetail.ccfNominalValue) as NOM_VAL\n, TRIM(DataPointHistoryDetail.CDOTYPEID) as OBJ_TYPE_ID\n, TRIM(DataPointHistoryDetail.OBJECTTYPENAME) as OBJ_TYPE_NM\n, TRIM(DataPointHistoryDetail.ccfQueryName) as QRY_NM\n, TRIM(DataPointHistoryDetail.ccfQueryType) as QRY_TYPE_CD\n, TRIM(DataPointHistoryDetail.RDOVALUEID) as RDO_VAL_ID\n,Case when DataPointHistoryDetail.TIMESTAMPVALUE = '0000000000' then null else to_timestamp(left(DataPointHistoryDetail.TIMESTAMPVALUE ,14),\\\"yyyyMMddHHmmss\\\") end AS TMST_DTTM\n, TRIM(DataPointHistoryDetail.TXNID) as TXN_ID\n, TRIM(DataPointHistoryDetail.UOMID) as UOM_ID\n, TRIM(DataPointHistoryDetail.UPPERLIMIT) as UP_LMT_VAL\n, TRIM(DataPointHistoryDetail.ccfUpperWarningLimit) as UP_WARN_LMT_VAL\n, CAST(NULL AS BOOLEAN) as VLD_LMT_NA_IND\nFROM  {Config.sourceDatabase}.DataPointHistoryDetail as DataPointHistoryDetail\nWHERE DataPointHistoryDetail._deleted_ = 'F'  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    
