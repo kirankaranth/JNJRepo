@@ -13,6 +13,8 @@ def pipeline(spark: SparkSession) -> None:
     df_DS_SAP_01_MARM = DS_SAP_01_MARM(spark)
     df_MANDT = MANDT(spark, df_DS_SAP_01_MARM)
     df_SchemaTransform_1 = SchemaTransform_1(spark, df_MANDT)
+    df_SET_FIELDS = SET_FIELDS(spark, df_SchemaTransform_1)
+    MD_MATL_ALT_UOM(spark, df_SET_FIELDS)
 
 def main():
     spark = SparkSession.builder\
