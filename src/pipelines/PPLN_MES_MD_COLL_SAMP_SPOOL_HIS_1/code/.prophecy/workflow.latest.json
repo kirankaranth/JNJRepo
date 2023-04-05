@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "dev_md_l1"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "mec"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "mec"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MES_MD_COLL_SAMP_SPOOL_HIS_1"
+      },
+      "connections" : [ {
+        "id" : "342e0631-3d7f-43d1-acde-d88ff375c4ef",
+        "source" : "d7214593-c865-42bc-9124-0220e7b18e13",
+        "sourcePort" : "dec05b21-0ef1-4568-8b65-7a37c06765d9",
+        "target" : "ee092396-592c-479c-b96b-63b354a2f197",
+        "targetPort" : "2cab9482-69c5-4760-a1d3-a609b3422b83"
+      }, {
+        "id" : "f83507e1-5c08-425a-86f4-db708e31ce77",
+        "source" : "17125b93-1e30-4a8b-81fc-d26e5a8fbd67",
+        "sourcePort" : "bd12aca2-f922-4a69-b6e8-6b37ca4e92ac",
+        "target" : "d7214593-c865-42bc-9124-0220e7b18e13",
+        "targetPort" : "0e941ff9-6091-48c2-928d-e20a786f602a"
+      } ],
+      "processes" : {
+        "ee092396-592c-479c-b96b-63b354a2f197" : {
+          "id" : "ee092396-592c-479c-b96b-63b354a2f197",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MES_MD_COLL_SAMP_SPOOL_HIS",
+            "slug" : "MES_MD_COLL_SAMP_SPOOL_HIS",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "2cab9482-69c5-4760-a1d3-a609b3422b83",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MES_MD_COLL_SAMP_SPOOL_HIS"
+          }
+        },
+        "d7214593-c865-42bc-9124-0220e7b18e13" : {
+          "id" : "d7214593-c865-42bc-9124-0220e7b18e13",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "0e941ff9-6091-48c2-928d-e20a786f602a",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "dec05b21-0ef1-4568-8b65-7a37c06765d9",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'COLL_SAMP_SPOOL_HIST_ID',COLL_SAMP_SPOOL_HIST_ID))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'COLL_SAMP_SPOOL_HIST_ID',COLL_SAMP_SPOOL_HIST_ID)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "17125b93-1e30-4a8b-81fc-d26e5a8fbd67" : {
+          "id" : "17125b93-1e30-4a8b-81fc-d26e5a8fbd67",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MES_MD_COLL_SAMP_SPOOL_HIS",
+            "slug" : "sql_MES_MD_COLL_SAMP_SPOOL_HIS",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "bd12aca2-f922-4a69-b6e8-6b37ca4e92ac",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT\n  '{Config.sourceSystem}' AS SRC_SYS_CD\n, TRIM(ETHCOLLECTSAMPLESPOOLHISTORY.ETHCOLLECTSAMPLESPOOLHISTORYID) as COLL_SAMP_SPOOL_HIST_ID\n, TRIM(ETHCOLLECTSAMPLESPOOLHISTORY.HISTORYMAINLINEID) as HIST_MNLINE_ID\n, INT(ETHCOLLECTSAMPLESPOOLHISTORY.ETHAMBIENTWRAPS) as AMBNT_WRAPS_CNT\n, TRIM(ETHCOLLECTSAMPLESPOOLHISTORY.ETHANNTEMP) as ANNEALING_TEMP_VAL\n, INT(ETHCOLLECTSAMPLESPOOLHISTORY.ETHANNEALINGWRAPS) as ANNEALING_WRAPS_CNT\n, INT(ETHCOLLECTSAMPLESPOOLHISTORY.CHANGECOUNT) as CHG_CNT\n, CAST(ETHCOLLECTSAMPLESPOOLHISTORY.ETHCLEAN as BOOLEAN ) as CLEAN_IND\n, TRIM(ETHCOLLECTSAMPLESPOOLHISTORY.ETHCOMMENTS) as COMT_TXT\n, TRIM(ETHCOLLECTSAMPLESPOOLHISTORY.EXPORTIMPORTKEY) as EXPT_IMPT_KEY_VAL\n, TRIM(ETHCOLLECTSAMPLESPOOLHISTORY.ETHEXTRUDERID) as EXTRUDER_ID\n, TRIM(ETHCOLLECTSAMPLESPOOLHISTORY.ETHFEEDERSPOOL) as FDR_SPOOL_ID\n, TRIM(ETHCOLLECTSAMPLESPOOLHISTORY.ETHFPMAMBIENTSPEED) as FPM_AMBNT_SPEED_VAL\n, TRIM(ETHCOLLECTSAMPLESPOOLHISTORY.ETHFPMANNEALINGSPEED) as FPM_ANNEALING_SPEED_VAL\n, TRIM(ETHCOLLECTSAMPLESPOOLHISTORY.ETHFPMORSPEED) as FPM_ORNTN_SPEED_VAL\n, TRIM(ETHCOLLECTSAMPLESPOOLHISTORY.HISTORYID) as HIST_ID\n, TRIM(ETHCOLLECTSAMPLESPOOLHISTORY.ETHLINEID) as LINE_ID\n, TRIM(ETHCOLLECTSAMPLESPOOLHISTORY.CDOTYPEID) as OBJ_TYPE_ID\n, CAST(ETHCOLLECTSAMPLESPOOLHISTORY.ETHORBREAKS as BOOLEAN ) as ORNTN_BRKS_IND\n, TRIM(ETHCOLLECTSAMPLESPOOLHISTORY.ETHORLINE) as ORNTN_LINE_NUM\n, TRIM(ETHCOLLECTSAMPLESPOOLHISTORY.ETHORTEMP) as ORNTN_TEMP_VAL\n, INT(ETHCOLLECTSAMPLESPOOLHISTORY.ETHORWRAPS) as ORNTN_WRAPS_CNT\n, TRIM(ETHCOLLECTSAMPLESPOOLHISTORY.TXNID) as TXN_ID\n, TRIM(ETHCOLLECTSAMPLESPOOLHISTORY.USERID) as USRID\nFROM {Config.sourceDatabase}.ETHCOLLECTSAMPLESPOOLHISTORY as ETHCOLLECTSAMPLESPOOLHISTORY\nWhere ETHCOLLECTSAMPLESPOOLHISTORY._deleted_ = 'F'  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    
