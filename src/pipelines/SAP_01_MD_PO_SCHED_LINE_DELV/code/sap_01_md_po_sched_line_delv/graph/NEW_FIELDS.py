@@ -51,4 +51,24 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("BTCH_NUM", trim(col("charg")))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
-        .withColumn("DAI_UPDT_DTTM", current_timestamp())
+        .withColumn("DAI_UPDT_DTTM", current_timestamp())\
+        .withColumn("_l0_upt", col("_upt_"))\
+        .withColumn(
+          "_pk_",
+          to_json(
+            expr(
+              "named_struct('SRC_SYS_CD', SRC_SYS_CD, 'PO_NUM', PO_NUM, 'PO_LINE_NBR', PO_LINE_NBR, 'DELV_SCHED_CNT_NBR', DELV_SCHED_CNT_NBR, 'ORDER_TYPE', ORDER_TYPE, 'ORDER_CO', ORDER_CO, 'ORDER_SUF', ORDER_SUF)"
+            )
+          )
+        )\
+        .withColumn(
+          "_pk_md5_",
+          md5(
+            to_json(
+              expr(
+                "named_struct('SRC_SYS_CD', SRC_SYS_CD, 'PO_NUM', PO_NUM, 'PO_LINE_NBR', PO_LINE_NBR, 'DELV_SCHED_CNT_NBR', DELV_SCHED_CNT_NBR, 'ORDER_TYPE', ORDER_TYPE, 'ORDER_CO', ORDER_CO, 'ORDER_SUF', ORDER_SUF)"
+              )
+            )
+          )
+        )\
+        .withColumn("_l1_upt_", current_timestamp())
