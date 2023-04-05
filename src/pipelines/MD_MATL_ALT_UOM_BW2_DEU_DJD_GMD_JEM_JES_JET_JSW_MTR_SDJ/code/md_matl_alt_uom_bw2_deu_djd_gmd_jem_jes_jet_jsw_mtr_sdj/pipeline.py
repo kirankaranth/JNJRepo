@@ -13,6 +13,8 @@ def pipeline(spark: SparkSession) -> None:
     df_SELECT_FIELDS = SELECT_FIELDS(spark, df_DS_JDE_01_F41002)
     df_Join_1 = Join_1(spark, df_SELECT_FIELDS, df_SELECT_FIELDS_1)
     df_SchemaTransform_1 = SchemaTransform_1(spark, df_Join_1)
+    df_FINAL_SELECT = FINAL_SELECT(spark, df_SchemaTransform_1)
+    MD_MATL_ALT_UOM(spark, df_FINAL_SELECT)
 
 def main():
     spark = SparkSession.builder\

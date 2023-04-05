@@ -22,8 +22,8 @@ class Config(ConfigBase):
             sourceSystem: str="gmd",
             targetSchema: str="dev_md_l1",
             DBNAME: str="gmd",
-            DBTABLE: str="f41002",
-            DBTABLE1: str="f4101",
+            DBTABLE: str="f4101",
+            DBTABLE1: str="f41002",
             COLUMNS: int=28,
             DAI_ETL_ID: int=0,
             **kwargs
