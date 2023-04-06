@@ -59,7 +59,7 @@ def prophecyDeploy(token, url, folder, version, environment, appName) {
                 export DATABRICKS_TOKEN=$deToken 
                 export LC_ALL=en_US.UTF-8 
                 python updateDeploy.py $environment $appName            
-                pbt deploy --release-version $version --project-id ${environment}_97 --path  $folder
+                pbt deploy --release-version $version --project-id 97 --path  $folder
                 python updatePermissions.py $environment $appName      
             """
         }
