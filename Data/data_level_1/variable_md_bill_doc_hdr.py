@@ -1,0 +1,105 @@
+import datetime
+import os
+from decimal import *
+
+table = "MD_BILL_DOC_HDR"
+view = "v01_md_delv_line"
+env = os.getenv("DATABRICKS_ENV").lower()
+groupname = "md_deliveries"
+underlying_table = "md_deliveries_MD_BILL_DOC_HDR"
+
+table_location = "dbfs:/mnt/" + os.getenv("DATABRICKS_ENV").lower() + "_curdelta/md_l1/MD_BILLING_DOCUMENT/" + table
+
+LIST__PRIMARY_KEYS = {"SRC_SYS_CD, BILL_DOC"}
+
+source_system = {"bba", "btb_na", "btb_latam", "fsn", "geu", "hcs", "mbp", "mrs", "p01", "svs", "taishan"}
+
+DICT__COLUMNS_AND_DATATYPES = {"SRC_SYS_CD": "string", "BILL_DOC": "string", "SLORG_CD": "string",
+    "SLORG_DESC": "string", "DSTR_CHNL_CD": "string", "DSTR_CHNL_DESC": "string", "SLS_DIV_CD": "string",
+    "SLS_DIV_DESC": "string", "BILL_TYPE_CD": "string", "BILL_TYPE_DESC": "string", "BILL_CAT": "string",
+    "DOC_CAT": "string", "PYR": "string", "SOLD_TO": "string", "SHIP_TO": "string", "CRT_DTTM": "timestamp",
+    "BILL_DTTM": "timestamp", "BILL_INVC_DTTM": "timestamp", "CRNCY_CD": "string", "CRT_BY": "string",
+    "PRC_PCDR_CD": "string", "DOC_COND_OWN_COND": "string", "SHIPPING_COND_CD": "string", "FISC_YR": "string",
+    "PSTNG_PER": "int", "CUST_GRP_CD": "string", "INTNL_COM_CD": "string", "DEL_DPRT_PT_CD": "string",
+    "PSTNG_STS": "string", "EXCH_RT_FIN_PSTNG": "decimal(18,4)", "ADDL_VAL_DAYS": "string", "FX_VAL_DTTM": "timestamp",
+    "PMT_TERM_CD": "string", "ACCT_ASGNMT_GRP": "string", "CTRY_CD": "string", "REGION_CD": "string", "CO_CD": "string",
+    "TAX_CLSN_1": "string", "NET_VAL_AMT": "decimal(18,4)", "COMB_CRITA": "string", "STATS_CRNCY": "string",
+    "CHG_DTTM": "timestamp", "INVC_LIST_TYPE": "string", "CNTL_AREA_CD": "string", "CR_ACCT": "string",
+    "CRNCY_CR_CNTL_AREA": "string", "CR_DX_RT": "decimal(18,4)", "HIER_TYPE_PRC": "string", "CUST_PO_NUM": "string",
+    "TRAD_PTNR_CO_CD": "string", "TAX_DPRT_CTRY": "string", "ORIG_VAT_NUM": "string", "CTRY_VAT_NUM": "string",
+    "REF_DOC_NUM": "string", "ASGNMT_NUM": "string", "TAX_AMT": "decimal(18,4)", "LOGL_SYS": "string",
+    "TRNL_DTTM": "timestamp", "PMT_REF": "string", "NUM_OF_PG": "int", "PSTNG_BILL_STS_CD": "string",
+    "INVC_LIST_STS_CD": "string", "CUST_PRC_GRP": "string", "SLS_DSTRC": "string", "PRC_LIST_TYPE": "string",
+    "TAX_CLSN_2": "string", "TAX_CLSN_3": "string", "TAX_CLSN_4": "string", "TAX_CLSN_5": "string",
+    "TAX_CLSN_6": "string", "TAX_CLSN_7": "string", "TAX_CLSN_8": "string", "TAX_CLSN_9": "string",
+    "INDSTR_CD_1": "string", "INDSTR_CD_2": "string", "PRCH_ORDR_TYPE": "string", "BILL_DOC_IS_CAN": "string",
+    "DAI_ETL_ID": "int", "DAI_CRT_DTTM": "timestamp", "DAI_UPDT_DTTM": "timestamp"}
+
+COLUMN_COUNT = 85
+
+UTC_COLUMNS = ["DAI_CRT_DTTM", "DAI_UPDT_DTTM"]
+LIST__UTC_COLUMNS_WITH_NULL = ["CRT_DTTM", "BILL_DTTM", "BILL_INVC_DTTM", "FX_VAL_DTTM", "CHG_DTTM", "TRNL_DTTM"]
+
+LIST__NULL_SOURCES_1 = {"bba", "btb_na"}
+LIST__NULL_COLUMNS_1 = ["SHIP_TO", "PSTNG_BILL_STS_CD", "INVC_LIST_STS_CD"]
+
+LIST__NULL_SOURCES_2 = {"btb_latam"}
+LIST__NULL_COLUMNS_2 = ["SHIP_TO", "PSTNG_BILL_STS_CD", "INVC_LIST_STS_CD", "PRCH_ORDR_TYPE"]
+
+LIST__NULL_SOURCES_3 = {"fsn", "geu", "hcs", "mbp", "mrs", "p01", "svs", "taishan"}
+LIST__NULL_COLUMNS_3 = ["SHIP_TO", "PSTNG_BILL_STS_CD", "INVC_LIST_STS_CD", "INDSTR_CD_1", "INDSTR_CD_2", "PRCH_ORDR_TYPE"]
+
+LIST__WHITESPACE_SOURCES_1 = {"bba", "btb_na"}
+LIST__WHITESPACE_COLUMNS_1 = ["SLORG_CD", "SLORG_DESC", "DSTR_CHNL_CD", "DSTR_CHNL_DESC", "SLS_DIV_CD", "SLS_DIV_DESC",
+    "BILL_TYPE_CD", "BILL_TYPE_DESC", "BILL_CAT", "DOC_CAT", "PYR", "SOLD_TO", "CRNCY_CD", "CRT_BY", "PRC_PCDR_CD",
+    "DOC_COND_OWN_COND", "SHIPPING_COND_CD", "FISC_YR", "PSTNG_PER", "CUST_GRP_CD", "INTNL_COM_CD", "DEL_DPRT_PT_CD",
+    "PSTNG_STS", "EXCH_RT_FIN_PSTNG", "ADDL_VAL_DAYS", "PMT_TERM_CD", "ACCT_ASGNMT_GRP", "CTRY_CD", "REGION_CD",
+    "CO_CD", "TAX_CLSN_1", "NET_VAL_AMT", "COMB_CRITA", "STATS_CRNCY", "INVC_LIST_TYPE", "CNTL_AREA_CD", "CR_ACCT",
+    "CRNCY_CR_CNTL_AREA", "CR_DX_RT", "HIER_TYPE_PRC", "CUST_PO_NUM", "TRAD_PTNR_CO_CD", "TAX_DPRT_CTRY",
+    "ORIG_VAT_NUM", "CTRY_VAT_NUM", "REF_DOC_NUM", "ASGNMT_NUM", "TAX_AMT", "LOGL_SYS", "PMT_REF", "NUM_OF_PG",
+    "CUST_PRC_GRP", "SLS_DSTRC", "PRC_LIST_TYPE", "TAX_CLSN_2", "TAX_CLSN_3", "TAX_CLSN_4", "TAX_CLSN_5", "TAX_CLSN_6",
+    "TAX_CLSN_7", "TAX_CLSN_8", "TAX_CLSN_9", "INDSTR_CD_1", "INDSTR_CD_2", "PRCH_ORDR_TYPE", "BILL_DOC_IS_CAN"]
+
+LIST__WHITESPACE_SOURCES_2 = {"fsn", "geu", "hcs", "mrs", "p01"}
+LIST__WHITESPACE_COLUMNS_2 = ["SLORG_CD", "SLORG_DESC", "DSTR_CHNL_CD", "DSTR_CHNL_DESC", "SLS_DIV_CD", "SLS_DIV_DESC",
+    "BILL_TYPE_CD", "BILL_TYPE_DESC", "BILL_CAT", "DOC_CAT", "PYR", "SOLD_TO", "CRNCY_CD", "CRT_BY", "PRC_PCDR_CD",
+    "DOC_COND_OWN_COND", "SHIPPING_COND_CD", "FISC_YR", "PSTNG_PER", "CUST_GRP_CD", "INTNL_COM_CD", "DEL_DPRT_PT_CD",
+    "PSTNG_STS", "EXCH_RT_FIN_PSTNG", "ADDL_VAL_DAYS", "PMT_TERM_CD", "ACCT_ASGNMT_GRP", "CTRY_CD", "REGION_CD",
+    "CO_CD", "TAX_CLSN_1", "NET_VAL_AMT", "COMB_CRITA", "STATS_CRNCY", "INVC_LIST_TYPE", "CNTL_AREA_CD", "CR_ACCT",
+    "CRNCY_CR_CNTL_AREA", "CR_DX_RT", "HIER_TYPE_PRC", "CUST_PO_NUM", "TRAD_PTNR_CO_CD", "TAX_DPRT_CTRY",
+    "ORIG_VAT_NUM", "CTRY_VAT_NUM", "REF_DOC_NUM", "ASGNMT_NUM", "TAX_AMT", "LOGL_SYS", "PMT_REF", "NUM_OF_PG",
+    "CUST_PRC_GRP", "SLS_DSTRC", "PRC_LIST_TYPE", "TAX_CLSN_2", "TAX_CLSN_3", "TAX_CLSN_4", "TAX_CLSN_5", "TAX_CLSN_6",
+    "TAX_CLSN_7", "TAX_CLSN_8", "TAX_CLSN_9", "BILL_DOC_IS_CAN"]
+
+LIST__WHITESPACE_SOURCES_3 = {"svs", "taishan"}
+LIST__WHITESPACE_COLUMNS_3 = ["SLORG_CD", "SLORG_DESC", "DSTR_CHNL_CD", "DSTR_CHNL_DESC", "SLS_DIV_CD", "SLS_DIV_DESC",
+    "BILL_TYPE_CD", "BILL_TYPE_DESC", "BILL_CAT", "DOC_CAT", "PYR", "SOLD_TO", "CRNCY_CD", "CRT_BY", "PRC_PCDR_CD",
+    "DOC_COND_OWN_COND", "SHIPPING_COND_CD", "FISC_YR", "PSTNG_PER", "CUST_GRP_CD", "INTNL_COM_CD", "DEL_DPRT_PT_CD",
+    "PSTNG_STS", "EXCH_RT_FIN_PSTNG", "ADDL_VAL_DAYS", "PMT_TERM_CD", "ACCT_ASGNMT_GRP", "CTRY_CD", "REGION_CD",
+    "CO_CD", "TAX_CLSN_1", "NET_VAL_AMT", "COMB_CRITA", "STATS_CRNCY", "INVC_LIST_TYPE", "CNTL_AREA_CD", "CR_ACCT",
+    "CRNCY_CR_CNTL_AREA", "CR_DX_RT", "HIER_TYPE_PRC", "CUST_PO_NUM", "TRAD_PTNR_CO_CD", "TAX_DPRT_CTRY",
+    "ORIG_VAT_NUM", "CTRY_VAT_NUM", "REF_DOC_NUM", "ASGNMT_NUM", "TAX_AMT", "LOGL_SYS", "PMT_REF", "NUM_OF_PG",
+    "CUST_PRC_GRP", "SLS_DSTRC", "PRC_LIST_TYPE", "TAX_CLSN_2", "TAX_CLSN_3", "TAX_CLSN_4", "TAX_CLSN_5", "TAX_CLSN_6",
+    "TAX_CLSN_7", "TAX_CLSN_8", "TAX_CLSN_9"]
+
+LIST__WHITESPACE_SOURCES_4 = {"btb_latam"}
+LIST__WHITESPACE_COLUMNS_4 = ["SLORG_CD", "SLORG_DESC", "DSTR_CHNL_CD", "DSTR_CHNL_DESC", "SLS_DIV_CD", "SLS_DIV_DESC",
+    "BILL_TYPE_CD", "BILL_TYPE_DESC", "BILL_CAT", "DOC_CAT", "PYR", "SOLD_TO", "CRNCY_CD", "CRT_BY", "PRC_PCDR_CD",
+    "DOC_COND_OWN_COND", "SHIPPING_COND_CD", "FISC_YR", "PSTNG_PER", "CUST_GRP_CD", "INTNL_COM_CD", "DEL_DPRT_PT_CD",
+    "PSTNG_STS", "EXCH_RT_FIN_PSTNG", "ADDL_VAL_DAYS", "PMT_TERM_CD", "ACCT_ASGNMT_GRP", "CTRY_CD", "REGION_CD",
+    "CO_CD", "TAX_CLSN_1", "NET_VAL_AMT", "COMB_CRITA", "STATS_CRNCY", "INVC_LIST_TYPE", "CNTL_AREA_CD", "CR_ACCT",
+    "CRNCY_CR_CNTL_AREA", "CR_DX_RT", "HIER_TYPE_PRC", "CUST_PO_NUM", "TRAD_PTNR_CO_CD", "TAX_DPRT_CTRY",
+    "ORIG_VAT_NUM", "CTRY_VAT_NUM", "REF_DOC_NUM", "ASGNMT_NUM", "TAX_AMT", "LOGL_SYS", "PMT_REF", "NUM_OF_PG",
+    "CUST_PRC_GRP", "SLS_DSTRC", "PRC_LIST_TYPE", "TAX_CLSN_2", "TAX_CLSN_3", "TAX_CLSN_4", "TAX_CLSN_5", "TAX_CLSN_6",
+    "TAX_CLSN_7", "TAX_CLSN_8", "TAX_CLSN_9", "INDSTR_CD_1", "INDSTR_CD_2", "BILL_DOC_IS_CAN"]
+
+LIST__WHITESPACE_SOURCES_5 = {"mbp"}
+LIST__WHITESPACE_COLUMNS_5 = ["SLORG_CD", "SLORG_DESC", "DSTR_CHNL_CD", "DSTR_CHNL_DESC", "SLS_DIV_CD", "SLS_DIV_DESC",
+    "BILL_TYPE_CD", "BILL_TYPE_DESC", "BILL_CAT", "DOC_CAT", "PYR", "SOLD_TO", "CRNCY_CD", "CRT_BY", "PRC_PCDR_CD",
+    "DOC_COND_OWN_COND", "SHIPPING_COND_CD", "FISC_YR", "PSTNG_PER", "CUST_GRP_CD", "INTNL_COM_CD", "DEL_DPRT_PT_CD",
+    "PSTNG_STS", "EXCH_RT_FIN_PSTNG", "ADDL_VAL_DAYS", "PMT_TERM_CD", "ACCT_ASGNMT_GRP", "CTRY_CD", "REGION_CD",
+    "CO_CD", "TAX_CLSN_1", "NET_VAL_AMT", "COMB_CRITA", "STATS_CRNCY", "INVC_LIST_TYPE", "CNTL_AREA_CD", "CR_ACCT",
+    "CRNCY_CR_CNTL_AREA", "CR_DX_RT", "HIER_TYPE_PRC", "CUST_PO_NUM", "TRAD_PTNR_CO_CD", "TAX_DPRT_CTRY",
+    "ORIG_VAT_NUM", "CTRY_VAT_NUM", "REF_DOC_NUM", "ASGNMT_NUM", "TAX_AMT", "LOGL_SYS", "PMT_REF", "NUM_OF_PG",
+    "CUST_PRC_GRP", "SLS_DSTRC", "PRC_LIST_TYPE", "TAX_CLSN_2", "TAX_CLSN_3", "TAX_CLSN_4", "TAX_CLSN_5", "TAX_CLSN_6",
+    "TAX_CLSN_7", "TAX_CLSN_8", "TAX_CLSN_9", "BILL_DOC_IS_CAN"]
