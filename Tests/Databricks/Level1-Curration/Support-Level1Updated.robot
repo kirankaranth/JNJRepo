@@ -40,7 +40,7 @@ Reconnect to Databrick or Reconnect to Databrick views
     Run keyword if      ${Connection}==True      Log to console  RECONNECTED SUCCESSFULLY
 
 I expect that the target table contains required number of columns
-    [Arguments]     ${number_of_columns}     ${table}
+    [Arguments]     ${table}    ${number_of_columns}
     Validate that the target table contains required number of columns    ${number_of_columns}  ${table}
     Log     Required number of columns: ${number_of_columns}
 
@@ -707,15 +707,14 @@ The rowcounts of view and underlying table are the same
     run keyword and continue on failure     should be equal as strings  ${execution_status}  PASS
     log test to report per step     ${jira_id_tag}
 
-Validate that columns contain all predefined values for list of sources
-    [Arguments]    ${source_list}    ${column_predef_val_list}   ${target}     ${databrick_name}
-    Given I have access to Databricks database    ${databrick_name}
-    When I check that the requirements are implemented correctly
-    Then I check that columns contain all predefined values for list of sources    ${source_list}    ${column_predef_val_list}   ${target}
-
 I check that columns contain all predefined values for list of sources
     [Arguments]    ${source_list}    ${column_predef_val_list}   ${target}
-    FOR  ${i}  IN  @{source_system}
+    Validate that all required columns for each source in source list contain all predefined values       ${source_list}       ${column_predef_val_list}      ${target}
+    log   Check performed for columns and values: ${column_predef_val_list} per source/sources ${source_list} for ${target}
+
+Validate that all required columns for each source in source list contain all predefined values
+     [Arguments]    ${source_list}    ${column_predef_val_list}   ${target}
+    FOR  ${i}  IN  @{source_list}
         ${alias}   get from dictionary     ${TABLE_ALIAS}     ${i}
         set test variable    ${alias}
         FOR  ${j}  IN  @{column_predef_val_list}
@@ -728,7 +727,7 @@ I check that columns contain all predefined values for list of sources
         Exit For Loop IF    ${result}==True
         END
     END
-    log test to report per step     ${jira_id_tag}
+    log test to report per step     ${source_list}
 
 Check predifined value for specific source
     [Arguments]   ${alias}    ${ColumnValue}    ${target}
@@ -821,3 +820,8 @@ Validate that columns contain predefined values or values from original table
     When I check that the requirements are implemented correctly
     Then I expect that the columns contain predefined values or values from original table     ${source_list}    ${column_predef_val_list}     ${target}
 
+Validate that columns contain all predefined values for list of sources
+    [Arguments]    ${source_list}    ${column_predef_val_list}   ${target}     ${databrick_name}
+    Given I have access to Databricks database    ${databrick_name}
+    When I check that the requirements are implemented correctly
+    Then I check that columns contain all predefined values for list of sources    ${source_list}    ${column_predef_val_list}   ${target}
