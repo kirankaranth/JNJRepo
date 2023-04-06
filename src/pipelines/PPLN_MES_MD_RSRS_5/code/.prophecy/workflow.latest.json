@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "dev_md_l1"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "mmt"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "mmt"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MES_MD_RSRS_5"
+      },
+      "connections" : [ {
+        "id" : "451bc36e-480e-49c2-a6db-cfca14785335",
+        "source" : "80c91b1a-17cc-43d9-9295-21b82562007a",
+        "sourcePort" : "7508a652-1014-4a76-ac34-7923023587d7",
+        "target" : "ee931039-21bb-438c-be25-41001392f077",
+        "targetPort" : "67b6d99d-1cde-48ed-aa85-3ad96e40aa60"
+      }, {
+        "id" : "196eb2e4-2599-4952-a541-daf4be5c2dd0",
+        "source" : "0c6af2f0-c9e2-49cf-8a5f-2797bb9e7885",
+        "sourcePort" : "e192e1ea-10aa-42d4-a036-130a32036cc2",
+        "target" : "80c91b1a-17cc-43d9-9295-21b82562007a",
+        "targetPort" : "1582fdda-f0e9-45b1-a3fe-c34f99c233e7"
+      } ],
+      "processes" : {
+        "ee931039-21bb-438c-be25-41001392f077" : {
+          "id" : "ee931039-21bb-438c-be25-41001392f077",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MES_MD_RSRS",
+            "slug" : "MES_MD_RSRS",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "67b6d99d-1cde-48ed-aa85-3ad96e40aa60",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MES_MD_RSRS"
+          }
+        },
+        "80c91b1a-17cc-43d9-9295-21b82562007a" : {
+          "id" : "80c91b1a-17cc-43d9-9295-21b82562007a",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "1582fdda-f0e9-45b1-a3fe-c34f99c233e7",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "7508a652-1014-4a76-ac34-7923023587d7",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'RSRS_ID',RSRS_ID))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'RSRS_ID',RSRS_ID)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "0c6af2f0-c9e2-49cf-8a5f-2797bb9e7885" : {
+          "id" : "0c6af2f0-c9e2-49cf-8a5f-2797bb9e7885",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MES_MD_RSRS",
+            "slug" : "sql_MES_MD_RSRS",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "e192e1ea-10aa-42d4-a036-130a32036cc2",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT '{Config.sourceSystem}' AS SRC_SYS_CD\n, TRIM(RESOURCEDEF.RESOURCEID) as RSRS_ID\n, TRIM(RESOURCEDEF.FACTORYID) as FCTRY_ID\n, TRIM(RESOURCEDEF.LOCATIONID) as LOC_ID\n, CAST(NULL AS STRING) as SPEC_ID\n, TRIM(RESOURCEDEF.ccfAlternateAssetID) as ALT_ASSET_ID\n, TRIM(RESOURCEDEF.ccfAssetSite) as ASSET_SITE_NM\n, TRIM(RESOURCEDEF.ccfAsyncTimeout) as ASYNC_TMOUT_TXT\n, CAST(RESOURCEDEF.ccfCalibrationAsset as BOOLEAN ) as CALIBRATION_ASSET_IND\n, TRIM(RESOURCEDEF.CIOCHANNELADAPTERID) as CIO_CHNL_ADPT_ID\n, INT(RESOURCEDEF.CHANGECOUNT) as CHG_CNT\n, TRIM(RESOURCEDEF.CHANGESTATUSID) as CHG_STS_ID\n, TRIM(RESOURCEDEF.CLEARANCELEVEL) as CLRNC_LVL_CD\n, CAST(NULL AS INT) as CNTNR_CAPY_CNT\n, CAST(NULL AS STRING) as CNTNR_STS_CD\n, TRIM(RESOURCEDEF.DECIMALPRECISION) as DEC_PRCN_VAL\n, TRIM(RESOURCEDEF.DECIMALSCALE) as DEC_SCALE_VAL\n, TRIM(RESOURCEDEF.ccfDefaultExpression) as DFLT_EXPRSSN_TXT\n, TRIM(RESOURCEDEF.ccfDefaultExpressionType) as DFLT_EXPRSSN_TYPE_CD\n, CAST(RESOURCEDEF.ccfExternalStatus as BOOLEAN ) as EXTRNL_STS_IND\n, TRIM(RESOURCEDEF.FULLYQUALIFIEDNAME) as FULL_QUAL_NM\n, TRIM(RESOURCEDEF.ICONID) as ICON_ID\n, CAST(RESOURCEDEF.ISINCLUDEINOEE as BOOLEAN ) as INCL_IN_OEE_IND\n, CAST(RESOURCEDEF.ccfIncludeRawData as BOOLEAN ) as INCL_RAW_DATA_IND\n, CAST(RESOURCEDEF.ISFROZEN as BOOLEAN ) as IS_FRZN_IND\n, CAST(RESOURCEDEF.isResolvedDntQuery as BOOLEAN ) as IS_RESL_DNT_QRY_IND\n, CAST(RESOURCEDEF.ISVALIDATEQUEUE as BOOLEAN ) as IS_VLD_QUE_IND\n, TRIM(RESOURCEDEF.ISLINEIDENTIFIER) as LINE_ID\n, CAST(RESOURCEDEF.ccfLogging as BOOLEAN ) as LOGGING_IND\n, TRIM(RESOURCEDEF.MAINTENANCECLASSID) as MAINT_CLS_ID\n, TRIM(RESOURCEDEF.gdnMaterialQueueBOMId) as MATL_QUE_BOM_ID\n, CAST(NULL AS STRING) as MAXIMO_DSTN_ID\n, CAST(NULL AS STRING) as MAXIMO_GL_ACCT_CD\n, CAST(NULL AS STRING) as MAXIMO_RSRS_NM\n, CAST(NULL AS STRING) as MAX_CAPY_VAL\n, CAST(NULL AS STRING) as MIN_CAPY_VAL\n, TRIM(RESOURCEDEF.CDOTYPEID) as OBJ_TYPE_ID\n, TRIM(RESOURCEDEF.ISOEESETTINGSID) as OEE_SETS_ID\n, TRIM(RESOURCEDEF.cscOPCChannelId) as OPC_CHNL_ID\n, TRIM(RESOURCEDEF.cscOPCMachineId) as OPC_MACH_ID\n, TRIM(RESOURCEDEF.cscOPCServerId) as OPC_SERVR_ID\n, TRIM(RESOURCEDEF.PARENTRESOURCEID) as PARNT_RSRS_ID\n, TRIM(RESOURCEDEF.ccfPCId) as PC_ID\n, TRIM(RESOURCEDEF.ccfPortId) as PORT_ID\n, TRIM(RESOURCEDEF.PRINTQUEUEID) as PRT_QUE_ID\n, TRIM(RESOURCEDEF.PRODUCTIONSTATUSID) as PRDTN_STS_ID\n, TRIM(RESOURCEDEF.ccfPrompt) as PRMT_TXT\n, CAST(NULL AS STRING) as READABL_VAL\n, CAST(RESOURCEDEF.cscResourceCapacity AS DECIMAL(18,4)) as RSRS_CAPY_QTY\n, TRIM(RESOURCEDEF.DESCRIPTION) as RSRS_DESC\n, TRIM(RESOURCEDEF.RESOURCEFAMILYID) as RSRS_FMLY_ID\n, TRIM(RESOURCEDEF.RESOURCENAME) as RSRS_NM\n, CAST(NULL AS STRING) as RSRS_NUM\n, TRIM(RESOURCEDEF.ccfResourcePartsId) as RSRS_PART_ID\n, TRIM(RESOURCEDEF.RESOURCESTATUSMODELID) as RSRS_STS_MDL_ID\n, TRIM(RESOURCEDEF.RESOURCETYPEID) as RSRS_TYPE_ID\n, CAST(NULL AS STRING) as SGNTR_REQ_ID\n, INT(RESOURCEDEF.ccfTimeToLive) as TIME_TO_LIVE_SECS_CNT\n, INT(RESOURCEDEF.ccfTrngRecentExpDays) as TRNG_RCNT_EXP_DAYS_CNT\n, TRIM(RESOURCEDEF.ccfTrngRecentId) as TRAIN_RCNT_ID\n, TRIM(RESOURCEDEF.TRAININGREQGROUPID) as TRAIN_REQ_GRP_ID\n, TRIM(RESOURCEDEF.UOMID) as UOM_ID\n, TRIM(RESOURCEDEF.VENDORID) as VEND_ID\n, TRIM(RESOURCEDEF.VENDORMODEL) as VEND_MDL_NUM\n, TRIM(RESOURCEDEF.VENDORSERIALNUMBER) as VEND_SER_NUM\n, TRIM(RESOURCEDEF.WEBSERVICETRANSPORTID) as WEB_SRVC_TRNSP_ID\n, TRIM(RESOURCEDEF.WIPMSGDEFMGRID) as WIP_MSG_DEF_MGR_ID\n, TRIM(RESOURCEDEF.WORKINGRANGEMAX) as WRK_RNG_MAX_VAL\n, TRIM(RESOURCEDEF.WORKINGRANGEMIN) as WRK_RNG_MIN_VAL\n, CAST(NULL AS STRING) as ETH_PRT_QUE_ID\n, CAST(NULL AS STRING) as ETH_RSRS_TYPE_ID\n, TRIM(RESOURCEDEF.LASTREVTXNID) as NOTES_TXT\n, TRIM(RESOURCEDEF.NOTES) as LAST_REVERSABLE_TXN_ID\nFROM  {Config.sourceDatabase}.RESOURCEDEF as RESOURCEDEF WHERE RESOURCEDEF._deleted_ =  'F'\n  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    
