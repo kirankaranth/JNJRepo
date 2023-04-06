@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "dev_md_l1"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "mvc"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "mvc"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MES_MD_MFG_ORDR_3"
+      },
+      "connections" : [ {
+        "id" : "aa7aa216-452f-4f62-befb-cac4396a45ea",
+        "source" : "6692c1e1-7ac6-43a8-9b3a-f4f64807bc84",
+        "sourcePort" : "2932b1b4-3d93-4809-8b9e-4cf4b5123edf",
+        "target" : "fb945027-be2d-40d3-ac24-07c5b5b70fb9",
+        "targetPort" : "a0d8a832-f6e3-4487-a019-44df873d72eb"
+      }, {
+        "id" : "46db76b1-2778-4588-bc39-61bce3130dec",
+        "source" : "f29d894b-d621-4c2c-afa4-d84aff7d29f9",
+        "sourcePort" : "ce6b4685-cf13-45f4-9e22-3ef2ce42722a",
+        "target" : "6692c1e1-7ac6-43a8-9b3a-f4f64807bc84",
+        "targetPort" : "dd0cc298-b809-4be0-9875-dc2bd6e40ede"
+      } ],
+      "processes" : {
+        "fb945027-be2d-40d3-ac24-07c5b5b70fb9" : {
+          "id" : "fb945027-be2d-40d3-ac24-07c5b5b70fb9",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MES_MD_MFG_ORDR",
+            "slug" : "MES_MD_MFG_ORDR",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "a0d8a832-f6e3-4487-a019-44df873d72eb",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MES_MD_MFG_ORDR"
+          }
+        },
+        "6692c1e1-7ac6-43a8-9b3a-f4f64807bc84" : {
+          "id" : "6692c1e1-7ac6-43a8-9b3a-f4f64807bc84",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "dd0cc298-b809-4be0-9875-dc2bd6e40ede",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "2932b1b4-3d93-4809-8b9e-4cf4b5123edf",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'MFG_ORDR_ID',MFG_ORDR_ID))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'MFG_ORDR_ID',MFG_ORDR_ID)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "f29d894b-d621-4c2c-afa4-d84aff7d29f9" : {
+          "id" : "f29d894b-d621-4c2c-afa4-d84aff7d29f9",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MES_MD_MFG_ORDR",
+            "slug" : "sql_MES_MD_MFG_ORDR",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "ce6b4685-cf13-45f4-9e22-3ef2ce42722a",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT\n   '{Config.sourceSystem}' AS SRC_SYS_CD\n, TRIM(MFGORDER.MFGORDERID) as MFG_ORDR_ID\n, TRIM(MFGORDER.PRODUCTID) as PROD_ID\n, CAST(NULL AS STRING) as ARMOUR_TYPE_CD\n, TRIM(MFGORDER.BACK_CAS_DESIGN) as BK_CASETTE_DSGN_TXT\n, TRIM(MFGORDER.BACKCASSETTEDESIGN) as BK_CASETTE_DSGN_2_TXT\n, CAST(NULL AS STRING) as BTCH_NUM\n, TRIM(MFGORDER.BEGINPRODUCTBASEID) as BEG_PROD_BASE_ID\n, TRIM(MFGORDER.BEGINPRODUCTID) as BEG_PROD_ID\n, TRIM(MFGORDER.BILLOFPROCESSID) as BILL_OF_PRCS_ID\n, TRIM(MFGORDER.BILLOFPROCESSBASEID) as BILL_OF_PRCS_BASE_ID\n, TRIM(MFGORDER.BOMBASEID) as BOM_BASE_ID\n, TRIM(MFGORDER.BOMID) as BOM_ID\n, CAST(NULL AS STRING) as CAVITY_FOIL_CD\n, CAST(NULL AS STRING) as CELL_ID\n, INT(MFGORDER.CHANGECOUNT) as CHG_CNT\n, TRIM(MFGORDER.CHANGESTATUSID) as CHG_STS_ID\n, CAST(NULL AS STRING) as CNSTR_CD\n, CAST(NULL AS STRING) as CNTNR_NUMING_RULE_ID\n, CAST(NULL AS STRING) as CUR_ORDR_STS_ID\n, TRIM(MFGORDER.DEFAULTLOT) as DFLT_LOT_NUM\n, TRIM(MFGORDER.DEFAULTPUTAWAYSTOCKPOINT) as DFLT_PUTAWAY_STK_PT_NM\n, CAST(NULL AS STRING) as DIFF_SUTURE_MATL_CD\n, CAST(NULL AS INT) as DOC_CNT\n, CAST(NULL AS STRING) as DOSSR_NUM\n, TRIM(MFGORDER.ERPBOMID) as ERP_BOM_ID\n, CAST(NULL AS STRING) as ERP_LOC_NM\n, TRIM(MFGORDER.ERPROUTEBASEID) as ERP_RTE_BASE_ID\n, TRIM(MFGORDER.ERPROUTEID) as ERP_RTE_ID\n, CAST(NULL AS TIMESTAMP) as EXPN_DTTM\n, CAST(NULL AS TIMESTAMP) as EXPN_2_DTTM\n, CAST(MFGORDER.EXTERNALLYCONTROLLED as BOOLEAN ) as EXTR_CTL_IND\n, TRIM(MFGORDER.FACTORYID) as FCTRY_ID\n, CAST(MFGORDER.QTY AS DECIMAL(18,4)) as FNL_QTY\n, TRIM(MFGORDER.FRONT_CAS_DESIGN) as FRN_CASETTE_DSGN_TXT\n, TRIM(MFGORDER.FRONTCASSETTEDESIGN) as FRN_CASETTE_DSGN_2_TXT\n, CAST(NULL AS STRING) as GS1_CD\n, CAST(NULL AS BOOLEAN) as HOLD_ERP_PRCSG_IND\n, TRIM(MFGORDER.ICONID) as ICON_ID\n, CAST(NULL AS STRING) as INTF_CD\n, CAST(MFGORDER.ISCLOSED as BOOLEAN ) as IS_CLSE_IND\n, CAST(MFGORDER.ISFROZEN as BOOLEAN ) as IS_FRZN_IND\n, CAST(MFGORDER.ISHOTLOT as BOOLEAN ) as IS_HOT_LOT_IND\n, CAST(NULL AS BOOLEAN) as IS_KITTING_ORDR_IND\n, CAST(MFGORDER.ISPOPCONVERSION as BOOLEAN ) as IS_POP_CONV_IND\n, CAST(NULL AS BOOLEAN) as IS_PREACTOR_SCHD_IND\n, CAST(MFGORDER.ISPRODUCTION as BOOLEAN ) as IS_PRDTN_IND\n, CAST(MFGORDER.ISSAP_ALT_ID_VALIDATIONREQUIRE as BOOLEAN ) as IS_SAP_ALT_ID_VLD_REQ_IND\n, CAST(MFGORDER.ISVALIDATESAPBOMALTID as BOOLEAN ) as IS_VLD_SAP_BOM_ALT_ID_IND\n, CAST(NULL AS STRING) as JDE_FLD_10_TXT\n, CAST(NULL AS STRING) as JDE_FLD_4_TXT\n, CAST(NULL AS STRING) as JDE_FLD_5_TXT\n, CAST(NULL AS STRING) as JDE_FLD_6_TXT\n, CAST(NULL AS STRING) as JDE_FLD_7_TXT\n, CAST(NULL AS STRING) as JDE_FLD_8_TXT\n, CAST(NULL AS STRING) as JDE_FLD_9_TXT\n, CAST(NULL AS INT) as LEAN_SEQ_NBR\n, CAST(NULL AS STRING) as LINE_ID\n, TRIM(MFGORDER.LOCATIONID) as LOC_ID\n, CAST(NULL AS TIMESTAMP) as LOT_EXPN_DTTM\n, TRIM(MFGORDER.MASTERLOTID) as MSTR_LOT_ID\n, TRIM(MFGORDER.MASTERLOTNAME) as MSTR_LOT_NM\n, CAST(NULL AS STRING) as MATL_COLOR_CD\n, CAST(NULL AS TIMESTAMP) as MFG_DTTM\n, CAST(NULL AS TIMESTAMP) as MFG_2_DTTM\n, TRIM(MFGORDER.DESCRIPTION) as MFG_ORDR_DESC\n, TRIM(MFGORDER.MFGORDERNAME) as MFG_ORDR_NM\n, CAST(MFGORDER.QTY2 AS DECIMAL(18,4)) as FNL_2_QTY\n, CAST(NULL AS STRING) as MRP_CTL_NM\n, CAST(NULL AS STRING) as NEEDLE_MFR_NM\n, CAST(NULL AS STRING) as NEEDLE_TYPE_CD\n, TRIM(MFGORDER.NOTES) as NOTES_TXT\n, TRIM(MFGORDER.CDOTYPEID) as OBJ_TYPE_ID\n, CAST(NULL AS STRING) as OPR_SCRAP_VAL\n, TRIM(MFGORDER.ORDERSTATUSID) as ORDR_STS_ID\n, TRIM(MFGORDER.ORDERTYPEID) as ORDR_TYPE_ID\n, Case when MFGORDER.PLANNEDCOMPLETIONDATE = '0000000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(left(MFGORDER.PLANNEDCOMPLETIONDATE ,14),\\\"yyyyMMddHHmmss\\\") end AS PLAN_CMPLT_DTTM\n, Case when MFGORDER.PLANNEDCOMPLETIONDATEGMT = '0000000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(left(MFGORDER.PLANNEDCOMPLETIONDATEGMT ,14),\\\"yyyyMMddHHmmss\\\") end AS PLAN_CMPLT_GMT_DTTM\n, Case when MFGORDER.PLANNEDSTARTDATE = '0000000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(left(MFGORDER.PLANNEDSTARTDATE ,14),\\\"yyyyMMddHHmmss\\\") end AS PLAN_STRT_DTTM\n, Case when MFGORDER.PLANNEDSTARTDATEGMT = '0000000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(left(MFGORDER.PLANNEDSTARTDATEGMT ,14),\\\"yyyyMMddHHmmss\\\") end AS PLAN_STRT_GMT_DTTM\n, CAST(NULL AS STRING) as PLNR_CD\n, CAST(NULL AS BOOLEAN) as PRE_PRCSG_IND\n, TRIM(MFGORDER.PRIORITYID) as PRIR_ID\n, TRIM(MFGORDER.PRODUCTBASEID) as PROD_BASE_ID\n, CAST(NULL AS STRING) as PROD_FMLY_ID\n, CAST(NULL AS STRING) as PROD_TYPE_ID\n, CAST(NULL AS STRING) as PROD_TYPE_2_ID\n, CAST(NULL AS STRING) as PRDTN_SCHD_NM\n, CAST(NULL AS STRING) as PRDTN_VERS_NUM\n, Case when MFGORDER.RELEASEDATE = '0000000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(left(MFGORDER.RELEASEDATE,8),\\\"yyyyMMdd\\\") end AS RLSE_DTTM\n, Case when MFGORDER.RELEASEDATEGMT = '0000000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(left(MFGORDER.RELEASEDATEGMT ,14),\\\"yyyyMMddHHmmss\\\") end AS RLSE_GMT_DTTM\n, TRIM(MFGORDER.REPORTINGFACTORYID) as RPTG_FCTRY_ID\n, CAST(NULL AS STRING) as RESV_NUM\n, CAST(NULL AS BOOLEAN) as RESORBABLE_IND\n, TRIM(MFGORDER.SAP_ALT_ID) as SAP_ALT_ID\n, CASE WHEN MFGORDER.SCHEDULEDSTARTDATE = '0000000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(left(MFGORDER.SCHEDULEDSTARTDATE,19),\\\"MM/dd/yyyy HH:mm:ss\\\") end AS SCHD_STRT_DTTM\n, CAST(NULL AS STRING) as SMR_1_DESC\n, CAST(NULL AS STRING) as SMR_1_NUM\n, CAST(NULL AS STRING) as SMR_2_DESC\n, CAST(NULL AS STRING) as SMR_2_NUM\n, CAST(NULL AS STRING) as STERILIZATION_SPEC_CD\n, CAST(NULL AS STRING) as STK_TYPE_CD\n, CAST(NULL AS STRING) as SUTURE_SIZE_VAL\n, CAST(NULL AS INT) as SUTURES_PER_FOIL_NBR\n, CAST(NULL AS DECIMAL(18,4)) as TO_TFR_QTY\n, CAST(NULL AS STRING) as TRACEABL_INFO_TXT\n, TRIM(MFGORDER.UOMID) as UOM_ID\n, TRIM(MFGORDER.UOM2ID) as UOM_2_ID\n, CAST(MFGORDER.VALIDATIONOVERRIDE as BOOLEAN ) as VLD_OVRD_IND\n, CAST(NULL AS STRING) as VAL_STREM_TXT\n, TRIM(MFGORDER.WIPMSGDEFMGRID) as WIP_MSG_DEF_MGR_ID\n, CAST(NULL AS STRING) as WRKF_ID\n, INT(MFGORDER.YEARPRODUCED) as YR_PRODCD_NBR\nFROM {Config.sourceDatabase}.MFGORDER as MFGORDER\nWhere MFGORDER._deleted_ = 'F'  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    
