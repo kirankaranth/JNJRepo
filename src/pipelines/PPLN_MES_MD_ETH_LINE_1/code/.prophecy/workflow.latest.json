@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "dev_md_l1"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "mec"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "mec"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MES_MD_ETH_LINE_1"
+      },
+      "connections" : [ {
+        "id" : "08d10b82-5783-44ee-ba42-b419eb8f5b21",
+        "source" : "8674f393-a175-4330-bb03-f95079805924",
+        "sourcePort" : "9be27027-5695-4293-994c-781b288e31f4",
+        "target" : "33795802-cb0e-41c4-a93d-67bae8a4069e",
+        "targetPort" : "ea81773c-832c-4d7d-8e15-a5ad1c1f9d04"
+      }, {
+        "id" : "94bc6711-65e9-4feb-9b90-067a9961bbaa",
+        "source" : "a35cb329-66a2-4500-9565-fee151acdc53",
+        "sourcePort" : "e231eee9-2e1b-46f7-a15b-841934066ce9",
+        "target" : "8674f393-a175-4330-bb03-f95079805924",
+        "targetPort" : "4b6a67c9-ce30-4681-b9a9-8f79fb6520f2"
+      } ],
+      "processes" : {
+        "33795802-cb0e-41c4-a93d-67bae8a4069e" : {
+          "id" : "33795802-cb0e-41c4-a93d-67bae8a4069e",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MES_MD_ETH_LINE",
+            "slug" : "MES_MD_ETH_LINE",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "ea81773c-832c-4d7d-8e15-a5ad1c1f9d04",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MES_MD_ETH_LINE"
+          }
+        },
+        "8674f393-a175-4330-bb03-f95079805924" : {
+          "id" : "8674f393-a175-4330-bb03-f95079805924",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "4b6a67c9-ce30-4681-b9a9-8f79fb6520f2",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "9be27027-5695-4293-994c-781b288e31f4",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'ETH_LINE_ID',ETH_LINE_ID))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'ETH_LINE_ID',ETH_LINE_ID)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "a35cb329-66a2-4500-9565-fee151acdc53" : {
+          "id" : "a35cb329-66a2-4500-9565-fee151acdc53",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MES_MD_ETH_LINE",
+            "slug" : "sql_MES_MD_ETH_LINE",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "e231eee9-2e1b-46f7-a15b-841934066ce9",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT '{Config.sourceSystem}' AS SRC_SYS_CD\n, TRIM(ETHLINE.ETHLINEID) as ETH_LINE_ID\n, INT(ETHLINE.ASSOCIATEDPACKAGES) as ASSCTD_PKGS_CNT\n, INT(ETHLINE.CHANGECOUNT) as CHG_CNT\n, TRIM(ETHLINE.CHANGEHISTORYID) as CHG_HIST_ID\n, TRIM(ETHLINE.DESCRIPTION) as ETH_LINE_DESC\n, TRIM(ETHLINE.ETHLINENAME) as ETH_LINE_NM\n, TRIM(ETHLINE.ICONID) as ICON_ID\n, CAST(ETHLINE.INSTANCELOCKED as BOOLEAN ) as INST_LOCK_IND\n, CAST(ETHLINE.ISFROZEN as BOOLEAN ) as IS_FRZN_IND\n, TRIM(ETHLINE.NOTES) as NOTES_TXT\n, TRIM(ETHLINE.CDOTypeId) as OBJ_TYPE_ID\nFROM {Config.sourceDatabase}.ETHLINE as ETHLINE\nWHERE ETHLINE._deleted_ =  'F'\n  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    
