@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "dev_md_l1"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "mmt"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "mmt"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MES_MD_MFG_ORDR_MATL_LIST_1"
+      },
+      "connections" : [ {
+        "id" : "a437e62f-eee9-4ce9-8ca9-79af72c907d9",
+        "source" : "94d2db12-8394-4695-8fa9-6218b240f11c",
+        "sourcePort" : "12e78446-297b-4c51-b3f6-097335ee5ba3",
+        "target" : "d52440b6-d418-4b14-ae1d-861976bb103a",
+        "targetPort" : "c3447e9f-4c48-47cc-8b0e-983b939532a7"
+      }, {
+        "id" : "540392e6-035c-4232-9785-435df3869cbf",
+        "source" : "d9ef4932-4676-490e-bd4e-f49c082c932d",
+        "sourcePort" : "3b8ff711-6a19-4613-8285-b27c58c8ba86",
+        "target" : "94d2db12-8394-4695-8fa9-6218b240f11c",
+        "targetPort" : "f9160e89-2def-4c85-ba39-74bed9c06c17"
+      } ],
+      "processes" : {
+        "d52440b6-d418-4b14-ae1d-861976bb103a" : {
+          "id" : "d52440b6-d418-4b14-ae1d-861976bb103a",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MES_MD_MFG_ORDR_MATL_LIST",
+            "slug" : "MES_MD_MFG_ORDR_MATL_LIST",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "c3447e9f-4c48-47cc-8b0e-983b939532a7",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MES_MD_MFG_ORDR_MATL_LIST"
+          }
+        },
+        "94d2db12-8394-4695-8fa9-6218b240f11c" : {
+          "id" : "94d2db12-8394-4695-8fa9-6218b240f11c",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "f9160e89-2def-4c85-ba39-74bed9c06c17",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "12e78446-297b-4c51-b3f6-097335ee5ba3",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'MFG_ORDR_MATL_LIST_ITM_ID',MFG_ORDR_MATL_LIST_ITM_ID))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'MFG_ORDR_MATL_LIST_ITM_ID',MFG_ORDR_MATL_LIST_ITM_ID)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "d9ef4932-4676-490e-bd4e-f49c082c932d" : {
+          "id" : "d9ef4932-4676-490e-bd4e-f49c082c932d",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MES_MD_MFG_ORDR_MATL_LIST",
+            "slug" : "sql_MES_MD_MFG_ORDR_MATL_LIST",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "3b8ff711-6a19-4613-8285-b27c58c8ba86",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT '{Config.sourceSystem}' AS SRC_SYS_CD\n, TRIM(MFGORDERMATERIALLISTITEM.MFGORDERMATERIALLISTITEMID) as MFG_ORDR_MATL_LIST_ITM_ID\n, TRIM(MFGORDERMATERIALLISTITEM.MfgOrderId) as MFG_ORDR_ID\n, TRIM(MFGORDERMATERIALLISTITEM.ProductId) as PROD_ID\n, CAST(MFGORDERMATERIALLISTITEM.AllowOverConsumption as BOOLEAN ) as ALLW_OVR_CNSMPTN_IND\n, CAST(MFGORDERMATERIALLISTITEM.AllowSubstitution as BOOLEAN ) as ALLW_SUBST_IND\n, CAST(MFGORDERMATERIALLISTITEM.AllowUnderConsumption as BOOLEAN ) as ALLW_UND_CNSMPTN_IND\n, CAST(NULL AS STRING) as BTCH_ID\n, CAST(NULL AS BOOLEAN) as BULK_ITM_IND\n, INT(MFGORDERMATERIALLISTITEM.ChangeCount) as CHG_CNT\n, CAST(NULL AS BOOLEAN) as CO_PROD_IND\n, TRIM(MFGORDERMATERIALLISTITEM.DefaultLot) as DFLT_LOT_NUM\n, TRIM(MFGORDERMATERIALLISTITEM.DefaultStockPoint) as DFLT_STK_PT_TXT\n, Case when MFGORDERMATERIALLISTITEM.EffectiveFromDate = '0000000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(left(MFGORDERMATERIALLISTITEM.EffectiveFromDate,8),\\\"yyyyMMdd\\\") end AS EFF_FROM_DTTM\n, Case when MFGORDERMATERIALLISTITEM.EffectiveFromDateGMT = '0000000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(left(MFGORDERMATERIALLISTITEM.EffectiveFromDateGMT,8),\\\"yyyyMMdd\\\") end AS EFF_FROM_GMT_DTTM\n, Case when MFGORDERMATERIALLISTITEM.EffectiveThruDate = '0000000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(left(MFGORDERMATERIALLISTITEM.EffectiveThruDate,8),\\\"yyyyMMdd\\\") end AS EFF_THRU_DTTM\n, Case when MFGORDERMATERIALLISTITEM.EffectiveThruDateGMT = '0000000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(left(MFGORDERMATERIALLISTITEM.EffectiveThruDateGMT,8),\\\"yyyyMMdd\\\") end AS EFF_THRU_GMT_DTTM\n, CAST(NULL AS BOOLEAN) as ERP_IS_PHANTOM_IND\n, TRIM(MFGORDERMATERIALLISTITEM.ERPLineItem) as ERP_LINE_ITEM_ID\n, CAST(MFGORDERMATERIALLISTITEM.ERPReportingFlag as BOOLEAN ) as ERP_RPTG_IND\n, TRIM(MFGORDERMATERIALLISTITEM.ExportImportKey) as EXPT_IMPT_KEY_VAL\n, CAST(MFGORDERMATERIALLISTITEM.IsEnabled as BOOLEAN ) as IS_ENABL_IND\n, CAST(MFGORDERMATERIALLISTITEM.IsFrozen as BOOLEAN ) as IS_FRZN_IND\n, CAST(MFGORDERMATERIALLISTITEM.IsPhantom as BOOLEAN ) as IS_PHANTOM_IND\n, TRIM(MFGORDERMATERIALLISTITEM.IssueControl) as ISS_CNTL_CD\n, CAST(NULL AS STRING) as ITM_CAT_CD\n, TRIM(MFGORDERMATERIALLISTITEM.MfgOrderMaterialListItemName) as MFG_ORDR_MATL_LIST_ITM_NM\n, CAST(NULL AS STRING) as OBJ_TYPE_ID\n, CAST(MFGORDERMATERIALLISTITEM.gdnOriginalQtyRequired AS DECIMAL(18,4)) as ORIG_REQ_QTY\n, TRIM(MFGORDERMATERIALLISTITEM.PhantomBillId) as PHANTOM_BILL_ID\n, TRIM(MFGORDERMATERIALLISTITEM.ProductBaseId) as PROD_BASE_ID\n, TRIM(MFGORDERMATERIALLISTITEM.isProductDescription) as PROD_DESC\n, TRIM(MFGORDERMATERIALLISTITEM.ReferenceDesignator) as REF_DSGNR_CD\n, CAST(MFGORDERMATERIALLISTITEM.QtyRequired AS DECIMAL(18,4)) as REQ_QTY\n, CAST(MFGORDERMATERIALLISTITEM.Qty2Required AS DECIMAL(18,4)) as REQ_2_QTY\n, CAST(NULL AS STRING) as RESV_ID\n, CAST(NULL AS STRING) as RESV_ITM_NUM\n, TRIM(MFGORDERMATERIALLISTITEM.RouteStepId) as RTE_STEP_ID\n, CAST(MFGORDERMATERIALLISTITEM.ScrapPercent AS DECIMAL(9,4)) as SCRAP_PCT\n, CAST(MFGORDERMATERIALLISTITEM.SetupQty AS DECIMAL(18,4)) as SETUP_QTY\n, CAST(MFGORDERMATERIALLISTITEM.SetupQty2 AS DECIMAL(18,4)) as SETUP_2_QTY\n, CAST(MFGORDERMATERIALLISTITEM.SubFactory as BOOLEAN ) as SUB_FCTRY_IND\n, TRIM(MFGORDERMATERIALLISTITEM.UOMId) as UOM_ID\n, TRIM(MFGORDERMATERIALLISTITEM.UOM2Id) as UOM_2_ID\n, CAST(MFGORDERMATERIALLISTITEM.VendorControl as BOOLEAN ) as VEND_CNTL_IND\n, CAST(NULL AS BOOLEAN) as WHSE_IND\nFROM  {Config.sourceDatabase}.MFGORDERMATERIALLISTITEM as MFGORDERMATERIALLISTITEM WHERE MFGORDERMATERIALLISTITEM._deleted_ =  'F'  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    
