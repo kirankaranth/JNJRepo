@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "dev_md_l1"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "mes"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "mes"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MES_MD_PRDTN_STS_2"
+      },
+      "connections" : [ {
+        "id" : "0c3339d6-7f36-41ec-8a89-5bc781488de9",
+        "source" : "256682a2-4672-43dc-a343-6d03ec266e99",
+        "sourcePort" : "cd92ba0a-beac-4fb1-9489-9708f185e8c0",
+        "target" : "168675b4-c0c8-4825-a7be-b50e74ab761e",
+        "targetPort" : "71c9f809-a636-44a4-829c-cdfa85d28d3c"
+      }, {
+        "id" : "bd7c1565-7e4a-402d-be6d-516ef7182ae3",
+        "source" : "b488336e-a772-4a4a-84d5-327fb3cd2c9e",
+        "sourcePort" : "66f8ac5e-805a-4af9-8053-91b852091de2",
+        "target" : "256682a2-4672-43dc-a343-6d03ec266e99",
+        "targetPort" : "d5504785-c004-4e72-a5b1-f59b2a556f72"
+      } ],
+      "processes" : {
+        "168675b4-c0c8-4825-a7be-b50e74ab761e" : {
+          "id" : "168675b4-c0c8-4825-a7be-b50e74ab761e",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MES_MD_PRDTN_STS",
+            "slug" : "MES_MD_PRDTN_STS",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "71c9f809-a636-44a4-829c-cdfa85d28d3c",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MES_MD_PRDTN_STS"
+          }
+        },
+        "256682a2-4672-43dc-a343-6d03ec266e99" : {
+          "id" : "256682a2-4672-43dc-a343-6d03ec266e99",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "d5504785-c004-4e72-a5b1-f59b2a556f72",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "cd92ba0a-beac-4fb1-9489-9708f185e8c0",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'PRDTN_STS_ID',PRDTN_STS_ID))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'PRDTN_STS_ID',PRDTN_STS_ID)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "b488336e-a772-4a4a-84d5-327fb3cd2c9e" : {
+          "id" : "b488336e-a772-4a4a-84d5-327fb3cd2c9e",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MES_MD_PRDTN_STS",
+            "slug" : "sql_MES_MD_PRDTN_STS",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "66f8ac5e-805a-4af9-8053-91b852091de2",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    select\n   '{Config.sourceSystem}' AS SRC_SYS_CD,\ntrim(ProductionStatus.productionstatusid) AS PRDTN_STS_ID,\ntrim(ProductionStatus.mfgorderid) AS MFG_ORDR_ID,\ntrim(ProductionStatus.productid) AS PROD_ID,\ntrim(ProductionStatus.productbaseid) AS PROD_BASE_ID,\ntrim(ProductionStatus.resourceid) AS RSRS_ID,\nCAST(trim(ProductionStatus.availability) AS BOOLEAN) AS AVLBLTY_IND,\nCAST(ProductionStatus.CHANGECOUNT AS INT) AS CHG_CNT,\ntrim(ProductionStatus.comments) AS COMT_TXT,\ntrim(ProductionStatus.CONTAINERID) AS CNTNR_ID,\nNULL AS DATA_CLCT_DEF_ID,\nNULL AS EXPT_IMPT_KEY_VAL,\nCAST(trim(ProductionStatus.inprocess) AS BOOLEAN) AS IN_PRCS_IND,\nNULL AS IS_OEE_LOSS_CAT_CD,\nNULL AS IS_TCKG_CNTNR_ID,\nCase when ProductionStatus.LASTACTIVITYDATE = '0000000000' then null else to_timestamp(left(ProductionStatus.LASTACTIVITYDATE ,14),\\\"yyyyMMddHHmmss\\\") end AS LAST_ACTV_DTTM,\nCase when ProductionStatus.LASTACTIVITYDATEGMT = '0000000000' then null else to_timestamp(left(ProductionStatus.LASTACTIVITYDATEGMT ,14),\\\"yyyyMMddHHmmss\\\") end AS LAST_ACTV_GMT_DTTM,\ntrim(ProductionStatus.lastrevtxnid) AS LAST_REVERSABLE_TXN_ID,\nCase when ProductionStatus.LASTSTATUSCHANGEDATE = '0000000000' then null else to_timestamp(left(ProductionStatus.LASTSTATUSCHANGEDATE ,14),\\\"yyyyMMddHHmmss\\\") end AS LAST_STS_CHG_DTTM,\nCase when ProductionStatus.LASTSTATUSCHANGEDATEGMT = '0000000000' then null else to_timestamp(left(ProductionStatus.LASTSTATUSCHANGEDATEGMT ,14),\\\"yyyyMMddHHmmss\\\") end as LAST_STS_CHG_GMT_DTTM,\nCase when ProductionStatus.LASTTHRUPUTDATE = '0000000000' then null else to_timestamp(left(ProductionStatus.LASTTHRUPUTDATE,8),\\\"yyyyMMdd\\\") end AS LAST_THRUPUT_DTTM,\nCase when ProductionStatus.LASTTHRUPUTDATEGMT = '0000000000' then null else to_timestamp(left(ProductionStatus.LASTTHRUPUTDATEGMT,8),\\\"yyyyMMdd\\\") end AS LAST_THRUPUT_GMT_DTTM,\nNULL AS LOT_ID,\ntrim(ProductionStatus.ccfmaintenancereqid) AS MAINT_RQST_ID,\ntrim(ProductionStatus.ccfMaintenanceStatusId) AS MAINT_STS_ID,\ntrim(ProductionStatus.cdotypeid) AS OBJ_TYPE_ID,\ntrim(ProductionStatus.reasonid) AS RSN_ID,\ntrim(ProductionStatus.resourcestate) AS RSRS_ST_CD,\nCAST(ProductionStatus.RUN AS INT) AS RUN_NBR,\ntrim(ProductionStatus.setupbaseid) AS SETUP_BASE_ID,\ntrim(ProductionStatus.setupid) AS SETUP_ID,\ntrim(ProductionStatus.statusid) AS STS_ID,\nCAST(ProductionStatus.TOTALTHRUPUTQTY AS DECIMAL(18,4)) AS TOT_THRUPUT_QTY,\nCAST(ProductionStatus.TOTALTHRUPUTQTY2 AS DECIMAL(18,4)) AS TOT_THRUPUT_2_QTY,\ntrim(ProductionStatus.uomid) AS UOM_ID,\ntrim(ProductionStatus.uom2id) AS UOM_2_ID,\ntrim(ProductionStatus.UPDATELASTSTATUSCHANGEDATE) aS UPDT_LAST_STS_CHG_DT_CD\nfrom {Config.sourceDatabase}.ProductionStatus as ProductionStatus\nWHERE ProductionStatus._deleted_='F'\n  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    
