@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "dev_md_l1"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "mvc"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "mvc"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MES_MD_FCTRY_2"
+      },
+      "connections" : [ {
+        "id" : "091ba75b-3904-4382-9eea-ac2d8876506a",
+        "source" : "106d2f75-8f5c-4466-91a6-349b27d46a6a",
+        "sourcePort" : "686f3deb-d33f-4c17-b40e-495d6903b22a",
+        "target" : "a30daf96-3df8-4193-a814-ab50b428e03a",
+        "targetPort" : "027f0804-b1e7-49f0-87ff-9ebe5a08c09b"
+      }, {
+        "id" : "927dc795-7e04-48ab-9b3a-7fc1f5a98db8",
+        "source" : "3ee72ddf-eb2a-4ee8-b4d1-aea3d29636e0",
+        "sourcePort" : "8aa9fb50-c764-4833-834f-d14476ca42ca",
+        "target" : "106d2f75-8f5c-4466-91a6-349b27d46a6a",
+        "targetPort" : "70ce36a0-0c8a-4537-a9fe-c84558368e2d"
+      } ],
+      "processes" : {
+        "a30daf96-3df8-4193-a814-ab50b428e03a" : {
+          "id" : "a30daf96-3df8-4193-a814-ab50b428e03a",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MES_MD_FCTRY",
+            "slug" : "MES_MD_FCTRY",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "027f0804-b1e7-49f0-87ff-9ebe5a08c09b",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MES_MD_FCTRY"
+          }
+        },
+        "106d2f75-8f5c-4466-91a6-349b27d46a6a" : {
+          "id" : "106d2f75-8f5c-4466-91a6-349b27d46a6a",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "70ce36a0-0c8a-4537-a9fe-c84558368e2d",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "686f3deb-d33f-4c17-b40e-495d6903b22a",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'FCTRY_ID',FCTRY_ID))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'FCTRY_ID',FCTRY_ID)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "3ee72ddf-eb2a-4ee8-b4d1-aea3d29636e0" : {
+          "id" : "3ee72ddf-eb2a-4ee8-b4d1-aea3d29636e0",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MES_MD_FCTRY",
+            "slug" : "sql_MES_MD_FCTRY",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "8aa9fb50-c764-4833-834f-d14476ca42ca",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT '{Config.sourceSystem}' AS SRC_SYS_CD\n, TRIM(FACTORY.FACTORYID) as FCTRY_ID\n, TRIM(FACTORY.ENTERPRISEID) as ENTRP_ID\n, TRIM(FACTORY.ORGANIZATIONID) as ORG_ID\n, CAST(NULL AS STRING) as ADJ_RSN_MAT_DFLT_ID\n, TRIM(FACTORY.APPLICATIONACCOUNTNAMEID) as APPL_ACCT_NM_ID\n, TRIM(FACTORY.APPLICATIONACCOUNTPASSWORD) as APPL_ACCT_PSWRD_TXT\n, TRIM(FACTORY.ARCHIVEINTRANSIT) as ARCH_IN_TRNST_TXT\n, TRIM(FACTORY.AUTOSIGNUSERID) as AUTO_SIGN_USRID\n, CAST(NULL AS STRING) as AUTO_STRT_SETS_ID\n, CAST(NULL AS STRING) as BRAIDING_INV_OPR_ID\n, CAST(NULL AS STRING) as BULK_INV_OPR_ID\n, CAST(NULL AS STRING) as CARR_NUMING_RULE_ID\n, CAST(NULL AS STRING) as CARR_WRKF_ID\n, TRIM(FACTORY.CASEADJUSTMENTLOSSREASONGROUID) as CASE_ADJ_LOSS_RSN_GRP_ID\n, TRIM(FACTORY.CASECODE) as CASE_CD\n, TRIM(FACTORY.CASELABELTEMPLATEGROUPID) as CASE_LBL_TEMPL_GRP_ID\n, INT(FACTORY.CHANGECOUNT) as CHG_CNT\n, CAST(NULL AS BOOLEAN) as CHG_JOB_STS_AUTMT_IND\n, CAST(NULL AS STRING) as CHG_MGT_APPL_ID\n, TRIM(FACTORY.CHANGESTATUSID) as CHG_STS_ID\n, TRIM(FACTORY.CHECKLISTHEATSEALID) as CKLST_HEAT_SEAL_ID\n, TRIM(FACTORY.CHECKLISTHYDRATIONID) as CKLST_HYDRATION_ID\n, TRIM(FACTORY.CHECKLISTINJECTIONMOLDINGID) as CKLST_INJECTION_MOLDING_ID\n, TRIM(FACTORY.CHECKLISTLENSFABRICATIONID) as CKLST_LEN_FABRICATION_ID\n, TRIM(FACTORY.CHECKLISTPOSTHYDRATIONID) as CKLST_POST_HYDRATION_ID\n, TRIM(FACTORY.CHECKLISTQAID) as CKLST_QA_ID\n, TRIM(FACTORY.CHECKLISTSECONDARYPACKINGID) as CKLST_SEC_PACK_ID\n, TRIM(FACTORY.CHECKLISTSTERILIZATIONID) as CKLST_STERILIZATION_ID\n, CAST(NULL AS STRING) as CHEM_TIP_INV_OPR_ID\n, TRIM(FACTORY.CLASSIFICATIONMISMATCHEDUPCID) as CLSN_MSMCHED_UPC_ID\n, CAST(NULL AS STRING) as CMMS_DATA_TRNSP_ID\n, CAST(NULL AS STRING) as CMMS_DFLT_DSTN_ID\n, CAST(NULL AS STRING) as CMMS_MSG_DFLT_SNDR_TXT\n, CAST(NULL AS STRING) as COATING_INV_OPR_ID\n, CAST(NULL AS STRING) as CMPLT_ORDR_STS_ID\n, TRIM(FACTORY.CONTAINERLEVELID) as CNTNR_LVL_ID\n, TRIM(FACTORY.CONTAINERNUMBERINGRULEID) as CNTNR_NUMING_RULE_ID\n, TRIM(FACTORY.DATACOLLECTIONDEFFOILLABBASEID) as DATA_CLCT_DEF_FOIL_LAB_BASE_ID\n, TRIM(FACTORY.DATACOLLECTIONDEFFOILLABELID) as DATA_CLCT_DEF_FOIL_LBL_ID\n, TRIM(FACTORY.DATACOLLECTIONDEFPLCDHRBASEID) as DATA_CLCT_DEF_PLCDHR_BASE_ID\n, TRIM(FACTORY.DATACOLLECTIONDEFPLCDHRID) as DATA_CLCT_DEF_PLCDHR_ID\n, TRIM(FACTORY.DATACOLLECTIONDEFPOSTHYDBASEID) as DATA_CLCT_DEF_POST_HYD_BASE_ID\n, TRIM(FACTORY.DATACOLLECTIONDEFPOSTHYDID) as DATA_CLCT_DEF_POST_HYD_ID\n, TRIM(FACTORY.DATATRANSPORTDCSID) as DATA_TRNSP_DCS_ID\n, CAST(NULL AS STRING) as DFLT_AUTO_PE_DESC\n, CAST(NULL AS STRING) as DFLT_DATA_PT_NM\n, CAST(NULL AS STRING) as DFLT_INV_LOC_ID\n, CAST(NULL AS STRING) as DFLT_ISS_DIFF_RSN_ID\n, TRIM(FACTORY.DEFAULTISSUEREASONID) as DFLT_ISS_RSN_ID\n, TRIM(FACTORY.DEFAULTLOTREASONID) as DFLT_LOT_RSN_ID\n, CAST(NULL AS STRING) as DFLT_LOT_STRT_RSN_ID\n, CAST(NULL AS STRING) as DFLT_OWN_CD\n, TRIM(FACTORY.DEFAULTRECONADJUSTREASONID) as DFLT_RECON_ADJ_RSN_ID\n, CAST(NULL AS STRING) as DFLT_RMV_RSN_ID\n, CAST(NULL AS STRING) as DFLT_REPL_RSN_ID\n, CAST(NULL AS STRING) as DFLT_RUN_STRT_RSN_ID\n, TRIM(FACTORY.DESTROYREASONDEFAULTID) as DSTRY_RSN_DFLT_ID\n, TRIM(FACTORY.DETAINREASONSETPOINTMISMATCHID) as DETAIAN_RSN_SET_PT_MSMCH_ID\n, TRIM(FACTORY.DETAINREASONCARTONVERIFYFAILID) as DETAIN_RSN_CTN_VFY_FAIL_ID\n, TRIM(FACTORY.DETAINREASONEXPIRATIONMISMATID) as DETAIN_RSN_EXPN_MSMCH_ID\n, TRIM(FACTORY.DETAINREASONFOILVERIFYFAILID) as DETAIN_RSN_FOIL_VFY_FAIL_ID\n, TRIM(FACTORY.DETAINREASONFORCEMOVESTERIID) as DETAIN_RSN_FOR_CE_MOVE_STERI_I\n, TRIM(FACTORY.DETAINREASONFORRAWMATERIALID) as DETAIN_RSN_FOR_RAW_MATL_ID\n, TRIM(FACTORY.DETAINREASONHIGHSPECID) as DETAIN_RSN_HIGH_SPEC_ID\n, TRIM(FACTORY.DETAINREASONINPROCESSSPLITID) as DETAIN_RSN_IN_PRCS_SPLT_ID\n, TRIM(FACTORY.DETAINREASONINTROMASTERATQCID) as DETAIN_RSN_INTRO_MSTR_AT_QC_ID\n, TRIM(FACTORY.DETAINREASONLOTINTRODUCEFEID) as DETAIN_RSN_LOT_INTRO_FE_ID\n, TRIM(FACTORY.DETAINREASONLOTINTRODUCEDID) as DETAIN_RSN_LOT_INTRO_ID\n, TRIM(FACTORY.DETAINREASONLOTNOTINHSID) as DETAIN_RSN_LOT_NOT_IN_HS_ID\n, TRIM(FACTORY.DETAINREASONLOWSPECID) as DETAIN_RSN_LOW_SPEC_ID\n, TRIM(FACTORY.DETAINREASONMANUALSTCHKLISTID) as DETAIN_RSN_MAN_ST_CKLST_ID\n, TRIM(FACTORY.DETAINREASONNEWMASTERID) as DETAIN_RSN_NEW_MSTR_ID\n, TRIM(FACTORY.DETAINREASONNOCARTONID) as DETAIN_RSN_NO_CTN_ID\n, TRIM(FACTORY.DETAINREASONNODATAID) as DETAIN_RSN_NO_DATA_ID\n, TRIM(FACTORY.DETAINREASONNODHRORFOILDATAID) as DETAIN_RSN_NO_DHR_OR_FOIL_DATA\n, TRIM(FACTORY.DETAINREASONNOPDDCDATAID) as DETAIN_RSN_NO_PDDC_DATA_ID\n, TRIM(FACTORY.DETAINREASONNOPLCVERSIONDATAID) as DETAIN_RSN_NO_PLC_VERS_DATA_ID\n, TRIM(FACTORY.DETAINREASONNONSTANDARDMOVEID) as DETAIN_RSN_NON_STD_MOVE_ID\n, TRIM(FACTORY.DETAINREASONNOTREADYFORSTERIID) as DETAIN_RSN_NOT_READY_FOR_STERI\n, TRIM(FACTORY.DETAINREASONPLCVERSIONMISMATID) as DETAIN_RSN_PLC_VERS_MSMCH_ID\n, TRIM(FACTORY.DETAINREASONPRODUCTNOTVALIDAID) as DETAIN_RSN_PROD_NOT_VLDD_ID\n, TRIM(FACTORY.DETAINREASONRECONVARABOVETOLID) as DETAIN_RSN_RECON_VAR_ABV_TOL_I\n, TRIM(FACTORY.DETAINREASONRECONVARBELOWTOLID) as DETAIN_RSN_RECON_VAR_BLW_TOL_I\n, TRIM(FACTORY.DETAINREASONRECONVARIANCEID) as DETAIN_RSN_RECON_VAR_ID\n, TRIM(FACTORY.DETAINREASONSTARTQTYCHANGEID) as DETAIN_RSN_STRT_QTY_CHG_ID\n, TRIM(FACTORY.DETAINREASONUPCMISMATCHID) as DETAIN_RSN_UPC_MSMCH_ID\n, TRIM(FACTORY.DISPATCHRULEID) as DSPCH_RULE_ID\n, CAST(NULL AS BOOLEAN) as DSPLY_GENL_MSG_IND\n, CAST(NULL AS BOOLEAN) as ENABL_CARR_TCKG_IND\n, TRIM(FACTORY.EXCLUSIVEMASTERLOTCHECKLISTID) as EXCLV_MSTR_LOT_CKLST_ID\n, CAST(NULL AS STRING) as EXTRUSION_INV_OPR_ID\n, TRIM(FACTORY.DESCRIPTION) as FCTRY_DESC\n, TRIM(FACTORY.FACTORYNAME) as FCTRY_NM\n, CAST(NULL AS STRING) as GENL_MSG_TXT\n, CAST(NULL AS STRING) as GERMAN_EXTRUSION_INV_OPR_ID\n, CAST(NULL AS STRING) as HACOBA_INV_OPR_ID\n, CAST(NULL AS STRING) as HEAT_TIP_INV_OPR_ID\n, TRIM(FACTORY.ICONID) as ICON_ID\n, CAST(FACTORY.ISFROZEN as BOOLEAN ) as IS_FRZN_IND\n, CAST(NULL AS BOOLEAN) as IS_PREACTOR_ENABL_IND\n, CAST(NULL AS BOOLEAN) as IS_VLD_MATL_QUE_QTY_IND\n, TRIM(FACTORY.ISSUEDIFFERENCEREASONDEFAULTID) as ISS_DIFF_RSN_DFLT_ID\n, CAST(NULL AS STRING) as JDE_DATA_TRNSP_ID\n, CAST(NULL AS STRING) as JOB_SCHED_STS_MDL_ID\n, TRIM(FACTORY.LIMERICKLOTAUTOSIGNID) as LIMERICK_LOT_AUTO_SIGN_ID\n, CAST(FACTORY.LIMERICKORDERQTY AS DECIMAL(18,4)) as LIMERICK_ORDR_QTY\n, TRIM(FACTORY.LIMERICKREWORKLINE) as LIMERICK_RWRK_LINE_NM\n, CAST(NULL AS BOOLEAN) as LCL_SCHDLNG_ENABL_IND\n, TRIM(FACTORY.LOCATIONPRODCONVERSIONREQFILLE) as LOC_PROD_CONV_REQ_FILLED_TXT\n, TRIM(FACTORY.LOCATIONPRODCONVERSIONREQ) as LOC_PROD_CONV_REQ_TXT\n, TRIM(FACTORY.LOCATIONRETURNFROMDISTRIBUTION) as LOC_RTN_FROM_DSTN_TXT\n, TRIM(FACTORY.LOCATIONREWORK) as LOC_RWRK_TXT\n, TRIM(FACTORY.LOSSREASONQTYOVERRIDEID) as LOSS_RSN_QTY_OVRD_ID\n, TRIM(FACTORY.LOSSREASONREJECTSID) as LOSS_RSN_RJCT_ID\n, TRIM(FACTORY.LOSSREASONSAMPLESID) as LOSS_RSN_SAMPS_ID\n, TRIM(FACTORY.LOSSREASONVARIANCEID) as LOSS_RSN_VAR_ID\n, TRIM(FACTORY.LOTDETAINREASONINPROCESSID) as LOT_DETAIN_RSN_IN_PRCS_ID\n, TRIM(FACTORY.LOTDETAINSTERIVERIFAILEDID) as LOT_DETAIN_STERILIZATION_VERIF\n, TRIM(FACTORY.LOTENDREASONINTRODUCEDID) as LOT_END_RSN_INTRO_ID\n, TRIM(FACTORY.LOTRACKDETAINREASONID) as LOT_RACK_DETAIN_RSN_ID\n, TRIM(FACTORY.LOTRACKQTYADJUSTREASONID) as LOT_RACK_QTY_ADJ_RSN_ID\n, TRIM(FACTORY.LOTREASONMOVEINTROID) as LOT_RSN_MOVE_INTRO_ID\n, TRIM(FACTORY.LOTREASONMOVEOUTOFSTERIID) as LOT_RSN_MOVE_OUT_OF_STERILIZAT\n, TRIM(FACTORY.MASTERLOTOWNERID) as MSTR_LOT_OWN_ID\n, TRIM(FACTORY.MASTERLOTSTARTREASONID) as MSTR_LOT_STRT_RSN_ID\n, CAST(NULL AS BOOLEAN) as MATL_MNG_ENABL_IND\n, INT(FACTORY.MAXCASESEQ) as MAX_CASE_SEQ_NBR\n, CAST(NULL AS INT) as MAX_LBR_EDIT_DAYS_CNT\n, INT(FACTORY.MAXPALLETSEQ) as MAX_PLLT_SEQ_NBR\n, TRIM(FACTORY.MAXTIMESINCEMSGSRETRIEVED) as MAX_TIMES_IN_CE_MSGS_RTRV_VAL\n, TRIM(FACTORY.MFGCALENDARID) as MFG_CAL_ID\n, TRIM(FACTORY.MFG_PLANT_LOCATION_ID) as MFG_PLNT_LOC_ID\n, TRIM(FACTORY.MFG_SOURCE_NAME) as MFG_SRC_NM\n, CASE WHEN FACTORY.MONOMERDISPLAYDATE = '0000000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(left(FACTORY.MONOMERDISPLAYDATE,19),\\\"MM/dd/yyyy HH:mm:ss\\\") END AS MONOMER_DSPLY_DTTM\n, INT(FACTORY.MONOMER_SPLITCOUNT) as MONOMER_SPLT_CNT\n, TRIM(FACTORY.MULTICONTAINERUTILITYSPEBASEID) as MULTI_CNTNR_UTIL_SPEC_BASE_ID\n, TRIM(FACTORY.MULTICONTAINERUTILITYSPECID) as MULTI_CNTNR_UTIL_SPEC_ID\n, CAST(NULL AS STRING) as NCR_FC_AMBNT_ID\n, CAST(NULL AS STRING) as NCR_FC_DRY_ID\n, CAST(NULL AS STRING) as NCR_FC_LGT_ID\n, CAST(NULL AS STRING) as NCR_FC_NITROGEN_ID\n, CAST(NULL AS STRING) as NCR_FC_POST_ANNEALING_ID\n, CAST(NULL AS STRING) as NCR_FC_PRE_ANNEALING_ID\n, TRIM(FACTORY.NOTES) as NOTES_TXT\n, TRIM(FACTORY.CDOTYPEID) as OBJ_TYPE_ID\n, CAST(NULL AS STRING) as OEE_SETS_ID\n, CAST(NULL AS STRING) as OPR__CMPLT_DFLT_QTY_ADJ_RSN_ID\n, TRIM(FACTORY.PALLETCODE) as PLLT_CD\n, TRIM(FACTORY.PALLETLABELTEMPLATEGROUPID) as PLLT_LBL_TEMPL_GRP_ID\n, CAST(NULL AS STRING) as PE_FM_AMBNT_ID\n, CAST(NULL AS STRING) as PE_FM_DRY_ID\n, CAST(NULL AS STRING) as PE_FM_LGT_ID\n, CAST(NULL AS STRING) as PE_FM_NITROGEN_ID\n, CAST(NULL AS STRING) as PE_FM_POST_ANNEALING_ID\n, CAST(NULL AS STRING) as PE_FM_PRE_ANNEALING_ID\n, TRIM(FACTORY.PRINTQUEUEID) as PRT_QUE_ID\n, CAST(FACTORY.PRODUCTCONVFROMDISTRIBALLOWED as BOOLEAN ) as PROD_CONV_FROM_DSTN_ALLW_IND\n, TRIM(FACTORY.PRODCONVLOCATIONFILLEDID) as PROD_CONV_LOC_FILLED_ID\n, TRIM(FACTORY.PRODCONVLOCATIONREQ) as PROD_CONV_LOC_REQ_TXT\n, TRIM(FACTORY.PRODCONVNOTFICATIONTARGETID) as PROD_CONV_NOTFICATION_TRGT_ID\n, TRIM(FACTORY.PRODCONVERTREQEMAILNOTIFICATID) as PROD_CONV_REQ_EML_NTF_ID\n, TRIM(FACTORY.PRODUCTGROUPCARTONID) as PROD_GRP_CTN_ID\n, TRIM(FACTORY.PRODUCTGROUPCASEID) as PROD_GRP_CASE_ID\n, TRIM(FACTORY.PRODUCTGROUPFOILID) as PROD_GRP_FOIL_ID\n, TRIM(FACTORY.PRODUCTGROUPPOLYPROPYLENEID) as PROD_GRP_POLYPROPYLENE_ID\n, TRIM(FACTORY.PRODUCTGROUPPOLYSTYRENEID) as PROD_GRP_POLYSTYRENE_ID\n, TRIM(FACTORY.PRODUCTGROUPRMMID) as PROD_GRP_RMM_ID\n, TRIM(FACTORY.PRODUCTGROUPSALINEID) as PROD_GRP_SALINE_ID\n, TRIM(FACTORY.PRODUCTGROUPTWEENID) as PROD_GRP_TWEEN_ID\n, TRIM(FACTORY.RELEASEREASONNAMECLINICALID) as RLSE_RSN_NM_CLNC_ID\n, TRIM(FACTORY.REPORTHEADING) as RPT_HD_TXT\n, CAST(FACTORY.REQUIRELOCATION as BOOLEAN ) as REQ_LOC_IND\n, TRIM(FACTORY.RESETCASEVERIFYTIME) as RST_CASE_VFY_TIME_VAL\n, CAST(FACTORY.RESIDENCETIMECHECKENABLED as BOOLEAN ) as RSDN_TIME_CHK_ENABL_IND\n, INT(FACTORY.RETENTIONDAYS) as RETN_DAYS_CNT\n, CAST(FACTORY.RETURNCASEVERIFYCONVERTEDLOTS as BOOLEAN ) as RTN_CASE_VFY_CNV_LOTS_IND\n, TRIM(FACTORY.RETURNFROMDISTQTYADJUSTREASOID) as RTN_FROM_DIST_QTY_ADJ_RSN_ID\n, TRIM(FACTORY.RETURNFROMDISTREWORKREASONID) as RTN_FROM_DSTN_RWRK_RSN_ID\n, TRIM(FACTORY.REWORKSTEPNAME) as RWRK_STEP_NM\n, TRIM(FACTORY.SAPRESTRICTED) as SAP_RSTK_CD\n, TRIM(FACTORY.SAPUNRESTRICTED) as SAP_UNRSTK_CD\n, TRIM(FACTORY.SMTPTRANSPORTID) as SMTP_TRNSP_ID\n, TRIM(FACTORY.SPLITLOTSTARTREASONID) as SPLT_LOT_STRT_RSN_ID\n, CAST(NULL AS STRING) as SPOOL_QTY_ADJ_RSN_ID\n, TRIM(FACTORY.STERIRUNDCDID) as STERILIZATION_RUN_DCD_ID\n, TRIM(FACTORY.TRAININGREQGROUPID) as TRAIN_REQ_GRP_ID\n, TRIM(FACTORY.UNKNOWNLOTREASONID) as UNKWN_LOT_RSN_ID\n, TRIM(FACTORY.UOMID) as UOM_ID\n, TRIM(FACTORY.UPDATESTARTQTYADJUSTREASONID) as UPDT_STRT_QTY_ADJ_RSN_ID\n, TRIM(FACTORY.VARIANCETOLERANCEMINUS) as VAR_TLRNC_MINUS_VAL\n, TRIM(FACTORY.VARIANCETOLERANCEPLUS) as VAR_TLRNC_PLUS_VAL\n, TRIM(FACTORY.WORKFLOWBASEID) as WRKF_BASE_ID\n, TRIM(FACTORY.WORKFLOWID) as WRKF_ID\n, TRIM(FACTORY.WIPMSGDEFMGRID) as WIP_MSG_DEF_MGR_ID\n, CAST(NULL AS STRING) as ETH_SMTP_TRNSP_ID\nFROM  {Config.sourceDatabase}.FACTORY as FACTORY \nWHERE FACTORY._deleted_ =  'F'\n  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    
