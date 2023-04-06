@@ -41,13 +41,12 @@ Reconnect to Databrick or Reconnect to Databrick views
     Run keyword if      ${Connection}==True      Log to console  RECONNECTED SUCCESSFULLY
 
 I expect that the target table contains required number of columns
-    [Arguments]     ${table_number_of_columns}  ${tables}
-    FOR     ${result}   IN  @{tables}
+    [Arguments]     ${COLUMN_COUNTS}     ${LIST_TABLES}
+    FOR     ${result}   IN  @{LIST_TABLES}
     ${table}=  Set Variable    ${result}
-    ${number_of_columns}=     get from dictionary     ${table_number_of_columns}    ${table}
+    ${number_of_columns}=     get from dictionary     ${COLUMN_COUNTS}    ${table}
     Validate that the target table contains required number of columns    ${number_of_columns}  ${table}
     END
-
 
 Validate that the target table contains required number of columns
     [Arguments]     ${number_of_columns}    ${table}
@@ -75,8 +74,8 @@ Fail test and Log error
     Run Keyword And Continue On Failure     Should Be Equal As Strings   ${execution_status}     PASS
 
 I expect that columns are of the correct datatype
-    [Arguments]      ${tables}   ${ALL_COLUMNS_AND_DATATYPES}
-    FOR     ${result}   IN  @{tables}
+    [Arguments]      ${LIST_TABLES}   ${ALL_COLUMNS_AND_DATATYPES}
+    FOR     ${result}   IN  @{LIST_TABLES}
     ${table}=  Set Variable    ${result}
     ${COLUMNS_AND_DATATYPES}=     get from dictionary     ${ALL_COLUMNS_AND_DATATYPES}    ${table}
     Validate that columns are of the correct datatype     ${COLUMNS_AND_DATATYPES}   ${table}
@@ -102,8 +101,8 @@ Validate that columns are of the correct datatype
     log test to report per step     ${jira_id_tag}
 
 I expect that the EDM location is correct
-    [Arguments]    ${table_edm_location}    ${tables}
-    FOR     ${result}   IN  @{tables}
+    [Arguments]    ${table_edm_location}    ${LIST_TABLES}
+    FOR     ${result}   IN  @{LIST_TABLES}
     ${table}=  Set Variable    ${result}
     ${table_location}=     get from dictionary     ${table_edm_location}    ${table}
     Validate that EDM location is correct    ${table_location}    ${table}
@@ -133,3 +132,30 @@ Validate that EDM location is correct
     run keyword if  ${status}==False    Set test variable      ${execution_status}    FAIL
     Run Keyword And Continue On Failure     Should Be Equal As Strings   ${execution_status}     PASS
     log test to report per step     ${jira_id_tag}
+
+Update location to use proper syntax
+    [Arguments]    ${table_location}
+    ${temp} =	Fetch From Left      ${table_location}     ${Prod_env_loc}
+    ${temp2} =	Fetch From Right     ${table_location}     ${Prod_env_loc}
+    ${table_location}    Catenate    ${temp}${Prod_env}${temp2}
+    set test variable     ${table_location}
+    log       ${table_location}
+
+# Templates
+Validate that table has the correct number of columns
+    [Arguments]     ${COLUMN_COUNTS}      ${LIST_TABLES}    ${databrick_name}
+    Given I have access to Databricks database     ${databrick_name}
+    When I check that the requirements are implemented correctly
+    Then I expect that the target table contains required number of columns     ${COLUMN_COUNTS}     ${LIST_TABLES}
+
+Validate that the tables underlying files are in the correct ADLS location
+    [Arguments]    ${LIST_TABLES}    ${table_edm_location}   ${databrick_name}
+    Given I have access to Databricks database       ${databrick_name}
+    When I check that the requirements are implemented correctly
+    Then I expect that the EDM location is correct       ${table_edm_location}    ${LIST_TABLES}
+
+Validate that the columns are of correct datatype
+    [Arguments]   ${LIST_TABLES}    ${COLUMNS_AND_DATATYPES}     ${databrick_name}
+    Given I have access to Databricks database    ${databrick_name}
+    When I check that the requirements are implemented correctly
+    Then I expect that columns are of the correct datatype    ${LIST_TABLES}    ${COLUMNS_AND_DATATYPES}
