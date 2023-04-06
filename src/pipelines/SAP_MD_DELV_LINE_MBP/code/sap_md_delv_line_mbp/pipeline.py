@@ -7,7 +7,29 @@ from prophecy.utils import *
 from sap_md_delv_line_mbp.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    pass
+    df_DS_SAP_04_LIPS = DS_SAP_04_LIPS(spark)
+    df_MANDT_FILTER_LIPS = MANDT_FILTER_LIPS(spark, df_DS_SAP_04_LIPS)
+    df_DS_SAP_04_LIKP = DS_SAP_04_LIKP(spark)
+    df_MANDT_FILTER_LIKP = MANDT_FILTER_LIKP(spark, df_DS_SAP_04_LIKP)
+    df_DS_SAP_04_VBAK = DS_SAP_04_VBAK(spark)
+    df_MANDT_FILTER_VBAK = MANDT_FILTER_VBAK(spark, df_DS_SAP_04_VBAK)
+    df_DS_SAP_03_VBUP = DS_SAP_03_VBUP(spark)
+    df_MANDT_FILTER_VBUP = MANDT_FILTER_VBUP(spark, df_DS_SAP_03_VBUP)
+    df_DS_SAP_02_TVM4T = DS_SAP_02_TVM4T(spark)
+    df_MANDT_FILTER_TVM4T = MANDT_FILTER_TVM4T(spark, df_DS_SAP_02_TVM4T)
+    df_Join_1 = Join_1(
+        spark, 
+        df_MANDT_FILTER_LIPS, 
+        df_MANDT_FILTER_LIKP, 
+        df_MANDT_FILTER_VBAK, 
+        df_MANDT_FILTER_VBUP, 
+        df_MANDT_FILTER_TVM4T
+    )
+    df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_Join_1)
+    df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS_RENAME_FORMAT)
+    MD_DELV_LINE(spark, df_SET_FIELD_ORDER_REFORMAT)
+    df_DUPLICATE_CHECK = DUPLICATE_CHECK(spark, df_SET_FIELD_ORDER_REFORMAT)
+    df_DUPLICATE_CHECK_FILTER = DUPLICATE_CHECK_FILTER(spark, df_DUPLICATE_CHECK)
 
 def main():
     spark = SparkSession.builder\
