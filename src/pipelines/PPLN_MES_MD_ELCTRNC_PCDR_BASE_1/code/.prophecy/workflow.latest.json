@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "dev_md_l1"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "mec"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "mec"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MES_MD_ELCTRNC_PCDR_BASE_1"
+      },
+      "connections" : [ {
+        "id" : "7a8333c5-63e1-436b-9719-113f5c36b5eb",
+        "source" : "29c90459-ea34-43db-a304-56cb2c3c3964",
+        "sourcePort" : "66f2d4f7-d8d2-4f90-bb06-15e623930c53",
+        "target" : "33a161b1-fb01-4069-a8bc-e46f5b5b17a2",
+        "targetPort" : "72485ebd-e503-44be-9839-34d6f645d43d"
+      }, {
+        "id" : "285be0f9-c769-4511-9dec-23b704dc5c80",
+        "source" : "5e5d026d-0ca9-48a2-bef0-19e28a41cde6",
+        "sourcePort" : "2232f43e-f27f-4d49-8b7d-a1acc49d9523",
+        "target" : "29c90459-ea34-43db-a304-56cb2c3c3964",
+        "targetPort" : "f2e1d92e-a6e3-4541-bf0a-0676e6532d9a"
+      } ],
+      "processes" : {
+        "33a161b1-fb01-4069-a8bc-e46f5b5b17a2" : {
+          "id" : "33a161b1-fb01-4069-a8bc-e46f5b5b17a2",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MES_MD_ELCTRNC_PCDR_BASE",
+            "slug" : "MES_MD_ELCTRNC_PCDR_BASE",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "72485ebd-e503-44be-9839-34d6f645d43d",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MES_MD_ELCTRNC_PCDR_BASE"
+          }
+        },
+        "29c90459-ea34-43db-a304-56cb2c3c3964" : {
+          "id" : "29c90459-ea34-43db-a304-56cb2c3c3964",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "f2e1d92e-a6e3-4541-bf0a-0676e6532d9a",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "66f2d4f7-d8d2-4f90-bb06-15e623930c53",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'ELCTRNC_PCDR_BASE_ID',ELCTRNC_PCDR_BASE_ID))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'ELCTRNC_PCDR_BASE_ID',ELCTRNC_PCDR_BASE_ID)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "5e5d026d-0ca9-48a2-bef0-19e28a41cde6" : {
+          "id" : "5e5d026d-0ca9-48a2-bef0-19e28a41cde6",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MES_MD_ELCTRNC_PCDR_BASE",
+            "slug" : "sql_MES_MD_ELCTRNC_PCDR_BASE",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "2232f43e-f27f-4d49-8b7d-a1acc49d9523",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT '{Config.sourceSystem}' AS SRC_SYS_CD\n,trim(ElectronicProcedureBase.ELECTRONICPROCEDUREBASEID) AS ELCTRNC_PCDR_BASE_ID\n,cast(ElectronicProcedureBase.CHANGECOUNT AS INT) AS CHG_CNT\n,trim(ElectronicProcedureBase.ELECTRONICPROCEDURENAME) AS ELCTRNC_PCDR_NM\n,trim(ElectronicProcedureBase.ICONID) AS ICON_ID\n,trim(ElectronicProcedureBase.CDOTYPEID) AS OBJ_TYPE_ID\n,trim(ElectronicProcedureBase.REVOFRCDID) AS RVSN_ID\nFROM {Config.sourceDatabase}.ElectronicProcedureBase ElectronicProcedureBase\nWHERE ElectronicProcedureBase._deleted_='F'  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    
