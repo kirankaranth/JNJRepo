@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "dev_md_l1"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "cmw"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "cmw"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MES_MD_OPR_2"
+      },
+      "connections" : [ {
+        "id" : "0ee1716e-1dd5-444c-85d0-3ea696a74bec",
+        "source" : "704b1198-9c6b-4e47-921d-b45fa200a74e",
+        "sourcePort" : "b75adc48-2efc-4a1d-8934-4a9ddb7c0c39",
+        "target" : "5f4561ac-f50f-4c21-b068-040786cd038e",
+        "targetPort" : "232e5059-f4aa-4803-b722-a106da7e440d"
+      }, {
+        "id" : "10537004-99b6-4f96-a19a-a596b7a3b9d0",
+        "source" : "26e527c0-67bd-44c6-a519-f232ac945a45",
+        "sourcePort" : "283269cd-e3f7-4635-875c-95b029ffdc4e",
+        "target" : "704b1198-9c6b-4e47-921d-b45fa200a74e",
+        "targetPort" : "3b89894e-398e-40c5-8ca5-1b05bf6fd670"
+      } ],
+      "processes" : {
+        "5f4561ac-f50f-4c21-b068-040786cd038e" : {
+          "id" : "5f4561ac-f50f-4c21-b068-040786cd038e",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MES_MD_OPR",
+            "slug" : "MES_MD_OPR",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "232e5059-f4aa-4803-b722-a106da7e440d",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MES_MD_OPR"
+          }
+        },
+        "704b1198-9c6b-4e47-921d-b45fa200a74e" : {
+          "id" : "704b1198-9c6b-4e47-921d-b45fa200a74e",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "3b89894e-398e-40c5-8ca5-1b05bf6fd670",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "b75adc48-2efc-4a1d-8934-4a9ddb7c0c39",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'OPR_ID',OPR_ID))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'OPR_ID',OPR_ID)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "26e527c0-67bd-44c6-a519-f232ac945a45" : {
+          "id" : "26e527c0-67bd-44c6-a519-f232ac945a45",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MES_MD_OPR",
+            "slug" : "sql_MES_MD_OPR",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "283269cd-e3f7-4635-875c-95b029ffdc4e",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT '{Config.sourceSystem}' AS SRC_SYS_CD\n, TRIM(OPERATION.OPERATIONID) as OPR_ID\n, TRIM(OPERATION.ACTIONSMENUID) as ACTNS_MENU_ID\n, CAST(NULL AS BOOLEAN) as ALLW_OPR_ADJ_IND\n, CAST(NULL AS BOOLEAN) as ALLW_RWRK_IND\n, CAST(NULL AS STRING) as ALLW_GRADE_CD\n, TRIM(OPERATION.AUTOADJUSTLIMIT) as AUTO_ADJ_LMT_VAL\n, TRIM(OPERATION.AUTOADJUSTREASONID) as AUTO_ADJ_RSN_ID\n, TRIM(OPERATION.cscBatchProcessingTypeId) as BTCH_PRCSG_TYPE_ID\n, TRIM(OPERATION.cscBatchTypeReleaseVerificatId) as BTCH_TYPE_RLSE_VERIF_ID\n, TRIM(OPERATION.BONUSREASONSID) as BNS_RSN_ID\n, TRIM(OPERATION.BUYREASONSID) as BUY_RSN_ID\n, INT(OPERATION.CHANGECOUNT) as CHG_CNT\n, TRIM(OPERATION.CHANGESTATUSID) as CHG_STS_ID\n, CAST(NULL AS STRING) as CKLST_GRP_ID\n, CAST(NULL AS INT) as CMPLT_CNT\n, TRIM(OPERATION.COMPONENTDEFECTREASONSID) as CMPNT_DEFCT_RSN_ID\n, CAST(NULL AS STRING) as CNSMPTN_GRP_ID\n, TRIM(OPERATION.CONTAINERDEFECTREASONSID) as CNTNR_DEFCT_RSN_ID\n, TRIM(OPERATION.DEFAULTROLLUPREASONID) as DFLT_RLUP_RSN_ID\n, CAST(NULL AS INT) as DFLT_UNIT_PER_BOX_NBR\n, TRIM(OPERATION.DISPATCHRULEID) as DSPCH_RULE_ID\n, CAST(NULL AS STRING) as EES_OPR_TYPE_CD\n, CAST(NULL AS STRING) as ETH_SUBST_RSN_ID\n, TRIM(OPERATION.ICONID) as ICON_ID\n, TRIM(OPERATION.IMAGE) as IMG_TXT\n, CAST(NULL AS STRING) as IN_PRCS_CKLST_RST_GRP_ID\n, CAST(NULL AS STRING) as IN_PRCS_WRKF_BASE_ID\n, CAST(NULL AS STRING) as IN_PRCS_WRKF_ID\n, CAST(OPERATION.INTRANSIT as BOOLEAN ) as IN_TRNST_IND\n, TRIM(OPERATION.INVENTORYPOINT) as INV_PT_CD\n, CAST(NULL AS BOOLEAN) as IS_BK_END_IND\n, CAST(NULL AS BOOLEAN) as IS_BULK_PACK_IND\n, CAST(NULL AS BOOLEAN) as IS_FNL_INV_PT_IND\n, CAST(NULL AS BOOLEAN) as IS_FRN_END_IND\n, CAST(OPERATION.ISFROZEN as BOOLEAN ) as IS_FRZN_IND\n, CAST(NULL AS BOOLEAN) as IS_HEAT_SEAL_IND\n, CAST(NULL AS BOOLEAN) as IS_IN_PRCS_SPLT_OPR_IND\n, CAST(NULL AS BOOLEAN) as IS_MSTR_LOT_STGNG_OPR_IND\n, CAST(NULL AS BOOLEAN) as IS_PRE_QC_IND\n, CAST(NULL AS BOOLEAN) as IS_PROD_CONV_MULTI_STAGE_IND\n, CAST(NULL AS BOOLEAN) as IS_PROD_CONV_IND\n, CAST(NULL AS BOOLEAN) as IS_PROD_CONV_STGNG_IND\n, CAST(NULL AS BOOLEAN) as IS_QA_IND\n, CAST(NULL AS BOOLEAN) as IS_QC_IND\n, CAST(NULL AS BOOLEAN) as IS_SEC_PACK_IND\n, CAST(NULL AS BOOLEAN) as IS_SEC_PKG_STGNG_IND\n, CAST(NULL AS BOOLEAN) as IS_SPLT_INTRO_IND\n, CAST(NULL AS BOOLEAN) as IS_STGNG_IND\n, CAST(NULL AS BOOLEAN) as IS_STERI_STGNG_IND\n, CAST(NULL AS BOOLEAN) as IS_STERILIZATION_IND\n, CAST(NULL AS BOOLEAN) as IS_STERILIZER_IND\n, CAST(NULL AS STRING) as ISS_RSN_GRP_ID\n, CAST(NULL AS BOOLEAN) as LIMS_RLSE_REQ_IND\n, TRIM(OPERATION.LOCALREWORKREASONSID) as LCL_RWRK_RSN_ID\n, TRIM(OPERATION.LOSSREASONSID) as LOSS_RSN_ID\n, CAST(NULL AS STRING) as LOT_RSN_GRP_ID\n, CAST(NULL AS INT) as MAX_ALLW_GRADE_NBR\n, TRIM(OPERATION.ccfMIC) as MIC_CD\n, TRIM(OPERATION.NOTES) as NOTES_TXT\n, TRIM(OPERATION.CDOTYPEID) as OBJ_TYPE_ID\n, TRIM(OPERATION.DESCRIPTION) as OPR_DESC\n, TRIM(OPERATION.OPERATIONNAME) as OPR_NM\n, TRIM(OPERATION.OUTSIDESERVICEPOINT) as OUTSD_SRVC_PT_CD\n, CAST(NULL AS STRING) as PRT_QUE_1_ID\n, CAST(NULL AS STRING) as PRT_QUE_2_ID\n, CAST(NULL AS STRING) as PRT_QUE_3_ID\n, TRIM(OPERATION.PRINTQUEUEID) as PRT_QUE_ID\n, TRIM(OPERATION.QTYADJUSTREASONID) as QTY_ADJ_RSN_ID\n, CAST(OPERATION.REJECTINCOMINGNCCONTAINER as BOOLEAN ) as REJ_INCM_NC_CNTNR_IND\n, CAST(NULL AS STRING) as RMV_RSN_GRP_ID\n, TRIM(OPERATION.REWORKREASONSID) as RWRK_RSN_ID\n, CAST(NULL AS STRING) as SAMP_TYPE_REQ_ID\n, CAST(NULL AS STRING) as SAMP_TYPE_VERIF_ID\n, TRIM(OPERATION.SCHEDULINGDETAILID) as SCHDLNG_DTL_ID\n, CAST(NULL AS STRING) as SEALING_OPR_CD\n, TRIM(OPERATION.SELLREASONSID) as SEL_RSN_ID\n, CAST(NULL AS BOOLEAN) as SEND_OP_CMPLT_MSG_IND\n, TRIM(OPERATION.SHIPMENTDESTINATIONSID) as SHIP_DEST_ID\n, CAST(NULL AS STRING) as SUBST_RSN_ID\n, TRIM(OPERATION.SUMMARYTHRUPUT) as SUM_THRUPUT_VAL\n, TRIM(OPERATION.THRUPUTREPORTINGLEVELID) as THRUPUT_RPTG_LVL_ID\n, CAST(NULL AS BOOLEAN) as TRK_AMBNT_EXP_TIME_IND\n, CAST(NULL AS BOOLEAN) as TRK_DRY_EXP_TIME_IND\n, CAST(NULL AS BOOLEAN) as TRK_LGT_EXP_TIME_IND\n, CAST(NULL AS BOOLEAN) as TRK_NITROGEN_EXP_TIME_IND\n, CAST(NULL AS STRING) as TRK_POST_ANNEALING_EXP_TIME_IN\n, CAST(NULL AS BOOLEAN) as TRK_PRE_ANNEALING_EXP_TIME_IND\n, TRIM(OPERATION.TRAININGREQGROUPID) as TRAIN_REQ_GRP_ID\n, INT(OPERATION.ccfTrngRecentExpDays) as TRNG_RCNT_EXP_DAYS_CNT\n, TRIM(OPERATION.ccfTrngRecentId) as TRNG_RCNT_ID\n, CAST(OPERATION.USEQUEUE as BOOLEAN ) as USE_QUE_IND\n, CAST(NULL AS BOOLEAN) as USE_RACK_IND\n, CAST(NULL AS BOOLEAN) as VLD_SNGL_SPOOLS_IND\n, CAST(NULL AS BOOLEAN) as VLD_SPOOLS_IND\n, TRIM(OPERATION.WIPMSGDEFMGRID) as WIP_MSG_DEF_MGR_ID\n, TRIM(OPERATION.WORKCENTERID) as WRK_CTR_ID\nFROM  {Config.sourceDatabase}.OPERATION as OPERATION WHERE OPERATION._deleted_ =  'F'\n  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    
