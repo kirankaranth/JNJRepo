@@ -37,7 +37,6 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
           when((col("HSDAT") == lit("00000000")), lit(None)).otherwise(to_timestamp(col("HSDAT"), "yyyyMMdd"))
         )\
         .withColumn("DELV_BILL_STS_CD", trim(col("FKSTA")))\
-        .withColumn("DELV_CMPLT_IND", trim(col("SPE_GEN_ELIKZ")))\
         .withColumn("DELV_ICMPT_STS_CD", trim(col("UVVLK")))\
         .withColumn("DELV_STS_CD", trim(col("LFSTA")))\
         .withColumn("DELV_TOT_STS_CD", trim(col("LFGSA")))\
@@ -111,7 +110,6 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
             "#"
           )
         )\
-        .withColumn("ORIG_QTY_DELV_ITM", trim(col("ORMNG")).cast(DecimalType(18, 4)))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
         .withColumn("DAI_UPDT_DTTM", current_timestamp())\
