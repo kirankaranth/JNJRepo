@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "dev_md_l1"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "cmw"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "cmw"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MES_MD_RTE_STEP_2"
+      },
+      "connections" : [ {
+        "id" : "023c0ad6-4a1b-4480-ac1c-b61daadd483e",
+        "source" : "891193ff-b418-4f16-a19a-97d951ced794",
+        "sourcePort" : "b5e6ba6a-3734-4313-8c33-b378d6766b12",
+        "target" : "ad26ca53-0d13-446d-b313-98282554e062",
+        "targetPort" : "bdb61ab4-069e-4035-b6ed-ca7a6739b0c5"
+      }, {
+        "id" : "48ad2b6a-1995-4ff8-917f-5b1ee30fc6a0",
+        "source" : "6a0a34a5-7531-461f-ba56-c4afae791c32",
+        "sourcePort" : "e4b05002-f8df-4601-9014-cd6e438a91c8",
+        "target" : "891193ff-b418-4f16-a19a-97d951ced794",
+        "targetPort" : "e47f0650-f0bf-408f-a2f6-a3c6e6b720c0"
+      } ],
+      "processes" : {
+        "ad26ca53-0d13-446d-b313-98282554e062" : {
+          "id" : "ad26ca53-0d13-446d-b313-98282554e062",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MES_MD_RTE_STEP",
+            "slug" : "MES_MD_RTE_STEP",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "bdb61ab4-069e-4035-b6ed-ca7a6739b0c5",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MES_MD_RTE_STEP"
+          }
+        },
+        "891193ff-b418-4f16-a19a-97d951ced794" : {
+          "id" : "891193ff-b418-4f16-a19a-97d951ced794",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "e47f0650-f0bf-408f-a2f6-a3c6e6b720c0",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "b5e6ba6a-3734-4313-8c33-b378d6766b12",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'RTE_STEP_ID',RTE_STEP_ID))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'RTE_STEP_ID',RTE_STEP_ID)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "6a0a34a5-7531-461f-ba56-c4afae791c32" : {
+          "id" : "6a0a34a5-7531-461f-ba56-c4afae791c32",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MES_MD_RTE_STEP",
+            "slug" : "sql_MES_MD_RTE_STEP",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "e4b05002-f8df-4601-9014-cd6e438a91c8",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT\n     '{Config.sourceSystem}' AS SRC_SYS_CD,\ntrim(RouteStep.routestepid) AS RTE_STEP_ID,\nCAST(RouteStep.changecount AS INT) AS CHG_CNT,\nNULL AS DUR_PER_UNIT_VAL,\ntrim(RouteStep.erpoperation) AS ERP_OPR_TXT,\ntrim(RouteStep.erprouteid) AS ERP_RTE_ID,\nNULL AS EXPT_IMPT_KEY_VAL,\ncast(RouteStep.isfrozen AS BOOLEAN) AS IS_FRZN_IND,\ntrim(RouteStep.cdotypeid) AS OBJ_TYPE_ID,\ntrim(RouteStep.description) AS RTE_STEP_DESC,\ntrim(RouteStep.name) AS RTE_STEP_NM,\nNULL AS RUN_RT_OPT_CD,\ncast(RouteStep.sequence AS INT) AS SEQ_NBR,\nNULL AS SETUP_TIME_VAL,\nNULL AS TIME_PER_BTCH_VAL,\nNULL AS UNIT_PER_HR_VAL\nFROM {Config.sourceDatabase}.RouteStep RouteStep\nWHERE RouteStep._deleted_='F'  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    
