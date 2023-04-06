@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "dev_md_l1"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "mdy"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "mdy"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MES_MD_CNTNR_DEFCT_RSN_1"
+      },
+      "connections" : [ {
+        "id" : "ee5694b9-2975-495b-a670-7c985f8a0bc6",
+        "source" : "dae9f8e1-cd80-417d-89ce-2af8b1dd4878",
+        "sourcePort" : "5dac99a5-8963-4a73-9e63-9e08fd10ec49",
+        "target" : "2f692b5f-4909-469a-bb88-b0a61f873791",
+        "targetPort" : "09e06d02-cfbe-4efe-a4fb-3fe4ccaa0b12"
+      }, {
+        "id" : "35618089-dd55-4eab-af48-ac37bf13162a",
+        "source" : "afaec808-7b6b-4963-92fa-fc9519cc305b",
+        "sourcePort" : "a4f8ec66-199a-4150-8a9c-abb3bb6add63",
+        "target" : "dae9f8e1-cd80-417d-89ce-2af8b1dd4878",
+        "targetPort" : "d11e50bc-1dcc-45f3-8ad1-de33fd549c9d"
+      } ],
+      "processes" : {
+        "2f692b5f-4909-469a-bb88-b0a61f873791" : {
+          "id" : "2f692b5f-4909-469a-bb88-b0a61f873791",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MES_MD_CNTNR_DEFCT_RSN",
+            "slug" : "MES_MD_CNTNR_DEFCT_RSN",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "09e06d02-cfbe-4efe-a4fb-3fe4ccaa0b12",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MES_MD_CNTNR_DEFCT_RSN"
+          }
+        },
+        "dae9f8e1-cd80-417d-89ce-2af8b1dd4878" : {
+          "id" : "dae9f8e1-cd80-417d-89ce-2af8b1dd4878",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "d11e50bc-1dcc-45f3-8ad1-de33fd549c9d",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "5dac99a5-8963-4a73-9e63-9e08fd10ec49",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'CNTNR_DEFCT_RSN_ID',CNTNR_DEFCT_RSN_ID))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'CNTNR_DEFCT_RSN_ID',CNTNR_DEFCT_RSN_ID)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "afaec808-7b6b-4963-92fa-fc9519cc305b" : {
+          "id" : "afaec808-7b6b-4963-92fa-fc9519cc305b",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MES_MD_CNTNR_DEFCT_RSN",
+            "slug" : "sql_MES_MD_CNTNR_DEFCT_RSN",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "a4f8ec66-199a-4150-8a9c-abb3bb6add63",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT '{Config.sourceSystem}' AS SRC_SYS_CD\n, TRIM(CONTAINERDEFECTREASON.DefectReasonId) as CNTNR_DEFCT_RSN_ID\n, INT(CONTAINERDEFECTREASON.ChangeCount) as CHG_CNT\n, TRIM(CONTAINERDEFECTREASON.ChangeHistoryId) as CHG_HIST_ID\n, TRIM(CONTAINERDEFECTREASON.DefectReasonName) as CNTNR_DEFCT_RSN_NM\n, TRIM(CONTAINERDEFECTREASON.Description) as CNTNR_DEFCT_RSN_DESC\n, TRIM(CONTAINERDEFECTREASON.IconId) as ICON_ID\n, CAST(CONTAINERDEFECTREASON.IsFrozen as BOOLEAN ) as IS_FRZN_IND\n, TRIM(CONTAINERDEFECTREASON.Notes) as NOTES_TXT\n, TRIM(CONTAINERDEFECTREASON.CDOTypeId) as OBJ_TYPE_ID\nFROM {Config.sourceDatabase}.CONTAINERDEFECTREASON as CONTAINERDEFECTREASON\nWHERE CONTAINERDEFECTREASON._deleted_ =  'F'  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    
