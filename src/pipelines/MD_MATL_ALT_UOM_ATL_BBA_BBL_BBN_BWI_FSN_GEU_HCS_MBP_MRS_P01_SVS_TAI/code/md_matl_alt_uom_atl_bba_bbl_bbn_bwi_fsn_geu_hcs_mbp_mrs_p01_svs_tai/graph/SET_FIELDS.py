@@ -28,6 +28,7 @@ def SET_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("DAI_ETL_ID"), 
         col("DAI_CRT_DTTM"), 
         col("_l0_upt_"), 
+        col("_pk_"), 
         col("_pk_md5_"), 
         col("_l1_upt_"), 
         col("DAI_UPDT_DTTM")
