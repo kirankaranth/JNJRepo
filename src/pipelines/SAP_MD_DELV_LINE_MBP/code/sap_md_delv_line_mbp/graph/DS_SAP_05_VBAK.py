@@ -5,5 +5,5 @@ from prophecy.libs import typed_lit
 from sap_md_delv_line_mbp.config.ConfigStore import *
 from sap_md_delv_line_mbp.udfs.UDFs import *
 
-def DS_SAP_04_LIPS(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM {Config.sourceDatabase}.lips WHERE _deleted_ = 'F'")
+def DS_SAP_05_VBAK(spark: SparkSession) -> DataFrame:
+    return spark.sql(f"SELECT * FROM mbp.vbak WHERE _deleted_ = 'F'")

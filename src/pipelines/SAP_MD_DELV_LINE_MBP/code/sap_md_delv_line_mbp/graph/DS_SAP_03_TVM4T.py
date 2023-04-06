@@ -5,5 +5,5 @@ from prophecy.libs import typed_lit
 from sap_md_delv_line_mbp.config.ConfigStore import *
 from sap_md_delv_line_mbp.udfs.UDFs import *
 
-def DS_SAP_02_TVM4T(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM {Config.sourceDatabase}.tvm4t WHERE _deleted_ = 'F' and SPRAS = 'E'")
+def DS_SAP_03_TVM4T(spark: SparkSession) -> DataFrame:
+    return spark.sql(f"SELECT * FROM mbp.tvm4t WHERE _deleted_ = 'F' and SPRAS = 'E'")
