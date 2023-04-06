@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "dev_md_l1"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "mec"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "mec"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MES_MD_PROD_1"
+      },
+      "connections" : [ {
+        "id" : "23eaa954-a9a6-46e0-ab2d-2a18b935e1a9",
+        "source" : "d6741109-28a1-4551-a921-bf5e0b77da39",
+        "sourcePort" : "e2b241ea-67af-467f-9c08-632481fb97e7",
+        "target" : "b1e4371f-7fed-45cf-bd73-4837e41d99cb",
+        "targetPort" : "a67b8b94-8b29-4e7b-b700-b821c0337ddc"
+      }, {
+        "id" : "312a19af-c9a3-4866-b89d-e1d81cecc847",
+        "source" : "3f17ec72-ea8b-4620-abac-6baa04fbaeb8",
+        "sourcePort" : "a1e93717-0e47-40bf-97fa-12bb8bfb5ee1",
+        "target" : "d6741109-28a1-4551-a921-bf5e0b77da39",
+        "targetPort" : "41b9dcb4-a777-4838-add1-bfb2df713762"
+      } ],
+      "processes" : {
+        "b1e4371f-7fed-45cf-bd73-4837e41d99cb" : {
+          "id" : "b1e4371f-7fed-45cf-bd73-4837e41d99cb",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MES_MD_PROD",
+            "slug" : "MES_MD_PROD",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "a67b8b94-8b29-4e7b-b700-b821c0337ddc",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MES_MD_PROD"
+          }
+        },
+        "d6741109-28a1-4551-a921-bf5e0b77da39" : {
+          "id" : "d6741109-28a1-4551-a921-bf5e0b77da39",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "41b9dcb4-a777-4838-add1-bfb2df713762",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "e2b241ea-67af-467f-9c08-632481fb97e7",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'PROD_ID',PROD_ID))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'PROD_ID',PROD_ID)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "3f17ec72-ea8b-4620-abac-6baa04fbaeb8" : {
+          "id" : "3f17ec72-ea8b-4620-abac-6baa04fbaeb8",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MES_MD_PROD",
+            "slug" : "sql_MES_MD_PROD",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "a1e93717-0e47-40bf-97fa-12bb8bfb5ee1",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT '{Config.sourceSystem}' AS SRC_SYS_CD\n, TRIM(PRODUCT.PRODUCTID) as PROD_ID\n, TRIM(PRODUCT.FACTORYID) as FCTRY_ID\n, TRIM(PRODUCT.PRODUCTFAMILYID) as PROD_FMLY_ID\n, TRIM(PRODUCT.PRODUCTTYPEID) as PROD_TYPE_ID\n, TRIM(PRODUCT.SPECID) as SPEC_ID\n, TRIM(PRODUCT.WORKFLOWBASEID) as WRKF_BASE_ID\n, TRIM(PRODUCT.WORKFLOWID) as WRKF_ID\n, CAST(NULL AS STRING) as ADD_POWER_CD\n, CAST(NULL AS BOOLEAN) as ALL_JOBS_CMPLT_IND\n, Case when PRODUCT.ALWAYSOVERRIDEEXPIRATIONDATE = '0000000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(left(PRODUCT.ALWAYSOVERRIDEEXPIRATIONDATE,8),\\\"yyyyMMdd\\\") end AS ALWAYS_OVR_RIDE_EXPN_DTTM\n, CAST(NULL AS STRING) as ARMOUR_TYPE_CD\n, CAST(NULL AS INT) as ARMS_CNT\n, CAST(NULL AS STRING) as AXIS_VAL\n, CAST(NULL AS STRING) as BASE_CRV_CD\n, TRIM(PRODUCT.BRANDNAME) as BRND_NM\n, CAST(NULL AS STRING) as BTCH_MGMT_REQ_TXT\n, TRIM(PRODUCT.BILLOFPROCESSID) as BILL_OF_PRCS_ID\n, TRIM(PRODUCT.BILLOFPROCESSBASEID) as BILL_OF_PRCS_BASE_ID\n, TRIM(PRODUCT.BOMBASEID) as BOM_BASE_ID\n, TRIM(PRODUCT.BOMID) as BOM_ID\n, CAST(PRODUCT.BPBATCHCONTROLLED as BOOLEAN ) as BP_BTCH_CTL_IND\n, TRIM(PRODUCT.BPMAXIMUMQUANTITYALLOWED) as BP_MAX_QTY_ALLW_EXPRSSN_TXT\n, TRIM(PRODUCT.BPMINIMUMQUANTITYALLOWED) as BP_MIN_QTY_ALLW_EXPRSSN_TXT\n, TRIM(PRODUCT.BPREQUIREDQUANTITY) as BP_REQ_QTY_EXPRSSN_TXT\n, TRIM(PRODUCT.BPSCALEGROUPID) as BP_SCALE_GRP_ID\n, CAST(NULL AS STRING) as BRNCH_PLNT_CD\n, CAST(NULL AS BOOLEAN) as BYPAS_BTCH_CNTNR_REL_CHK_IND\n, CAST(NULL AS DECIMAL(18,4)) as CTN_QTY\n, CAST(NULL AS STRING) as CTN_TYPE_ID\n, CAST(NULL AS STRING) as CTN_UOM_ID\n, CAST(NULL AS DECIMAL(18,4)) as CASE_QTY\n, CAST(NULL AS STRING) as CASE_UOM_ID\n, TRIM(PRODUCT.CATALOGNUMBER) as CATLG_NUM\n, TRIM(PRODUCT.ETHCELLID) as CELL_ID\n, CAST(NULL AS STRING) as CELL_NUM\n, CAST(NULL AS STRING) as CTR_THKNESS_VAL\n, INT(PRODUCT.CHANGECOUNT) as CHG_CNT\n, TRIM(PRODUCT.CHANGEHISTORYID) as CHG_HIST_ID\n, TRIM(PRODUCT.ETHCOLOR) as COLOR_CD\n, CAST(NULL AS STRING) as CMPLT_STS_CD\n, CAST(NULL AS STRING) as CMPLT_STS_RSN_CD\n, TRIM(PRODUCT.CONCOMITANTPRODUCTNUMBER) as CNCMTNT_PROD_NUM\n, CAST(NULL AS STRING) as CNTNR_LVL_ID\n, TRIM(PRODUCT.CONTAINERNUMBERINGRULEID) as CNTNR_NUMING_RULE_ID\n, CAST(PRODUCT.ETHCUMYIELD AS DECIMAL(18,4)) as CUM_YLD_QTY\n, CAST(PRODUCT.CURRENTCOST AS DECIMAL(18,4)) as CUR_COST_AMT\n, TRIM(PRODUCT.CUSTOMERID) as CUST_ID\n, TRIM(PRODUCT.CUSTOMERPRODUCTNUMBER) as CUST_PROD_NUM\n, CAST(NULL AS STRING) as CYL_VAL\n, TRIM(PRODUCT.ISDEFAULTINVENTORYLOCATIONID) as DFLT_INV_LOC_CD\n, CAST(NULL AS STRING) as DIAM_VAL\n, CAST(NULL AS STRING) as DVC_TYPE_ID\n, CAST(PRODUCT.ETHDENIERSIZE AS DECIMAL(18,4)) as DENIER_SIZE_MEAS\n, TRIM(PRODUCT.DEVICETYPE) as DVC_TYPE_CD\n, TRIM(PRODUCT.DOCUMENTSETID) as DOC_SET_ID\n, CAST(NULL AS STRING) as DRWG_NUM\n, TRIM(PRODUCT.ECO) as ENGR_CHG_ORDR_NUM\n, TRIM(PRODUCT.GLENTITY) as ERP_ACTG_ID\n, TRIM(PRODUCT.ERPBOMBASEID) as ERP_BOM_BASE_ID\n, TRIM(PRODUCT.ERPBOMID) as ERP_BOM_ID\n, CAST(NULL AS STRING) as ERP_DOC_NM\n, CAST(NULL AS STRING) as ERP_DOC_VERS_NUM\n, CAST(NULL AS STRING) as ERP_MATL_NUM\n, CAST(NULL AS STRING) as ERP_PLNT_ID\n, CAST(NULL AS STRING) as ERP_QUAL_INSP_TYPE_CD\n, TRIM(PRODUCT.ERPROUTEBASEID) as ERP_RTE_BASE_ID\n, TRIM(PRODUCT.ERPROUTEID) as ERP_RTE_ID\n, CAST(NULL AS STRING) as EXPN_DT_FMT_CD\n, TRIM(PRODUCT.EXPIRATIONDATESPECBASEID) as EXPN_DT_SPEC_BASE_ID\n, TRIM(PRODUCT.EXPIRATIONDATESPECID) as EXPN_DT_SPEC_ID\n, TRIM(PRODUCT.EXPIRATIONDATETRANSACTION) as EXPN_DT_TRX_ID\n, INT(PRODUCT.EXPIRATIONPERIOD) as EXPRIATION_PER_NBR\n, TRIM(PRODUCT.EXPIRATIONPERIODUNITS) as EXPRIATION_PER_UNIT_CD\n, CAST(PRODUCT.EXTERNALLYCONTROLLED as BOOLEAN ) as EXTR_CTL_IND\n, CAST(NULL AS STRING) as FMLY_CD\n, TRIM(PRODUCT.FEFOENFORCE) as FEFO_ENFRC_ID\n, TRIM(PRODUCT.FEFOOVERRIDEESIGREQUIREMENTID) as FEFO_OVRDE_SGNTR_REQ_ID\n, CAST(NULL AS BOOLEAN) as GEL_PROD_IND\n, CAST(NULL AS STRING) as GS1_CD\n, TRIM(PRODUCT.ICONID) as ICON_ID\n, CAST(PRODUCT.INSPECTALL as BOOLEAN ) as INSP_ALL_IND\n, CAST(PRODUCT.INVENTORYCONTROLLED as BOOLEAN ) as INV_CTL_IND\n, CAST(NULL AS STRING) as IO_CD\n, CAST(PRODUCT.ISFROZEN as BOOLEAN ) as IS_FRZN_IND\n, CAST(NULL AS BOOLEAN) as IS_LIMERICK_PROD_IND\n, CAST(PRODUCT.ISPHANTOM as BOOLEAN ) as IS_PHANTOM_IND\n, CAST(NULL AS BOOLEAN) as ISS_FROM_ENFRC_IND\n, CAST(NULL AS BOOLEAN) as ISS_TO_ENFRC_IND\n, CAST(NULL AS STRING) as ITM_NUM\n, CAST(NULL AS STRING) as ITM_SHRT_NM\n, TRIM(PRODUCT.ETHJDEROUTE) as JDE_RTE_ID\n, CAST(NULL AS STRING) as LANG_KEY_VAL\n, CAST(PRODUCT.ETHLENGTH_C AS DECIMAL(18,4)) as LGTH_C_MEAS\n, CAST(PRODUCT.ETHLENGTH_I AS DECIMAL(18,4)) as LGTH_I_MEAS\n, TRIM(PRODUCT.ETHLINEID) as LINE_ID\n, CAST(NULL AS STRING) as LINE_NUM\n, CAST(PRODUCT.LOTCONTROLLED as BOOLEAN ) as LOT_CTL_IND\n, TRIM(PRODUCT.MANUFACTURINGDATESPECBASEID) as MFG_DT_SPEC_BASE_ID\n, TRIM(PRODUCT.MANUFACTURINGDATESPECID) as MFG_DT_SPEC_ID\n, TRIM(PRODUCT.MANUFACTURINGDATETRANSACTION) as MFG_DT_TRX_ID\n, CAST(NULL AS STRING) as MSTR_PLNG_FMLY_CD\n, CAST(NULL AS STRING) as MAX_ADD_POWER_VAL\n, CAST(NULL AS INT) as MAX_BTCH_CNSMPTN_CNT\n, CAST(NULL AS BOOLEAN) as MESF_UPDT_EXP_ON_CMPNT_ISS_IND\n, CAST(PRODUCT.ETHMFGLEADTIME AS DECIMAL(18,4)) as MFG_LEAD_TIME_MEAS\n, CAST(NULL AS STRING) as MOD_CD\n, TRIM(PRODUCT.MODELNUMBER) as MDL_NUM\n, CAST(NULL AS STRING) as MRP_CTL_VAL\n, CAST(NULL AS BOOLEAN) as MULTI_LVL_PROD_IND\n, CAST(NULL AS STRING) as NEEDLE_TYPE_CD\n, TRIM(PRODUCT.NOTES) as NOTES_TXT\n, TRIM(PRODUCT.CDOTYPEID) as OBJ_TYPE_ID\n, CAST(NULL AS STRING) as OPEN_TIME_2_VAL\n, CAST(NULL AS STRING) as OVRD_AQL_LEVL_ID\n, CAST(NULL AS STRING) as OWN_ID\n, CAST(NULL AS STRING) as PER_CD\n, CAST(NULL AS INT) as PCS_PER_BOX_CNT\n, CAST(PRODUCT.PLANNEDCOST AS DECIMAL(18,4)) as PLAN_COST_AMT\n, CAST(NULL AS STRING) as PLNT_NM\n, CAST(NULL AS STRING) as PRPRC_TXT\n, CAST(NULL AS STRING) as PRCS_SPEC_1_DESC\n, CAST(NULL AS STRING) as PRCS_SPEC_2_DESC\n, CAST(NULL AS STRING) as PRCS_SPEC_CD\n, TRIM(PRODUCT.PRODUCTBASEID) as PROD_BASE_ID\n, CAST(NULL AS STRING) as PROD_BRND_NM\n, TRIM(PRODUCT.ETHPRODUCTDETAILSID) as PROD_DTLS_ID\n, TRIM(PRODUCT.DESCRIPTION) as PROD_DESC\n, TRIM(PRODUCT.ETHDESCRIPTION2) as PROD_2_DESC\n, CAST(NULL AS STRING) as PROD_GRP_ID\n, CAST(NULL AS STRING) as PROD_ISS_GRP_ID\n, CAST(NULL AS STRING) as PROD_OTH_NM\n, CAST(NULL AS STRING) as PROD_RECIPE_BASE_ID\n, CAST(NULL AS STRING) as PROD_RECIPE_ID\n, TRIM(PRODUCT.PRODUCTREVISION) as PROD_RVSN_NUM\n, TRIM(PRODUCT.PRODUCTVARIATION) as PROD_VAR_ID\n, CAST(NULL AS STRING) as PROD_VERS_NUM\n, TRIM(PRODUCT.PRODUCTIONIDENTIFIERID) as PRDTN_ID\n, CAST(NULL AS STRING) as RAW_MATL_TYPE_CD\n, CAST(NULL AS STRING) as RECIPE_NUM\n, CAST(NULL AS STRING) as RESRTABLE_CD\n, CAST(NULL AS BOOLEAN) as RMT_VERIF_REQ_IND\n, CAST(NULL AS STRING) as RXDX_CD\n, TRIM(PRODUCT.SAMPLINGPLANID) as SMPLG_PLAN_ID\n, TRIM(PRODUCT.SAMPLINGPLANBASEID) as SMPLG_PLAN_BASE_ID\n, CAST(NULL AS STRING) as SAP_MATL_NUM\n, CAST(NULL AS BOOLEAN) as SEND_EXP_DT_TO_ERP_IND\n, CAST(PRODUCT.SERIALCONTROLLED as BOOLEAN ) as SER_CTL_IND\n, CAST(NULL AS INT) as SHLF_LIF_DAYS_CNT\n, CAST(NULL AS STRING) as SHLF_LIF_VAL\n, CAST(NULL AS STRING) as SHRT_BRND_NM\n, TRIM(PRODUCT.ETHSHORTNAME) as SHRT_NM\n, CAST(NULL AS STRING) as SKU_COLOR_CD\n, TRIM(PRODUCT.SPCCHARTGROUPID) as SPC_CHRT_GRP_ID\n, CAST(NULL AS STRING) as SPHERE_POWER_VAL\n, CAST(PRODUCT.STDSTARTQTY AS DECIMAL(18,4)) as STD_STRT_QTY\n, CAST(PRODUCT.STDSTARTQTY2 AS DECIMAL(18,4)) as STD_STRT_2_QTY\n, INT(PRODUCT.STDSTARTUOM2ID) as STD_STRT_UOM_2_ID\n, CAST(PRODUCT.STDCOST AS DECIMAL(18,4)) as STD_UNIT_COST_AMT\n, TRIM(PRODUCT.STATUS) as STS_CD\n, TRIM(PRODUCT.STDSTARTUOMID) as STD_STRT_UOM_ID\n, CAST(NULL AS STRING) as STERILIZATION_TYPE_CD\n, CAST(NULL AS STRING) as STER_SPEC_CD\n, CAST(NULL AS STRING) as STER_SPEC_DESC\n, CAST(PRODUCT.STOCKPOINTCONTROLLED as BOOLEAN ) as STK_PT_CTL_IND\n, CAST(TRIM(PRODUCT.ETHNUMSTRANDS) AS INT) as ETH_STRAND_CNT\n, TRIM(PRODUCT.SUBFACTORY) as SUB_FCTRY_NM\n, CAST(NULL AS DECIMAL(18,4)) as SUTURE_LEN_MEAS\n, CAST(NULL AS STRING) as SUTURE_MTRC_CD\n, CAST(NULL AS DECIMAL(18,4)) as SUTURE_SIZE_MEAS\n, CAST(PRODUCT.TARGETCYCLETIME AS DECIMAL(18,4)) as TRGT_CYC_TM\n, TRIM(PRODUCT.TARGETDURATIONPERUNIT) as TRGT_DUR_PER_UNIT_VAL\n, CAST(PRODUCT.TARGETFINALYIELD AS DECIMAL(18,4)) as TRGT_FNL_YLD_AMT\n, CAST(PRODUCT.TARGETROLLEDTHROUGHPUTYIELD AS DECIMAL(18,4)) as TRGT_ROLLD_THRUPUT_YLD_QTY\n, CAST(PRODUCT.TARGETUNITSPERHOUR AS DECIMAL(18,4)) as TRGT_UNIT_PER_HR_QTY\n, TRIM(PRODUCT.TCRELEASESTATUS) as TEAM_CTR_RLSE_STS_CD\n, CAST(NULL AS STRING) as TOT_SHLF_LIF_VAL\n, CAST(NULL AS STRING) as TRACEABL_INFO_TXT\n, CAST(NULL AS INT) as TRNG_RCNT_EXP_DAYS_CNT\n, CAST(NULL AS STRING) as TRNG_RCNT_ID\n, TRIM(PRODUCT.TRAININGREQGROUPID) as TRNG_REQ_GRP_ID\n, TRIM(PRODUCT.UDIID) as UDI_ID\n, TRIM(PRODUCT.UDITRANSACTION) as UDI_TRX_ID\n, TRIM(PRODUCT.UOM2ID) as UOM_2_ID\n, CAST(NULL AS STRING) as UOM_CONV_DENOM_VAL\n, CAST(NULL AS STRING) as UOM_CONV_NUMRTR_VAL\n, CAST(NULL AS STRING) as UPC_CHK_DIG_NUM\n, CAST(NULL AS STRING) as UPC_NUM\n, CAST(NULL AS STRING) as UV_CD\n, CAST(NULL AS STRING) as VAL_STREM_TXT\n, CAST(NULL AS STRING) as VRNT_TYPE_CD\n, CAST(NULL AS STRING) as VISIT_INT_CD\n, TRIM(PRODUCT.WIPMSGDEFMGRID) as WIP_MSG_DEF_MGR_ID\n, CAST(NULL AS STRING) as STRT_RSN_ID\n, CAST(NULL AS INT) as STRAND_CNT\nFROM  {Config.sourceDatabase}.PRODUCT as PRODUCT WHERE PRODUCT._deleted_ =  'F'\n  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    
