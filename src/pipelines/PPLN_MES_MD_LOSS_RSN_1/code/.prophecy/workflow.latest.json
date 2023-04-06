@@ -1,0 +1,256 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "dev_md_l1"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "mec"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "mec"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MES_MD_LOSS_RSN_1"
+      },
+      "connections" : [ {
+        "id" : "23f01425-115d-4ba2-bbd6-1b8ef76e07de",
+        "source" : "7a510bc8-8865-401e-8bc1-6b150b57d51e",
+        "sourcePort" : "4da0c23d-2ffe-452e-ba23-6efbf799f13c",
+        "target" : "f0eac42d-94f9-4bd3-8aa4-250b230bc450",
+        "targetPort" : "7b324eb3-9bd2-41c9-b935-819ffe664141"
+      }, {
+        "id" : "935b6ca2-b877-4802-ad54-d04c2027b283",
+        "source" : "2265c185-6e34-429d-8d66-1da2cda21568",
+        "sourcePort" : "1e022339-df4e-450d-8d30-29b596dbc6a3",
+        "target" : "7a510bc8-8865-401e-8bc1-6b150b57d51e",
+        "targetPort" : "e3843339-0e9c-4146-aa1b-1bbac322de8a"
+      } ],
+      "processes" : {
+        "f0eac42d-94f9-4bd3-8aa4-250b230bc450" : {
+          "id" : "f0eac42d-94f9-4bd3-8aa4-250b230bc450",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MES_MD_LOSS_RSN",
+            "slug" : "MES_MD_LOSS_RSN",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "7b324eb3-9bd2-41c9-b935-819ffe664141",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MES_MD_LOSS_RSN"
+          }
+        },
+        "7a510bc8-8865-401e-8bc1-6b150b57d51e" : {
+          "id" : "7a510bc8-8865-401e-8bc1-6b150b57d51e",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "e3843339-0e9c-4146-aa1b-1bbac322de8a",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "4da0c23d-2ffe-452e-ba23-6efbf799f13c",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'LOSS_RSN_ID',LOSS_RSN_ID))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'LOSS_RSN_ID',LOSS_RSN_ID)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            } ]
+          }
+        },
+        "2265c185-6e34-429d-8d66-1da2cda21568" : {
+          "id" : "2265c185-6e34-429d-8d66-1da2cda21568",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MES_MD_LOSS_RSN",
+            "slug" : "sql_MES_MD_LOSS_RSN",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "1e022339-df4e-450d-8d30-29b596dbc6a3",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT '{Config.sourceSystem}' AS SRC_SYS_CD\n, TRIM(LOSSREASON.LOSSREASONID) as LOSS_RSN_ID\n, INT(LOSSREASON.CHANGECOUNT) as CHG_CNT\n, TRIM(LOSSREASON.CHANGEHISTORYID) as CHG_HIST_ID\n, TRIM(LOSSREASON.ICONID) as ICON_ID\n, CAST(LOSSREASON.ISFROZEN as BOOLEAN ) as IS_FRZN_IND\n, TRIM(LOSSREASON.DESCRIPTION) as LOSS_RSN_DESC\n, TRIM(LOSSREASON.LOSSREASONNAME) as LOSS_RSN_NM\n, TRIM(LOSSREASON.NOTES) as NOTES_TXT\n, TRIM(LOSSREASON.CDOTYPEID) as OBJ_TYPE_ID\nFROM  {Config.sourceDatabase}.LOSSREASON as LOSSREASON WHERE LOSSREASON._deleted_ =  'F'\n  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    
