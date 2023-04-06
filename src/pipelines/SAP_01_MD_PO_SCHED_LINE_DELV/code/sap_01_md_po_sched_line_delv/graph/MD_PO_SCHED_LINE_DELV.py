@@ -9,5 +9,5 @@ def MD_PO_SCHED_LINE_DELV(spark: SparkSession, in0: DataFrame):
     in0.write\
         .format("delta")\
         .option("replaceWhere", f"SRC_SYS_CD = '{Config.sourceSystem}'")\
-        .mode("overwrite")\
+        .mode("error")\
         .saveAsTable(f"{Config.targetSchema}.MD_PO_SCHED_LINE_DELV")

@@ -7,7 +7,9 @@ from prophecy.utils import *
 from dart_l1_purchase_order_md_po_hist.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    pass
+    df_SAP_EKBE = SAP_EKBE(spark)
+    df_MANDT_FILTER = MANDT_FILTER(spark, df_SAP_EKBE)
+    df_NEW_FIELDS = NEW_FIELDS(spark, df_MANDT_FILTER)
 
 def main():
     spark = SparkSession.builder\

@@ -2,7 +2,7 @@
   "metainfo" : {
     "id" : "1",
     "language" : "python",
-    "fabricId" : "4",
+    "fabricId" : "32",
     "frontEndLanguage" : "sql",
     "mode" : "batch",
     "udfs" : {
@@ -18,7 +18,63 @@
     "configuration" : {
       "common" : {
         "type" : "record",
-        "fields" : [ ]
+        "fields" : [ {
+          "name" : "sourceSystem",
+          "kind" : {
+            "type" : "string",
+            "value" : "tai"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "sourceDatabase",
+          "kind" : {
+            "type" : "string",
+            "value" : "tai"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "targetSchema",
+          "kind" : {
+            "type" : "string",
+            "value" : "dev_md_l1"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "sourceTable",
+          "kind" : {
+            "type" : "string",
+            "value" : "ekbe"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "DAI_ETL_ID",
+          "kind" : {
+            "type" : "string",
+            "value" : "0"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "configDatabase",
+          "kind" : {
+            "type" : "string",
+            "value" : " "
+          },
+          "optional" : true,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "MANDT",
+          "kind" : {
+            "type" : "string",
+            "value" : "100"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        } ]
       },
       "oldCommon" : {
         "type" : "record",
@@ -26,7 +82,7 @@
       },
       "fabrics" : { },
       "instances" : { },
-      "selected" : "default",
+      "selected" : "BBL",
       "nonEditable" : [ ],
       "isSubscribedPipelineWithPipelineConfigs" : false
     },
@@ -41,14 +97,1686 @@
     "interimModeEnabled" : true,
     "visualCodeInterimMode" : "Disabled",
     "recordsLimit" : {
-      "enabled" : false,
-      "value" : 1000
+      "enabled" : true,
+      "value" : 150
     },
     "topLevelPackage" : "dart_l1_purchase_order_md_po_hist",
     "configurationVersion" : "v1"
   },
-  "connections" : [ ],
-  "processes" : { },
+  "connections" : [ {
+    "id" : "3UXOLiPouAB8PfNXRUYQ2$$1_Wr-hq-tirdZRt0yV26S",
+    "source" : "Pp393Z8UgE4i8KuWbCSdU$$C0zt4PPh1y3yeORQhWuPh",
+    "sourcePort" : "18BcPTShZHz6MqK2IKg3B$$NoVpji6eI8uB5QcEZ9F3R",
+    "target" : "_pepk_axn711PP1ZPaj71$$PFSY499QW6y499s0P8bdq",
+    "targetPort" : "c3D9jUA6QWVmPXPW0000U$$zOKgRqUlvap_pV2zvIGCL"
+  }, {
+    "id" : "XVTcdMW-UaG2pPvl0lOdu$$Ci9QL8rnWYlsqnGeuYNdY",
+    "source" : "_pepk_axn711PP1ZPaj71$$PFSY499QW6y499s0P8bdq",
+    "sourcePort" : "Zn6qzyB-79gf66hwlnQlQ$$mUOcDyXaRfPieonFk3tSU",
+    "target" : "WwPgmiVoNgqwNtDcwLUsl$$YEohQL6yZ1eEKSsActA7l",
+    "targetPort" : "XWq1ggdyokuKZIg_V5N-o$$0x1l7i07HiHVM9ag6C_LI"
+  } ],
+  "processes" : {
+    "Pp393Z8UgE4i8KuWbCSdU$$C0zt4PPh1y3yeORQhWuPh" : {
+      "id" : "Pp393Z8UgE4i8KuWbCSdU$$C0zt4PPh1y3yeORQhWuPh",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "SAP_EKBE",
+        "slug" : "SAP_EKBE",
+        "x" : -640,
+        "y" : 100,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "18BcPTShZHz6MqK2IKg3B$$NoVpji6eI8uB5QcEZ9F3R",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/DS_SAP_01_EBKE"
+      }
+    },
+    "_pepk_axn711PP1ZPaj71$$PFSY499QW6y499s0P8bdq" : {
+      "id" : "_pepk_axn711PP1ZPaj71$$PFSY499QW6y499s0P8bdq",
+      "component" : "Filter",
+      "metadata" : {
+        "label" : "MANDT_FILTER",
+        "slug" : "MANDT_FILTER",
+        "x" : -480,
+        "y" : 100,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "c3D9jUA6QWVmPXPW0000U$$zOKgRqUlvap_pV2zvIGCL",
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "_deleted_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ZEKKN",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VGABE",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MANDT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "GJAHR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "EBELP",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "EBELN",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BUZEI",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BELNR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BEWTP",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BWART",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BUDAT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MENGE",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BPMNG",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DMBTR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WRBTR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WAERS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "AREWR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WESBS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BPWES",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SHKZG",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BWTAR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ELIKZ",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "XBLNR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LFGJA",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LFBNR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LFPOS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "GRUND",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CPUDT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CPUTM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "REEWR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "EVERE",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "REFWR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MATNR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WERKS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "XWSBR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ETENS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "KNUMV",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MWSKZ",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LSMNG",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LSMEH",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "EMATN",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "AREWW",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "HSWAE",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BAMNG",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CHARG",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BLDAT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "XWOFF",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "XUNPL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ERNAM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SRVPOS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PACKNO",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "INTROW",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BEKKN",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LEMIN",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "AREWB",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "REWRB",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SAPRL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MENGE_POP",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BPMNG_POP",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DMBTR_POP",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WRBTR_POP",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WESBB",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BPWEB",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WEORA",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "AREWR_POP",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "KUDIF",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RETAMT_FC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RETAMT_LC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RETAMTP_FC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RETAMTP_LC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "XMACC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WKURS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "INV_ITEM_ORIGIN",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VBELN_ST",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VBELP_ST",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ET_UPD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "J_SC_DIE_COMP_F",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_pk_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_upt_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_kafkaOffset_",
+              "type" : "long",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_createTime_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_kafkaTimestamp_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_infa_bigint_sequence_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Zn6qzyB-79gf66hwlnQlQ$$mUOcDyXaRfPieonFk3tSU",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ "c3D9jUA6QWVmPXPW0000U$$zOKgRqUlvap_pV2zvIGCL##MANDT" ],
+        "condition" : {
+          "format" : "sql",
+          "expression" : "MANDT = '$MANDT'"
+        }
+      }
+    },
+    "WwPgmiVoNgqwNtDcwLUsl$$YEohQL6yZ1eEKSsActA7l" : {
+      "id" : "WwPgmiVoNgqwNtDcwLUsl$$YEohQL6yZ1eEKSsActA7l",
+      "component" : "SchemaTransform",
+      "metadata" : {
+        "label" : "NEW_FIELDS",
+        "slug" : "NEW_FIELDS",
+        "x" : -360,
+        "y" : 100,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "XWq1ggdyokuKZIg_V5N-o$$0x1l7i07HiHVM9ag6C_LI",
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "_deleted_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ZEKKN",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VGABE",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MANDT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "GJAHR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "EBELP",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "EBELN",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BUZEI",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BELNR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BEWTP",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BWART",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BUDAT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MENGE",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BPMNG",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DMBTR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WRBTR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WAERS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "AREWR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WESBS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BPWES",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SHKZG",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BWTAR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ELIKZ",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "XBLNR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LFGJA",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LFBNR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LFPOS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "GRUND",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CPUDT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CPUTM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "REEWR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "EVERE",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "REFWR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MATNR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WERKS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "XWSBR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ETENS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "KNUMV",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MWSKZ",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LSMNG",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LSMEH",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "EMATN",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "AREWW",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "HSWAE",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BAMNG",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CHARG",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BLDAT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "XWOFF",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "XUNPL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ERNAM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SRVPOS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PACKNO",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "INTROW",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BEKKN",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LEMIN",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "AREWB",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "REWRB",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SAPRL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MENGE_POP",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BPMNG_POP",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DMBTR_POP",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WRBTR_POP",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WESBB",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BPWEB",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WEORA",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "AREWR_POP",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "KUDIF",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RETAMT_FC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RETAMT_LC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RETAMTP_FC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RETAMTP_LC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "XMACC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WKURS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "INV_ITEM_ORIGIN",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VBELN_ST",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VBELP_ST",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ET_UPD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "J_SC_DIE_COMP_F",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_pk_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_upt_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_kafkaOffset_",
+              "type" : "long",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_createTime_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_kafkaTimestamp_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_infa_bigint_sequence_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "QO678HZlpFA07aGERQ9-j$$j2UH56EUSC-dkHRiI9e34",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ "XWq1ggdyokuKZIg_V5N-o$$0x1l7i07HiHVM9ag6C_LI##EBELP", "XWq1ggdyokuKZIg_V5N-o$$0x1l7i07HiHVM9ag6C_LI##EBELN" ],
+        "transformations" : [ {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "SRC_SYS_CD",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "'$sourceSystem'"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "PO_NUM",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "EBELN"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "PO_LINE_NBR",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "EBELP"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        } ]
+      }
+    }
+  },
   "ports" : {
     "inputs" : [ ],
     "outputs" : [ ],
