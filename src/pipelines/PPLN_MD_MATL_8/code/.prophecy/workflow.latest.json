@@ -1,256 +1,1216 @@
 {
-      "metainfo" : {
-        "id" : "1",
-        "language" : "python",
-        "fabricId" : "32",
-        "frontEndLanguage" : "sql",
-        "mode" : "batch",
-        "udfs" : {
-          "language" : "python",
-          "udfs" : [ ]
-        },
-        "udafs" : {
-          "language" : "python",
-          "code" : ""
-        },
-        "configuration" : {
-          "common" : {
-            "type" : "record",
-            "fields" : [ {
-              "name" : "targetSchema",
-              "kind" : {
-                "type" : "string",
-                "value" : "l1_md_prophecy"
-              },
-              "optional" : false
-            }, {
-              "name" : "sourceSystem",
-              "kind" : {
-                "type" : "string",
-                "value" : "gmd"
-              },
-              "optional" : false
-            }, {
-              "name" : "sourceDatabase",
-              "kind" : {
-                "type" : "string",
-                "value" : "gmd"
-              },
-              "optional" : false
-            } ]
+  "metainfo" : {
+    "id" : "1",
+    "language" : "python",
+    "fabricId" : "32",
+    "frontEndLanguage" : "sql",
+    "mode" : "batch",
+    "udfs" : {
+      "language" : "python",
+      "udfs" : [ ]
+    },
+    "udafs" : {
+      "language" : "python",
+      "code" : ""
+    },
+    "configuration" : {
+      "common" : {
+        "type" : "record",
+        "fields" : [ {
+          "name" : "targetSchema",
+          "kind" : {
+            "type" : "string",
+            "value" : "l1_md_prophecy"
           },
-          "oldCommon" : {
-            "type" : "record",
-            "fields" : [ ]
+          "optional" : false
+        }, {
+          "name" : "sourceSystem",
+          "kind" : {
+            "type" : "string",
+            "value" : "gmd"
           },
-          "fabrics" : { },
-          "instances" : { },
-          "selected" : "default",
-          "nonEditable" : [ ],
-          "isSubscribedPipelineWithPipelineConfigs" : false
-        },
-        "sparkConf" : [ ],
-        "hadoopConf" : [ ],
-        "codeMode" : "sparse",
-        "buildSystem" : "maven",
-        "externalDependencies" : [ ],
-        "isImported" : false,
-        "interimMode" : "Full",
-        "interimModeEnabled" : true,
-        "visualCodeInterimMode" : "Disabled",
-        "recordsLimit" : {
-          "enabled" : false,
-          "value" : 1000
-        },
-        "topLevelPackage" : "PPLN_MD_MATL_8"
+          "optional" : false
+        }, {
+          "name" : "sourceDatabase",
+          "kind" : {
+            "type" : "string",
+            "value" : "gmd"
+          },
+          "optional" : false
+        } ]
       },
-      "connections" : [ {
-        "id" : "1f3e9680-5854-4452-9e6c-02264337f5fe",
-        "source" : "38871115-89d8-49c7-81d2-d9fc1eb47a81",
-        "sourcePort" : "cfa698c4-e800-49d2-b267-da1008ca8794",
-        "target" : "f6a8e020-354f-4ac2-90b5-942ea2bd54a7",
-        "targetPort" : "37daceeb-0997-4171-ae39-9988284816ca"
-      }, {
-        "id" : "2e787f92-abd3-441a-824e-de92177fa1af",
-        "source" : "5c9f56d2-36dc-469b-8954-e1e22fdafd71",
-        "sourcePort" : "ffbdb82e-eac7-4e4d-b960-83094bc21b5b",
-        "target" : "38871115-89d8-49c7-81d2-d9fc1eb47a81",
-        "targetPort" : "4a405700-7a1b-44fa-93c6-83028c94d095"
-      } ],
-      "processes" : {
-        "f6a8e020-354f-4ac2-90b5-942ea2bd54a7" : {
-          "id" : "f6a8e020-354f-4ac2-90b5-942ea2bd54a7",
-          "component" : "Target",
-          "metadata" : {
-            "label" : "MD_MATL",
-            "slug" : "MD_MATL",
-            "x" : -540,
-            "y" : -400,
-            "phase" : 0,
-            "cache" : false,
-            "detailedStats" : false,
-            "isImported" : false
-          },
-          "ports" : {
-            "inputs" : [ {
-              "id" : "37daceeb-0997-4171-ae39-9988284816ca",
-              "slug" : "in0",
-              "isStreaming" : false
-            } ],
-            "outputs" : [ ],
-            "selectedInputFields" : [ ],
-            "isCustomOutputSchema" : false
-          },
-          "properties" : {
-            "datasetId" : "datasets/MD_MATL"
-          }
-        },
-        "38871115-89d8-49c7-81d2-d9fc1eb47a81" : {
-          "id" : "38871115-89d8-49c7-81d2-d9fc1eb47a81",
-          "component" : "SchemaTransform",
-          "metadata" : {
-            "label" : "addL1fields",
-            "slug" : "addL1fields",
-            "x" : -780,
-            "y" : -400,
-            "phase" : 0,
-            "cache" : false,
-            "detailedStats" : false,
-            "isImported" : false
-          },
-          "ports" : {
-            "inputs" : [ {
-              "id" : "4a405700-7a1b-44fa-93c6-83028c94d095",
-              "slug" : "in0",
-              "isStreaming" : false
-            } ],
-            "outputs" : [ {
-              "id" : "cfa698c4-e800-49d2-b267-da1008ca8794",
-              "slug" : "out",
-              "isStreaming" : false
-            } ],
-            "selectedInputFields" : [ ],
-            "isCustomOutputSchema" : false
-          },
-          "properties" : {
-            "columnsSelector" : [ ],
-            "transformations" : [ {
-              "kind" : "AddReplaceColumn",
-              "AddReplaceColumn" : {
-                "sourceColumn" : "SRC_SYS_CD",
-                "expression" : {
-                  "format" : "sql",
-                  "expression" : "'$sourceSystem'"
-                }
-              },
-              "DropColumn" : {
-                "sourceColumn" : ""
-              },
-              "RenameColumn" : {
-                "sourceColumn" : "",
-                "targetColumn" : ""
-              }
-            }, {
-              "kind" : "AddReplaceColumn",
-              "AddReplaceColumn" : {
-                "sourceColumn" : "_pk_",
-                "expression" : {
-                  "format" : "sql",
-                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'MATL_NUM',MATL_NUM))"
-                }
-              },
-              "DropColumn" : {
-                "sourceColumn" : ""
-              },
-              "RenameColumn" : {
-                "sourceColumn" : "",
-                "targetColumn" : ""
-              }
-            }, {
-              "kind" : "AddReplaceColumn",
-              "AddReplaceColumn" : {
-                "sourceColumn" : "_pk_md5_",
-                "expression" : {
-                  "format" : "sql",
-                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'MATL_NUM',MATL_NUM)))"
-                }
-              },
-              "DropColumn" : {
-                "sourceColumn" : ""
-              },
-              "RenameColumn" : {
-                "sourceColumn" : "",
-                "targetColumn" : ""
-              }
-            }, {
-              "kind" : "AddReplaceColumn",
-              "AddReplaceColumn" : {
-                "sourceColumn" : "_l1_upt_",
-                "expression" : {
-                  "format" : "sql",
-                  "expression" : "current_timestamp()"
-                }
-              },
-              "DropColumn" : {
-                "sourceColumn" : ""
-              },
-              "RenameColumn" : {
-                "sourceColumn" : "",
-                "targetColumn" : ""
-              }
-            } ]
-          }
-        },
-        "5c9f56d2-36dc-469b-8954-e1e22fdafd71" : {
-          "id" : "5c9f56d2-36dc-469b-8954-e1e22fdafd71",
-          "component" : "Script",
-          "metadata" : {
-            "label" : "sql_MD_MATL",
-            "slug" : "sql_MD_MATL",
-            "x" : -1060,
-            "y" : -400,
-            "phase" : 0,
-            "cache" : false,
-            "detailedStats" : false,
-            "isImported" : false
-          },
-          "ports" : {
-            "inputs" : [ ],
-            "outputs" : [ {
-              "id" : "ffbdb82e-eac7-4e4d-b960-83094bc21b5b",
-              "slug" : "out0",
-              "schema" : {
-                "type" : "struct",
-                "fields" : [ {
-                  "name" : "_deleted_",
-                  "type" : "string",
-                  "nullable" : true,
-                  "metadata" : {
-                    "description" : "",
-                    "mappings" : [ ],
-                    "tags" : [ ]
-                  } 
-                } ]
-              },
-              "isStreaming" : false
-            } ],
-            "selectedInputFields" : [ ],
-            "isCustomOutputSchema" : true
-          },
-          "properties" : {
-            "script" : "out0 = spark.sql(f\"\"\"\n    SELECT DISTINCT\n    '{Config.sourceSystem}'   AS SRC_SYS_CD\n,F4101.imlitm AS MATL_NUM\n,TRIM(F4101.imsrp2) AS MATL_TYPE_CD\n,NULL AS BRND_CD\n,TRIM(F4101.imsrp1) AS FRANCHISE_CD\n,TRIM(F4101.imprp7) AS LCL_PLNG_SUB_FRAN_CD\n,NULL AS PRCHSNG_VAL_KEY_CD\n,NULL AS DEL_IND\n,TRIM(F4101.imprp4) AS MATL_GRP_CD\n,NULL AS INDSTR_SECTR_CD\n,TRIM(F4101.imuom1) AS BASE_UOM_CD\n,CAST(F4101.imsld AS DECIMAL(18,4)) AS TOT_SHLF_LIF_DAYS_CNT\n,NULL AS MIN_SHLF_RMN_LIF_DAYS_CNT\n,TRIM(F4101.imstkt) AS MATL_STS_CD\n,TRIM(F4101.imprp3) AS DSTN_CHN_STS_CD\n,NULL AS NET_WT_MEAS\n,TRIM(F4101.imsrp9) AS PROD_HIER_CD\n,NULL AS PRCMT_QUAL_MGMT_IND\n,NULL AS STRG_CONDS_CD\n,NULL AS LBL_TEMP_RNG\n,NULL AS TRSPN_GRP_CD\n,CASE WHEN TRIM(F4101.imsrce) IN ('0', '') OR TRIM(F4101.imsrce) IS NULL THEN '' ELSE 'X' END AS BTCH_MNG_IND\n,TRIM(F4101.imdraw) AS MATL_DOC_NUM\n,TRIM(F4101.imrvno) AS MATL_DOC_VERS_NUM\n,CONCAT(TRIM(F4101.imdsc1),'; ',TRIM(F4101.imdsc2)) AS MATL_SHRT_DESC\n,NULL AS MMS_SURGERY_TYPE_CD\n,NULL AS MMS_MATL_TYPE_CD\n,NULL AS PRMRY_PLNT_CD\n,NULL AS MMS_FIN_CLSN_CD\n,NULL AS MMS_STERILIZATION_IND\n,TRIM(F4101.imaitm) AS MATL_CATLG_NUM\n,NULL AS SRC_SECTR_CD\n,NULL AS MATL_PARNT_CD\n,NULL AS MATL_SUB_TYPE_CD\n,TRIM(F4101.imglpt) AS FIN_HIER_BASE_CD\n,NULL AS IMPLNT_INSTM_IND\n,NULL AS MATL_MOD_CD\n,NULL AS KIT_IND\n,NULL AS MMS_TEMP_SENS_IND\n,NULL AS DIR_PART_MRKNG_CD\n,TRIM(F4101.imprp2) AS MATL_CAT_GRP_CD\n,TRIM(F4101.imsrp6) AS PLNG_HIER3_CD\n,NULL AS MATL_SPEC_NUM\n,NULL AS MATL_SPEC_VERS_NUM\n,TRIM(F4101.imuser) AS CHG_BY\n,NULL AS DOC_CHG_NUM\n,NULL AS CNTNR_REQ\n,NULL AS OLD_MATL_NUM\n,NULL AS GRS_WT\n,NULL AS ORDR_UNIT_PUR_UOM\n,NULL AS CHEM_CMPLI\n,NULL AS CRT_BY\n,NULL AS CRT_ON_DTTM\n,NULL AS LBL_TYPE\n,NULL AS LBL_FORM\n,NULL AS EXTRNL_MATL_GRP\n,NULL AS MAX_LVL\n,trim(F4101.imuwum) AS WT_UNIT\n,NULL AS SIZE_DIM\n,NULL AS PER_IN\n, CASE\n    WHEN LENGTH(f4101.imtday) = 6 THEN TO_TIMESTAMP(\n      CONCAT(\n        DATE_ADD(\n          CAST(\n            SUBSTRING(f4101.IMUPMJ + 1900000, 1, 4) AS DATE\n          ),\n          CAST(SUBSTRING(f4101.IMUPMJ, 4, 3) AS INT) -1\n        ),\n        \\\"\\\"\\\"\\\",\n        f4101.imtday\n      ),\n      'yyyy-MM-ddHHmmss'\n    )\n    WHEN LENGTH(f4101.imtday) = 5 THEN TO_TIMESTAMP(\n      CONCAT(\n        DATE_ADD(\n          CAST(\n            SUBSTRING(f4101.IMUPMJ + 1900000, 1, 4) AS DATE\n          ),\n          CAST(SUBSTRING(f4101.IMUPMJ, 4, 3) AS INT) -1\n        ),\n        \\\"\\\"\\\"\\\",\n        concat(0, f4101.imtday)\n      ),\n      'yyyy-MM-ddHHmmss'\n    )\n    ELSE TO_TIMESTAMP(\n      DATE_ADD(\n        CAST(SUBSTRING(f4101.IMUPMJ + 1900000, 1, 4) AS Date),\n        CAST(SUBSTRING(f4101.IMUPMJ, 4, 3) as INT) -1\n      )\n    )\n  END AS LAST_CHG_DT_TIME_DTTM\n,NULL AS MATL_GRP_PKGNG_MATL\n,NULL AS MATL_EXTRNL\n,NULL AS STRG_PCT\n,NULL AS VAL_FROM_XPLNT_DTTM\n,NULL AS VAL_FROM_XDC_DTTM\n,NULL AS INDSTR_STD_DESC\n,NULL AS RD_RUL_SLED\n,NULL AS SER_LVL\n,NULL AS MATL_HAZ_CD\n,NULL AS VAR_ORDR_UNT\n,NULL AS PKGNG_MATL_TYPE\n,TRIM(F4101.imuvm1) AS VOL_UNIT\n,CAST(TRIM(F4101.imvcud) AS DECIMAL(18,4))  AS VOL\n,NULL AS BSC_MATL\n,TRIM(F4101.imlnty) AS DOC_TYPE\n,NULL AS DOC_PG_FMT\n,NULL AS EAN_UPC\n,NULL AS EAN_CAT\n,NULL AS MFR_BOOK_PART_NUM\n,NULL AS DIR_SHP_FL\n,NULL AS FIN_PLNT\n,NULL AS MAIN_STRG_LOC\n,NULL AS PCS_PER_SLS_UNT\n,NULL AS PROD_LINE\n,NULL AS MAKE_BUY_IN\n,NULL AS STRT_PLNT\n,NULL AS MATL_SHRT_DESC_UP_CASE\n,TRIM(f0005_s2.drdl01) AS MATL_TYPE_DESC\n,TRIM(f0005_s1.drdl01) AS FRAN_CD_DESC\n,NULL AS BASE_UOM_DESC\n,NULL AS OBJ_NUM\n,NULL AS TYPE_OF_MATERIAL\n,trim(F4101.imprp1) AS STERILE\n,TRIM(F4101.imsrp0) AS BRAVO_MINOR_CODE\n,TRIM(f0005.drdl01) AS BRAVO_MINOR_CODE_DESC\n,NULL AS NDL_SLS_TYPE\n,NULL AS SUTURE_LENGTH_INCH\n,NULL AS SER_TYPE\n,NULL AS GTIN_VRNT\n,TRIM(f0005_p4.drdl01) AS MATL_GRP_DESC\n,NULL AS MATL_GRP_DESC_2\n,f4101.imitm AS SHRT_MATL_NUM\n,NULL AS CMMDTY\n,NULL AS NDL_COLOR\n,NULL AS NDL_ALLOY\n,NULL AS SUTURE_USP\n,NULL AS EAN_UPC_HRMZD\nFROM {Config.sourceDatabase}.F4101 F4101\nLEFT JOIN {Config.sourceDatabase}.f0005 f0005 \nON F4101.IMSRP0 = TRIM(f0005.DRKY) \nAND TRIM(f0005.DRSY) = '41'\nAND f0005.DRRT = '10'\nAND f0005._deleted_ = 'F'\nLEFT JOIN {Config.sourceDatabase}.f0005 f0005_s1 \nON F4101.IMSRP1 = TRIM(f0005_s1.DRKY) \nAND TRIM(f0005_s1.DRSY) = '41'\nAND f0005_s1.DRRT = 'S1'\nAND f0005_s1._deleted_ = 'F'\nLEFT JOIN {Config.sourceDatabase}.f0005 f0005_s2\nON F4101.IMSRP2 = TRIM(f0005_s2.DRKY) \nAND TRIM(f0005_s2.DRSY) = '41'\nAND f0005_s2.DRRT = 'S2'\nAND f0005_s2._deleted_ = 'F'\nLEFT JOIN {Config.sourceDatabase}.f0005 f0005_p4\nON F4101.IMPRP4 = TRIM(f0005_p4.DRKY)\nAND TRIM(f0005_p4.DRSY) = '41'\nAND f0005_p4.DRRT = 'P4'\nAND f0005_p4._deleted_ = 'F'\nWHERE F4101._deleted_ = 'F'  \n \n\"\"\")",
-            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
-            "scriptMethodFooter" : "    return out0"
-          }
-        }
+      "oldCommon" : {
+        "type" : "record",
+        "fields" : [ ]
+      },
+      "fabrics" : { },
+      "instances" : { },
+      "selected" : "default",
+      "nonEditable" : [ ],
+      "isSubscribedPipelineWithPipelineConfigs" : false
+    },
+    "sparkConf" : [ ],
+    "hadoopConf" : [ ],
+    "codeMode" : "sparse",
+    "buildSystem" : "maven",
+    "externalDependencies" : [ ],
+    "isImported" : false,
+    "interimMode" : "Full",
+    "interimModeEnabled" : true,
+    "visualCodeInterimMode" : "Disabled",
+    "recordsLimit" : {
+      "enabled" : false,
+      "value" : 1000
+    },
+    "topLevelPackage" : "PPLN_MD_MATL_8"
+  },
+  "connections" : [ {
+    "id" : "1f3e9680-5854-4452-9e6c-02264337f5fe",
+    "source" : "38871115-89d8-49c7-81d2-d9fc1eb47a81",
+    "sourcePort" : "cfa698c4-e800-49d2-b267-da1008ca8794",
+    "target" : "f6a8e020-354f-4ac2-90b5-942ea2bd54a7",
+    "targetPort" : "37daceeb-0997-4171-ae39-9988284816ca"
+  }, {
+    "id" : "2e787f92-abd3-441a-824e-de92177fa1af",
+    "source" : "5c9f56d2-36dc-469b-8954-e1e22fdafd71",
+    "sourcePort" : "ffbdb82e-eac7-4e4d-b960-83094bc21b5b",
+    "target" : "38871115-89d8-49c7-81d2-d9fc1eb47a81",
+    "targetPort" : "4a405700-7a1b-44fa-93c6-83028c94d095"
+  } ],
+  "processes" : {
+    "f6a8e020-354f-4ac2-90b5-942ea2bd54a7" : {
+      "id" : "f6a8e020-354f-4ac2-90b5-942ea2bd54a7",
+      "component" : "Target",
+      "metadata" : {
+        "label" : "MD_MATL",
+        "slug" : "MD_MATL",
+        "x" : -540,
+        "y" : -400,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
       },
       "ports" : {
-        "inputs" : [ ],
+        "inputs" : [ {
+          "id" : "37daceeb-0997-4171-ae39-9988284816ca",
+          "slug" : "in0",
+          "isStreaming" : false
+        } ],
         "outputs" : [ ],
         "selectedInputFields" : [ ],
         "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/MD_MATL"
+      }
+    },
+    "38871115-89d8-49c7-81d2-d9fc1eb47a81" : {
+      "id" : "38871115-89d8-49c7-81d2-d9fc1eb47a81",
+      "component" : "SchemaTransform",
+      "metadata" : {
+        "label" : "addL1fields",
+        "slug" : "addL1fields",
+        "x" : -780,
+        "y" : -400,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "4a405700-7a1b-44fa-93c6-83028c94d095",
+          "slug" : "in0",
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "cfa698c4-e800-49d2-b267-da1008ca8794",
+          "slug" : "out",
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "transformations" : [ {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "SRC_SYS_CD",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "'$sourceSystem'"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_pk_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'MATL_NUM',MATL_NUM))"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_pk_md5_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'MATL_NUM',MATL_NUM)))"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_l1_upt_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "current_timestamp()"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        } ]
+      }
+    },
+    "5c9f56d2-36dc-469b-8954-e1e22fdafd71" : {
+      "id" : "5c9f56d2-36dc-469b-8954-e1e22fdafd71",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "sql_MD_MATL",
+        "slug" : "sql_MD_MATL",
+        "x" : -1060,
+        "y" : -400,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "ffbdb82e-eac7-4e4d-b960-83094bc21b5b",
+          "slug" : "out0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "SRC_SYS_CD",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MATL_NUM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MATL_TYPE_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BRND_CD",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "FRANCHISE_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LCL_PLNG_SUB_FRAN_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PRCHSNG_VAL_KEY_CD",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DEL_IND",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MATL_GRP_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "INDSTR_SECTR_CD",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BASE_UOM_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "TOT_SHLF_LIF_DAYS_CNT",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MIN_SHLF_RMN_LIF_DAYS_CNT",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MATL_STS_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DSTN_CHN_STS_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "NET_WT_MEAS",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PROD_HIER_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PRCMT_QUAL_MGMT_IND",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "STRG_CONDS_CD",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LBL_TEMP_RNG",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "TRSPN_GRP_CD",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BTCH_MNG_IND",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MATL_DOC_NUM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MATL_DOC_VERS_NUM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MATL_SHRT_DESC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MMS_SURGERY_TYPE_CD",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MMS_MATL_TYPE_CD",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PRMRY_PLNT_CD",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MMS_FIN_CLSN_CD",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MMS_STERILIZATION_IND",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MATL_CATLG_NUM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SRC_SECTR_CD",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MATL_PARNT_CD",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MATL_SUB_TYPE_CD",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "FIN_HIER_BASE_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IMPLNT_INSTM_IND",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MATL_MOD_CD",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "KIT_IND",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MMS_TEMP_SENS_IND",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DIR_PART_MRKNG_CD",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MATL_CAT_GRP_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PLNG_HIER3_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MATL_SPEC_NUM",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MATL_SPEC_VERS_NUM",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CHG_BY",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DOC_CHG_NUM",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CNTNR_REQ",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "OLD_MATL_NUM",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "GRS_WT",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ORDR_UNIT_PUR_UOM",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CHEM_CMPLI",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CRT_BY",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CRT_ON_DTTM",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LBL_TYPE",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LBL_FORM",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "EXTRNL_MATL_GRP",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MAX_LVL",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WT_UNIT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SIZE_DIM",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PER_IN",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LAST_CHG_DT_TIME_DTTM",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MATL_GRP_PKGNG_MATL",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MATL_EXTRNL",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "STRG_PCT",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VAL_FROM_XPLNT_DTTM",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VAL_FROM_XDC_DTTM",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "INDSTR_STD_DESC",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RD_RUL_SLED",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SER_LVL",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MATL_HAZ_CD",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VAR_ORDR_UNT",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PKGNG_MATL_TYPE",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VOL_UNIT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VOL",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BSC_MATL",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DOC_TYPE",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DOC_PG_FMT",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "EAN_UPC",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "EAN_CAT",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MFR_BOOK_PART_NUM",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DIR_SHP_FL",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "FIN_PLNT",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MAIN_STRG_LOC",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PCS_PER_SLS_UNT",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PROD_LINE",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MAKE_BUY_IN",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "STRT_PLNT",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MATL_SHRT_DESC_UP_CASE",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MATL_TYPE_DESC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "FRAN_CD_DESC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BASE_UOM_DESC",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "OBJ_NUM",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "TYPE_OF_MATERIAL",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "STERILE",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BRAVO_MINOR_CODE",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BRAVO_MINOR_CODE_DESC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "NDL_SLS_TYPE",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SUTURE_LENGTH_INCH",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SER_TYPE",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "GTIN_VRNT",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MATL_GRP_DESC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MATL_GRP_DESC_2",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SHRT_MATL_NUM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CMMDTY",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "NDL_COLOR",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "NDL_ALLOY",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SUTURE_USP",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "EAN_UPC_HRMZD",
+              "type" : "void",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true
+      },
+      "properties" : {
+        "script" : "out0 = spark.sql(f\"\"\"\n    SELECT DISTINCT\n    '{Config.sourceSystem}'   AS SRC_SYS_CD\n,F4101.imlitm AS MATL_NUM\n,TRIM(F4101.imsrp2) AS MATL_TYPE_CD\n,NULL AS BRND_CD\n,TRIM(F4101.imsrp1) AS FRANCHISE_CD\n,TRIM(F4101.imprp7) AS LCL_PLNG_SUB_FRAN_CD\n,NULL AS PRCHSNG_VAL_KEY_CD\n,NULL AS DEL_IND\n,TRIM(F4101.imprp4) AS MATL_GRP_CD\n,NULL AS INDSTR_SECTR_CD\n,TRIM(F4101.imuom1) AS BASE_UOM_CD\n,CAST(F4101.imsld AS DECIMAL(18,4)) AS TOT_SHLF_LIF_DAYS_CNT\n,NULL AS MIN_SHLF_RMN_LIF_DAYS_CNT\n,TRIM(F4101.imstkt) AS MATL_STS_CD\n,TRIM(F4101.imprp3) AS DSTN_CHN_STS_CD\n,NULL AS NET_WT_MEAS\n,TRIM(F4101.imsrp9) AS PROD_HIER_CD\n,NULL AS PRCMT_QUAL_MGMT_IND\n,NULL AS STRG_CONDS_CD\n,NULL AS LBL_TEMP_RNG\n,NULL AS TRSPN_GRP_CD\n,CASE WHEN TRIM(F4101.imsrce) IN ('0', '') OR TRIM(F4101.imsrce) IS NULL THEN '' ELSE 'X' END AS BTCH_MNG_IND\n,TRIM(F4101.imdraw) AS MATL_DOC_NUM\n,TRIM(F4101.imrvno) AS MATL_DOC_VERS_NUM\n,CONCAT(TRIM(F4101.imdsc1),'; ',TRIM(F4101.imdsc2)) AS MATL_SHRT_DESC\n,NULL AS MMS_SURGERY_TYPE_CD\n,NULL AS MMS_MATL_TYPE_CD\n,NULL AS PRMRY_PLNT_CD\n,NULL AS MMS_FIN_CLSN_CD\n,NULL AS MMS_STERILIZATION_IND\n,TRIM(F4101.imaitm) AS MATL_CATLG_NUM\n,NULL AS SRC_SECTR_CD\n,NULL AS MATL_PARNT_CD\n,NULL AS MATL_SUB_TYPE_CD\n,TRIM(F4101.imglpt) AS FIN_HIER_BASE_CD\n,NULL AS IMPLNT_INSTM_IND\n,NULL AS MATL_MOD_CD\n,NULL AS KIT_IND\n,NULL AS MMS_TEMP_SENS_IND\n,NULL AS DIR_PART_MRKNG_CD\n,TRIM(F4101.imprp2) AS MATL_CAT_GRP_CD\n,TRIM(F4101.imsrp6) AS PLNG_HIER3_CD\n,NULL AS MATL_SPEC_NUM\n,NULL AS MATL_SPEC_VERS_NUM\n,TRIM(F4101.imuser) AS CHG_BY\n,NULL AS DOC_CHG_NUM\n,NULL AS CNTNR_REQ\n,NULL AS OLD_MATL_NUM\n,NULL AS GRS_WT\n,NULL AS ORDR_UNIT_PUR_UOM\n,NULL AS CHEM_CMPLI\n,NULL AS CRT_BY\n,NULL AS CRT_ON_DTTM\n,NULL AS LBL_TYPE\n,NULL AS LBL_FORM\n,NULL AS EXTRNL_MATL_GRP\n,NULL AS MAX_LVL\n,trim(F4101.imuwum) AS WT_UNIT\n,NULL AS SIZE_DIM\n,NULL AS PER_IN\n, CASE\n    WHEN LENGTH(f4101.imtday) = 6 THEN TO_TIMESTAMP(\n      CONCAT(\n        DATE_ADD(\n          CAST(\n            SUBSTRING(f4101.IMUPMJ + 1900000, 1, 4) AS DATE\n          ),\n          CAST(SUBSTRING(f4101.IMUPMJ, 4, 3) AS INT) -1\n        ),\n        \\\"\\\"\\\"\\\",\n        f4101.imtday\n      ),\n      'yyyy-MM-ddHHmmss'\n    )\n    WHEN LENGTH(f4101.imtday) = 5 THEN TO_TIMESTAMP(\n      CONCAT(\n        DATE_ADD(\n          CAST(\n            SUBSTRING(f4101.IMUPMJ + 1900000, 1, 4) AS DATE\n          ),\n          CAST(SUBSTRING(f4101.IMUPMJ, 4, 3) AS INT) -1\n        ),\n        \\\"\\\"\\\"\\\",\n        concat(0, f4101.imtday)\n      ),\n      'yyyy-MM-ddHHmmss'\n    )\n    ELSE TO_TIMESTAMP(\n      DATE_ADD(\n        CAST(SUBSTRING(f4101.IMUPMJ + 1900000, 1, 4) AS Date),\n        CAST(SUBSTRING(f4101.IMUPMJ, 4, 3) as INT) -1\n      )\n    )\n  END AS LAST_CHG_DT_TIME_DTTM\n,NULL AS MATL_GRP_PKGNG_MATL\n,NULL AS MATL_EXTRNL\n,NULL AS STRG_PCT\n,NULL AS VAL_FROM_XPLNT_DTTM\n,NULL AS VAL_FROM_XDC_DTTM\n,NULL AS INDSTR_STD_DESC\n,NULL AS RD_RUL_SLED\n,NULL AS SER_LVL\n,NULL AS MATL_HAZ_CD\n,NULL AS VAR_ORDR_UNT\n,NULL AS PKGNG_MATL_TYPE\n,TRIM(F4101.imuvm1) AS VOL_UNIT\n,CAST(TRIM(F4101.imvcud) AS DECIMAL(18,4))  AS VOL\n,NULL AS BSC_MATL\n,TRIM(F4101.imlnty) AS DOC_TYPE\n,NULL AS DOC_PG_FMT\n,NULL AS EAN_UPC\n,NULL AS EAN_CAT\n,NULL AS MFR_BOOK_PART_NUM\n,NULL AS DIR_SHP_FL\n,NULL AS FIN_PLNT\n,NULL AS MAIN_STRG_LOC\n,NULL AS PCS_PER_SLS_UNT\n,NULL AS PROD_LINE\n,NULL AS MAKE_BUY_IN\n,NULL AS STRT_PLNT\n,NULL AS MATL_SHRT_DESC_UP_CASE\n,TRIM(f0005_s2.drdl01) AS MATL_TYPE_DESC\n,TRIM(f0005_s1.drdl01) AS FRAN_CD_DESC\n,NULL AS BASE_UOM_DESC\n,NULL AS OBJ_NUM\n,NULL AS TYPE_OF_MATERIAL\n,trim(F4101.imprp1) AS STERILE\n,TRIM(F4101.imsrp0) AS BRAVO_MINOR_CODE\n,TRIM(f0005.drdl01) AS BRAVO_MINOR_CODE_DESC\n,NULL AS NDL_SLS_TYPE\n,NULL AS SUTURE_LENGTH_INCH\n,NULL AS SER_TYPE\n,NULL AS GTIN_VRNT\n,TRIM(f0005_p4.drdl01) AS MATL_GRP_DESC\n,NULL AS MATL_GRP_DESC_2\n,f4101.imitm AS SHRT_MATL_NUM\n,NULL AS CMMDTY\n,NULL AS NDL_COLOR\n,NULL AS NDL_ALLOY\n,NULL AS SUTURE_USP\n,NULL AS EAN_UPC_HRMZD\nFROM {Config.sourceDatabase}.F4101 F4101\nLEFT JOIN {Config.sourceDatabase}.f0005 f0005 \nON F4101.IMSRP0 = TRIM(f0005.DRKY) \nAND TRIM(f0005.DRSY) = '41'\nAND f0005.DRRT = '10'\nAND f0005._deleted_ = 'F'\nLEFT JOIN {Config.sourceDatabase}.f0005 f0005_s1 \nON F4101.IMSRP1 = TRIM(f0005_s1.DRKY) \nAND TRIM(f0005_s1.DRSY) = '41'\nAND f0005_s1.DRRT = 'S1'\nAND f0005_s1._deleted_ = 'F'\nLEFT JOIN {Config.sourceDatabase}.f0005 f0005_s2\nON F4101.IMSRP2 = TRIM(f0005_s2.DRKY) \nAND TRIM(f0005_s2.DRSY) = '41'\nAND f0005_s2.DRRT = 'S2'\nAND f0005_s2._deleted_ = 'F'\nLEFT JOIN {Config.sourceDatabase}.f0005 f0005_p4\nON F4101.IMPRP4 = TRIM(f0005_p4.DRKY)\nAND TRIM(f0005_p4.DRSY) = '41'\nAND f0005_p4.DRRT = 'P4'\nAND f0005_p4._deleted_ = 'F'\nWHERE F4101._deleted_ = 'F'  \n \n\"\"\")",
+        "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+        "scriptMethodFooter" : "    return out0"
       }
     }
-
-
-    
+  },
+  "ports" : {
+    "inputs" : [ ],
+    "outputs" : [ ],
+    "selectedInputFields" : [ ],
+    "isCustomOutputSchema" : false
+  }
+}
