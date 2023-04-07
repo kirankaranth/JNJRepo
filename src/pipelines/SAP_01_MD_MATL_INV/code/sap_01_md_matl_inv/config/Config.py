@@ -8,7 +8,7 @@ class Config(ConfigBase):
             sourceSystem: str=None,
             targetSchema: str=None,
             sourceDatabase: str=None,
-            ConfigDatabase: str=None,
+            configDatabase: str=None,
             MANDT: str=None,
             DBTABLE1: str=None,
             DBTABLE2: str=None,
@@ -22,7 +22,7 @@ class Config(ConfigBase):
             sourceSystem, 
             targetSchema, 
             sourceDatabase, 
-            ConfigDatabase, 
+            configDatabase, 
             MANDT, 
             DBTABLE1, 
             DBTABLE2, 
@@ -36,7 +36,7 @@ class Config(ConfigBase):
             sourceSystem: str="hm2",
             targetSchema: str="dev_md_l1",
             sourceDatabase: str="hm2",
-            ConfigDatabase: str=" ",
+            configDatabase: str=" ",
             MANDT: str="500",
             DBTABLE1: str="nsdm_v_mard",
             DBTABLE2: str="nsdm_v_mchb",
@@ -49,7 +49,7 @@ class Config(ConfigBase):
         self.sourceSystem = sourceSystem
         self.targetSchema = targetSchema
         self.sourceDatabase = sourceDatabase
-        self.ConfigDatabase = ConfigDatabase
+        self.configDatabase = configDatabase
         self.MANDT = MANDT
         self.DBTABLE1 = DBTABLE1
         self.DBTABLE2 = DBTABLE2
