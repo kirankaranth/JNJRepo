@@ -30,6 +30,26 @@ class SchemaTransform_1Test(BaseTestCase):
             self.maxUnequalRowsToShow
         )
 
+    def test_unit_test__1(self):
+        dfIn0 = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/md_matl_alt_uom_atl_bba_bbl_bbn_bwi_fsn_geu_hcs_mbp_mrs_p01_svs_tai/graph/SchemaTransform_1/in0/schema.json',
+            'test/resources/data/md_matl_alt_uom_atl_bba_bbl_bbn_bwi_fsn_geu_hcs_mbp_mrs_p01_svs_tai/graph/SchemaTransform_1/in0/data/test_unit_test__1.json',
+            'in0'
+        )
+        dfOut = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/md_matl_alt_uom_atl_bba_bbl_bbn_bwi_fsn_geu_hcs_mbp_mrs_p01_svs_tai/graph/SchemaTransform_1/out/schema.json',
+            'test/resources/data/md_matl_alt_uom_atl_bba_bbl_bbn_bwi_fsn_geu_hcs_mbp_mrs_p01_svs_tai/graph/SchemaTransform_1/out/data/test_unit_test__1.json',
+            'out'
+        )
+        dfOutComputed = SchemaTransform_1(self.spark, dfIn0)
+        assertDFEquals(
+            dfOut.select("WT_UOM_CD", "GTIN_CAT_CD"),
+            dfOutComputed.select("WT_UOM_CD", "GTIN_CAT_CD"),
+            self.maxUnequalRowsToShow
+        )
+
     def setUp(self):
         BaseTestCase.setUp(self)
         import os
