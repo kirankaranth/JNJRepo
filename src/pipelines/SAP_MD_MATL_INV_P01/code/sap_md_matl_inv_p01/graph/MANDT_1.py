@@ -5,5 +5,5 @@ from prophecy.libs import typed_lit
 from sap_md_matl_inv_p01.config.ConfigStore import *
 from sap_md_matl_inv_p01.udfs.UDFs import *
 
-def DS_SAP_01_NSDM_V_MARD(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM {Config.sourceSystem}.nsdm_v_mard WHERE _deleted_ = 'F'")
+def MANDT_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
+    return in0.filter((col("MANDT") == lit(Config.MANDT)))
