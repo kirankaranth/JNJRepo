@@ -1,3 +1,4 @@
+from .MD_PO_HIST import MD_PO_HIST
 from .MANDT_FILTER import MANDT_FILTER
 from .SAP_EKBE import SAP_EKBE
 from .NEW_FIELDS import NEW_FIELDS
