@@ -1,0 +1,60 @@
+from pyspark.sql import *
+from pyspark.sql.functions import *
+from pyspark.sql.types import *
+from prophecy.libs import typed_lit
+from dart_l1_purchase_order_md_po_hist.config.ConfigStore import *
+from dart_l1_purchase_order_md_po_hist.udfs.UDFs import *
+
+def SET_FIELD_ORDER_REFORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
+    return in0.select(
+        col("SRC_SYS_CD"), 
+        col("PO_NUM"), 
+        col("PO_LINE_NBR"), 
+        col("EV_TYPE_CO"), 
+        col("PO_SEQ_NBR"), 
+        col("MATL_MVMT_YR"), 
+        col("MATL_MVMT_NUM"), 
+        col("MATL_MVMT_SEQ_NBR"), 
+        col("PO_HIST_CAT_CD"), 
+        col("MVMT_TYPE_CD"), 
+        col("PSTNG_DTTM"), 
+        col("RECV_EA_QTY"), 
+        col("ENT_MATL_NUM"), 
+        col("PLNT_CD"), 
+        col("UNIQ_KEY_ID"), 
+        col("MVMT_TYPE"), 
+        col("QTY_IN_PRCH_ORDR_PRC_UNIT"), 
+        col("AMT_IN_LCL_CRNCY1"), 
+        col("CRNCY_KEY"), 
+        col("GR_IR_ACCT_CLRNG_VAL_IN_LCL_CRNCY"), 
+        col("GOODS_RCPT_BLOK_STK_IN_OU"), 
+        col("QTY_IN_GR_BLOK_STK"), 
+        col("DEBIT_OR_CREDIT_IN"), 
+        col("VALUT_TYPE"), 
+        col("DELV_CMPLT_IN"), 
+        col("REF_DOC_NUM"), 
+        col("FISC_YR_OF_A_REF_DOC"), 
+        col("DOC_NUM_OF_A_REF_DOC"), 
+        col("ITM_OF_A_REF_DOC"), 
+        col("RSN_FOR_MVMT"), 
+        col("ACTG_DOC_ENT_DTTM"), 
+        col("INVC_VAL_ENT"), 
+        col("CMPLI_WTH_SHIPPING_INSTR"), 
+        col("INVC_VAL_IN_FRGN_CRNCY"), 
+        col("RVSL_OF_GR_ALLW"), 
+        col("SEQ_NUM_OF_SUP_CNFRM"), 
+        col("NUM_OF_DOC_COND"), 
+        col("TAX_ON_SLS_PRCH_CD"), 
+        col("TAX_RPTG_CTRY_REGN"), 
+        col("QTY_IN_UOM_FROM_DELV_NOTE"), 
+        col("UOM_FROM_DELV_NOTE"), 
+        col("MATL_NUM"), 
+        col("CLRNG_VAL_ON_GR_IR_CLRNG_ACCT"), 
+        col("LCL_CRNCY_KEY"), 
+        col("QTY1"), 
+        col("BTCH_NUM"), 
+        col("DOC_DTTM"), 
+        col("CALC_OF_VAL_OPEN"), 
+        col("UNPLAN_ACCT_ASGNMT"), 
+        col("NM_OF_PRSN_RESP_FOR_CREAT_OBJ")
+    )

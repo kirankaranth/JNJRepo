@@ -10,4 +10,4 @@ def MD_PO_HIST(spark: SparkSession, in0: DataFrame):
         .format("delta")\
         .option("replaceWhere", f"SRC_SYS_CD = '{Config.sourceSystem}'")\
         .mode("overwrite")\
-        .saveAsTable(f"{Config.targetSchema}.md_po_hist")
+        .saveAsTable(f"{Config.targetSchema}.MD_PO_HIST")
