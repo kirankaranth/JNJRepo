@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 setup(
-    name = 'JDE_01_F0401_DEU_JES_JEM_JET_JSW_SJD_DJD_MTR_MBP',
+    name = 'JDE_01_F0401_DEU_JEM_JSW_SJD',
     version = '1.0',
     packages = find_packages(include = ('jde_01_deu_f0401*', )) + ["prophecy_config_instances"],
     package_dir = {'prophecy_config_instances' : 'configs/resources/config'},
