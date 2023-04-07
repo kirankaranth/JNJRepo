@@ -13,16 +13,16 @@ JEKT-0205_01 SIT Test to check that the CDL L1 table has the correct number of c
    [Documentation]   Validate that CDL L1 has the correct number of columns
    [Tags]  JEKT-205_01
    [Template]    Validate that table has the correct number of columns
-   ${COLUMN_COUNTS}     ${LIST_TABLES}   table
+   ${COLUMN_COUNTS}     ${TABLES}   table
 
 JEKT-0205_02 SIT Test to check that the CDL L1 is created in the correct location
     [Documentation]    I check that the underlying files are in the correct ADLS location
     [Tags]   JEKT-205_02
     [Template]    Validate that the tables underlying files are in the correct ADLS location
-    ${LIST_TABLES}    ${table_edm_location}     table
+    ${TABLES}    ${table_edm_location}     table
 
 JEKT-0205_03 SIT Test to check that the CDL L1 datatypes
     [Documentation]  Validate that the columns are of correct datatype
     [Tags]   JEKT-205_03
     [Template]    Validate that the columns are of correct datatype
-    ${LIST_TABLES}    ${column_data_Types}     table
+    ${TABLES}    ${column_data_Types}     table

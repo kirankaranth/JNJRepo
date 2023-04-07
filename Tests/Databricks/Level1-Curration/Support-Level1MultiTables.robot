@@ -41,8 +41,14 @@ Reconnect to Databrick or Reconnect to Databrick views
     Run keyword if      ${Connection}==True      Log to console  RECONNECTED SUCCESSFULLY
 
 I expect that the target table contains required number of columns
-    [Arguments]     ${COLUMN_COUNTS}     ${LIST_TABLES}
-    FOR     ${result}   IN  @{LIST_TABLES}
+    [Arguments]     ${COLUMN_COUNTS}     ${TABLES}
+    Validate the target table contains required number of columns       ${COLUMN_COUNTS}     ${TABLES}
+    log   Required number of columns : ${COLUMN_COUNTS}
+
+
+Validate the target table contains required number of columns
+    [Arguments]     ${COLUMN_COUNTS}     ${TABLES}
+    FOR     ${result}   IN  @{TABLES}
     ${table}=  Set Variable    ${result}
     ${number_of_columns}=     get from dictionary     ${COLUMN_COUNTS}    ${table}
     Validate that the target table contains required number of columns    ${number_of_columns}  ${table}
@@ -63,6 +69,7 @@ Validate that the target table contains required number of columns
     log test to report per step     ${jira_id_tag}
     Log to console   Actual Colums: ${column_count} ${table}
     Log to console   Expected Colums: ${number_of_columns} ${table}
+
 I expect that table contains only unique primary keys
     Validate Uniqueness Of The Primary Keys Are As Expected For The Curated Table    ${PRIMARY_KEYS}
     Log    Primary key list:${PRIMARY_KEYS}
@@ -74,12 +81,17 @@ Fail test and Log error
     Run Keyword And Continue On Failure     Should Be Equal As Strings   ${execution_status}     PASS
 
 I expect that columns are of the correct datatype
-    [Arguments]      ${LIST_TABLES}   ${ALL_COLUMNS_AND_DATATYPES}
-    FOR     ${result}   IN  @{LIST_TABLES}
+    [Arguments]     ${TABLES}    ${COLUMNS_AND_DATATYPES}
+    validate columns for multiple tables are of the correct datatype    ${TABLES}    ${COLUMNS_AND_DATATYPES}
+    Log     Checked columns and datatypes: ${COLUMNS_AND_DATATYPES}
+
+validate columns for multiple tables are of the correct datatype
+    [Arguments]      ${TABLES}   ${ALL_COLUMNS_AND_DATATYPES}
+    FOR     ${result}   IN  @{TABLES}
     ${table}=  Set Variable    ${result}
     ${COLUMNS_AND_DATATYPES}=     get from dictionary     ${ALL_COLUMNS_AND_DATATYPES}    ${table}
     Validate that columns are of the correct datatype     ${COLUMNS_AND_DATATYPES}   ${table}
-    Log     Checked columns and datatypes: ${COLUMNS_AND_DATATYPES}
+    Log     Checked columns and datatypes: ${ALL_COLUMNS_AND_DATATYPES}
     END
 
 Validate that columns are of the correct datatype
@@ -101,8 +113,13 @@ Validate that columns are of the correct datatype
     log test to report per step     ${jira_id_tag}
 
 I expect that the EDM location is correct
-    [Arguments]    ${table_edm_location}    ${LIST_TABLES}
-    FOR     ${result}   IN  @{LIST_TABLES}
+    [Arguments]    ${table_edm_location}    ${TABLES}
+    Validate EDM location for all tables    ${table_edm_location}    ${TABLES}
+    log   EDM location : ${table_edm_location}
+
+Validate EDM location for all tables
+    [Arguments]    ${table_edm_location}    ${TABLES}
+    FOR     ${result}   IN  @{TABLES}
     ${table}=  Set Variable    ${result}
     ${table_location}=     get from dictionary     ${table_edm_location}    ${table}
     Validate that EDM location is correct    ${table_location}    ${table}
@@ -143,19 +160,19 @@ Update location to use proper syntax
 
 # Templates
 Validate that table has the correct number of columns
-    [Arguments]     ${COLUMN_COUNTS}      ${LIST_TABLES}    ${databrick_name}
+    [Arguments]     ${COLUMN_COUNTS}      ${TABLES}    ${databrick_name}
     Given I have access to Databricks database     ${databrick_name}
     When I check that the requirements are implemented correctly
-    Then I expect that the target table contains required number of columns     ${COLUMN_COUNTS}     ${LIST_TABLES}
+    Then I expect that the target table contains required number of columns     ${COLUMN_COUNTS}     ${TABLES}
 
 Validate that the tables underlying files are in the correct ADLS location
-    [Arguments]    ${LIST_TABLES}    ${table_edm_location}   ${databrick_name}
+    [Arguments]    ${TABLES}    ${table_edm_location}   ${databrick_name}
     Given I have access to Databricks database       ${databrick_name}
     When I check that the requirements are implemented correctly
-    Then I expect that the EDM location is correct       ${table_edm_location}    ${LIST_TABLES}
+    Then I expect that the EDM location is correct       ${table_edm_location}    ${TABLES}
 
 Validate that the columns are of correct datatype
-    [Arguments]   ${LIST_TABLES}    ${COLUMNS_AND_DATATYPES}     ${databrick_name}
+    [Arguments]   ${TABLES}    ${COLUMNS_AND_DATATYPES}     ${databrick_name}
     Given I have access to Databricks database    ${databrick_name}
     When I check that the requirements are implemented correctly
-    Then I expect that columns are of the correct datatype    ${LIST_TABLES}    ${COLUMNS_AND_DATATYPES}
+    Then I expect that columns are of the correct datatype    ${TABLES}    ${COLUMNS_AND_DATATYPES}
