@@ -12,12 +12,7 @@ def SchemaTransform_4_MKOL(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("MATL_NUM", col("MATNR"))\
         .withColumn("PLNT_CD", col("WERKS"))\
         .withColumn("SLOC_CD", col("LGORT"))\
-        .withColumn(
-          "BTCH_NUM",
-          lit(
-            "#"
-          )
-        )\
+        .withColumn("BTCH_NUM", col("CHARG"))\
         .withColumn(
           "BTCH_STS_CD",
           lit(
@@ -30,29 +25,24 @@ def SchemaTransform_4_MKOL(spark: SparkSession, in0: DataFrame) -> DataFrame:
             "#"
           )
         )\
-        .withColumn(
-          "PRTY_NUM",
-          lit(
-            "#"
-          )
-        )\
-        .withColumn("UNRSTRCTD_STCK", col("LABST").cast(DecimalType(18, 4)))\
-        .withColumn("IN_TRNSFR_STCK", col("UMLME").cast(DecimalType(18, 4)))\
-        .withColumn("QLTY_INSP_STCK", col("INSME").cast(DecimalType(18, 4)))\
-        .withColumn("RSTRCTD_STCK", col("EINME").cast(DecimalType(18, 4)))\
-        .withColumn("BLCKD_STCK", col("SPEME").cast(DecimalType(18, 4)))\
+        .withColumn("PRTY_NUM", col("SOBKZ"))\
+        .withColumn("UNRSTRCTD_STCK", col("SLABS").cast(DecimalType(18, 4)))\
+        .withColumn("IN_TRNSFR_STCK", lit(None).cast(DecimalType(18, 4)))\
+        .withColumn("QLTY_INSP_STCK", col("SINSM").cast(DecimalType(18, 4)))\
+        .withColumn("RSTRCTD_STCK", col("SEINM").cast(DecimalType(18, 4)))\
+        .withColumn("BLCKD_STCK", lit(None).cast(DecimalType(18, 4)))\
         .withColumn(
           "CRT_DTTM",
           when((col("ERSDA") == lit("00000000")), lit(None))\
             .when((length(col("ERSDA")) < lit(8)), lit(None))\
             .otherwise(to_timestamp(col("ERSDA"), "yyyyMMdd"))
         )\
-        .withColumn("RTRNS", col("RETME").cast(DecimalType(18, 4)))\
+        .withColumn("RTRNS", lit(None).cast(DecimalType(18, 4)))\
         .withColumn("BASE_UOM_CD", lookup("LU_MARA_MEINS", col("MATNR")).getField("MEINS"))\
         .withColumn("STO_IN_TRNST_QTY", lit(None).cast(DecimalType(18, 4)))\
         .withColumn("PLNT_IN_TRNST_QTY", lit(None).cast(DecimalType(18, 4)))\
-        .withColumn("FISC_YR_OF_CUR_PER", col("LFGJA").cast(IntegerType()))\
-        .withColumn("CUR_PER", col("LFMON").cast(IntegerType()))\
+        .withColumn("FISC_YR_OF_CUR_PER", lit(None).cast(IntegerType()))\
+        .withColumn("CUR_PER", lit(None).cast(IntegerType()))\
         .withColumn("SHRT_MATL_NUM", lit(None))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\

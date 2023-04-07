@@ -17,7 +17,12 @@ def SchemaTransform_6_MSSL(spark: SparkSession, in0: DataFrame) -> DataFrame:
             "#"
           )
         )\
-        .withColumn("BTCH_NUM", col("CHARG"))\
+        .withColumn(
+          "BTCH_NUM",
+          lit(
+            "#"
+          )
+        )\
         .withColumn(
           "BTCH_STS_CD",
           lit(
@@ -25,11 +30,11 @@ def SchemaTransform_6_MSSL(spark: SparkSession, in0: DataFrame) -> DataFrame:
           )
         )\
         .withColumn("SPCL_STCK_IND", col("SOBKZ"))\
-        .withColumn("PRTY_NUM", col("KUNNR"))\
-        .withColumn("UNRSTRCTD_STCK", col("KULAB").cast(DecimalType(18, 4)))\
-        .withColumn("IN_TRNSFR_STCK", col("KUUML").cast(DecimalType(18, 4)))\
-        .withColumn("QLTY_INSP_STCK", col("KUINS").cast(DecimalType(18, 4)))\
-        .withColumn("RSTRCTD_STCK", col("KUEIN").cast(DecimalType(18, 4)))\
+        .withColumn("PRTY_NUM", col("LIFNR"))\
+        .withColumn("UNRSTRCTD_STCK", col("SLLAB").cast(DecimalType(18, 4)))\
+        .withColumn("IN_TRNSFR_STCK", lit(None).cast(DecimalType(18, 4)))\
+        .withColumn("QLTY_INSP_STCK", col("SLINS").cast(DecimalType(18, 4)))\
+        .withColumn("RSTRCTD_STCK", col("SLEIN").cast(DecimalType(18, 4)))\
         .withColumn("BLCKD_STCK", lit(None).cast(DecimalType(18, 4)))\
         .withColumn(
           "CRT_DTTM",
@@ -41,8 +46,8 @@ def SchemaTransform_6_MSSL(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("BASE_UOM_CD", lookup("LU_MARA_MEINS", col("MATNR")).getField("MEINS"))\
         .withColumn("STO_IN_TRNST_QTY", lit(None).cast(DecimalType(18, 4)))\
         .withColumn("PLNT_IN_TRNST_QTY", lit(None).cast(DecimalType(18, 4)))\
-        .withColumn("FISC_YR_OF_CUR_PER", col("LFGJA").cast(IntegerType()))\
-        .withColumn("CUR_PER", col("LFMON").cast(IntegerType()))\
+        .withColumn("FISC_YR_OF_CUR_PER", lit(None).cast(IntegerType()))\
+        .withColumn("CUR_PER", lit(None).cast(IntegerType()))\
         .withColumn("SHRT_MATL_NUM", lit(None))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
