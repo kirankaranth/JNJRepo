@@ -7,7 +7,7 @@ from sap_01_md_ship.udfs.UDFs import *
 
 def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
-        .withColumn("SRC_SYS_CD", lit("SRC_SYS_CD"))\
+        .withColumn("SRC_SYS_CD", lit(Config.sourceSystem))\
         .withColumn("SHIP_NUM", col("TKNUM"))\
         .withColumn(
           "DELV_TYP_CD",
