@@ -5,5 +5,5 @@ from prophecy.libs import typed_lit
 from sap_01_md_matl_inv.config.ConfigStore import *
 from sap_01_md_matl_inv.udfs.UDFs import *
 
-def DS_SAP_01_NSDM_V_MCHB(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM {Config.sourceSystem}.nsdm_v_mchb WHERE _deleted_ = 'F'")
+def DS_SAP_04_MARA(spark: SparkSession) -> DataFrame:
+    return spark.sql(f"SELECT * FROM {Config.sourceSystem}.mara WHERE _deleted_ = 'F'")
