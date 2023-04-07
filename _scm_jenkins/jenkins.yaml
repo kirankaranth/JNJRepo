@@ -1,0 +1,57 @@
+
+- url: https://jenkins.eat.jnj.com/jekt-dev/
+  # Job Creation details
+  # Job Creation details
+  createJobsFrom:            # branches to create jenkins job from
+      - development
+      - production
+      - main
+      - feature/*
+      - test
+  createJobsIncludeAuthors:  # create jobs for all users making commits to the repo
+      - .*
+  createJobsIgnoreAuthors:   # ignore creation of Jobs triggered by service account
+      - sa-.*
+  createJobsIncludeCommits:
+      - .*
+  createJobsIgnoreCommits: []
+  triggerFrom:                                              # Will trigger on indicated branch[es]
+    - eventType: pullRequest                                # handles pullRequest open, updated, and reopened events from source branch
+      branches:
+        - feature/*
+
+  # Job Trigger details
+  triggerJobsFrom:           # branches where jenkins job build is triggered when a change is detected
+  
+      - bugfix/*
+      - hotfix/*
+      - development
+      - production
+      - test
+
+  triggerJobsIncludeAuthors:
+      - .*
+  triggerJobsIgnoreAuthors:
+      - sa-.*
+  triggerJobsIncludeCommits:
+      - .*
+
+  # Job Configuration Details
+  jobs:                      # list of job definitions
+      - jobStyle: multi-branch-pipeline
+        jobName: md_l1/mappings # job path/jobName
+        jobCredentials: sourcecode-bitbucket    # credentials used for cloning source code repo
+        includeBranches: # list of branches where to trigger job from
+        - development
+        - pqa
+        - qa
+        - production
+        - test
+        - beta
+        - feature/*
+        - bugfix/*
+        - hotfix/*
+        excludeBranches: # List of branches for which the Jenkins will skip job trigger - feature/neverBuild
+        - feature/neverBuild
+
+
