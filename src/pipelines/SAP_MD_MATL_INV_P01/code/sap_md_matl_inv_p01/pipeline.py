@@ -15,18 +15,33 @@ def pipeline(spark: SparkSession) -> None:
     df_MANDT_3 = MANDT_3(spark, df_DS_SAP_03_MSKU)
     df_SchemaTransform_3_MSKU = SchemaTransform_3_MSKU(spark, df_MANDT_3)
     df_SET_FIELD_ORDER_3 = SET_FIELD_ORDER_3(spark, df_SchemaTransform_3_MSKU)
+    df_DS_SAP_04_MKOL = DS_SAP_04_MKOL(spark)
     df_DS_SAP_01_MARD = DS_SAP_01_MARD(spark)
     df_MANDT_1 = MANDT_1(spark, df_DS_SAP_01_MARD)
     df_SchemaTransform_1_MARD = SchemaTransform_1_MARD(spark, df_MANDT_1)
-    df_SET_FIELD_ORDER = SET_FIELD_ORDER(spark, df_SchemaTransform_1_MARD)
+    df_SET_FIELD_ORDER_1 = SET_FIELD_ORDER_1(spark, df_SchemaTransform_1_MARD)
     df_MANDT_2 = MANDT_2(spark, df_DS_SAP_02_MCHB)
     df_SchemaTransform_2_MCHB = SchemaTransform_2_MCHB(spark, df_MANDT_2)
-    df_SET_FIELD_ORDER_1 = SET_FIELD_ORDER_1(spark, df_SchemaTransform_2_MCHB)
+    df_SET_FIELD_ORDER_2 = SET_FIELD_ORDER_2(spark, df_SchemaTransform_2_MCHB)
+    df_MANDT_4 = MANDT_4(spark, df_DS_SAP_04_MKOL)
+    df_SchemaTransform_4_MKOL = SchemaTransform_4_MKOL(spark, df_MANDT_4)
+    df_SET_FIELD_ORDER_4 = SET_FIELD_ORDER_4(spark, df_SchemaTransform_4_MKOL)
+    df_DS_SAP_05_MSLB = DS_SAP_05_MSLB(spark)
+    df_MANDT_5 = MANDT_5(spark, df_DS_SAP_05_MSLB)
+    df_SchemaTransform_5_MSLB = SchemaTransform_5_MSLB(spark, df_MANDT_5)
+    df_SET_FIELD_ORDER_5 = SET_FIELD_ORDER_5(spark, df_SchemaTransform_5_MSLB)
+    df_DS_SAP_06_MSSL = DS_SAP_06_MSSL(spark)
+    df_MANDT_6 = MANDT_6(spark, df_DS_SAP_06_MSSL)
+    df_SchemaTransform_6_MSSL = SchemaTransform_6_MSSL(spark, df_MANDT_6)
+    df_SET_FIELD_ORDER_6 = SET_FIELD_ORDER_6(spark, df_SchemaTransform_6_MSSL)
     df_SetOperation_1_Union = SetOperation_1_Union(
         spark, 
-        df_SET_FIELD_ORDER, 
         df_SET_FIELD_ORDER_1, 
-        df_SET_FIELD_ORDER_3
+        df_SET_FIELD_ORDER_2, 
+        df_SET_FIELD_ORDER_3, 
+        df_SET_FIELD_ORDER_4, 
+        df_SET_FIELD_ORDER_5, 
+        df_SET_FIELD_ORDER_6
     )
     MD_MATL_INV(spark, df_SetOperation_1_Union)
 
