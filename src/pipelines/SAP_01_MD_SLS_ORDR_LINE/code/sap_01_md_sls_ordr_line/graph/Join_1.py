@@ -341,5 +341,6 @@ def Join_1(
         trim(col("VBAP.WTYSC_CLMITEM")).alias("CLM_ITM_NUM"), 
         when((trim(col("VBKD.prsdt")) == lit("00000000")), lit(None).cast(TimestampType()))\
           .otherwise(to_timestamp(trim(col("VBKD.prsdt")), "yyyyMMdd"))\
-          .alias("PRC_AND_EXCH_RT_DTTM")
+          .alias("PRC_AND_EXCH_RT_DTTM"), 
+        col("VBAP._upt_").alias("_upt_")
     )
