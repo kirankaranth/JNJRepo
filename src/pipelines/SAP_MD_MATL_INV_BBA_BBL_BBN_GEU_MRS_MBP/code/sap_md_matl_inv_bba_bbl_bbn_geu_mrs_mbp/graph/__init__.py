@@ -1,6 +1,7 @@
 from .DS_SAP_04_MSLB import DS_SAP_04_MSLB
 from .SET_FIELD_ORDER_2 import SET_FIELD_ORDER_2
 from .SET_FIELD_ORDER_1 import SET_FIELD_ORDER_1
+from .MANDT_4 import MANDT_4
 from .SchemaTransform_5_MSLB import SchemaTransform_5_MSLB
 from .SET_FIELD_ORDER_3 import SET_FIELD_ORDER_3
 from .DS_SAP_05_MSSL import DS_SAP_05_MSSL
@@ -9,7 +10,6 @@ from .MANDT_3 import MANDT_3
 from .SchemaTransform_1_MARD import SchemaTransform_1_MARD
 from .SchemaTransform_2_MCHB import SchemaTransform_2_MCHB
 from .DS_SAP_01_MARD import DS_SAP_01_MARD
-from .MANDT_7 import MANDT_7
 from .MANDT_5 import MANDT_5
 from .DS_SAP_02_MCHB import DS_SAP_02_MCHB
 from .MD_MATL_INV import MD_MATL_INV
