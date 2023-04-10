@@ -53,6 +53,7 @@ Validate the target table contains required number of columns
     ${number_of_columns}=     get from dictionary     ${COLUMN_COUNTS}    ${table}
     Validate that the target table contains required number of columns    ${number_of_columns}  ${table}
     END
+    log test to report per step     ${jira_id_tag}
 
 Validate that the target table contains required number of columns
     [Arguments]     ${number_of_columns}    ${table}
@@ -66,7 +67,7 @@ Validate that the target table contains required number of columns
     Run keyword if  ${status}==False      Add result to report    !Test FAILED: The ${system}.${table} expected ${number_of_columns} columns but contains ${column_count} columns
     Run keyword if  ${status}==False      Set test variable    ${execution_status}    FAIL
     Run Keyword And Continue On Failure     Should Be Equal As Strings   ${execution_status}     PASS
-    log test to report per step     ${jira_id_tag}
+    Add result To report    ${\n}
     Log to console   Actual Colums: ${column_count} ${table}
     Log to console   Expected Colums: ${number_of_columns} ${table}
 
@@ -90,9 +91,11 @@ validate columns for multiple tables are of the correct datatype
     FOR     ${result}   IN  @{TABLES}
     ${table}=  Set Variable    ${result}
     ${COLUMNS_AND_DATATYPES}=     get from dictionary     ${ALL_COLUMNS_AND_DATATYPES}    ${table}
+    Add result to report  Checking for table: ${table}
     Validate that columns are of the correct datatype     ${COLUMNS_AND_DATATYPES}   ${table}
     Log     Checked columns and datatypes: ${ALL_COLUMNS_AND_DATATYPES}
     END
+    log test to report per step     ${jira_id_tag}
 
 Validate that columns are of the correct datatype
     [Arguments]    ${COLUMNS_AND_DATATYPES}    ${target}
@@ -105,17 +108,18 @@ Validate that columns are of the correct datatype
     Add result to report  Expected: Column ${column} to be of ${datatype} datatype
     Add result to report  Actual: Column ${column} is of ${datatype_from_dbfs} datatype
     Run keyword if   ${status}==False     Set test variable   ${execution_status}  FAIL
-    Run keyword if   ${status}==False     Add result to report    FAILED: Column ${column} is of ${datatype_from_dbfs} datatype but required datatype is ${datatype} in ${system}.${target}\n
+    Run keyword if   ${status}==False     Add result to report    FAILED: Column ${column} is of ${datatype_from_dbfs} datatype but required datatype is ${datatype} in ${system}.${target}
     Run keyword if   ${status}==True      Add result to report    PASSED: Column ${column} is of ${datatype} datatype as required in ${system}.${target} \n
     Log to console   Column ${column} is checked
     END
     Run keyword if   '${execution_status}'=='PASS'   Add result to report   \nTest Passed: All Columns are correct datatype.   ELSE   Add result to report   \nTest Failed: At least one datatype was incorrect.
-    log test to report per step     ${jira_id_tag}
+
 
 I expect that the EDM location is correct
-    [Arguments]    ${table_edm_location}    ${TABLES}
-    Validate EDM location for all tables    ${table_edm_location}    ${TABLES}
+    [Arguments]    ${table_edm_location}    ${LIST_TABLES}
+    Validate EDM location for all tables    ${table_edm_location}    ${LIST_TABLES}
     log   EDM location : ${table_edm_location}
+
 
 Validate EDM location for all tables
     [Arguments]    ${table_edm_location}    ${TABLES}
@@ -123,16 +127,8 @@ Validate EDM location for all tables
     ${table}=  Set Variable    ${result}
     ${table_location}=     get from dictionary     ${table_edm_location}    ${table}
     Validate that EDM location is correct    ${table_location}    ${table}
-    ${actual_location}=   return location of table on dbfs   ${table}   ${system}
-    Log to console   Expected Location:     ${table_location}
-    Log to console   Actual Location:       ${actual_location}
-    ${status}        Run keyword and return status      should be equal  ${actual_location}   ${table_location}
-    run keyword if  ${status}==True     Add result to report   PASSED: The ${table}'s underlying files are in the correct ADLS location
-    run keyword if  ${status}==False    Add result to report   FAILED: Table location was not equal to expected location\n
-    run keyword if  ${status}==False    Set test variable      ${execution_status}    FAIL
-    Run Keyword And Continue On Failure     Should Be Equal As Strings   ${execution_status}     PASS
-    log test to report per step     ${jira_id_tag}
     END
+    log test to report per step     ${jira_id_tag}
 
 Validate that EDM location is correct
     [Arguments]    ${table_location}    ${table}
@@ -142,13 +138,13 @@ Validate that EDM location is correct
     log     ${table_location}
     Run keyword if   ${env}==True     Update location to use proper syntax    ${table_location}
     Add result to report   Actual Result: ${actual_location}
-    Add result to report   Expected Result: ${table_location}\n
+    Add result to report   Expected Result: ${table_location}
     ${status}        Run keyword and return status      should be equal   ${actual_location}   ${table_location}
-    run keyword if  ${status}==True     Add result to report   PASSED: The ${table}'s underlying files are in the correct ADLS location
-    run keyword if  ${status}==False    Add result to report   FAILED: Table location was not equal to expected location\n
+    run keyword if  ${status}==True     Add result to report   PASSED:- The ${table}'s underlying files are in the correct ADLS location
+    run keyword if  ${status}==False    Add result to report   FAILED: Table location was not equal to expected location
     run keyword if  ${status}==False    Set test variable      ${execution_status}    FAIL
     Run Keyword And Continue On Failure     Should Be Equal As Strings   ${execution_status}     PASS
-    log test to report per step     ${jira_id_tag}
+    Add result To report    ${\n}
 
 Update location to use proper syntax
     [Arguments]    ${table_location}
