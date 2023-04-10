@@ -5,7 +5,7 @@ from prophecy.libs import typed_lit
 from jde_md_sls_ordr_line_.config.ConfigStore import *
 from jde_md_sls_ordr_line_.udfs.UDFs import *
 
-def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
+def NEW_FIELDS_RENAME_FORMAT_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
         .withColumn("SRC_SYS_CD", lit(Config.sourceSystem))\
         .withColumn("COMPANY_CD", col("SDKCOO"))\

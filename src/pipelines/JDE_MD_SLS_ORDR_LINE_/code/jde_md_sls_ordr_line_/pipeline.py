@@ -12,6 +12,9 @@ def pipeline(spark: SparkSession) -> None:
     df_JDE_F42119 = JDE_F42119(spark)
     df_NEW_FIELDS_RENAME_FORMAT_1 = NEW_FIELDS_RENAME_FORMAT_1(spark, df_JDE_F42119)
     df_UNION = UNION(spark, df_NEW_FIELDS_RENAME_FORMAT, df_NEW_FIELDS_RENAME_FORMAT_1)
+    df_SET_FIELDS_REFORMAT_ORDER = SET_FIELDS_REFORMAT_ORDER(spark, df_UNION)
+    df_DEDUPLICATE = DEDUPLICATE(spark, df_SET_FIELDS_REFORMAT_ORDER)
+    MD_SLS_ORDR_LINE(spark, df_DEDUPLICATE)
 
 def main():
     spark = SparkSession.builder\
