@@ -23,22 +23,22 @@ def Join_1(
 ) -> DataFrame:
     return VBAP\
         .alias("VBAP")\
-        .join(VBAK.alias("VBAK"), (col("VBAP.VBELN") == col("VBAK.VBELN")), "inner")\
+        .join(VBAK.alias("VBAK"), (col("VBAP.VBELN") == col("VBAK.VBELN")), "left_outer")\
         .join(
           VBKD.alias("VBKD"),
           ((col("VBAP.VBELN") == col("VBKD.VBELN")) & (col("VBAP.POSNR") == col("VBKD.POSNR"))),
-          "inner"
+          "left_outer"
         )\
-        .join(TVAGT.alias("TVAGT"), (col("VBAP.ABGRU") == col("TVAGT.ABGRU")), "inner")\
-        .join(TVM1T.alias("TVM1T"), (col("VBAP.MVGR1") == col("TVM1T.MVGR1")), "inner")\
-        .join(TVM2T.alias("TVM2T"), (col("VBAP.MVGR2") == col("TVM2T.MVGR2")), "inner")\
-        .join(TVM3T.alias("TVM3T"), (col("VBAP.MVGR3") == col("TVM3T.MVGR3")), "inner")\
-        .join(TVM5T.alias("TVM5T"), (col("VBAP.MVGR5") == col("TVM5T.MVGR5")), "inner")\
-        .join(TVSTT.alias("TVSTT"), (col("VBAP.VSTEL") == col("TVSTT.VSTEL")), "inner")\
-        .join(TVST.alias("TVST"), (col("VBAP.VSTEL") == col("TVST.VSTEL")), "inner")\
-        .join(TVAPT.alias("TVAPT"), (col("VBAP.PSTYV") == col("TVAPT.PSTYV")), "inner")\
-        .join(TVRO.alias("TVRO"), (col("VBAP.ROUTE") == col("TVRO.ROUTE")), "inner")\
-        .join(TVROT.alias("TVROT"), (col("VBAP.ROUTE") == col("TVROT.ROUTE")), "inner")\
+        .join(TVAGT.alias("TVAGT"), (col("VBAP.ABGRU") == col("TVAGT.ABGRU")), "left_outer")\
+        .join(TVM1T.alias("TVM1T"), (col("VBAP.MVGR1") == col("TVM1T.MVGR1")), "left_outer")\
+        .join(TVM2T.alias("TVM2T"), (col("VBAP.MVGR2") == col("TVM2T.MVGR2")), "left_outer")\
+        .join(TVM3T.alias("TVM3T"), (col("VBAP.MVGR3") == col("TVM3T.MVGR3")), "left_outer")\
+        .join(TVM5T.alias("TVM5T"), (col("VBAP.MVGR5") == col("TVM5T.MVGR5")), "left_outer")\
+        .join(TVSTT.alias("TVSTT"), (col("VBAP.VSTEL") == col("TVSTT.VSTEL")), "left_outer")\
+        .join(TVST.alias("TVST"), (col("VBAP.VSTEL") == col("TVST.VSTEL")), "left_outer")\
+        .join(TVAPT.alias("TVAPT"), (col("VBAP.PSTYV") == col("TVAPT.PSTYV")), "left_outer")\
+        .join(TVRO.alias("TVRO"), (col("VBAP.ROUTE") == col("TVRO.ROUTE")), "left_outer")\
+        .join(TVROT.alias("TVROT"), (col("VBAP.ROUTE") == col("TVROT.ROUTE")), "left_outer")\
         .select(
         lit(Config.sourceSystem).alias("SRC_SYS_CD"), 
         trim(col("VBAK.BUKRS_VF")).alias("COMPANY_CD"), 
