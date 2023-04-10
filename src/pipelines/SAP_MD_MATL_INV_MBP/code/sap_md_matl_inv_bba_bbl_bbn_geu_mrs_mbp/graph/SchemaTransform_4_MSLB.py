@@ -27,7 +27,7 @@ def SchemaTransform_4_MSLB(spark: SparkSession, in0: DataFrame) -> DataFrame:
         )\
         .withColumn("PRTY_NUM", col("LIFNR"))\
         .withColumn("UNRSTRCTD_STCK", col("LBLAB").cast(DecimalType(18, 4)))\
-        .withColumn("IN_TRNSFR_STCK", col("LBUML").cast(DecimalType(18, 4)))\
+        .withColumn("IN_TRNSFR_STCK", lit(None).cast(DecimalType(18, 4)))\
         .withColumn("QLTY_INSP_STCK", col("LBINS").cast(DecimalType(18, 4)))\
         .withColumn("RSTRCTD_STCK", col("LBEIN").cast(DecimalType(18, 4)))\
         .withColumn("BLCKD_STCK", lit(None).cast(DecimalType(18, 4)))\

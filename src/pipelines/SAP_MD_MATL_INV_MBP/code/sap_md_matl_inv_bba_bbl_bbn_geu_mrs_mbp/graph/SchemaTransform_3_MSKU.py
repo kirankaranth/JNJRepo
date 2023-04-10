@@ -27,7 +27,7 @@ def SchemaTransform_3_MSKU(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("SPCL_STCK_IND", col("SOBKZ"))\
         .withColumn("PRTY_NUM", col("KUNNR"))\
         .withColumn("UNRSTRCTD_STCK", col("KULAB").cast(DecimalType(18, 4)))\
-        .withColumn("IN_TRNSFR_STCK", col("KUUML").cast(DecimalType(18, 4)))\
+        .withColumn("IN_TRNSFR_STCK", lit(None).cast(DecimalType(18, 4)))\
         .withColumn("QLTY_INSP_STCK", col("KUINS").cast(DecimalType(18, 4)))\
         .withColumn("RSTRCTD_STCK", col("KUEIN").cast(DecimalType(18, 4)))\
         .withColumn("BLCKD_STCK", lit(None).cast(DecimalType(18, 4)))\
