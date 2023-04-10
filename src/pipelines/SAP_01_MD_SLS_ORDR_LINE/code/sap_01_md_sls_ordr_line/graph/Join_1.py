@@ -23,14 +23,14 @@ def Join_1(
 ) -> DataFrame:
     return VBAP\
         .alias("VBAP")\
-        .join(VBAK.alias("VBAK"), (col("VBAP.VBELN") == col("VBAK.VBELN")), "left_outer")\
+        .join(VBAK.alias("VBAK"), (col("VBAP.VBELN") == col("VBAK.VBELN")), "inner")\
         .join(
           VBKD.alias("VBKD"),
           ((col("VBAP.VBELN") == col("VBKD.VBELN")) & (col("VBAP.POSNR") == col("VBKD.POSNR"))),
-          "left_outer"
+          "inner"
         )\
-        .join(TVAGT.alias("TVAGT"), (col("VBAP.ABGRU") == col("TVAGT.ABGRU")), "left_outer")\
-        .join(TVM1T.alias("TVM1T"), (col("VBAP.MVGR1") == col("TVM1T.MVGR1")), "left_outer")\
+        .join(TVAGT.alias("TVAGT"), (col("VBAP.ABGRU") == col("TVAGT.ABGRU")), "inner")\
+        .join(TVM1T.alias("TVM1T"), (col("VBAP.MVGR1") == col("TVM1T.MVGR1")), "inner")\
         .join(TVM2T.alias("TVM2T"), (col("VBAP.MVGR2") == col("TVM2T.MVGR2")), "inner")\
         .join(TVM3T.alias("TVM3T"), (col("VBAP.MVGR3") == col("TVM3T.MVGR3")), "inner")\
         .join(TVM5T.alias("TVM5T"), (col("VBAP.MVGR5") == col("TVM5T.MVGR5")), "inner")\
