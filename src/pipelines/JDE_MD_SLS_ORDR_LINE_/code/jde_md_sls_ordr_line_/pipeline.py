@@ -7,7 +7,11 @@ from prophecy.utils import *
 from jde_md_sls_ordr_line_.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    df_DS_JDE_01_F4211 = DS_JDE_01_F4211(spark)
+    df_JDE_F4211 = JDE_F4211(spark)
+    df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_JDE_F4211)
+    df_JDE_F42119 = JDE_F42119(spark)
+    df_NEW_FIELDS_RENAME_FORMAT_1 = NEW_FIELDS_RENAME_FORMAT_1(spark, df_JDE_F42119)
+    df_UNION = UNION(spark, df_NEW_FIELDS_RENAME_FORMAT, df_NEW_FIELDS_RENAME_FORMAT_1)
 
 def main():
     spark = SparkSession.builder\
