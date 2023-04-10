@@ -5,5 +5,7 @@ from prophecy.libs import typed_lit
 from jde_01_deu_f0401.config.ConfigStore import *
 from jde_01_deu_f0401.udfs.UDFs import *
 
-def JDE_F0401(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM {Config.sourceSystem}.F0401_adt WHERE _deleted_='F'")
+def GET_DUP(spark: SparkSession, in0: DataFrame) -> DataFrame:
+    df1 = in0.groupBy(col("_pk_"))
+
+    return df1.agg(count(lit(1)).alias("PK_COUNT"))

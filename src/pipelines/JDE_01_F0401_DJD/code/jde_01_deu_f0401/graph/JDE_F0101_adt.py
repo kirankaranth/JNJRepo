@@ -6,4 +6,4 @@ from jde_01_deu_f0401.config.ConfigStore import *
 from jde_01_deu_f0401.udfs.UDFs import *
 
 def JDE_F0101_adt(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.sourceSystem}.F0101_adt")
+    return spark.sql(f"SELECT * FROM {Config.sourceSystem}.F0101_adt WHERE _deleted_ = 'F'")
