@@ -49,7 +49,7 @@ def pipeline(spark: SparkSession) -> None:
         df_MANDT_FILTER_1_1_1_2, 
         df_MANDT_FILTER_1_1_1_2_1_1_1_1_1_1_1
     )
-    df_Filter_1 = Filter_1(spark, df_Join_1)
+    df_NEW_FIEDS = NEW_FIEDS(spark, df_Join_1)
 
 def main():
     spark = SparkSession.builder\
