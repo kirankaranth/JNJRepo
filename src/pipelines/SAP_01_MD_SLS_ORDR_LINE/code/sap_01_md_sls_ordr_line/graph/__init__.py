@@ -25,4 +25,5 @@ from .MANDT_FILTER_1_1_1_2_1_1_1_1_1 import MANDT_FILTER_1_1_1_2_1_1_1_1_1
 from .SAP_TVM2T import SAP_TVM2T
 from .SAP_VBAK import SAP_VBAK
 from .SAP_TVAGT import SAP_TVAGT
+from .MD_SLS_ORDR_LINE import MD_SLS_ORDR_LINE
 from .MANDT_FILTER_1_1_1_2 import MANDT_FILTER_1_1_1_2
