@@ -11,7 +11,9 @@ def pipeline(spark: SparkSession) -> None:
     df_Filter_SAP_01_MAST = Filter_SAP_01_MAST(spark, df_JDE_f3002_f3002_adt)
     df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_Filter_SAP_01_MAST)
     df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS_RENAME_FORMAT)
+    df_PK_COUNT = PK_COUNT(spark, df_SET_FIELD_ORDER_REFORMAT)
     MD_MATL_BOM(spark, df_SET_FIELD_ORDER_REFORMAT)
+    df_PK_COUNT_GT_1 = PK_COUNT_GT_1(spark, df_PK_COUNT)
 
 def main():
     spark = SparkSession.builder\

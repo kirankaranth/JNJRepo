@@ -5,5 +5,5 @@ from prophecy.libs import typed_lit
 from jde_01_md_matl_bom.config.ConfigStore import *
 from jde_01_md_matl_bom.udfs.UDFs import *
 
-def JDE_f3002_f3002_adt(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.sourceSystem}.{Config.sourceTable}")
+def PK_COUNT_GT_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
+    return in0.filter((col("PK_COUNT") > lit(1)))
