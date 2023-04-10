@@ -1,0 +1,430 @@
+# Pipeline details across environments (defaults)
+common:
+  pipelineType: app-dev
+  debug: true
+  gitversion:
+    dockerImage: jnj.artifactrepo.jnj.com/jpm/gitversion:5
+  jenkinsProfile:
+      additionalImageSources:
+        - desc: The JEKT Docker registry # this is optional, and non-functional for information purposes only
+          type: privateRegistry
+          url: https://jekt-docker.artifactrepo.jnj.com # this specifies the URL of the docker registry
+          credsId: jnj-eat-artifactory # this specifies a jenkins credential with authentication details
+
+
+  versionCalculation:
+    enabled: false
+    type: gitversion
+
+  unitTest:
+    enabled: false
+    type: script
+    script: pbtValidate3.Jenkinsfile
+
+  lint:
+    enabled: false
+    type: script
+    script: pbtTest2.Jenkinsfile
+
+  staticAnalysis:
+    enabled: false
+
+  package:
+    enabled: false
+  publish:
+    enabled: false
+
+
+  buildAnalysis:
+    enabled: false
+
+  deploy:
+      enabled: false
+      type: script
+      script: pbtDeploy6.Jenkinsfile
+
+  integrationTest:
+    enabled: false
+
+  regressionTest:
+    enabled: false
+    type: robot-framework
+    projectTestFolder: test/robot_lab
+    jiraProjectKey: JBGA
+    credentialsId: jira
+    overridingProperties:
+      itags: "JEKT-XXXX"
+      testAdditionalArgs: "  -jtl  'ProphecyDemo'  -jtc 'ProphecyDemo'  -jav 'Deprecated' -jfv  'Deprecated'   -dd --template"
+      testExecutionAdditionalArgs: "  -jtl  'ProphecyDemo'  -jtc 'ProphecyDemo'  -jav 'Deprecated' -jfv  'Deprecated'    -jtr   skostadi  -dd --template"
+       #testExecutionAdditionalArgs: "-jtac 'CDL-MD-L1' -jtc 'CDL MD L1'   -jtr  username -dd --template"
+      env: dev
+      varsfile: devEnv.py
+      dockerImage: jbga-docker.artifactrepo.jnj.com/prophecy-robot-suite:dbconnectorpreqa
+      credsList:
+          - registry: https://jbga-docker.artifactrepo.jnj.com
+            credentialsId: sourcecode-bitbucket
+      credentials:
+        - credentialsId: epicenter-dev-token
+          type: secret
+          secretVariable: token
+      screenshotStop: true
+      moveToComplete: false
+      testAdditionalArgs:  " -jtl  'ProphecyIO'  -jtc 'ProphecyDemo'  -jav 'Prophecy-R1' -jfv  'Prophecy-R1'  -dd --template"
+      testExecutionAdditionalArgs: " -jtl  'ProphecyIO'  -jtc 'ProphecyDemo'  -jav 'Prophecy-R1' -jfv  'Prophecy-R1'    -dd --template"
+
+  buildParameters:
+    dryRun:
+      enabled: true
+      type: boolean
+      description: Should this be just a dry run?
+      defaultValue: false
+      manifestLocation: regressionTest.overridingProperties.moveToComplete
+    testSelectionCriteria:
+      enabled: true
+      type: string
+      description: What seledtion criteria should be used for the test - specific story, whole release name
+      defaultValue: 'JBGA-7214'
+      manifestLocation: regressionTest.overridingProperties.itags
+
+
+  resolveArtifacts:
+    enabled: false
+
+  prerelease:
+    type: none
+    confirmVersion: true
+
+  release:
+    type: none
+    confirmVersion: true
+    updateChangelog: true
+    releaseDestination: main
+
+  archive:
+    enabled: false
+
+
+#### Environments Block
+environments:
+
+  #############################
+  ############# PREDEV
+  ###################################
+  PREDEV:
+    versionCalculation:
+      patternType: jnj-developer-branch
+    unitTest:
+      enabled: true
+    lint:
+      enabled: true
+    staticAnalysis:
+      shortLivedAnalysis: false
+    package:
+      enabled: false
+    publish:
+      enabled: false
+    deploy:
+      enabled: false
+    archive:
+      enabled: false
+    regressionTest:
+      enabled: false
+
+  #############################
+  ############# BETA
+  ###################################
+  BETA:
+    versionCalculation:
+      enabled: true
+      type: gitversion
+
+    staticAnalysis:
+      shortLivedAnalysis: false
+    package:
+      enabled: false
+    publish:
+      enabled: false
+    deploy:
+      enabled: false
+    archive:
+      enabled: false
+    regressionTest:
+      enabled: false
+    deploy:
+        enabled: true
+
+
+  #############################
+  ############# DEV
+  ###################################
+  DEV:
+    #release:
+    #  type: manual
+    versionCalculation:
+      enabled: true
+      type: gitversion
+    createMergeTags:
+      enabled: true
+      credentialsId: sourcecode-bitbucket
+    unitTest:
+      enabled: false
+    lint:
+      enabled: false
+    resolveArtifacts:
+      enabled: false
+    staticAnalysis:
+      enabled: false
+
+    integrationTest:
+      enabled: false
+
+    buildAnalysis:
+      enabled: false
+
+    lint:
+      enabled: false
+    resolveArtifacts:
+      enabled: false
+    staticAnalysis:
+      enabled: false
+
+    integrationTest:
+      enabled: false
+
+    buildAnalysis:
+      enabled: false
+
+    package:
+      enabled: false
+
+    publish:
+      enabled: false
+
+
+    deploy:
+        enabled: true
+
+
+    archive:
+      enabled: false
+
+  #############################
+  ############# PQA
+  ###################################
+  PQA:
+
+    ##This step is to be executed Manually as we need to specify the user story under test and the test execution which will be used
+    regressionTest:
+      enabled: false
+      type: robot-framework
+      projectTestFolder: test/robot_lab
+      jiraProjectKey: JBGA
+      credentialsId: jira
+      overridingProperties:
+        itags: ${env.TAG_NAME}
+        env: qa
+        varsfile: devEnv.py
+        dockerImage: jbga-docker.artifactrepo.jnj.com/prophecy-robot-suite:dbconnectorpreqa
+        credsList:
+          - registry: https://jbga-docker.artifactrepo.jnj.com
+            credentialsId: sourcecode-bitbucket
+        screenshotStop: true
+        xex: JBGA-7300
+
+    versionCalculation:
+      patternType: jnj-dev-branch
+    unitTest:
+      enabled: false
+
+    lint:
+      enabled: false
+    resolveArtifacts:
+      enabled: false
+    staticAnalysis:
+      enabled: false
+
+    integrationTest:
+      enabled: false
+
+    buildAnalysis:
+      enabled: false
+
+    package:
+      enabled: false
+
+    publish:
+      enabled: false
+
+    deploy:
+      enabled: false
+
+    archive:
+      enabled: false
+
+  #############################
+  ############# TEST
+  ###################################
+  TEST:
+
+    buildParameters:
+      testSelectionCriteria:
+        enabled: true
+        type: string
+        description: What seledtion criteria should be used for the test - specific story, whole release name
+        defaultValue: 'JBGA-7214'
+        manifestLocation: regressionTest.overridingProperties.itags
+      testExecutionNumber:
+        enabled: true
+        type: string
+        description: What seledtion criteria should be used for the test - specific story, whole release name
+        defaultValue: 'JBGA-7300'
+        manifestLocation: regressionTest.overridingProperties.xex
+
+    ##This step is to be executed Manually as we need to specify the user story under test and the test execution which will be used
+    regressionTest:
+      enabled: true
+      type: robot-framework
+      projectTestFolder: test/robot_lab
+      jiraProjectKey: JBGA
+      credentialsId: jira
+      overridingProperties:
+        itags: ${env.TAG_NAME}
+        env: qa
+        varsfile: devEnv.py
+        dockerImage: jbga-docker.artifactrepo.jnj.com/prophecy-robot-suite:dbconnectorpreqa
+        credsList:
+          - registry: https://jbga-docker.artifactrepo.jnj.com
+            credentialsId: sourcecode-bitbucket
+        screenshotStop: true
+        xex: JBGA-7300
+
+
+
+    versionCalculation:
+      patternType: jnj-dev-branch
+    unitTest:
+      enabled: false
+
+    lint:
+      enabled: false
+    resolveArtifacts:
+      enabled: false
+    staticAnalysis:
+      enabled: false
+
+    integrationTest:
+      enabled: false
+
+    buildAnalysis:
+      enabled: false
+
+    package:
+      enabled: false
+
+    publish:
+      enabled: false
+
+
+    deploy:
+
+      enabled: false
+
+    archive:
+      enabled: false
+  #############################
+  ############# QA
+  ###################################
+  QA:
+
+    buildParameters:
+      moveToComplete:
+        enabled: true
+        type: boolean
+        description: Should tests be moved to complete
+        defaultValue: true
+        manifestLocation: regressionTest.overridingProperties.moveToComplete
+      dryRun:
+        enabled: true
+        type: boolean
+        description: Should this be just a dry run?
+        defaultValue: false
+        manifestLocation: regressionTest.overridingProperties.moveToComplete
+      testSelectionCriteria:
+        enabled: true
+        type: string
+        description: What seledtion criteria should be used for the test - specific story, whole release name
+        defaultValue: 'JBGA-7214'
+        manifestLocation: regressionTest.overridingProperties.itags
+    #release:
+    #  type: manual
+    regressionTest:
+      enabled: false
+      type: robot-framework
+      projectTestFolder: test/robot_lab
+      jiraProjectKey: JBGA
+      credentialsId: jira
+      overridingProperties:
+        env: dev
+        varsfile: devEnv.py
+        dockerImage: jbga-docker.artifactrepo.jnj.com/prophecy-robot-suite:dbconnectorpreqa
+        credsList:
+          - registry: https://jbga-docker.artifactrepo.jnj.com
+            credentialsId: sourcecode-bitbucket
+        screenshotStop: true
+        moveToComplete: true
+    versionCalculation:
+      patternType: jnj-dev-branch
+    unitTest:
+      enabled: false
+
+    lint:
+      enabled: false
+    resolveArtifacts:
+      enabled: false
+    staticAnalysis:
+      enabled: false
+
+    integrationTest:
+      enabled: false
+
+    buildAnalysis:
+      enabled: false
+
+    package:
+      enabled: false
+
+    publish:
+      enabled: false
+
+
+    deploy:
+
+      enabled: false
+
+    archive:
+      enabled: false
+  #############################
+  ############# PROD
+  ###################################
+  PROD:
+    #versionCalculation:
+    #  type: helm
+    #  confirmVersion: true
+    #  version: "^0"
+    resolveArtifacts:
+      enabled: true
+      type: helm
+
+    package:
+        enabled: false
+    publish:
+      enabled: false
+      type: "multi"
+      stages:
+        Helm:
+          enabled: false
+          chartRepo: jbga-helm-charts
+
+    deploy:
+
+        enabled: false
