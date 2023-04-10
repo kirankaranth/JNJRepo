@@ -5,7 +5,7 @@ from prophecy.libs import typed_lit
 from sap_md_matl_inv_bba_bbl_bbn_geu_mrs_mbp.config.ConfigStore import *
 from sap_md_matl_inv_bba_bbl_bbn_geu_mrs_mbp.udfs.UDFs import *
 
-def SET_FIELD_ORDER_6(spark: SparkSession, in0: DataFrame) -> DataFrame:
+def SET_FIELD_ORDER_4(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0.select(
         col("SRC_SYS_CD"), 
         col("SRC_TBL_NM"), 

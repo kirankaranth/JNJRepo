@@ -5,7 +5,7 @@ from prophecy.libs import typed_lit
 from sap_md_matl_inv_bba_bbl_bbn_geu_mrs_mbp.config.ConfigStore import *
 from sap_md_matl_inv_bba_bbl_bbn_geu_mrs_mbp.udfs.UDFs import *
 
-def SchemaTransform_5_MSLB(spark: SparkSession, in0: DataFrame) -> DataFrame:
+def SchemaTransform_5_MSSL(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
         .withColumn("SRC_SYS_CD", lit(Config.sourceSystem))\
         .withColumn("SRC_TBL_NM", lit(Config.DBTABLE5))\
@@ -17,19 +17,24 @@ def SchemaTransform_5_MSLB(spark: SparkSession, in0: DataFrame) -> DataFrame:
             "#"
           )
         )\
-        .withColumn("BTCH_NUM", col("CHARG"))\
-        .withColumn("BTCH_STS_CD", col("SOBKZ"))\
         .withColumn(
-          "SPCL_STCK_IND",
+          "BTCH_NUM",
           lit(
             "#"
           )
         )\
+        .withColumn(
+          "BTCH_STS_CD",
+          lit(
+            "#"
+          )
+        )\
+        .withColumn("SPCL_STCK_IND", col("SOBKZ"))\
         .withColumn("PRTY_NUM", col("LIFNR"))\
-        .withColumn("UNRSTRCTD_STCK", col("LBLAB").cast(DecimalType(18, 4)))\
-        .withColumn("IN_TRNSFR_STCK", col("LBUML").cast(DecimalType(18, 4)))\
-        .withColumn("QLTY_INSP_STCK", col("LBINS").cast(DecimalType(18, 4)))\
-        .withColumn("RSTRCTD_STCK", col("LBEIN").cast(DecimalType(18, 4)))\
+        .withColumn("UNRSTRCTD_STCK", col("SLLAB").cast(DecimalType(18, 4)))\
+        .withColumn("IN_TRNSFR_STCK", lit(None).cast(DecimalType(18, 4)))\
+        .withColumn("QLTY_INSP_STCK", col("SLINS").cast(DecimalType(18, 4)))\
+        .withColumn("RSTRCTD_STCK", col("SLEIN").cast(DecimalType(18, 4)))\
         .withColumn("BLCKD_STCK", lit(None).cast(DecimalType(18, 4)))\
         .withColumn(
           "CRT_DTTM",
