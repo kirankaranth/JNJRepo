@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 setup(
-    name = 'SAP_01_MD_SHIP_BBN_BBL_P01_HCS',
+    name = 'JDE_01_MD_SHIP_MTK',
     version = '1.0',
-    packages = find_packages(include = ('sap_01_md_ship*', )) + ["prophecy_config_instances"],
+    packages = find_packages(include = ('jde_01_md_ship_mtk*', )) + ["prophecy_config_instances"],
     package_dir = {'prophecy_config_instances' : 'configs/resources/config'},
     package_data = {'prophecy_config_instances' : ['*.json', '*.py']},
     description = 'workflow',
@@ -10,7 +10,7 @@ setup(
 'prophecy-libs==1.4.8'],
     entry_points = {
 'console_scripts' : [
-'main = sap_01_md_ship.pipeline:main'], },
+'main = jde_01_md_ship_mtk.pipeline:main'], },
     data_files = [(".prophecy", [".prophecy/workflow.latest.json"])],
     extras_require = {
 'test' : ['pytest', 'pytest-html'], }
