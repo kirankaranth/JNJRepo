@@ -9,6 +9,8 @@ from jde_md_delv_line_bw2_gmd_jet_jsw_deu_mtr_sjd_djd_jem_jes.graph import *
 def pipeline(spark: SparkSession) -> None:
     df_DS_JDE_01_F43121 = DS_JDE_01_F43121(spark)
     df_DS_JDE_01_F4211 = DS_JDE_01_F4211(spark)
+    df_Filter_1 = Filter_1(spark, df_DS_JDE_01_F43121)
+    df_Filter_2 = Filter_2(spark, df_DS_JDE_01_F4211)
 
 def main():
     spark = SparkSession.builder\
