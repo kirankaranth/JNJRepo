@@ -218,12 +218,12 @@ class DatabricksQuery(DatabaseLibrary):
                 and x[0] != "Not partitioned"
                 and x[0] != "Part 0"
                 and x[0] != ""
-                and x[0] != "Part 1"
-                and x[0] !="_pk_"
-                and x[0] !="_deleted_"
-                and x[0] !="_l0_upt_"
-                and x[0] !="_l1_upt_"
-                and x[0] !="_pk_md5_",
+                and x[0] != "Part 1",
+                # and x[0] !="_pk_"
+                # and x[0] !="_deleted_"
+                # and x[0] !="_l0_upt_"
+                # and x[0] !="_l1_upt_"
+                # and x[0] !="_pk_md5_",
                 cols,
             )
         )
