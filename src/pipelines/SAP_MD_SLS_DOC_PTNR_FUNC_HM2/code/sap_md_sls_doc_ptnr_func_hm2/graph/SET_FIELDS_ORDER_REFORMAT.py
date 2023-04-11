@@ -40,5 +40,12 @@ def SET_FIELDS_ORDER_REFORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("_l1_upt_"), 
         col("_pk_"), 
         col("_pk_md5_"), 
-        col("_deleted_")
+        col("_deleted_"), 
+        col("DATA_FIL_VAL_DATA_AGE_DTTM"), 
+        col("BUSN_PTNR_NUM"), 
+        col("ADDR_DTRMN_DOC"), 
+        col("ADDR_TYPE"), 
+        col("BP_REF_ADDR_NUM"), 
+        col("DUMMY_FUNC_LGTH_1"), 
+        col("SDM_VERS_FLD_FOR_VBPA")
     )

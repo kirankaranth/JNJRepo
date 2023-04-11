@@ -56,4 +56,16 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
             )
           )
         )\
-        .withColumn("_deleted_", lit("F"))
+        .withColumn("_deleted_", lit("F"))\
+        .withColumn(
+          "DATA_FIL_VAL_DATA_AGE_DTTM",
+          when((col("_DATAAGING") == lit("00000000")), lit(None))\
+            .otherwise(to_timestamp(col("_DATAAGING"), "yyyyMMdd"))\
+            .alias("DATA_FIL_VAL_DATA_AGE_DTTM")
+        )\
+        .withColumn("BUSN_PTNR_NUM", trim(col("ASSIGNED_BP")))\
+        .withColumn("ADDR_DTRMN_DOC", trim(col("ADDR_OPERATION")))\
+        .withColumn("ADDR_TYPE", trim(col("ADDR_TYPE")))\
+        .withColumn("BP_REF_ADDR_NUM", trim(col("BP_REF_ADRNR")))\
+        .withColumn("DUMMY_FUNC_LGTH_1", trim(col("DUMMY_SDDOCPARTNER_INCL_EEW_PS")))\
+        .withColumn("SDM_VERS_FLD_FOR_VBPA", trim(col("SDM_VERSION")))
