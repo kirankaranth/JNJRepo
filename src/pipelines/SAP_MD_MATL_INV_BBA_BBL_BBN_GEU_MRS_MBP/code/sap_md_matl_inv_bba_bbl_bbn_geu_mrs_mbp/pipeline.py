@@ -17,10 +17,10 @@ def pipeline(spark: SparkSession) -> None:
     df_MANDT_4 = MANDT_4(spark, df_DS_SAP_04_MSLB)
     df_DS_SAP_01_MARD = DS_SAP_01_MARD(spark)
     df_MANDT_5 = MANDT_5(spark, df_DS_SAP_05_MSSL)
-    df_SchemaTransform_5_MSSL = SchemaTransform_5_MSSL(spark, df_MANDT_5)
-    df_SET_FIELD_ORDER_5 = SET_FIELD_ORDER_5(spark, df_SchemaTransform_5_MSSL)
-    df_SchemaTransform_4_MSLB = SchemaTransform_4_MSLB(spark, df_MANDT_4)
-    df_SET_FIELD_ORDER_4 = SET_FIELD_ORDER_4(spark, df_SchemaTransform_4_MSLB)
+    df_SchemaTransform_6_MSSL = SchemaTransform_6_MSSL(spark, df_MANDT_5)
+    df_SET_FIELD_ORDER_6 = SET_FIELD_ORDER_6(spark, df_SchemaTransform_6_MSSL)
+    df_SchemaTransform_5_MSLB = SchemaTransform_5_MSLB(spark, df_MANDT_4)
+    df_SET_FIELD_ORDER_5 = SET_FIELD_ORDER_5(spark, df_SchemaTransform_5_MSLB)
     df_MANDT_1 = MANDT_1(spark, df_DS_SAP_01_MARD)
     df_SchemaTransform_1_MARD = SchemaTransform_1_MARD(spark, df_MANDT_1)
     df_SET_FIELD_ORDER_1 = SET_FIELD_ORDER_1(spark, df_SchemaTransform_1_MARD)
@@ -35,8 +35,8 @@ def pipeline(spark: SparkSession) -> None:
         df_SET_FIELD_ORDER_1, 
         df_SET_FIELD_ORDER_2, 
         df_SET_FIELD_ORDER_3, 
-        df_SET_FIELD_ORDER_4, 
-        df_SET_FIELD_ORDER_5
+        df_SET_FIELD_ORDER_5, 
+        df_SET_FIELD_ORDER_6
     )
     MD_MATL_INV(spark, df_SetOperation_1_Union)
 
