@@ -31,5 +31,6 @@ def SET_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("_pk_"), 
         col("_pk_md5_"), 
         col("_l1_upt_"), 
-        col("DAI_UPDT_DTTM")
+        col("DAI_UPDT_DTTM"), 
+        col("_deleted_")
     )
