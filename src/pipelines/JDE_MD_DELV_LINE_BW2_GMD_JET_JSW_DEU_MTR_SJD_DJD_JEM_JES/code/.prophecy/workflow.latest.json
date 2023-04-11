@@ -112,17 +112,17 @@
     "configurationVersion" : "v1"
   },
   "connections" : [ {
-    "id" : "WDE7JaWVzmzUMs-OrbY_i$$s5zsau6emdSqZAj5cpGvo",
-    "source" : "uIyVAjQwiM04Pz2X2g8mb$$XDVTlzo1xdlZbuF96yK2p",
-    "sourcePort" : "9IKXRFsvqQAVbRjo-ljBL$$_tySDHXYReQZl_24w5kdS",
-    "target" : "R_QP_LJsi53JgQbgOLKo_$$Mff_3o-2isLIMczjXfAs2",
-    "targetPort" : "WQPHfcrZ92GcRNknG6ddw$$OiUCK-UUPp6PjRlsRwQ-k"
-  }, {
-    "id" : "I1tJFfpFvBk8gzDUzqOvj",
+    "id" : "KpIVDL_sMhC0PP6hYkTe9$$d3HXzuvq0z1iWB3jkwbb3",
     "source" : "my5MQryLz1apNfEBFRoQw$$0BuuZviwuequ4ezgj3vhD",
     "sourcePort" : "x0j28bpl7oScZ6SbkKLFI$$FmzwohtznMhgLthe6apV5",
-    "target" : "Q3LC8wTPglCJqHK7a7pm5$$SmdXcXFccJvyFOxYezbIg",
-    "targetPort" : "ThlJ31wZ7d5YjHeWBRNEZ$$wTVWCHtAoM3vLRa68nAV2"
+    "target" : "stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ",
+    "targetPort" : "H7qVM_v-BYUsCeNfZP8ox$$wTn4Cn72tDOW3YW2tlBhO"
+  }, {
+    "id" : "sfIyLh5qM6Rl4sGBOQ-sF$$F2Fr6Ik-zxNajmY7QAhs7",
+    "source" : "uIyVAjQwiM04Pz2X2g8mb$$XDVTlzo1xdlZbuF96yK2p",
+    "sourcePort" : "9IKXRFsvqQAVbRjo-ljBL$$_tySDHXYReQZl_24w5kdS",
+    "target" : "0WcDDgqylucLaoG_YhoJB$$0renTL3Cu7ccG_10qgJD_",
+    "targetPort" : "Ptj1kD-AjTVcqqKDX1INU$$bjJUpdMCB6-R1rErvbqR8"
   } ],
   "processes" : {
     "my5MQryLz1apNfEBFRoQw$$0BuuZviwuequ4ezgj3vhD" : {
@@ -177,13 +177,13 @@
         "datasetId" : "datasets/DS_JDE_01_F4211"
       }
     },
-    "Q3LC8wTPglCJqHK7a7pm5$$SmdXcXFccJvyFOxYezbIg" : {
-      "id" : "Q3LC8wTPglCJqHK7a7pm5$$SmdXcXFccJvyFOxYezbIg",
-      "component" : "Filter",
+    "stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ" : {
+      "id" : "stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ",
+      "component" : "SchemaTransform",
       "metadata" : {
-        "label" : "Filter_1",
-        "slug" : "Filter_1",
-        "x" : 280,
+        "label" : "NEW_FIELDS_RENAME_FORMAT_F43121",
+        "slug" : "NEW_FIELDS_RENAME_FORMAT_F43121",
+        "x" : 300,
         "y" : 160,
         "phase" : 0,
         "cache" : false,
@@ -192,7 +192,7 @@
       },
       "ports" : {
         "inputs" : [ {
-          "id" : "ThlJ31wZ7d5YjHeWBRNEZ$$wTVWCHtAoM3vLRa68nAV2",
+          "id" : "H7qVM_v-BYUsCeNfZP8ox$$wTn4Cn72tDOW3YW2tlBhO",
           "slug" : "in0",
           "schema" : {
             "type" : "struct",
@@ -1731,26 +1731,471 @@
           "isStreaming" : false
         } ],
         "outputs" : [ {
-          "id" : "GnnKYUAZ5KcGxHAUNdqG9$$MLXlxwd8Jd7NIWzaJ3RT-",
+          "id" : "TGJ2iPPxKx06Q2ioFNem-$$to-iWOJ3kvseQvvAXGGiY",
           "slug" : "out"
         } ],
         "selectedInputFields" : [ ],
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ ],
-        "condition" : {
-          "format" : "sql",
-          "expression" : "true"
-        }
+        "columnsSelector" : [ "H7qVM_v-BYUsCeNfZP8ox$$wTn4Cn72tDOW3YW2tlBhO##PRDCTO", "H7qVM_v-BYUsCeNfZP8ox$$wTn4Cn72tDOW3YW2tlBhO##PRDOC", "H7qVM_v-BYUsCeNfZP8ox$$wTn4Cn72tDOW3YW2tlBhO##PRNLIN", "H7qVM_v-BYUsCeNfZP8ox$$wTn4Cn72tDOW3YW2tlBhO##PRLNID", "H7qVM_v-BYUsCeNfZP8ox$$wTn4Cn72tDOW3YW2tlBhO##PRDOCO", "H7qVM_v-BYUsCeNfZP8ox$$wTn4Cn72tDOW3YW2tlBhO##PRKCOO" ],
+        "transformations" : [ {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "SRC_SYS_CD",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "'$sourceSystem'"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "DELV_NUM",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "PRDOC"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "DELV_LINE_NBR",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "CONCAT(PRLNID, PRNLIN)"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "DELV_TYP_CD",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "PRDCTO"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "CO_CD",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "PRKCOO"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "DOC_REF_NUM",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "PRDOCO"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "ACTL_GI_DTTM",
+            "expression" : {
+              "format" : "sql",
+              "expression" : ""
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "",
+            "expression" : {
+              "format" : "sql",
+              "expression" : ""
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "",
+            "expression" : {
+              "format" : "sql",
+              "expression" : ""
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "",
+            "expression" : {
+              "format" : "sql",
+              "expression" : ""
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "",
+            "expression" : {
+              "format" : "sql",
+              "expression" : ""
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "",
+            "expression" : {
+              "format" : "sql",
+              "expression" : ""
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "",
+            "expression" : {
+              "format" : "sql",
+              "expression" : ""
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "",
+            "expression" : {
+              "format" : "sql",
+              "expression" : ""
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "",
+            "expression" : {
+              "format" : "sql",
+              "expression" : ""
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "",
+            "expression" : {
+              "format" : "sql",
+              "expression" : ""
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "",
+            "expression" : {
+              "format" : "sql",
+              "expression" : ""
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "",
+            "expression" : {
+              "format" : "sql",
+              "expression" : ""
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "",
+            "expression" : {
+              "format" : "sql",
+              "expression" : ""
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "",
+            "expression" : {
+              "format" : "sql",
+              "expression" : ""
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "",
+            "expression" : {
+              "format" : "sql",
+              "expression" : ""
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "",
+            "expression" : {
+              "format" : "sql",
+              "expression" : ""
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "",
+            "expression" : {
+              "format" : "sql",
+              "expression" : ""
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "",
+            "expression" : {
+              "format" : "sql",
+              "expression" : ""
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "",
+            "expression" : {
+              "format" : "sql",
+              "expression" : ""
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "",
+            "expression" : {
+              "format" : "sql",
+              "expression" : ""
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "",
+            "expression" : {
+              "format" : "sql",
+              "expression" : ""
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "",
+            "expression" : {
+              "format" : "sql",
+              "expression" : ""
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        } ]
       }
     },
-    "R_QP_LJsi53JgQbgOLKo_$$Mff_3o-2isLIMczjXfAs2" : {
-      "id" : "R_QP_LJsi53JgQbgOLKo_$$Mff_3o-2isLIMczjXfAs2",
-      "component" : "Filter",
+    "0WcDDgqylucLaoG_YhoJB$$0renTL3Cu7ccG_10qgJD_" : {
+      "id" : "0WcDDgqylucLaoG_YhoJB$$0renTL3Cu7ccG_10qgJD_",
+      "component" : "SchemaTransform",
       "metadata" : {
-        "label" : "Filter_2",
-        "slug" : "Filter_2",
+        "label" : "NEW_FIELDS_RENAME_FORMAT_F4211",
+        "slug" : "NEW_FIELDS_RENAME_FORMAT_F4211",
         "x" : 300,
         "y" : 340,
         "phase" : 0,
@@ -1760,7 +2205,7 @@
       },
       "ports" : {
         "inputs" : [ {
-          "id" : "WQPHfcrZ92GcRNknG6ddw$$OiUCK-UUPp6PjRlsRwQ-k",
+          "id" : "Ptj1kD-AjTVcqqKDX1INU$$bjJUpdMCB6-R1rErvbqR8",
           "slug" : "in0",
           "schema" : {
             "type" : "struct",
@@ -4244,7 +4689,7 @@
           "isStreaming" : false
         } ],
         "outputs" : [ {
-          "id" : "YkMJ9CPZYWysinn3sJ06F$$MB9AGoZ3YJGMCX6hQST5C",
+          "id" : "dFXbscju-1ptQRBNw9Tzo$$MGXUbGwbwq_PQv7vabng1",
           "slug" : "out"
         } ],
         "selectedInputFields" : [ ],
@@ -4252,10 +4697,7 @@
       },
       "properties" : {
         "columnsSelector" : [ ],
-        "condition" : {
-          "format" : "sql",
-          "expression" : "true"
-        }
+        "transformations" : [ ]
       }
     }
   },
@@ -4264,5 +4706,358 @@
     "outputs" : [ ],
     "selectedInputFields" : [ ],
     "isCustomOutputSchema" : false
-  }
+  },
+  "diagnostics" : [ {
+    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[6].expression.expression",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "Expression can't be empty.",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[7].sourceColumn",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "Target can't be empty.",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[8].sourceColumn",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "Target can't be empty.",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[9].sourceColumn",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "Target can't be empty.",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[10].sourceColumn",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "Target can't be empty.",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[11].sourceColumn",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "Target can't be empty.",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[12].sourceColumn",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "Target can't be empty.",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[13].sourceColumn",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "Target can't be empty.",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[14].sourceColumn",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "Target can't be empty.",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[15].sourceColumn",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "Target can't be empty.",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[16].sourceColumn",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "Target can't be empty.",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[17].sourceColumn",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "Target can't be empty.",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[18].sourceColumn",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "Target can't be empty.",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[19].sourceColumn",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "Target can't be empty.",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[20].sourceColumn",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "Target can't be empty.",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[21].sourceColumn",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "Target can't be empty.",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[22].sourceColumn",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "Target can't be empty.",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[23].sourceColumn",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "Target can't be empty.",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[24].sourceColumn",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "Target can't be empty.",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[25].sourceColumn",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "Target can't be empty.",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[26].sourceColumn",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "Target can't be empty.",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[27].sourceColumn",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "Target can't be empty.",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  } ]
 }
