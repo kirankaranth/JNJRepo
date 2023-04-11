@@ -1738,7 +1738,7 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "H7qVM_v-BYUsCeNfZP8ox$$wTn4Cn72tDOW3YW2tlBhO##PRDCTO", "H7qVM_v-BYUsCeNfZP8ox$$wTn4Cn72tDOW3YW2tlBhO##PRDOC", "H7qVM_v-BYUsCeNfZP8ox$$wTn4Cn72tDOW3YW2tlBhO##PRNLIN", "H7qVM_v-BYUsCeNfZP8ox$$wTn4Cn72tDOW3YW2tlBhO##PRLNID", "H7qVM_v-BYUsCeNfZP8ox$$wTn4Cn72tDOW3YW2tlBhO##PRDOCO", "H7qVM_v-BYUsCeNfZP8ox$$wTn4Cn72tDOW3YW2tlBhO##PRKCOO" ],
+        "columnsSelector" : [ "H7qVM_v-BYUsCeNfZP8ox$$wTn4Cn72tDOW3YW2tlBhO##PRDOC", "H7qVM_v-BYUsCeNfZP8ox$$wTn4Cn72tDOW3YW2tlBhO##PRUREC", "H7qVM_v-BYUsCeNfZP8ox$$wTn4Cn72tDOW3YW2tlBhO##PRKCOO", "H7qVM_v-BYUsCeNfZP8ox$$wTn4Cn72tDOW3YW2tlBhO##PRMCU", "H7qVM_v-BYUsCeNfZP8ox$$wTn4Cn72tDOW3YW2tlBhO##PRDCTO", "H7qVM_v-BYUsCeNfZP8ox$$wTn4Cn72tDOW3YW2tlBhO##PRSFXO", "H7qVM_v-BYUsCeNfZP8ox$$wTn4Cn72tDOW3YW2tlBhO##PRLNID", "H7qVM_v-BYUsCeNfZP8ox$$wTn4Cn72tDOW3YW2tlBhO##PRLNTY", "H7qVM_v-BYUsCeNfZP8ox$$wTn4Cn72tDOW3YW2tlBhO##PRUORG", "H7qVM_v-BYUsCeNfZP8ox$$wTn4Cn72tDOW3YW2tlBhO##PRMATC", "H7qVM_v-BYUsCeNfZP8ox$$wTn4Cn72tDOW3YW2tlBhO##PRUPMJ", "H7qVM_v-BYUsCeNfZP8ox$$wTn4Cn72tDOW3YW2tlBhO##PRNLIN", "H7qVM_v-BYUsCeNfZP8ox$$wTn4Cn72tDOW3YW2tlBhO##PRLITM", "H7qVM_v-BYUsCeNfZP8ox$$wTn4Cn72tDOW3YW2tlBhO##PRLOTN", "H7qVM_v-BYUsCeNfZP8ox$$wTn4Cn72tDOW3YW2tlBhO##PRUOM", "H7qVM_v-BYUsCeNfZP8ox$$wTn4Cn72tDOW3YW2tlBhO##_upt_", "H7qVM_v-BYUsCeNfZP8ox$$wTn4Cn72tDOW3YW2tlBhO##PRLOCN", "H7qVM_v-BYUsCeNfZP8ox$$wTn4Cn72tDOW3YW2tlBhO##PRDOCO", "H7qVM_v-BYUsCeNfZP8ox$$wTn4Cn72tDOW3YW2tlBhO##PRTDAY", "H7qVM_v-BYUsCeNfZP8ox$$wTn4Cn72tDOW3YW2tlBhO##PRRCDJ" ],
         "transformations" : [ {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
@@ -1841,7 +1841,7 @@
             "sourceColumn" : "ACTL_GI_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "CASE WHEN LOWER(TRIM(PRRCDJ)) IS NULL OR TRIM(PRRCDJ) = '' OR TRIM(PRRCDJ) = '0' THEN NULL ELSE to_timestamp(substr(CAST(date_add(concat(substr(CAST(CAST(TRIM(PRRCDJ) AS INT) + 1900000 AS STRING),1,4),'-01-01'), CAST(substr(CAST(CAST(TRIM(PRRCDJ) AS INT) + 1900000 AS string),5) AS INT )-1) AS STRING), 1, 10),'yyyy-MM-dd') END"
             }
           },
           "DropColumn" : {
@@ -1854,10 +1854,10 @@
         }, {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
-            "sourceColumn" : "",
+            "sourceColumn" : "ACTL_SLS_UNIT_DELV_QTY",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "CAST(TRIM(PRUREC) as decimal(18,4))"
             }
           },
           "DropColumn" : {
@@ -1870,10 +1870,10 @@
         }, {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
-            "sourceColumn" : "",
+            "sourceColumn" : "BTCH_NUM",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "TRIM(PRLOTN)"
             }
           },
           "DropColumn" : {
@@ -1886,10 +1886,10 @@
         }, {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
-            "sourceColumn" : "",
+            "sourceColumn" : "MATL_NUM",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "TRIM(PRLITM)"
             }
           },
           "DropColumn" : {
@@ -1902,10 +1902,10 @@
         }, {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
-            "sourceColumn" : "",
+            "sourceColumn" : "SLS_ORDR_LINE_NBR_REF",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "TRIM(PRLNID)"
             }
           },
           "DropColumn" : {
@@ -1918,10 +1918,10 @@
         }, {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
-            "sourceColumn" : "",
+            "sourceColumn" : "SLS_UOM_CD",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "TRIM(PRUOM)"
             }
           },
           "DropColumn" : {
@@ -1934,10 +1934,10 @@
         }, {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
-            "sourceColumn" : "",
+            "sourceColumn" : "SHIPPING_PLNT_CD",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "TRIM(PRMCU)"
             }
           },
           "DropColumn" : {
@@ -1950,10 +1950,10 @@
         }, {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
-            "sourceColumn" : "",
+            "sourceColumn" : "SLOC_CD",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "TRIM(PRLOCN)"
             }
           },
           "DropColumn" : {
@@ -1966,10 +1966,10 @@
         }, {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
-            "sourceColumn" : "",
+            "sourceColumn" : "CRT_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "CASE WHEN LOWER(TRIM(PRUPMJ)) IS NULL OR TRIM(PRUPMJ) = '' OR TRIM(PRUPMJ) = '0' THEN NULL ELSE to_timestamp(concat(substr(CAST(date_add(concat(substr(CAST(CAST(TRIM(PRUPMJ) AS INT) + 1900000 as string),1,4),'-01-01'), CAST(substr(CAST(CAST(TRIM(PRUPMJ) AS INT) + 1900000 AS string),5) AS INT )-1) AS string), 1, 10),' ', lpad(TRIM(PRTDAY), 6, '0')), 'yyyy-MM-dd HHmmss') END"
             }
           },
           "DropColumn" : {
@@ -1982,10 +1982,10 @@
         }, {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
-            "sourceColumn" : "",
+            "sourceColumn" : "ORDR_SFX",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "PRSFXO"
             }
           },
           "DropColumn" : {
@@ -1998,10 +1998,10 @@
         }, {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
-            "sourceColumn" : "",
+            "sourceColumn" : "MATCH_TYPE",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "PRMATC"
             }
           },
           "DropColumn" : {
@@ -2014,10 +2014,10 @@
         }, {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
-            "sourceColumn" : "",
+            "sourceColumn" : "LINE_TYPE_DELV",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "TRIM(PRLNTY)"
             }
           },
           "DropColumn" : {
@@ -2030,10 +2030,10 @@
         }, {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
-            "sourceColumn" : "",
+            "sourceColumn" : "SRC_TBL_NM",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "'F43121'"
             }
           },
           "DropColumn" : {
@@ -2046,10 +2046,10 @@
         }, {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
-            "sourceColumn" : "",
+            "sourceColumn" : "ORIG_QTY_DELV_ITM",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "CAST(TRIM(PRUORG) as decimal(18,4))"
             }
           },
           "DropColumn" : {
@@ -2062,10 +2062,10 @@
         }, {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
-            "sourceColumn" : "",
+            "sourceColumn" : "DAI_ETL_ID",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "'$DAI_ETL_ID'"
             }
           },
           "DropColumn" : {
@@ -2078,10 +2078,10 @@
         }, {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
-            "sourceColumn" : "",
+            "sourceColumn" : "DAI_CRT_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "current_timestamp()"
             }
           },
           "DropColumn" : {
@@ -2094,10 +2094,10 @@
         }, {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
-            "sourceColumn" : "",
+            "sourceColumn" : "DAI_UPDT_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "current_timestamp()"
             }
           },
           "DropColumn" : {
@@ -2110,10 +2110,10 @@
         }, {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
-            "sourceColumn" : "",
+            "sourceColumn" : "_10_upt_",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "_upt_"
             }
           },
           "DropColumn" : {
@@ -2126,10 +2126,10 @@
         }, {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
-            "sourceColumn" : "",
+            "sourceColumn" : "_l1_upt_",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "current_timestamp()"
             }
           },
           "DropColumn" : {
@@ -2142,10 +2142,10 @@
         }, {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
-            "sourceColumn" : "",
+            "sourceColumn" : "_pk_",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'DELV_NUM',DELV_NUM,'DELV_LINE_NBR',DELV_LINE_NBR,'DELV_TYP_CD',DELV_TYP_CD,'CO_CD',CO_CD,'DOC_REF_NUM',DOC_REF_NUM,'ORDR_SFX',ORDR_SFX,'MATCH_TYPE',MATCH_TYPE,'SRC_TBL_NM',SRC_TBL_NM))"
             }
           },
           "DropColumn" : {
@@ -2158,10 +2158,10 @@
         }, {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
-            "sourceColumn" : "",
+            "sourceColumn" : "_pk_md5_",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'DELV_NUM',DELV_NUM,'DELV_LINE_NBR',DELV_LINE_NBR,'DELV_TYP_CD',DELV_TYP_CD,'CO_CD',CO_CD,'DOC_REF_NUM',DOC_REF_NUM,'ORDR_SFX',ORDR_SFX,'MATCH_TYPE',MATCH_TYPE,'SRC_TBL_NM',SRC_TBL_NM)))"
             }
           },
           "DropColumn" : {
@@ -2174,10 +2174,10 @@
         }, {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
-            "sourceColumn" : "",
+            "sourceColumn" : "_deleted_",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "'F'"
             }
           },
           "DropColumn" : {
@@ -4708,7 +4708,7 @@
     "isCustomOutputSchema" : false
   },
   "diagnostics" : [ {
-    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[6].expression.expression",
+    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ",
     "range" : {
       "start" : {
         "line" : 0,
@@ -4720,343 +4720,7 @@
       }
     },
     "severity" : 1,
-    "message" : "Expression can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[7].sourceColumn",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Target can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[8].sourceColumn",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Target can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[9].sourceColumn",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Target can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[10].sourceColumn",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Target can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[11].sourceColumn",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Target can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[12].sourceColumn",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Target can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[13].sourceColumn",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Target can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[14].sourceColumn",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Target can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[15].sourceColumn",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Target can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[16].sourceColumn",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Target can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[17].sourceColumn",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Target can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[18].sourceColumn",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Target can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[19].sourceColumn",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Target can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[20].sourceColumn",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Target can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[21].sourceColumn",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Target can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[22].sourceColumn",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Target can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[23].sourceColumn",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Target can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[24].sourceColumn",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Target can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[25].sourceColumn",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Target can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[26].sourceColumn",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Target can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.stI8Vw9lONF2iFk8gS-2j$$EWmWLgsRT5ECt2qQVw2aJ.properties.transformations[27].sourceColumn",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Target can't be empty.",
+    "message" : "TypeError: substring() missing 1 required positional argument: 'len'",
     "tags" : [ ],
     "relatedInformation" : [ ]
   } ]
