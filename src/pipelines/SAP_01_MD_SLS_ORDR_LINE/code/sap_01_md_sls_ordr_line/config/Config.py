@@ -21,7 +21,7 @@ class Config(ConfigBase):
             MANDT: str="100",
             sourceDatabase: str="bbl",
             DAI_ETL_ID: int=0,
-            targetSchema: str="dev-md_l1",
+            targetSchema: str="dev_md_l1",
             **kwargs
     ):
         prophecy_spark = self.spark
