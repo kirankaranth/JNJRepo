@@ -9,10 +9,11 @@ from jde_md_delv_line_bw2_gmd_jet_jsw_deu_mtr_sjd_djd_jem_jes.graph import *
 def pipeline(spark: SparkSession) -> None:
     df_DS_JDE_01_F43121 = DS_JDE_01_F43121(spark)
     df_NEW_FIELDS_RENAME_FORMAT_F43121 = NEW_FIELDS_RENAME_FORMAT_F43121(spark, df_DS_JDE_01_F43121)
+    df_Reformat_1 = Reformat_1(spark, df_NEW_FIELDS_RENAME_FORMAT_F43121)
     df_DS_JDE_01_F4211 = DS_JDE_01_F4211(spark)
     df_NEW_FIELDS_RENAME_FORMAT_F4211 = NEW_FIELDS_RENAME_FORMAT_F4211(spark, df_DS_JDE_01_F4211)
     df_Reformat_2 = Reformat_2(spark, df_NEW_FIELDS_RENAME_FORMAT_F4211)
-    df_Reformat_1 = Reformat_1(spark, df_NEW_FIELDS_RENAME_FORMAT_F43121)
+    df_SetOperation_1 = SetOperation_1(spark, df_Reformat_1, df_Reformat_2)
 
 def main():
     spark = SparkSession.builder\
