@@ -10,6 +10,7 @@ def pipeline(spark: SparkSession) -> None:
     df_DS_JDE_01_F43121 = DS_JDE_01_F43121(spark)
     df_DS_JDE_01_F4211 = DS_JDE_01_F4211(spark)
     df_NEW_FIELDS_RENAME_FORMAT_F43121 = NEW_FIELDS_RENAME_FORMAT_F43121(spark, df_DS_JDE_01_F43121)
+    df_NEW_FIELDS_RENAME_FORMAT_F4211 = NEW_FIELDS_RENAME_FORMAT_F4211(spark, df_DS_JDE_01_F4211)
 
 def main():
     spark = SparkSession.builder\
