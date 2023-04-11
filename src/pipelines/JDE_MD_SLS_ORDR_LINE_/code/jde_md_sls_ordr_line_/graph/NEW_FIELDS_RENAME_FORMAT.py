@@ -49,7 +49,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("WT_UOM_CD", trim(col("SDWTUM")))\
         .withColumn("NET_WT_MEAS", col("SDITWT").cast(DecimalType(18, 4)))\
         .withColumn("VOL_UOM_CD", trim(col("SDVLUM")))\
-        .withColumn("VOL_MEAS   ", col("SDITVL").cast(DecimalType(18, 4)))\
+        .withColumn("VOL_MEAS", col("SDITVL").cast(DecimalType(18, 4)))\
         .withColumn("COST_IN_DOC_CRNCY", col("SDECST").cast(DecimalType(18, 4)))\
         .withColumn("BTCH_NUM", trim(col("SDLOTN")))\
         .withColumn(
@@ -102,6 +102,8 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
             )
           )
         )\
+        .withColumn("RQST_ORDR_QTY_BASE_UNIT", col("sdpqor").cast(DecimalType(18, 4)))\
+        .withColumn("CUST_REF", trim(col("sdvr01")))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
         .withColumn("DAI_UPDT_DTTM", current_timestamp())\

@@ -33,7 +33,7 @@ def SET_FIELDS_REFORMAT_ORDER(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("WT_UOM_CD"), 
         col("NET_WT_MEAS"), 
         col("VOL_UOM_CD"), 
-        col("`VOL_MEAS   `").alias("VOL_MEAS   "), 
+        col("VOL_MEAS"), 
         col("COST_IN_DOC_CRNCY"), 
         col("BTCH_NUM"), 
         col("ORIG_RQST_DELV_DTTM"), 
