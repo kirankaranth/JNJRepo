@@ -72,7 +72,7 @@ def NEW_FIELDS_RENAME_FORMAT_F43121(spark: SparkSession, in0: DataFrame) -> Data
         .withColumn("ORDR_SFX", col("PRSFXO"))\
         .withColumn("MATCH_TYPE", col("PRMATC"))\
         .withColumn("LINE_TYPE_DELV", trim(col("PRLNTY")))\
-        .withColumn("SRC_TBL_NM", lit("F43121"))\
+        .withColumn("SRC_TBL_NM", lit(Config.sourceTable))\
         .withColumn("ORIG_QTY_DELV_ITM", trim(col("PRUORG")).cast(DecimalType(18, 4)))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\

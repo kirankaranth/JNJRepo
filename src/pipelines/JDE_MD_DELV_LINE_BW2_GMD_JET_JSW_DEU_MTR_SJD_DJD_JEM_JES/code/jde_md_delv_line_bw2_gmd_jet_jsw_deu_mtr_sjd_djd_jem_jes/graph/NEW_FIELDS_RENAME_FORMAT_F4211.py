@@ -45,7 +45,7 @@ def NEW_FIELDS_RENAME_FORMAT_F4211(spark: SparkSession, in0: DataFrame) -> DataF
           )
         )\
         .withColumn("LINE_TYPE_DELV", trim(col("SDLNTY")))\
-        .withColumn("SRC_TBL_NM", lit("F4211"))\
+        .withColumn("SRC_TBL_NM", lit(Config.sourceTable1))\
         .withColumn("ORIG_QTY_DELV_ITM", lit(None).cast(DecimalType(18, 4)))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
