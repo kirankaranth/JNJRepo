@@ -92,7 +92,6 @@ def Join_1(spark: SparkSession, VBAP: DataFrame, VBAK: DataFrame, VBKD: DataFram
         trim(col("VBAP.MVGR2")).alias("MATL_GRP_2_MVGR2"), 
         lookup("LU_SAP_TVM2T", col("MVGR2")).getField("BEZEI").alias("MATL_GRP_2_DESC"), 
         trim(col("VBAP.MVGR3")).alias("MATL_GRP_3"), 
-        lookup("LU_SAP_TVM3T", col("MVGR3")).getField("BEZEI").alias("MATL_GRP_3_DESC"), 
         trim(col("VBAP.MVGR4")).alias("MATL_GRP_4"), 
         trim(col("VBAP.MVGR5")).alias("MATL_GRP_5"), 
         lookup("LU_SAP_TVM5T", col("MVGR5")).getField("BEZEI").alias("MATL_GRP_5_DESC"), 
@@ -320,7 +319,6 @@ def Join_1(spark: SparkSession, VBAP: DataFrame, VBAK: DataFrame, VBKD: DataFram
         when((trim(col("VBKD.prsdt")) == lit("00000000")), lit(None).cast(TimestampType()))\
           .otherwise(to_timestamp(trim(col("VBKD.prsdt")), "yyyyMMdd"))\
           .alias("PRC_AND_EXCH_RT_DTTM"), 
-        col("VBAP._upt_").alias("_l0_upt_"), 
         trim(col("VBAP.SGT_RCAT")).alias("REQ_SGMNT"), 
         trim(col("VBAP.HANDOVERLOC")).alias("LOC_PHY_HANDOVR_GOODS"), 
         when((col("VBAP.handoverdate") == lit("000000")), lit(None).cast(TimestampType()))\
@@ -329,5 +327,7 @@ def Join_1(spark: SparkSession, VBAP: DataFrame, VBAK: DataFrame, VBKD: DataFram
         trim(col("VBAP.FMFGUS_KEY")).alias("US_FED_GOVT_FLD"), 
         trim(col("VBAP.WRF_CHARSTC1")).alias("CHAR_VAL_1"), 
         trim(col("VBAP.WRF_CHARSTC2")).alias("CHAR_VAL_2"), 
-        trim(col("VBAP.WRF_CHARSTC3")).alias("CHAR_VAL_3")
+        trim(col("VBAP.WRF_CHARSTC3")).alias("CHAR_VAL_3"), 
+        trim(col("VBAP._BITMYM_SVALUE")).cast(DecimalType(18, 4)).alias("EQUIP_RSDL_VAL"), 
+        col("VBAP._upt_").alias("_l0_upt_")
     )
