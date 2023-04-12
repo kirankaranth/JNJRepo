@@ -6,4 +6,4 @@ from jde_01_md_ship_mtk.config.ConfigStore import *
 from jde_01_md_ship_mtk.udfs.UDFs import *
 
 def JDE_F4211(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"mtr.f4211")
+    return spark.read.table(f"{Config.sourceSystem}.{Config.sourceTable}")

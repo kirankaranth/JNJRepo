@@ -6,4 +6,4 @@ from jde_01_md_ship_mtk.config.ConfigStore import *
 from jde_01_md_ship_mtk.udfs.UDFs import *
 
 def JDE_F43121(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM mtr.f43121 WHERE _deleted_ = 'F'")
+    return spark.sql(f"SELECT * FROM {Config.sourceSystem}.{Config.sourceTable1} WHERE _deleted_ = 'F'")
