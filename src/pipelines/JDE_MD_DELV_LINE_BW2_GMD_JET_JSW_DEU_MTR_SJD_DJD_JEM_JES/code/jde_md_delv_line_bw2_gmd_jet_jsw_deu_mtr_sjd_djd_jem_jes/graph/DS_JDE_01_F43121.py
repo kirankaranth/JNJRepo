@@ -6,4 +6,4 @@ from jde_md_delv_line_bw2_gmd_jet_jsw_deu_mtr_sjd_djd_jem_jes.config.ConfigStore
 from jde_md_delv_line_bw2_gmd_jet_jsw_deu_mtr_sjd_djd_jem_jes.udfs.UDFs import *
 
 def DS_JDE_01_F43121(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"bw2.f43121")
+    return spark.read.table(f"{Config.sourceDatabase}.f43121")

@@ -16,6 +16,7 @@ def pipeline(spark: SparkSession) -> None:
     df_NEW_FIELDS_RENAME_FORMAT_F4211 = NEW_FIELDS_RENAME_FORMAT_F4211(spark, df_DELETED_FILTER_F4211)
     df_SET_FIELD_ORDER_REFORMAT_F4211 = SET_FIELD_ORDER_REFORMAT_F4211(spark, df_NEW_FIELDS_RENAME_FORMAT_F4211)
     df_SetOperation_1 = SetOperation_1(spark, df_SET_FIELD_ORDER_REFORMAT_F43121, df_SET_FIELD_ORDER_REFORMAT_F4211)
+    JDE_MD_DELV_LINE(spark, df_SetOperation_1)
 
 def main():
     spark = SparkSession.builder\
