@@ -9,6 +9,7 @@ from .NEW_FIEDS import NEW_FIEDS
 from .MANDT_FILTER_1_1_1_2_1_1 import MANDT_FILTER_1_1_1_2_1_1
 from .MANDT_FILTER_1_1_1_1 import MANDT_FILTER_1_1_1_1
 from .LU_SAP_TVAGT import LU_SAP_TVAGT
+from .Join_1 import Join_1
 from .LU_SAP_TVAPT import LU_SAP_TVAPT
 from .DUPLICATE_CHECK_1 import DUPLICATE_CHECK_1
 from .LU_SAP_TVM3T import LU_SAP_TVM3T
