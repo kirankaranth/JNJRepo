@@ -6,4 +6,4 @@ from sap_01_md_matl_inv.config.ConfigStore import *
 from sap_01_md_matl_inv.udfs.UDFs import *
 
 def DS_SAP_02_NSDM_V_MCHB(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.sourceSystem}.nsdm_v_mchb")
+    return spark.sql(f"SELECT * FROM {Config.sourceSystem}.nsdm_v_mchb WHERE _deleted_ = 'F'")

@@ -6,4 +6,4 @@ from sap_01_md_matl_inv.config.ConfigStore import *
 from sap_01_md_matl_inv.udfs.UDFs import *
 
 def MANDT_3(spark: SparkSession, in0: DataFrame) -> DataFrame:
-    return in0.filter(((col("_deleted_") == lit("F")) & (col("MANDT") == lit(Config.MANDT))))
+    return in0.filter((col("MANDT") == lit(Config.MANDT)))
