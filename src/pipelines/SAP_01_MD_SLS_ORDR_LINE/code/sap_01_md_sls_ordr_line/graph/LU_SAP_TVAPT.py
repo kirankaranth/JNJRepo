@@ -7,5 +7,5 @@ from sap_01_md_sls_ordr_line.udfs.UDFs import *
 
 def LU_SAP_TVAPT(spark: SparkSession, in0: DataFrame):
     keyColumns = ['''PSTYV''']
-    valueColumns = ['''VTEXT''']
+    valueColumns = ['''VTEXT''', '''PSTYV''']
     createLookup("LU_SAP_TVAPT", in0, spark, keyColumns, valueColumns)

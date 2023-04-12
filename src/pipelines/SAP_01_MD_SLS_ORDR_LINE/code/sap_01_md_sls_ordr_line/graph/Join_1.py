@@ -5,22 +5,7 @@ from prophecy.libs import typed_lit
 from sap_01_md_sls_ordr_line.config.ConfigStore import *
 from sap_01_md_sls_ordr_line.udfs.UDFs import *
 
-def Join_1(
-        spark: SparkSession,
-        VBAP: DataFrame,
-        VBAK: DataFrame,
-        VBKD: DataFrame, 
-        TVAGT: DataFrame, 
-        TVM1T: DataFrame, 
-        TVM2T: DataFrame, 
-        TVM3T: DataFrame, 
-        TVM5T: DataFrame, 
-        TVSTT: DataFrame, 
-        TVST: DataFrame, 
-        TVAPT: DataFrame, 
-        TVRO: DataFrame, 
-        TVROT: DataFrame
-) -> DataFrame:
+def Join_1(spark: SparkSession, VBAP: DataFrame, VBAK: DataFrame, VBKD: DataFrame, TVST: DataFrame) -> DataFrame:
     return VBAP\
         .alias("VBAP")\
         .join(VBAK.alias("VBAK"), (col("VBAP.VBELN") == col("VBAK.VBELN")), "left_outer")\
@@ -29,16 +14,7 @@ def Join_1(
           ((col("VBAP.VBELN") == col("VBKD.VBELN")) & (col("VBAP.POSNR") == col("VBKD.POSNR"))),
           "left_outer"
         )\
-        .join(TVAGT.alias("TVAGT"), (col("VBAP.ABGRU") == col("TVAGT.ABGRU")), "left_outer")\
-        .join(TVM1T.alias("TVM1T"), (col("VBAP.MVGR1") == col("TVM1T.MVGR1")), "left_outer")\
-        .join(TVM2T.alias("TVM2T"), (col("VBAP.MVGR2") == col("TVM2T.MVGR2")), "left_outer")\
-        .join(TVM3T.alias("TVM3T"), (col("VBAP.MVGR3") == col("TVM3T.MVGR3")), "left_outer")\
-        .join(TVM5T.alias("TVM5T"), (col("VBAP.MVGR5") == col("TVM5T.MVGR5")), "left_outer")\
-        .join(TVSTT.alias("TVSTT"), (col("VBAP.VSTEL") == col("TVSTT.VSTEL")), "left_outer")\
         .join(TVST.alias("TVST"), (col("VBAP.VSTEL") == col("TVST.VSTEL")), "left_outer")\
-        .join(TVAPT.alias("TVAPT"), (col("VBAP.PSTYV") == col("TVAPT.PSTYV")), "left_outer")\
-        .join(TVRO.alias("TVRO"), (col("VBAP.ROUTE") == col("TVRO.ROUTE")), "left_outer")\
-        .join(TVROT.alias("TVROT"), (col("VBAP.ROUTE") == col("TVROT.ROUTE")), "left_outer")\
         .select(
         lit(Config.sourceSystem).alias("SRC_SYS_CD"), 
         trim(col("VBAK.BUKRS_VF")).alias("COMPANY_CD"), 
@@ -69,8 +45,8 @@ def Join_1(
         when((col("VBAP.erdat") == lit("00000000")), lit(None).cast(TimestampType()))\
           .otherwise(to_timestamp(concat(col("VBAP.erdat"), col("VBAP.erzet")), "yyyyMMddHHmmss"))\
           .alias("CR_DTTM"), 
-        trim(col("TVAGT.BEZEI")).alias("REJ_RSN_DESC"), 
-        trim(col("TVAPT.VTEXT")).alias("LINE_ITEM_CAT_DESC"), 
+        lookup("LU_SAP_TVAGT", col("ABGRU")).getField("BEZEI").alias("REJ_RSN_DESC"), 
+        lookup("LU_SAP_TVAPT", col("PSTYV")).getField("VTEXT").alias("LINE_ITEM_CAT_DESC"), 
         col("NETPR").cast(DecimalType(18, 4)).alias("NET_PRC_AMT"), 
         trim(col("VBAP.MATWA")).alias("ENT_MATL_NUM"), 
         trim(col("VBAP.MEINS")).alias("BASE_UOM_CD"), 
@@ -112,17 +88,17 @@ def Join_1(
         col("VBAP.ZMENG").cast(DecimalType(18, 4)).alias("TRGT_QTY_SLS_UNIT"), 
         trim(col("VBAP.ERNAM")).alias("CRT_BY_NM"), 
         trim(col("VBAP.MVGR1")).alias("MATL_GRP_1"), 
-        trim(col("TVM1T.BEZEI")).alias("MATL_GRP_1_DESC"), 
+        lookup("LU_SAP_TVM1T", col("MVGR1")).getField("BEZEI").alias("MATL_GRP_1_DESC"), 
         trim(col("VBAP.MVGR2")).alias("MATL_GRP_2_MVGR2"), 
-        trim(col("TVM2T.BEZEI")).alias("MATL_GRP_2_DESC"), 
+        lookup("LU_SAP_TVM2T", col("MVGR2")).getField("BEZEI").alias("MATL_GRP_2_DESC"), 
         trim(col("VBAP.MVGR3")).alias("MATL_GRP_3"), 
-        trim(col("TVM3T.BEZEI")).alias("MATL_GRP_3_DESC"), 
+        lookup("LU_SAP_TVM3T", col("MVGR3")).getField("BEZEI").alias("MATL_GRP_3_DESC"), 
         trim(col("VBAP.MVGR4")).alias("MATL_GRP_4"), 
         trim(col("VBAP.MVGR5")).alias("MATL_GRP_5"), 
-        trim(col("TVM5T.BEZEI")).alias("MATL_GRP_5_DESC"), 
+        lookup("LU_SAP_TVM5T", col("MVGR5")).getField("BEZEI").alias("MATL_GRP_5_DESC"), 
         trim(col("VBAP.AUFNR")).alias("ORDR_NUM"), 
         col("VBAP.KPEIN").cast(DecimalType(18, 4)).alias("COND_PRC_UNIT"), 
-        trim(col("TVSTT.VTEXT")).alias("SHIPPING_PT_DESC"), 
+        lookup("LU_SAP_TVSTT", col("VSTEL")).getField("VTEXT").alias("SHIPPING_PT_DESC"), 
         trim(col("TVST.LOADTN")).alias("LD_TIME_WRK_HRS"), 
         trim(col("TVST.PIPATN")).alias("PICK_PACK_TIME"), 
         trim(col("TVST.TSTRID")).alias("WRK_TIMES"), 
@@ -130,10 +106,10 @@ def Join_1(
         col("TVST.LOADTG").cast(DecimalType(18, 4)).alias("LD_TIME_WRK_DAYS"), 
         col("TVST.PIPATG").cast(DecimalType(18, 4)).alias("PICK_PACK_TIME_WRK_DAYS"), 
         trim(col("TVST.ALAND")).alias("SHIPPING_PT_CTRY"), 
-        trim(col("TVRO.SPFBK")).alias("RTE_FCTRY_CAL"), 
-        trim(col("TVRO.TDVZTD")).alias("TRSPN_LEAD_TIME_IN_CAL_DAYS"), 
-        trim(col("TVRO.TRAZTD")).alias("TRST_DUR_IN_CAL_DAYS"), 
-        trim(col("TVROT.BEZEI")).alias("RTE_DESC"), 
+        lookup("LU_SAP_TVRO", col("ROUTE")).getField("SPFBK").alias("RTE_FCTRY_CAL"), 
+        lookup("LU_SAP_TVRO", col("ROUTE")).getField("TDVZTD").alias("TRSPN_LEAD_TIME_IN_CAL_DAYS"), 
+        lookup("LU_SAP_TVRO", col("ROUTE")).getField("TRAZTD").alias("TRST_DUR_IN_CAL_DAYS"), 
+        lookup("LU_SAP_TVRO", col("ROUTE")).getField("BEZEI").alias("RTE_DESC"), 
         when((trim(col("VBKD.bstdk")) == lit("00000000")), lit(None).cast(TimestampType()))\
           .otherwise(to_timestamp(trim(col("VBKD.bstdk")), "yyyyMMdd"))\
           .alias("CUST_PO_DTTM"), 
@@ -168,7 +144,7 @@ def Join_1(
         trim(col("TVST.RIZBS")).alias("DTRMN_PICK_PACK_TIME"), 
         trim(col("TVST.VSTEL")).alias("SHIPPING_PT"), 
         trim(col("TVST.ALAND")).alias("CTRY_CD"), 
-        trim(col("TVAPT.PSTYV")).alias("ITEM_CAT_CD"), 
+        lookup("LU_SAP_TVAPT", col("PSTYV")).getField("PSTYV").alias("ITEM_CAT_CD"), 
         lit(
             "#"
           )\
@@ -344,5 +320,6 @@ def Join_1(
         when((trim(col("VBKD.prsdt")) == lit("00000000")), lit(None).cast(TimestampType()))\
           .otherwise(to_timestamp(trim(col("VBKD.prsdt")), "yyyyMMdd"))\
           .alias("PRC_AND_EXCH_RT_DTTM"), 
-        col("VBAP._upt_").alias("_l0_upt_")
+        col("VBAP._upt_").alias("_l0_upt_"), 
+        col("VBAP.ARKTX").alias("ARKTX")
     )
