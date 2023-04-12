@@ -6,4 +6,4 @@ from jde_md_delv_line_bw2_gmd_jet_jsw_deu_mtr_sjd_djd_jem_jes.config.ConfigStore
 from jde_md_delv_line_bw2_gmd_jet_jsw_deu_mtr_sjd_djd_jem_jes.udfs.UDFs import *
 
 def DS_JDE_01_F4211(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM bw2.f4211 WHERE _deleted_ = 'F'")
+    return spark.read.table(f"bw2.f4211")
