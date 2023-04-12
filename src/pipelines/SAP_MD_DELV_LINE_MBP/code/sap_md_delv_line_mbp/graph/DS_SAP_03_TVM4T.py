@@ -6,4 +6,4 @@ from sap_md_delv_line_mbp.config.ConfigStore import *
 from sap_md_delv_line_mbp.udfs.UDFs import *
 
 def DS_SAP_03_TVM4T(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM mbp.tvm4t WHERE SPRAS = 'E'")
+    return spark.read.table(f"mbp.tvm4t")
