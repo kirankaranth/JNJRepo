@@ -10,12 +10,12 @@ def pipeline(spark: SparkSession) -> None:
     df_DS_JDE_01_F43121 = DS_JDE_01_F43121(spark)
     df_Filter_1 = Filter_1(spark, df_DS_JDE_01_F43121)
     df_NEW_FIELDS_RENAME_FORMAT_F43121 = NEW_FIELDS_RENAME_FORMAT_F43121(spark, df_Filter_1)
-    df_Reformat_1 = Reformat_1(spark, df_NEW_FIELDS_RENAME_FORMAT_F43121)
+    df_SET_FIELD_ORDER_REFORMAT_F43121 = SET_FIELD_ORDER_REFORMAT_F43121(spark, df_NEW_FIELDS_RENAME_FORMAT_F43121)
     df_DS_JDE_01_F4211 = DS_JDE_01_F4211(spark)
     df_Filter_2 = Filter_2(spark, df_DS_JDE_01_F4211)
     df_NEW_FIELDS_RENAME_FORMAT_F4211 = NEW_FIELDS_RENAME_FORMAT_F4211(spark, df_Filter_2)
-    df_Reformat_1_1 = Reformat_1_1(spark, df_NEW_FIELDS_RENAME_FORMAT_F4211)
-    df_SetOperation_1 = SetOperation_1(spark, df_Reformat_1, df_Reformat_1_1)
+    df_SET_FIELD_ORDER_REFORMAT_F4211 = SET_FIELD_ORDER_REFORMAT_F4211(spark, df_NEW_FIELDS_RENAME_FORMAT_F4211)
+    df_SetOperation_1 = SetOperation_1(spark, df_SET_FIELD_ORDER_REFORMAT_F43121, df_SET_FIELD_ORDER_REFORMAT_F4211)
 
 def main():
     spark = SparkSession.builder\
