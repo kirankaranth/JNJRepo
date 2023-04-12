@@ -5,5 +5,5 @@ from prophecy.libs import typed_lit
 from jde_md_sls_ordr_line_.config.ConfigStore import *
 from jde_md_sls_ordr_line_.udfs.UDFs import *
 
-def JDE_F4211(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.DBNAME}.{Config.DBTABLE1}")
+def DELETED_FILTER(spark: SparkSession, in0: DataFrame) -> DataFrame:
+    return in0.filter((col("_deleted_") == lit("F")))
