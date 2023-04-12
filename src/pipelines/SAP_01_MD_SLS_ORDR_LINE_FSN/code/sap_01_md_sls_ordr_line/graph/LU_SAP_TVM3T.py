@@ -5,5 +5,7 @@ from prophecy.libs import typed_lit
 from sap_01_md_sls_ordr_line.config.ConfigStore import *
 from sap_01_md_sls_ordr_line.udfs.UDFs import *
 
-def SAP_TVM3T(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM {Config.sourceDatabase}.tvm3t WHERE spras = 'E'")
+def LU_SAP_TVM3T(spark: SparkSession, in0: DataFrame):
+    keyColumns = ['''MVGR3''']
+    valueColumns = ['''BEZEI''']
+    createLookup("LU_SAP_TVM3T", in0, spark, keyColumns, valueColumns)
