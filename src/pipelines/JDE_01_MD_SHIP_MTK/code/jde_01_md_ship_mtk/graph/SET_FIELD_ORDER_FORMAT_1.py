@@ -5,7 +5,7 @@ from prophecy.libs import typed_lit
 from jde_01_md_ship_mtk.config.ConfigStore import *
 from jde_01_md_ship_mtk.udfs.UDFs import *
 
-def SET_FIELD_ORDER_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
+def SET_FIELD_ORDER_FORMAT_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0.select(
         col("SRC_SYS_CD"), 
         col("SHIP_NUM"), 
