@@ -77,7 +77,7 @@ def NEW_FIELDS_RENAME_FORMAT_F43121(spark: SparkSession, in0: DataFrame) -> Data
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
         .withColumn("DAI_UPDT_DTTM", current_timestamp())\
-        .withColumn("_10_upt_", col("_upt_"))\
+        .withColumn("_l0_upt_", col("_upt_"))\
         .withColumn("_l1_upt_", current_timestamp())\
         .withColumn(
           "_pk_",
