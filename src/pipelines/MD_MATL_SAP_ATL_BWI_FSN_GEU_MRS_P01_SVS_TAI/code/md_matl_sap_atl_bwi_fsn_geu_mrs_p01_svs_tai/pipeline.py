@@ -7,10 +7,12 @@ from prophecy.utils import *
 from md_matl_sap_atl_bwi_fsn_geu_mrs_p01_svs_tai.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    df_MARA = MARA(spark)
     df_MAKT = MAKT(spark)
-    df_DEL_AND_MANDT = DEL_AND_MANDT(spark, df_MARA)
     df_DEL_AND_MANDT_1 = DEL_AND_MANDT_1(spark, df_MAKT)
+    MAKTX_LU(spark, df_DEL_AND_MANDT_1)
+    df_MARA = MARA(spark)
+    df_DEL_AND_MANDT = DEL_AND_MANDT(spark, df_MARA)
+    df_SchemaTransform_1 = SchemaTransform_1(spark, df_DEL_AND_MANDT)
 
 def main():
     spark = SparkSession.builder\
