@@ -1,0 +1,3 @@
+from sap_md_bom_hdr_atl_bbl_bwi_fsn_geu_mbp_p01_svs_tai.pipeline import main
+
+main()
