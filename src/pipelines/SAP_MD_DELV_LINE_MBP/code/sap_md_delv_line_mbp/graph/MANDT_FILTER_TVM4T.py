@@ -6,4 +6,4 @@ from sap_md_delv_line_mbp.config.ConfigStore import *
 from sap_md_delv_line_mbp.udfs.UDFs import *
 
 def MANDT_FILTER_TVM4T(spark: SparkSession, in0: DataFrame) -> DataFrame:
-    return in0.filter((col("MANDT") == lit(Config.MANDT)))
+    return in0.filter(((col("MANDT") == lit(Config.MANDT)) & (col("_deleted_") == lit("F"))))
