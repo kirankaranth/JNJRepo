@@ -7,11 +7,11 @@ from prophecy.utils import *
 from jde_01_deu_f0401.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark)
-    MD_SUP_PRCHSNG_ORG(spark, df_SET_FIELD_ORDER_REFORMAT)
     df_SAP_FML1 = SAP_FML1(spark)
     df_MANDT_FILTER = MANDT_FILTER(spark, df_SAP_FML1)
     df_NEW_FIELDS_TRANSFORMATION = NEW_FIELDS_TRANSFORMATION(spark, df_MANDT_FILTER)
+    df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS_TRANSFORMATION)
+    MD_SUP_PRCHSNG_ORG(spark, df_SET_FIELD_ORDER_REFORMAT)
     df_GET_DUP = GET_DUP(spark, df_SET_FIELD_ORDER_REFORMAT)
     df_DUP_FILTER = DUP_FILTER(spark, df_GET_DUP)
 
