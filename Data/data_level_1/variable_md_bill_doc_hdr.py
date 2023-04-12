@@ -3,39 +3,14 @@ import os
 from decimal import *
 
 table = "MD_BILL_DOC_HDR"
-view = "v01_md_delv_line"
+view = "v01_md_bill_doc_hdr"
 env = os.getenv("DATABRICKS_ENV").lower()
 groupname = "md_deliveries"
 underlying_table = "md_deliveries_MD_BILL_DOC_HDR"
 
-table_location = "dbfs:/mnt/" + os.getenv("DATABRICKS_ENV").lower() + "_curdelta/md_l1/MD_BILLING_DOCUMENT/" + table
-
 LIST__PRIMARY_KEYS = {"SRC_SYS_CD, BILL_DOC"}
 
 source_system = {"bba", "btb_na", "btb_latam", "fsn", "geu", "hcs", "mbp", "mrs", "p01", "svs", "taishan"}
-
-DICT__COLUMNS_AND_DATATYPES = {"SRC_SYS_CD": "string", "BILL_DOC": "string", "SLORG_CD": "string",
-    "SLORG_DESC": "string", "DSTR_CHNL_CD": "string", "DSTR_CHNL_DESC": "string", "SLS_DIV_CD": "string",
-    "SLS_DIV_DESC": "string", "BILL_TYPE_CD": "string", "BILL_TYPE_DESC": "string", "BILL_CAT": "string",
-    "DOC_CAT": "string", "PYR": "string", "SOLD_TO": "string", "SHIP_TO": "string", "CRT_DTTM": "timestamp",
-    "BILL_DTTM": "timestamp", "BILL_INVC_DTTM": "timestamp", "CRNCY_CD": "string", "CRT_BY": "string",
-    "PRC_PCDR_CD": "string", "DOC_COND_OWN_COND": "string", "SHIPPING_COND_CD": "string", "FISC_YR": "string",
-    "PSTNG_PER": "int", "CUST_GRP_CD": "string", "INTNL_COM_CD": "string", "DEL_DPRT_PT_CD": "string",
-    "PSTNG_STS": "string", "EXCH_RT_FIN_PSTNG": "decimal(18,4)", "ADDL_VAL_DAYS": "string", "FX_VAL_DTTM": "timestamp",
-    "PMT_TERM_CD": "string", "ACCT_ASGNMT_GRP": "string", "CTRY_CD": "string", "REGION_CD": "string", "CO_CD": "string",
-    "TAX_CLSN_1": "string", "NET_VAL_AMT": "decimal(18,4)", "COMB_CRITA": "string", "STATS_CRNCY": "string",
-    "CHG_DTTM": "timestamp", "INVC_LIST_TYPE": "string", "CNTL_AREA_CD": "string", "CR_ACCT": "string",
-    "CRNCY_CR_CNTL_AREA": "string", "CR_DX_RT": "decimal(18,4)", "HIER_TYPE_PRC": "string", "CUST_PO_NUM": "string",
-    "TRAD_PTNR_CO_CD": "string", "TAX_DPRT_CTRY": "string", "ORIG_VAT_NUM": "string", "CTRY_VAT_NUM": "string",
-    "REF_DOC_NUM": "string", "ASGNMT_NUM": "string", "TAX_AMT": "decimal(18,4)", "LOGL_SYS": "string",
-    "TRNL_DTTM": "timestamp", "PMT_REF": "string", "NUM_OF_PG": "int", "PSTNG_BILL_STS_CD": "string",
-    "INVC_LIST_STS_CD": "string", "CUST_PRC_GRP": "string", "SLS_DSTRC": "string", "PRC_LIST_TYPE": "string",
-    "TAX_CLSN_2": "string", "TAX_CLSN_3": "string", "TAX_CLSN_4": "string", "TAX_CLSN_5": "string",
-    "TAX_CLSN_6": "string", "TAX_CLSN_7": "string", "TAX_CLSN_8": "string", "TAX_CLSN_9": "string",
-    "INDSTR_CD_1": "string", "INDSTR_CD_2": "string", "PRCH_ORDR_TYPE": "string", "BILL_DOC_IS_CAN": "string",
-    "DAI_ETL_ID": "int", "DAI_CRT_DTTM": "timestamp", "DAI_UPDT_DTTM": "timestamp"}
-
-COLUMN_COUNT = 85
 
 UTC_COLUMNS = ["DAI_CRT_DTTM", "DAI_UPDT_DTTM"]
 LIST__UTC_COLUMNS_WITH_NULL = ["CRT_DTTM", "BILL_DTTM", "BILL_INVC_DTTM", "FX_VAL_DTTM", "CHG_DTTM", "TRNL_DTTM"]
