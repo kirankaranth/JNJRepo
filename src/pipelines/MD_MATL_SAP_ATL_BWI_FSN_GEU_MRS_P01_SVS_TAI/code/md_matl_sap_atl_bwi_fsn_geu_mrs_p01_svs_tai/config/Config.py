@@ -22,7 +22,7 @@ class Config(ConfigBase):
             self,
             sourceSystem: str="atl",
             targetSchema: str="dev_md_l1",
-            sourceDatabase: str="geu",
+            sourceDatabase: str="atl",
             configDatabase: str=" ",
             MANDT: str="100",
             DBTABLE1: str="mara",
