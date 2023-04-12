@@ -6,4 +6,4 @@ from sap_01_md_sls_ordr_line.config.ConfigStore import *
 from sap_01_md_sls_ordr_line.udfs.UDFs import *
 
 def SAP_TVROT(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM {Config.sourceDatabase}.tvrot WHERE _deleted_ = 'F' and spras = 'E'")
+    return spark.sql(f"SELECT * FROM {Config.sourceDatabase}.tvrot WHERE spras = 'E'")

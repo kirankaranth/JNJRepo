@@ -6,4 +6,4 @@ from sap_01_md_sls_ordr_line.config.ConfigStore import *
 from sap_01_md_sls_ordr_line.udfs.UDFs import *
 
 def SAP_TVAGT(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM {Config.sourceDatabase}.tvagt WHERE _deleted_ = 'F' and Spras = 'E'")
+    return spark.sql(f"SELECT * FROM {Config.sourceDatabase}.tvagt WHERE Spras = 'E'")

@@ -98,7 +98,7 @@ def Join_1(spark: SparkSession, VBAP: DataFrame, VBAK: DataFrame, VBKD: DataFram
         lookup("LU_SAP_TVM5T", col("MVGR5")).getField("BEZEI").alias("MATL_GRP_5_DESC"), 
         trim(col("VBAP.AUFNR")).alias("ORDR_NUM"), 
         col("VBAP.KPEIN").cast(DecimalType(18, 4)).alias("COND_PRC_UNIT"), 
-        lookup("LU_SAP_TVSTT", col("VSTEL")).getField("VTEXT").alias("SHIPPING_PT_DESC"), 
+        lookup("LU_SAP_TVSTT", col("VBAP.VSTEL")).getField("VTEXT").alias("SHIPPING_PT_DESC"), 
         trim(col("TVST.LOADTN")).alias("LD_TIME_WRK_HRS"), 
         trim(col("TVST.PIPATN")).alias("PICK_PACK_TIME"), 
         trim(col("TVST.TSTRID")).alias("WRK_TIMES"), 
@@ -109,7 +109,7 @@ def Join_1(spark: SparkSession, VBAP: DataFrame, VBAK: DataFrame, VBKD: DataFram
         lookup("LU_SAP_TVRO", col("ROUTE")).getField("SPFBK").alias("RTE_FCTRY_CAL"), 
         lookup("LU_SAP_TVRO", col("ROUTE")).getField("TDVZTD").alias("TRSPN_LEAD_TIME_IN_CAL_DAYS"), 
         lookup("LU_SAP_TVRO", col("ROUTE")).getField("TRAZTD").alias("TRST_DUR_IN_CAL_DAYS"), 
-        lookup("LU_SAP_TVRO", col("ROUTE")).getField("BEZEI").alias("RTE_DESC"), 
+        lookup("LU_SAP_TVROT", col("ROUTE")).getField("BEZEI").alias("RTE_DESC"), 
         when((trim(col("VBKD.bstdk")) == lit("00000000")), lit(None).cast(TimestampType()))\
           .otherwise(to_timestamp(trim(col("VBKD.bstdk")), "yyyyMMdd"))\
           .alias("CUST_PO_DTTM"), 
@@ -320,6 +320,5 @@ def Join_1(spark: SparkSession, VBAP: DataFrame, VBAK: DataFrame, VBKD: DataFram
         when((trim(col("VBKD.prsdt")) == lit("00000000")), lit(None).cast(TimestampType()))\
           .otherwise(to_timestamp(trim(col("VBKD.prsdt")), "yyyyMMdd"))\
           .alias("PRC_AND_EXCH_RT_DTTM"), 
-        col("VBAP._upt_").alias("_l0_upt_"), 
-        col("VBAP.ARKTX").alias("ARKTX")
+        col("VBAP._upt_").alias("_l0_upt_")
     )
