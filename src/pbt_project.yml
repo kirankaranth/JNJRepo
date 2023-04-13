@@ -9,8 +9,8 @@ buildSystemDetails:
   parentArtefactID: cdl_l1_team
   buildSystem: wheel
   author: null
-  createdAt: '2023-03-24 13:37:27'
-  modifiedAt: '2023-03-24 13:37:27'
+  createdAt: '2023-03-24 11:41:29'
+  modifiedAt: '2023-03-24 11:41:29'
 pipelines:
   pipelines/SAP_01_MD_SER_NUM_STOCK_SGMNT:
     name: SAP_MD_SER_NUM_STOCK_SGMNT_ATL_BBA_BBL_BBN_MRS
@@ -634,6 +634,40 @@ pipelines:
       - datasets/DS_JDE_01_F43121
       outputs:
       - datasets/JDE_MD_DELV_LINE
+    subgraphs: []
+    dependencies: {}
+  pipelines/MD_MATL_ALT_UOM_BW2_DEU_DJD_GMD_JEM_JES_JET_JSW_MTR_SDJ:
+    name: MD_MATL_ALT_UOM_BW2_DEU_DJD_GMD_JEM_JES_JET_JSW_MTR_SDJ
+    description: JDE Systems for MD_MATL_ALT_UOM
+    author: natkins7@its.jnj.com
+    mode: batch
+    artefactID: ''
+    language: python
+    createdAt: '2023-04-05 09:54:31'
+    modifiedAt: '2023-04-11 08:42:24'
+    datasets:
+      inputs:
+      - datasets/DS_JDE_01_F41002
+      - datasets/DS_JDE_01_F4101
+      outputs:
+      - datasets/MD_MATL_ALT_UOM
+    subgraphs: []
+    dependencies: {}
+  pipelines/MD_MATL_ALT_UOM_ATL_BBA_BBL_BBN_BWI_FSN_GEU_HCS_MBP_MRS_P01_SVS_TAI:
+    name: MD_MATL_ALT_UOM_ATL_BBA_BBL_BBN_BWI_FSN_GEU_HCS_MBP_MRS_P01_SVS_TAI
+    description: MD_ALT_UOM pipeline for SAP systems
+    author: natkins7@its.jnj.com
+    mode: batch
+    artefactID: ''
+    language: python
+    createdAt: '2023-04-05 11:55:35'
+    modifiedAt: '2023-04-11 09:12:53'
+    datasets:
+      inputs:
+      - datasets/DS_SAP_01_MARM
+      - datasets/DS_SAP_MARA_01
+      outputs:
+      - datasets/MD_MATL_ALT_UOM
     subgraphs: []
     dependencies: {}
 datasets:
@@ -4027,6 +4061,51 @@ datasets:
         author: jcovezd1@its.jnj.com
         createdAt: '2023-04-12 13:45:30'
         modifiedAt: '2023-04-12 13:45:30'
+  datasets/DS_JDE_01_F41002:
+    name: DS_JDE_01_F41002
+    description: ''
+    author: natkins7@its.jnj.com
+    createdAt: '2023-04-05 09:59:44'
+    modifiedAt: '2023-04-05 10:57:25'
+    mode: batch
+    physicalDatasets:
+      CDL_L1_Dev:
+        fabricId: 32
+        datasetType: Database
+        description: ''
+        author: natkins7@its.jnj.com
+        createdAt: '2023-04-05 09:59:44'
+        modifiedAt: '2023-04-05 09:59:44'
+  datasets/DS_SAP_01_MARM:
+    name: DS_SAP_01_MARM
+    description: ''
+    author: natkins7@its.jnj.com
+    createdAt: '2023-04-05 12:01:01'
+    modifiedAt: '2023-04-05 14:04:25'
+    mode: batch
+    physicalDatasets:
+      CDL_L1_Dev:
+        fabricId: 32
+        datasetType: Database
+        description: ''
+        author: natkins7@its.jnj.com
+        createdAt: '2023-04-05 12:01:01'
+        modifiedAt: '2023-04-05 12:01:01'
+  datasets/DS_SAP_MARA_01:
+    name: DS_SAP_MARA_01
+    description: ''
+    author: natkins7@its.jnj.com
+    createdAt: '2023-04-05 12:03:26'
+    modifiedAt: '2023-04-05 14:07:28'
+    mode: batch
+    physicalDatasets:
+      CDL_L1_Dev:
+        fabricId: 32
+        datasetType: Database
+        description: ''
+        author: natkins7@its.jnj.com
+        createdAt: '2023-04-05 12:03:26'
+        modifiedAt: '2023-04-05 12:03:26'
 templates: {}
 jobs:
   jobs/JOB_MD_SER_NUM_STOCK_SGMNT:
@@ -4919,6 +4998,32 @@ jobs:
     createdAt: '2023-03-30 16:54:04'
     modifiedAt: '2023-03-30 16:56:57'
     author: jcovezd1@its.jnj.com
+  jobs/JOB_MD_MATL_LOC:
+    name: JOB_MD_MATL_ALT_UOM
+    description: ''
+    fabricUID: 32
+    scheduler:
+      Databricks: {}
+    cloudProvider: null
+    jobSize: Prophecy_Small
+    scheduleCron: 0 0 0 1/1 * ? *
+    timeout: null
+    alerting:
+      emails: ''
+      onStart: false
+      onSuccess: false
+      onFailure: false
+    pipelines:
+    - pipelines/MD_MATL_ALT_UOM_BW2_DEU_DJD_GMD_JEM_JES_JET_JSW_MTR_SDJ
+    - pipelines/MD_MATL_ALT_UOM_ATL_BBA_BBL_BBN_BWI_FSN_GEU_HCS_MBP_MRS_P01_SVS_TAI
+    jobClusterMode:
+      clusterMode:
+        Single: {}
+      clusterId: null
+    enabled: null
+    createdAt: '2023-04-07 09:26:56'
+    modifiedAt: '2023-04-13 13:16:08'
+    author: natkins7@its.jnj.com
 functions:
   author: null
   createdAt: '2023-03-24 15:42:34'
