@@ -18,11 +18,11 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("MATL_GRP_CD", trim(col("MATKL")))\
         .withColumn("INDSTR_SECTR_CD", trim(col("MBRSH")))\
         .withColumn("BASE_UOM_CD", trim(col("MEINS")))\
-        .withColumn("TOT_SHLF_LIF_DAYS_CNT", trim(col("MHDHB")))\
-        .withColumn("MIN_SHLF_RMN_LIF_DAYS_CNT", trim(col("MHDRZ")))\
+        .withColumn("TOT_SHLF_LIF_DAYS_CNT", col("MHDHB").cast(DecimalType(18, 4)))\
+        .withColumn("MIN_SHLF_RMN_LIF_DAYS_CNT", col("MHDRZ").cast(DecimalType(18, 4)))\
         .withColumn("MATL_STS_CD", trim(col("MSTAE")))\
         .withColumn("DSTN_CHN_STS_CD", trim(col("MSTAV")))\
-        .withColumn("NET_WT_MEAS", trim(col("NTGEW")))\
+        .withColumn("NET_WT_MEAS", col("NTGEW").cast(DecimalType(18, 4)))\
         .withColumn("PROD_HIER_CD", trim(col("PRDHA")))\
         .withColumn("PRCMT_QUAL_MGMT_IND", trim(col("QMPUR")))\
         .withColumn("STRG_CONDS_CD", trim(col("RAUBE")))\
@@ -39,7 +39,7 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("DOC_CHG_NUM", trim(col("AESZN")))\
         .withColumn("CNTNR_REQ", trim(col("BEHVO")))\
         .withColumn("OLD_MATL_NUM", trim(col("BISMT")))\
-        .withColumn("GRS_WT", trim(col("BRGEW")))\
+        .withColumn("GRS_WT", col("BRGEW").cast(DecimalType(18, 4)))\
         .withColumn("ORDR_UNIT_PUR_UOM", trim(col("BSTME")))\
         .withColumn("CRT_BY", trim(col("ERNAM")))\
         .withColumn(
@@ -78,7 +78,7 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("VAR_ORDR_UNT", trim(col("VABME")))\
         .withColumn("PKGNG_MATL_TYPE", trim(col("VHART")))\
         .withColumn("VOL_UNIT", trim(col("VOLEH")))\
-        .withColumn("VOL", trim(col("VOLUM")))\
+        .withColumn("VOL", col("VOLUM").cast(DecimalType(18, 4)))\
         .withColumn("BSC_MATL", trim(col("WRKST")))\
         .withColumn("DOC_TYPE", trim(col("ZEIAR")))\
         .withColumn("DOC_PG_FMT", trim(col("ZEIFO")))\
