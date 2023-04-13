@@ -6,4 +6,4 @@ from sap_md_matl_mvmt_hdr.config.ConfigStore import *
 from sap_md_matl_mvmt_hdr.udfs.UDFs import *
 
 def F0005(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.sourceSystem}.f0005")
+    return spark.read.table(f"{Config.sourceSystem}.f0005_adt")
