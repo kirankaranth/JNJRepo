@@ -33,8 +33,6 @@ def SELECT_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("MATL_DOC_VERS_NUM"), 
         col("MATL_SHRT_DESC"), 
         col("MATL_CAT_GRP_CD"), 
-        col("MATL_SPEC_NUM"), 
-        col("MATL_SPEC_VERS_NUM"), 
         col("CHG_BY"), 
         col("DOC_CHG_NUM"), 
         col("CNTNR_REQ"), 
