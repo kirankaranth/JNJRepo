@@ -27,4 +27,30 @@ def SchemaTransform_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("PRCMT_QUAL_MGMT_IND", trim(col("QMPUR")))\
         .withColumn("STRG_CONDS_CD", trim(col("RAUBE")))\
         .withColumn("LBL_TEMP_RNG\t", trim(col("TEMPB")))\
-        .withColumn("TRSPN_GRP_CD", trim(col("TRAGR")))
+        .withColumn("TRSPN_GRP_CD", trim(col("TRAGR")))\
+        .withColumn("BTCH_MNG_IND", trim(col("XCHPF")))\
+        .withColumn("MATL_DOC_NUM", trim(col("ZEINR")))\
+        .withColumn("MATL_DOC_VERS_NUM", trim(col("ZEIVR")))\
+        .withColumn("MATL_SHRT_DESC", lookup("LU_MAKT_MAKTX", col("MATNR")).getField("MAKTX"))\
+        .withColumn("MATL_CAT_GRP_CD", trim(col("MTPOS_MARA")))\
+        .withColumn("CHG_BY", trim(col("AENAM")))\
+        .withColumn("DOC_CHG_NUM", trim(col("AESZN")))\
+        .withColumn("CNTNR_REQ", trim(col("BEHVO")))\
+        .withColumn("OLD_MATL_NUM\t", trim(col("BISMT")))\
+        .withColumn("GRS_WT", trim(col("BRGEW")))\
+        .withColumn("ORDR_UNIT_PUR_UOM", trim(col("BSTME")))\
+        .withColumn("CRT_BY", trim(col("ERNAM")))\
+        .withColumn(
+          "CRT_ON_DTTM",
+          when((col("ERSDA") == lit("00000000")), lit(None).cast(TimestampType()))\
+            .otherwise(to_timestamp(col("ERSDA"), "yyyyMMdd"))
+        )\
+        .withColumn("LBL_TYPE", trim(col("ETIAR")))\
+        .withColumn("LBL_FORM", trim(col("ETIFO")))\
+        .withColumn("EXTRNL_MATL_GRP", trim(col("EXTWG")))\
+        .withColumn("MAX_LVL", trim(col("FUELG")))\
+        .withColumn("WT_UNIT", trim(col("GEWEI")))\
+        .withColumn("SIZE_DIM", trim(col("GROES")))\
+        .withColumn("PER_IN", trim(col("IPRKZ")))\
+        .withColumn("LAST_CHG_DT_TIME_DTTM", when((col("LAEDA") == lit("00000000")), lit(None).cast(TimestampType()))\
+        .otherwise(to_timestamp(col("LAEDA"), "yyyyMMdd")))
