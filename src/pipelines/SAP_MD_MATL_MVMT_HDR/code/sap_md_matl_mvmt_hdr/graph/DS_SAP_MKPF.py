@@ -6,4 +6,4 @@ from sap_md_matl_mvmt_hdr.config.ConfigStore import *
 from sap_md_matl_mvmt_hdr.udfs.UDFs import *
 
 def DS_SAP_MKPF(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM {Config.sourceSystem}.mkpf WHERE _deleted_ = 'F'")
+    return spark.read.table(f"{Config.sourceSystem}.mkpf")
