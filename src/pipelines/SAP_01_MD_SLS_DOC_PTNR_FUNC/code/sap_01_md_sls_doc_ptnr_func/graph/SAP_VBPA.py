@@ -6,4 +6,4 @@ from sap_01_md_sls_doc_ptnr_func.config.ConfigStore import *
 from sap_01_md_sls_doc_ptnr_func.udfs.UDFs import *
 
 def SAP_VBPA(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM {Config.sourceDatabase}.VBPA WHERE _deleted_ = 'F'")
+    return spark.read.table(f"{Config.sourceDatabase}.VBPA")
