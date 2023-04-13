@@ -6,4 +6,4 @@ from sap_01_md_bill_doc_hdr.config.ConfigStore import *
 from sap_01_md_bill_doc_hdr.udfs.UDFs import *
 
 def DS_SAP_01_TVTWT(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM {Config.sourceDatabase}.tvtwt WHERE _deleted_ = 'F' and SPRAS = 'E'")
+    return spark.read.table(f"{Config.sourceDatabase}.tvtwt")

@@ -43,7 +43,13 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("DELV_TOT_STS_CD", trim(col("LFGSA")))\
         .withColumn(
           "EXP_DTTM",
-          when(((col("VFDAT") == lit("00000000")) | (length(col("VFDAT")) < lit(8))), lit(None))\
+          when(
+              (
+                ((col("VFDAT") == lit("00000000")) | (length(regexp_replace(col("VFDAT"), "D+", "")) != lit(8)))
+                | (length(col("VFDAT")) < lit(8))
+              ), 
+              lit(None)
+            )\
             .otherwise(to_timestamp(col("VFDAT"), "yyyyMMdd"))
         )\
         .withColumn("GM_ICMPT_STS_CD", trim(col("UVWAK")))\
