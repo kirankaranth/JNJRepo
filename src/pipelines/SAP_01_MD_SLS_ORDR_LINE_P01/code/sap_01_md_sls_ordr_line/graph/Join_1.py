@@ -289,9 +289,6 @@ def Join_1(spark: SparkSession, VBAP: DataFrame, VBAK: DataFrame, VBKD: DataFram
         trim(col("VBAP._SOPROMET_NOSHP")).alias("FL_NO_SHIPPING"), 
         trim(col("VBAP._SOPROMET_POSNR")).alias("POS"), 
         trim(col("VBAP._SOPROMET_KZLGB")).alias("MYMEDISET_FL_LN_FEE"), 
-        trim(col("VBAP._BITMYM_TRAY")).alias("TRAY"), 
-        trim(col("VBAP._BITMYM_MONINR")).alias("MONIT_REC"), 
-        col("VBAP._BITMYM_AVALUE").cast(DecimalType(18, 4)).alias("EQMNT_RSDL_VAL"), 
         trim(col("VBAP.FERC_IND")).alias("RGLT_IN"), 
         trim(col("VBAP.KOSTL")).alias("COST_CTR_KOSTL"), 
         trim(col("VBAP.FONDS")).alias("FUND"), 
@@ -308,13 +305,5 @@ def Join_1(spark: SparkSession, VBAP: DataFrame, VBAK: DataFrame, VBKD: DataFram
         when((trim(col("VBKD.prsdt")) == lit("00000000")), lit(None).cast(TimestampType()))\
           .otherwise(to_timestamp(trim(col("VBKD.prsdt")), "yyyyMMdd"))\
           .alias("PRC_AND_EXCH_RT_DTTM"), 
-        trim(col("VBAP.SGT_RCAT")).alias("REQ_SGMNT"), 
-        trim(col("VBAP.HANDOVERLOC")).alias("LOC_PHY_HANDOVR_GOODS"), 
-        when((col("VBAP.handoverdate") == lit("000000")), lit(None).cast(TimestampType()))\
-          .otherwise(to_timestamp(concat(col("VBAP.HANDOVERDATE"), col("VBAP.HANDOVERTIME")), "yyyyMMddHHmmss"))\
-          .alias("HANDOVR_LOC_DTTM"), 
-        trim(col("VBAP._BITMYM_IDNLF")).alias("MATL_NUM_USED_BY_VEND"), 
-        trim(col("VBAP._bitmym_svalue")).cast(DecimalType(18, 4)).alias("EQUIP_RSDL_VAL"), 
-        lookup("LU_SAP_TVM4T", col("MVGR4")).getField("BEZEI").alias("MATL_GRP_4_DESC"), 
         col("VBAP._upt_").alias("_l0_upt_")
     )
