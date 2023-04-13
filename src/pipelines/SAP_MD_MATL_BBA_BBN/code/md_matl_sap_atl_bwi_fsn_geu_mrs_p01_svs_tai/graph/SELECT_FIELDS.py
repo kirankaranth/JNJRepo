@@ -77,5 +77,20 @@ def SELECT_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("_pk_L1").alias("_pk_"), 
         col("_pk_md5_"), 
         col("_l1_upt_"), 
-        col("_deleted_L1").alias("_deleted_")
+        col("_deleted_L1").alias("_deleted_"), 
+        col("MMS_SURGERY_TYPE_CD"), 
+        col("MMS_MATL_TYPE_CD"), 
+        col("PRMRY_PLNT_CD"), 
+        col("MMS_FIN_CLSN_CD"), 
+        col("MMS_STERILIZATION_IND").alias("MMS_STERILIZATION_IND\t"), 
+        col("MATL_CATLG_NUM"), 
+        col("SRC_SECTR_CD"), 
+        col("MATL_PARNT_CD"), 
+        col("MATL_SUB_TYPE_CD"), 
+        col("FIN_HIER_BASE_CD"), 
+        col("IMPLNT_INSTM_IND"), 
+        col("MATL_MOD_CD"), 
+        col("KIT_IND"), 
+        col("MMS_TEMP_SENS_IND"), 
+        col("PLNG_HIER3_CD")
     )

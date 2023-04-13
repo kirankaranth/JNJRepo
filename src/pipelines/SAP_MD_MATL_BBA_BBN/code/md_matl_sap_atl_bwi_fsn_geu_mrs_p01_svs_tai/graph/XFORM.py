@@ -102,7 +102,7 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("MMS_MATL_TYPE_CD", trim(col("zzmmstype")))\
         .withColumn("PRMRY_PLNT_CD", trim(col("zzwerks")))\
         .withColumn("MMS_FIN_CLSN_CD", trim(col("zzmmsficlass")))\
-        .withColumn("MMS_STERILIZATION_IND\t", trim(col("zzmmsterile")))\
+        .withColumn("MMS_STERILIZATION_IND", trim(col("zzmmsterile")))\
         .withColumn("MATL_CATLG_NUM", trim(col("zzcatnumber")))\
         .withColumn("SRC_SECTR_CD", trim(col("zzsector")))\
         .withColumn("MATL_PARNT_CD", trim(col("zzp2_basecode")))\
