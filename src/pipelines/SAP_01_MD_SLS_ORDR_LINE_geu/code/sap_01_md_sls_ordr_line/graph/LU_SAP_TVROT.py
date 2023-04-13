@@ -5,5 +5,7 @@ from prophecy.libs import typed_lit
 from sap_01_md_sls_ordr_line.config.ConfigStore import *
 from sap_01_md_sls_ordr_line.udfs.UDFs import *
 
-def SAP_VBAK(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM {Config.sourceDatabase}.vbak WHERE _deleted_ = 'F'")
+def LU_SAP_TVROT(spark: SparkSession, in0: DataFrame):
+    keyColumns = ['''ROUTE''']
+    valueColumns = ['''BEZEI''']
+    createLookup("LU_SAP_TVROT", in0, spark, keyColumns, valueColumns)
