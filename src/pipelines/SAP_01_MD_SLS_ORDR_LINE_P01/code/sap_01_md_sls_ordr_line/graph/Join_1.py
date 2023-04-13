@@ -277,12 +277,21 @@ def Join_1(spark: SparkSession, VBAP: DataFrame, VBAK: DataFrame, VBKD: DataFram
         trim(col("VBAP.MSR_REFUND_CODE")).alias("RTRN_RFND_CD"), 
         trim(col("VBAP.MSR_APPROV_BLOCK")).alias("APPR_BLK"), 
         trim(col("VBAP.NRAB_KNUMH")).alias("NUM_COND_REC"), 
+        trim(col("VBAP.TRMRISK_RELEVANT")).alias("RISK_RLVNT_SLS"), 
         trim(col("VBAP.TC_AUT_DET")).alias("TAX_CD_AUTMT_DTRMN"), 
         trim(col("VBAP.MANUAL_TC_REASON")).alias("MAN_TAX_CD_RSN"), 
         trim(col("VBAP.FISCAL_INCENTIVE")).alias("TAX_INCT_TYPE"), 
         trim(col("VBAP.TAX_SUBJECT_ST")).alias("TAX_SUBJ_SUBST_TRIB"), 
         trim(col("VBAP.AUFPL_OLC")).alias("RTG_NUM_OPS_ORDR_AUFPL_OLC"), 
         trim(col("VBAP.APLZL_OLC")).alias("INTRNL_CNTR_APLZL_OLC"), 
+        trim(col("VBAP._SOPROMET_KOSTL")).alias("COST_CTR_SOPROMET_KOSTL"), 
+        trim(col("VBAP._SOPROMET_LRESN")).alias("RESV"), 
+        trim(col("VBAP._SOPROMET_NOSHP")).alias("FL_NO_SHIPPING"), 
+        trim(col("VBAP._SOPROMET_POSNR")).alias("POS"), 
+        trim(col("VBAP._SOPROMET_KZLGB")).alias("MYMEDISET_FL_LN_FEE"), 
+        trim(col("VBAP._BITMYM_TRAY")).alias("TRAY"), 
+        trim(col("VBAP._BITMYM_MONINR")).alias("MONIT_REC"), 
+        col("VBAP._BITMYM_AVALUE").cast(DecimalType(18, 4)).alias("EQMNT_RSDL_VAL"), 
         trim(col("VBAP.FERC_IND")).alias("RGLT_IN"), 
         trim(col("VBAP.KOSTL")).alias("COST_CTR_KOSTL"), 
         trim(col("VBAP.FONDS")).alias("FUND"), 
@@ -299,6 +308,13 @@ def Join_1(spark: SparkSession, VBAP: DataFrame, VBAK: DataFrame, VBKD: DataFram
         when((trim(col("VBKD.prsdt")) == lit("00000000")), lit(None).cast(TimestampType()))\
           .otherwise(to_timestamp(trim(col("VBKD.prsdt")), "yyyyMMdd"))\
           .alias("PRC_AND_EXCH_RT_DTTM"), 
+        trim(col("VBAP.SGT_RCAT")).alias("REQ_SGMNT"), 
+        trim(col("VBAP.HANDOVERLOC")).alias("LOC_PHY_HANDOVR_GOODS"), 
+        when((col("VBAP.handoverdate") == lit("000000")), lit(None).cast(TimestampType()))\
+          .otherwise(to_timestamp(concat(col("VBAP.HANDOVERDATE"), col("VBAP.HANDOVERTIME")), "yyyyMMddHHmmss"))\
+          .alias("HANDOVR_LOC_DTTM"), 
+        trim(col("VBAP._BITMYM_IDNLF")).alias("MATL_NUM_USED_BY_VEND"), 
+        trim(col("VBAP._bitmym_svalue")).cast(DecimalType(18, 4)).alias("EQUIP_RSDL_VAL"), 
         lookup("LU_SAP_TVM4T", col("MVGR4")).getField("BEZEI").alias("MATL_GRP_4_DESC"), 
         col("VBAP._upt_").alias("_l0_upt_")
     )
