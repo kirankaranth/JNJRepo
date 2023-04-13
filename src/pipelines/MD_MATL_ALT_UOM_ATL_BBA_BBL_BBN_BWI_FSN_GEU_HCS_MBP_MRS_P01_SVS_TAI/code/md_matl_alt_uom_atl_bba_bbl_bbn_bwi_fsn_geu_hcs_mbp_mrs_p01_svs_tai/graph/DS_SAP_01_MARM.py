@@ -6,4 +6,4 @@ from md_matl_alt_uom_atl_bba_bbl_bbn_bwi_fsn_geu_hcs_mbp_mrs_p01_svs_tai.config.
 from md_matl_alt_uom_atl_bba_bbl_bbn_bwi_fsn_geu_hcs_mbp_mrs_p01_svs_tai.udfs.UDFs import *
 
 def DS_SAP_01_MARM(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM {Config.DBNAME}.{Config.DBTABLE} WHERE _deleted_ = 'F'")
+    return spark.read.table(f"{Config.sourceDatabase}.{Config.DBTABLE}")
