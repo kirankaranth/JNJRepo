@@ -85,5 +85,15 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("EAN_UPC", trim(col("EAN11")))\
         .withColumn("EAN_CAT", trim(col("NUMTP")))\
         .withColumn("GTIN_VRNT", trim(col("GTIN_VARIANT")))\
-        .withColumn("EAN_UPC_HRMZD", when((length(trim(col("EAN11"))) == lit(0)), lit(""))\
-        .otherwise(concat(expr("substring('00000000000000', 1, (14 - length(trim(EAN11))))"), trim(col("EAN11")))))
+        .withColumn(
+          "EAN_UPC_HRMZD",
+          when((length(trim(col("EAN11"))) == lit(0)), lit(""))\
+            .otherwise(concat(expr("substring('00000000000000', 1, (14 - length(trim(EAN11))))"), trim(col("EAN11"))))
+        )\
+        .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
+        .withColumn("DAI_CRT_DTTM", current_timestamp())\
+        .withColumn("DAI_UPDT_DTTM", current_timestamp())\
+        .withColumn("_pk_L1", to_json(expr("named_struct('SRC_SYS_CD', SRC_SYS_CD, 'MATL_NUM', MATL_NUM)")))\
+        .withColumn("_pk_md5_", md5(to_json(expr("named_struct('SRC_SYS_CD', SRC_SYS_CD, 'MATL_NUM', MATL_NUM)"))))\
+        .withColumn("_l1_upt_", current_timestamp())\
+        .withColumn("_deleted_L1", lit("F"))

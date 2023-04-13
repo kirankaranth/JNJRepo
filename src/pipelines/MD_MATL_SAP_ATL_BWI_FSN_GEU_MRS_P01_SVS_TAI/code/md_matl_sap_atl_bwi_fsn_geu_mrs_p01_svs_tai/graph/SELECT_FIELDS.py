@@ -7,7 +7,6 @@ from md_matl_sap_atl_bwi_fsn_geu_mrs_p01_svs_tai.udfs.UDFs import *
 
 def SELECT_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0.select(
-        col("_upt_").alias("_l0_upt_"), 
         col("SRC_SYS_CD"), 
         col("MATL_NUM"), 
         col("MATL_TYPE_CD"), 
@@ -70,5 +69,13 @@ def SELECT_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("EAN_UPC"), 
         col("EAN_CAT"), 
         col("GTIN_VRNT"), 
-        col("EAN_UPC_HRMZD")
+        col("EAN_UPC_HRMZD"), 
+        col("DAI_ETL_ID"), 
+        col("DAI_CRT_DTTM"), 
+        col("DAI_UPDT_DTTM"), 
+        col("_upt_").alias("_l0_upt_"), 
+        col("_pk_L1").alias("_pk_"), 
+        col("_pk_md5_"), 
+        col("_l1_upt_"), 
+        col("_deleted_L1").alias("_deleted_")
     )
