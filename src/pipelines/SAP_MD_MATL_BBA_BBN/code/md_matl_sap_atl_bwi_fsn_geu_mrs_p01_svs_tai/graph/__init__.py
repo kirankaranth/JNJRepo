@@ -6,6 +6,7 @@ from .DS_SAP_MAKT_01 import DS_SAP_MAKT_01
 from .MAKTX_LU import MAKTX_LU
 from .DEL_MANDT4 import DEL_MANDT4
 from .MAT_SPEC_LU import MAT_SPEC_LU
+from .XFORM import XFORM
 from .DEL_MANDT2 import DEL_MANDT2
 from .INOB import INOB
 from .SPEC_VER import SPEC_VER
