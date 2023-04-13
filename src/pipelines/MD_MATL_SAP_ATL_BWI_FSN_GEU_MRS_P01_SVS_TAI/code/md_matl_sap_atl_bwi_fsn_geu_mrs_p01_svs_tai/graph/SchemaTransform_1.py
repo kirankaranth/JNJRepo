@@ -33,6 +33,8 @@ def SchemaTransform_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("MATL_DOC_VERS_NUM", trim(col("ZEIVR")))\
         .withColumn("MATL_SHRT_DESC", lookup("LU_MAKT_MAKTX", col("MATNR")).getField("MAKTX"))\
         .withColumn("MATL_CAT_GRP_CD", trim(col("MTPOS_MARA")))\
+        .withColumn("MATL_SPEC_NUM", trim(col("FERTH")))\
+        .withColumn("MATL_SPEC_VERS_NUM", trim(col("NORMT")))\
         .withColumn("CHG_BY", trim(col("AENAM")))\
         .withColumn("DOC_CHG_NUM", trim(col("AESZN")))\
         .withColumn("CNTNR_REQ", trim(col("BEHVO")))\
@@ -52,5 +54,36 @@ def SchemaTransform_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("WT_UNIT", trim(col("GEWEI")))\
         .withColumn("SIZE_DIM", trim(col("GROES")))\
         .withColumn("PER_IN", trim(col("IPRKZ")))\
-        .withColumn("LAST_CHG_DT_TIME_DTTM", when((col("LAEDA") == lit("00000000")), lit(None).cast(TimestampType()))\
-        .otherwise(to_timestamp(col("LAEDA"), "yyyyMMdd")))
+        .withColumn(
+          "LAST_CHG_DT_TIME_DTTM",
+          when((col("LAEDA") == lit("00000000")), lit(None).cast(TimestampType()))\
+            .otherwise(to_timestamp(col("LAEDA"), "yyyyMMdd"))
+        )\
+        .withColumn("MATL_GRP_PKGNG_MATL", trim(col("MAGRV")))\
+        .withColumn("STRG_PCT", trim(col("MHDLP")))\
+        .withColumn(
+          "VAL_FROM_XPLNT_DTTM",
+          when((col("MSTDE") == lit("00000000")), lit(None).cast(TimestampType()))\
+            .otherwise(to_timestamp(col("MSTDE"), "yyyyMMdd"))
+        )\
+        .withColumn(
+          "VAL_FROM_XDC_DTTM",
+          when((col("MSTDV") == lit("00000000")), lit(None).cast(TimestampType()))\
+            .otherwise(to_timestamp(col("MSTDV"), "yyyyMMdd"))
+        )\
+        .withColumn("INDSTR_STD_DESC", trim(col("NORMT")))\
+        .withColumn("RD_RUL_SLED", trim(col("RDMHD")))\
+        .withColumn("SER_LVL", trim(col("SERLV")))\
+        .withColumn("MATL_HAZ_CD", trim(col("STOFF")))\
+        .withColumn("VAR_ORDR_UNT", trim(col("VABME")))\
+        .withColumn("PKGNG_MATL_TYPE", trim(col("VHART")))\
+        .withColumn("VOL_UNIT", trim(col("VOLEH")))\
+        .withColumn("VOL", trim(col("VOLUM")))\
+        .withColumn("BSC_MATL", trim(col("WRKST")))\
+        .withColumn("DOC_TYPE", trim(col("ZEIAR")))\
+        .withColumn("DOC_PG_FMT", trim(col("ZEIFO")))\
+        .withColumn("EAN_UPC", trim(col("EAN11")))\
+        .withColumn("EAN_CAT", trim(col("NUMTP")))\
+        .withColumn("GTIN_VRNT", trim(col("GTIN_VARIANT")))\
+        .withColumn("EAN_UPC_HRMZD", when((length(trim(col("EAN11"))) == lit(0)), lit(""))\
+        .otherwise(concat(expr("substring('00000000000000', 1, (14 - length(trim(EAN11))))"), trim(col("EAN11")))))
