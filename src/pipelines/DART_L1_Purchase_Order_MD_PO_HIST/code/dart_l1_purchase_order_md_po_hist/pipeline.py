@@ -11,6 +11,8 @@ def pipeline(spark: SparkSession) -> None:
     df_MANDT_FILTER = MANDT_FILTER(spark, df_SAP_EKBE)
     df_NEW_FIELDS = NEW_FIELDS(spark, df_MANDT_FILTER)
     df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS)
+    df_DUPLICATE = DUPLICATE(spark, df_SET_FIELD_ORDER_REFORMAT)
+    df_DUP_FILTER = DUP_FILTER(spark, df_DUPLICATE)
     MD_PO_HIST(spark, df_SET_FIELD_ORDER_REFORMAT)
 
 def main():

@@ -58,12 +58,7 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("SEQ_NUM_OF_SUP_CNFRM", col("ETENS"))\
         .withColumn("NUM_OF_DOC_COND", col("KNUMV"))\
         .withColumn("TAX_ON_SLS_PRCH_CD", col("MWSKZ"))\
-        .withColumn(
-          "TAX_RPTG_CTRY_REGN",
-          lit(
-            "#"
-          )
-        )\
+        .withColumn("TAX_RPTG_CTRY_REGN", lit(Config.TAX_RPTG_CTRY_REGN))\
         .withColumn("QTY_IN_UOM_FROM_DELV_NOTE", col("LSMNG"))\
         .withColumn("UOM_FROM_DELV_NOTE", col("LSMEH"))\
         .withColumn("MATL_NUM", col("EMATN"))\
@@ -119,15 +114,15 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("ACC_AT_ORIG", trim(col("weora")))\
         .withColumn("GR_IR_ACCT_CLRNG_VAL_LCL_CRNCY", trim(col("arewr_pop")))\
         .withColumn("EXCH_RT_DIFF_AMT", trim(col("kudif")))\
-        .withColumn("RETN_AMT_IN_DOC_CRNCY", trim(col("retamt_fc")))\
-        .withColumn("RETN_AMT_IN_CO_CD_CRNCY", trim(col("retamt_lc")))\
-        .withColumn("PSTD_RETN_AMT_IN_DOC_CRNCY", trim(col("retamtp_fc")))\
-        .withColumn("PSTD_SCTY_RETN_AMT", trim(col("retamtp_lc")))\
-        .withColumn("MLT_ACCT_ASGNMT", trim(col("xmacc")))\
-        .withColumn("EXCH_RT", trim(col("wkurs")))\
+        .withColumn("RETN_AMT_IN_DOC_CRNCY", lit(Config.RETN_AMT_IN_DOC_CRNCY))\
+        .withColumn("RETN_AMT_IN_CO_CD_CRNCY", lit(Config.RETN_AMT_IN_CO_CD_CRNCY))\
+        .withColumn("PSTD_RETN_AMT_IN_DOC_CRNCY", lit(Config.PSTD_RETN_AMT_IN_DOC_CRNCY))\
+        .withColumn("PSTD_SCTY_RETN_AMT", lit(Config.PSTD_SCTY_RETN_AMT))\
+        .withColumn("MLT_ACCT_ASGNMT", lit(Config.MLT_ACCT_ASGNMT))\
+        .withColumn("EXCH_RT", lit(Config.EXCH_RT))\
         .withColumn("ORIG_OF_AN_INVC_ITM", trim(col("inv_item_origin")))\
-        .withColumn("DELV", trim(col("vbeln_st")))\
-        .withColumn("DELV_ITM", trim(col("vbelp_st")))\
+        .withColumn("DELV", lit(Config.DELV))\
+        .withColumn("DELV_ITM", lit(Config.DELV_ITM))\
         .withColumn("STK_SGMNT", lit(Config.STK_SGMNT))\
         .withColumn("UOM_FROM_SRVC_ENT_SHT", lit(Config.UOM_FROM_SRVC_ENT_SHT))\
         .withColumn("LOGL_SYS", lit(Config.LOGL_SYS))\
