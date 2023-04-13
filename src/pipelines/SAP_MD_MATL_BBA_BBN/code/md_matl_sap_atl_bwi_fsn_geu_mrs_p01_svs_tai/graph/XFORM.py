@@ -33,8 +33,6 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("MATL_DOC_VERS_NUM", trim(col("ZEIVR")))\
         .withColumn("MATL_SHRT_DESC", lookup("LU_MAKT_MAKTX", col("MATNR")).getField("MAKTX"))\
         .withColumn("MATL_CAT_GRP_CD", trim(col("MTPOS_MARA")))\
-        .withColumn("MATL_SPEC_NUM", trim(col("FERTH")))\
-        .withColumn("MATL_SPEC_VERS_NUM", trim(col("NORMT")))\
         .withColumn("CHG_BY", trim(col("AENAM")))\
         .withColumn("DOC_CHG_NUM", trim(col("AESZN")))\
         .withColumn("CNTNR_REQ", trim(col("BEHVO")))\
@@ -99,4 +97,19 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("_pk_L1", to_json(expr("named_struct('SRC_SYS_CD', SRC_SYS_CD, 'MATL_NUM', MATL_NUM)")))\
         .withColumn("_pk_md5_", md5(to_json(expr("named_struct('SRC_SYS_CD', SRC_SYS_CD, 'MATL_NUM', MATL_NUM)"))))\
         .withColumn("_l1_upt_", current_timestamp())\
-        .withColumn("_deleted_L1", lit("F"))
+        .withColumn("_deleted_L1", lit("F"))\
+        .withColumn("MMS_SURGERY_TYPE_CD", trim(col("zzmmssurgtype")))\
+        .withColumn("MMS_MATL_TYPE_CD", trim(col("zzmmstype")))\
+        .withColumn("PRMRY_PLNT_CD", trim(col("zzwerks")))\
+        .withColumn("MMS_FIN_CLSN_CD", trim(col("zzmmsficlass")))\
+        .withColumn("MMS_STERILIZATION_IND\t", trim(col("zzmmsterile")))\
+        .withColumn("MATL_CATLG_NUM", trim(col("zzcatnumber")))\
+        .withColumn("SRC_SECTR_CD", trim(col("zzsector")))\
+        .withColumn("MATL_PARNT_CD", trim(col("zzp2_basecode")))\
+        .withColumn("MATL_SUB_TYPE_CD", trim(col("zzmatsub_type")))\
+        .withColumn("FIN_HIER_BASE_CD", trim(col("zzsec_prdgrp")))\
+        .withColumn("IMPLNT_INSTM_IND", trim(col("zzprod_cat1")))\
+        .withColumn("MATL_MOD_CD", trim(col("zzvariant")))\
+        .withColumn("KIT_IND", trim(col("zzkit_ind")))\
+        .withColumn("MMS_TEMP_SENS_IND", trim(col("zzmmsts")))\
+        .withColumn("PLNG_HIER3_CD", trim(col("zzp3_low_level")))
