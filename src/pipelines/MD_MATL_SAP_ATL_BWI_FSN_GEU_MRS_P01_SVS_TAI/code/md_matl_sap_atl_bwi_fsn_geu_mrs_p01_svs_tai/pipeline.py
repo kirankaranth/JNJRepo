@@ -14,6 +14,9 @@ def pipeline(spark: SparkSession) -> None:
     df_DEL_AND_MANDT = DEL_AND_MANDT(spark, df_MARA)
     df_XFORM = XFORM(spark, df_DEL_AND_MANDT)
     df_SELECT_FIELDS = SELECT_FIELDS(spark, df_XFORM)
+    df_CABN = CABN(spark)
+    df_INOB = INOB(spark)
+    df_AUSP = AUSP(spark)
     TARGET(spark, df_SELECT_FIELDS)
 
 def main():
