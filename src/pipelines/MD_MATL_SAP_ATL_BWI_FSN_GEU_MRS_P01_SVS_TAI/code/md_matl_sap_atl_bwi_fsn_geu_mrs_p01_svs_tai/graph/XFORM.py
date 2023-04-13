@@ -5,7 +5,7 @@ from prophecy.libs import typed_lit
 from md_matl_sap_atl_bwi_fsn_geu_mrs_p01_svs_tai.config.ConfigStore import *
 from md_matl_sap_atl_bwi_fsn_geu_mrs_p01_svs_tai.udfs.UDFs import *
 
-def SchemaTransform_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
+def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
         .withColumn("SRC_SYS_CD", lit(Config.sourceSystem))\
         .withColumn("MATL_NUM", col("MATNR"))\
@@ -26,7 +26,7 @@ def SchemaTransform_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("PROD_HIER_CD", trim(col("PRDHA")))\
         .withColumn("PRCMT_QUAL_MGMT_IND", trim(col("QMPUR")))\
         .withColumn("STRG_CONDS_CD", trim(col("RAUBE")))\
-        .withColumn("LBL_TEMP_RNG\t", trim(col("TEMPB")))\
+        .withColumn("LBL_TEMP_RNG", trim(col("TEMPB")))\
         .withColumn("TRSPN_GRP_CD", trim(col("TRAGR")))\
         .withColumn("BTCH_MNG_IND", trim(col("XCHPF")))\
         .withColumn("MATL_DOC_NUM", trim(col("ZEINR")))\
@@ -38,7 +38,7 @@ def SchemaTransform_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("CHG_BY", trim(col("AENAM")))\
         .withColumn("DOC_CHG_NUM", trim(col("AESZN")))\
         .withColumn("CNTNR_REQ", trim(col("BEHVO")))\
-        .withColumn("OLD_MATL_NUM\t", trim(col("BISMT")))\
+        .withColumn("OLD_MATL_NUM", trim(col("BISMT")))\
         .withColumn("GRS_WT", trim(col("BRGEW")))\
         .withColumn("ORDR_UNIT_PUR_UOM", trim(col("BSTME")))\
         .withColumn("CRT_BY", trim(col("ERNAM")))\

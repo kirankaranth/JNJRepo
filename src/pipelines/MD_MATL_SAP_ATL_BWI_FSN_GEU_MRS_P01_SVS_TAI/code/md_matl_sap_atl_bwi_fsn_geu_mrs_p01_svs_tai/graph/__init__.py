@@ -1,5 +1,6 @@
 from .MAKTX_LU import MAKTX_LU
-from .SchemaTransform_1 import SchemaTransform_1
+from .XFORM import XFORM
+from .SELECT_FIELDS import SELECT_FIELDS
 from .DEL_AND_MANDT import DEL_AND_MANDT
 from .MARA import MARA
 from .MAKT import MAKT

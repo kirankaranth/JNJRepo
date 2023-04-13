@@ -12,7 +12,9 @@ def pipeline(spark: SparkSession) -> None:
     MAKTX_LU(spark, df_DEL_AND_MANDT_1)
     df_MARA = MARA(spark)
     df_DEL_AND_MANDT = DEL_AND_MANDT(spark, df_MARA)
-    df_SchemaTransform_1 = SchemaTransform_1(spark, df_DEL_AND_MANDT)
+    df_XFORM = XFORM(spark, df_DEL_AND_MANDT)
+    df_SELECT_FIELDS = SELECT_FIELDS(spark, df_XFORM)
+    TARGET(spark, df_SELECT_FIELDS)
 
 def main():
     spark = SparkSession.builder\
