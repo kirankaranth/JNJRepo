@@ -6,4 +6,4 @@ from sap_md_matl_inv_bba_bbl_bbn_geu_mrs_mbp.config.ConfigStore import *
 from sap_md_matl_inv_bba_bbl_bbn_geu_mrs_mbp.udfs.UDFs import *
 
 def DS_SAP_05_MSSL(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM {Config.sourceSystem}.mssl WHERE _deleted_ = 'F'")
+    return spark.read.table(f"{Config.sourceSystem}.mssl")
