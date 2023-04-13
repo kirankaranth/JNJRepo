@@ -313,14 +313,8 @@ def Join_1(spark: SparkSession, VBAP: DataFrame, VBAK: DataFrame, VBKD: DataFram
         when((col("VBAP.handoverdate") == lit("000000")), lit(None).cast(TimestampType()))\
           .otherwise(to_timestamp(concat(col("VBAP.HANDOVERDATE"), col("VBAP.HANDOVERTIME")), "yyyyMMddHHmmss"))\
           .alias("HANDOVR_LOC_DTTM"), 
-        col("VBAP._upt_").alias("_l0_upt_"), 
-        when(
-            ((col("VBAP.ERDAT") == lit("00000000")) | (col("VBAP.ERZET") == lit("000000"))), 
-            lit(None).cast(TimestampType())
-          )\
-          .otherwise(to_timestamp(concat(col("VBAP.ERDAT"), col("VBAP.ERZET")), "yyyyMMddHHmmss"))\
-          .alias("CR_DTTM"), 
         trim(col("VBAP._BITMYM_IDNLF")).alias("MATL_NUM_USED_BY_VEND"), 
         trim(col("VBAP._bitmym_svalue")).cast(DecimalType(18, 4)).alias("EQUIP_RSDL_VAL"), 
-        lookup("LU_SAP_TVM4T", col("MVGR4")).getField("BEZEI").alias("MATL_GRP_4_DESC")
+        lookup("LU_SAP_TVM4T", col("MVGR4")).getField("BEZEI").alias("MATL_GRP_4_DESC"), 
+        col("VBAP._upt_").alias("_l0_upt_")
     )

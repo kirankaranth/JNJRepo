@@ -19,7 +19,7 @@ class Config(ConfigBase):
             self,
             sourceSystem: str="hcs",
             MANDT: str="100",
-            sourceDatabase: str="bba",
+            sourceDatabase: str="hcs",
             DAI_ETL_ID: int=0,
             targetSchema: str="dev_md_l1",
             **kwargs
