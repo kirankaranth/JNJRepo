@@ -6,4 +6,4 @@ from md_matl_alt_uom_bw2_deu_djd_gmd_jem_jes_jet_jsw_mtr_sdj.config.ConfigStore 
 from md_matl_alt_uom_bw2_deu_djd_gmd_jem_jes_jet_jsw_mtr_sdj.udfs.UDFs import *
 
 def DS_JDE_01_F4101(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.DBNAME}.{Config.DBTABLE}")
+    return spark.read.table(f"{Config.sourceDatabase}.{Config.DBTABLE}")
