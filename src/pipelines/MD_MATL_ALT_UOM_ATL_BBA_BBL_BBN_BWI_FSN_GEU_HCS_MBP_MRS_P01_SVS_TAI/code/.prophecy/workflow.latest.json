@@ -6410,7 +6410,7 @@
             "sourceColumn" : "GTIN_NUM_HRMZD",
             "expression" : {
               "format" : "sql",
-              "expression" : "CASE WHEN length(Trim(EAN11)) = 0 THEN '' ELSE Concat(Substring('00000000000000',1,14-length(Trim(EAN11))),Trim(EAN11)) END"
+              "expression" : "CASE WHEN length(REPLACE(trim(EAN11),' ','')) = 0 THEN '' ELSE Concat(Substring('00000000000000',1,14-length(REPLACE(trim(EAN11),' ',''))),REPLACE(trim(EAN11),' ','')) END"
             }
           },
           "DropColumn" : {
