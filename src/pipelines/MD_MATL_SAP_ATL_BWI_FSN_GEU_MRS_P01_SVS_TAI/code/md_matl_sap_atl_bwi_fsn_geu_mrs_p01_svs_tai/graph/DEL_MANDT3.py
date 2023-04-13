@@ -5,7 +5,5 @@ from prophecy.libs import typed_lit
 from md_matl_sap_atl_bwi_fsn_geu_mrs_p01_svs_tai.config.ConfigStore import *
 from md_matl_sap_atl_bwi_fsn_geu_mrs_p01_svs_tai.udfs.UDFs import *
 
-def DEL_AND_MANDT_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
-    return in0.filter(
-        (((col("_deleted_") == lit("F")) & (col("MANDT") == lit(Config.MANDT))) & (col("SPRAS") == lit("E")))
-    )
+def DEL_MANDT3(spark: SparkSession, in0: DataFrame) -> DataFrame:
+    return in0.filter(((col("_deleted_") == lit("F")) & (col("MANDT") == lit(Config.MANDT))))
