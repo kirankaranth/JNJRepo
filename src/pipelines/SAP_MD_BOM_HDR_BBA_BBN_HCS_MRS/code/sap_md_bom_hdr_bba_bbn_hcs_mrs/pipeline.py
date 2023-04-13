@@ -12,6 +12,8 @@ def pipeline(spark: SparkSession) -> None:
     df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_STKO_MANDT_FILTER)
     df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS_RENAME_FORMAT)
     MD_BOM_HDR(spark, df_SET_FIELD_ORDER_REFORMAT)
+    df_Aggregate_1 = Aggregate_1(spark, df_SET_FIELD_ORDER_REFORMAT)
+    df_Filter_1 = Filter_1(spark, df_Aggregate_1)
 
 def main():
     spark = SparkSession.builder\
