@@ -10,7 +10,6 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("SRC_SYS_CD", lit(Config.sourceSystem))\
         .withColumn("MATL_NUM", col("MATNR"))\
         .withColumn("MATL_TYPE_CD", trim(col("MTART")))\
-        .withColumn("BRND_CD", trim(col("BRAND_ID")))\
         .withColumn("FRANCHISE_CD", trim(col("SPART")))\
         .withColumn("LCL_PLNG_SUB_FRAN_CD", trim(col("LABOR")))\
         .withColumn("PRCHSNG_VAL_KEY_CD", trim(col("EKWSL")))\
