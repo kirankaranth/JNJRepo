@@ -13,10 +13,11 @@ class Config(ConfigBase):
             COLUMNS: int=None,
             DAI_ETL_ID: int=None,
             DIVISOR: int=None,
+            ConfigDatabase: str=None,
             **kwargs
     ):
         self.spark = None
-        self.update(sourceSystem, targetSchema, DBNAME, DBTABLE, DBTABLE1, COLUMNS, DAI_ETL_ID, DIVISOR)
+        self.update(sourceSystem, targetSchema, DBNAME, DBTABLE, DBTABLE1, COLUMNS, DAI_ETL_ID, DIVISOR, ConfigDatabase)
 
     def update(
             self,
@@ -28,6 +29,7 @@ class Config(ConfigBase):
             COLUMNS: int=24,
             DAI_ETL_ID: int=0,
             DIVISOR: int=1,
+            ConfigDatabase: str=" ",
             **kwargs
     ):
         prophecy_spark = self.spark
@@ -39,4 +41,5 @@ class Config(ConfigBase):
         self.COLUMNS = self.get_int_value(COLUMNS)
         self.DAI_ETL_ID = self.get_int_value(DAI_ETL_ID)
         self.DIVISOR = self.get_int_value(DIVISOR)
+        self.ConfigDatabase = ConfigDatabase
         pass
