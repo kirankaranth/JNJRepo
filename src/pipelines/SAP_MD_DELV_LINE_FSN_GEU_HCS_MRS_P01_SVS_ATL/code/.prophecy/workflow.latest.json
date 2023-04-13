@@ -11878,7 +11878,7 @@
             "sourceColumn" : "EXP_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "case when VFDAT= '00000000' then null else to_timestamp(VFDAT, 'yyyyMMdd') end"
+              "expression" : "case when VFDAT= '00000000' or length(regexp_replace(VFDAT,'\\D+','')) <> 8 or length(VFDAT) < 8 then null else to_timestamp(VFDAT, 'yyyyMMdd') end"
             }
           },
           "DropColumn" : {
