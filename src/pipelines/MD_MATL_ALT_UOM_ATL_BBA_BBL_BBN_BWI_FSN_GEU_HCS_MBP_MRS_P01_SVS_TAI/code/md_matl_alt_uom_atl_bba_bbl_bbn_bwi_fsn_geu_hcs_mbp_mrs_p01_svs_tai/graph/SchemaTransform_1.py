@@ -26,8 +26,11 @@ def SchemaTransform_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("VOL_MEAS", col("VOLUM").cast(DecimalType(18, 4)))\
         .withColumn(
           "GTIN_NUM_HRMZD",
-          when((length(trim(col("EAN11"))) == lit(0)), lit(""))\
-            .otherwise(concat(expr("substring('00000000000000', 1, (14 - length(trim(EAN11))))"), trim(col("EAN11"))))
+          when((length(expr("replace(trim(EAN11), ' ', '')")) == lit(0)), lit(""))\
+            .otherwise(concat(
+            expr("substring('00000000000000', 1, (14 - length(replace(trim(EAN11), ' ', ''))))"), 
+            expr("replace(trim(EAN11), ' ', '')")
+          ))
         )\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
