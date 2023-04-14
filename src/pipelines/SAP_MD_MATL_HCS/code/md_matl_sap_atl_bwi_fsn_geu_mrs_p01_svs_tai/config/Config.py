@@ -20,11 +20,11 @@ class Config(ConfigBase):
 
     def update(
             self,
-            sourceSystem: str="tai",
+            sourceSystem: str="hcs",
             targetSchema: str="dev_md_l1",
-            sourceDatabase: str="tai",
+            sourceDatabase: str="hcs",
             configDatabase: str=" ",
-            MANDT: str="800",
+            MANDT: str="100",
             DBTABLE1: str="mara",
             DBTABLE2: str="makt",
             DAI_ETL_ID: int=0,
