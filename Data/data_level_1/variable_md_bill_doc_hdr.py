@@ -12,7 +12,7 @@ LIST__PRIMARY_KEYS = {"SRC_SYS_CD, BILL_DOC"}
 
 source_system = {"bba", "btb_na", "btb_latam", "fsn", "geu", "hcs", "mbp", "mrs", "p01", "svs", "taishan"}
 
-UTC_COLUMNS = ["DAI_CRT_DTTM", "DAI_UPDT_DTTM"]
+UTC_COLUMNS = ["DAI_CRT_DTTM", "DAI_UPDT_DTTM", "_l0_upt_", "_l1_upt_"]
 LIST__UTC_COLUMNS_WITH_NULL = ["CRT_DTTM", "BILL_DTTM", "BILL_INVC_DTTM", "FX_VAL_DTTM", "CHG_DTTM", "TRNL_DTTM"]
 
 LIST__NULL_SOURCES_1 = {"bba", "btb_na"}
