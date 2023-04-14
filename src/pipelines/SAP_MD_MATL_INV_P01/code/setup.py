@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 setup(
-    name = 'SAP_MD_MATL_INV_P01',
+    name = 'SAP_MD_MATL_INV_P01_SVS',
     version = '1.0',
     packages = find_packages(include = ('sap_md_matl_inv_p01*', )) + ["prophecy_config_instances"],
     package_dir = {'prophecy_config_instances' : 'configs/resources/config'},
