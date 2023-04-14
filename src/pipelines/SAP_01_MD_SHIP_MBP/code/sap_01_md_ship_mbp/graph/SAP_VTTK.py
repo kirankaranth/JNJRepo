@@ -6,4 +6,4 @@ from sap_01_md_ship_mbp.config.ConfigStore import *
 from sap_01_md_ship_mbp.udfs.UDFs import *
 
 def SAP_VTTK(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM {Config.sourceSystem}.vttk WHERE _deleted_ = 'F'")
+    return spark.read.table(f"{Config.sourceSystem}.vttk")
