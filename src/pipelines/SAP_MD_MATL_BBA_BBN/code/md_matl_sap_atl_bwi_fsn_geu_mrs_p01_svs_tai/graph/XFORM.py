@@ -114,4 +114,5 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("MATL_MOD_CD", trim(col("zzvariant")))\
         .withColumn("KIT_IND", trim(col("zzkit_ind")))\
         .withColumn("MMS_TEMP_SENS_IND", trim(col("zzmmsts")))\
-        .withColumn("PLNG_HIER3_CD", trim(col("zzp3_low_level")))
+        .withColumn("PLNG_HIER3_CD", trim(col("zzp3_low_level")))\
+        .withColumn("MATL_TYPE_DESC", lookup("T134T_LU", col("MTART")).getField("MTBEZ"))

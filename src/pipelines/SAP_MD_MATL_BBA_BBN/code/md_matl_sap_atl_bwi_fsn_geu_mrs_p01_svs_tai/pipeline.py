@@ -7,6 +7,9 @@ from prophecy.utils import *
 from md_matl_sap_atl_bwi_fsn_geu_mrs_p01_svs_tai.graph import *
 
 def pipeline(spark: SparkSession) -> None:
+    df_T134T = T134T(spark)
+    df_DEL_MANDT4_1 = DEL_MANDT4_1(spark, df_T134T)
+    T134T_LU(spark, df_DEL_MANDT4_1)
     df_AUSP = AUSP(spark)
     df_DEL_MANDT = DEL_MANDT(spark, df_AUSP)
     df_CABN = CABN(spark)
