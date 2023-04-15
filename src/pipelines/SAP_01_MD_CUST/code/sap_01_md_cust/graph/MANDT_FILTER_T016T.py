@@ -5,5 +5,5 @@ from prophecy.libs import typed_lit
 from sap_01_md_cust.config.ConfigStore import *
 from sap_01_md_cust.udfs.UDFs import *
 
-def SAP_KNA1(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.sourceSystem}.kna1")
+def MANDT_FILTER_T016T(spark: SparkSession, in0: DataFrame) -> DataFrame:
+    return in0.filter(lit(True))
