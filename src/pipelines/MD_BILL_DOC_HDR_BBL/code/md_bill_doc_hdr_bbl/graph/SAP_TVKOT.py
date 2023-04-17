@@ -6,4 +6,4 @@ from md_bill_doc_hdr_bbl.config.ConfigStore import *
 from md_bill_doc_hdr_bbl.udfs.UDFs import *
 
 def SAP_TVKOT(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM {Config.sourceDatabase}.TVKOT WHERE _deleted_ = 'F' and SPRAS = 'E'")
+    return spark.sql(f"SELECT * FROM {Config.sourceDatabase}.tvkot WHERE _deleted_ = 'F' and SPRAS = 'E'")
