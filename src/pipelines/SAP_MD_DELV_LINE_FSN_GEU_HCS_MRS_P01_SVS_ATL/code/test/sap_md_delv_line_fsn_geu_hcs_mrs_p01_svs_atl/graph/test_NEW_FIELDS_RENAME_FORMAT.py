@@ -10,6 +10,26 @@ from sap_md_delv_line_fsn_geu_hcs_mrs_p01_svs_atl.config.ConfigStore import *
 
 class NEW_FIELDS_RENAME_FORMATTest(BaseTestCase):
 
+    def test_trim(self):
+        dfIn0 = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/sap_md_delv_line_fsn_geu_hcs_mrs_p01_svs_atl/graph/NEW_FIELDS_RENAME_FORMAT/in0/schema.json',
+            'test/resources/data/sap_md_delv_line_fsn_geu_hcs_mrs_p01_svs_atl/graph/NEW_FIELDS_RENAME_FORMAT/in0/data/test_trim.json',
+            'in0'
+        )
+        dfOut = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/sap_md_delv_line_fsn_geu_hcs_mrs_p01_svs_atl/graph/NEW_FIELDS_RENAME_FORMAT/out/schema.json',
+            'test/resources/data/sap_md_delv_line_fsn_geu_hcs_mrs_p01_svs_atl/graph/NEW_FIELDS_RENAME_FORMAT/out/data/test_trim.json',
+            'out'
+        )
+        dfOutComputed = NEW_FIELDS_RENAME_FORMAT(self.spark, dfIn0)
+        assertDFEquals(
+            dfOut.select("DOC_REF_NUM", "PICK_CNTL_STS_CD"),
+            dfOutComputed.select("DOC_REF_NUM", "PICK_CNTL_STS_CD"),
+            self.maxUnequalRowsToShow
+        )
+
     def test_timestamp(self):
         dfIn0 = createDfFromResourceFiles(
             self.spark,
