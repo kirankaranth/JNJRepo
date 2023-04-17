@@ -6,4 +6,4 @@ from sap_md_delv_line_mbp.config.ConfigStore import *
 from sap_md_delv_line_mbp.udfs.UDFs import *
 
 def DS_SAP_05_VBAK(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM mbp.vbak WHERE _deleted_ = 'F'")
+    return spark.read.table(f"mbp.vbak")
