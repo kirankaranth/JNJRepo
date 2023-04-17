@@ -19058,7 +19058,7 @@
             "sourceColumn" : "ACTL_GI_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "case when WADAT_IST= '00000000' or length(regexp_replace(WADAT_IST,'\\D+','')) <> 8 or length(WADAT_IST) < 8 then null else to_timestamp(WADAT_IST, 'yyyyMMdd') end"
+              "expression" : "case when WADAT_IST= '00000000' then null else to_timestamp(WADAT_IST, 'yyyyMMdd') end"
             }
           },
           "DropColumn" : {
@@ -19170,7 +19170,7 @@
             "sourceColumn" : "MFG_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "case when HSDAT= '00000000' or length(regexp_replace(HSDAT,'\\D+','')) <> 8 or length(HSDAT) < 8 then null else to_timestamp(HSDAT, 'yyyyMMdd') end"
+              "expression" : "case when HSDAT= '00000000' then null else to_timestamp(HSDAT, 'yyyyMMdd') end"
             }
           },
           "DropColumn" : {
@@ -19666,7 +19666,7 @@
             "sourceColumn" : "CRT_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "case when ERDAT= '00000000' or length(regexp_replace(ERDAT,'\\D+','')) <> 8 or length(ERDAT) < 8 then null else to_timestamp(concat(ERDAT, ERZET),'yyyyMMddHHmmss') end"
+              "expression" : "CASE WHEN ERDAT = '00000000' THEN NULL ELSE to_timestamp(concat(ERDAT, ERZET),'yyyyMMddHHmmss') end"
             }
           },
           "DropColumn" : {
