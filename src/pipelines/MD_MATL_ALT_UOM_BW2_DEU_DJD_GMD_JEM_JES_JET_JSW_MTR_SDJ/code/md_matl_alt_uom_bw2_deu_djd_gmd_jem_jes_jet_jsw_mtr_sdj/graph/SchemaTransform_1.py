@@ -20,10 +20,20 @@ def SchemaTransform_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("DAI_UPDT_DTTM", current_timestamp())\
         .withColumn(
           "_pk_",
-          to_json(expr("named_struct('SRC_SYS_CD', SRC_SYS_CD, 'MATL_NUM', MATL_NUM, 'ALT_UOM_CD', ALT_UOM_CD)"))
+          to_json(
+            expr(
+              "named_struct('SRC_SYS_CD', SRC_SYS_CD, 'MATL_NUM', MATL_NUM, 'ALT_UOM_CD', ALT_UOM_CD, 'BASE_UOM_CD', BASE_UOM_CD)"
+            )
+          )
         )\
         .withColumn(
           "_pk_md5_",
-          md5(to_json(expr("named_struct('SRC_SYS_CD', SRC_SYS_CD, 'MATL_NUM', MATL_NUM, 'ALT_UOM_CD', ALT_UOM_CD)")))
+          md5(
+            to_json(
+              expr(
+                "named_struct('SRC_SYS_CD', SRC_SYS_CD, 'MATL_NUM', MATL_NUM, 'ALT_UOM_CD', ALT_UOM_CD, 'BASE_UOM_CD', BASE_UOM_CD)"
+              )
+            )
+          )
         )\
         .withColumn("_l1_upt_", current_timestamp())
