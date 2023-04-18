@@ -531,7 +531,7 @@ def Join_1(spark: SparkSession, VBAP: DataFrame, VBAK: DataFrame, VBKD: DataFram
         trim(col("VBAP.RFM_SCC_INDICATOR")).alias("SEASN_CMPLT_IN"), 
         trim(col("VBAP.EQUNR")).alias("EQMNT_NUM"), 
         trim(col("VBAP.EQART")).alias("TYPE_TECH_OBJ"), 
-        trim(col("VBAP.J_3GLVART")).alias("trim(VBAP.J_3GLVART)"), 
+        trim(col("VBAP.J_3GLVART")).alias("ACTV_TYPE"), 
         when((col("VBAP._dmbe_effectivedatefrom") == lit("00000000")), lit(None).cast(TimestampType()))\
           .otherwise(to_timestamp(col("VBAP._dmbe_effectivedatefrom"), "yyyyMMdd"))\
           .alias("FROM_DTTM"), 
