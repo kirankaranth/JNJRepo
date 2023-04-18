@@ -43,14 +43,21 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("DELV_TOT_STS_CD", trim(col("LFGSA")))\
         .withColumn(
           "EXP_DTTM",
-          when((col("VFDAT") == lit("00000000")), lit(None)).otherwise(to_timestamp(col("VFDAT"), "yyyyMMdd"))
+          when(
+              (
+                ((col("VFDAT") == lit("00000000")) | (length(regexp_replace(col("VFDAT"), "D+", "")) != lit(8)))
+                | (length(col("VFDAT")) < lit(8))
+              ), 
+              lit(None)
+            )\
+            .otherwise(to_timestamp(col("VFDAT"), "yyyyMMdd"))
         )\
         .withColumn("GM_ICMPT_STS_CD", trim(col("UVWAK")))\
         .withColumn("GM_STS_CD", trim(col("WBSTA")))\
         .withColumn("INTCO_BILL_STS_CD", trim(col("FKIVP")))\
         .withColumn("MATL_NUM", trim(col("MATNR")))\
         .withColumn("ICMPT_STS_CD", trim(col("UVALL")))\
-        .withColumn("NUM_OF_CNTNRS_CNT", trim(col("ZZCONTAINER")))\
+        .withColumn("NUM_OF_CNTNRS_CNT", trim(col("ZZCONTAINER")).cast(IntegerType()))\
         .withColumn("ORDR_BILL_STS_CD", trim(col("FKSAA")))\
         .withColumn("PACK_ICMPT_STS_CD", trim(col("UVPAK")))\
         .withColumn("PACK_STS_CD", trim(col("PKSTA")))\
