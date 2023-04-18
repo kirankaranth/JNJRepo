@@ -542,5 +542,15 @@ def Join_1(spark: SparkSession, VBAP: DataFrame, VBAK: DataFrame, VBKD: DataFram
         trim(col("VBAP.J_3GPOSNRI")).alias("DOC_ITM"), 
         trim(col("VBAP.RFM_PSST_RULE")).alias("PSST_GRP_RULE"), 
         trim(col("VBAP.RFM_PSST_GROUP")).alias("PSST_GRP"), 
-        trim(col("VBAP.VLCENDCU")).alias("END_CUST")
+        trim(col("VBAP.VLCENDCU")).alias("END_CUST"), 
+        trim(col("VBAP.SGT_RCAT")).alias("REQ_SGMNT"), 
+        trim(col("VBAP.HANDOVERLOC")).alias("LOC_PHY_HANDOVR_GOODS"), 
+        when((col("VBAP.handoverdate") == lit("00000000")), lit(None).cast(TimestampType()))\
+          .otherwise(to_timestamp(concat(col("VBAP.handoverdate"), col("VBAP.handovertime")), "yyyyMMddHHmmss"))\
+          .alias("HANDOVR_LOC_DTTM"), 
+        col("VBAP._BITMYM_SVALUE").cast(DecimalType(18, 4)).alias("EQUIP_RSDL_VAL"), 
+        trim(col("VBAP.FMFGUS_KEY")).alias("US_FED_GOVT_FLD"), 
+        trim(col("VBAP.WRF_CHARSTC1")).alias("CHAR_VAL_1"), 
+        trim(col("VBAP.WRF_CHARSTC2")).alias("CHAR_VAL_2"), 
+        trim(col("VBAP.WRF_CHARSTC3")).alias("CHAR_VAL_3")
     )
