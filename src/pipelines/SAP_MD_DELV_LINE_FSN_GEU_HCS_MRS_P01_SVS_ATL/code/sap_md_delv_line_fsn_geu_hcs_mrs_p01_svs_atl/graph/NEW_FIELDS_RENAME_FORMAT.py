@@ -59,7 +59,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
           "EXP_DTTM",
           when(
               (
-                ((col("VFDAT") == lit("00000000")) | (length(regexp_replace(col("VFDAT"), "D+", "")) != lit(8)))
+                ((col("VFDAT") == lit("00000000")) | (length(regexp_replace(col("VFDAT"), "D+", "")) > lit(0)))
                 | (length(col("VFDAT")) < lit(8))
               ), 
               lit(None)

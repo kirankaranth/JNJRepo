@@ -37,17 +37,16 @@ class NEW_FIELDS_RENAME_FORMATTest(BaseTestCase):
             'test/resources/data/sap_md_delv_line_fsn_geu_hcs_mrs_p01_svs_atl/graph/NEW_FIELDS_RENAME_FORMAT/in0/data/test_timestamp.json',
             'in0'
         )
-        dfOut = createDfFromResourceFiles(
-            self.spark,
-            'test/resources/data/sap_md_delv_line_fsn_geu_hcs_mrs_p01_svs_atl/graph/NEW_FIELDS_RENAME_FORMAT/out/schema.json',
-            'test/resources/data/sap_md_delv_line_fsn_geu_hcs_mrs_p01_svs_atl/graph/NEW_FIELDS_RENAME_FORMAT/out/data/test_timestamp.json',
-            'out'
-        )
         dfOutComputed = NEW_FIELDS_RENAME_FORMAT(self.spark, dfIn0)
-        assertDFEquals(
-            dfOut.select("EXP_DTTM", "CRT_DTTM"),
-            dfOutComputed.select("EXP_DTTM", "CRT_DTTM"),
-            self.maxUnequalRowsToShow
+        assertPredicates(
+            "out",
+            dfOutComputed,
+            list(
+              zip(
+                [col("EXP_DTTM").isNull(), (col("CRT_DTTM") == to_timestamp(lit("2018-02-06T02:09:16.000+0000")))],
+                ["INVALID_EXP_DTTM", "VALID_CRT_DTTM"]
+              )
+            )
         )
 
     def setUp(self):

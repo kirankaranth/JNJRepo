@@ -60,7 +60,7 @@
   }, {
     "data" : {
       "khfd359QQeBM2njMurXLr$$yBEzoSB5E9a4DJQMducJ9" : {
-        "values" : [ [ "2020091/", "020916", " 20180206" ] ],
+        "values" : [ [ "2020091a", "020916", "20180206" ] ],
         "schema" : {
           "type" : "struct",
           "fields" : [ {
@@ -95,7 +95,7 @@
         "predicates" : [ ]
       },
       "tqAuwL_icTNPKvj1mGRNM$$ny7jkog9eq6ka3uVL3v4N" : {
-        "values" : [ [ "null", "2018-02-06T02:09:16.000+0000" ] ],
+        "values" : [ [ "isnull", "2018-02-06T02:09:16.000+0000" ] ],
         "schema" : {
           "type" : "struct",
           "fields" : [ {
@@ -118,11 +118,23 @@
             }
           } ]
         },
-        "predicates" : [ ]
+        "predicates" : [ {
+          "name" : "INVALID_EXP_DTTM",
+          "expression" : {
+            "predicate" : "isnull(EXP_DTTM)",
+            "format" : "sql"
+          }
+        }, {
+          "name" : "VALID_CRT_DTTM",
+          "expression" : {
+            "predicate" : "CRT_DTTM == to_timestamp(\"2018-02-06T02:09:16.000+0000\")",
+            "format" : "sql"
+          }
+        } ]
       }
     },
     "name" : "Timestamp",
-    "testType" : "outputRow",
+    "testType" : "outputPredicate",
     "language" : "python"
   } ],
   "language" : "python"
