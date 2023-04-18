@@ -9226,7 +9226,7 @@
             "sourceColumn" : "ACTL_GI_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "case when WADAT_IST= '00000000' or length(regexp_replace(WADAT_IST,'\\D+','')) <> 8 or length(WADAT_IST) < 8 then null else to_timestamp(WADAT_IST, 'yyyyMMdd') end"
+              "expression" : "case when WADAT_IST= '00000000' OR length(regexp_replace(WADAT_IST, '(\\\\d+)', ''))> 0 OR LENGTH(WADAT_IST) < 8 THEN NULL ELSE TO_TIMESTAMP(WADAT_IST, 'yyyyMMdd') END"
             }
           },
           "DropColumn" : {
@@ -9338,7 +9338,7 @@
             "sourceColumn" : "MFG_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "case when HSDAT= '00000000' or length(regexp_replace(HSDAT,'\\D+','')) <> 8 or length(HSDAT) < 8 then null else to_timestamp(HSDAT, 'yyyyMMdd') end"
+              "expression" : "case when HSDAT= '00000000' OR length(regexp_replace(HSDAT, '(\\\\d+)', ''))> 0 OR LENGTH(HSDAT) < 8 THEN NULL ELSE TO_TIMESTAMP(HSDAT, 'yyyyMMdd') END"
             }
           },
           "DropColumn" : {
@@ -9418,7 +9418,7 @@
             "sourceColumn" : "EXP_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "case when VFDAT= '00000000' or length(regexp_replace(VFDAT,'\\D+','')) <> 8 or length(VFDAT) < 8 then null else to_timestamp(VFDAT, 'yyyyMMdd') end"
+              "expression" : "case when VFDAT= '00000000' OR length(regexp_replace(vfdat, '(\\\\d+)', ''))> 0 OR LENGTH(vfdat) < 8 THEN NULL ELSE TO_TIMESTAMP(vfdat, 'yyyyMMdd') END"
             }
           },
           "DropColumn" : {
@@ -9802,7 +9802,7 @@
             "sourceColumn" : "CRT_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "case when ERDAT= '00000000' or length(regexp_replace(ERDAT,'\\D+','')) <> 8 or length(ERDAT) < 8 then null else to_timestamp(concat(ERDAT, ERZET),'yyyyMMddHHmmss') end"
+              "expression" : "case when ERDAT= '00000000' OR length(regexp_replace(ERDAT, '(\\\\d+)', ''))> 0 OR LENGTH(ERDAT) < 8 THEN NULL ELSE to_timestamp(concat(ERDAT, ERZET),'yyyyMMddHHmmss') end"
             }
           },
           "DropColumn" : {
