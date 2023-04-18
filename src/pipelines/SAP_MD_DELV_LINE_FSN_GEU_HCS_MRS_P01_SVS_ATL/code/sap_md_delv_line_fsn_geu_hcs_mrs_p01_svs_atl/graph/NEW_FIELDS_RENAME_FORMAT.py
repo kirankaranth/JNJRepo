@@ -26,7 +26,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
           "ACTL_GI_DTTM",
           when(
               (
-                ((col("WADAT_IST") == lit("00000000")) | (length(regexp_replace(col("WADAT_IST"), "D+", "")) > lit(0)))
+                ((col("WADAT_IST") == lit("00000000")) | (length(trim(translate(col("WADAT_IST"), " -./", ""))) < lit(8)))
                 | (length(col("WADAT_IST")) < lit(8))
               ), 
               lit(None)
@@ -43,7 +43,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
           "MFG_DTTM",
           when(
               (
-                ((col("HSDAT") == lit("00000000")) | (length(regexp_replace(col("HSDAT"), "D+", "")) > lit(0)))
+                ((col("HSDAT") == lit("00000000")) | (length(trim(translate(col("HSDAT"), " -./", ""))) < lit(8)))
                 | (length(col("HSDAT")) < lit(8))
               ), 
               lit(None)
@@ -59,12 +59,12 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
           "EXP_DTTM",
           when(
               (
-                ((col("VFDAT") == lit("00000000")) | (length(regexp_replace(col("VFDAT"), "D+", "")) > lit(0)))
-                | (length(col("VFDAT")) < lit(8))
+                ((col("VFDAT") == lit("00000000")) | (length(trim(translate(col("vfdat"), " -./", ""))) < lit(8)))
+                | (length(col("vfdat")) < lit(8))
               ), 
               lit(None)
             )\
-            .otherwise(to_timestamp(col("VFDAT"), "yyyyMMdd"))
+            .otherwise(to_timestamp(col("vfdat"), "yyyyMMdd"))
         )\
         .withColumn("GM_ICMPT_STS_CD", trim(col("UVWAK")))\
         .withColumn("GM_STS_CD", trim(col("WBSTA")))\
@@ -93,7 +93,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
           "CRT_DTTM",
           when(
               (
-                ((col("ERDAT") == lit("00000000")) | (length(regexp_replace(col("ERDAT"), "D+", "")) > lit(0)))
+                ((col("ERDAT") == lit("00000000")) | (length(trim(translate(col("ERDAT"), " -./", ""))) < lit(8)))
                 | (length(col("ERDAT")) < lit(8))
               ), 
               lit(None)
