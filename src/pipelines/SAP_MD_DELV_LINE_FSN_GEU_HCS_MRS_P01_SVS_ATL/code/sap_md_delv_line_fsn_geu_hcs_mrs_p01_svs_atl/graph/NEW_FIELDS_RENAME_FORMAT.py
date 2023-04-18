@@ -26,7 +26,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
           "ACTL_GI_DTTM",
           when(
               (
-                ((col("WADAT_IST") == lit("00000000")) | (length(trim(translate(col("WADAT_IST"), " -./", ""))) < lit(8)))
+                ((col("WADAT_IST") == lit("00000000")) | (length(regexp_replace(col("WADAT_IST"), "(\\d+)", "")) > lit(0)))
                 | (length(col("WADAT_IST")) < lit(8))
               ), 
               lit(None)
@@ -43,7 +43,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
           "MFG_DTTM",
           when(
               (
-                ((col("HSDAT") == lit("00000000")) | (length(trim(translate(col("HSDAT"), " -./", ""))) < lit(8)))
+                ((col("HSDAT") == lit("00000000")) | (length(regexp_replace(col("HSDAT"), "(\\d+)", "")) > lit(0)))
                 | (length(col("HSDAT")) < lit(8))
               ), 
               lit(None)
@@ -59,7 +59,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
           "EXP_DTTM",
           when(
               (
-                ((col("VFDAT") == lit("00000000")) | (length(trim(translate(col("vfdat"), " -./", ""))) < lit(8)))
+                ((col("VFDAT") == lit("00000000")) | (length(regexp_replace(col("vfdat"), "(\\d+)", "")) > lit(0)))
                 | (length(col("vfdat")) < lit(8))
               ), 
               lit(None)
@@ -93,7 +93,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
           "CRT_DTTM",
           when(
               (
-                ((col("ERDAT") == lit("00000000")) | (length(trim(translate(col("ERDAT"), " -./", ""))) < lit(8)))
+                ((col("ERDAT") == lit("00000000")) | (length(regexp_replace(col("ERDAT"), "(\\d+)", "")) > lit(0)))
                 | (length(col("ERDAT")) < lit(8))
               ), 
               lit(None)
