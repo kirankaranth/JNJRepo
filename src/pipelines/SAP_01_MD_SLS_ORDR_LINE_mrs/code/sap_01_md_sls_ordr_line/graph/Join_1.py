@@ -349,5 +349,6 @@ def Join_1(spark: SparkSession, VBAP: DataFrame, VBAK: DataFrame, VBKD: DataFram
         trim(col("VBAP.FSH_ITEM")).alias("FSH_ITEM"), 
         trim(col("VBAP.FSH_VASREF")).alias("FSH_VASREF"), 
         trim(col("VBAP.FSH_GRID_COND_REC")).alias("FSH_GRID_COND_REC"), 
-        trim(col("VBAP.FSH_PQR_UEPOS")).alias("FSH_PQR_UEPOS")
+        trim(col("VBAP.FSH_PQR_UEPOS")).alias("FSH_PQR_UEPOS"), 
+        lit("").alias("x")
     )
