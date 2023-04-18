@@ -313,5 +313,6 @@ def Join_1(spark: SparkSession, VBAP: DataFrame, VBAK: DataFrame, VBKD: DataFram
           .otherwise(to_timestamp(trim(col("VBKD.prsdt")), "yyyyMMdd"))\
           .alias("PRC_AND_EXCH_RT_DTTM"), 
         col("VBAP._upt_").alias("_l0_upt_"), 
-        lookup("LU_SAP_TVM5T", col("MVGR4")).getField("BEZEI").alias("MATL_GRP_4_DESC")
+        lookup("LU_SAP_TVM5T", col("MVGR4")).getField("BEZEI").alias("MATL_GRP_4_DESC"), 
+        trim(col("vbap.FMFGUS_KEY")).alias("US_FED_GOVT_FLD")
     )
