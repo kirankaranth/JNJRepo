@@ -24,14 +24,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("FCTR_DNMNTR_MEAS", trim(col("UMVKN")).cast(DecimalType(18, 4)))\
         .withColumn(
           "ACTL_GI_DTTM",
-          when(
-              (
-                ((col("WADAT_IST") == lit("00000000")) | (length(regexp_replace(col("WADAT_IST"), "D+", "")) != lit(8)))
-                | (length(col("WADAT_IST")) < lit(8))
-              ), 
-              lit(None)
-            )\
-            .otherwise(to_timestamp(col("WADAT_IST"), "yyyyMMdd"))
+          when((col("WADAT_IST") == lit("00000000")), lit(None)).otherwise(to_timestamp(col("WADAT_IST"), "yyyyMMdd"))
         )\
         .withColumn("ACTL_SLS_UNIT_DELV_QTY", trim(col("LFIMG")).cast(DecimalType(18, 4)))\
         .withColumn("ACTL_SKU_DELV_QTY", trim(col("LGMNG")).cast(DecimalType(18, 4)))\
@@ -41,14 +34,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("CNFRM_STS_CD", trim(col("BESTA")))\
         .withColumn(
           "MFG_DTTM",
-          when(
-              (
-                ((col("HSDAT") == lit("00000000")) | (length(regexp_replace(col("HSDAT"), "D+", "")) != lit(8)))
-                | (length(col("HSDAT")) < lit(8))
-              ), 
-              lit(None)
-            )\
-            .otherwise(to_timestamp(col("HSDAT"), "yyyyMMdd"))
+          when((col("HSDAT") == lit("00000000")), lit(None)).otherwise(to_timestamp(col("HSDAT"), "yyyyMMdd"))
         )\
         .withColumn("DELV_BILL_STS_CD", trim(col("DELIV_RELTD_BILLG_STA")))\
         .withColumn("DELV_CMPLT_IND", trim(col("SPE_GEN_ELIKZ")))\
@@ -83,13 +69,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("VEND_BTCH_NUM", trim(col("LICHN")))\
         .withColumn(
           "CRT_DTTM",
-          when(
-              (
-                ((col("ERDAT") == lit("00000000")) | (length(regexp_replace(col("ERDAT"), "D+", "")) != lit(8)))
-                | (length(col("ERDAT")) < lit(8))
-              ), 
-              lit(None)
-            )\
+          when((col("ERDAT") == lit("00000000")), lit(None))\
             .otherwise(to_timestamp(concat(col("ERDAT"), col("ERZET")), "yyyyMMddHHmmss"))
         )\
         .withColumn("ITM_TYPE", trim(col("POSAR")))\
