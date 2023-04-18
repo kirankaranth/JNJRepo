@@ -18,10 +18,10 @@ class Config(ConfigBase):
 
     def update(
             self,
-            sourceSystem: str="bba",
+            sourceSystem: str="hm2",
             targetSchema: str="dev_md_l1",
             MANDT: str="100",
-            sourceDatabase: str="bba",
+            sourceDatabase: str="pqa_hm2",
             DAI_ETL_ID: int=0,
             ConfigDatabase: str=" ",
             **kwargs
