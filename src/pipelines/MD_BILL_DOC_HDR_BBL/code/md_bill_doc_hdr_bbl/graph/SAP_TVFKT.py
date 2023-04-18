@@ -6,4 +6,4 @@ from md_bill_doc_hdr_bbl.config.ConfigStore import *
 from md_bill_doc_hdr_bbl.udfs.UDFs import *
 
 def SAP_TVFKT(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM {Config.sourceDatabase}.tvfkt WHERE _deleted_ = 'F' and SPRAS = 'E'")
+    return spark.read.table(f"{Config.sourceDatabase}.tvfkt")
