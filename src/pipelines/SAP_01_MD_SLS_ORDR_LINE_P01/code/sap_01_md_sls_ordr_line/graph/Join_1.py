@@ -305,5 +305,6 @@ def Join_1(spark: SparkSession, VBAP: DataFrame, VBAK: DataFrame, VBKD: DataFram
         when((trim(col("VBKD.prsdt")) == lit("00000000")), lit(None).cast(TimestampType()))\
           .otherwise(to_timestamp(trim(col("VBKD.prsdt")), "yyyyMMdd"))\
           .alias("PRC_AND_EXCH_RT_DTTM"), 
-        col("VBAP._upt_").alias("_l0_upt_")
+        col("VBAP._upt_").alias("_l0_upt_"), 
+        lookup("LU_SAP_TVM4T", col("MVGR4")).getField("BEZEI").alias("MATL_GRP_4_DESC")
     )
