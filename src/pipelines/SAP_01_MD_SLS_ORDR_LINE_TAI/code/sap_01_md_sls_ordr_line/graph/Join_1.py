@@ -95,7 +95,6 @@ def Join_1(spark: SparkSession, VBAP: DataFrame, VBAK: DataFrame, VBKD: DataFram
         lookup("LU_SAP_TVM3T", col("MVGR3")).getField("BEZEI").alias("MATL_GRP_3_DESC"), 
         trim(col("VBAP.MVGR4")).alias("MATL_GRP_4"), 
         trim(col("VBAP.MVGR5")).alias("MATL_GRP_5"), 
-        lookup("LU_SAP_TVM5T", col("MVGR5")).getField("BEZEI").alias("MATL_GRP_5_DESC"), 
         trim(col("VBAP.AUFNR")).alias("ORDR_NUM"), 
         col("VBAP.KPEIN").cast(DecimalType(18, 4)).alias("COND_PRC_UNIT"), 
         lookup("LU_SAP_TVSTT", col("VBAP.VSTEL")).getField("VTEXT").alias("SHIPPING_PT_DESC"), 
