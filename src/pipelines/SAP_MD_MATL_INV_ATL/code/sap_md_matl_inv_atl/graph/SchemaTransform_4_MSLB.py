@@ -38,7 +38,7 @@ def SchemaTransform_4_MSLB(spark: SparkSession, in0: DataFrame) -> DataFrame:
             .otherwise(to_timestamp(col("ERSDA"), "yyyyMMdd"))
         )\
         .withColumn("RTRNS", lit(None).cast(DecimalType(18, 4)))\
-        .withColumn("BASE_UOM_CD", LU_MARA_MEINS(col("MATNR")).getField("MEINS"))\
+        .withColumn("BASE_UOM_CD", lookup("LU_MARA_MEINS", col("MATNR")).getField("MEINS"))\
         .withColumn("STO_IN_TRNST_QTY", lit(None).cast(DecimalType(18, 4)))\
         .withColumn("PLNT_IN_TRNST_QTY", lit(None).cast(DecimalType(18, 4)))\
         .withColumn("FISC_YR_OF_CUR_PER", lit(None).cast(IntegerType()))\
