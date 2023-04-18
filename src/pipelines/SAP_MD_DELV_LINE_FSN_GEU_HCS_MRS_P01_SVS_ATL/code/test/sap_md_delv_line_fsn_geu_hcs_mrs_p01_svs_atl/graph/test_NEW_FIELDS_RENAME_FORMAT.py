@@ -49,6 +49,22 @@ class NEW_FIELDS_RENAME_FORMATTest(BaseTestCase):
             )
         )
 
+    def test_decimals(self):
+        dfIn0 = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/sap_md_delv_line_fsn_geu_hcs_mrs_p01_svs_atl/graph/NEW_FIELDS_RENAME_FORMAT/in0/schema.json',
+            'test/resources/data/sap_md_delv_line_fsn_geu_hcs_mrs_p01_svs_atl/graph/NEW_FIELDS_RENAME_FORMAT/in0/data/test_decimals.json',
+            'in0'
+        )
+        dfOut = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/sap_md_delv_line_fsn_geu_hcs_mrs_p01_svs_atl/graph/NEW_FIELDS_RENAME_FORMAT/out/schema.json',
+            'test/resources/data/sap_md_delv_line_fsn_geu_hcs_mrs_p01_svs_atl/graph/NEW_FIELDS_RENAME_FORMAT/out/data/test_decimals.json',
+            'out'
+        )
+        dfOutComputed = NEW_FIELDS_RENAME_FORMAT(self.spark, dfIn0)
+        assertDFEquals(dfOut.select("GRS_WT_MEAS"), dfOutComputed.select("GRS_WT_MEAS"), self.maxUnequalRowsToShow)
+
     def setUp(self):
         BaseTestCase.setUp(self)
         import os
