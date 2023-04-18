@@ -10,21 +10,65 @@ from jde_md_delv_line_bw2_gmd_jet_jsw_deu_mtr_sjd_djd_jem_jes.config.ConfigStore
 
 class NEW_FIELDS_RENAME_FORMAT_F43121Test(BaseTestCase):
 
-    def test_unit_test_(self):
+    def test_timestamp(self):
         dfIn0 = createDfFromResourceFiles(
             self.spark,
             'test/resources/data/jde_md_delv_line_bw2_gmd_jet_jsw_deu_mtr_sjd_djd_jem_jes/graph/NEW_FIELDS_RENAME_FORMAT_F43121/in0/schema.json',
-            'test/resources/data/jde_md_delv_line_bw2_gmd_jet_jsw_deu_mtr_sjd_djd_jem_jes/graph/NEW_FIELDS_RENAME_FORMAT_F43121/in0/data/test_unit_test_.json',
+            'test/resources/data/jde_md_delv_line_bw2_gmd_jet_jsw_deu_mtr_sjd_djd_jem_jes/graph/NEW_FIELDS_RENAME_FORMAT_F43121/in0/data/test_timestamp.json',
             'in0'
         )
         dfOut = createDfFromResourceFiles(
             self.spark,
             'test/resources/data/jde_md_delv_line_bw2_gmd_jet_jsw_deu_mtr_sjd_djd_jem_jes/graph/NEW_FIELDS_RENAME_FORMAT_F43121/out/schema.json',
-            'test/resources/data/jde_md_delv_line_bw2_gmd_jet_jsw_deu_mtr_sjd_djd_jem_jes/graph/NEW_FIELDS_RENAME_FORMAT_F43121/out/data/test_unit_test_.json',
+            'test/resources/data/jde_md_delv_line_bw2_gmd_jet_jsw_deu_mtr_sjd_djd_jem_jes/graph/NEW_FIELDS_RENAME_FORMAT_F43121/out/data/test_timestamp.json',
             'out'
         )
         dfOutComputed = NEW_FIELDS_RENAME_FORMAT_F43121(self.spark, dfIn0)
-        assertDFEquals(dfOut.select("ACTL_GI_DTTM"), dfOutComputed.select("ACTL_GI_DTTM"), self.maxUnequalRowsToShow)
+        assertDFEquals(
+            dfOut.select("ACTL_GI_DTTM", "CRT_DTTM"),
+            dfOutComputed.select("ACTL_GI_DTTM", "CRT_DTTM"),
+            self.maxUnequalRowsToShow
+        )
+
+    def test_decimal(self):
+        dfIn0 = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/jde_md_delv_line_bw2_gmd_jet_jsw_deu_mtr_sjd_djd_jem_jes/graph/NEW_FIELDS_RENAME_FORMAT_F43121/in0/schema.json',
+            'test/resources/data/jde_md_delv_line_bw2_gmd_jet_jsw_deu_mtr_sjd_djd_jem_jes/graph/NEW_FIELDS_RENAME_FORMAT_F43121/in0/data/test_decimal.json',
+            'in0'
+        )
+        dfOut = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/jde_md_delv_line_bw2_gmd_jet_jsw_deu_mtr_sjd_djd_jem_jes/graph/NEW_FIELDS_RENAME_FORMAT_F43121/out/schema.json',
+            'test/resources/data/jde_md_delv_line_bw2_gmd_jet_jsw_deu_mtr_sjd_djd_jem_jes/graph/NEW_FIELDS_RENAME_FORMAT_F43121/out/data/test_decimal.json',
+            'out'
+        )
+        dfOutComputed = NEW_FIELDS_RENAME_FORMAT_F43121(self.spark, dfIn0)
+        assertDFEquals(
+            dfOut.select("ACTL_SLS_UNIT_DELV_QTY"),
+            dfOutComputed.select("ACTL_SLS_UNIT_DELV_QTY"),
+            self.maxUnequalRowsToShow
+        )
+
+    def test_trim(self):
+        dfIn0 = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/jde_md_delv_line_bw2_gmd_jet_jsw_deu_mtr_sjd_djd_jem_jes/graph/NEW_FIELDS_RENAME_FORMAT_F43121/in0/schema.json',
+            'test/resources/data/jde_md_delv_line_bw2_gmd_jet_jsw_deu_mtr_sjd_djd_jem_jes/graph/NEW_FIELDS_RENAME_FORMAT_F43121/in0/data/test_trim.json',
+            'in0'
+        )
+        dfOut = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/jde_md_delv_line_bw2_gmd_jet_jsw_deu_mtr_sjd_djd_jem_jes/graph/NEW_FIELDS_RENAME_FORMAT_F43121/out/schema.json',
+            'test/resources/data/jde_md_delv_line_bw2_gmd_jet_jsw_deu_mtr_sjd_djd_jem_jes/graph/NEW_FIELDS_RENAME_FORMAT_F43121/out/data/test_trim.json',
+            'out'
+        )
+        dfOutComputed = NEW_FIELDS_RENAME_FORMAT_F43121(self.spark, dfIn0)
+        assertDFEquals(
+            dfOut.select("DOC_REF_NUM", "BTCH_NUM"),
+            dfOutComputed.select("DOC_REF_NUM", "BTCH_NUM"),
+            self.maxUnequalRowsToShow
+        )
 
     def setUp(self):
         BaseTestCase.setUp(self)
