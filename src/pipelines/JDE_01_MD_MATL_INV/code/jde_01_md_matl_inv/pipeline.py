@@ -9,7 +9,9 @@ from jde_01_md_matl_inv.graph import *
 def pipeline(spark: SparkSession) -> None:
     df_JDE_F4101 = JDE_F4101(spark)
     df_JDE_F41021 = JDE_F41021(spark)
-    df_JOIN = JOIN(spark, df_JDE_F41021, df_JDE_F4101)
+    df_DEL_FILTER = DEL_FILTER(spark, df_JDE_F41021)
+    df_DEL_FILTER2 = DEL_FILTER2(spark, df_JDE_F4101)
+    df_JOIN = JOIN(spark, df_DEL_FILTER, df_DEL_FILTER2)
     df_TRANSFORM = TRANSFORM(spark, df_JOIN)
     df_DEDUPLICATE = DEDUPLICATE(spark, df_TRANSFORM)
     df_SET_FIELD_ORDER = SET_FIELD_ORDER(spark, df_DEDUPLICATE)
