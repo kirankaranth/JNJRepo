@@ -18,13 +18,13 @@ def SchemaTransform_4_MSLB(spark: SparkSession, in0: DataFrame) -> DataFrame:
           )
         )\
         .withColumn("BTCH_NUM", col("CHARG"))\
-        .withColumn("BTCH_STS_CD", col("SOBKZ"))\
         .withColumn(
-          "SPCL_STCK_IND",
+          "BTCH_STS_CD",
           lit(
             "#"
           )
         )\
+        .withColumn("SPCL_STCK_IND", col("SOBKZ"))\
         .withColumn("PRTY_NUM", col("LIFNR"))\
         .withColumn("UNRSTRCTD_STCK", col("LBLAB").cast(DecimalType(18, 4)))\
         .withColumn("IN_TRNSFR_STCK", lit(None).cast(DecimalType(18, 4)))\
