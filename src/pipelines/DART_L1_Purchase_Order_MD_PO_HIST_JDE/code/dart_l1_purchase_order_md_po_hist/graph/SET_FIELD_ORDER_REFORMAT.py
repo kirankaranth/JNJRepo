@@ -68,7 +68,6 @@ def SET_FIELD_ORDER_REFORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("DPRE_CMPLT_FL"), 
         col("VAL_GOODS_RCPT_BLOK_STK"), 
         col("TYPE_OF_PAREL_UNIT_OF_MEAS"), 
-        col("GOODS_RCPT_BLOK_STK"), 
         col("QTY_IN_PAREL_UNIT_OF_MEAS"), 
         col("PCDR_FOR_UPDT_SCHED_LINE_QTY"), 
         col("LOGL_SYS"), 
@@ -87,9 +86,7 @@ def SET_FIELD_ORDER_REFORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("GR_IR_ACCT_CLRNG_VAL_LCL_CRNCY"), 
         col("ACC_AT_ORIG"), 
         col("QTY_IN_VALUT_GR_BLOK_STK"), 
-        col("VALUT_GOODS_RCPT_BLOK_STK"), 
         col("AMT_IN_DOC_CRNCY"), 
-        col("AMT_IN_LCL_CRNCY"), 
         col("QTY_IN_PO_PRC_UNIT"), 
         col("QTY2"), 
         col("SAP_RLSE"), 
@@ -100,10 +97,11 @@ def SET_FIELD_ORDER_REFORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("LINE_NUM_OF_SRVC"), 
         col("PKG_NUM_OF_SRVC"), 
         col("SRVC_NUM"), 
-        col("DAI_UPT_DTTM"), 
         col("DAI_CRT_DTTM"), 
         col("_pk_md5_"), 
         col("_l1_upt_"), 
         col("_l0_upt_"), 
-        col("DAI_ETL_ID")
+        col("DAI_ETL_ID"), 
+        col("_pk_"), 
+        col("DAI_UPDT_DTTM")
     )

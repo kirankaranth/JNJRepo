@@ -104,7 +104,7 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
             lit("yyyy-MM-dd HHmmss").alias("col2")
           ))
         )\
-        .withColumn("RECV_EA_QTY", trim(col("olurec")))\
+        .withColumn("RECV_EA_QTY", trim(col("olurec")).cast(DecimalType(18, 4)))\
         .withColumn("ENT_MATL_NUM", trim(col("ollitm")))\
         .withColumn("PLNT_CD", trim(col("olmcu")))\
         .withColumn(
@@ -156,7 +156,7 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("CALC_OF_VAL_OPEN", lit(None))\
         .withColumn("UNPLAN_ACCT_ASGNMT", lit(None))\
         .withColumn("NM_OF_PRSN_RESP_FOR_CREAT_OBJ", lit(None))\
-        .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
+        .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID).cast(IntegerType()))\
         .withColumn("_l0_upt_", col("_upt_"))\
         .withColumn("_l1_upt_", current_timestamp())\
         .withColumn(
@@ -179,7 +179,7 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         )\
         .withColumn("_deleted_", lit("F"))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
-        .withColumn("DAI_UPT_DTTM", current_timestamp())\
+        .withColumn("DAI_UPDT_DTTM", current_timestamp())\
         .withColumn("SRVC_NUM", lit(None))\
         .withColumn("PKG_NUM_OF_SRVC", lit(None))\
         .withColumn("LINE_NUM_OF_SRVC", lit(None))\
@@ -191,15 +191,11 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("QTY2", lit(None))\
         .withColumn("QTY_IN_PO_PRC_UNIT", lit(None))\
         .withColumn("AMT_IN_LCL_CRNCY", lit(None))\
-        .withColumn("AMT_IN_DOC_CRNCY", lit(None))\
-        .withColumn("VALUT_GOODS_RCPT_BLOK_STK", lit(None))\
         .withColumn("QTY_IN_VALUT_GR_BLOK_STK", lit(None))\
         .withColumn("ACC_AT_ORIG", lit(None))\
         .withColumn("GR_IR_ACCT_CLRNG_VAL_LCL_CRNCY", lit(None))\
         .withColumn("EXCH_RT_DIFF_AMT", lit(None))\
-        .withColumn("RETN_AMT_IN_DOC_CRNCY", lit(None))\
         .withColumn("RETN_AMT_IN_CO_CD_CRNCY", lit(None))\
-        .withColumn("PSTD_RETN_AMT_IN_DOC_CRNCY", lit(None))\
         .withColumn("PSTD_SCTY_RETN_AMT", lit(None))\
         .withColumn("MLT_ACCT_ASGNMT", lit(None))\
         .withColumn("EXCH_RT", lit(None))\
@@ -211,9 +207,7 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("LOGL_SYS", lit(None))\
         .withColumn("PCDR_FOR_UPDT_SCHED_LINE_QTY", lit(None))\
         .withColumn("QTY_IN_PAREL_UNIT_OF_MEAS", lit(None))\
-        .withColumn("GOODS_RCPT_BLOK_STK", lit(None))\
         .withColumn("TYPE_OF_PAREL_UNIT_OF_MEAS", lit(None))\
-        .withColumn("VAL_GOODS_RCPT_BLOK_STK", lit(None))\
         .withColumn("DPRE_CMPLT_FL", lit(None))\
         .withColumn("SEASN_YR", lit(None))\
         .withColumn("SEASN", lit(None))\
@@ -222,4 +216,8 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("QTY3", lit(None))\
         .withColumn("CHAR_VAL_1", lit(None))\
         .withColumn("CHAR_VAL_2", lit(None))\
-        .withColumn("CHAR_VAL_3", lit(None))
+        .withColumn("CHAR_VAL_3", lit(None))\
+        .withColumn("VAL_GOODS_RCPT_BLOK_STK", lit(None))\
+        .withColumn("PSTD_RETN_AMT_IN_DOC_CRNCY", lit(None))\
+        .withColumn("RETN_AMT_IN_DOC_CRNCY", lit(None))\
+        .withColumn("AMT_IN_DOC_CRNCY", lit(None))

@@ -5,5 +5,5 @@ from prophecy.libs import typed_lit
 from dart_l1_purchase_order_md_po_hist.config.ConfigStore import *
 from dart_l1_purchase_order_md_po_hist.udfs.UDFs import *
 
-def MANDT_FILTER(spark: SparkSession, in0: DataFrame) -> DataFrame:
+def DELETED_FILTER(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0.filter((col("_deleted_") == lit("F")))
