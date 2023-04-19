@@ -43,7 +43,6 @@ def SET_FIELD_ORDER_REFORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("INVC_VAL_IN_FRGN_CRNCY"), 
         col("RVSL_OF_GR_ALLW"), 
         col("SEQ_NUM_OF_SUP_CNFRM"), 
-        col("NUM_OF_DOC_COND"), 
         col("TAX_ON_SLS_PRCH_CD"), 
         col("TAX_RPTG_CTRY_REGN"), 
         col("QTY_IN_UOM_FROM_DELV_NOTE"), 
@@ -100,10 +99,13 @@ def SET_FIELD_ORDER_REFORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("LINE_NUM_OF_SRVC"), 
         col("PKG_NUM_OF_SRVC"), 
         col("SRVC_NUM"), 
-        col("DAI_UPT_DTTM"), 
         col("DAI_CRT_DTTM"), 
         col("_pk_md5_"), 
         col("_l1_upt_"), 
         col("_l0_upt_"), 
-        col("DAI_ETL_ID")
+        col("DAI_ETL_ID"), 
+        col("_deleted_"), 
+        col("_pk_"), 
+        col("NUM_OF_THE_DOC_COND"), 
+        col("DAI_UPDT_DTTM")
     )

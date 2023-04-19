@@ -12,7 +12,7 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("PO_LINE_NBR", col("EBELP"))\
         .withColumn("PO_SEQ_NBR", col("ZEKKN"))\
         .withColumn("EV_TYPE_CO", col("VGABE"))\
-        .withColumn("MATL_MVMT_YR", col("GJAHR"))\
+        .withColumn("MATL_MVMT_YR", col("GJAHR").cast(IntegerType()))\
         .withColumn("MATL_MVMT_NUM", col("BELNR"))\
         .withColumn("MATL_MVMT_SEQ_NBR", col("BUZEI"))\
         .withColumn("PO_HIST_CAT_CD", col("BEWTP"))\
@@ -21,7 +21,7 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
           "PSTNG_DTTM",
           when((col("budat") == lit("00000000")), lit(None)).otherwise(to_timestamp(col("budat"), "yyyyMMdd"))
         )\
-        .withColumn("RECV_EA_QTY", col("MENGE"))\
+        .withColumn("RECV_EA_QTY", col("MENGE").cast(DecimalType(18, 4)))\
         .withColumn("ENT_MATL_NUM", col("MATNR"))\
         .withColumn("PLNT_CD", col("WERKS"))\
         .withColumn(
@@ -31,13 +31,12 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
           )
         )\
         .withColumn("MVMT_TYPE", col("BWART"))\
-        .withColumn("QTY_IN_PRCH_ORDR_PRC_UNIT", col("BPMNG"))\
-        .withColumn("AMT_IN_LCL_CRNCY1", col("DMBTR"))\
-        .withColumn("AMT_IN_DOC_CRNCY1", col("WRBTR"))\
+        .withColumn("QTY_IN_PRCH_ORDR_PRC_UNIT", col("BPMNG").cast(DecimalType(18, 4)))\
+        .withColumn("AMT_IN_LCL_CRNCY1", col("DMBTR").cast(DecimalType(18, 4)))\
         .withColumn("CRNCY_KEY", col("WAERS"))\
-        .withColumn("GR_IR_ACCT_CLRNG_VAL_IN_LCL_CRNCY", col("AREWR"))\
-        .withColumn("GOODS_RCPT_BLOK_STK_IN_OU", col("WESBS"))\
-        .withColumn("QTY_IN_GR_BLOK_STK", col("BPWES"))\
+        .withColumn("GR_IR_ACCT_CLRNG_VAL_IN_LCL_CRNCY", col("AREWR").cast(DecimalType(18, 4)))\
+        .withColumn("GOODS_RCPT_BLOK_STK_IN_OU", col("WESBS").cast(DecimalType(18, 4)))\
+        .withColumn("QTY_IN_GR_BLOK_STK", col("BPWES").cast(DecimalType(18, 4)))\
         .withColumn("DEBIT_OR_CREDIT_IN", col("SHKZG"))\
         .withColumn("VALUT_TYPE", col("BWTAR"))\
         .withColumn("DELV_CMPLT_IN", col("ELIKZ"))\
@@ -48,23 +47,23 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("RSN_FOR_MVMT", col("GRUND"))\
         .withColumn(
           "ACTG_DOC_ENT_DTTM",
-          when((col("cpudt") == lit("00000000")), lit(None).cast(TimestampType()))\
+          when((col("cpudt") == lit("00000000")), lit(None))\
             .otherwise(to_timestamp(concat(col("cpudt"), col("cputm")), "yyyyMMddHHmmss"))
         )\
-        .withColumn("INVC_VAL_ENT", col("REEWR"))\
+        .withColumn("INVC_VAL_ENT", col("REEWR").cast(DecimalType(18, 4)))\
         .withColumn("CMPLI_WTH_SHIPPING_INSTR", col("EVERE"))\
-        .withColumn("INVC_VAL_IN_FRGN_CRNCY", col("REFWR"))\
+        .withColumn("INVC_VAL_IN_FRGN_CRNCY", col("REFWR").cast(DecimalType(18, 4)))\
         .withColumn("RVSL_OF_GR_ALLW", col("XWSBR"))\
         .withColumn("SEQ_NUM_OF_SUP_CNFRM", col("ETENS"))\
-        .withColumn("NUM_OF_DOC_COND", col("KNUMV"))\
+        .withColumn("NUM_OF_THE_DOC_COND", col("KNUMV"))\
         .withColumn("TAX_ON_SLS_PRCH_CD", col("MWSKZ"))\
         .withColumn("TAX_RPTG_CTRY_REGN", lit(Config.TAX_RPTG_CTRY_REGN))\
-        .withColumn("QTY_IN_UOM_FROM_DELV_NOTE", col("LSMNG"))\
+        .withColumn("QTY_IN_UOM_FROM_DELV_NOTE", col("LSMNG").cast(DecimalType(18, 4)))\
         .withColumn("UOM_FROM_DELV_NOTE", col("LSMEH"))\
         .withColumn("MATL_NUM", col("EMATN"))\
-        .withColumn("CLRNG_VAL_ON_GR_IR_CLRNG_ACCT", col("AREWW"))\
+        .withColumn("CLRNG_VAL_ON_GR_IR_CLRNG_ACCT", col("AREWW").cast(DecimalType(18, 4)))\
         .withColumn("LCL_CRNCY_KEY", col("HSWAE"))\
-        .withColumn("QTY1", col("BAMNG"))\
+        .withColumn("QTY1", col("BAMNG").cast(DecimalType(18, 4)))\
         .withColumn("BTCH_NUM", col("CHARG"))\
         .withColumn(
           "DOC_DTTM",
@@ -73,7 +72,7 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("CALC_OF_VAL_OPEN", col("XWOFF"))\
         .withColumn("UNPLAN_ACCT_ASGNMT", col("XUNPL"))\
         .withColumn("NM_OF_PRSN_RESP_FOR_CREAT_OBJ", col("ERNAM"))\
-        .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
+        .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID).cast(IntegerType()))\
         .withColumn("_l0_upt_", col("_upt_"))\
         .withColumn("_l1_upt_", current_timestamp())\
         .withColumn(
@@ -96,30 +95,30 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         )\
         .withColumn("_deleted_", lit("F"))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
-        .withColumn("DAI_UPT_DTTM", current_timestamp())\
+        .withColumn("DAI_UPDT_DTTM", current_timestamp())\
         .withColumn("SRVC_NUM", trim(col("srvpos")))\
         .withColumn("PKG_NUM_OF_SRVC", trim(col("packno")))\
         .withColumn("LINE_NUM_OF_SRVC", trim(col("introw")))\
         .withColumn("NUM_OF_PO_ACCT_ASGNMT", trim(col("bekkn")))\
         .withColumn("RTRN_IN", trim(col("lemin")))\
-        .withColumn("CLRNG_VAL_ON_GR_IR_ACCT", trim(col("arewb")))\
-        .withColumn("INVC_AMT_IN_PO_CRNCY", trim(col("rewrb")))\
+        .withColumn("CLRNG_VAL_ON_GR_IR_ACCT", trim(col("arewb")).cast(DecimalType(18, 4)))\
+        .withColumn("INVC_AMT_IN_PO_CRNCY", trim(col("rewrb")).cast(DecimalType(18, 4)))\
         .withColumn("SAP_RLSE", trim(col("saprl")))\
-        .withColumn("QTY2", trim(col("menge_pop")))\
-        .withColumn("QTY_IN_PO_PRC_UNIT", trim(col("bpmng_pop")))\
-        .withColumn("AMT_IN_LCL_CRNCY", trim(col("dmbtr_pop")))\
-        .withColumn("AMT_IN_DOC_CRNCY", trim(col("wrbtr_pop")))\
-        .withColumn("VALUT_GOODS_RCPT_BLOK_STK", trim(col("wesbb")))\
-        .withColumn("QTY_IN_VALUT_GR_BLOK_STK", trim(col("bpweb")))\
+        .withColumn("QTY2", trim(col("menge_pop")).cast(DecimalType(18, 4)))\
+        .withColumn("QTY_IN_PO_PRC_UNIT", trim(col("bpmng_pop")).cast(DecimalType(18, 4)))\
+        .withColumn("AMT_IN_LCL_CRNCY", trim(col("dmbtr_pop")).cast(DecimalType(18, 4)))\
+        .withColumn("AMT_IN_DOC_CRNCY", trim(col("wrbtr_pop")).cast(DecimalType(18, 4)))\
+        .withColumn("VALUT_GOODS_RCPT_BLOK_STK", trim(col("wesbb")).cast(DecimalType(18, 4)))\
+        .withColumn("QTY_IN_VALUT_GR_BLOK_STK", trim(col("bpweb")).cast(DecimalType(18, 4)))\
         .withColumn("ACC_AT_ORIG", trim(col("weora")))\
-        .withColumn("GR_IR_ACCT_CLRNG_VAL_LCL_CRNCY", trim(col("arewr_pop")))\
-        .withColumn("EXCH_RT_DIFF_AMT", trim(col("kudif")))\
-        .withColumn("RETN_AMT_IN_DOC_CRNCY", lit(Config.RETN_AMT_IN_DOC_CRNCY))\
-        .withColumn("RETN_AMT_IN_CO_CD_CRNCY", lit(Config.RETN_AMT_IN_CO_CD_CRNCY))\
-        .withColumn("PSTD_RETN_AMT_IN_DOC_CRNCY", lit(Config.PSTD_RETN_AMT_IN_DOC_CRNCY))\
-        .withColumn("PSTD_SCTY_RETN_AMT", lit(Config.PSTD_SCTY_RETN_AMT))\
+        .withColumn("GR_IR_ACCT_CLRNG_VAL_LCL_CRNCY", trim(col("arewr_pop")).cast(DecimalType(18, 4)))\
+        .withColumn("EXCH_RT_DIFF_AMT", trim(col("kudif")).cast(DecimalType(18, 4)))\
+        .withColumn("RETN_AMT_IN_DOC_CRNCY", lit(Config.RETN_AMT_IN_DOC_CRNCY).cast(DecimalType(18, 4)))\
+        .withColumn("RETN_AMT_IN_CO_CD_CRNCY", lit(Config.RETN_AMT_IN_CO_CD_CRNCY).cast(DecimalType(18, 4)))\
+        .withColumn("PSTD_RETN_AMT_IN_DOC_CRNCY", lit(Config.PSTD_RETN_AMT_IN_DOC_CRNCY).cast(DecimalType(18, 4)))\
+        .withColumn("PSTD_SCTY_RETN_AMT", lit(Config.PSTD_SCTY_RETN_AMT).cast(DecimalType(18, 4)))\
         .withColumn("MLT_ACCT_ASGNMT", lit(Config.MLT_ACCT_ASGNMT))\
-        .withColumn("EXCH_RT", lit(Config.EXCH_RT))\
+        .withColumn("EXCH_RT", lit(Config.EXCH_RT).cast(DecimalType(18, 4)))\
         .withColumn("ORIG_OF_AN_INVC_ITM", trim(col("inv_item_origin")))\
         .withColumn("DELV", lit(Config.DELV))\
         .withColumn("DELV_ITM", lit(Config.DELV_ITM))\
@@ -127,16 +126,18 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("UOM_FROM_SRVC_ENT_SHT", lit(Config.UOM_FROM_SRVC_ENT_SHT))\
         .withColumn("LOGL_SYS", lit(Config.LOGL_SYS))\
         .withColumn("PCDR_FOR_UPDT_SCHED_LINE_QTY", trim(col("et_upd")))\
-        .withColumn("QTY_IN_PAREL_UNIT_OF_MEAS", lit(Config.QTY_IN_PAREL_UNIT_OF_MEAS))\
-        .withColumn("GOODS_RCPT_BLOK_STK", lit(Config.GOODS_RCPT_BLOK_STK))\
+        .withColumn("QTY_IN_PAREL_UNIT_OF_MEAS", lit(Config.QTY_IN_PAREL_UNIT_OF_MEAS).cast(DecimalType(18, 4)))\
+        .withColumn("GOODS_RCPT_BLOK_STK", lit(Config.GOODS_RCPT_BLOK_STK).cast(DecimalType(18, 4)))\
         .withColumn("TYPE_OF_PAREL_UNIT_OF_MEAS", lit(Config.TYPE_OF_PAREL_UNIT_OF_MEAS))\
-        .withColumn("VAL_GOODS_RCPT_BLOK_STK", lit(Config.VAL_GOODS_RCPT_BLOK_STK))\
+        .withColumn("VAL_GOODS_RCPT_BLOK_STK", lit(Config.VAL_GOODS_RCPT_BLOK_STK).cast(DecimalType(18, 4)))\
         .withColumn("DPRE_CMPLT_FL", trim(col("j_sc_die_comp_f")))\
         .withColumn("SEASN_YR", lit(Config.SEASN_YR))\
         .withColumn("SEASN", lit(Config.SEASN))\
         .withColumn("FSHN_CLCT", lit(Config.FSHN_CLCT))\
         .withColumn("FSHN_Theme", lit(Config.FSHN_Theme))\
-        .withColumn("QTY3", lit(Config.QTY3))\
+        .withColumn("QTY3", lit(Config.QTY3).cast(DecimalType(18, 4)))\
         .withColumn("CHAR_VAL_1", lit(Config.CHAR_VAL_1))\
         .withColumn("CHAR_VAL_2", lit(Config.CHAR_VAL_2))\
-        .withColumn("CHAR_VAL_3", lit(Config.CHAR_VAL_3))
+        .withColumn("CHAR_VAL_3", lit(Config.CHAR_VAL_3))\
+        .withColumn("_deleted_", lit("F"))\
+        .withColumn("AMT_IN_DOC_CRNCY1", trim(col("WRBTR")).cast(DecimalType(18, 4)))
