@@ -22,40 +22,7 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
             "#"
           )
         )\
-        .withColumn(
-          "MATL_MVMT_YR",
-          when(
-              (
-                ((lower(trim(col("olupmj"))) == lit("null")) | (trim(col("olupmj")) == lit("")))
-                | (trim(col("olupmj")) == lit("0"))
-              ), 
-              lit(None)
-            )\
-            .otherwise(struct(
-            concat(
-                substring(
-                  date_add(
-                      concat(
-                        substring((trim(col("olupmj")).cast(IntegerType()) + lit(1900000)).cast(StringType()), 1, 4), 
-                        lit("-01-01")
-                      ), 
-                      (
-                        substring((trim(col("olupmj")).cast(IntegerType()) + 1900000).cast(StringType()), 5, 8)\
-                          .cast(IntegerType())
-                        - 1
-                      )
-                    )\
-                    .cast(StringType()), 
-                  1, 
-                  10
-                ), 
-                lit(""), 
-                lpad(trim(col("oltday")), 6, "0")
-              )\
-              .alias("col1"), 
-            lit("yyyy-MM-dd HHmmss").alias("col2")
-          ))
-        )\
+        .withColumn("MATL_MVMT_YR", trim(col("olupmj")).cast(IntegerType()))\
         .withColumn(
           "MATL_MVMT_NUM",
           lit(
@@ -79,29 +46,28 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
               ), 
               lit(None)
             )\
-            .otherwise(struct(
+            .otherwise(to_timestamp(
             concat(
-                substring(
-                  date_add(
-                      concat(
-                        substring((trim(col("olupmj")).cast(IntegerType()) + lit(1900000)).cast(StringType()), 1, 4), 
-                        lit("-01-01")
-                      ), 
-                      (
-                        substring((trim(col("olupmj")).cast(IntegerType()) + 1900000).cast(StringType()), 5, 8)\
-                          .cast(IntegerType())
-                        - 1
-                      )
-                    )\
-                    .cast(StringType()), 
-                  1, 
-                  10
-                ), 
-                lit(" "), 
-                lpad(trim(col("oltday")), 6, "0")
-              )\
-              .alias("col1"), 
-            lit("yyyy-MM-dd HHmmss").alias("col2")
+              substring(
+                date_add(
+                    concat(
+                      substring((trim(col("olupmj")).cast(IntegerType()) + lit(1900000)).cast(StringType()), 1, 4), 
+                      lit("-01-01")
+                    ), 
+                    (
+                      substring((trim(col("olupmj")).cast(IntegerType()) + 1900000).cast(StringType()), 5, 8)\
+                        .cast(IntegerType())
+                      - 1
+                    )
+                  )\
+                  .cast(StringType()), 
+                1, 
+                10
+              ), 
+              lit(" "), 
+              lpad(trim(col("oltday")), 6, "0")
+            ), 
+            "yyyy-MM-dd HHmmss"
           ))
         )\
         .withColumn("RECV_EA_QTY", trim(col("olurec")).cast(DecimalType(18, 4)))\
@@ -142,7 +108,7 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("INVC_VAL_IN_FRGN_CRNCY", lit(None))\
         .withColumn("RVSL_OF_GR_ALLW", lit(None))\
         .withColumn("SEQ_NUM_OF_SUP_CNFRM", lit(None))\
-        .withColumn("NUM_OF_DOC_COND", lit(None))\
+        .withColumn("NUM_OF_THE_DOC_COND", lit(None))\
         .withColumn("TAX_ON_SLS_PRCH_CD", lit(None))\
         .withColumn("TAX_RPTG_CTRY_REGN", lit(None))\
         .withColumn("QTY_IN_UOM_FROM_DELV_NOTE", lit(None))\
