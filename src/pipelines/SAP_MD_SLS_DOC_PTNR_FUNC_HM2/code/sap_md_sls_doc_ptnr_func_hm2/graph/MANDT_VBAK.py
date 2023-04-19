@@ -6,4 +6,4 @@ from sap_md_sls_doc_ptnr_func_hm2.config.ConfigStore import *
 from sap_md_sls_doc_ptnr_func_hm2.udfs.UDFs import *
 
 def MANDT_VBAK(spark: SparkSession, in0: DataFrame) -> DataFrame:
-    return in0.filter((col("MANDT") == lit(Config.MANDT)))
+    return in0.filter(((col("MANDT") == lit(Config.MANDT)) & (col("_deleted_") == lit("F"))))
