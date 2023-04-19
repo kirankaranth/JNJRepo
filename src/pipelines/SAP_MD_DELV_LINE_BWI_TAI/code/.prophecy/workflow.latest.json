@@ -1452,10 +1452,10 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "mRqhMX79qc5c87jRtG5ij$$jsRaiMXj8oh21BM8cYA9c##MANDT" ],
+        "columnsSelector" : [ "236zbYZvDauRyUHMaC0NP$$pKq2V39DaqtBc5SIgZ8pR##MANDT", "236zbYZvDauRyUHMaC0NP$$pKq2V39DaqtBc5SIgZ8pR##_deleted_" ],
         "condition" : {
           "format" : "sql",
-          "expression" : "MANDT = '$MANDT'"
+          "expression" : "MANDT = '$MANDT' and _deleted_ = 'F'"
         }
       }
     },
@@ -3009,10 +3009,10 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "Vmg5O363YZIjJn5wl0Cdh$$G5gn_HyQEe-skuURG4NJT##MANDT" ],
+        "columnsSelector" : [ "xYxPi9qfH8M8SISeW7DSR$$ANvgQPINTtNidnWsqggHL##_deleted_", "xYxPi9qfH8M8SISeW7DSR$$ANvgQPINTtNidnWsqggHL##MANDT" ],
         "condition" : {
           "format" : "sql",
-          "expression" : "MANDT = '$MANDT'"
+          "expression" : "MANDT = '$MANDT' and _deleted_ = 'F'"
         }
       }
     },
@@ -4775,10 +4775,10 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "kZ8w92oBKsdX1Ryip4Utz$$6TCugpkcSCejgjM5fkrtj##MANDT" ],
+        "columnsSelector" : [ "wlaGhtDZMYJcmreIayQ7R$$T3B5o2G4V8pcvyKX60ZD-##MANDT", "wlaGhtDZMYJcmreIayQ7R$$T3B5o2G4V8pcvyKX60ZD-##_deleted_" ],
         "condition" : {
           "format" : "sql",
-          "expression" : "MANDT = '$MANDT'"
+          "expression" : "MANDT = '$MANDT' and _deleted_ = 'F'"
         }
       }
     },
@@ -7630,10 +7630,10 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "kqBjsxt3-BGjdM5EtHTrM$$uxYIa6WgU7xHRVMxxQQN9##MANDT" ],
+        "columnsSelector" : [ "DIvF-Qfvpo7Zq7MITmP8m$$-yOQtEnis46kQNSJVxqsv##MANDT", "DIvF-Qfvpo7Zq7MITmP8m$$-yOQtEnis46kQNSJVxqsv##_deleted_" ],
         "condition" : {
           "format" : "sql",
-          "expression" : "MANDT = '$MANDT'"
+          "expression" : "MANDT = '$MANDT' and _deleted_ = 'F'"
         }
       }
     },
@@ -15751,7 +15751,7 @@
             "sourceColumn" : "ACTL_GI_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "case when WADAT_IST= '00000000' then null else to_timestamp(WADAT_IST, \"yyyyMMdd\") end"
+              "expression" : "case when WADAT_IST= '00000000' then null else to_timestamp(WADAT_IST, 'yyyyMMdd') end"
             }
           },
           "DropColumn" : {
@@ -15863,7 +15863,7 @@
             "sourceColumn" : "MFG_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "case when HSDAT= '00000000' then null else to_timestamp(HSDAT, \"yyyyMMdd\") end"
+              "expression" : "case when HSDAT= '00000000' then null else to_timestamp(HSDAT, 'yyyyMMdd') end"
             }
           },
           "DropColumn" : {
@@ -15959,7 +15959,7 @@
             "sourceColumn" : "EXP_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "case when VFDAT= '00000000' then null else to_timestamp(VFDAT, \"yyyyMMdd\") end"
+              "expression" : "case when VFDAT= '00000000' or length(regexp_replace(VFDAT,'\\D+','')) <> 8 or length(VFDAT) < 8 then null else to_timestamp(VFDAT, 'yyyyMMdd') end"
             }
           },
           "DropColumn" : {

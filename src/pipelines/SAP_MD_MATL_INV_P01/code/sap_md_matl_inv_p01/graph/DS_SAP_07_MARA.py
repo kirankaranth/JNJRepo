@@ -6,4 +6,4 @@ from sap_md_matl_inv_p01.config.ConfigStore import *
 from sap_md_matl_inv_p01.udfs.UDFs import *
 
 def DS_SAP_07_MARA(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM {Config.sourceSystem}.mara WHERE _deleted_ = 'F'")
+    return spark.read.table(f"{Config.sourceSystem}.mara")

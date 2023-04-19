@@ -42,16 +42,17 @@ def list_jobs(workspace_url, access_token):
 
 
 def get_workspace_url(env):
-    if env == "qa":
+    if env == "qa" or env == "QA":
         workspace_url = "https://adb-3309966811984132.12.azuredatabricks.net"
-    elif env == "prd":
+    elif env == "prod" or env == "PROD":
         workspace_url = "https://adb-7108733885606347.7.azuredatabricks.net"
     else:
         workspace_url = "https://adb-4924220490975335.15.azuredatabricks.net"
     return workspace_url
 
+
 def get_permissions(env):
-    if env == "qa":
+    if env == "qa" or env == "QA":
         permissions = [
       {
         "name": "ITS-EP-AZR-AJF-DatabricksDataAdministrators",
@@ -66,7 +67,8 @@ def get_permissions(env):
         "scope": "CAN_VIEW"
       }
     ]
-    elif env == "prd":
+
+    elif env == "prod" or env == "PROD" :
         permissions = [
       {
         "name": "ITS-EP-AZR-AJL-DatabricksDataAdministrators",
@@ -128,8 +130,7 @@ try:
         found_jobs = response["jobs"] if "jobs" in response else []
         for potential_found_job in found_jobs:
             if (
-                str(env+"_"+app) in potential_found_job["settings"]["name"]
-                
+                str(env+"_"+app) in potential_found_job["settings"]["name"]       
             ):
 
                 for permission in get_permissions(env):
@@ -155,7 +156,7 @@ try:
     #         found_job["job_id"], new_settings=job_request, version="2.1"
     #     )
 except Exception as e:
-    print (e)
+    print(e)
     print(
         f"\n[bold red] Create/Update for job: {job_request['name']} failed with exception: {e} [/bold red]"
     )

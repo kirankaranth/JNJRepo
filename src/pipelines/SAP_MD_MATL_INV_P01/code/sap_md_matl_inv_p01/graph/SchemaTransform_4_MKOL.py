@@ -19,13 +19,8 @@ def SchemaTransform_4_MKOL(spark: SparkSession, in0: DataFrame) -> DataFrame:
             "#"
           )
         )\
-        .withColumn(
-          "SPCL_STCK_IND",
-          lit(
-            "#"
-          )
-        )\
-        .withColumn("PRTY_NUM", col("SOBKZ"))\
+        .withColumn("SPCL_STCK_IND", col("SOBKZ"))\
+        .withColumn("PRTY_NUM", col("LIFNR"))\
         .withColumn("UNRSTRCTD_STCK", col("SLABS").cast(DecimalType(18, 4)))\
         .withColumn("IN_TRNSFR_STCK", lit(None).cast(DecimalType(18, 4)))\
         .withColumn("QLTY_INSP_STCK", col("SINSM").cast(DecimalType(18, 4)))\
