@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 setup(
-    name = 'SAP_MD_PO_HIST',
+    name = 'SAP_MD_PO_HIST_BBA_BBN_BBL_HCS_GEU_HMD_MBP_MRS_P01_TAI',
     version = '1.0',
     packages = find_packages(include = ('dart_l1_purchase_order_md_po_hist*', )) + ["prophecy_config_instances"],
     package_dir = {'prophecy_config_instances' : 'configs/resources/config'},
