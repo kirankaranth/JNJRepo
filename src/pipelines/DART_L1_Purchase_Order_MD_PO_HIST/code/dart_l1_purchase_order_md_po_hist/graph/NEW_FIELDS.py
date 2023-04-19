@@ -119,7 +119,7 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("PSTD_SCTY_RETN_AMT", lit(Config.PSTD_SCTY_RETN_AMT).cast(DecimalType(18, 4)))\
         .withColumn("MLT_ACCT_ASGNMT", lit(Config.MLT_ACCT_ASGNMT))\
         .withColumn("EXCH_RT", lit(Config.EXCH_RT).cast(DecimalType(18, 4)))\
-        .withColumn("ORIG_OF_AN_INVC_ITM", trim(col("inv_item_origin")))\
+        .withColumn("ORIG_OF_AN_INVC_ITM", lit(Config.ORIG_OF_AN_INVC_ITM))\
         .withColumn("DELV", lit(Config.DELV))\
         .withColumn("DELV_ITM", lit(Config.DELV_ITM))\
         .withColumn("STK_SGMNT", lit(Config.STK_SGMNT))\
