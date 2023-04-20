@@ -6,4 +6,4 @@ from dart_l1_purchase_order_md_po_hist.config.ConfigStore import *
 from dart_l1_purchase_order_md_po_hist.udfs.UDFs import *
 
 def SAP_EKBE(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.sourceDatabase}.ekbe")
+    return spark.read.table(f"{Config.sourceDatabase}.{Config.sourceTable}")
