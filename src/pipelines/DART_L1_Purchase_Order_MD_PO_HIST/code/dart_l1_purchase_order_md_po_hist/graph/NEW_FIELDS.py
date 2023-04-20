@@ -8,13 +8,13 @@ from dart_l1_purchase_order_md_po_hist.udfs.UDFs import *
 def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
         .withColumn("SRC_SYS_CD", lit(Config.sourceSystem))\
-        .withColumn("PO_NUM", trim(col("EBELN")))\
-        .withColumn("PO_LINE_NBR", trim(col("EBELP")))\
-        .withColumn("PO_SEQ_NBR", trim(col("ZEKKN")))\
-        .withColumn("EV_TYPE_CO", trim(col("VGABE")))\
+        .withColumn("PO_NUM", col("EBELN"))\
+        .withColumn("PO_LINE_NBR", col("EBELP"))\
+        .withColumn("PO_SEQ_NBR", col("ZEKKN"))\
+        .withColumn("EV_TYPE_CO", col("VGABE"))\
         .withColumn("MATL_MVMT_YR", trim(col("GJAHR")).cast(IntegerType()))\
-        .withColumn("MATL_MVMT_NUM", trim(col("BELNR")))\
-        .withColumn("MATL_MVMT_SEQ_NBR", trim(col("BUZEI")))\
+        .withColumn("MATL_MVMT_NUM", col("BELNR"))\
+        .withColumn("MATL_MVMT_SEQ_NBR", col("BUZEI"))\
         .withColumn("PO_HIST_CAT_CD", trim(col("BEWTP")))\
         .withColumn("MVMT_TYPE_CD", trim(col("BWART")))\
         .withColumn(
@@ -30,7 +30,7 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
             "#"
           )
         )\
-        .withColumn("MVMT_TYPE", col("BWART"))\
+        .withColumn("MVMT_TYPE", trim(col("BWART")))\
         .withColumn("QTY_IN_PRCH_ORDR_PRC_UNIT", trim(col("BPMNG")).cast(DecimalType(18, 4)))\
         .withColumn("AMT_IN_LCL_CRNCY1", trim(col("DMBTR")).cast(DecimalType(18, 4)))\
         .withColumn("CRNCY_KEY", trim(col("WAERS")))\
@@ -113,12 +113,12 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("ACC_AT_ORIG", trim(col("weora")))\
         .withColumn("GR_IR_ACCT_CLRNG_VAL_LCL_CRNCY", trim(col("arewr_pop")).cast(DecimalType(18, 4)))\
         .withColumn("EXCH_RT_DIFF_AMT", trim(col("kudif")).cast(DecimalType(18, 4)))\
-        .withColumn("RETN_AMT_IN_DOC_CRNCY", lit(Config.RETN_AMT_IN_DOC_CRNCY).cast(DecimalType(18, 4)))\
-        .withColumn("RETN_AMT_IN_CO_CD_CRNCY", lit(Config.RETN_AMT_IN_CO_CD_CRNCY).cast(DecimalType(18, 4)))\
-        .withColumn("PSTD_RETN_AMT_IN_DOC_CRNCY", lit(Config.PSTD_RETN_AMT_IN_DOC_CRNCY).cast(DecimalType(18, 4)))\
-        .withColumn("PSTD_SCTY_RETN_AMT", lit(Config.PSTD_SCTY_RETN_AMT).cast(DecimalType(18, 4)))\
+        .withColumn("RETN_AMT_IN_DOC_CRNCY", expr(Config.RETN_AMT_IN_DOC_CRNCY))\
+        .withColumn("RETN_AMT_IN_CO_CD_CRNCY", expr(Config.RETN_AMT_IN_CO_CD_CRNCY))\
+        .withColumn("PSTD_RETN_AMT_IN_DOC_CRNCY", expr(Config.PSTD_RETN_AMT_IN_DOC_CRNCY))\
+        .withColumn("PSTD_SCTY_RETN_AMT", expr(Config.PSTD_SCTY_RETN_AMT))\
         .withColumn("MLT_ACCT_ASGNMT", expr(Config.MLT_ACCT_ASGNMT))\
-        .withColumn("EXCH_RT", lit(Config.EXCH_RT).cast(DecimalType(18, 4)))\
+        .withColumn("EXCH_RT", expr(Config.EXCH_RT))\
         .withColumn("ORIG_OF_AN_INVC_ITM", expr(Config.ORIG_OF_AN_INVC_ITM))\
         .withColumn("DELV", expr(Config.DELV))\
         .withColumn("DELV_ITM", expr(Config.DELV_ITM))\
@@ -126,16 +126,16 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("UOM_FROM_SRVC_ENT_SHT", expr(Config.UOM_FROM_SRVC_ENT_SHT))\
         .withColumn("LOGL_SYS", expr(Config.LOGL_SYS))\
         .withColumn("PCDR_FOR_UPDT_SCHED_LINE_QTY", trim(col("et_upd")))\
-        .withColumn("QTY_IN_PAREL_UNIT_OF_MEAS", lit(Config.QTY_IN_PAREL_UNIT_OF_MEAS).cast(DecimalType(18, 4)))\
-        .withColumn("GOODS_RCPT_BLOK_STK", lit(Config.GOODS_RCPT_BLOK_STK).cast(DecimalType(18, 4)))\
+        .withColumn("QTY_IN_PAREL_UNIT_OF_MEAS", expr(Config.QTY_IN_PAREL_UNIT_OF_MEAS))\
+        .withColumn("GOODS_RCPT_BLOK_STK", expr(Config.GOODS_RCPT_BLOK_STK))\
         .withColumn("TYPE_OF_PAREL_UNIT_OF_MEAS", expr(Config.TYPE_OF_PAREL_UNIT_OF_MEAS))\
-        .withColumn("VAL_GOODS_RCPT_BLOK_STK", lit(Config.VAL_GOODS_RCPT_BLOK_STK).cast(DecimalType(18, 4)))\
+        .withColumn("VAL_GOODS_RCPT_BLOK_STK", expr(Config.VAL_GOODS_RCPT_BLOK_STK))\
         .withColumn("DPRE_CMPLT_FL", trim(col("j_sc_die_comp_f")))\
         .withColumn("SEASN_YR", expr(Config.SEASN_YR))\
         .withColumn("SEASN", expr(Config.SEASN))\
         .withColumn("FSHN_CLCT", expr(Config.FSHN_CLCT))\
         .withColumn("FSHN_Theme", expr(Config.FSHN_Theme))\
-        .withColumn("QTY3", lit(Config.QTY3).cast(DecimalType(18, 4)))\
+        .withColumn("QTY3", expr(Config.QTY3))\
         .withColumn("CHAR_VAL_1", expr(Config.CHAR_VAL_1))\
         .withColumn("CHAR_VAL_2", expr(Config.CHAR_VAL_2))\
         .withColumn("CHAR_VAL_3", expr(Config.CHAR_VAL_3))\
