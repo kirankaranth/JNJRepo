@@ -157,7 +157,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
           "LAST_CHG_CNFRM_DTTM",
           when((col("UPTIM") == lit("000000")), lit(None)).otherwise(to_timestamp(col("UPTIM"), "HHmmSS"))
         )\
-        .withColumn("CENT_DEL_BLK_MSTR_REC\r\n", trim(col("NODEL")))\
+        .withColumn("CENT_DEL_BLK_MSTR_REC", trim(col("NODEL")))\
         .withColumn("BUSN_PRPS_CMPLT_FL", trim(col("CVP_XBLCK")))\
         .withColumn("SUFRAMA_CD", trim(col("SUFRAMA")))\
         .withColumn("RG_NUM", trim(col("RG")))\
