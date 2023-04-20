@@ -135,7 +135,7 @@ class Config(ConfigBase):
             QTY2: str="null",
             ACC_AT_ORIG: str="null",
             VALUT_GOODS_RCPT_BLOK_STK: str="null",
-            AMT_IN_DOC_CRNCY: str="null",
+            AMT_IN_DOC_CRNCY: str="CAST(null as decimal(18,4))",
             **kwargs
     ):
         prophecy_spark = self.spark
