@@ -19,4 +19,12 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("CTRY_SHRT_NM", lookup("LU_SAP_T005T", col("LAND1")).getField("LANDX"))\
         .withColumn("ADDR_LINE_1_TXT", trim(col("STRAS")))\
         .withColumn("PSTL_CD_NUM", trim(col("PSTLZ")))\
-        .withColumn("CITY_NM", trim(col("ORT01")))
+        .withColumn("CITY_NM", trim(col("ORT01")))\
+        .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
+        .withColumn("DAI_CRT_DTTM", current_timestamp())\
+        .withColumn("DAI_UPDT_DTTM", current_timestamp())\
+        .withColumn("_l0_upt", col("_upt_"))\
+        .withColumn("_pk_", to_json(expr("named_struct('SRC_SYS_CD', SRC_SYS_CD, 'PLNT_CD', PLNT_CD)")))\
+        .withColumn("_pk_md5_", md5(to_json(expr("named_struct('SRC_SYS_CD', SRC_SYS_CD, 'PLNT_CD', PLNT_CD)"))))\
+        .withColumn("_l1_upt_", current_timestamp())\
+        .withColumn("_deleted_", lit("F"))

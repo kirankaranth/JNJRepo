@@ -16,6 +16,7 @@ def pipeline(spark: SparkSession) -> None:
     df_MANDT_FILTER_T001K = MANDT_FILTER_T001K(spark, df_SAP_T001K)
     df_Join_1 = Join_1(spark, df_MANDT_FILTER_T001W, df_MANDT_FILTER_T001K)
     df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_Join_1)
+    df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS_RENAME_FORMAT)
 
 def main():
     spark = SparkSession.builder\
