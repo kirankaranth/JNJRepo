@@ -9,7 +9,7 @@ class Config(ConfigBase):
             sourceDatabase: str=None,
             targetSchema: str=None,
             sourceTable: str=None,
-            DAI_ETL_ID: str=None,
+            DAI_ETL_ID: int=None,
             configDatabase: str=None,
             MANDT: str=None,
             STK_SGMNT: str=None,
@@ -99,7 +99,7 @@ class Config(ConfigBase):
             sourceDatabase: str="tai",
             targetSchema: str="dev_md_l1",
             sourceTable: str="ekbe",
-            DAI_ETL_ID: str="0",
+            DAI_ETL_ID: int=0,
             configDatabase: str=None,
             MANDT: str="100",
             STK_SGMNT: str="CAST(null as string)",
@@ -143,7 +143,7 @@ class Config(ConfigBase):
         self.sourceDatabase = sourceDatabase
         self.targetSchema = targetSchema
         self.sourceTable = sourceTable
-        self.DAI_ETL_ID = DAI_ETL_ID
+        self.DAI_ETL_ID = self.get_int_value(DAI_ETL_ID)
         self.configDatabase = configDatabase
         self.MANDT = MANDT
         self.STK_SGMNT = STK_SGMNT
