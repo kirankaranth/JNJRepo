@@ -19,6 +19,7 @@ def pipeline(spark: SparkSession) -> None:
     df_SET_FIELD_ORDER_REFORMAT_1 = SET_FIELD_ORDER_REFORMAT_1(spark, df_NEW_FIELDS_RENAME_FORMAT)
     df_DUPLICATE_CHECK = DUPLICATE_CHECK(spark, df_SET_FIELD_ORDER_REFORMAT_1)
     df_DUPLICATE_CHECK_FILTER = DUPLICATE_CHECK_FILTER(spark, df_DUPLICATE_CHECK)
+    MD_CUST(spark, df_SET_FIELD_ORDER_REFORMAT_1)
 
 def main():
     spark = SparkSession.builder\
