@@ -5,5 +5,7 @@ from prophecy.libs import typed_lit
 from sap_01_md_cust_hcs.config.ConfigStore import *
 from sap_01_md_cust_hcs.udfs.UDFs import *
 
-def SET_FIELD_ORDER_REFORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
-    return in0
+def DUPLICATE_CHECK(spark: SparkSession, in0: DataFrame) -> DataFrame:
+    df1 = in0.groupBy(col("SRC_SYS_CD"), col("CUST_NUM"))
+
+    return df1.agg(count(lit(1)).alias("PK_COUNT"))
