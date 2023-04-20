@@ -6,4 +6,4 @@ from sap_01_md_cust.config.ConfigStore import *
 from sap_01_md_cust.udfs.UDFs import *
 
 def SAP_KNA1(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.sourceDatabase}.kna1")
+    return spark.read.table(f"{Config.sourceSystem}.kna1")
