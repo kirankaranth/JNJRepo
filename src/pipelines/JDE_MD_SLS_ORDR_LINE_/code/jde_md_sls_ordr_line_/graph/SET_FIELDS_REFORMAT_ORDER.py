@@ -59,5 +59,6 @@ def SET_FIELDS_REFORMAT_ORDER(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("DAI_UPDT_DTTM"), 
         col("_l0_upt_"), 
         col("_pk_md5_"), 
-        col("_l1_upt_")
+        col("_l1_upt_"), 
+        col("_deleted_")
     )
