@@ -6,4 +6,4 @@ from jde_md_sls_ordr_line_.config.ConfigStore import *
 from jde_md_sls_ordr_line_.udfs.UDFs import *
 
 def JDE_F42119(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.DBNAME}.{Config.DBTABLE}")
+    return spark.sql(f"SELECT * FROM {Config.DBNAME}.{Config.DBTABLE} WHERE _deleted_ = 'F'")

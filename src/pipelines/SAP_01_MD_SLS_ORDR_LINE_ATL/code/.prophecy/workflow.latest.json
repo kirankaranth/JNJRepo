@@ -2610,6 +2610,33 @@
                 "mappings" : [ ],
                 "tags" : [ ]
               }
+            }, {
+              "name" : "DAI_UPDT_DTTM",
+              "type" : "timestamp",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_l1_upt_",
+              "type" : "timestamp",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_deleted_",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
             } ]
           },
           "isStreaming" : false
@@ -14073,6 +14100,15 @@
           "schema" : {
             "type" : "struct",
             "fields" : [ {
+              "name" : "MANDT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
               "name" : "_deleted_",
               "type" : "string",
               "nullable" : true,
@@ -14092,15 +14128,6 @@
               }
             }, {
               "name" : "MVGR3",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "MANDT",
               "type" : "string",
               "nullable" : true,
               "metadata" : {
@@ -15165,6 +15192,15 @@
           "schema" : {
             "type" : "struct",
             "fields" : [ {
+              "name" : "MANDT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
               "name" : "_deleted_",
               "type" : "string",
               "nullable" : true,
@@ -15184,15 +15220,6 @@
               }
             }, {
               "name" : "MVGR2",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "MANDT",
               "type" : "string",
               "nullable" : true,
               "metadata" : {
@@ -17728,7 +17755,7 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "Qy65ukxAACp_06a2BuUXa$$AnVtV56wWQAenLl4Qt8J7##SRC_TBL_NM", "Qy65ukxAACp_06a2BuUXa$$AnVtV56wWQAenLl4Qt8J7##SLS_ORDR_DOC_ID", "Qy65ukxAACp_06a2BuUXa$$AnVtV56wWQAenLl4Qt8J7##SLS_ORDR_TYPE_CD", "Qy65ukxAACp_06a2BuUXa$$AnVtV56wWQAenLl4Qt8J7##SRC_SYS_CD", "Qy65ukxAACp_06a2BuUXa$$AnVtV56wWQAenLl4Qt8J7##COMPANY_CD", "Qy65ukxAACp_06a2BuUXa$$AnVtV56wWQAenLl4Qt8J7##SLS_ORDR_LINE_NBR" ],
+        "columnsSelector" : [ "Qy65ukxAACp_06a2BuUXa$$AnVtV56wWQAenLl4Qt8J7##SRC_TBL_NM", "Qy65ukxAACp_06a2BuUXa$$AnVtV56wWQAenLl4Qt8J7##SLS_ORDR_TYPE_CD", "Qy65ukxAACp_06a2BuUXa$$AnVtV56wWQAenLl4Qt8J7##COMPANY_CD", "Qy65ukxAACp_06a2BuUXa$$AnVtV56wWQAenLl4Qt8J7##SLS_ORDR_LINE_NBR", "Qy65ukxAACp_06a2BuUXa$$AnVtV56wWQAenLl4Qt8J7##SRC_SYS_CD", "Qy65ukxAACp_06a2BuUXa$$AnVtV56wWQAenLl4Qt8J7##SLS_ORDR_DOC_ID" ],
         "transformations" : [ {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
@@ -17784,6 +17811,54 @@
             "expression" : {
               "format" : "sql",
               "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD, 'COMPANY_CD',COMPANY_CD, 'SLS_ORDR_DOC_ID',SLS_ORDR_DOC_ID, 'SLS_ORDR_LINE_NBR',SLS_ORDR_LINE_NBR, 'SLS_ORDR_TYPE_CD',SLS_ORDR_TYPE_CD, 'SRC_TBL_NM',SRC_TBL_NM)))"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "DAI_UPDT_DTTM",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "current_timestamp()"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_l1_upt_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "current_timestamp()"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_deleted_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "'F'"
             }
           },
           "DropColumn" : {
@@ -18167,6 +18242,15 @@
           "schema" : {
             "type" : "struct",
             "fields" : [ {
+              "name" : "MANDT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
               "name" : "_deleted_",
               "type" : "string",
               "nullable" : true,
@@ -18186,15 +18270,6 @@
               }
             }, {
               "name" : "MVGR3",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "MANDT",
               "type" : "string",
               "nullable" : true,
               "metadata" : {
@@ -22891,6 +22966,33 @@
                 "mappings" : [ ],
                 "tags" : [ ]
               }
+            }, {
+              "name" : "DAI_UPDT_DTTM",
+              "type" : "timestamp",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_l1_upt_",
+              "type" : "timestamp",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_deleted_",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
             } ]
           },
           "isStreaming" : false
@@ -22982,6 +23084,15 @@
           "schema" : {
             "type" : "struct",
             "fields" : [ {
+              "name" : "MANDT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
               "name" : "_deleted_",
               "type" : "string",
               "nullable" : true,
@@ -23001,15 +23112,6 @@
               }
             }, {
               "name" : "MVGR2",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "MANDT",
               "type" : "string",
               "nullable" : true,
               "metadata" : {
