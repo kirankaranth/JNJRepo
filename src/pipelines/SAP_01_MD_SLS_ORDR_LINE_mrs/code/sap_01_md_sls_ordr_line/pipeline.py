@@ -53,9 +53,9 @@ def pipeline(spark: SparkSession) -> None:
         df_MANDT_FILTER_1_1_1_2_1_1_1_1_1_1
     )
     df_NEW_FIEDS = NEW_FIEDS(spark, df_Join_1)
-    MD_SLS_ORDR_LINE(spark, df_NEW_FIEDS)
     df_DUPLICATE_CHECK = DUPLICATE_CHECK(spark, df_NEW_FIEDS)
     df_DUPLICATE_CHECK_1 = DUPLICATE_CHECK_1(spark, df_DUPLICATE_CHECK)
+    MD_SLS_ORDR_LINE(spark, df_NEW_FIEDS)
 
 def main():
     spark = SparkSession.builder\
