@@ -7,10 +7,14 @@ from prophecy.utils import *
 from jde_01_md_plnt_deu_djd_sjd_jem_jsw_jet_jes_bw2_gmd.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    df_JDE_F0006 = JDE_F0006(spark)
     df_JDE_F0116 = JDE_F0116(spark)
-    df_JDE_F0006_FILTER = JDE_F0006_FILTER(spark, df_JDE_F0006)
     df_JDE_F0116_FILTER = JDE_F0116_FILTER(spark, df_JDE_F0116)
+    df_JDE_F0006 = JDE_F0006(spark)
+    df_JDE_F0006_FILTER = JDE_F0006_FILTER(spark, df_JDE_F0006)
+    df_Join_JDE = Join_JDE(spark, df_JDE_F0006_FILTER, df_JDE_F0116_FILTER)
+    df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_Join_JDE)
+    df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS_RENAME_FORMAT)
+    MD_PLNT(spark, df_SET_FIELD_ORDER_REFORMAT)
 
 def main():
     spark = SparkSession.builder\
