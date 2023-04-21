@@ -139,4 +139,4 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("CHAR_VAL_1", expr(Config.CHAR_VAL_1))\
         .withColumn("CHAR_VAL_2", expr(Config.CHAR_VAL_2))\
         .withColumn("CHAR_VAL_3", expr(Config.CHAR_VAL_3))\
-        .withColumn("AMT_IN_DOC_CRNCY1", trim(col("WRBTR")).cast(DecimalType(18, 4)))
+        .withColumn("AMT_IN_DOC_CRNCY1", expr(Config.AMT_IN_DOC_CRNCY))
