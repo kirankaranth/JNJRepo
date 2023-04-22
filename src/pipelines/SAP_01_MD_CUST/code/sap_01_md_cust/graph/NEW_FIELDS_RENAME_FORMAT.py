@@ -7,7 +7,7 @@ from sap_01_md_cust.udfs.UDFs import *
 
 def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
-        .withColumn("SRC_SYS_CD", lit(""))\
+        .withColumn("SRC_SYS_CD", lit(Config.sourceSystem))\
         .withColumn("CUST_NUM", col("KUNNR"))\
         .withColumn("BLOCK_TYPE_CD", trim(col("AUFSD")))\
         .withColumn("GLN1_NBR", trim(col("BBBNR")))\
