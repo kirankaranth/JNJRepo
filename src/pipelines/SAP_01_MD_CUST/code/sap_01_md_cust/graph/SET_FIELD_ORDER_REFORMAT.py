@@ -158,6 +158,7 @@ def SET_FIELD_ORDER_REFORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("RIC_NUM"), 
         col("FRGN_NATL_REGS"), 
         col("RNE_ISU_DTTM"), 
+        col("CNAE"), 
         col("LEGAL_NATR"), 
         col("CRT_NUM"), 
         col("ICMS_TAXPY"), 

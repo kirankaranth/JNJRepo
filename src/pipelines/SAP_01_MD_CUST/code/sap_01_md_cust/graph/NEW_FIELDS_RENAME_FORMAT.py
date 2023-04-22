@@ -181,7 +181,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("TAX_DCLTN_TYPE", trim(col("TDT")))\
         .withColumn("CO_SIZE", trim(col("COMSIZE")))\
         .withColumn("DCLTN_RGMN_PIS_COFINS", trim(col("DECREGPC")))\
-        .withColumn("MAX_STCK_HGHT_PKGNG_MATL", trim(col("_VSO_R_PALHGT")))\
+        .withColumn("MAX_STCK_HGHT_PKGNG_MATL", trim(col("_VSO_R_PALHGT")).cast(DecimalType(18, 4)))\
         .withColumn("UNIT_LGTH_PKGNG_MATL", trim(col("_VSO_R_PAL_UL")))\
         .withColumn("CUST_RLTD_PACK_EA_PKGNG_MATL", trim(col("_VSO_R_PK_MAT")))\
         .withColumn("PKGNG_MATL_CUST_VSO", trim(col("_VSO_R_MATPAL")))\
