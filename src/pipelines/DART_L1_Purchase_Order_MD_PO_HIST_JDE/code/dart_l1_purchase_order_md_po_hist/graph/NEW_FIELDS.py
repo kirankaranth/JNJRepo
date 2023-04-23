@@ -90,14 +90,14 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("QTY_IN_PRCH_ORDR_PRC_UNIT", lit(None))\
         .withColumn("AMT_IN_LCL_CRNCY1", lit(None))\
         .withColumn("AMT_IN_DOC_CRNCY1", lit(None))\
-        .withColumn("CRNCY_KEY", trim(col("OLCRCD")))\
+        .withColumn("CRNCY_KEY", lit(None))\
         .withColumn("GR_IR_ACCT_CLRNG_VAL_IN_LCL_CRNCY", lit(None))\
         .withColumn("GOODS_RCPT_BLOK_STK_IN_OU", lit(None))\
         .withColumn("QTY_IN_GR_BLOK_STK", lit(None))\
         .withColumn("DEBIT_OR_CREDIT_IN", lit(None))\
         .withColumn("VALUT_TYPE", lit(None))\
         .withColumn("DELV_CMPLT_IN", lit(None))\
-        .withColumn("REF_DOC_NUM", trim(col("OLOORN")))\
+        .withColumn("REF_DOC_NUM", lit(None))\
         .withColumn("FISC_YR_OF_A_REF_DOC", lit(None))\
         .withColumn("DOC_NUM_OF_A_REF_DOC", lit(None))\
         .withColumn("ITM_OF_A_REF_DOC", lit(None))\
@@ -112,7 +112,7 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("TAX_ON_SLS_PRCH_CD", lit(None))\
         .withColumn("TAX_RPTG_CTRY_REGN", lit(None))\
         .withColumn("QTY_IN_UOM_FROM_DELV_NOTE", lit(None))\
-        .withColumn("UOM_FROM_DELV_NOTE", trim(col("OLUOM")))\
+        .withColumn("UOM_FROM_DELV_NOTE", lit(None))\
         .withColumn("MATL_NUM", lit(None))\
         .withColumn("CLRNG_VAL_ON_GR_IR_CLRNG_ACCT", lit(None))\
         .withColumn("LCL_CRNCY_KEY", lit(None))\
