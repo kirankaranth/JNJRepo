@@ -1,3 +1,3 @@
-from sap_md_matl_inv_atl.pipeline import main
+from sap_md_matl_inv_fsn.pipeline import main
 
 main()
