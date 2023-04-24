@@ -94,10 +94,10 @@
     "dependentProjectExternalDependencies" : [ ],
     "isImported" : false,
     "interimMode" : "Full",
-    "interimModeEnabled" : true,
+    "interimModeEnabled" : false,
     "visualCodeInterimMode" : "Disabled",
     "recordsLimit" : {
-      "enabled" : true,
+      "enabled" : false,
       "value" : 1000
     },
     "topLevelPackage" : "jde_01_md_plnt_deu_djd_sjd_jem_jsw_jet_jes_bw2_gmd",
@@ -145,6 +145,18 @@
     "sourcePort" : "LJGMJ0y9HdVHL28DWn-QX$$5pcQIvezlxpfh-NlUo-DV",
     "target" : "utJciQp62uVcwpLtugIPp$$AD-F06qTo5W7See7B0TmN",
     "targetPort" : "aA7TNonH2Is7L-iP8NGY1$$JC_G6ss5YGP1DhOxAap0G"
+  }, {
+    "id" : "FuX_90jSL2t9Oq9BgCNji$$WB6vLAxlsMAfCT8KdZipM",
+    "source" : "tAmhbOsz98ktpkFq_iXUM$$4oSGw5k3HDhPWVtkfIi1I",
+    "sourcePort" : "oIoqgCd2u6UOYMdFVg5c4$$y9xuJIrFrUrEVgs0sMaFz",
+    "target" : "5RV7zOz6Cz5SjaIvx94wS$$Qi5C7O_AMnfMcFlNRVmp_",
+    "targetPort" : "iShcBXCV0L4XpEXtXvSZp$$kl1GeoS7E1n1jVOvCc6DR"
+  }, {
+    "id" : "wDkfpeGCoDVrdHECRVnKC",
+    "source" : "YtyZow5aU6_oUIUrbCOny$$tXl75YElEb9WBf2yki1OF",
+    "sourcePort" : "LJGMJ0y9HdVHL28DWn-QX$$5pcQIvezlxpfh-NlUo-DV",
+    "target" : "tAmhbOsz98ktpkFq_iXUM$$4oSGw5k3HDhPWVtkfIi1I",
+    "targetPort" : "V6l3fTeJgyJWDDFEj_VO5$$Zw44q-6ZDGh2nWHKWGOw_"
   } ],
   "processes" : {
     "utJciQp62uVcwpLtugIPp$$AD-F06qTo5W7See7B0TmN" : {
@@ -329,6 +341,290 @@
       },
       "properties" : {
         "datasetId" : "datasets/MD_PLNT"
+      }
+    },
+    "5RV7zOz6Cz5SjaIvx94wS$$Qi5C7O_AMnfMcFlNRVmp_" : {
+      "id" : "5RV7zOz6Cz5SjaIvx94wS$$Qi5C7O_AMnfMcFlNRVmp_",
+      "component" : "Filter",
+      "metadata" : {
+        "label" : "DUPLICATE_FILTER",
+        "slug" : "DUPLICATE_FILTER",
+        "x" : 1260,
+        "y" : 60,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "iShcBXCV0L4XpEXtXvSZp$$kl1GeoS7E1n1jVOvCc6DR",
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "SRC_SYS_CD",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PLNT_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PK_COUNT",
+              "type" : "long",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "gT3k40mR7jB6-brvV9n6p$$ihFZPEcusDshPwqOnYT4z",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ "iShcBXCV0L4XpEXtXvSZp$$kl1GeoS7E1n1jVOvCc6DR##PK_COUNT" ],
+        "condition" : {
+          "format" : "sql",
+          "expression" : "PK_COUNT > 1"
+        }
+      }
+    },
+    "tAmhbOsz98ktpkFq_iXUM$$4oSGw5k3HDhPWVtkfIi1I" : {
+      "id" : "tAmhbOsz98ktpkFq_iXUM$$4oSGw5k3HDhPWVtkfIi1I",
+      "component" : "Aggregate",
+      "metadata" : {
+        "label" : "DUPLICATE_CHECK",
+        "slug" : "DUPLICATE_CHECK",
+        "x" : 1100,
+        "y" : 60,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "V6l3fTeJgyJWDDFEj_VO5$$Zw44q-6ZDGh2nWHKWGOw_",
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "SRC_SYS_CD",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PLNT_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PLNT_NM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CTRY_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PLNT_CAT_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RGN_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CO_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PSTL_CD_NUM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CITY_NM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DAI_ETL_ID",
+              "type" : "integer",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DAI_CRT_DTTM",
+              "type" : "timestamp",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DAI_UPDT_DTTM",
+              "type" : "timestamp",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_l0_upt_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_pk_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_pk_md5_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_l1_upt_",
+              "type" : "timestamp",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_deleted_",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "oIoqgCd2u6UOYMdFVg5c4$$y9xuJIrFrUrEVgs0sMaFz",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "allIns" : false,
+        "doPivot" : false,
+        "aggregate" : [ {
+          "target" : "PK_COUNT",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "count (*)"
+          },
+          "description" : "",
+          "_row_id" : ""
+        } ],
+        "allowSelection" : true,
+        "pivotColumn" : null,
+        "pivotValues" : [ ],
+        "activeTab" : "groupBy",
+        "columnsSelector" : [ "V6l3fTeJgyJWDDFEj_VO5$$Zw44q-6ZDGh2nWHKWGOw_##SRC_SYS_CD", "V6l3fTeJgyJWDDFEj_VO5$$Zw44q-6ZDGh2nWHKWGOw_##PLNT_CD" ],
+        "groupBy" : [ {
+          "target" : "SRC_SYS_CD",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "SRC_SYS_CD"
+          },
+          "description" : "",
+          "_row_id" : null
+        }, {
+          "target" : "PLNT_CD",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "PLNT_CD"
+          },
+          "description" : "",
+          "_row_id" : null
+        } ]
       }
     },
     "VkZBxU53B5z-53bpUgssJ$$pLML6v42nIqvT4j_8yCt8" : {
