@@ -1,10 +1,10 @@
 from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
-from sap_01_md_matl_inv.config.ConfigStore import *
-from sap_01_md_matl_inv.udfs.UDFs import *
+from sap_01_md_matl_inv_hm2.config.ConfigStore import *
+from sap_01_md_matl_inv_hm2.udfs.UDFs import *
 from prophecy.utils import *
-from sap_01_md_matl_inv.graph import *
+from sap_01_md_matl_inv_hm2.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_DS_SAP_04_MARA = DS_SAP_04_MARA(spark)

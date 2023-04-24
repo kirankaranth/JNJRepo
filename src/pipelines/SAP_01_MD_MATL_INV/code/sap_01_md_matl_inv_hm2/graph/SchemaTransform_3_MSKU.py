@@ -2,16 +2,21 @@ from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from prophecy.libs import typed_lit
-from sap_01_md_matl_inv.config.ConfigStore import *
-from sap_01_md_matl_inv.udfs.UDFs import *
+from sap_01_md_matl_inv_hm2.config.ConfigStore import *
+from sap_01_md_matl_inv_hm2.udfs.UDFs import *
 
-def SchemaTransform_2_MCHB(spark: SparkSession, in0: DataFrame) -> DataFrame:
+def SchemaTransform_3_MSKU(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
         .withColumn("SRC_SYS_CD", lit(Config.sourceSystem))\
-        .withColumn("SRC_TBL_NM", lit(Config.DBTABLE2))\
+        .withColumn("SRC_TBL_NM", lit(Config.DBTABLE3))\
         .withColumn("MATL_NUM", col("MATNR"))\
         .withColumn("PLNT_CD", col("WERKS"))\
-        .withColumn("SLOC_CD", col("LGORT"))\
+        .withColumn(
+          "SLOC_CD",
+          lit(
+            "#"
+          )
+        )\
         .withColumn("BTCH_NUM", col("CHARG"))\
         .withColumn(
           "BTCH_STS_CD",
@@ -19,30 +24,20 @@ def SchemaTransform_2_MCHB(spark: SparkSession, in0: DataFrame) -> DataFrame:
             "#"
           )
         )\
-        .withColumn(
-          "SPCL_STCK_IND",
-          lit(
-            "#"
-          )
-        )\
-        .withColumn(
-          "PRTY_NUM",
-          lit(
-            "#"
-          )
-        )\
-        .withColumn("UNRSTRCTD_STCK", col("CLABS").cast(DecimalType(18, 4)))\
-        .withColumn("IN_TRNSFR_STCK", col("CUMLM").cast(DecimalType(18, 4)))\
-        .withColumn("QLTY_INSP_STCK", col("CINSM").cast(DecimalType(18, 4)))\
-        .withColumn("RSTRCTD_STCK", col("CEINM").cast(DecimalType(18, 4)))\
-        .withColumn("BLCKD_STCK", col("CSPEM").cast(DecimalType(18, 4)))\
+        .withColumn("SPCL_STCK_IND", col("SOBKZ"))\
+        .withColumn("PRTY_NUM", col("KUNNR"))\
+        .withColumn("UNRSTRCTD_STCK", col("KULAB").cast(DecimalType(18, 4)))\
+        .withColumn("IN_TRNSFR_STCK", col("KUUML").cast(DecimalType(18, 4)))\
+        .withColumn("QLTY_INSP_STCK", col("KUINS").cast(DecimalType(18, 4)))\
+        .withColumn("RSTRCTD_STCK", col("KUEIN").cast(DecimalType(18, 4)))\
+        .withColumn("BLCKD_STCK", lit(None).cast(DecimalType(18, 4)))\
         .withColumn(
           "CRT_DTTM",
           when((col("ERSDA") == lit("00000000")), lit(None))\
             .when((length(col("ERSDA")) < lit(8)), lit(None))\
             .otherwise(to_timestamp(col("ERSDA"), "yyyyMMdd"))
         )\
-        .withColumn("RTRNS", col("CRETM").cast(DecimalType(18, 4)))\
+        .withColumn("RTRNS", lit(None).cast(DecimalType(18, 4)))\
         .withColumn("BASE_UOM_CD", lookup("LU_MARA_MEINS", col("MATNR")).getField("MEINS"))\
         .withColumn("STO_IN_TRNST_QTY", lit(None).cast(DecimalType(18, 4)))\
         .withColumn("PLNT_IN_TRNST_QTY", lit(None).cast(DecimalType(18, 4)))\
