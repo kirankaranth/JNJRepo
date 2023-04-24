@@ -1,6 +1,6 @@
 import unittest
 
-from test.sap_md_matl_inv_p01.graph.test_SchemaTransform_5_MSLB import *
+
 
 if __name__ == "__main__":
     runner = unittest.TextTestRunner()
