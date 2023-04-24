@@ -550,5 +550,6 @@ def Join_1(spark: SparkSession, VBAP: DataFrame, VBAK: DataFrame, VBKD: DataFram
         trim(col("VBAP.FMFGUS_KEY")).alias("US_FED_GOVT_FLD"), 
         trim(col("VBAP.WRF_CHARSTC1")).alias("CHAR_VAL_1"), 
         trim(col("VBAP.WRF_CHARSTC2")).alias("CHAR_VAL_2"), 
-        trim(col("VBAP.WRF_CHARSTC3")).alias("CHAR_VAL_3")
+        trim(col("VBAP.WRF_CHARSTC3")).alias("CHAR_VAL_3"), 
+        lookup("LU_SAP_TVROT", col("ROUTE")).getField("BEZEI").alias("RTE_DESC")
     )
