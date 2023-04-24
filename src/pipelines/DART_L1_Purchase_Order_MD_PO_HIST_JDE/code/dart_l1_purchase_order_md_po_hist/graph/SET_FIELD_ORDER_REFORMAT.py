@@ -103,5 +103,7 @@ def SET_FIELD_ORDER_REFORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("DAI_ETL_ID"), 
         col("_pk_"), 
         col("DAI_UPDT_DTTM"), 
-        col("NUM_OF_THE_DOC_COND")
+        col("NUM_OF_THE_DOC_COND"), 
+        col("_deleted_"), 
+        col("AMT_IN_LCL_CRNCY")
     )
