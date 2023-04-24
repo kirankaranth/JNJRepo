@@ -5,5 +5,5 @@ from prophecy.libs import typed_lit
 from md_matl_alt_uom_bw2_deu_djd_gmd_jem_jes_jet_jsw_mtr_sdj.config.ConfigStore import *
 from md_matl_alt_uom_bw2_deu_djd_gmd_jem_jes_jet_jsw_mtr_sdj.udfs.UDFs import *
 
-def SELECT_FIELDS_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
-    return in0.select(col("IMITM"), col("IMLITM"), col("IMUOM1"))
+def UNION(spark: SparkSession, in0: DataFrame, in1: DataFrame, ) -> DataFrame:
+    return in0.unionAll(in1)

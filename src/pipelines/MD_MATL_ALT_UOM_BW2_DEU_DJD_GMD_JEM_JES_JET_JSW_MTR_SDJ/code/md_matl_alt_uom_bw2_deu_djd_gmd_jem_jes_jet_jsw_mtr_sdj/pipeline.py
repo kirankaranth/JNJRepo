@@ -8,13 +8,18 @@ from md_matl_alt_uom_bw2_deu_djd_gmd_jem_jes_jet_jsw_mtr_sdj.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_DS_JDE_01_F4101 = DS_JDE_01_F4101(spark)
-    df_DS_JDE_01_F41002 = DS_JDE_01_F41002(spark)
     df_DEL_FILTER1 = DEL_FILTER1(spark, df_DS_JDE_01_F4101)
-    df_SELECT_FIELDS_1 = SELECT_FIELDS_1(spark, df_DEL_FILTER1)
+    IMLITM_LU(spark, df_DEL_FILTER1)
+    IMUOM1_LU(spark, df_DEL_FILTER1)
+    df_DS_JDE_01_F41002 = DS_JDE_01_F41002(spark)
     df_DEL_FILTER = DEL_FILTER(spark, df_DS_JDE_01_F41002)
-    df_SELECT_FIELDS = SELECT_FIELDS(spark, df_DEL_FILTER)
-    df_Join_1 = Join_1(spark, df_SELECT_FIELDS, df_SELECT_FIELDS_1)
-    df_SchemaTransform_1 = SchemaTransform_1(spark, df_Join_1)
+    df_DISTINCT_ITEM = DISTINCT_ITEM(spark, df_DEL_FILTER)
+    df_ITEM_BASE_UOM = ITEM_BASE_UOM(spark, df_DISTINCT_ITEM)
+    df_UMRUM_JOIN = UMRUM_JOIN(spark, df_ITEM_BASE_UOM, df_DEL_FILTER)
+    df_UMUM_JOIN = UMUM_JOIN(spark, df_ITEM_BASE_UOM, df_DEL_FILTER)
+    df_UNION = UNION(spark, df_UMRUM_JOIN, df_UMUM_JOIN)
+    df_DE_DUP = DE_DUP(spark, df_UNION)
+    df_SchemaTransform_1 = SchemaTransform_1(spark, df_DE_DUP)
     df_FINAL_SELECT = FINAL_SELECT(spark, df_SchemaTransform_1)
     MD_MATL_ALT_UOM(spark, df_FINAL_SELECT)
 
