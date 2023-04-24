@@ -82,7 +82,7 @@
       },
       "fabrics" : { },
       "instances" : { },
-      "selected" : "djd",
+      "selected" : "bw2",
       "nonEditable" : [ ],
       "isSubscribedPipelineWithPipelineConfigs" : false
     },
@@ -97,7 +97,7 @@
     "interimModeEnabled" : true,
     "visualCodeInterimMode" : "Disabled",
     "recordsLimit" : {
-      "enabled" : true,
+      "enabled" : false,
       "value" : 5000
     },
     "topLevelPackage" : "md_matl_alt_uom_bw2_deu_djd_gmd_jem_jes_jet_jsw_mtr_sdj",
@@ -199,6 +199,18 @@
     "sourcePort" : "wuHqkzK9QtVr3YJdkKjzW$$6njzHlbxgO7ohFE-Eoq3D",
     "target" : "69f_asg3mb6kDkSxspp4H$$QQq062xoXOwkOzvA6vi0G",
     "targetPort" : "d_0NBxxoSd7lbLFosH1c3$$XBtXQ6eyKzK9OW8lMnUz8"
+  }, {
+    "id" : "l1vYzISXKlt41ltHvln36",
+    "source" : "GPpL70vOG56FhbvEpiDHp$$y36puJMxnHpchxalxgMVK",
+    "sourcePort" : "r6bWqEeFh0dOkehW2o47n$$gDnxf7PK5bv_kAMX8eS1l",
+    "target" : "cKarztViyMngzJ2CXnZGm$$4cavQwIy3YCdsuo43jeME",
+    "targetPort" : "YZvbfvB5gyUoHRvqLs5p_$$edT31I38CxGZ7kJFFQvZe"
+  }, {
+    "id" : "kjtNZFVYXv54-f0vaKY6a$$2e4MwsTRSZDEXau4q09V5",
+    "source" : "cKarztViyMngzJ2CXnZGm$$4cavQwIy3YCdsuo43jeME",
+    "sourcePort" : "54gPWQ2mChxn3xYs5PsJz$$YRKXdJb7XsKE21nyhkV6o",
+    "target" : "C7epOB5wQwsKcInySj7Nj$$z71kHNvjFAjxYIoihd8Wi",
+    "targetPort" : "xAvF8swHZqd9rc0Z3YMvJ$$aS7JOulKuvQlLdUSyP818"
   } ],
   "processes" : {
     "jhWAIQ2lr-N0XBZ7aNiZS$$Hx-x4t92qRfqZz7OUiYk6" : {
@@ -2842,7 +2854,7 @@
       "metadata" : {
         "label" : "FINAL_SELECT",
         "slug" : "FINAL_SELECT",
-        "x" : 200,
+        "x" : 220,
         "y" : -260,
         "phase" : 0,
         "cache" : false,
@@ -3139,6 +3151,271 @@
             "expression" : "_l1_upt_"
           },
           "description" : ""
+        } ]
+      }
+    },
+    "C7epOB5wQwsKcInySj7Nj$$z71kHNvjFAjxYIoihd8Wi" : {
+      "id" : "C7epOB5wQwsKcInySj7Nj$$z71kHNvjFAjxYIoihd8Wi",
+      "component" : "Filter",
+      "metadata" : {
+        "label" : "DUPS",
+        "slug" : "DUPS",
+        "x" : 500,
+        "y" : -500,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "xAvF8swHZqd9rc0Z3YMvJ$$aS7JOulKuvQlLdUSyP818",
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "SRC_SYS_CD",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MATL_NUM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ALT_UOM_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "Records",
+              "type" : "long",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Q4BrIHubTsjjBdBtn0mxP$$UcN54tQybKK4OLer4eLxf",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ "xAvF8swHZqd9rc0Z3YMvJ$$aS7JOulKuvQlLdUSyP818##Records" ],
+        "condition" : {
+          "format" : "sql",
+          "expression" : "Records >1"
+        }
+      }
+    },
+    "cKarztViyMngzJ2CXnZGm$$4cavQwIy3YCdsuo43jeME" : {
+      "id" : "cKarztViyMngzJ2CXnZGm$$4cavQwIy3YCdsuo43jeME",
+      "component" : "Aggregate",
+      "metadata" : {
+        "label" : "DUP_CHECK",
+        "slug" : "DUP_CHECK",
+        "x" : 380,
+        "y" : -500,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "YZvbfvB5gyUoHRvqLs5p_$$edT31I38CxGZ7kJFFQvZe",
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "SRC_SYS_CD",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MATL_NUM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ALT_UOM_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BASE_UOM_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "FACT_NUMRTR_MEAS",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_deleted_",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_l0_upt_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DAI_ETL_ID",
+              "type" : "integer",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DAI_CRT_DTTM",
+              "type" : "timestamp",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DAI_UPDT_DTTM",
+              "type" : "timestamp",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_pk_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_pk_md5_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_l1_upt_",
+              "type" : "timestamp",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "54gPWQ2mChxn3xYs5PsJz$$YRKXdJb7XsKE21nyhkV6o",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "allIns" : false,
+        "doPivot" : false,
+        "aggregate" : [ {
+          "target" : "Records",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "Count(*)"
+          },
+          "description" : "",
+          "_row_id" : ""
+        } ],
+        "allowSelection" : true,
+        "pivotColumn" : null,
+        "pivotValues" : [ ],
+        "activeTab" : "groupBy",
+        "columnsSelector" : [ "YZvbfvB5gyUoHRvqLs5p_$$edT31I38CxGZ7kJFFQvZe##SRC_SYS_CD", "YZvbfvB5gyUoHRvqLs5p_$$edT31I38CxGZ7kJFFQvZe##MATL_NUM", "YZvbfvB5gyUoHRvqLs5p_$$edT31I38CxGZ7kJFFQvZe##ALT_UOM_CD" ],
+        "groupBy" : [ {
+          "target" : "SRC_SYS_CD",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "SRC_SYS_CD"
+          },
+          "description" : "",
+          "_row_id" : null
+        }, {
+          "target" : "MATL_NUM",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "MATL_NUM"
+          },
+          "description" : "",
+          "_row_id" : null
+        }, {
+          "target" : "ALT_UOM_CD",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "ALT_UOM_CD"
+          },
+          "description" : "",
+          "_row_id" : null
         } ]
       }
     },

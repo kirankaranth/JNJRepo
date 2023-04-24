@@ -21,6 +21,8 @@ def pipeline(spark: SparkSession) -> None:
     df_DE_DUP = DE_DUP(spark, df_UNION)
     df_SchemaTransform_1 = SchemaTransform_1(spark, df_DE_DUP)
     df_FINAL_SELECT = FINAL_SELECT(spark, df_SchemaTransform_1)
+    df_DUP_CHECK = DUP_CHECK(spark, df_FINAL_SELECT)
+    df_DUPS = DUPS(spark, df_DUP_CHECK)
     MD_MATL_ALT_UOM(spark, df_FINAL_SELECT)
 
 def main():
