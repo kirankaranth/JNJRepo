@@ -10,18 +10,17 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("SRC_SYS_CD", lit(Config.sourceSystem))\
         .withColumn("BILL_DOC", col("VBELN"))\
         .withColumn("SLORG_CD", trim(col("VKORG")))\
-        .withColumn("SLORG_DESC", trim(col("TVKOT_VTEXT")))\
+        .withColumn("SLORG_DESC", lookup("LU_SAP_TVKOT", col("VKORG")).getField("VTEXT"))\
         .withColumn("DSTR_CHNL_CD", trim(col("VTWEG")))\
-        .withColumn("DSTR_CHNL_DESC", trim(col("TVTWT_VTEXT")))\
+        .withColumn("DSTR_CHNL_DESC", lookup("LU_SAP_TVTWT", col("VTWEG")).getField("VTEXT"))\
         .withColumn("SLS_DIV_CD", trim(col("SPART")))\
-        .withColumn("SLS_DIV_DESC", trim(col("TSPAT_VTEXT")))\
+        .withColumn("SLS_DIV_DESC", lookup("LU_SAP_TSPAT", col("SPART")).getField("VTEXT"))\
         .withColumn("BILL_TYPE_CD", trim(col("FKART")))\
-        .withColumn("BILL_TYPE_DESC", trim(col("TVFKT_VTEXT")))\
+        .withColumn("BILL_TYPE_DESC", lookup("LU_SAP_TVFKT", col("FKART")).getField("VTEXT"))\
         .withColumn("BILL_CAT", trim(col("FKTYP")))\
         .withColumn("DOC_CAT", trim(col("VBTYP")))\
         .withColumn("PYR", trim(col("KUNRG")))\
         .withColumn("SOLD_TO", trim(col("KUNAG")))\
-        .withColumn("SHIP_TO", trim(col("KUNWE")))\
         .withColumn(
           "CRT_DTTM",
           when((col("ERDAT") == lit("00000000")), lit(None))\
@@ -86,8 +85,6 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         )\
         .withColumn("PMT_REF", trim(col("KIDNO")))\
         .withColumn("NUM_OF_PG", trim(col("NUMPG")).cast(IntegerType()))\
-        .withColumn("PSTNG_BILL_STS_CD", trim(col("BUCHK")))\
-        .withColumn("INVC_LIST_STS_CD", trim(col("RELIK")))\
         .withColumn("CUST_PRC_GRP", trim(col("KONDA")))\
         .withColumn("SLS_DSTRC", trim(col("BZIRK")))\
         .withColumn("PRC_LIST_TYPE", trim(col("PLTYP")))\
@@ -99,6 +96,9 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("TAX_CLSN_7", trim(col("TAXK7")))\
         .withColumn("TAX_CLSN_8", trim(col("TAXK8")))\
         .withColumn("TAX_CLSN_9", trim(col("TAXK9")))\
+        .withColumn("INDSTR_CD_1", trim(col("ZZ_IND_CODE1")))\
+        .withColumn("INDSTR_CD_2", trim(col("ZZ_IND_CODE2")))\
+        .withColumn("PRCH_ORDR_TYPE", trim(col("ZZ_POTYPE")))\
         .withColumn("BILL_DOC_IS_CAN", trim(col("FKSTO")))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\

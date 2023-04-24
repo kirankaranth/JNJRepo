@@ -7,7 +7,7 @@ setup(
     package_data = {'prophecy_config_instances' : ['*.json', '*.py']},
     description = 'workflow',
     install_requires = [
-'prophecy-libs==1.5.0'],
+'prophecy-libs==1.4.8'],
     entry_points = {
 'console_scripts' : [
 'main = md_matl_alt_uom_bw2_deu_djd_gmd_jem_jes_jet_jsw_mtr_sdj.pipeline:main'], },
