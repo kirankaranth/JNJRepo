@@ -125,7 +125,7 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("STK_SGMNT", expr(Config.STK_SGMNT))\
         .withColumn("UOM_FROM_SRVC_ENT_SHT", expr(Config.UOM_FROM_SRVC_ENT_SHT))\
         .withColumn("LOGL_SYS", expr(Config.LOGL_SYS))\
-        .withColumn("PCDR_FOR_UPDT_SCHED_LINE_QTY", trim(col("et_upd")))\
+        .withColumn("PCDR_FOR_UPDT_SCHED_LINE_QTY", expr(Config.PCDR_FOR_UPDT_SCHED_LINE_QTY))\
         .withColumn("QTY_IN_PAREL_UNIT_OF_MEAS", expr(Config.QTY_IN_PAREL_UNIT_OF_MEAS))\
         .withColumn("GOODS_RCPT_BLOK_STK", expr(Config.GOODS_RCPT_BLOK_STK))\
         .withColumn("TYPE_OF_PAREL_UNIT_OF_MEAS", expr(Config.TYPE_OF_PAREL_UNIT_OF_MEAS))\

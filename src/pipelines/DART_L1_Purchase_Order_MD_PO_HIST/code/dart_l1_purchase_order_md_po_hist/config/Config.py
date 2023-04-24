@@ -46,6 +46,7 @@ class Config(ConfigBase):
             ACC_AT_ORIG: str=None,
             VALUT_GOODS_RCPT_BLOK_STK: str=None,
             AMT_IN_DOC_CRNCY: str=None,
+            PCDR_FOR_UPDT_SCHED_LINE_QTY: str=None,
             **kwargs
     ):
         self.spark = None
@@ -90,7 +91,8 @@ class Config(ConfigBase):
             QTY2, 
             ACC_AT_ORIG, 
             VALUT_GOODS_RCPT_BLOK_STK, 
-            AMT_IN_DOC_CRNCY
+            AMT_IN_DOC_CRNCY, 
+            PCDR_FOR_UPDT_SCHED_LINE_QTY
         )
 
     def update(
@@ -136,6 +138,7 @@ class Config(ConfigBase):
             ACC_AT_ORIG: str="CAST(null as string)",
             VALUT_GOODS_RCPT_BLOK_STK: str="CAST(null as decimal(18,4))",
             AMT_IN_DOC_CRNCY: str="CAST(null as decimal(18,4))",
+            PCDR_FOR_UPDT_SCHED_LINE_QTY: str="trim(et_upd)",
             **kwargs
     ):
         prophecy_spark = self.spark
@@ -180,4 +183,5 @@ class Config(ConfigBase):
         self.ACC_AT_ORIG = ACC_AT_ORIG
         self.VALUT_GOODS_RCPT_BLOK_STK = VALUT_GOODS_RCPT_BLOK_STK
         self.AMT_IN_DOC_CRNCY = AMT_IN_DOC_CRNCY
+        self.PCDR_FOR_UPDT_SCHED_LINE_QTY = PCDR_FOR_UPDT_SCHED_LINE_QTY
         pass
