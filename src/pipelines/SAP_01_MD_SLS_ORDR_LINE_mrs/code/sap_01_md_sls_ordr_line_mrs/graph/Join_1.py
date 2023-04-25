@@ -332,22 +332,5 @@ def Join_1(spark: SparkSession, VBAP: DataFrame, VBAK: DataFrame, VBKD: DataFram
         col("VBAP._upt_").alias("_l0_upt_"), 
         lookup("LU_SAP_TVM4T", col("MVGR4")).getField("BEZEI").alias("MATL_GRP_4_DESC"), 
         trim(col("VBAP._bitmym_svalue")).cast(DecimalType(18, 4)).alias("EQUIP_RSDL_VAL"), 
-        trim(col("VBAP.FSH_SEASON_YEAR")).alias("SEASN_YR"), 
-        trim(col("VBAP.FSH_SEASON")).alias("FSH_SEASON"), 
-        trim(col("VBAP.FSH_COLLECTION")).alias("FSH_COLLECTION"), 
-        trim(col("VBAP.FSH_THEME")).alias("FSH_THEME"), 
-        trim(col("VBAP.FSH_CRSD")).alias("FSH_CRSD"), 
-        trim(col("VBAP.FSH_SEAREF")).alias("FSH_SEAREF"), 
-        when((col("VBAP.FSH_CANDATE") == lit("00000000")), lit(None))\
-          .otherwise(to_timestamp(col("VBAP.FSH_CANDATE"), "yyyyMMdd"))\
-          .alias("FSH_CANDATE"), 
-        trim(col("VBAP.FSH_PSM_PFM_SPLIT")).alias("FSH_PSM_PFM_SPLIT"), 
-        trim(col("VBAP.FSH_VAS_REL")).alias("FSH_VAS_REL"), 
-        trim(col("VBAP.FSH_VAS_PRNT_ID")).alias("FSH_VAS_PRNT_ID"), 
-        trim(col("VBAP.FSH_TRANSACTION")).alias("FSH_TRANSACTION"), 
-        trim(col("VBAP.FSH_ITEM_GROUP")).alias("FSH_ITEM_GROUP"), 
-        trim(col("VBAP.FSH_ITEM")).alias("FSH_ITEM"), 
-        trim(col("VBAP.FSH_VASREF")).alias("FSH_VASREF"), 
-        trim(col("VBAP.FSH_GRID_COND_REC")).alias("FSH_GRID_COND_REC"), 
-        trim(col("VBAP.FSH_PQR_UEPOS")).alias("FSH_PQR_UEPOS")
+        trim(col("VBAP.FSH_SEASON_YEAR")).alias("SEASN_YR")
     )
