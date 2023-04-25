@@ -4,8 +4,8 @@ from pyspark.sql.types import *
 from argparse import Namespace
 from prophecy.test import BaseTestCase
 from prophecy.test.utils import *
-from sap_01_md_po_sched_line_delv.graph.NEW_FIELDS import *
-from sap_01_md_po_sched_line_delv.config.ConfigStore import *
+from sap_md_po_sched_line_delv_atl_bba_bbl_bbn_bwi_fsn_geu_hcs_hmd_mbp_mrs_p01_svs_tai_hmd.graph.NEW_FIELDS import *
+from sap_md_po_sched_line_delv_atl_bba_bbl_bbn_bwi_fsn_geu_hcs_hmd_mbp_mrs_p01_svs_tai_hmd.config.ConfigStore import *
 
 
 class NEW_FIELDSTest(BaseTestCase):
@@ -13,14 +13,14 @@ class NEW_FIELDSTest(BaseTestCase):
     def test_unit_test_0(self):
         dfIn0 = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/sap_01_md_po_sched_line_delv/graph/NEW_FIELDS/in0/schema.json',
-            'test/resources/data/sap_01_md_po_sched_line_delv/graph/NEW_FIELDS/in0/data/test_unit_test_0.json',
+            'test/resources/data/sap_md_po_sched_line_delv_atl_bba_bbl_bbn_bwi_fsn_geu_hcs_hmd_mbp_mrs_p01_svs_tai_hmd/graph/NEW_FIELDS/in0/schema.json',
+            'test/resources/data/sap_md_po_sched_line_delv_atl_bba_bbl_bbn_bwi_fsn_geu_hcs_hmd_mbp_mrs_p01_svs_tai_hmd/graph/NEW_FIELDS/in0/data/test_unit_test_0.json',
             'in0'
         )
         dfOut = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/sap_01_md_po_sched_line_delv/graph/NEW_FIELDS/out/schema.json',
-            'test/resources/data/sap_01_md_po_sched_line_delv/graph/NEW_FIELDS/out/data/test_unit_test_0.json',
+            'test/resources/data/sap_md_po_sched_line_delv_atl_bba_bbl_bbn_bwi_fsn_geu_hcs_hmd_mbp_mrs_p01_svs_tai_hmd/graph/NEW_FIELDS/out/schema.json',
+            'test/resources/data/sap_md_po_sched_line_delv_atl_bba_bbl_bbn_bwi_fsn_geu_hcs_hmd_mbp_mrs_p01_svs_tai_hmd/graph/NEW_FIELDS/out/data/test_unit_test_0.json',
             'out'
         )
         dfOutComputed = NEW_FIELDS(self.spark, dfIn0)
@@ -33,14 +33,14 @@ class NEW_FIELDSTest(BaseTestCase):
     def test_unit_test_1(self):
         dfIn0 = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/sap_01_md_po_sched_line_delv/graph/NEW_FIELDS/in0/schema.json',
-            'test/resources/data/sap_01_md_po_sched_line_delv/graph/NEW_FIELDS/in0/data/test_unit_test_1.json',
+            'test/resources/data/sap_md_po_sched_line_delv_atl_bba_bbl_bbn_bwi_fsn_geu_hcs_hmd_mbp_mrs_p01_svs_tai_hmd/graph/NEW_FIELDS/in0/schema.json',
+            'test/resources/data/sap_md_po_sched_line_delv_atl_bba_bbl_bbn_bwi_fsn_geu_hcs_hmd_mbp_mrs_p01_svs_tai_hmd/graph/NEW_FIELDS/in0/data/test_unit_test_1.json',
             'in0'
         )
         dfOut = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/sap_01_md_po_sched_line_delv/graph/NEW_FIELDS/out/schema.json',
-            'test/resources/data/sap_01_md_po_sched_line_delv/graph/NEW_FIELDS/out/data/test_unit_test_1.json',
+            'test/resources/data/sap_md_po_sched_line_delv_atl_bba_bbl_bbn_bwi_fsn_geu_hcs_hmd_mbp_mrs_p01_svs_tai_hmd/graph/NEW_FIELDS/out/schema.json',
+            'test/resources/data/sap_md_po_sched_line_delv_atl_bba_bbl_bbn_bwi_fsn_geu_hcs_hmd_mbp_mrs_p01_svs_tai_hmd/graph/NEW_FIELDS/out/data/test_unit_test_1.json',
             'out'
         )
         dfOutComputed = NEW_FIELDS(self.spark, dfIn0)
