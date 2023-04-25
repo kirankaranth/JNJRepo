@@ -22,7 +22,7 @@ class Config(ConfigBase):
             sourceDatabase: str="jes",
             sourceTable: str="f4311",
             DAI_ETL_ID: int=0,
-            targetSchema: str="dev_l1_md",
+            targetSchema: str="dev_md_l1",
             configDatabase: str=None,
             **kwargs
     ):

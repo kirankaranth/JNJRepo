@@ -6,4 +6,4 @@ from jde_01_md_po_sched_line_delv.config.ConfigStore import *
 from jde_01_md_po_sched_line_delv.udfs.UDFs import *
 
 def JDE_F4311(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM {Config.sourceDatabase}.{Config.sourceTable} WHERE _deleted_ = 'F' ")
+    return spark.read.table(f"{Config.sourceDatabase}.{Config.sourceTable}")
