@@ -24,7 +24,14 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("FCTR_DNMNTR_MEAS", trim(col("UMVKN")).cast(DecimalType(18, 4)))\
         .withColumn(
           "ACTL_GI_DTTM",
-          when((col("WADAT_IST") == lit("00000000")), lit(None)).otherwise(to_timestamp(col("WADAT_IST"), "yyyyMMdd"))
+          when(
+              (
+                ((col("WADAT_IST") == lit("00000000")) | (length(regexp_replace(col("WADAT_IST"), "(\\d+)", "")) > lit(0)))
+                | (length(col("WADAT_IST")) < lit(8))
+              ), 
+              lit(None)
+            )\
+            .otherwise(to_timestamp(col("WADAT_IST"), "yyyyMMdd"))
         )\
         .withColumn("ACTL_SLS_UNIT_DELV_QTY", trim(col("LFIMG")).cast(DecimalType(18, 4)))\
         .withColumn("ACTL_SKU_DELV_QTY", trim(col("LGMNG")).cast(DecimalType(18, 4)))\
@@ -34,7 +41,14 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("CNFRM_STS_CD", trim(col("BESTA")))\
         .withColumn(
           "MFG_DTTM",
-          when((col("HSDAT") == lit("00000000")), lit(None)).otherwise(to_timestamp(col("HSDAT"), "yyyyMMdd"))
+          when(
+              (
+                ((col("HSDAT") == lit("00000000")) | (length(regexp_replace(col("HSDAT"), "(\\d+)", "")) > lit(0)))
+                | (length(col("HSDAT")) < lit(8))
+              ), 
+              lit(None)
+            )\
+            .otherwise(to_timestamp(col("HSDAT"), "yyyyMMdd"))
         )\
         .withColumn("DELV_BILL_STS_CD", trim(col("FKSTA")))\
         .withColumn("DELV_ICMPT_STS_CD", trim(col("UVVLK")))\
@@ -44,12 +58,12 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
           "EXP_DTTM",
           when(
               (
-                ((col("VFDAT") == lit("00000000")) | (length(regexp_replace(col("VFDAT"), "D+", "")) != lit(8)))
-                | (length(col("VFDAT")) < lit(8))
+                ((col("VFDAT") == lit("00000000")) | (length(regexp_replace(col("vfdat"), "(\\d+)", "")) > lit(0)))
+                | (length(col("vfdat")) < lit(8))
               ), 
               lit(None)
             )\
-            .otherwise(to_timestamp(col("VFDAT"), "yyyyMMdd"))
+            .otherwise(to_timestamp(col("vfdat"), "yyyyMMdd"))
         )\
         .withColumn("GM_ICMPT_STS_CD", trim(col("UVWAK")))\
         .withColumn("GM_STS_CD", trim(col("WBSTA")))\
@@ -76,7 +90,13 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("WM_STS_CD", trim(col("LVSTA")))\
         .withColumn(
           "CRT_DTTM",
-          when((col("ERDAT") == lit("00000000")), lit(None))\
+          when(
+              (
+                ((col("ERDAT") == lit("00000000")) | (length(regexp_replace(col("ERDAT"), "(\\d+)", "")) > lit(0)))
+                | (length(col("ERDAT")) < lit(8))
+              ), 
+              lit(None)
+            )\
             .otherwise(to_timestamp(concat(col("ERDAT"), col("ERZET")), "yyyyMMddHHmmss"))
         )\
         .withColumn("ITM_TYPE", trim(col("POSAR")))\
