@@ -6,4 +6,4 @@ from sap_md_delv_line_hm2.config.ConfigStore import *
 from sap_md_delv_line_hm2.udfs.UDFs import *
 
 def DS_SAP_01_TVM4T(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM {Config.sourceDatabase}.tvm4t WHERE _deleted_ = 'F' and SPRAS = 'E'")
+    return spark.read.table(f"{Config.sourceDatabase}.tvm4t")
