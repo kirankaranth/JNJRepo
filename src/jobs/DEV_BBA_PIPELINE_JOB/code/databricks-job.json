@@ -30,10 +30,10 @@
     }
   }, {
     "PipelineComponent" : {
-      "id" : "",
+      "id" : "pipelines/SAP_01_MD_PO_SCHED_LINE_DELV",
       "nodeName" : "MD_PO_SCHED_LINE_DELV",
-      "path" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/.jar",
-      "language" : "scala"
+      "path" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_PO_SCHED_LINE_DELV_ATL_BBA_BBL_BBN_BWI_FSN_GEU_HCS_HMD_MBP_MRS_P01_SVS_TAI_HMD-1.0-py3-none-any.whl",
+      "language" : "python"
     }
   }, {
     "PipelineComponent" : {
@@ -57,7 +57,7 @@
           "prophecy.metadata.is.interactive.run" : "false",
           "prophecy.project.id" : "__PROJECT_ID_PLACEHOLDER__",
           "prophecy.execution.service.url" : "wss://prophecy.jnj.com/execution/eventws",
-          "prophecy.packages.path" : "{\"\":\"dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/.jar\",\"pipelines/SAP_01_MD_BILL_DOC_HDR\":\"dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_01_MD_BILL_DOC_HDR_BBA_BBN-1.0-py3-none-any.whl\",\"pipelines/SAP_MD_MATL_INV_BBA_BBL_BBN_GEU_MRS_MBP\":\"dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_MATL_INV_BBA_BBL_BBN_GEU_MRS-1.0-py3-none-any.whl\",\"pipelines/SAP_01_MD_SER_NUM_STOCK_SGMNT\":\"dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_SER_NUM_STOCK_SGMNT_ATL_BBA_BBL_BBN_MRS-1.0-py3-none-any.whl\",\"pipelines/SAP_01_MD_SLS_DOC_PTNR_FUNC\":\"dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_01_MD_SLS_DOC_PTNR_FUNC-1.0-py3-none-any.whl\",\"pipelines/SAP_MD_DELV_LINE_BBA_BBL_BBN\":\"dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_DELV_LINE_BBA_BBL_BBN-1.0-py3-none-any.whl\"}",
+          "prophecy.packages.path" : "{\"pipelines/SAP_01_MD_BILL_DOC_HDR\":\"dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_01_MD_BILL_DOC_HDR_BBA_BBN-1.0-py3-none-any.whl\",\"pipelines/SAP_01_MD_PO_SCHED_LINE_DELV\":\"dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_PO_SCHED_LINE_DELV_ATL_BBA_BBL_BBN_BWI_FSN_GEU_HCS_HMD_MBP_MRS_P01_SVS_TAI_HMD-1.0-py3-none-any.whl\",\"pipelines/SAP_MD_MATL_INV_BBA_BBL_BBN_GEU_MRS_MBP\":\"dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_MATL_INV_BBA_BBL_BBN_GEU_MRS-1.0-py3-none-any.whl\",\"pipelines/SAP_01_MD_SER_NUM_STOCK_SGMNT\":\"dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_SER_NUM_STOCK_SGMNT_ATL_BBA_BBL_BBN_MRS-1.0-py3-none-any.whl\",\"pipelines/SAP_01_MD_SLS_DOC_PTNR_FUNC\":\"dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_01_MD_SLS_DOC_PTNR_FUNC-1.0-py3-none-any.whl\",\"pipelines/SAP_MD_DELV_LINE_BBA_BBL_BBN\":\"dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_DELV_LINE_BBA_BBL_BBN-1.0-py3-none-any.whl\"}",
           "prophecy.metadata.job.branch" : "__PROJECT_RELEASE_VERSION_PLACEHOLDER__",
           "prophecy.metadata.url" : "__PROPHECY_URL_PLACEHOLDER__",
           "prophecy.execution.metrics.disabled" : false
@@ -158,9 +158,10 @@
     }, {
       "task_key" : "MD_PO_SCHED_LINE_DELV",
       "job_cluster_key" : "BBA_PIPELINE_JOB_default_Prophecy_Small",
-      "spark_jar_task" : {
-        "main_class_name" : "Main",
-        "parameters" : [ "-O", "{}" ]
+      "python_wheel_task" : {
+        "package_name" : "SAP_MD_PO_SCHED_LINE_DELV_ATL_BBA_BBL_BBN_BWI_FSN_GEU_HCS_HMD_MBP_MRS_P01_SVS_TAI_HMD",
+        "entry_point" : "main",
+        "parameters" : [ "-i", "bba", "-O", "{}" ]
       },
       "libraries" : [ {
         "maven" : {
@@ -171,7 +172,7 @@
           "package" : "prophecy-libs==1.5.0"
         }
       }, {
-        "jar" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/.jar"
+        "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_PO_SCHED_LINE_DELV_ATL_BBA_BBL_BBN_BWI_FSN_GEU_HCS_HMD_MBP_MRS_P01_SVS_TAI_HMD-1.0-py3-none-any.whl"
       } ],
       "email_notifications" : { },
       "max_retries" : 0
