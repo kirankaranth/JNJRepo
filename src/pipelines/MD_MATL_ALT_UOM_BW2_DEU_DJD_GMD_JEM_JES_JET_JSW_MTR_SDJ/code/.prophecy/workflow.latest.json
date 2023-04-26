@@ -82,7 +82,7 @@
       },
       "fabrics" : { },
       "instances" : { },
-      "selected" : "bw2",
+      "selected" : "jsw",
       "nonEditable" : [ ],
       "isSubscribedPipelineWithPipelineConfigs" : false
     },
@@ -95,7 +95,7 @@
     "isImported" : false,
     "interimMode" : "Full",
     "interimModeEnabled" : true,
-    "visualCodeInterimMode" : "Disabled",
+    "visualCodeInterimMode" : "IO",
     "recordsLimit" : {
       "enabled" : false,
       "value" : 5000
@@ -219,7 +219,7 @@
       "metadata" : {
         "label" : "DS_JDE_01_F4101",
         "slug" : "DS_JDE_01_F4101",
-        "x" : -1400,
+        "x" : -1500,
         "y" : 0,
         "phase" : 0,
         "cache" : false,
@@ -396,7 +396,7 @@
       "metadata" : {
         "label" : "DE_DUP",
         "slug" : "DE_DUP",
-        "x" : -120,
+        "x" : -100,
         "y" : -260,
         "phase" : 0,
         "cache" : false,
@@ -479,7 +479,7 @@
           "path" : "out",
           "id" : "wuHqkzK9QtVr3YJdkKjzW$$6njzHlbxgO7ohFE-Eoq3D",
           "language" : "sql",
-          "content" : "SELECT \r\n    *\r\nFROM \r\n    (SELECT\r\n        in0.*,\r\n        row_number() OVER(PARTITION BY ITEM, ALT_UOM ORDER BY ITEM, ALT_UOM, JOIN_ORIGIN) row_num\r\n    FROM\r\n        in0) a\r\nWHERE row_num = 1\r\n"
+          "content" : "/*\r\nThis gem is to remove any duplicates from the pipeline. \r\n\r\nSome duplicates arose (as expected) because of the method of doing 2 joins and the union; in examples where the source system \r\nhad the conversion ~ \"both ways\" e.g. EA --> CA = 12 AND CA --> EA = 0.0833.\r\n\r\nIn this situation I wanted to keep the 12 EA in a CA rather than an EA is 0.0833 of case. \r\nI managed this via the JOIN_ORIGIN being a number: 1 where the BASE_UOM = UMUM meaning the UMRUM (related) is the ALT. This\r\nensures that when both calculations exist, we only take the one that says that the ALT_UOM is x number of BASE_UOMs \r\nand not a BASE_UOM is 0.8 number of ALTs\r\n\r\nThere are examples about 30 out of 1 million (0.003%) where there is ONLY the ALT = 0.0833 of the BASE but that is the only data\r\nthere is so we have to go with it.\r\n\r\nThis row_num also takes care of the duplicates on JSW although it does mean that the values brought in are for a ~ random plant \r\n\r\n */\r\n\r\nSELECT \r\n    *\r\nFROM \r\n    (SELECT\r\n        in0.*,\r\n        row_number() OVER(PARTITION BY ITEM, ALT_UOM ORDER BY ITEM, ALT_UOM, JOIN_ORIGIN) row_num\r\n    FROM\r\n        in0) a\r\nWHERE row_num = 1\r\n"
         } ],
         "inputPortNames" : [ "in0" ]
       }
@@ -490,7 +490,7 @@
       "metadata" : {
         "label" : "DS_JDE_01_F41002",
         "slug" : "DS_JDE_01_F41002",
-        "x" : -1400,
+        "x" : -1500,
         "y" : -240,
         "phase" : 0,
         "cache" : false,
@@ -2414,7 +2414,7 @@
         "label" : "UMRUM_JOIN",
         "slug" : "UMRUM_JOIN",
         "x" : -480,
-        "y" : -340,
+        "y" : -500,
         "phase" : 0,
         "cache" : false,
         "detailedStats" : false,
@@ -2692,7 +2692,7 @@
           "target" : "ITEM",
           "expression" : {
             "format" : "sql",
-            "expression" : "coalesce(in0.UMITM,in0.IMLITM)"
+            "expression" : "in0.IMLITM"
           },
           "description" : "",
           "_row_id" : ""
@@ -2750,7 +2750,7 @@
         } ],
         "allIn1" : null,
         "activeTab" : "expressions",
-        "columnsSelector" : [ "W0srfXXdFQF4w2GXUOZwV$$8PGoHs-Q90x4ZjwuF-aDQ##IMUOM1", "W0srfXXdFQF4w2GXUOZwV$$8PGoHs-Q90x4ZjwuF-aDQ##UMITM", "ZamBSSUtqcE_nFXZ6Q54m$$FR6O6BPOgrG6v38Q1ZBKy##UMRUM", "ZamBSSUtqcE_nFXZ6Q54m$$FR6O6BPOgrG6v38Q1ZBKy##UMITM", "W0srfXXdFQF4w2GXUOZwV$$8PGoHs-Q90x4ZjwuF-aDQ##IMUOM1", "ZamBSSUtqcE_nFXZ6Q54m$$FR6O6BPOgrG6v38Q1ZBKy##UMCONV", "W0srfXXdFQF4w2GXUOZwV$$8PGoHs-Q90x4ZjwuF-aDQ##IMLITM", "ZamBSSUtqcE_nFXZ6Q54m$$FR6O6BPOgrG6v38Q1ZBKy##_upt_", "W0srfXXdFQF4w2GXUOZwV$$8PGoHs-Q90x4ZjwuF-aDQ##UMITM", "ZamBSSUtqcE_nFXZ6Q54m$$FR6O6BPOgrG6v38Q1ZBKy##UMUM" ],
+        "columnsSelector" : [ "W0srfXXdFQF4w2GXUOZwV$$8PGoHs-Q90x4ZjwuF-aDQ##IMUOM1", "W0srfXXdFQF4w2GXUOZwV$$8PGoHs-Q90x4ZjwuF-aDQ##UMITM", "ZamBSSUtqcE_nFXZ6Q54m$$FR6O6BPOgrG6v38Q1ZBKy##UMRUM", "ZamBSSUtqcE_nFXZ6Q54m$$FR6O6BPOgrG6v38Q1ZBKy##UMITM", "W0srfXXdFQF4w2GXUOZwV$$8PGoHs-Q90x4ZjwuF-aDQ##IMUOM1", "ZamBSSUtqcE_nFXZ6Q54m$$FR6O6BPOgrG6v38Q1ZBKy##UMCONV", "W0srfXXdFQF4w2GXUOZwV$$8PGoHs-Q90x4ZjwuF-aDQ##IMLITM", "ZamBSSUtqcE_nFXZ6Q54m$$FR6O6BPOgrG6v38Q1ZBKy##_upt_", "ZamBSSUtqcE_nFXZ6Q54m$$FR6O6BPOgrG6v38Q1ZBKy##UMUM" ],
         "allIn0" : null,
         "whereClause" : null,
         "headAlias" : "in0"
@@ -2762,7 +2762,7 @@
       "metadata" : {
         "label" : "ITEM_BASE_UOM",
         "slug" : "ITEM_BASE_UOM",
-        "x" : -660,
+        "x" : -720,
         "y" : -240,
         "phase" : 0,
         "cache" : false,
@@ -2854,7 +2854,7 @@
       "metadata" : {
         "label" : "FINAL_SELECT",
         "slug" : "FINAL_SELECT",
-        "x" : 220,
+        "x" : 260,
         "y" : -260,
         "phase" : 0,
         "cache" : false,
@@ -3234,8 +3234,8 @@
       "metadata" : {
         "label" : "DUP_CHECK",
         "slug" : "DUP_CHECK",
-        "x" : 380,
-        "y" : -500,
+        "x" : 400,
+        "y" : -380,
         "phase" : 0,
         "cache" : false,
         "detailedStats" : false,
@@ -7224,7 +7224,7 @@
         "label" : "UMUM_JOIN",
         "slug" : "UMUM_JOIN",
         "x" : -480,
-        "y" : -140,
+        "y" : 20,
         "phase" : 0,
         "cache" : false,
         "detailedStats" : false,
@@ -7502,7 +7502,7 @@
           "target" : "ITEM",
           "expression" : {
             "format" : "sql",
-            "expression" : "coalesce(in0.UMITM,in0.IMLITM)"
+            "expression" : "in0.IMLITM"
           },
           "description" : "",
           "_row_id" : ""
@@ -7560,7 +7560,7 @@
         } ],
         "allIn1" : null,
         "activeTab" : "expressions",
-        "columnsSelector" : [ "UDWe44E_am-4JQLhBcnRC$$rpWWib8K_RZ5ls1EZcEDr##UMUM", "TYWLQ68m1YJWOIe4b_lmd$$d7TXgOQs01VZkLAV9EicA##UMITM", "TYWLQ68m1YJWOIe4b_lmd$$d7TXgOQs01VZkLAV9EicA##IMUOM1", "UDWe44E_am-4JQLhBcnRC$$rpWWib8K_RZ5ls1EZcEDr##UMITM", "TYWLQ68m1YJWOIe4b_lmd$$d7TXgOQs01VZkLAV9EicA##UMITM", "UDWe44E_am-4JQLhBcnRC$$rpWWib8K_RZ5ls1EZcEDr##UMRUM", "UDWe44E_am-4JQLhBcnRC$$rpWWib8K_RZ5ls1EZcEDr##_upt_", "UDWe44E_am-4JQLhBcnRC$$rpWWib8K_RZ5ls1EZcEDr##UMCONV", "TYWLQ68m1YJWOIe4b_lmd$$d7TXgOQs01VZkLAV9EicA##IMLITM", "TYWLQ68m1YJWOIe4b_lmd$$d7TXgOQs01VZkLAV9EicA##IMUOM1" ],
+        "columnsSelector" : [ "UDWe44E_am-4JQLhBcnRC$$rpWWib8K_RZ5ls1EZcEDr##UMUM", "TYWLQ68m1YJWOIe4b_lmd$$d7TXgOQs01VZkLAV9EicA##UMITM", "TYWLQ68m1YJWOIe4b_lmd$$d7TXgOQs01VZkLAV9EicA##IMUOM1", "UDWe44E_am-4JQLhBcnRC$$rpWWib8K_RZ5ls1EZcEDr##UMITM", "UDWe44E_am-4JQLhBcnRC$$rpWWib8K_RZ5ls1EZcEDr##UMRUM", "UDWe44E_am-4JQLhBcnRC$$rpWWib8K_RZ5ls1EZcEDr##_upt_", "UDWe44E_am-4JQLhBcnRC$$rpWWib8K_RZ5ls1EZcEDr##UMCONV", "TYWLQ68m1YJWOIe4b_lmd$$d7TXgOQs01VZkLAV9EicA##IMLITM", "TYWLQ68m1YJWOIe4b_lmd$$d7TXgOQs01VZkLAV9EicA##IMUOM1" ],
         "allIn0" : null,
         "whereClause" : null,
         "headAlias" : "in0"
@@ -7572,7 +7572,7 @@
       "metadata" : {
         "label" : "DISTINCT_ITEM",
         "slug" : "DISTINCT_ITEM",
-        "x" : -840,
+        "x" : -960,
         "y" : -240,
         "phase" : 0,
         "cache" : false,
@@ -8064,7 +8064,7 @@
       "metadata" : {
         "label" : "MD_MATL_ALT_UOM",
         "slug" : "MD_MATL_ALT_UOM",
-        "x" : 400,
+        "x" : 500,
         "y" : -260,
         "phase" : 0,
         "cache" : false,
@@ -8212,7 +8212,7 @@
       "metadata" : {
         "label" : "SchemaTransform_1",
         "slug" : "SchemaTransform_1",
-        "x" : 40,
+        "x" : 80,
         "y" : -260,
         "phase" : 0,
         "cache" : false,
