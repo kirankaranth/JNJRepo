@@ -2,8 +2,8 @@ from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from prophecy.libs import typed_lit
-from sap_01_md_cust.config.ConfigStore import *
-from sap_01_md_cust.udfs.UDFs import *
+from jde_01_md_cust.config.ConfigStore import *
+from jde_01_md_cust.udfs.UDFs import *
 
 def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
@@ -62,8 +62,8 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("PSTL_CD", trim(col("PSTLZ")))\
         .withColumn("RGN", trim(col("REGIO")))\
         .withColumn("TRSPN_ZN", trim(col("LZONE")))\
-        .withColumn("SLS_DOC_BLOK_RSN_TEXT", lookup("LU_SAP_TVAST", col("AUFSD")).getField("VTEXT"))\
-        .withColumn("DESC_INDSTR_KEY", lookup("LU_SAP_T016T", col("BRSCH")).getField("BRTXT"))\
+        .withColumn("SLS_DOC_BLOK_RSN_TEXT", LU_SAP_TVAST(col("AUFSD")).getField("VTEXT"))\
+        .withColumn("DESC_INDSTR_KEY", LU_SAP_T016T(col("BRSCH")).getField("BRTXT"))\
         .withColumn("FST_PHN_NUM", trim(col("TELF1")))\
         .withColumn("FAX_NUM", trim(col("TELFX")))\
         .withColumn("IN_ACCT_ONE_TIME_ACCT", trim(col("XCPDK")))\
@@ -173,13 +173,13 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
           "RNE_ISU_DTTM",
           when((col("RNEDATE") == lit("00000000")), lit(None)).otherwise(to_timestamp(col("RNEDATE"), "yyyyMMdd"))
         )\
-        .withColumn("CNAE", expr(Config.CNAE))\
+        .withColumn("CNAE", trim(col("CNAE")))\
         .withColumn("LEGAL_NATR", trim(col("LEGALNAT")))\
         .withColumn("CRT_NUM", trim(col("CRTN")))\
         .withColumn("ICMS_TAXPY", trim(col("ICMSTAXPAY")))\
         .withColumn("INDSTR_MN_TYPE", trim(col("INDTYP")))\
         .withColumn("TAX_DCLTN_TYPE", trim(col("TDT")))\
-        .withColumn("CO_SIZE", expr(Config.CO_SIZE))\
+        .withColumn("CO_SIZE", trim(col("COMSIZE")))\
         .withColumn("DCLTN_RGMN_PIS_COFINS", trim(col("DECREGPC")))\
         .withColumn("MAX_STCK_HGHT_PKGNG_MATL", trim(col("_VSO_R_PALHGT")).cast(DecimalType(18, 4)))\
         .withColumn("UNIT_LGTH_PKGNG_MATL", trim(col("_VSO_R_PAL_UL")))\
