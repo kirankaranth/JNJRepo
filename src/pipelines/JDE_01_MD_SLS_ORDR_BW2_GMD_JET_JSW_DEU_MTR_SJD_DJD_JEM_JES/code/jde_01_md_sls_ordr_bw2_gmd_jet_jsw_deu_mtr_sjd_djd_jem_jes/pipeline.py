@@ -7,7 +7,7 @@ from prophecy.utils import *
 from jde_01_md_sls_ordr_bw2_gmd_jet_jsw_deu_mtr_sjd_djd_jem_jes.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    pass
+    df_JDE_F4201 = JDE_F4201(spark)
 
 def main():
     spark = SparkSession.builder\
