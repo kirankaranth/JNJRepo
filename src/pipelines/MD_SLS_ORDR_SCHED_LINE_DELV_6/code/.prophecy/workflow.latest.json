@@ -79,7 +79,7 @@
     "isImported" : false,
     "interimMode" : "Full",
     "interimModeEnabled" : true,
-    "visualCodeInterimMode" : "Disabled",
+    "visualCodeInterimMode" : "IO",
     "recordsLimit" : {
       "enabled" : false,
       "value" : 1000
@@ -903,6 +903,15 @@
                 "mappings" : [ ],
                 "tags" : [ ]
               }
+            }, {
+              "name" : "_deleted_",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
             } ]
           },
           "isStreaming" : false
@@ -1675,7 +1684,7 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "2824c28f-8854-406c-91fe-64af860e3ebe##SCHED_LINE_NUM", "2824c28f-8854-406c-91fe-64af860e3ebe##SLS_ORDR_TYPE_CD", "2824c28f-8854-406c-91fe-64af860e3ebe##SCHED_LINE_ITM_NUM", "2824c28f-8854-406c-91fe-64af860e3ebe##SRC_SYS_CD", "2824c28f-8854-406c-91fe-64af860e3ebe##CO_CD", "2824c28f-8854-406c-91fe-64af860e3ebe##SLS_ORDR_DOC_ID" ],
         "transformations" : [ {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
@@ -1779,6 +1788,22 @@
             "expression" : {
               "format" : "sql",
               "expression" : "current_timestamp()"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_deleted_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "'F'"
             }
           },
           "DropColumn" : {
