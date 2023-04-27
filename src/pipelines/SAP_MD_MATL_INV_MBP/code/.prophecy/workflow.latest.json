@@ -135,12 +135,12 @@
     "isImported" : false,
     "interimMode" : "Full",
     "interimModeEnabled" : true,
-    "visualCodeInterimMode" : "Disabled",
+    "visualCodeInterimMode" : "IO",
     "recordsLimit" : {
       "enabled" : true,
-      "value" : 10
+      "value" : 100
     },
-    "topLevelPackage" : "sap_md_matl_inv_bba_bbl_bbn_geu_mrs_mbp",
+    "topLevelPackage" : "sap_md_matl_inv_mbp",
     "configurationVersion" : "v1"
   },
   "connections" : [ {
@@ -689,10 +689,10 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "ofop3x_iI4Qux0EfVg18W$$UD-Hw5Rw4LCa_eYIpY7Sl##MANDT" ],
+        "columnsSelector" : [ "ofop3x_iI4Qux0EfVg18W$$UD-Hw5Rw4LCa_eYIpY7Sl##MANDT", "ofop3x_iI4Qux0EfVg18W$$UD-Hw5Rw4LCa_eYIpY7Sl##_deleted_" ],
         "condition" : {
           "format" : "sql",
-          "expression" : "MANDT = '$MANDT'"
+          "expression" : "_deleted_ = 'F' and MANDT = '$MANDT'"
         }
       }
     },
@@ -1772,7 +1772,7 @@
             }, {
               "name" : "BTCH_STS_CD",
               "type" : "string",
-              "nullable" : true,
+              "nullable" : false,
               "metadata" : {
                 "description" : "",
                 "mappings" : [ ],
@@ -1781,7 +1781,7 @@
             }, {
               "name" : "SPCL_STCK_IND",
               "type" : "string",
-              "nullable" : false,
+              "nullable" : true,
               "metadata" : {
                 "description" : "",
                 "mappings" : [ ],
@@ -2635,7 +2635,7 @@
             "sourceColumn" : "CRT_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "case\r\n  when ERSDA = '00000000' then null\r\n  when length(ERSDA) < 8 then null\r\n  else to_timestamp(ERSDA, \"yyyyMMdd\")\r\nend"
+              "expression" : "case\r\n  when ERSDA = '00000000' then null\r\n  when length(ERSDA) < 8 then null\r\n  else to_timestamp(ERSDA, 'yyyyMMdd')\r\nend"
             }
           },
           "DropColumn" : {
@@ -3216,7 +3216,7 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "VVesScB6Y4U_gaFUd8PIf$$x7WY6jEWxH7iwCZ-gVRyO##CHARG", "VVesScB6Y4U_gaFUd8PIf$$x7WY6jEWxH7iwCZ-gVRyO##LBEIN", "VVesScB6Y4U_gaFUd8PIf$$x7WY6jEWxH7iwCZ-gVRyO##SOBKZ", "VVesScB6Y4U_gaFUd8PIf$$x7WY6jEWxH7iwCZ-gVRyO##MATNR", "VVesScB6Y4U_gaFUd8PIf$$x7WY6jEWxH7iwCZ-gVRyO##LBINS", "VVesScB6Y4U_gaFUd8PIf$$x7WY6jEWxH7iwCZ-gVRyO##LBLAB", "VVesScB6Y4U_gaFUd8PIf$$x7WY6jEWxH7iwCZ-gVRyO##ERSDA", "VVesScB6Y4U_gaFUd8PIf$$x7WY6jEWxH7iwCZ-gVRyO##LIFNR", "VVesScB6Y4U_gaFUd8PIf$$x7WY6jEWxH7iwCZ-gVRyO##WERKS", "VVesScB6Y4U_gaFUd8PIf$$x7WY6jEWxH7iwCZ-gVRyO##_upt_" ],
+        "columnsSelector" : [ "VVesScB6Y4U_gaFUd8PIf$$x7WY6jEWxH7iwCZ-gVRyO##ERSDA", "VVesScB6Y4U_gaFUd8PIf$$x7WY6jEWxH7iwCZ-gVRyO##SOBKZ", "VVesScB6Y4U_gaFUd8PIf$$x7WY6jEWxH7iwCZ-gVRyO##LBEIN", "VVesScB6Y4U_gaFUd8PIf$$x7WY6jEWxH7iwCZ-gVRyO##MATNR", "VVesScB6Y4U_gaFUd8PIf$$x7WY6jEWxH7iwCZ-gVRyO##CHARG", "VVesScB6Y4U_gaFUd8PIf$$x7WY6jEWxH7iwCZ-gVRyO##LIFNR", "VVesScB6Y4U_gaFUd8PIf$$x7WY6jEWxH7iwCZ-gVRyO##WERKS", "VVesScB6Y4U_gaFUd8PIf$$x7WY6jEWxH7iwCZ-gVRyO##_upt_", "VVesScB6Y4U_gaFUd8PIf$$x7WY6jEWxH7iwCZ-gVRyO##LBINS", "VVesScB6Y4U_gaFUd8PIf$$x7WY6jEWxH7iwCZ-gVRyO##LBLAB" ],
         "transformations" : [ {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
@@ -3319,7 +3319,7 @@
             "sourceColumn" : "BTCH_STS_CD",
             "expression" : {
               "format" : "sql",
-              "expression" : "SOBKZ"
+              "expression" : "'#'"
             }
           },
           "DropColumn" : {
@@ -3335,7 +3335,7 @@
             "sourceColumn" : "SPCL_STCK_IND",
             "expression" : {
               "format" : "sql",
-              "expression" : "'#'"
+              "expression" : "SOBKZ"
             }
           },
           "DropColumn" : {
@@ -3447,7 +3447,7 @@
             "sourceColumn" : "CRT_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "case\r\n  when ERSDA = '00000000' then null\r\n  when length(ERSDA) < 8 then null\r\n  else to_timestamp(ERSDA, \"yyyyMMdd\")\r\nend"
+              "expression" : "case\r\n  when ERSDA = '00000000' then null\r\n  when length(ERSDA) < 8 then null\r\n  else to_timestamp(ERSDA, 'yyyyMMdd')\r\nend"
             }
           },
           "DropColumn" : {
@@ -3911,10 +3911,10 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "yvQQSMYLne6zogeXOMSnD$$CpgMKdbR0Pt3vU7c131yw##MANDT" ],
+        "columnsSelector" : [ "yvQQSMYLne6zogeXOMSnD$$CpgMKdbR0Pt3vU7c131yw##_deleted_", "yvQQSMYLne6zogeXOMSnD$$CpgMKdbR0Pt3vU7c131yw##MANDT" ],
         "condition" : {
           "format" : "sql",
-          "expression" : "MANDT = '$MANDT'"
+          "expression" : "_deleted_ = 'F' and MANDT = '$MANDT'"
         }
       }
     },
@@ -4828,7 +4828,7 @@
             }, {
               "name" : "BTCH_STS_CD",
               "type" : "string",
-              "nullable" : true,
+              "nullable" : false,
               "metadata" : {
                 "description" : "",
                 "mappings" : [ ],
@@ -4837,7 +4837,7 @@
             }, {
               "name" : "SPCL_STCK_IND",
               "type" : "string",
-              "nullable" : false,
+              "nullable" : true,
               "metadata" : {
                 "description" : "",
                 "mappings" : [ ],
@@ -5894,7 +5894,7 @@
             "sourceColumn" : "CRT_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "case\r\n  when ERSDA = '00000000' then null\r\n  when length(ERSDA) < 8 then null\r\n  else to_timestamp(ERSDA, \"yyyyMMdd\")\r\nend"
+              "expression" : "case\r\n  when ERSDA = '00000000' then null\r\n  when length(ERSDA) < 8 then null\r\n  else to_timestamp(ERSDA, 'yyyyMMdd')\r\nend"
             }
           },
           "DropColumn" : {
@@ -8230,10 +8230,10 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "FifCkCPQpW6wMQjcvgkw4$$ySGzFtdUiB2Lim_0l1IdE##MANDT" ],
+        "columnsSelector" : [ "FifCkCPQpW6wMQjcvgkw4$$ySGzFtdUiB2Lim_0l1IdE##MANDT", "FifCkCPQpW6wMQjcvgkw4$$ySGzFtdUiB2Lim_0l1IdE##_deleted_" ],
         "condition" : {
           "format" : "sql",
-          "expression" : "MANDT = '$MANDT'"
+          "expression" : "_deleted_ = 'F' and MANDT = '$MANDT'"
         }
       }
     },
@@ -8565,10 +8565,10 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "1F_uJI5yZ0trVRtmnIh_T$$VmNM9qSGSgxhoJWon0vRl##MANDT" ],
+        "columnsSelector" : [ "1F_uJI5yZ0trVRtmnIh_T$$VmNM9qSGSgxhoJWon0vRl##_deleted_", "1F_uJI5yZ0trVRtmnIh_T$$VmNM9qSGSgxhoJWon0vRl##MANDT" ],
         "condition" : {
           "format" : "sql",
-          "expression" : "MANDT = '$MANDT'"
+          "expression" : "_deleted_ = 'F' and MANDT = '$MANDT'"
         }
       }
     },
@@ -8999,10 +8999,10 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "Y2G-_s4Pcf51-hxbjGQ2L$$r_D1UQhOq2eO7DMlfOPLi##MANDT" ],
+        "columnsSelector" : [ "Y2G-_s4Pcf51-hxbjGQ2L$$r_D1UQhOq2eO7DMlfOPLi##MANDT", "Y2G-_s4Pcf51-hxbjGQ2L$$r_D1UQhOq2eO7DMlfOPLi##_deleted_" ],
         "condition" : {
           "format" : "sql",
-          "expression" : "MANDT = '$MANDT'"
+          "expression" : "_deleted_ = 'F' and MANDT = '$MANDT'"
         }
       }
     },
@@ -9082,7 +9082,7 @@
             }, {
               "name" : "BTCH_STS_CD",
               "type" : "string",
-              "nullable" : true,
+              "nullable" : false,
               "metadata" : {
                 "description" : "",
                 "mappings" : [ ],
@@ -9860,10 +9860,10 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "eBkz512Dlktq0JJmeD82N$$sXpwS-9FzQKCHEGos_zit##MANDT" ],
+        "columnsSelector" : [ "eBkz512Dlktq0JJmeD82N$$sXpwS-9FzQKCHEGos_zit##_deleted_", "eBkz512Dlktq0JJmeD82N$$sXpwS-9FzQKCHEGos_zit##MANDT" ],
         "condition" : {
           "format" : "sql",
-          "expression" : "MANDT = '$MANDT'"
+          "expression" : "_deleted_ = 'F' and MANDT = '$MANDT'"
         }
       }
     },
@@ -10651,7 +10651,7 @@
             "sourceColumn" : "CRT_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "case\r\n  when ERSDA = '00000000' then null\r\n  when length(ERSDA) < 8 then null\r\n  else to_timestamp(ERSDA, \"yyyyMMdd\")\r\nend"
+              "expression" : "case\r\n  when ERSDA = '00000000' then null\r\n  when length(ERSDA) < 8 then null\r\n  else to_timestamp(ERSDA, 'yyyyMMdd')\r\nend"
             }
           },
           "DropColumn" : {
@@ -15329,7 +15329,7 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "-y3EId5Zykm_13kMwX58E$$dFOp-xjxvmRVXHE1FT1jL##WERKS", "-y3EId5Zykm_13kMwX58E$$dFOp-xjxvmRVXHE1FT1jL##ERSDA", "-y3EId5Zykm_13kMwX58E$$dFOp-xjxvmRVXHE1FT1jL##MATNR", "-y3EId5Zykm_13kMwX58E$$dFOp-xjxvmRVXHE1FT1jL##LGORT", "-y3EId5Zykm_13kMwX58E$$dFOp-xjxvmRVXHE1FT1jL##CINSM", "-y3EId5Zykm_13kMwX58E$$dFOp-xjxvmRVXHE1FT1jL##CHARG", "-y3EId5Zykm_13kMwX58E$$dFOp-xjxvmRVXHE1FT1jL##CEINM", "-y3EId5Zykm_13kMwX58E$$dFOp-xjxvmRVXHE1FT1jL##CUMLM", "-y3EId5Zykm_13kMwX58E$$dFOp-xjxvmRVXHE1FT1jL##_upt_", "-y3EId5Zykm_13kMwX58E$$dFOp-xjxvmRVXHE1FT1jL##CSPEM", "-y3EId5Zykm_13kMwX58E$$dFOp-xjxvmRVXHE1FT1jL##LFMON", "-y3EId5Zykm_13kMwX58E$$dFOp-xjxvmRVXHE1FT1jL##CRETM", "-y3EId5Zykm_13kMwX58E$$dFOp-xjxvmRVXHE1FT1jL##LFGJA", "-y3EId5Zykm_13kMwX58E$$dFOp-xjxvmRVXHE1FT1jL##CLABS" ],
+        "columnsSelector" : [ "-y3EId5Zykm_13kMwX58E$$dFOp-xjxvmRVXHE1FT1jL##LGORT", "-y3EId5Zykm_13kMwX58E$$dFOp-xjxvmRVXHE1FT1jL##MATNR", "-y3EId5Zykm_13kMwX58E$$dFOp-xjxvmRVXHE1FT1jL##CSPEM", "-y3EId5Zykm_13kMwX58E$$dFOp-xjxvmRVXHE1FT1jL##LFMON", "-y3EId5Zykm_13kMwX58E$$dFOp-xjxvmRVXHE1FT1jL##_upt_", "-y3EId5Zykm_13kMwX58E$$dFOp-xjxvmRVXHE1FT1jL##CLABS", "-y3EId5Zykm_13kMwX58E$$dFOp-xjxvmRVXHE1FT1jL##CRETM", "-y3EId5Zykm_13kMwX58E$$dFOp-xjxvmRVXHE1FT1jL##CHARG", "-y3EId5Zykm_13kMwX58E$$dFOp-xjxvmRVXHE1FT1jL##CEINM", "-y3EId5Zykm_13kMwX58E$$dFOp-xjxvmRVXHE1FT1jL##CINSM", "-y3EId5Zykm_13kMwX58E$$dFOp-xjxvmRVXHE1FT1jL##LFGJA", "-y3EId5Zykm_13kMwX58E$$dFOp-xjxvmRVXHE1FT1jL##ERSDA", "-y3EId5Zykm_13kMwX58E$$dFOp-xjxvmRVXHE1FT1jL##WERKS", "-y3EId5Zykm_13kMwX58E$$dFOp-xjxvmRVXHE1FT1jL##CUMLM" ],
         "transformations" : [ {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
@@ -15560,7 +15560,7 @@
             "sourceColumn" : "CRT_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "case\r\n  when ERSDA = '00000000' then null\r\n  when length(ERSDA) < 8 then null\r\n  else to_timestamp(ERSDA, \"yyyyMMdd\")\r\nend"
+              "expression" : "case\r\n  when ERSDA = '00000000' then null\r\n  when length(ERSDA) < 8 then null\r\n  else to_timestamp(ERSDA, 'yyyyMMdd')\r\nend"
             }
           },
           "DropColumn" : {
