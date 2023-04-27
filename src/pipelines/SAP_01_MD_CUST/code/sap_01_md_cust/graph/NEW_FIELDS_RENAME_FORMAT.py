@@ -158,10 +158,10 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
           when((col("UPTIM") == lit("000000")), lit(None)).otherwise(to_timestamp(col("UPTIM"), "HHmmSS"))
         )\
         .withColumn("CENT_DEL_BLK_MSTR_REC", trim(col("NODEL")))\
-        .withColumn("BUSN_PRPS_CMPLT_FL", trim(col("CVP_XBLCK")))\
-        .withColumn("SUFRAMA_CD", trim(col("SUFRAMA")))\
-        .withColumn("RG_NUM", trim(col("RG")))\
-        .withColumn("ISS_BY", trim(col("EXP")))\
+        .withColumn("BUSN_PRPS_CMPLT_FL", expr(Config.BUSN_PRPS_CMPLT_FL))\
+        .withColumn("SUFRAMA_CD", expr(Config.SUFRAMA_CD))\
+        .withColumn("RG_NUM", expr(Config.RG_NUM))\
+        .withColumn("ISS_BY", expr(Config.ISS_BY))\
         .withColumn("ST", trim(col("UF")))\
         .withColumn(
           "RG_ISU_DTTM",
