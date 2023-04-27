@@ -166,7 +166,7 @@
     "format" : "MULTI_TASK",
     "name" : "JOB_MD_MATL_INV",
     "job_clusters" : [ {
-      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Small",
+      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Large",
       "new_cluster" : {
         "spark_version" : "11.3.x-scala2.12",
         "node_type_id" : "Standard_D12_v2",
@@ -181,18 +181,27 @@
           "prophecy.metadata.url" : "__PROPHECY_URL_PLACEHOLDER__",
           "prophecy.execution.metrics.disabled" : false
         },
-        "num_workers" : 3,
+        "custom_tags" : { },
+        "ssh_public_keys" : [ ],
+        "init_scripts" : [ ],
+        "spark_env_vars" : { },
+        "autoscale" : {
+          "min_workers" : 2,
+          "max_workers" : 40
+        },
         "azure_attributes" : {
           "first_on_demand" : 1,
-          "availability" : "SPOT_WITH_FALLBACK_AZURE"
+          "availability" : "SPOT_WITH_FALLBACK_AZURE",
+          "spot_bid_max_price" : -1
         },
-        "driver_node_type_id" : "Standard_D12_v2"
+        "driver_node_type_id" : "Standard_D12_v2",
+        "enable_elastic_disk" : true
       }
     } ],
     "email_notifications" : { },
     "tasks" : [ {
       "task_key" : "bbl",
-      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Small",
+      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_MATL_INV_BBA_BBL_BBN_GEU_MRS",
         "entry_point" : "main",
@@ -204,7 +213,7 @@
         }
       }, {
         "pypi" : {
-          "package" : "prophecy-libs==1.4.8"
+          "package" : "prophecy-libs==1.5.0"
         }
       }, {
         "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_MATL_INV_BBA_BBL_BBN_GEU_MRS-1.0-py3-none-any.whl"
@@ -213,7 +222,7 @@
       "max_retries" : 0
     }, {
       "task_key" : "tai",
-      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Small",
+      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_MATL_INV_TAI",
         "entry_point" : "main",
@@ -225,7 +234,7 @@
         }
       }, {
         "pypi" : {
-          "package" : "prophecy-libs==1.4.8"
+          "package" : "prophecy-libs==1.5.0"
         }
       }, {
         "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_MATL_INV_TAI-1.0-py3-none-any.whl"
@@ -234,7 +243,7 @@
       "max_retries" : 0
     }, {
       "task_key" : "mbp",
-      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Small",
+      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_MATL_INV_MBP",
         "entry_point" : "main",
@@ -246,7 +255,7 @@
         }
       }, {
         "pypi" : {
-          "package" : "prophecy-libs==1.4.8"
+          "package" : "prophecy-libs==1.5.0"
         }
       }, {
         "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_MATL_INV_MBP-1.0-py3-none-any.whl"
@@ -255,7 +264,7 @@
       "max_retries" : 0
     }, {
       "task_key" : "sjd",
-      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Small",
+      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "JDE_MD_MATL_INV_BW2_DEU_DJD_GMD_JEM_JES_JET_JSW_MTR_SDJ",
         "entry_point" : "main",
@@ -267,7 +276,7 @@
         }
       }, {
         "pypi" : {
-          "package" : "prophecy-libs==1.4.8"
+          "package" : "prophecy-libs==1.5.0"
         }
       }, {
         "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/JDE_MD_MATL_INV_BW2_DEU_DJD_GMD_JEM_JES_JET_JSW_MTR_SDJ-1.0-py3-none-any.whl"
@@ -276,7 +285,7 @@
       "max_retries" : 0
     }, {
       "task_key" : "atl",
-      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Small",
+      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_MATL_INV_ATL",
         "entry_point" : "main",
@@ -288,7 +297,7 @@
         }
       }, {
         "pypi" : {
-          "package" : "prophecy-libs==1.4.8"
+          "package" : "prophecy-libs==1.5.0"
         }
       }, {
         "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_MATL_INV_ATL-1.0-py3-none-any.whl"
@@ -297,7 +306,7 @@
       "max_retries" : 0
     }, {
       "task_key" : "fsn",
-      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Small",
+      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_MATL_INV_FSN",
         "entry_point" : "main",
@@ -309,7 +318,7 @@
         }
       }, {
         "pypi" : {
-          "package" : "prophecy-libs==1.4.8"
+          "package" : "prophecy-libs==1.5.0"
         }
       }, {
         "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_MATL_INV_FSN-1.0-py3-none-any.whl"
@@ -318,7 +327,7 @@
       "max_retries" : 0
     }, {
       "task_key" : "deu",
-      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Small",
+      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "JDE_MD_MATL_INV_BW2_DEU_DJD_GMD_JEM_JES_JET_JSW_MTR_SDJ",
         "entry_point" : "main",
@@ -330,7 +339,7 @@
         }
       }, {
         "pypi" : {
-          "package" : "prophecy-libs==1.4.8"
+          "package" : "prophecy-libs==1.5.0"
         }
       }, {
         "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/JDE_MD_MATL_INV_BW2_DEU_DJD_GMD_JEM_JES_JET_JSW_MTR_SDJ-1.0-py3-none-any.whl"
@@ -339,7 +348,7 @@
       "max_retries" : 0
     }, {
       "task_key" : "hcs",
-      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Small",
+      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_MATL_INV_HCS",
         "entry_point" : "main",
@@ -351,7 +360,7 @@
         }
       }, {
         "pypi" : {
-          "package" : "prophecy-libs==1.4.8"
+          "package" : "prophecy-libs==1.5.0"
         }
       }, {
         "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_MATL_INV_HCS-1.0-py3-none-any.whl"
@@ -360,7 +369,7 @@
       "max_retries" : 0
     }, {
       "task_key" : "gmd",
-      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Small",
+      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "JDE_MD_MATL_INV_BW2_DEU_DJD_GMD_JEM_JES_JET_JSW_MTR_SDJ",
         "entry_point" : "main",
@@ -372,7 +381,7 @@
         }
       }, {
         "pypi" : {
-          "package" : "prophecy-libs==1.4.8"
+          "package" : "prophecy-libs==1.5.0"
         }
       }, {
         "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/JDE_MD_MATL_INV_BW2_DEU_DJD_GMD_JEM_JES_JET_JSW_MTR_SDJ-1.0-py3-none-any.whl"
@@ -381,7 +390,7 @@
       "max_retries" : 0
     }, {
       "task_key" : "jes",
-      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Small",
+      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "JDE_MD_MATL_INV_BW2_DEU_DJD_GMD_JEM_JES_JET_JSW_MTR_SDJ",
         "entry_point" : "main",
@@ -393,7 +402,7 @@
         }
       }, {
         "pypi" : {
-          "package" : "prophecy-libs==1.4.8"
+          "package" : "prophecy-libs==1.5.0"
         }
       }, {
         "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/JDE_MD_MATL_INV_BW2_DEU_DJD_GMD_JEM_JES_JET_JSW_MTR_SDJ-1.0-py3-none-any.whl"
@@ -402,7 +411,7 @@
       "max_retries" : 0
     }, {
       "task_key" : "bbn",
-      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Small",
+      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_MATL_INV_BBA_BBL_BBN_GEU_MRS",
         "entry_point" : "main",
@@ -414,7 +423,7 @@
         }
       }, {
         "pypi" : {
-          "package" : "prophecy-libs==1.4.8"
+          "package" : "prophecy-libs==1.5.0"
         }
       }, {
         "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_MATL_INV_BBA_BBL_BBN_GEU_MRS-1.0-py3-none-any.whl"
@@ -423,7 +432,7 @@
       "max_retries" : 0
     }, {
       "task_key" : "p01",
-      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Small",
+      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_MATL_INV_P01_SVS",
         "entry_point" : "main",
@@ -435,7 +444,7 @@
         }
       }, {
         "pypi" : {
-          "package" : "prophecy-libs==1.4.8"
+          "package" : "prophecy-libs==1.5.0"
         }
       }, {
         "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_MATL_INV_P01_SVS-1.0-py3-none-any.whl"
@@ -444,7 +453,7 @@
       "max_retries" : 0
     }, {
       "task_key" : "bwi",
-      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Small",
+      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_MATL_INV_BWI",
         "entry_point" : "main",
@@ -456,7 +465,7 @@
         }
       }, {
         "pypi" : {
-          "package" : "prophecy-libs==1.4.8"
+          "package" : "prophecy-libs==1.5.0"
         }
       }, {
         "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_MATL_INV_BWI-1.0-py3-none-any.whl"
@@ -465,7 +474,7 @@
       "max_retries" : 0
     }, {
       "task_key" : "mtr",
-      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Small",
+      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "JDE_MD_DELV_LINE_BW2_GMD_JET_JSW_DEU_MTR_SJD_DJD_JEM_JES",
         "entry_point" : "main",
@@ -477,7 +486,7 @@
         }
       }, {
         "pypi" : {
-          "package" : "prophecy-libs==1.4.8"
+          "package" : "prophecy-libs==1.5.0"
         }
       }, {
         "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/JDE_MD_DELV_LINE_BW2_GMD_JET_JSW_DEU_MTR_SJD_DJD_JEM_JES-1.0-py3-none-any.whl"
@@ -486,7 +495,7 @@
       "max_retries" : 0
     }, {
       "task_key" : "mrs",
-      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Small",
+      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_MATL_INV_BBA_BBL_BBN_GEU_MRS",
         "entry_point" : "main",
@@ -498,7 +507,7 @@
         }
       }, {
         "pypi" : {
-          "package" : "prophecy-libs==1.4.8"
+          "package" : "prophecy-libs==1.5.0"
         }
       }, {
         "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_MATL_INV_BBA_BBL_BBN_GEU_MRS-1.0-py3-none-any.whl"
@@ -507,7 +516,7 @@
       "max_retries" : 0
     }, {
       "task_key" : "jem",
-      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Small",
+      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "JDE_MD_MATL_INV_BW2_DEU_DJD_GMD_JEM_JES_JET_JSW_MTR_SDJ",
         "entry_point" : "main",
@@ -519,7 +528,7 @@
         }
       }, {
         "pypi" : {
-          "package" : "prophecy-libs==1.4.8"
+          "package" : "prophecy-libs==1.5.0"
         }
       }, {
         "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/JDE_MD_MATL_INV_BW2_DEU_DJD_GMD_JEM_JES_JET_JSW_MTR_SDJ-1.0-py3-none-any.whl"
@@ -528,7 +537,7 @@
       "max_retries" : 0
     }, {
       "task_key" : "bba",
-      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Small",
+      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_MATL_INV_BBA_BBL_BBN_GEU_MRS",
         "entry_point" : "main",
@@ -540,7 +549,7 @@
         }
       }, {
         "pypi" : {
-          "package" : "prophecy-libs==1.4.8"
+          "package" : "prophecy-libs==1.5.0"
         }
       }, {
         "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_MATL_INV_BBA_BBL_BBN_GEU_MRS-1.0-py3-none-any.whl"
@@ -549,7 +558,7 @@
       "max_retries" : 0
     }, {
       "task_key" : "geu",
-      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Small",
+      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_MATL_INV_BBA_BBL_BBN_GEU_MRS",
         "entry_point" : "main",
@@ -561,7 +570,7 @@
         }
       }, {
         "pypi" : {
-          "package" : "prophecy-libs==1.4.8"
+          "package" : "prophecy-libs==1.5.0"
         }
       }, {
         "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_MATL_INV_BBA_BBL_BBN_GEU_MRS-1.0-py3-none-any.whl"
@@ -570,7 +579,7 @@
       "max_retries" : 0
     }, {
       "task_key" : "svs",
-      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Small",
+      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_MATL_INV_P01_SVS",
         "entry_point" : "main",
@@ -582,7 +591,7 @@
         }
       }, {
         "pypi" : {
-          "package" : "prophecy-libs==1.4.8"
+          "package" : "prophecy-libs==1.5.0"
         }
       }, {
         "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_MATL_INV_P01_SVS-1.0-py3-none-any.whl"
@@ -591,7 +600,7 @@
       "max_retries" : 0
     }, {
       "task_key" : "jsw",
-      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Small",
+      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "JDE_MD_MATL_INV_BW2_DEU_DJD_GMD_JEM_JES_JET_JSW_MTR_SDJ",
         "entry_point" : "main",
@@ -603,7 +612,7 @@
         }
       }, {
         "pypi" : {
-          "package" : "prophecy-libs==1.4.8"
+          "package" : "prophecy-libs==1.5.0"
         }
       }, {
         "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/JDE_MD_MATL_INV_BW2_DEU_DJD_GMD_JEM_JES_JET_JSW_MTR_SDJ-1.0-py3-none-any.whl"
@@ -612,7 +621,7 @@
       "max_retries" : 0
     }, {
       "task_key" : "bw2",
-      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Small",
+      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "JDE_MD_MATL_INV_BW2_DEU_DJD_GMD_JEM_JES_JET_JSW_MTR_SDJ",
         "entry_point" : "main",
@@ -624,7 +633,7 @@
         }
       }, {
         "pypi" : {
-          "package" : "prophecy-libs==1.4.8"
+          "package" : "prophecy-libs==1.5.0"
         }
       }, {
         "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/JDE_MD_MATL_INV_BW2_DEU_DJD_GMD_JEM_JES_JET_JSW_MTR_SDJ-1.0-py3-none-any.whl"
@@ -633,7 +642,7 @@
       "max_retries" : 0
     }, {
       "task_key" : "djd",
-      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Small",
+      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "JDE_MD_MATL_INV_BW2_DEU_DJD_GMD_JEM_JES_JET_JSW_MTR_SDJ",
         "entry_point" : "main",
@@ -645,7 +654,7 @@
         }
       }, {
         "pypi" : {
-          "package" : "prophecy-libs==1.4.8"
+          "package" : "prophecy-libs==1.5.0"
         }
       }, {
         "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/JDE_MD_MATL_INV_BW2_DEU_DJD_GMD_JEM_JES_JET_JSW_MTR_SDJ-1.0-py3-none-any.whl"
@@ -654,7 +663,7 @@
       "max_retries" : 0
     }, {
       "task_key" : "jet",
-      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Small",
+      "job_cluster_key" : "JOB_MD_MATL_INV_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "JDE_MD_MATL_INV_BW2_DEU_DJD_GMD_JEM_JES_JET_JSW_MTR_SDJ",
         "entry_point" : "main",
@@ -666,7 +675,7 @@
         }
       }, {
         "pypi" : {
-          "package" : "prophecy-libs==1.4.8"
+          "package" : "prophecy-libs==1.5.0"
         }
       }, {
         "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/JDE_MD_MATL_INV_BW2_DEU_DJD_GMD_JEM_JES_JET_JSW_MTR_SDJ-1.0-py3-none-any.whl"

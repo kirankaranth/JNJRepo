@@ -9,7 +9,7 @@
       "clusterMode" : "Single"
     },
     "enabled" : false,
-    "defaultClusterSize" : "Prophecy_Small",
+    "defaultClusterSize" : "Prophecy_Large",
     "alerting" : {
       "emails" : "",
       "onStart" : false,
@@ -29,7 +29,20 @@
     },
     "availableFabrics" : [ {
       "id" : "4",
-      "name" : "dev_ajp_nonprod",
+      "name" : "CDL_Dev_Consume_Views",
+      "clusterSizes" : {
+        "default" : "small",
+        "availableClusterSizes" : [ "small" ]
+      },
+      "pylibsResolutionMode" : {
+        "PublicCentral" : { }
+      },
+      "scalalibsResolutionMode" : {
+        "PublicCentral" : { }
+      }
+    }, {
+      "id" : "16",
+      "name" : "vkalluru-pilot",
       "clusterSizes" : {
         "default" : "small",
         "availableClusterSizes" : [ "small" ]
@@ -45,7 +58,33 @@
       "name" : "CDL_L1_Dev",
       "clusterSizes" : {
         "default" : "Prophecy_Small",
-        "availableClusterSizes" : [ "Prophecy_Small" ]
+        "availableClusterSizes" : [ "Prophecy_Small", "Prophecy_Medium", "Prophecy_Large" ]
+      },
+      "pylibsResolutionMode" : {
+        "PublicCentral" : { }
+      },
+      "scalalibsResolutionMode" : {
+        "PublicCentral" : { }
+      }
+    }, {
+      "id" : "14",
+      "name" : "Epicenter",
+      "clusterSizes" : {
+        "default" : "small",
+        "availableClusterSizes" : [ "small", "sk_test" ]
+      },
+      "pylibsResolutionMode" : {
+        "PublicCentral" : { }
+      },
+      "scalalibsResolutionMode" : {
+        "PublicCentral" : { }
+      }
+    }, {
+      "id" : "29",
+      "name" : "affiliate_4",
+      "clusterSizes" : {
+        "default" : "small",
+        "availableClusterSizes" : [ "small" ]
       },
       "pylibsResolutionMode" : {
         "PublicCentral" : { }
@@ -122,8 +161,8 @@
           }, {
             "name" : "DAI_ETL_ID",
             "kind" : {
-              "type" : "string",
-              "value" : "0"
+              "type" : "int",
+              "value" : 0
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
@@ -143,9 +182,289 @@
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "STK_SGMNT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "UOM_FROM_SRVC_ENT_SHT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "LOGL_SYS",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY_IN_PAREL_UNIT_OF_MEAS",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "GOODS_RCPT_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "TYPE_OF_PAREL_UNIT_OF_MEAS",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VAL_GOODS_RCPT_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SEASN_YR",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SEASN",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "FSHN_CLCT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "FSHN_Theme",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY3",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CHAR_VAL_1",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CHAR_VAL_2",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CHAR_VAL_3",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "TAX_RPTG_CTRY_REGN",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ORIG_OF_AN_INVC_ITM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(inv_item_origin)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "RETN_AMT_IN_DOC_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(trim(retamt_fc) as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "RETN_AMT_IN_CO_CD_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(trim(retamt_lc) as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PSTD_RETN_AMT_IN_DOC_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(trim(retamtp_fc) as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PSTD_SCTY_RETN_AMT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(trim(retamtp_lc) as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DELV",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(vbeln_st)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DELV_ITM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(vbelp_st)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "EXCH_RT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(trim(wkurs) as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MLT_ACCT_ASGNMT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(xmacc)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "GR_IR_ACCT_CLRNG_VAL_LCL_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY_IN_PO_PRC_UNIT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY_IN_VALUT_GR_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "AMT_IN_LCL_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "EXCH_RT_DIFF_AMT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY2",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ACC_AT_ORIG",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VALUT_GOODS_RCPT_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "AMT_IN_DOC_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PCDR_FOR_UPDT_SCHED_LINE_QTY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(et_upd)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "GEU", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "BBN", "TAI" ]
+            "CDL_MD_L1" : [ "GEU", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "BBN", "TAI", "BWI" ]
           },
           "overrides" : { },
           "selectedInstance" : "BBL"
@@ -218,8 +537,8 @@
           }, {
             "name" : "DAI_ETL_ID",
             "kind" : {
-              "type" : "string",
-              "value" : "0"
+              "type" : "int",
+              "value" : 0
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
@@ -239,9 +558,289 @@
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "STK_SGMNT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "UOM_FROM_SRVC_ENT_SHT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "LOGL_SYS",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY_IN_PAREL_UNIT_OF_MEAS",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "GOODS_RCPT_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "TYPE_OF_PAREL_UNIT_OF_MEAS",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VAL_GOODS_RCPT_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SEASN_YR",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SEASN",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "FSHN_CLCT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "FSHN_Theme",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY3",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CHAR_VAL_1",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CHAR_VAL_2",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CHAR_VAL_3",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "TAX_RPTG_CTRY_REGN",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ORIG_OF_AN_INVC_ITM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "RETN_AMT_IN_DOC_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(trim(retamt_fc) as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "RETN_AMT_IN_CO_CD_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(trim(retamt_lc) as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PSTD_RETN_AMT_IN_DOC_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(trim(retamtp_fc) as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PSTD_SCTY_RETN_AMT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(trim(retamtp_lc) as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DELV",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(vbeln_st)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DELV_ITM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(vbelp_st)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "EXCH_RT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(trim(wkurs) as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MLT_ACCT_ASGNMT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(xmacc)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "GR_IR_ACCT_CLRNG_VAL_LCL_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY_IN_PO_PRC_UNIT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY_IN_VALUT_GR_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "AMT_IN_LCL_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "EXCH_RT_DIFF_AMT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY2",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ACC_AT_ORIG",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VALUT_GOODS_RCPT_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "AMT_IN_DOC_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PCDR_FOR_UPDT_SCHED_LINE_QTY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(et_upd)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "GEU", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "BBN", "TAI" ]
+            "CDL_MD_L1" : [ "GEU", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "BBN", "TAI", "BWI" ]
           },
           "overrides" : { },
           "selectedInstance" : "GEU"
@@ -314,8 +913,8 @@
           }, {
             "name" : "DAI_ETL_ID",
             "kind" : {
-              "type" : "string",
-              "value" : "0"
+              "type" : "int",
+              "value" : 0
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
@@ -331,13 +930,293 @@
             "name" : "MANDT",
             "kind" : {
               "type" : "string",
-              "value" : "500"
+              "value" : "100"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "STK_SGMNT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "UOM_FROM_SRVC_ENT_SHT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "LOGL_SYS",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY_IN_PAREL_UNIT_OF_MEAS",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "GOODS_RCPT_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "TYPE_OF_PAREL_UNIT_OF_MEAS",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VAL_GOODS_RCPT_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SEASN_YR",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SEASN",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "FSHN_CLCT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "FSHN_Theme",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY3",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CHAR_VAL_1",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CHAR_VAL_2",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CHAR_VAL_3",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "TAX_RPTG_CTRY_REGN",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ORIG_OF_AN_INVC_ITM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "RETN_AMT_IN_DOC_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "RETN_AMT_IN_CO_CD_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PSTD_RETN_AMT_IN_DOC_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PSTD_SCTY_RETN_AMT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DELV",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DELV_ITM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "EXCH_RT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MLT_ACCT_ASGNMT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "GR_IR_ACCT_CLRNG_VAL_LCL_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY_IN_PO_PRC_UNIT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY_IN_VALUT_GR_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "AMT_IN_LCL_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "EXCH_RT_DIFF_AMT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY2",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ACC_AT_ORIG",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VALUT_GOODS_RCPT_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "AMT_IN_DOC_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PCDR_FOR_UPDT_SCHED_LINE_QTY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(et_upd)"
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "GEU", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "BBN", "TAI" ]
+            "CDL_MD_L1" : [ "GEU", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "BBN", "TAI", "BWI" ]
           },
           "overrides" : { },
           "selectedInstance" : "HMD"
@@ -498,8 +1377,8 @@
           }, {
             "name" : "DAI_ETL_ID",
             "kind" : {
-              "type" : "string",
-              "value" : "0"
+              "type" : "int",
+              "value" : 0
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
@@ -519,9 +1398,289 @@
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "STK_SGMNT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(sgt_scat)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "UOM_FROM_SRVC_ENT_SHT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "LOGL_SYS",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY_IN_PAREL_UNIT_OF_MEAS",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "GOODS_RCPT_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "TYPE_OF_PAREL_UNIT_OF_MEAS",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VAL_GOODS_RCPT_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SEASN_YR",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SEASN",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "FSHN_CLCT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "FSHN_Theme",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY3",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CHAR_VAL_1",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(wrf_charstc1)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CHAR_VAL_2",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(wrf_charstc2)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CHAR_VAL_3",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(wrf_charstc3)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "TAX_RPTG_CTRY_REGN",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ORIG_OF_AN_INVC_ITM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(inv_item_origin)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "RETN_AMT_IN_DOC_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "RETN_AMT_IN_CO_CD_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PSTD_RETN_AMT_IN_DOC_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PSTD_SCTY_RETN_AMT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DELV",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(vbeln_st)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DELV_ITM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(vbelp_st)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "EXCH_RT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MLT_ACCT_ASGNMT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "GR_IR_ACCT_CLRNG_VAL_LCL_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY_IN_PO_PRC_UNIT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY_IN_VALUT_GR_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "AMT_IN_LCL_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "EXCH_RT_DIFF_AMT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY2",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ACC_AT_ORIG",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VALUT_GOODS_RCPT_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "AMT_IN_DOC_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PCDR_FOR_UPDT_SCHED_LINE_QTY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(et_upd)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "GEU", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "BBN", "TAI" ]
+            "CDL_MD_L1" : [ "GEU", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "BBN", "TAI", "BWI" ]
           },
           "overrides" : { },
           "selectedInstance" : "BBA"
@@ -770,8 +1929,8 @@
           }, {
             "name" : "DAI_ETL_ID",
             "kind" : {
-              "type" : "string",
-              "value" : "0"
+              "type" : "int",
+              "value" : 0
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
@@ -791,9 +1950,289 @@
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "STK_SGMNT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "UOM_FROM_SRVC_ENT_SHT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "LOGL_SYS",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY_IN_PAREL_UNIT_OF_MEAS",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "GOODS_RCPT_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "TYPE_OF_PAREL_UNIT_OF_MEAS",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VAL_GOODS_RCPT_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SEASN_YR",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SEASN",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "FSHN_CLCT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "FSHN_Theme",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY3",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CHAR_VAL_1",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CHAR_VAL_2",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CHAR_VAL_3",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "TAX_RPTG_CTRY_REGN",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ORIG_OF_AN_INVC_ITM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "RETN_AMT_IN_DOC_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "RETN_AMT_IN_CO_CD_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PSTD_RETN_AMT_IN_DOC_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PSTD_SCTY_RETN_AMT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DELV",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DELV_ITM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "EXCH_RT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MLT_ACCT_ASGNMT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "GR_IR_ACCT_CLRNG_VAL_LCL_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY_IN_PO_PRC_UNIT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY_IN_VALUT_GR_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "AMT_IN_LCL_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "EXCH_RT_DIFF_AMT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY2",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ACC_AT_ORIG",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VALUT_GOODS_RCPT_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "AMT_IN_DOC_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PCDR_FOR_UPDT_SCHED_LINE_QTY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "GEU", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "BBN", "TAI" ]
+            "CDL_MD_L1" : [ "GEU", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "BBN", "TAI", "BWI" ]
           },
           "overrides" : { },
           "selectedInstance" : "MBP"
@@ -1130,8 +2569,8 @@
           }, {
             "name" : "DAI_ETL_ID",
             "kind" : {
-              "type" : "string",
-              "value" : "0"
+              "type" : "int",
+              "value" : 0
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
@@ -1147,13 +2586,293 @@
             "name" : "MANDT",
             "kind" : {
               "type" : "string",
-              "value" : "20"
+              "value" : "020"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "STK_SGMNT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "UOM_FROM_SRVC_ENT_SHT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "LOGL_SYS",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY_IN_PAREL_UNIT_OF_MEAS",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "GOODS_RCPT_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "TYPE_OF_PAREL_UNIT_OF_MEAS",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VAL_GOODS_RCPT_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SEASN_YR",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SEASN",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "FSHN_CLCT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "FSHN_Theme",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY3",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CHAR_VAL_1",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CHAR_VAL_2",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CHAR_VAL_3",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "TAX_RPTG_CTRY_REGN",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ORIG_OF_AN_INVC_ITM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "RETN_AMT_IN_DOC_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(trim(retamt_fc) as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "RETN_AMT_IN_CO_CD_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(trim(retamt_lc) as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PSTD_RETN_AMT_IN_DOC_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(trim(retamtp_fc) as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PSTD_SCTY_RETN_AMT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(trim(retamtp_lc) as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DELV",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(vbeln_st)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DELV_ITM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(vbelp_st)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "EXCH_RT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(trim(wkurs) as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MLT_ACCT_ASGNMT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(xmacc)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "GR_IR_ACCT_CLRNG_VAL_LCL_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY_IN_PO_PRC_UNIT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY_IN_VALUT_GR_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "AMT_IN_LCL_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "EXCH_RT_DIFF_AMT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY2",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ACC_AT_ORIG",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VALUT_GOODS_RCPT_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "AMT_IN_DOC_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PCDR_FOR_UPDT_SCHED_LINE_QTY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(et_upd)"
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "GEU", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "BBN", "TAI" ]
+            "CDL_MD_L1" : [ "GEU", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "BBN", "TAI", "BWI" ]
           },
           "overrides" : { },
           "selectedInstance" : "P01"
@@ -1314,8 +3033,8 @@
           }, {
             "name" : "DAI_ETL_ID",
             "kind" : {
-              "type" : "string",
-              "value" : "0"
+              "type" : "int",
+              "value" : 0
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
@@ -1335,9 +3054,289 @@
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "STK_SGMNT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "UOM_FROM_SRVC_ENT_SHT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "LOGL_SYS",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY_IN_PAREL_UNIT_OF_MEAS",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "GOODS_RCPT_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "TYPE_OF_PAREL_UNIT_OF_MEAS",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VAL_GOODS_RCPT_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SEASN_YR",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SEASN",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "FSHN_CLCT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "FSHN_Theme",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY3",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CHAR_VAL_1",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(wrf_charstc1)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CHAR_VAL_2",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(wrf_charstc2)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CHAR_VAL_3",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(wrf_charstc3)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "TAX_RPTG_CTRY_REGN",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ORIG_OF_AN_INVC_ITM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "RETN_AMT_IN_DOC_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "RETN_AMT_IN_CO_CD_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PSTD_RETN_AMT_IN_DOC_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PSTD_SCTY_RETN_AMT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DELV",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DELV_ITM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "EXCH_RT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MLT_ACCT_ASGNMT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "GR_IR_ACCT_CLRNG_VAL_LCL_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY_IN_PO_PRC_UNIT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY_IN_VALUT_GR_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "AMT_IN_LCL_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "EXCH_RT_DIFF_AMT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY2",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ACC_AT_ORIG",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VALUT_GOODS_RCPT_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "AMT_IN_DOC_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PCDR_FOR_UPDT_SCHED_LINE_QTY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(et_upd)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "GEU", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "BBN", "TAI" ]
+            "CDL_MD_L1" : [ "GEU", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "BBN", "TAI", "BWI" ]
           },
           "overrides" : { },
           "selectedInstance" : "BBN"
@@ -1410,8 +3409,8 @@
           }, {
             "name" : "DAI_ETL_ID",
             "kind" : {
-              "type" : "string",
-              "value" : "0"
+              "type" : "int",
+              "value" : 0
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
@@ -1431,9 +3430,289 @@
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "STK_SGMNT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "UOM_FROM_SRVC_ENT_SHT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "LOGL_SYS",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY_IN_PAREL_UNIT_OF_MEAS",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "GOODS_RCPT_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "TYPE_OF_PAREL_UNIT_OF_MEAS",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VAL_GOODS_RCPT_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SEASN_YR",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SEASN",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "FSHN_CLCT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "FSHN_Theme",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY3",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CHAR_VAL_1",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CHAR_VAL_2",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CHAR_VAL_3",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "TAX_RPTG_CTRY_REGN",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ORIG_OF_AN_INVC_ITM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "RETN_AMT_IN_DOC_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "RETN_AMT_IN_CO_CD_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PSTD_RETN_AMT_IN_DOC_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PSTD_SCTY_RETN_AMT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DELV",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DELV_ITM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "EXCH_RT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MLT_ACCT_ASGNMT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "GR_IR_ACCT_CLRNG_VAL_LCL_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY_IN_PO_PRC_UNIT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY_IN_VALUT_GR_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "AMT_IN_LCL_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "EXCH_RT_DIFF_AMT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY2",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ACC_AT_ORIG",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VALUT_GOODS_RCPT_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "AMT_IN_DOC_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PCDR_FOR_UPDT_SCHED_LINE_QTY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(et_upd)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "GEU", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "BBN", "TAI" ]
+            "CDL_MD_L1" : [ "GEU", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "BBN", "TAI", "BWI" ]
           },
           "overrides" : { },
           "selectedInstance" : "MRS"
@@ -1506,8 +3785,8 @@
           }, {
             "name" : "DAI_ETL_ID",
             "kind" : {
-              "type" : "string",
-              "value" : "0"
+              "type" : "int",
+              "value" : 0
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
@@ -1527,9 +3806,289 @@
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "STK_SGMNT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(sgt_scat)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "UOM_FROM_SRVC_ENT_SHT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "LOGL_SYS",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY_IN_PAREL_UNIT_OF_MEAS",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "GOODS_RCPT_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "TYPE_OF_PAREL_UNIT_OF_MEAS",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VAL_GOODS_RCPT_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SEASN_YR",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SEASN",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "FSHN_CLCT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "FSHN_Theme",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY3",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CHAR_VAL_1",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CHAR_VAL_2",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CHAR_VAL_3",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "TAX_RPTG_CTRY_REGN",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ORIG_OF_AN_INVC_ITM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "RETN_AMT_IN_DOC_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "RETN_AMT_IN_CO_CD_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PSTD_RETN_AMT_IN_DOC_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PSTD_SCTY_RETN_AMT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DELV",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DELV_ITM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "EXCH_RT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MLT_ACCT_ASGNMT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "GR_IR_ACCT_CLRNG_VAL_LCL_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY_IN_PO_PRC_UNIT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY_IN_VALUT_GR_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "AMT_IN_LCL_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "EXCH_RT_DIFF_AMT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY2",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ACC_AT_ORIG",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VALUT_GOODS_RCPT_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "AMT_IN_DOC_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PCDR_FOR_UPDT_SCHED_LINE_QTY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(et_upd)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "GEU", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "BBN", "TAI" ]
+            "CDL_MD_L1" : [ "GEU", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "BBN", "TAI", "BWI" ]
           },
           "overrides" : { },
           "selectedInstance" : "HCS"
@@ -1602,8 +4161,8 @@
           }, {
             "name" : "DAI_ETL_ID",
             "kind" : {
-              "type" : "string",
-              "value" : "0"
+              "type" : "int",
+              "value" : 0
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
@@ -1623,9 +4182,289 @@
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "STK_SGMNT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "UOM_FROM_SRVC_ENT_SHT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "LOGL_SYS",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY_IN_PAREL_UNIT_OF_MEAS",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "GOODS_RCPT_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "TYPE_OF_PAREL_UNIT_OF_MEAS",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VAL_GOODS_RCPT_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SEASN_YR",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SEASN",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "FSHN_CLCT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "FSHN_Theme",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY3",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CHAR_VAL_1",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CHAR_VAL_2",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CHAR_VAL_3",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "TAX_RPTG_CTRY_REGN",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ORIG_OF_AN_INVC_ITM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "RETN_AMT_IN_DOC_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "RETN_AMT_IN_CO_CD_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PSTD_RETN_AMT_IN_DOC_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PSTD_SCTY_RETN_AMT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DELV",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DELV_ITM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "EXCH_RT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MLT_ACCT_ASGNMT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "GR_IR_ACCT_CLRNG_VAL_LCL_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(trim(arewr_pop) as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY_IN_PO_PRC_UNIT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(trim(bpmng_pop) as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY_IN_VALUT_GR_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "AMT_IN_LCL_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "EXCH_RT_DIFF_AMT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "QTY2",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ACC_AT_ORIG",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VALUT_GOODS_RCPT_BLOK_STK",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "AMT_IN_DOC_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PCDR_FOR_UPDT_SCHED_LINE_QTY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(et_upd)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "GEU", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "BBN", "TAI" ]
+            "CDL_MD_L1" : [ "GEU", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "BBN", "TAI", "BWI" ]
           },
           "overrides" : { },
           "selectedInstance" : "TAI"
