@@ -1,10 +1,10 @@
 from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
-from sap_01_md_bill_doc_hdr.config.ConfigStore import *
-from sap_01_md_bill_doc_hdr.udfs.UDFs import *
+from sap_md_bill_doc_hdr_hmd.config.ConfigStore import *
+from sap_md_bill_doc_hdr_hmd.udfs.UDFs import *
 from prophecy.utils import *
-from sap_01_md_bill_doc_hdr.graph import *
+from sap_md_bill_doc_hdr_hmd.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_DS_SAP_01_VBRK = DS_SAP_01_VBRK(spark)
