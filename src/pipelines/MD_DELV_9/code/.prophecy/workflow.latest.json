@@ -1,0 +1,320 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "dev_md_l1"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "bw2"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "bw2"
+              },
+              "optional" : false
+            }, {
+              "name" : "MANDT",
+              "kind" : {
+                "type" : "string",
+                "value" : ""
+              },
+              "optional" : true
+            }, {
+              "name" : "DAI_ETL_ID",
+              "kind" : {
+                "type" : "int",
+                "value" : "0"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "MD_DELV_9"
+      },
+      "connections" : [ {
+        "id" : "52e5a49e-389c-4010-9187-2bbd3772e045",
+        "source" : "a69b2b21-9626-4f6f-874b-4985ac206711",
+        "sourcePort" : "4e95206d-213f-4567-90af-9846404fb355",
+        "target" : "e4c2a03b-5916-442f-8853-91770b3e779b",
+        "targetPort" : "0d1b7603-02b5-40cb-a300-b2c6ac829ce0"
+      }, {
+        "id" : "7e61e83b-20e1-4756-b3dd-025f869493b9",
+        "source" : "3cbf48d4-0f72-455b-b31a-325779e1ebb1",
+        "sourcePort" : "0f361f84-67aa-451b-8dcf-1606596c17ac",
+        "target" : "a69b2b21-9626-4f6f-874b-4985ac206711",
+        "targetPort" : "0c42654f-8099-43b6-a2d8-204dba59d98f"
+      } ],
+      "processes" : {
+        "e4c2a03b-5916-442f-8853-91770b3e779b" : {
+          "id" : "e4c2a03b-5916-442f-8853-91770b3e779b",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MD_DELV",
+            "slug" : "MD_DELV",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "0d1b7603-02b5-40cb-a300-b2c6ac829ce0",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MD_DELV"
+          }
+        },
+        "a69b2b21-9626-4f6f-874b-4985ac206711" : {
+          "id" : "a69b2b21-9626-4f6f-874b-4985ac206711",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "0c42654f-8099-43b6-a2d8-204dba59d98f",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "4e95206d-213f-4567-90af-9846404fb355",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct('REF_DOC_NUM',REF_DOC_NUM))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct('REF_DOC_NUM',REF_DOC_NUM)))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            },
+            {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "DAI_ETL_ID",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$DAI_ETL_ID'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            },{
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "DAI_CRT_DTTM",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            },{
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "DAI_UPDT_DTTM",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }
+            ]
+          }
+        },
+        "3cbf48d4-0f72-455b-b31a-325779e1ebb1" : {
+          "id" : "3cbf48d4-0f72-455b-b31a-325779e1ebb1",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MD_DELV",
+            "slug" : "sql_MD_DELV",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "0f361f84-67aa-451b-8dcf-1606596c17ac",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    with mysub\nas\n(select\nF43121.PRKCOO AS CO_CD,\nF43121.PRDOC AS DELV_NUM,\nF43121.PRDCTO AS DELV_TYP_CD,\nNULL AS DELV_TYP_DESC,\nNULL AS BILL_OF_LDNG_NUM,\nNULL AS BILL_ICMPT_TOT_STS_CD,\nNULL AS BILL_STS_CD,\nNULL AS CHG_DTTM,\nNULL AS CNFRM_STS_CD,\nNULL AS CRT_DTTM,\nNULL AS CR_CHK_TOT_STS_CD,\nNULL AS DELV_DTTM,\nNULL AS SHIP_STS_CD,\nNULL AS SPL_PRCS_IN,\nNULL AS SLS_ORG_NUM,\nNULL AS SLS_ORG_NM,\nNULL AS DELV_ICMPT_TOT_STS_CD,\nNULL AS DELV_STS_CD,\nNULL AS DELV_TOT_STS_CD,\nNULL AS RTE_ID,\nNULL AS DELIVERY_NUM,\nF43121.PRDOCO AS REF_DOC_NUM,\nNULL AS GM_ICMPT_TOT_STS_CD,\nNULL AS GM_TOT_STS_CD,\nNULL AS IN_PLNT_IND,\nNULL AS ICMPT_TOT_STS_CD,\nNULL AS INTCO_BILL_TOT_STS_CD,\nNULL AS INVC_LIST_STS_CD,\nNULL AS ORDR_BILL_STS_CD,\nNULL AS PACK_ICMPT_STS_CD,\nNULL AS PACK_ICMPT_TOT_STS_CD,\nNULL AS PACK_TOT_STS_CD,\nNULL AS PICK_CNFRM_STS_CD,\nNULL AS PICK_ICMPT_STS_CD,\nNULL AS PICK_ICMPT_TOT_STS_CD,\nNULL AS PICK_TOT_STS_CD,\nNULL as PLAN_GI_DTTM,\nNULL AS ACTL_GI_DTTM,\nTRIM(F43121.PRMCU) AS PLNT_CD,\nNULL AS PSTNG_BILL_STS_CD,\nNULL AS PRC_ICMPT_STS_CD,\nNULL AS PRCS_ORDR_NUM,\nNULL AS PRCSG_TOT_STS_CD,\nNULL AS REF_DOC_STS_CD,\nNULL AS REF_DOC_TOT_STS_CD,\nNULL AS REJ_TOT_STS_CD,\nNULL AS SLS_ORDR_CAR_CD,\nNULL AS SHIP_TO_CUST_NUM,\nNULL AS SHIPPING_COND_CD,\nNULL AS SHIPPING_PT_NUM,\nNULL AS SOLD_TO_CUST_NUM,\nNULL AS SUP_NUM,\nNULL AS TOT_PKGS_CNT,\nNULL AS TRNSP_PLAN_STS_CD,\nNULL AS WM_TOT_STS_CD,\nNULL AS PICK_DTTM,\nNULL AS SLS_ORDR_CRNCY_CD,\nNULL AS RESV_CD,\nNULL AS OVRL_HDR_CD,\nNULL AS BILL_BLK_STS_CD,\nNULL AS DELV_BLK_STS_CD,\nNULL AS OVRL_BLK_STS_CD,\nNULL AS POD_DTTM,\nNULL AS TOT_WT_CD,\nNULL AS GR_SLIP_NUM,\nNULL AS MEANS_TRNSP_ID,\n'F43121' AS SRC_TBL_NM,\nCAST(NULL AS string) as SHIP_REF_NUM,\nCAST(NULL AS string) as MODE_TRSPN_BORDR,\nCAST(NULL AS string) as DFLT_DELV_BLK_CD,\nCAST(NULL AS string) as DFLT_DELV_BLK_DESC,\nCAST(NULL AS string) as CNFRM_BLK_CD,\nCAST(NULL AS string) as DELV_BLK_CD,\nCAST(NULL AS string) as SHIPPING_PT_DESC,\nCAST(NULL AS string) as SHIP_BLOK_RSN_CD,\nCAST(NULL AS string) as SHIP_BLOK_RSN_DESC,\nCAST(NULL AS string) as FCTRY_CAL_KEY,\nCAST(NULL AS string) as RTE_DESC,\nCAST(NULL AS decimal (18,4)) as TRSPN_LEAD_TIME_IN_CAL_DAYS,\nCAST(NULL AS decimal (18,4)) as TRST_DUR_IN_CAL_DAYS\nfrom {Config.sourceDatabase}.F43121 F43121\nwhere F43121._deleted_ = 'F'\nUNION ALL\nSELECT\nF4211.SDKCOO AS CO_CD,\nF4211.SDDOC AS DELV_NUM,\nF4211.SDDCTO AS DELV_TYP_CD,\nNULL AS DELV_TYP_DESC,\nNULL AS BILL_OF_LDNG_NUM,\nNULL AS BILL_ICMPT_TOT_STS_CD,\nNULL AS BILL_STS_CD,\nNULL AS CHG_DTTM,\nNULL AS CNFRM_STS_CD,\nNULL AS CRT_DTTM,\nNULL AS CR_CHK_TOT_STS_CD,\nNULL AS DELV_DTTM,\nNULL AS SHIP_STS_CD,\nNULL AS SPL_PRCS_IN,\nNULL AS SLS_ORG_NUM,\nNULL AS SLS_ORG_NM,\nNULL AS DELV_ICMPT_TOT_STS_CD,\nNULL AS DELV_STS_CD,\nNULL AS DELV_TOT_STS_CD,\nNULL AS RTE_ID,\nNULL AS DELIVERY_NUM,\nF4211.SDDOCO AS REF_DOC_NUM,\nNULL AS GM_ICMPT_TOT_STS_CD,\nNULL AS GM_TOT_STS_CD,\nNULL AS IN_PLNT_IND,\nNULL AS ICMPT_TOT_STS_CD,\nNULL AS INTCO_BILL_TOT_STS_CD,\nNULL AS INVC_LIST_STS_CD,\nNULL AS ORDR_BILL_STS_CD,\nNULL AS PACK_ICMPT_STS_CD,\nNULL AS PACK_ICMPT_TOT_STS_CD,\nNULL AS PACK_TOT_STS_CD,\nNULL AS PICK_CNFRM_STS_CD,\nNULL AS PICK_ICMPT_STS_CD,\nNULL AS PICK_ICMPT_TOT_STS_CD,\nNULL AS PICK_TOT_STS_CD,\nNULL as PLAN_GI_DTTM,\nNULL AS ACTL_GI_DTTM,\nTRIM(F4211.SDMCU) AS PLNT_CD,\nNULL AS PSTNG_BILL_STS_CD,\nNULL AS PRC_ICMPT_STS_CD,\nNULL AS PRCS_ORDR_NUM,\nNULL AS PRCSG_TOT_STS_CD,\nNULL AS REF_DOC_STS_CD,\nNULL AS REF_DOC_TOT_STS_CD,\nNULL AS REJ_TOT_STS_CD,\nNULL AS SLS_ORDR_CAR_CD,\nNULL AS SHIP_TO_CUST_NUM,\nNULL AS SHIPPING_COND_CD,\nNULL AS SHIPPING_PT_NUM,\nNULL AS SOLD_TO_CUST_NUM,\nNULL AS SUP_NUM,\nNULL AS TOT_PKGS_CNT,\nNULL AS TRNSP_PLAN_STS_CD,\nNULL AS WM_TOT_STS_CD,\nNULL AS PICK_DTTM,\nNULL AS SLS_ORDR_CRNCY_CD,\nNULL AS RESV_CD,\nNULL AS OVRL_HDR_CD,\nNULL AS BILL_BLK_STS_CD,\nNULL AS DELV_BLK_STS_CD,\nNULL AS OVRL_BLK_STS_CD,\nNULL AS POD_DTTM,\nNULL AS TOT_WT_CD,\nNULL AS GR_SLIP_NUM,\nNULL AS MEANS_TRNSP_ID,\n'F4211' AS SRC_TBL_NM,\nCAST(NULL AS string) as SHIP_REF_NUM,\nCAST(NULL AS string) as MODE_TRSPN_BORDR,\nCAST(NULL AS string) as DFLT_DELV_BLK_CD,\nCAST(NULL AS string) as DFLT_DELV_BLK_DESC,\nCAST(NULL AS string) as CNFRM_BLK_CD,\nCAST(NULL AS string) as DELV_BLK_CD,\nCAST(NULL AS string) as SHIPPING_PT_DESC,\nCAST(NULL AS string) as SHIP_BLOK_RSN_CD,\nCAST(NULL AS string) as SHIP_BLOK_RSN_DESC,\nCAST(NULL AS string) as FCTRY_CAL_KEY,\nCAST(NULL AS string) as RTE_DESC,\nCAST(NULL AS decimal (18,4)) as TRSPN_LEAD_TIME_IN_CAL_DAYS,\nCAST(NULL AS decimal (18,4)) as TRST_DUR_IN_CAL_DAYS\nfrom {Config.sourceDatabase}.F4211 F4211\nwhere F4211._deleted_ = 'F')\nselect \nSRC_SYS_CD,CO_CD,DELV_NUM,DELV_TYP_CD,DELV_TYP_DESC,BILL_OF_LDNG_NUM,BILL_ICMPT_TOT_STS_CD,BILL_STS_CD,CHG_DTTM,CNFRM_STS_CD,CRT_DTTM,CR_CHK_TOT_STS_CD,\nDELV_DTTM,SHIP_STS_CD,SPL_PRCS_IN,SLS_ORG_NUM,SLS_ORG_NM,DELV_ICMPT_TOT_STS_CD,DELV_STS_CD,DELV_TOT_STS_CD,RTE_ID,DELIVERY_NUM,REF_DOC_NUM,\nGM_ICMPT_TOT_STS_CD,GM_TOT_STS_CD,IN_PLNT_IND,ICMPT_TOT_STS_CD,INTCO_BILL_TOT_STS_CD,INVC_LIST_STS_CD,ORDR_BILL_STS_CD,PACK_ICMPT_STS_CD,PACK_ICMPT_TOT_STS_CD,\nPACK_TOT_STS_CD,PICK_CNFRM_STS_CD,PICK_ICMPT_STS_CD,PICK_ICMPT_TOT_STS_CD,PICK_TOT_STS_CD,PLAN_GI_DTTM,ACTL_GI_DTTM,PLNT_CD,PSTNG_BILL_STS_CD,PRC_ICMPT_STS_CD,\nPRCS_ORDR_NUM,PRCSG_TOT_STS_CD,REF_DOC_STS_CD,REF_DOC_TOT_STS_CD,REJ_TOT_STS_CD,SLS_ORDR_CAR_CD,SHIP_TO_CUST_NUM,SHIPPING_COND_CD,SHIPPING_PT_NUM,SOLD_TO_CUST_NUM,\nSUP_NUM,TOT_PKGS_CNT,TRNSP_PLAN_STS_CD,WM_TOT_STS_CD,PICK_DTTM,SLS_ORDR_CRNCY_CD,RESV_CD,OVRL_HDR_CD,BILL_BLK_STS_CD,\nDELV_BLK_STS_CD,OVRL_BLK_STS_CD,POD_DTTM,TOT_WT_CD,GR_SLIP_NUM,MEANS_TRNSP_ID,SRC_TBL_NM, SHIP_REF_NUM, MODE_TRSPN_BORDR, DFLT_DELV_BLK_CD, DFLT_DELV_BLK_DESC,\nCNFRM_BLK_CD, DELV_BLK_CD, SHIPPING_PT_DESC, SHIP_BLOK_RSN_CD, SHIP_BLOK_RSN_DESC, FCTRY_CAL_KEY, RTE_DESC, TRSPN_LEAD_TIME_IN_CAL_DAYS, TRST_DUR_IN_CAL_DAYS\n\nfrom\n(select *,\nROW_NUMBER() over (partition by SRC_SYS_CD,CO_CD,DELV_NUM,DELV_TYP_CD,REF_DOC_NUM,SRC_TBL_NM order by DELV_NUM) as RNK\nfrom \n'{Config.sourceSystem}' AS SRC_SYS_CD\n,mysub.CO_CD AS CO_CD\n,mysub.DELV_NUM AS DELV_NUM\n,mysub.DELV_TYP_CD AS DELV_TYP_CD\n,mysub.DELV_TYP_DESC AS DELV_TYP_DESC\n,mysub.BILL_OF_LDNG_NUM AS BILL_OF_LDNG_NUM\n,mysub.BILL_ICMPT_TOT_STS_CD AS BILL_ICMPT_TOT_STS_CD\n,mysub.BILL_STS_CD AS BILL_STS_CD\n,mysub.CHG_DTTM AS CHG_DTTM\n,mysub.CNFRM_STS_CD AS CNFRM_STS_CD\n,mysub.CRT_DTTM AS CRT_DTTM\n,mysub.CR_CHK_TOT_STS_CD AS CR_CHK_TOT_STS_CD\n,mysub.DELV_DTTM AS DELV_DTTM\n,mysub.SHIP_STS_CD AS SHIP_STS_CD\n,mysub.SPL_PRCS_IN AS SPL_PRCS_IN\n,mysub.SLS_ORG_NUM AS SLS_ORG_NUM\n,mysub.SLS_ORG_NM AS SLS_ORG_NM\n,mysub.DELV_ICMPT_TOT_STS_CD AS DELV_ICMPT_TOT_STS_CD\n,mysub.DELV_STS_CD AS DELV_STS_CD\n,mysub.DELV_TOT_STS_CD AS DELV_TOT_STS_CD\n,mysub.RTE_ID AS RTE_ID\n,mysub.DELIVERY_NUM AS DELIVERY_NUM\n,mysub.REF_DOC_NUM AS REF_DOC_NUM\n,mysub.GM_ICMPT_TOT_STS_CD AS GM_ICMPT_TOT_STS_CD\n,mysub.GM_TOT_STS_CD AS GM_TOT_STS_CD\n,mysub.IN_PLNT_IND AS IN_PLNT_IND\n,mysub.ICMPT_TOT_STS_CD AS ICMPT_TOT_STS_CD\n,mysub.INTCO_BILL_TOT_STS_CD AS INTCO_BILL_TOT_STS_CD\n,mysub.INVC_LIST_STS_CD AS INVC_LIST_STS_CD\n,mysub.ORDR_BILL_STS_CD AS ORDR_BILL_STS_CD\n,mysub.PACK_ICMPT_STS_CD AS PACK_ICMPT_STS_CD\n,mysub.PACK_ICMPT_TOT_STS_CD AS PACK_ICMPT_TOT_STS_CD\n,mysub.PACK_TOT_STS_CD AS PACK_TOT_STS_CD\n,mysub.PICK_CNFRM_STS_CD AS PICK_CNFRM_STS_CD\n,mysub.PICK_ICMPT_STS_CD AS PICK_ICMPT_STS_CD\n,mysub.PICK_ICMPT_TOT_STS_CD AS PICK_ICMPT_TOT_STS_CD\n,mysub.PICK_TOT_STS_CD AS PICK_TOT_STS_CD\n,mysub.PLAN_GI_DTTM as PLAN_GI_DTTM\n,mysub.ACTL_GI_DTTM AS ACTL_GI_DTTM\n,mysub.PLNT_CD AS PLNT_CD\n,mysub.PSTNG_BILL_STS_CD AS PSTNG_BILL_STS_CD\n,mysub.PRC_ICMPT_STS_CD AS PRC_ICMPT_STS_CD\n,mysub.PRCS_ORDR_NUM AS PRCS_ORDR_NUM\n,mysub.PRCSG_TOT_STS_CD AS PRCSG_TOT_STS_CD\n,mysub.REF_DOC_STS_CD AS REF_DOC_STS_CD\n,mysub.REF_DOC_TOT_STS_CD AS REF_DOC_TOT_STS_CD\n,mysub.REJ_TOT_STS_CD AS REJ_TOT_STS_CD\n,mysub.SLS_ORDR_CAR_CD AS SLS_ORDR_CAR_CD\n,mysub.SHIP_TO_CUST_NUM AS SHIP_TO_CUST_NUM\n,mysub.SHIPPING_COND_CD AS SHIPPING_COND_CD\n,mysub.SHIPPING_PT_NUM AS SHIPPING_PT_NUM\n,mysub.SOLD_TO_CUST_NUM AS SOLD_TO_CUST_NUM\n,mysub.SUP_NUM AS SUP_NUM\n,mysub.TOT_PKGS_CNT AS TOT_PKGS_CNT\n,mysub.TRNSP_PLAN_STS_CD AS TRNSP_PLAN_STS_CD\n,mysub.WM_TOT_STS_CD AS WM_TOT_STS_CD\n,mysub.PICK_DTTM AS PICK_DTTM\n,mysub.SLS_ORDR_CRNCY_CD AS SLS_ORDR_CRNCY_CD\n,mysub.RESV_CD AS RESV_CD\n,mysub.OVRL_HDR_CD AS OVRL_HDR_CD\n,mysub.BILL_BLK_STS_CD AS BILL_BLK_STS_CD\n,mysub.DELV_BLK_STS_CD AS DELV_BLK_STS_CD\n,mysub.OVRL_BLK_STS_CD AS OVRL_BLK_STS_CD\n,mysub.POD_DTTM AS POD_DTTM\n,mysub.TOT_WT_CD AS TOT_WT_CD\n,mysub.GR_SLIP_NUM AS GR_SLIP_NUM\n,mysub.MEANS_TRNSP_ID AS MEANS_TRNSP_ID\n,mysub.SRC_TBL_NM AS SRC_TBL_NM\n,mysub.SHIP_REF_NUM AS SHIP_REF_NUM\n,mysub.MODE_TRSPN_BORDR AS MODE_TRSPN_BORDR\n,mysub.DFLT_DELV_BLK_CD AS DFLT_DELV_BLK_CD\n,mysub.DFLT_DELV_BLK_DESC AS DFLT_DELV_BLK_DESC\n,mysub.CNFRM_BLK_CD AS CNFRM_BLK_CD\n,mysub.DELV_BLK_CD AS DELV_BLK_CD\n,mysub.SHIPPING_PT_DESC AS SHIPPING_PT_DESC\n,mysub.SHIP_BLOK_RSN_CD AS SHIP_BLOK_RSN_CD\n,mysub.SHIP_BLOK_RSN_DESC AS SHIP_BLOK_RSN_DESC\n,mysub.FCTRY_CAL_KEY AS FCTRY_CAL_KEY\n,mysub.RTE_DESC AS RTE_DESC\n,mysub.TRSPN_LEAD_TIME_IN_CAL_DAYS AS TRSPN_LEAD_TIME_IN_CAL_DAYS\n,mysub.TRST_DUR_IN_CAL_DAYS AS TRST_DUR_IN_CAL_DAYS\nfrom mysub mysub))where RNK =1   \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    
