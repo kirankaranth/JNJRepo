@@ -17,15 +17,15 @@ def pipeline(spark: SparkSession) -> None:
     )
     df_MANDT_FILTER = MANDT_FILTER(spark, df_DS_SAP_RSEG)
     df_NEW_FIELDS = NEW_FIELDS(spark, df_MANDT_FILTER)
-    df_NEW_FIELDS = collectMetrics(
+    df_FIELDS_ORDER_REFORMAT = FIELDS_ORDER_REFORMAT(spark, df_NEW_FIELDS)
+    df_FIELDS_ORDER_REFORMAT = collectMetrics(
         spark, 
-        df_NEW_FIELDS, 
+        df_FIELDS_ORDER_REFORMAT, 
         "graph", 
-        "klzwN9GulS6_TaNLHhz0v$$d2CznFeYIqYuRyqbXuCF3", 
-        "G1pU8dyqCNoyiV9TY9Cp2$$7Mb7J7BMJGcUbho3xZ_Jq"
+        "BJGrM-dbKVctZAVQ6oI-e$$H27Oe0zk8NnNrj7_WmPmF", 
+        "1yh91bgJbUhkR_kOBbaOw$$FCd-7izOLJTC0qWRut9u7"
     )
-    df_NEW_FIELDS.cache().count()
-    df_NEW_FIELDS.unpersist()
+    MD_DOC_ITM_INVC(spark, df_FIELDS_ORDER_REFORMAT)
 
 def main():
     spark = SparkSession.builder\
