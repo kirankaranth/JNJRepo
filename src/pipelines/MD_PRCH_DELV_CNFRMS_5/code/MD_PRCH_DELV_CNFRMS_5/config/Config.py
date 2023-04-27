@@ -18,7 +18,7 @@ class Config(ConfigBase):
     def update(
             self,
             targetSchema: str="dev_md_l1",
-            sourceSystem: str="btb_latam",
+            sourceSystem: str="bbl",
             sourceDatabase: str="btb_latam",
             MANDT: str=None,
             DAI_ETL_ID: int=0,
