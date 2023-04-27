@@ -1,0 +1,306 @@
+{
+      "metainfo" : {
+        "id" : "1",
+        "language" : "python",
+        "fabricId" : "32",
+        "frontEndLanguage" : "sql",
+        "mode" : "batch",
+        "udfs" : {
+          "language" : "python",
+          "udfs" : [ ]
+        },
+        "udafs" : {
+          "language" : "python",
+          "code" : ""
+        },
+        "configuration" : {
+          "common" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "targetSchema",
+              "kind" : {
+                "type" : "string",
+                "value" : "dev_md_l1"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceSystem",
+              "kind" : {
+                "type" : "string",
+                "value" : "atlas"
+              },
+              "optional" : false
+            }, {
+              "name" : "sourceDatabase",
+              "kind" : {
+                "type" : "string",
+                "value" : "atlas"
+              },
+              "optional" : false
+            } ]
+          },
+          "oldCommon" : {
+            "type" : "record",
+            "fields" : [ ]
+          },
+          "fabrics" : { },
+          "instances" : { },
+          "selected" : "default",
+          "nonEditable" : [ ],
+          "isSubscribedPipelineWithPipelineConfigs" : false
+        },
+        "sparkConf" : [ ],
+        "hadoopConf" : [ ],
+        "codeMode" : "sparse",
+        "buildSystem" : "maven",
+        "externalDependencies" : [ ],
+        "isImported" : false,
+        "interimMode" : "Full",
+        "interimModeEnabled" : true,
+        "visualCodeInterimMode" : "Disabled",
+        "recordsLimit" : {
+          "enabled" : false,
+          "value" : 1000
+        },
+        "topLevelPackage" : "PPLN_MD_SLS_ORDR_SCHED_LINE_DELV_5"
+      },
+      "connections" : [ {
+        "id" : "bfa245f8-b727-4fda-be02-ba7b449a2110",
+        "source" : "7304b720-f78c-40c6-83aa-0a2c72f3e01e",
+        "sourcePort" : "e9a79c17-5845-44a4-ac41-5c946b3257a0",
+        "target" : "8fdbd872-cd9f-4c52-975b-4604eb726483",
+        "targetPort" : "a3e900c4-5ee9-4e83-8f00-e3fe8f302beb"
+      }, {
+        "id" : "3def86b5-b05a-4f4c-815f-83e22811506c",
+        "source" : "67a1ad26-bc1a-4cf3-8399-60a85f06b66f",
+        "sourcePort" : "d9520fab-e715-4da4-aa4c-8f3f178878dd",
+        "target" : "7304b720-f78c-40c6-83aa-0a2c72f3e01e",
+        "targetPort" : "eed491a7-dfea-422e-b529-18896fe36e6e"
+      } ],
+      "processes" : {
+        "8fdbd872-cd9f-4c52-975b-4604eb726483" : {
+          "id" : "8fdbd872-cd9f-4c52-975b-4604eb726483",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "MD_SLS_ORDR_SCHED_LINE_DELV",
+            "slug" : "MD_SLS_ORDR_SCHED_LINE_DELV",
+            "x" : -540,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "a3e900c4-5ee9-4e83-8f00-e3fe8f302beb",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/MD_SLS_ORDR_SCHED_LINE_DELV"
+          }
+        },
+        "7304b720-f78c-40c6-83aa-0a2c72f3e01e" : {
+          "id" : "7304b720-f78c-40c6-83aa-0a2c72f3e01e",
+          "component" : "SchemaTransform",
+          "metadata" : {
+            "label" : "addL1fields",
+            "slug" : "addL1fields",
+            "x" : -780,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "eed491a7-dfea-422e-b529-18896fe36e6e",
+              "slug" : "in0",
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "e9a79c17-5845-44a4-ac41-5c946b3257a0",
+              "slug" : "out",
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false
+          },
+          "properties" : {
+            "columnsSelector" : [ ],
+            "transformations" : [ {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "SRC_SYS_CD",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "'$sourceSystem'"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "to_json(named_struct())"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_pk_md5_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "md5(to_json(named_struct()))"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }, {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "_l1_upt_",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            },
+            {
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "DAI_ETL_ID",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            },{
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "DAI_CRT_DTTM",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            },{
+              "kind" : "AddReplaceColumn",
+              "AddReplaceColumn" : {
+                "sourceColumn" : "DAI_UPDT_DTTM",
+                "expression" : {
+                  "format" : "sql",
+                  "expression" : "current_timestamp()"
+                }
+              },
+              "DropColumn" : {
+                "sourceColumn" : ""
+              },
+              "RenameColumn" : {
+                "sourceColumn" : "",
+                "targetColumn" : ""
+              }
+            }
+            ]
+          }
+        },
+        "67a1ad26-bc1a-4cf3-8399-60a85f06b66f" : {
+          "id" : "67a1ad26-bc1a-4cf3-8399-60a85f06b66f",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "sql_MD_SLS_ORDR_SCHED_LINE_DELV",
+            "slug" : "sql_MD_SLS_ORDR_SCHED_LINE_DELV",
+            "x" : -1060,
+            "y" : -400,
+            "phase" : 0,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ ],
+            "outputs" : [ {
+              "id" : "d9520fab-e715-4da4-aa4c-8f3f178878dd",
+              "slug" : "out0",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "_deleted_",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  } 
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true
+          },
+          "properties" : {
+            "script" : "out0 = spark.sql(f\"\"\"\n    select\n(SELECT src_sys.src_sys_cd FROM l1.src_sys\n   WHERE src_sys.src_sys_cd='{src_sys_cd}'\n AND src_sys.active = TRUE) AS SRC_SYS_CD,\nVBEP.posnr as SCHED_LINE_ITM_NUM,\nVBEP.vbeln AS SLS_ORDR_DOC_ID,\nVBEP.etenr AS SCHED_LINE_NUM,\nVBAK.bukrs_vf AS CO_CD,\nVBAK.auart AS SLS_ORDR_TYPE_CD,\nCASE WHEN VBEP.mbdat = '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE to_timestamp(CONCAT(VBEP.mbdat,VBEP.mbuhr),'yyyyMMddHHmmss') END AS MATL_AVLBLTY_DTTM,\nCAST(TRIM(VBEP.bmeng) AS DECIMAL(18,4)) AS CNFRM_QTY,\nCASE WHEN VBEP.edatu = '00000000' then null else to_timestamp(VBEP.edatu,\\\"yyyyMMdd\\\") end as RQST_DELV_DTTM,\nCASE WHEN VBEP.wadat = '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE to_timestamp(CONCAT(VBEP.wadat,VBEP.wauhr),'yyyyMMddHHmmss') END AS GI_DTTM,\nCAST(TRIM(VBEP.wmeng) AS DECIMAL(18,4)) AS SLS_UNIT_ORDR_QTY,\nTRIM(VBEP.vrkme) AS SLS_UOM_CD,\nTRIM(VBEP.lifsp) AS DELV_BLK_CD,\nTRIM(TVLST.vtext) AS DELV_BLK_DESC,\nCASE WHEN VBEP.tddat = '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE to_timestamp(CONCAT(VBEP.tddat,VBEP.tduhr),'yyyyMMddHHmmss') END AS TRSPN_PLAN_DTTM,\nCASE WHEN VBEP.lddat = '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE to_timestamp(CONCAT(VBEP.lddat,VBEP.lduhr),'yyyyMMddHHmmss') END AS LD_DTTM,\nTRIM(ETTYP) SCHED_LINE_CAT,\nTRIM(LFREL) ITM_RLVNT_DELV,\nto_timestamp(EZEIT,\\\"HHmmSS\\\") as ARR_DTTM,\ncast(trim(LMENG) as decimal(18,4)) REQ_QTY_MGMT_SKU,\nTRIM(MEINS) BASE_UNIT_OF_MEAS,\ncase when BDDAT = '00000000' then cast(null as TIMESTAMP) else to_timestamp(BDDAT,\\\"yyyyMMdd\\\") end as REQ_DTTM,\nTRIM(BDART) REQ_TYPE,\nTRIM(PLART) PLNG_TYPE,\nTRIM(VBELE) BUSN_DOC_NUM,\nTRIM(POSNE) BUSN_ITM_NUM,\nTRIM(ETENE) SCHED_LINE,\ncase when RSDAT = '00000000' then cast(null as TIMESTAMP) else to_timestamp(RSDAT,\\\"yyyyMMdd\\\") end as EARLY_POSBL_RESV_DTTM,\nTRIM(IDNNR) MAINT_RQST,\nTRIM(BANFN) PRCH_REQSN_NUM,\nTRIM(BSART) ORDR_TYPE,\nTRIM(BSTYP) PRCHSNG_DOC_CAT,\nTRIM(WEPOS) CNFRM_STS_SCHED_LINE,\nTRIM(REPOS) INVC_RCPT_IN,\ncase when LRGDT = '00000000' then cast(null as TIMESTAMP) else to_timestamp(LRGDT,\\\"yyyyMMdd\\\") end as RTN_RTRN_PKGNG_DTTM,\nTRIM(PRGRS) DT_TYPE,\ncast(TRIM(CMENG) as decimal(18,4)) CORR_QTY_SLS_UNIT,\nTRIM(GRSTR) GRP_DEF_STRC_DATA,\nTRIM(ABART) RLSE_TYPE,\nTRIM(ABRUF) FCST_DELV_SCHED_NUM,\ncast(TRIM(ROMS1) as decimal(18,4)) CMT_QTY,\ncast(TRIM(ROMS2) as decimal(18,4)) SIZE_2,\ncast(TRIM(ROMS3) as decimal(18,4)) SIZE_3,\nTRIM(ROMEI) UNIT_MEAS_SIZE_1_TO_3,\nTRIM(RFORM) FRML_KEY_VAR_SIZE_ITM,\nTRIM(UMVKZ) NUMRTR_CONV_SLS_QTY_INTO_SKU,\nTRIM(UMVKN) DENOM_CONV_SLS_QTY_INTO_SKU,\nTRIM(VERFP) AVLBLTY_CNFRM_AUTMT,\nTRIM(BWART) MVMT_TYPE,\nTRIM(BNFPO) ITM_NUM_PRCH_REQSN,\nTRIM(ETART) SCHED_LINE_TYPE_EDI,\nTRIM(VBEP.AUFNR) ORDR_NUM,\nTRIM(PLNUM) PLAN_ORDR,\nTRIM(SERNR) BOM_EXPLS_NUM,\nTRIM(AESKD) CUST_ENGR_CHG_STS,\ncast(TRIM(ABGES) as decimal(18,4)) GUARNTD,\nTRIM(AULWE) RTE_SCHED,\ncast(null as timestamp) as HAND_OVR_LOC_DTTM,\nnull as  DELV_DT_RULE,\ncast(null as decimal(18,4)) as DELV_QTY_BU,\ncast(null as decimal(18,4)) as DELV_QTY_SU,\ncast(null as decimal(18,4)) as OPEN_CNFRM_DELV_QTY_BU,\ncast(null as decimal(18,4)) as OPEN_CNFRM_DELV_QTY_SU,\ncast(null as decimal(18,4)) as OPEN_RQST_DELV_QTY_BU,\ncast(null as decimal(18,4)) as OPEN_RQST_DELV_QTY_SU,\ncast(null as timestamp) as DELV_CRT_DTTM,\ncast(null as timestamp) as  SCHED_LINE_DTTM,\nnull as  RQR_CLS,\ncast(null as timestamp) as DATA_FIL_VAL_DATA_AGE_DTTM,\nnull as  SD_DOC_CRNCY,\ncast(null as decimal(18,4)) as OPEN_DELV_NET_AMT,\nnull as  GUID_RAW_FMT,\nnull as  LEGAL_CNTL_STS,\ncast(null as decimal(18,4)) as RQST_REQ_QTY_BASE_UNIT,\ncast(null as decimal(18,4)) as CNFRM_REQ_QTY_BASE_UNIT,\nnull as  DUMMY_FUNC_LGTH_1,\ncast(null as decimal(18,4)) as ARUN_REQ_ALC_QTY,\nnull as  ORDR_SCHDLNG_GRP_ID,\nnull as  REJ_CD_FOR_PRTL_QTY_REJ,\ncast(null as timestamp) as MATL_AVLBLTY_3PTY_ORDR_PLNG_DTTM\nfrom {Config.sourceDatabase}.VBEP VBEP\nLEFT JOIN {Config.sourceDatabase}.VBAK VBAK\non VBEP.VBELN = VBAK.VBELN\nAND VBAK._deleted_ = 'F' AND VBAK.MANDT = \\\"100\\\"\nLEFT JOIN {Config.sourceDatabase}.TVLST TVLST\nON VBEP.LIFSP = TVLST.LIFSP\nAND TVLST._deleted_ = 'F' AND TVLST.MANDT = \\\"100\\\" AND TVLST.SPRAS = 'E'\nwhere VBEP._deleted_ = 'F' AND VBEP.MANDT =\\\"100\\\"  \n \n\"\"\")",
+            "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+            "scriptMethodFooter" : "    return out0"
+          }
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      }
+    }
+
+
+    
