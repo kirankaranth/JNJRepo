@@ -17,7 +17,8 @@ def pipeline(spark: SparkSession) -> None:
     )
     df_MANDT_FILTER = MANDT_FILTER(spark, df_DS_SAP_RSEG)
     df_NEW_FIELDS = NEW_FIELDS(spark, df_MANDT_FILTER)
-    df_FIELDS_ORDER_REFORMAT = FIELDS_ORDER_REFORMAT(spark, df_NEW_FIELDS)
+    df_DEDUPLICATE = DEDUPLICATE(spark, df_NEW_FIELDS)
+    df_FIELDS_ORDER_REFORMAT = FIELDS_ORDER_REFORMAT(spark, df_DEDUPLICATE)
     df_FIELDS_ORDER_REFORMAT = collectMetrics(
         spark, 
         df_FIELDS_ORDER_REFORMAT, 

@@ -50,6 +50,22 @@
           },
           "optional" : false,
           "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "sourceSystem",
+          "kind" : {
+            "type" : "string",
+            "value" : "HM2"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "targetSchema",
+          "kind" : {
+            "type" : "string",
+            "value" : "dev_md_l1"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
         } ]
       },
       "oldCommon" : {
@@ -58,7 +74,7 @@
       },
       "fabrics" : { },
       "instances" : { },
-      "selected" : "HM2",
+      "selected" : "default",
       "nonEditable" : [ ],
       "isSubscribedPipelineWithPipelineConfigs" : false
     },
@@ -92,17 +108,23 @@
     "target" : "klzwN9GulS6_TaNLHhz0v$$d2CznFeYIqYuRyqbXuCF3",
     "targetPort" : "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet"
   }, {
-    "id" : "TWXkNRBrklCOq8VIuVJkS$$HCQLUY7ypfkF3GU7TF4Xn",
-    "source" : "klzwN9GulS6_TaNLHhz0v$$d2CznFeYIqYuRyqbXuCF3",
-    "sourcePort" : "G1pU8dyqCNoyiV9TY9Cp2$$7Mb7J7BMJGcUbho3xZ_Jq",
-    "target" : "BJGrM-dbKVctZAVQ6oI-e$$H27Oe0zk8NnNrj7_WmPmF",
-    "targetPort" : "X2KDYuvUpc0biQX4RPXRR$$Lw_IYay4Peo7OiT1CCtCF"
-  }, {
     "id" : "sPxTUIluu05S60S7lq7_s$$_c0RC1whhcHjbq0vPC9X6",
     "source" : "BJGrM-dbKVctZAVQ6oI-e$$H27Oe0zk8NnNrj7_WmPmF",
     "sourcePort" : "1yh91bgJbUhkR_kOBbaOw$$FCd-7izOLJTC0qWRut9u7",
     "target" : "fV4mKuLGNIfmnw-h0-Wwp$$EUD83X9qAv3RkJm0i2y9Q",
     "targetPort" : "nHfrT64WzNp5b5Z_EuooI$$XW-ptaKmou6wlakWtcecw"
+  }, {
+    "id" : "vwYT8iJ1iI94YG80hTmF-",
+    "source" : "klzwN9GulS6_TaNLHhz0v$$d2CznFeYIqYuRyqbXuCF3",
+    "sourcePort" : "G1pU8dyqCNoyiV9TY9Cp2$$7Mb7J7BMJGcUbho3xZ_Jq",
+    "target" : "ickV939YCXr_gWqZKsSAy$$DcXCFGzxCMfAX2MUqmw2M",
+    "targetPort" : "cxgVhCartdzFrWguFVjfp$$XS3sTNlyCFGyWuo7GyTR4"
+  }, {
+    "id" : "XzcBsGWkBd2UWz3rKph42",
+    "source" : "ickV939YCXr_gWqZKsSAy$$DcXCFGzxCMfAX2MUqmw2M",
+    "sourcePort" : "fZS1ZACXq7JMwzPvX623p$$vDgVp1WpfFEepdyWy_371",
+    "target" : "BJGrM-dbKVctZAVQ6oI-e$$H27Oe0zk8NnNrj7_WmPmF",
+    "targetPort" : "X2KDYuvUpc0biQX4RPXRR$$Lw_IYay4Peo7OiT1CCtCF"
   } ],
   "processes" : {
     "klzwN9GulS6_TaNLHhz0v$$d2CznFeYIqYuRyqbXuCF3" : {
@@ -111,7 +133,7 @@
       "metadata" : {
         "label" : "NEW_FIELDS",
         "slug" : "NEW_FIELDS",
-        "x" : -700,
+        "x" : -920,
         "y" : 180,
         "phase" : 0,
         "cache" : false,
@@ -1349,7 +1371,7 @@
             "sourceColumn" : "SRC_SYS_CD",
             "expression" : {
               "format" : "sql",
-              "expression" : "'$sourceDatabase'"
+              "expression" : "'$sourceSystem'"
             }
           },
           "DropColumn" : {
@@ -1541,7 +1563,7 @@
             "sourceColumn" : "AMT_IN_DOC_CRNCY",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(WRBTR)\r\n"
+              "expression" : "CAST(trim(WRBTR) as decimal(18,4))\r\n"
             }
           },
           "DropColumn" : {
@@ -1605,7 +1627,7 @@
             "sourceColumn" : "QTY",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(MENGE)\r\n"
+              "expression" : "CAST(trim(MENGE) as decimal(18,4))\r\n"
             }
           },
           "DropColumn" : {
@@ -1637,7 +1659,7 @@
             "sourceColumn" : "QTY_PRCH_ORDR_PRC_UNIT",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(BPMNG)\r\n"
+              "expression" : "CAST(trim(BPMNG) as decimal(18,4))\r\n"
             }
           },
           "DropColumn" : {
@@ -1669,7 +1691,7 @@
             "sourceColumn" : "TOT_VALUT_STK",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(LBKUM)\r\n"
+              "expression" : "CAST(trim(LBKUM) as decimal(18,4))\r\n"
             }
           },
           "DropColumn" : {
@@ -1685,7 +1707,7 @@
             "sourceColumn" : "TOT_VALUT_STK_PREV_PER",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(VRKUM)\r\n"
+              "expression" : "CAST(trim(VRKUM) as decimal(18,4))\r\n"
             }
           },
           "DropColumn" : {
@@ -2021,7 +2043,7 @@
             "sourceColumn" : "DELV_COST_SHR_ITM_VAL",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(BNKAN)\r\n"
+              "expression" : "CAST(trim(BNKAN) as decimal(18,4))\r\n"
             }
           },
           "DropColumn" : {
@@ -2053,7 +2075,7 @@
             "sourceColumn" : "VAL_TOT_VALUT_STK",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(SALK3)\r\n"
+              "expression" : "CAST(trim(SALK3) as decimal(18,4))\r\n"
             }
           },
           "DropColumn" : {
@@ -2069,7 +2091,7 @@
             "sourceColumn" : "VAL_TOT_STK_PREV_PER",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(VMSAL)\r\n"
+              "expression" : "CAST(trim(VMSAL) as decimal(18,4))\r\n"
             }
           },
           "DropColumn" : {
@@ -2165,7 +2187,7 @@
             "sourceColumn" : "QTY_INVC_IN_INVC_PO_ORDR",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(RBMNG)\r\n"
+              "expression" : "CAST(trim(RBMNG) as decimal(18,4))\r\n"
             }
           },
           "DropColumn" : {
@@ -2181,7 +2203,7 @@
             "sourceColumn" : "QTY_INVC_IN_INVC_PO_PRC",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(BPRBM)\r\n"
+              "expression" : "CAST(trim(BPRBM) as decimal(18,4))\r\n"
             }
           },
           "DropColumn" : {
@@ -2197,7 +2219,7 @@
             "sourceColumn" : "INVC_AMT_DOC_CRNCY_INVC",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(RBWWR)\r\n"
+              "expression" : "CAST(trim(RBWWR) as decimal(18,4))\r\n"
             }
           },
           "DropColumn" : {
@@ -2405,7 +2427,7 @@
             "sourceColumn" : "STK_PSTNG_LINE_INCM_INVC",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(STOCK_POSTING)\r\n"
+              "expression" : "CAST(trim(STOCK_POSTING) as decimal(18,4))\r\n"
             }
           },
           "DropColumn" : {
@@ -2421,7 +2443,7 @@
             "sourceColumn" : "STK_PSTNG_INCM_INVC_PREV",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(STOCK_POSTING_PP)\r\n"
+              "expression" : "CAST(trim(STOCK_POSTING_PP) as decimal(18,4))\r\n"
             }
           },
           "DropColumn" : {
@@ -2437,7 +2459,7 @@
             "sourceColumn" : "STK_PSTNG_INCM_PREV_YR",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(STOCK_POSTING_PY)\r\n"
+              "expression" : "CAST(trim(STOCK_POSTING_PY) as decimal(18,4))\r\n"
             }
           },
           "DropColumn" : {
@@ -2533,7 +2555,7 @@
             "sourceColumn" : "RETN_AMT_IN_DOC_CRNCY",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(RETAMT_FC)\r\n"
+              "expression" : "CAST(trim(RETAMT_FC) as decimal(18,4))\r\n"
             }
           },
           "DropColumn" : {
@@ -2549,7 +2571,7 @@
             "sourceColumn" : "RETN_IN_PCT",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(RETPC)\r\n"
+              "expression" : "CAST(trim(RETPC) as decimal(18,4))\r\n"
             }
           },
           "DropColumn" : {
@@ -2773,7 +2795,7 @@
             "sourceColumn" : "DIFF_AMT",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(DIFF_AMOUNT)\r\n"
+              "expression" : "CAST(trim(DIFF_AMOUNT) as decimal(18,4))\r\n"
             }
           },
           "DropColumn" : {
@@ -4297,7 +4319,7 @@
               }
             }, {
               "name" : "AMT_IN_DOC_CRNCY",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -4333,7 +4355,7 @@
               }
             }, {
               "name" : "QTY",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -4351,7 +4373,7 @@
               }
             }, {
               "name" : "QTY_PRCH_ORDR_PRC_UNIT",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -4369,7 +4391,7 @@
               }
             }, {
               "name" : "TOT_VALUT_STK",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -4378,7 +4400,7 @@
               }
             }, {
               "name" : "TOT_VALUT_STK_PREV_PER",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -4567,7 +4589,7 @@
               }
             }, {
               "name" : "DELV_COST_SHR_ITM_VAL",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -4585,7 +4607,7 @@
               }
             }, {
               "name" : "VAL_TOT_VALUT_STK",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -4594,7 +4616,7 @@
               }
             }, {
               "name" : "VAL_TOT_STK_PREV_PER",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -4648,7 +4670,7 @@
               }
             }, {
               "name" : "QTY_INVC_IN_INVC_PO_ORDR",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -4657,7 +4679,7 @@
               }
             }, {
               "name" : "QTY_INVC_IN_INVC_PO_PRC",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -4666,7 +4688,7 @@
               }
             }, {
               "name" : "INVC_AMT_DOC_CRNCY_INVC",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -4783,7 +4805,7 @@
               }
             }, {
               "name" : "STK_PSTNG_LINE_INCM_INVC",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -4792,7 +4814,7 @@
               }
             }, {
               "name" : "STK_PSTNG_INCM_INVC_PREV",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -4801,7 +4823,7 @@
               }
             }, {
               "name" : "STK_PSTNG_INCM_PREV_YR",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -4855,7 +4877,7 @@
               }
             }, {
               "name" : "RETN_AMT_IN_DOC_CRNCY",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -4864,7 +4886,7 @@
               }
             }, {
               "name" : "RETN_IN_PCT",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -4990,7 +5012,7 @@
               }
             }, {
               "name" : "DIFF_AMT",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -5820,6 +5842,2149 @@
         "datasetId" : "datasets/DS_SAP_RSEG"
       }
     },
+    "ickV939YCXr_gWqZKsSAy$$DcXCFGzxCMfAX2MUqmw2M" : {
+      "id" : "ickV939YCXr_gWqZKsSAy$$DcXCFGzxCMfAX2MUqmw2M",
+      "component" : "Deduplicate",
+      "metadata" : {
+        "label" : "DEDUPLICATE",
+        "slug" : "DEDUPLICATE",
+        "x" : -680,
+        "y" : 180,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "cxgVhCartdzFrWguFVjfp$$XS3sTNlyCFGyWuo7GyTR4",
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "MANDT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BELNR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "GJAHR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BUZEI",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "EBELN",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "EBELP",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ZEKKN",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MATNR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BWKEY",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BWTAR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BUKRS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WERKS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WRBTR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SHKZG",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MWSKZ",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "TXJCD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MENGE",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BSTME",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BPMNG",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BPRME",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LBKUM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VRKUM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MEINS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PSTYP",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "KNTTP",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BKLAS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "EREKZ",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "EXKBE",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "XEKBZ",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "TBTKZ",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPGRP",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPGRM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPGRT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPGRG",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPGRV",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPGRQ",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPGRS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPGRC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPGREXT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BUSTW",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "XBLNR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "XRUEB",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BNKAN",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "KSCHL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SALK3",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VMSAL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "XLIFO",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LFBNR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LFGJA",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LFPOS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MATBF",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RBMNG",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BPRBM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RBWWR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LFEHL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "GRICD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "GRIRG",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "GITYP",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PACKNO",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "INTROW",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SGTXT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "XSKRL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "KZMEK",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MRMOK",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "STUNR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ZAEHK",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "STOCK_POSTING",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "STOCK_POSTING_PP",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "STOCK_POSTING_PY",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WEREC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LIFNR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "FRBNR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "XHISTMA",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "COMPLAINT_REASON",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RETAMT_FC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RETPC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RETDUEDT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "XRETTAXNET",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RE_ACCOUNT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ERP_CONTRACT_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ERP_CONTRACT_ITM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SRM_CONTRACT_ID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SRM_CONTRACT_ITM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CONT_PSTYP",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SRVMAPKEY",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CHARG",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "INV_ITM_ORIGIN",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "INVREL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "XDINV",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DIFF_AMOUNT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "XCPRF",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PRODUCTTYPE",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "NODE_KEY",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PARENT_KEY",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ROOT_KEY",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DUMMY_MMIV_SI_S_ITEM_EEW_PS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ENH_DATE1",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ENH_DATE2",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ENH_CHAR1",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ENH_CHAR2",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ENH_PERCENT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ENH_NUMC1",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_CWM_MENGE",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_CWM_WEMNG",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_CWM_REMNG",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_CWM_BAMNG",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_CWM_VALUM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "TXDAT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "TXDAT_FROM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_NFM_SPGRK",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "EFKOR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "FSH_SEASON_YEAR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "FSH_SEASON",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "FSH_COLLECTION",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "FSH_THEME",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "HSN_SAC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CUSTOMS_VAL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LICNO",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ZEILE",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SGT_SCAT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WRF_CHARSTC1",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WRF_CHARSTC2",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WRF_CHARSTC3",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "TAX_COUNTRY",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "GR_BY_SES",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VCM_CHAIN_CATEGORY",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "T2CCODE_CRCY_CONV_FACTOR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "T2CNTRY_CRCY_CONV_FACTOR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_pk_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_upt_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_kafkaOffset_",
+              "type" : "long",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_createTime_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_kafkaTimestamp_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_deleted_",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SRC_SYS_CD",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ACTG_DOC_NUM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "FISC_YR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DOC_ITM_IN_INVC_DOC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PRCHSNG_DOC_NUM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ITM_NUM_OF_PRCHSNG_DOC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SEQ_NUM_OF_ACCT_ASGNMT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MATL_NUM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VALUT_AREA",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VALUT_TYPE",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CO_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PLNT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "AMT_IN_DOC_CRNCY",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DR_CR_IN",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "TAX_ON_SLS_PRCH_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "TAX_JURIS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "QTY",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PRCH_ORDR_UNIT_OF_MEAS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "QTY_PRCH_ORDR_PRC_UNIT",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ORDR_PRC_UNIT_PRCHSNG",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "TOT_VALUT_STK",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "TOT_VALUT_STK_PREV_PER",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BASE_UNIT_OF_MEAS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ITM_CAT_IN_PRCHSNG_DOC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ACCT_ASGNMT_CAT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VALUT_CLS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "FNL_INVC_IN",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IN_UPDT_PRCH_ORDR_HIST",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "UPDT_PRCH_ORDR_DELV_COST",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IN_SUBSQ_DR_CR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BLOK_RSN_PRC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BLOK_RSN_QTY",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BLOK_RSN_DT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BLOK_RSN_ORDR_PRC_QTY",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BLOK_RSN_PROJ_BGT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MAN_BLOK_RSN",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BLOK_RSN_ITM_AMT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BLOK_RSN_QUAL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BLOK_RSN_ENHNC_FLD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PSTNG_STRNG_FOR_VAL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "REF_DOC_NUM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IN_DOC_PSTD_PREV_PER",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DELV_COST_SHR_ITM_VAL",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "COND_TYPE",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VAL_TOT_VALUT_STK",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VAL_TOT_STK_PREV_PER",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LIFO_FIFO_RLVNT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DOC_NUM_REF_DOC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "FISC_YR_OF_CUR_PER",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ITM_OF_REF_DOC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MATL_RSPCT_OF_STK_IS_MNG",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "QTY_INVC_IN_INVC_PO_ORDR",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "QTY_INVC_IN_INVC_PO_PRC",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "INVC_AMT_DOC_CRNCY_INVC",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "TYPE_OF_VEND_ERR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ACTV_CD_FOR_GRS_INCM_TAX",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RGN",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DSTN_TYPE_FOR_EMP_TAX",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PKG_NUM_OF_SRVC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LINE_NUM_OF_SRVC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ITM_TEXT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LINE_ITM_NOT_LIAB_DISC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CORR_IN",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IN_INVC_ITM_PRCS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "STEP_NUM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "COND_CNTR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "STK_PSTNG_LINE_INCM_INVC",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "STK_PSTNG_INCM_INVC_PREV",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "STK_PSTNG_INCM_PREV_YR",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CLRNG_GR_IR_PSTNG_EXTRNL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ACCT_NUM_OF_VEND_OR_CR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "NUM_BILL_LDNG_GOODS_RCPT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "UPDT_MLT_ACCT_ASGNMT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CMPNT_RSN_IN_INVC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RETN_AMT_IN_DOC_CRNCY",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RETN_IN_PCT",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "RETN_DUE_DTTM",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "TAX_RDCTN_FOR_RETN",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CASH_LDGR_EXP_REVN_ACCT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "NUM_OF_PRIN_PRCH_AGMT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ITM_NUM_PRIN_PRCH_AGMT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CENT_CNTRC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CENT_CNTRC_ITM_NUM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CONT_ITM_CAT_PRCHSNG_DOC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ITM_KEY_FOR_ESOA_MSG",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BTCH_NUM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ORIG_INVC_ITM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "GRP_CHAR_FOR_INVC_VERIF",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IN_FOR_DIFF_INVC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DIFF_AMT",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CMMDTY_REPRC_INVC_VERIF",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "INTRNL_LIC_NUM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ITM_NUM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DAI_ETL_ID",
+              "type" : "integer",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DAI_CRT_DTTM",
+              "type" : "timestamp",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DAI_UPDT_DTTM",
+              "type" : "timestamp",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_l0_upt_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_l1_upt_",
+              "type" : "timestamp",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_pk_md5_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "fZS1ZACXq7JMwzPvX623p$$vDgVp1WpfFEepdyWy_371",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "dedupColumns" : [ {
+          "colName" : "SRC_SYS_CD"
+        }, {
+          "colName" : "ACTG_DOC_NUM"
+        }, {
+          "colName" : "FISC_YR"
+        }, {
+          "colName" : "DOC_ITM_IN_INVC_DOC"
+        } ],
+        "dedupType" : "first",
+        "columnsSelector" : [ "cxgVhCartdzFrWguFVjfp$$XS3sTNlyCFGyWuo7GyTR4##DOC_ITM_IN_INVC_DOC", "cxgVhCartdzFrWguFVjfp$$XS3sTNlyCFGyWuo7GyTR4##ACTG_DOC_NUM", "cxgVhCartdzFrWguFVjfp$$XS3sTNlyCFGyWuo7GyTR4##SRC_SYS_CD", "cxgVhCartdzFrWguFVjfp$$XS3sTNlyCFGyWuo7GyTR4##FISC_YR" ],
+        "orders" : [ ],
+        "useOrderBy" : false
+      }
+    },
     "fV4mKuLGNIfmnw-h0-Wwp$$EUD83X9qAv3RkJm0i2y9Q" : {
       "id" : "fV4mKuLGNIfmnw-h0-Wwp$$EUD83X9qAv3RkJm0i2y9Q",
       "component" : "Target",
@@ -5922,7 +8087,7 @@
               }
             }, {
               "name" : "DIFF_AMT",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -6048,7 +8213,7 @@
               }
             }, {
               "name" : "RETN_IN_PCT",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -6057,7 +8222,7 @@
               }
             }, {
               "name" : "RETN_AMT_IN_DOC_CRNCY",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -6111,7 +8276,7 @@
               }
             }, {
               "name" : "STK_PSTNG_INCM_PREV_YR",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -6120,7 +8285,7 @@
               }
             }, {
               "name" : "STK_PSTNG_INCM_INVC_PREV",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -6129,7 +8294,7 @@
               }
             }, {
               "name" : "STK_PSTNG_LINE_INCM_INVC",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -6246,7 +8411,7 @@
               }
             }, {
               "name" : "INVC_AMT_DOC_CRNCY_INVC",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -6255,7 +8420,7 @@
               }
             }, {
               "name" : "QTY_INVC_IN_INVC_PO_PRC",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -6264,7 +8429,7 @@
               }
             }, {
               "name" : "QTY_INVC_IN_INVC_PO_ORDR",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -6318,7 +8483,7 @@
               }
             }, {
               "name" : "VAL_TOT_STK_PREV_PER",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -6327,7 +8492,7 @@
               }
             }, {
               "name" : "VAL_TOT_VALUT_STK",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -6345,7 +8510,7 @@
               }
             }, {
               "name" : "DELV_COST_SHR_ITM_VAL",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -6525,7 +8690,7 @@
               }
             }, {
               "name" : "TOT_VALUT_STK_PREV_PER",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -6534,7 +8699,7 @@
               }
             }, {
               "name" : "TOT_VALUT_STK",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -6552,7 +8717,7 @@
               }
             }, {
               "name" : "QTY_PRCH_ORDR_PRC_UNIT",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -6570,7 +8735,7 @@
               }
             }, {
               "name" : "QTY",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -6606,7 +8771,7 @@
               }
             }, {
               "name" : "AMT_IN_DOC_CRNCY",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -6757,7 +8922,7 @@
       "metadata" : {
         "label" : "MANDT_FILTER",
         "slug" : "MANDT_FILTER",
-        "x" : -980,
+        "x" : -1100,
         "y" : 180,
         "phase" : 0,
         "cache" : false,

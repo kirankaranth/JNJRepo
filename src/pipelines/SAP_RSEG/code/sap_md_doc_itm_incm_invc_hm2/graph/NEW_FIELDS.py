@@ -7,7 +7,7 @@ from sap_md_doc_itm_incm_invc_hm2.udfs.UDFs import *
 
 def NEW_FIELDS(spark: SparkSession, MANDT_FILTER: DataFrame) -> DataFrame:
     return MANDT_FILTER\
-        .withColumn("SRC_SYS_CD", lit(Config.sourceDatabase))\
+        .withColumn("SRC_SYS_CD", lit(Config.sourceSystem))\
         .withColumn("ACTG_DOC_NUM", col("BELNR"))\
         .withColumn("FISC_YR", col("GJAHR"))\
         .withColumn("DOC_ITM_IN_INVC_DOC", col("BUZEI"))\
@@ -19,16 +19,16 @@ def NEW_FIELDS(spark: SparkSession, MANDT_FILTER: DataFrame) -> DataFrame:
         .withColumn("VALUT_TYPE", trim(col("BWTAR")))\
         .withColumn("CO_CD", trim(col("BUKRS")))\
         .withColumn("PLNT", trim(col("WERKS")))\
-        .withColumn("AMT_IN_DOC_CRNCY", trim(col("WRBTR")))\
+        .withColumn("AMT_IN_DOC_CRNCY", trim(col("WRBTR")).cast(DecimalType(18, 4)))\
         .withColumn("DR_CR_IN", trim(col("SHKZG")))\
         .withColumn("TAX_ON_SLS_PRCH_CD", trim(col("MWSKZ")))\
         .withColumn("TAX_JURIS", trim(col("TXJCD")))\
-        .withColumn("QTY", trim(col("MENGE")))\
+        .withColumn("QTY", trim(col("MENGE")).cast(DecimalType(18, 4)))\
         .withColumn("PRCH_ORDR_UNIT_OF_MEAS", trim(col("BSTME")))\
-        .withColumn("QTY_PRCH_ORDR_PRC_UNIT", trim(col("BPMNG")))\
+        .withColumn("QTY_PRCH_ORDR_PRC_UNIT", trim(col("BPMNG")).cast(DecimalType(18, 4)))\
         .withColumn("ORDR_PRC_UNIT_PRCHSNG", trim(col("BPRME")))\
-        .withColumn("TOT_VALUT_STK", trim(col("LBKUM")))\
-        .withColumn("TOT_VALUT_STK_PREV_PER", trim(col("VRKUM")))\
+        .withColumn("TOT_VALUT_STK", trim(col("LBKUM")).cast(DecimalType(18, 4)))\
+        .withColumn("TOT_VALUT_STK_PREV_PER", trim(col("VRKUM")).cast(DecimalType(18, 4)))\
         .withColumn("BASE_UNIT_OF_MEAS", trim(col("MEINS")))\
         .withColumn("ITM_CAT_IN_PRCHSNG_DOC", trim(col("PSTYP")))\
         .withColumn("ACCT_ASGNMT_CAT", trim(col("KNTTP")))\
@@ -49,18 +49,18 @@ def NEW_FIELDS(spark: SparkSession, MANDT_FILTER: DataFrame) -> DataFrame:
         .withColumn("PSTNG_STRNG_FOR_VAL", trim(col("BUSTW")))\
         .withColumn("REF_DOC_NUM", trim(col("XBLNR")))\
         .withColumn("IN_DOC_PSTD_PREV_PER", trim(col("XRUEB")))\
-        .withColumn("DELV_COST_SHR_ITM_VAL", trim(col("BNKAN")))\
+        .withColumn("DELV_COST_SHR_ITM_VAL", trim(col("BNKAN")).cast(DecimalType(18, 4)))\
         .withColumn("COND_TYPE", trim(col("KSCHL")))\
-        .withColumn("VAL_TOT_VALUT_STK", trim(col("SALK3")))\
-        .withColumn("VAL_TOT_STK_PREV_PER", trim(col("VMSAL")))\
+        .withColumn("VAL_TOT_VALUT_STK", trim(col("SALK3")).cast(DecimalType(18, 4)))\
+        .withColumn("VAL_TOT_STK_PREV_PER", trim(col("VMSAL")).cast(DecimalType(18, 4)))\
         .withColumn("LIFO_FIFO_RLVNT", trim(col("XLIFO")))\
         .withColumn("DOC_NUM_REF_DOC", trim(col("LFBNR")))\
         .withColumn("FISC_YR_OF_CUR_PER", trim(col("LFGJA")))\
         .withColumn("ITM_OF_REF_DOC", trim(col("LFPOS")))\
         .withColumn("MATL_RSPCT_OF_STK_IS_MNG", trim(col("MATBF")))\
-        .withColumn("QTY_INVC_IN_INVC_PO_ORDR", trim(col("RBMNG")))\
-        .withColumn("QTY_INVC_IN_INVC_PO_PRC", trim(col("BPRBM")))\
-        .withColumn("INVC_AMT_DOC_CRNCY_INVC", trim(col("RBWWR")))\
+        .withColumn("QTY_INVC_IN_INVC_PO_ORDR", trim(col("RBMNG")).cast(DecimalType(18, 4)))\
+        .withColumn("QTY_INVC_IN_INVC_PO_PRC", trim(col("BPRBM")).cast(DecimalType(18, 4)))\
+        .withColumn("INVC_AMT_DOC_CRNCY_INVC", trim(col("RBWWR")).cast(DecimalType(18, 4)))\
         .withColumn("TYPE_OF_VEND_ERR", trim(col("LFEHL")))\
         .withColumn("ACTV_CD_FOR_GRS_INCM_TAX", trim(col("GRICD")))\
         .withColumn("RGN", trim(col("GRIRG")))\
@@ -73,16 +73,16 @@ def NEW_FIELDS(spark: SparkSession, MANDT_FILTER: DataFrame) -> DataFrame:
         .withColumn("IN_INVC_ITM_PRCS", trim(col("MRMOK")))\
         .withColumn("STEP_NUM", trim(col("STUNR")))\
         .withColumn("COND_CNTR", trim(col("ZAEHK")))\
-        .withColumn("STK_PSTNG_LINE_INCM_INVC", trim(col("STOCK_POSTING")))\
-        .withColumn("STK_PSTNG_INCM_INVC_PREV", trim(col("STOCK_POSTING_PP")))\
-        .withColumn("STK_PSTNG_INCM_PREV_YR", trim(col("STOCK_POSTING_PY")))\
+        .withColumn("STK_PSTNG_LINE_INCM_INVC", trim(col("STOCK_POSTING")).cast(DecimalType(18, 4)))\
+        .withColumn("STK_PSTNG_INCM_INVC_PREV", trim(col("STOCK_POSTING_PP")).cast(DecimalType(18, 4)))\
+        .withColumn("STK_PSTNG_INCM_PREV_YR", trim(col("STOCK_POSTING_PY")).cast(DecimalType(18, 4)))\
         .withColumn("CLRNG_GR_IR_PSTNG_EXTRNL", trim(col("WEREC")))\
         .withColumn("ACCT_NUM_OF_VEND_OR_CR", trim(col("LIFNR")))\
         .withColumn("NUM_BILL_LDNG_GOODS_RCPT", trim(col("FRBNR")))\
         .withColumn("UPDT_MLT_ACCT_ASGNMT", trim(col("XHISTMA")))\
         .withColumn("CMPNT_RSN_IN_INVC", trim(col("COMPLAINT_REASON")))\
-        .withColumn("RETN_AMT_IN_DOC_CRNCY", trim(col("RETAMT_FC")))\
-        .withColumn("RETN_IN_PCT", trim(col("RETPC")))\
+        .withColumn("RETN_AMT_IN_DOC_CRNCY", trim(col("RETAMT_FC")).cast(DecimalType(18, 4)))\
+        .withColumn("RETN_IN_PCT", trim(col("RETPC")).cast(DecimalType(18, 4)))\
         .withColumn(
           "RETN_DUE_DTTM",
           when((col("RETDUEDT") == lit("00000000")), lit(None)).otherwise(to_timestamp(col("RETDUEDT"), "yyyyMMdd"))
@@ -99,7 +99,7 @@ def NEW_FIELDS(spark: SparkSession, MANDT_FILTER: DataFrame) -> DataFrame:
         .withColumn("ORIG_INVC_ITM", trim(col("INV_ITM_ORIGIN")))\
         .withColumn("GRP_CHAR_FOR_INVC_VERIF", trim(col("INVREL")))\
         .withColumn("IN_FOR_DIFF_INVC", trim(col("XDINV")))\
-        .withColumn("DIFF_AMT", trim(col("DIFF_AMOUNT")))\
+        .withColumn("DIFF_AMT", trim(col("DIFF_AMOUNT")).cast(DecimalType(18, 4)))\
         .withColumn("CMMDTY_REPRC_INVC_VERIF", trim(col("XCPRF")))\
         .withColumn("INTRNL_LIC_NUM", trim(col("LICNO")))\
         .withColumn("ITM_NUM", trim(col("ZEILE")))\
