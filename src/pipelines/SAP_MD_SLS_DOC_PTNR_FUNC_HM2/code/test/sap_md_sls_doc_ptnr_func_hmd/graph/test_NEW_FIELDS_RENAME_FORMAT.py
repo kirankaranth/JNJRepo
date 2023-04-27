@@ -4,8 +4,8 @@ from pyspark.sql.types import *
 from argparse import Namespace
 from prophecy.test import BaseTestCase
 from prophecy.test.utils import *
-from sap_md_sls_doc_ptnr_func_hm2.graph.NEW_FIELDS_RENAME_FORMAT import *
-from sap_md_sls_doc_ptnr_func_hm2.config.ConfigStore import *
+from sap_md_sls_doc_ptnr_func_hmd.graph.NEW_FIELDS_RENAME_FORMAT import *
+from sap_md_sls_doc_ptnr_func_hmd.config.ConfigStore import *
 
 
 class NEW_FIELDS_RENAME_FORMATTest(BaseTestCase):
@@ -13,14 +13,14 @@ class NEW_FIELDS_RENAME_FORMATTest(BaseTestCase):
     def test_unit_test_(self):
         dfIn0 = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/sap_md_sls_doc_ptnr_func_hm2/graph/NEW_FIELDS_RENAME_FORMAT/in0/schema.json',
-            'test/resources/data/sap_md_sls_doc_ptnr_func_hm2/graph/NEW_FIELDS_RENAME_FORMAT/in0/data/test_unit_test_.json',
+            'test/resources/data/sap_md_sls_doc_ptnr_func_hmd/graph/NEW_FIELDS_RENAME_FORMAT/in0/schema.json',
+            'test/resources/data/sap_md_sls_doc_ptnr_func_hmd/graph/NEW_FIELDS_RENAME_FORMAT/in0/data/test_unit_test_.json',
             'in0'
         )
         dfOut = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/sap_md_sls_doc_ptnr_func_hm2/graph/NEW_FIELDS_RENAME_FORMAT/out/schema.json',
-            'test/resources/data/sap_md_sls_doc_ptnr_func_hm2/graph/NEW_FIELDS_RENAME_FORMAT/out/data/test_unit_test_.json',
+            'test/resources/data/sap_md_sls_doc_ptnr_func_hmd/graph/NEW_FIELDS_RENAME_FORMAT/out/schema.json',
+            'test/resources/data/sap_md_sls_doc_ptnr_func_hmd/graph/NEW_FIELDS_RENAME_FORMAT/out/data/test_unit_test_.json',
             'out'
         )
         dfOutComputed = NEW_FIELDS_RENAME_FORMAT(self.spark, dfIn0)

@@ -1,10 +1,10 @@
 from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
-from sap_md_sls_doc_ptnr_func_hm2.config.ConfigStore import *
-from sap_md_sls_doc_ptnr_func_hm2.udfs.UDFs import *
+from sap_md_sls_doc_ptnr_func_hmd.config.ConfigStore import *
+from sap_md_sls_doc_ptnr_func_hmd.udfs.UDFs import *
 from prophecy.utils import *
-from sap_md_sls_doc_ptnr_func_hm2.graph import *
+from sap_md_sls_doc_ptnr_func_hmd.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_SAP_VBPA = SAP_VBPA(spark)
