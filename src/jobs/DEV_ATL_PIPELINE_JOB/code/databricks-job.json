@@ -33,7 +33,7 @@
     "format" : "MULTI_TASK",
     "name" : "ATL_PIPELINE_JOB",
     "job_clusters" : [ {
-      "job_cluster_key" : "ATL_PIPELINE_JOB_default_Prophecy_Small",
+      "job_cluster_key" : "ATL_PIPELINE_JOB_default_Prophecy_Large",
       "new_cluster" : {
         "spark_version" : "11.3.x-scala2.12",
         "node_type_id" : "Standard_D12_v2",
@@ -48,18 +48,27 @@
           "prophecy.metadata.url" : "__PROPHECY_URL_PLACEHOLDER__",
           "prophecy.execution.metrics.disabled" : false
         },
-        "num_workers" : 3,
+        "custom_tags" : { },
+        "ssh_public_keys" : [ ],
+        "init_scripts" : [ ],
+        "spark_env_vars" : { },
+        "autoscale" : {
+          "min_workers" : 2,
+          "max_workers" : 40
+        },
         "azure_attributes" : {
           "first_on_demand" : 1,
-          "availability" : "SPOT_WITH_FALLBACK_AZURE"
+          "availability" : "SPOT_WITH_FALLBACK_AZURE",
+          "spot_bid_max_price" : -1
         },
-        "driver_node_type_id" : "Standard_D12_v2"
+        "driver_node_type_id" : "Standard_D12_v2",
+        "enable_elastic_disk" : true
       }
     } ],
     "email_notifications" : { },
     "tasks" : [ {
       "task_key" : "MD_SER_NUM_STOCK_SGMNT",
-      "job_cluster_key" : "ATL_PIPELINE_JOB_default_Prophecy_Small",
+      "job_cluster_key" : "ATL_PIPELINE_JOB_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_SER_NUM_STOCK_SGMNT_ATL_BBA_BBL_BBN_MRS",
         "entry_point" : "main",
@@ -80,7 +89,7 @@
       "max_retries" : 0
     }, {
       "task_key" : "MD_SLS_DOC_PTNR_FUNC",
-      "job_cluster_key" : "ATL_PIPELINE_JOB_default_Prophecy_Small",
+      "job_cluster_key" : "ATL_PIPELINE_JOB_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "SAP_01_MD_SLS_DOC_PTNR_FUNC",
         "entry_point" : "main",
@@ -101,7 +110,7 @@
       "max_retries" : 0
     }, {
       "task_key" : "MD_DELV_LINE",
-      "job_cluster_key" : "ATL_PIPELINE_JOB_default_Prophecy_Small",
+      "job_cluster_key" : "ATL_PIPELINE_JOB_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_DELV_LINE_FSN_GEU_HCS_MRS_P01_SVS_ATL",
         "entry_point" : "main",
@@ -122,7 +131,7 @@
       "max_retries" : 0
     }, {
       "task_key" : "MD_MATL_INV",
-      "job_cluster_key" : "ATL_PIPELINE_JOB_default_Prophecy_Small",
+      "job_cluster_key" : "ATL_PIPELINE_JOB_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_MATL_INV_ATL",
         "entry_point" : "main",

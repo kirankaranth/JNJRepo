@@ -75,7 +75,7 @@
     "format" : "MULTI_TASK",
     "name" : "MBP_PIPELINE_JOB",
     "job_clusters" : [ {
-      "job_cluster_key" : "MBP_PIPELINE_JOB_default_Prophecy_Small",
+      "job_cluster_key" : "MBP_PIPELINE_JOB_default_Prophecy_Large",
       "new_cluster" : {
         "spark_version" : "11.3.x-scala2.12",
         "node_type_id" : "Standard_D12_v2",
@@ -90,18 +90,27 @@
           "prophecy.metadata.url" : "__PROPHECY_URL_PLACEHOLDER__",
           "prophecy.execution.metrics.disabled" : false
         },
-        "num_workers" : 3,
+        "custom_tags" : { },
+        "ssh_public_keys" : [ ],
+        "init_scripts" : [ ],
+        "spark_env_vars" : { },
+        "autoscale" : {
+          "min_workers" : 2,
+          "max_workers" : 40
+        },
         "azure_attributes" : {
           "first_on_demand" : 1,
-          "availability" : "SPOT_WITH_FALLBACK_AZURE"
+          "availability" : "SPOT_WITH_FALLBACK_AZURE",
+          "spot_bid_max_price" : -1
         },
-        "driver_node_type_id" : "Standard_D12_v2"
+        "driver_node_type_id" : "Standard_D12_v2",
+        "enable_elastic_disk" : true
       }
     } ],
     "email_notifications" : { },
     "tasks" : [ {
       "task_key" : "MD_SLS_ORDR_LINE",
-      "job_cluster_key" : "MBP_PIPELINE_JOB_default_Prophecy_Small",
+      "job_cluster_key" : "MBP_PIPELINE_JOB_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "SAP_01_MD_SLS_ORDR_LINE_MBP",
         "entry_point" : "main",
@@ -122,7 +131,7 @@
       "max_retries" : 0
     }, {
       "task_key" : "MD_SLS_DOC_PTNR_FUNC",
-      "job_cluster_key" : "MBP_PIPELINE_JOB_default_Prophecy_Small",
+      "job_cluster_key" : "MBP_PIPELINE_JOB_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "SAP_01_MD_SLS_DOC_PTNR_FUNC",
         "entry_point" : "main",
@@ -143,7 +152,7 @@
       "max_retries" : 0
     }, {
       "task_key" : "MD_PO_SCHED_LINE_DELV",
-      "job_cluster_key" : "MBP_PIPELINE_JOB_default_Prophecy_Small",
+      "job_cluster_key" : "MBP_PIPELINE_JOB_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_PO_SCHED_LINE_DELV_ATL_BBA_BBL_BBN_BWI_FSN_GEU_HCS_HMD_MBP_MRS_P01_SVS_TAI_HMD",
         "entry_point" : "main",
@@ -164,7 +173,7 @@
       "max_retries" : 0
     }, {
       "task_key" : "MD_MATL_INV",
-      "job_cluster_key" : "MBP_PIPELINE_JOB_default_Prophecy_Small",
+      "job_cluster_key" : "MBP_PIPELINE_JOB_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_MATL_INV_MBP",
         "entry_point" : "main",
@@ -185,7 +194,7 @@
       "max_retries" : 0
     }, {
       "task_key" : "MD_MATL_LOC",
-      "job_cluster_key" : "MBP_PIPELINE_JOB_default_Prophecy_Small",
+      "job_cluster_key" : "MBP_PIPELINE_JOB_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_MATL_LOC_TAI_MRS_P01_HCS_BWI_GEU_SVS_MBP_FSN",
         "entry_point" : "main",
@@ -206,7 +215,7 @@
       "max_retries" : 0
     }, {
       "task_key" : "MD_SHIP",
-      "job_cluster_key" : "MBP_PIPELINE_JOB_default_Prophecy_Small",
+      "job_cluster_key" : "MBP_PIPELINE_JOB_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "SAP_01_MD_SHIP_MBP",
         "entry_point" : "main",
@@ -227,7 +236,7 @@
       "max_retries" : 0
     }, {
       "task_key" : "MD_PO_HIST",
-      "job_cluster_key" : "MBP_PIPELINE_JOB_default_Prophecy_Small",
+      "job_cluster_key" : "MBP_PIPELINE_JOB_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_PO_HIST_BBA_BBL_BBN_MBP_MRS_TAI_P01_HMD_GEU_HCS",
         "entry_point" : "main",
@@ -248,7 +257,7 @@
       "max_retries" : 0
     }, {
       "task_key" : "MD_SER_NUM_STOCK_SGMNT",
-      "job_cluster_key" : "MBP_PIPELINE_JOB_default_Prophecy_Small",
+      "job_cluster_key" : "MBP_PIPELINE_JOB_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_SER_NUM_STOCK_SGMNT_HCS_MBP_P01_SVS",
         "entry_point" : "main",
@@ -269,7 +278,7 @@
       "max_retries" : 0
     }, {
       "task_key" : "MD_DELV_LINE",
-      "job_cluster_key" : "MBP_PIPELINE_JOB_default_Prophecy_Small",
+      "job_cluster_key" : "MBP_PIPELINE_JOB_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_DELV_LINE_MBP",
         "entry_point" : "main",
@@ -290,7 +299,7 @@
       "max_retries" : 0
     }, {
       "task_key" : "MD_BILL_DOC_HDR",
-      "job_cluster_key" : "MBP_PIPELINE_JOB_default_Prophecy_Small",
+      "job_cluster_key" : "MBP_PIPELINE_JOB_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "SAP_01_MD_BILL_DOC_HDR_FSN_GEU_HCS_MBP_MRS_P01_SVS_TAI",
         "entry_point" : "main",

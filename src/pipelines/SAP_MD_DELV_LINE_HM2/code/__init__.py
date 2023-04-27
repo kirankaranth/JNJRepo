@@ -1,1 +1,1 @@
-from .sap_md_delv_line_hmd import *
+from .sap_md_delv_line_hm2 import *
