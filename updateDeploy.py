@@ -20,12 +20,13 @@ for item in os.scandir("./src/jobs/"):
             jsonObject["request"]["name"] = env+"_"+app+"_"+ jsonObject["request"]["name"]
             for task in jsonObject["request"]["tasks"]:
 
-                a = json.loads(task["python_wheel_task"]["parameters"][3])
-                b = json.loads('{"targetSchema":"'+envFolder+'_'+app+'","targetEnv":"'+envFolder+'","targetApp":"'+app+'"}')
-                a.update(b)
-                #print(a)
-                task["python_wheel_task"]["parameters"][3] = json.dumps(a) #'{"targetSchema":"'+envFolder+'_'+app+'","targetEnv":"'+envFolder+'","targetApp":"'+app+'"}'
-            
+                if 'python_wheel_task' in task:
+                    a = json.loads(task["python_wheel_task"]["parameters"][3])
+                    b = json.loads('{"targetSchema":"'+envFolder+'_'+app+'","targetEnv":"'+envFolder+'","targetApp":"'+app+'"}')
+                    a.update(b)
+                    #print(a)
+                    task["python_wheel_task"]["parameters"][3] = json.dumps(a) #'{"targetSchema":"'+envFolder+'_'+app+'","targetEnv":"'+envFolder+'","targetApp":"'+app+'"}'
+                
             f.close()
             f = open(item.path+"/"+dbLoc,'w')
             json.dump(jsonObject,f)
