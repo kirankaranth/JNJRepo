@@ -46,7 +46,7 @@
           "name" : "MANDT",
           "kind" : {
             "type" : "string",
-            "value" : ""
+            "value" : "100"
           },
           "optional" : true,
           "isWorkflowNodeConfiguration" : false
@@ -79,7 +79,7 @@
     "isImported" : false,
     "interimMode" : "Full",
     "interimModeEnabled" : true,
-    "visualCodeInterimMode" : "Disabled",
+    "visualCodeInterimMode" : "IO",
     "recordsLimit" : {
       "enabled" : false,
       "value" : 1000
@@ -903,6 +903,15 @@
                 "mappings" : [ ],
                 "tags" : [ ]
               }
+            }, {
+              "name" : "_deleted_",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
             } ]
           },
           "isStreaming" : false
@@ -1675,7 +1684,7 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "bf7d13d1-daa9-45ce-8aaf-0c83db1d03cc##SCHED_LINE_NUM", "bf7d13d1-daa9-45ce-8aaf-0c83db1d03cc##SCHED_LINE_ITM_NUM", "bf7d13d1-daa9-45ce-8aaf-0c83db1d03cc##CO_CD", "bf7d13d1-daa9-45ce-8aaf-0c83db1d03cc##SLS_ORDR_DOC_ID", "bf7d13d1-daa9-45ce-8aaf-0c83db1d03cc##SRC_SYS_CD", "bf7d13d1-daa9-45ce-8aaf-0c83db1d03cc##SLS_ORDR_TYPE_CD" ],
         "transformations" : [ {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
@@ -1779,6 +1788,22 @@
             "expression" : {
               "format" : "sql",
               "expression" : "current_timestamp()"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_deleted_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "'F'"
             }
           },
           "DropColumn" : {
