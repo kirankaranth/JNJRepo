@@ -6,4 +6,4 @@ from sap_md_delv_line_bwi_tai.config.ConfigStore import *
 from sap_md_delv_line_bwi_tai.udfs.UDFs import *
 
 def DS_SAP_03_LIPS(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM {Config.sourceDatabase}.lips WHERE _deleted_ = 'F'")
+    return spark.read.table(f"{Config.sourceDatabase}.lips")
