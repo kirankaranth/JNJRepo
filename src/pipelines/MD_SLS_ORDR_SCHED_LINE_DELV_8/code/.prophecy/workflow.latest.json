@@ -79,21 +79,21 @@
         "topLevelPackage" : "MD_SLS_ORDR_SCHED_LINE_DELV_8"
       },
       "connections" : [ {
-        "id" : "8f5e2af5-aedf-4e36-a431-64f7da00d85b",
-        "source" : "16bdc258-152f-4572-bc72-b45b7721107c",
-        "sourcePort" : "68bcefac-f77c-452b-953f-a4c95576c7ca",
-        "target" : "4eec4116-f905-434d-b9d3-59bf2dc62d81",
-        "targetPort" : "c69bec99-772f-43fa-87ec-cf8b5f214b24"
+        "id" : "3e1aa86b-c086-4434-93de-061ab1b8f44a",
+        "source" : "68d9e988-0ab7-44dd-b0f8-f40d63c03d3c",
+        "sourcePort" : "ea993d6b-b04b-439f-a8d5-f20617654ed1",
+        "target" : "e161dbf1-1616-40dd-bff9-3941585279ee",
+        "targetPort" : "bc386c29-2729-4495-9357-f4eae2c38432"
       }, {
-        "id" : "5634a241-842b-447f-9a30-ee8ccecf237d",
-        "source" : "14871519-8eed-4ba3-9b7d-f5e9a4997991",
-        "sourcePort" : "2ee43dd4-4187-4462-8b73-924712603ed7",
-        "target" : "16bdc258-152f-4572-bc72-b45b7721107c",
-        "targetPort" : "ae1f0f82-aa62-454f-b4e7-dd2fc896a3b0"
+        "id" : "f684b91c-df50-4187-a214-9ffa57e1c3de",
+        "source" : "10772554-c197-47dd-b248-62268f4beead",
+        "sourcePort" : "7de6bf92-694c-49d7-8047-7c57d22b6cad",
+        "target" : "68d9e988-0ab7-44dd-b0f8-f40d63c03d3c",
+        "targetPort" : "bf7d13d1-daa9-45ce-8aaf-0c83db1d03cc"
       } ],
       "processes" : {
-        "4eec4116-f905-434d-b9d3-59bf2dc62d81" : {
-          "id" : "4eec4116-f905-434d-b9d3-59bf2dc62d81",
+        "e161dbf1-1616-40dd-bff9-3941585279ee" : {
+          "id" : "e161dbf1-1616-40dd-bff9-3941585279ee",
           "component" : "Target",
           "metadata" : {
             "label" : "MD_SLS_ORDR_SCHED_LINE_DELV",
@@ -107,7 +107,7 @@
           },
           "ports" : {
             "inputs" : [ {
-              "id" : "c69bec99-772f-43fa-87ec-cf8b5f214b24",
+              "id" : "bc386c29-2729-4495-9357-f4eae2c38432",
               "slug" : "in0",
               "isStreaming" : false
             } ],
@@ -119,8 +119,8 @@
             "datasetId" : "datasets/MD_SLS_ORDR_SCHED_LINE_DELV"
           }
         },
-        "16bdc258-152f-4572-bc72-b45b7721107c" : {
-          "id" : "16bdc258-152f-4572-bc72-b45b7721107c",
+        "68d9e988-0ab7-44dd-b0f8-f40d63c03d3c" : {
+          "id" : "68d9e988-0ab7-44dd-b0f8-f40d63c03d3c",
           "component" : "SchemaTransform",
           "metadata" : {
             "label" : "addL1fields",
@@ -134,12 +134,12 @@
           },
           "ports" : {
             "inputs" : [ {
-              "id" : "ae1f0f82-aa62-454f-b4e7-dd2fc896a3b0",
+              "id" : "bf7d13d1-daa9-45ce-8aaf-0c83db1d03cc",
               "slug" : "in0",
               "isStreaming" : false
             } ],
             "outputs" : [ {
-              "id" : "68bcefac-f77c-452b-953f-a4c95576c7ca",
+              "id" : "ea993d6b-b04b-439f-a8d5-f20617654ed1",
               "slug" : "out",
               "isStreaming" : false
             } ],
@@ -170,7 +170,7 @@
                 "sourceColumn" : "_pk_",
                 "expression" : {
                   "format" : "sql",
-                  "expression" : "to_json(named_struct())"
+                  "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'SCHED_LINE_ITM_NUM',SCHED_LINE_ITM_NUM,'SLS_ORDR_DOC_ID',SLS_ORDR_DOC_ID,'SCHED_LINE_NUM',SCHED_LINE_NUM,'CO_CD',CO_CD,'SLS_ORDR_TYPE_CD',SLS_ORDR_TYPE_CD))"
                 }
               },
               "DropColumn" : {
@@ -186,7 +186,7 @@
                 "sourceColumn" : "_pk_md5_",
                 "expression" : {
                   "format" : "sql",
-                  "expression" : "md5(to_json(named_struct()))"
+                  "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'SCHED_LINE_ITM_NUM',SCHED_LINE_ITM_NUM,'SLS_ORDR_DOC_ID',SLS_ORDR_DOC_ID,'SCHED_LINE_NUM',SCHED_LINE_NUM,'CO_CD',CO_CD,'SLS_ORDR_TYPE_CD',SLS_ORDR_TYPE_CD)))"
                 }
               },
               "DropColumn" : {
@@ -219,7 +219,7 @@
                 "sourceColumn" : "DAI_ETL_ID",
                 "expression" : {
                   "format" : "sql",
-                  "expression" : "current_timestamp()"
+                  "expression" : "'$DAI_ETL_ID'"
                 }
               },
               "DropColumn" : {
@@ -265,8 +265,8 @@
             ]
           }
         },
-        "14871519-8eed-4ba3-9b7d-f5e9a4997991" : {
-          "id" : "14871519-8eed-4ba3-9b7d-f5e9a4997991",
+        "10772554-c197-47dd-b248-62268f4beead" : {
+          "id" : "10772554-c197-47dd-b248-62268f4beead",
           "component" : "Script",
           "metadata" : {
             "label" : "sql_MD_SLS_ORDR_SCHED_LINE_DELV",
@@ -281,7 +281,7 @@
           "ports" : {
             "inputs" : [ ],
             "outputs" : [ {
-              "id" : "2ee43dd4-4187-4462-8b73-924712603ed7",
+              "id" : "7de6bf92-694c-49d7-8047-7c57d22b6cad",
               "slug" : "out0",
               "schema" : {
                 "type" : "struct",
