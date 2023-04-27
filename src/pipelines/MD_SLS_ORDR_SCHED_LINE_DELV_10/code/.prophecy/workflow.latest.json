@@ -327,6 +327,15 @@
                 "mappings" : [ ],
                 "tags" : [ ]
               }
+            }, {
+              "name" : "_deleted_",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
             } ]
           },
           "isStreaming" : false
@@ -523,7 +532,7 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "ddd0f89d-6a0e-4340-a760-4930e40baf9c##SCHED_LINE_NUM", "ddd0f89d-6a0e-4340-a760-4930e40baf9c##SCHED_LINE_ITM_NUM", "ddd0f89d-6a0e-4340-a760-4930e40baf9c##SLS_ORDR_TYPE_CD", "ddd0f89d-6a0e-4340-a760-4930e40baf9c##SRC_SYS_CD", "ddd0f89d-6a0e-4340-a760-4930e40baf9c##CO_CD", "ddd0f89d-6a0e-4340-a760-4930e40baf9c##SLS_ORDR_DOC_ID" ],
         "transformations" : [ {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
@@ -627,6 +636,22 @@
             "expression" : {
               "format" : "sql",
               "expression" : "current_timestamp()"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_deleted_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "'F'"
             }
           },
           "DropColumn" : {
