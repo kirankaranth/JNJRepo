@@ -1,10 +1,10 @@
 from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
-from sap_md_delv_line_hm2.config.ConfigStore import *
-from sap_md_delv_line_hm2.udfs.UDFs import *
+from sap_md_delv_line_hmd.config.ConfigStore import *
+from sap_md_delv_line_hmd.udfs.UDFs import *
 from prophecy.utils import *
-from sap_md_delv_line_hm2.graph import *
+from sap_md_delv_line_hmd.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_DS_SAP_01_LIPS = DS_SAP_01_LIPS(spark)
