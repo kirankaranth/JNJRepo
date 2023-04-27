@@ -1,6 +1,6 @@
 import unittest
 
-from test.sap_01_md_matl_loc.graph.test_SET_FIELD_ORDER_REFORMAT import *
+from test.jde_md_matl_loc_deu.graph.test_SET_FIELD_ORDER_REFORMAT import *
 
 if __name__ == "__main__":
     runner = unittest.TextTestRunner()
