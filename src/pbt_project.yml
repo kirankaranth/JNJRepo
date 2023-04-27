@@ -9,8 +9,8 @@ buildSystemDetails:
   parentArtefactID: cdl_l1_team
   buildSystem: wheel
   author: null
-  createdAt: '2023-03-24 11:41:29'
-  modifiedAt: '2023-03-24 11:41:29'
+  createdAt: '2023-03-24 12:57:11'
+  modifiedAt: '2023-03-24 12:57:11'
 pipelines:
   pipelines/SAP_01_MD_SER_NUM_STOCK_SGMNT:
     name: SAP_MD_SER_NUM_STOCK_SGMNT_ATL_BBA_BBL_BBN_MRS
@@ -1701,6 +1701,23 @@ pipelines:
       - datasets/DS_JDE_01_f42119
       outputs:
       - datasets/MD_SLS_ORDR_LINE
+    subgraphs: []
+    dependencies: {}
+  pipelines/SAP_MD_SLS_DOC_PTNR_FUNC_HM2:
+    name: SAP_MD_SLS_DOC_PTNR_FUNC_HMD
+    description: ''
+    author: mbolado1@its.jnj.com
+    mode: batch
+    artefactID: ''
+    language: python
+    createdAt: '2023-04-11 14:58:12'
+    modifiedAt: '2023-04-27 20:29:19'
+    datasets:
+      inputs:
+      - datasets/DS_SAP_01_VBAK
+      - datasets/DS_SAP_01_VBPA
+      outputs:
+      - datasets/MD_SLS_DOC_PTNR_FUNC
     subgraphs: []
     dependencies: {}
 datasets:
@@ -5324,9 +5341,16 @@ datasets:
     description: ''
     author: mbolado1@its.jnj.com
     createdAt: '2023-04-06 17:00:17'
-    modifiedAt: '2023-04-13 12:04:57'
+    modifiedAt: '2023-04-27 20:23:16'
     mode: batch
-    physicalDatasets: {}
+    physicalDatasets:
+      CDL_L1_Dev:
+        fabricId: 32
+        datasetType: File
+        description: ''
+        author: smille29@its.jnj.com
+        createdAt: '2023-04-27 20:11:49'
+        modifiedAt: '2023-04-27 20:11:49'
   datasets/DS_SAP_01_MARC:
     name: DS_SAP_MARC
     description: ''
@@ -7709,6 +7733,31 @@ jobs:
     createdAt: '2023-04-26 20:17:30'
     modifiedAt: '2023-04-27 16:54:41'
     author: smille29@its.jnj.com
+  jobs/JOB_MD_SLS_DOC_PTNR_FUNC_HM2:
+    name: JOB_MD_SLS_DOC_PTNR_FUNC_HM2
+    description: ''
+    fabricUID: 32
+    scheduler:
+      Databricks: {}
+    cloudProvider: null
+    jobSize: Prophecy_Small
+    scheduleCron: 0 0 0 1/1 * ? *
+    timeout: null
+    alerting:
+      emails: ''
+      onStart: false
+      onSuccess: false
+      onFailure: false
+    pipelines:
+    - pipelines/SAP_MD_SLS_DOC_PTNR_FUNC_HM2
+    jobClusterMode:
+      clusterMode:
+        Single: {}
+      clusterId: null
+    enabled: null
+    createdAt: '2023-04-14 12:08:25'
+    modifiedAt: '2023-04-14 12:09:00'
+    author: mbolado1@its.jnj.com
 functions:
   author: null
   createdAt: '2023-03-24 15:42:34'
