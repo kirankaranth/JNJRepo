@@ -28,6 +28,7 @@ class Config(ConfigBase):
             TAX_DCLTN_TYPE: str=None,
             CO_SIZE: str=None,
             DCLTN_RGMN_PIS_COFINS: str=None,
+            FEE_SCHED: str=None,
             **kwargs
     ):
         self.spark = None
@@ -54,7 +55,8 @@ class Config(ConfigBase):
             INDSTR_MN_TYPE, 
             TAX_DCLTN_TYPE, 
             CO_SIZE, 
-            DCLTN_RGMN_PIS_COFINS
+            DCLTN_RGMN_PIS_COFINS, 
+            FEE_SCHED
         )
 
     def update(
@@ -82,6 +84,7 @@ class Config(ConfigBase):
             TAX_DCLTN_TYPE: str="CAST(null as String)",
             CO_SIZE: str="CAST(null as String)",
             DCLTN_RGMN_PIS_COFINS: str="CAST(null as String)",
+            FEE_SCHED: str="CAST(null as String)",
             **kwargs
     ):
         prophecy_spark = self.spark
@@ -108,4 +111,5 @@ class Config(ConfigBase):
         self.TAX_DCLTN_TYPE = TAX_DCLTN_TYPE
         self.CO_SIZE = CO_SIZE
         self.DCLTN_RGMN_PIS_COFINS = DCLTN_RGMN_PIS_COFINS
+        self.FEE_SCHED = FEE_SCHED
         pass
