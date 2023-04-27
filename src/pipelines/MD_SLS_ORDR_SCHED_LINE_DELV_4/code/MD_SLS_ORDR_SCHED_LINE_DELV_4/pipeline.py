@@ -9,6 +9,13 @@ from MD_SLS_ORDR_SCHED_LINE_DELV_4.graph import *
 def pipeline(spark: SparkSession) -> None:
     df_sql_MD_SLS_ORDR_SCHED_LINE_DELV = sql_MD_SLS_ORDR_SCHED_LINE_DELV(spark)
     df_addL1fields = addL1fields(spark, df_sql_MD_SLS_ORDR_SCHED_LINE_DELV)
+    df_addL1fields = collectMetrics(
+        spark, 
+        df_addL1fields, 
+        "graph", 
+        "88155baa-938f-498a-9df0-ce9214b6b948", 
+        "e0bfa68f-4297-4dc4-95f7-f66706dcf8a6"
+    )
     MD_SLS_ORDR_SCHED_LINE_DELV(spark, df_addL1fields)
 
 def main():
@@ -20,6 +27,10 @@ def main():
                 .getOrCreate()\
                 .newSession()
     Utils.initializeFromArgs(spark, parse_args())
+    MetricsCollector.initializeMetrics(spark)
+    spark.conf.set("prophecy.collect.basic.stats", "true")
+    spark.conf.set("spark.sql.legacy.allowUntypedScalaUDF", "true")
+    spark.conf.set("spark.sql.optimizer.excludedRules", "org.apache.spark.sql.catalyst.optimizer.ColumnPruning")
     spark.conf.set("prophecy.metadata.pipeline.uri", "pipelines/MD_SLS_ORDR_SCHED_LINE_DELV_4")
     
     MetricsCollector.start(spark = spark, pipelineId = "pipelines/MD_SLS_ORDR_SCHED_LINE_DELV_4")
