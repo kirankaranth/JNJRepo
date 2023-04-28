@@ -35,9 +35,9 @@ class Config(ConfigBase):
 
     def update(
             self,
-            sourceSystem: str="bba",
+            sourceSystem: str="hm2",
             targetSchema: str="dev_md_l1",
-            sourceDatabase: str="bba",
+            sourceDatabase: str="hm2",
             configDatabase: str=" ",
             MANDT: str="100",
             DBTABLE1: str="mara",
