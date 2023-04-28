@@ -16,10 +16,10 @@ def Join_1(
     return in0\
         .alias("in0")\
         .join(in1.alias("in1"), (col("in0.VBELN") == col("in1.VBELN")), "left_outer")\
-        .join(in2.alias("in2"), (col("in0.VGBEL") == col("in2.VBELN")), "left_outer")\
+        .join(in2.alias("in2"), (col("in0.VBELN") == col("in2.VBELN")), "left_outer")\
         .join(
           in3.alias("in3"),
-          ((col("in0.VGBEL") == col("in3.VBELN")) & (col("in0.POSNR") == col("in3.POSNR"))),
+          ((col("in0.VBELN") == col("in3.VBELN")) & (col("in0.POSNR") == col("in3.POSNR"))),
           "left_outer"
         )\
         .join(in4.alias("in4"), (col("in0.MVGR4") == col("in4.MVGR4")), "left_outer")\
