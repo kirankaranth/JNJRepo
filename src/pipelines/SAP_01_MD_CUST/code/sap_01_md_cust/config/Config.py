@@ -29,6 +29,9 @@ class Config(ConfigBase):
             CO_SIZE: str=None,
             DCLTN_RGMN_PIS_COFINS: str=None,
             FEE_SCHED: str=None,
+            DUNS_NUM: str=None,
+            DUNS_4: str=None,
+            DESC_INDSTR_KEY: str=None,
             **kwargs
     ):
         self.spark = None
@@ -56,7 +59,10 @@ class Config(ConfigBase):
             TAX_DCLTN_TYPE, 
             CO_SIZE, 
             DCLTN_RGMN_PIS_COFINS, 
-            FEE_SCHED
+            FEE_SCHED, 
+            DUNS_NUM, 
+            DUNS_4, 
+            DESC_INDSTR_KEY
         )
 
     def update(
@@ -85,6 +91,9 @@ class Config(ConfigBase):
             CO_SIZE: str="CAST(null as String)",
             DCLTN_RGMN_PIS_COFINS: str="CAST(null as String)",
             FEE_SCHED: str="CAST(null as String)",
+            DUNS_NUM: str="CAST(null as String)",
+            DUNS_4: str="CAST(null as String)",
+            DESC_INDSTR_KEY: str="CAST(null as String)",
             **kwargs
     ):
         prophecy_spark = self.spark
@@ -112,4 +121,7 @@ class Config(ConfigBase):
         self.CO_SIZE = CO_SIZE
         self.DCLTN_RGMN_PIS_COFINS = DCLTN_RGMN_PIS_COFINS
         self.FEE_SCHED = FEE_SCHED
+        self.DUNS_NUM = DUNS_NUM
+        self.DUNS_4 = DUNS_4
+        self.DESC_INDSTR_KEY = DESC_INDSTR_KEY
         pass
