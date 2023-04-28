@@ -4,8 +4,8 @@ from pyspark.sql.types import *
 from argparse import Namespace
 from prophecy.test import BaseTestCase
 from prophecy.test.utils import *
-from jde_01_md_matl_inv.graph.TRANSFORM import *
-from jde_01_md_matl_inv.config.ConfigStore import *
+from jde_md_matl_inv_bw2_deu_djd_gmd_jem_jes_jet_jsw_mtr_sjd.graph.TRANSFORM import *
+from jde_md_matl_inv_bw2_deu_djd_gmd_jem_jes_jet_jsw_mtr_sjd.config.ConfigStore import *
 
 
 class TRANSFORMTest(BaseTestCase):
@@ -13,14 +13,14 @@ class TRANSFORMTest(BaseTestCase):
     def test_unit_test_0(self):
         dfIn0 = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/jde_01_md_matl_inv/graph/TRANSFORM/in0/schema.json',
-            'test/resources/data/jde_01_md_matl_inv/graph/TRANSFORM/in0/data/test_unit_test_0.json',
+            'test/resources/data/jde_md_matl_inv_bw2_deu_djd_gmd_jem_jes_jet_jsw_mtr_sjd/graph/TRANSFORM/in0/schema.json',
+            'test/resources/data/jde_md_matl_inv_bw2_deu_djd_gmd_jem_jes_jet_jsw_mtr_sjd/graph/TRANSFORM/in0/data/test_unit_test_0.json',
             'in0'
         )
         dfOut = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/jde_01_md_matl_inv/graph/TRANSFORM/out/schema.json',
-            'test/resources/data/jde_01_md_matl_inv/graph/TRANSFORM/out/data/test_unit_test_0.json',
+            'test/resources/data/jde_md_matl_inv_bw2_deu_djd_gmd_jem_jes_jet_jsw_mtr_sjd/graph/TRANSFORM/out/schema.json',
+            'test/resources/data/jde_md_matl_inv_bw2_deu_djd_gmd_jem_jes_jet_jsw_mtr_sjd/graph/TRANSFORM/out/data/test_unit_test_0.json',
             'out'
         )
         dfOutComputed = TRANSFORM(self.spark, dfIn0)
