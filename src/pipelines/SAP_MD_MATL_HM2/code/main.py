@@ -1,3 +1,3 @@
-from sap_md_matl_bba_bbn.pipeline import main
+from sap_md_matl_hm2.pipeline import main
 
 main()
