@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 setup(
-    name = 'MD_PRCH_DELV_CNFRMS_12',
+    name = 'MD_PRCH_DELV_CNFRMS_12_hmd',
     version = '1.0',
     packages = find_packages(include = ('md_prch_delv_cnfrms_12_hmd*', )) + ["prophecy_config_instances"],
     package_dir = {'prophecy_config_instances' : 'configs/resources/config'},
