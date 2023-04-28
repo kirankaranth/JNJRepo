@@ -19,7 +19,7 @@ class Config(ConfigBase):
             self,
             targetSchema: str="dev_md_l1",
             sourceSystem: str="bbl",
-            sourceDatabase: str="btb_latam",
+            sourceDatabase: str="bbl",
             MANDT: str=None,
             DAI_ETL_ID: int=0,
             **kwargs

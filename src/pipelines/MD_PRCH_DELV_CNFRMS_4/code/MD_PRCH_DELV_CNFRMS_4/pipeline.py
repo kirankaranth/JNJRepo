@@ -9,6 +9,13 @@ from MD_PRCH_DELV_CNFRMS_4.graph import *
 def pipeline(spark: SparkSession) -> None:
     df_sql_MD_PRCH_DELV_CNFRMS = sql_MD_PRCH_DELV_CNFRMS(spark)
     df_addL1fields = addL1fields(spark, df_sql_MD_PRCH_DELV_CNFRMS)
+    df_addL1fields = collectMetrics(
+        spark, 
+        df_addL1fields, 
+        "graph", 
+        "6ecf77b1-32dd-4d42-a643-7439054dc3e9", 
+        "f6aa82dd-0136-481d-9d19-4937a92b52de"
+    )
     MD_PRCH_DELV_CNFRMS(spark, df_addL1fields)
 
 def main():
@@ -20,6 +27,10 @@ def main():
                 .getOrCreate()\
                 .newSession()
     Utils.initializeFromArgs(spark, parse_args())
+    MetricsCollector.initializeMetrics(spark)
+    spark.conf.set("prophecy.collect.basic.stats", "true")
+    spark.conf.set("spark.sql.legacy.allowUntypedScalaUDF", "true")
+    spark.conf.set("spark.sql.optimizer.excludedRules", "org.apache.spark.sql.catalyst.optimizer.ColumnPruning")
     spark.conf.set("prophecy.metadata.pipeline.uri", "pipelines/MD_PRCH_DELV_CNFRMS_4")
     
     MetricsCollector.start(spark = spark, pipelineId = "pipelines/MD_PRCH_DELV_CNFRMS_4")
