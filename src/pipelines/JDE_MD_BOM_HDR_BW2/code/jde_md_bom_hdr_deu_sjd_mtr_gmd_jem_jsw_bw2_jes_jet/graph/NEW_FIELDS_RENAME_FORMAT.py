@@ -11,24 +11,19 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("BOM_CAT_CD", col("ixtbm"))\
         .withColumn(
           "BOM_NUM",
-          concat(
+          concat_ws(
+            ";", 
             col("ixkit"), 
-            lit(";"), 
             col("ixmmcu"), 
-            lit(";"), 
             col("ixtbm"), 
-            lit(";"), 
             col("ixbqty"), 
-            lit(";"), 
             col("ixcoby"), 
-            lit(";"), 
             col("ixcpnt"), 
-            lit(";"), 
             col("ixsbnt")
           )
         )\
         .withColumn("ALT_BOM_NUM", lit("01").cast(StringType()))\
-        .withColumn("BOM_CNTR_NBR", concat(col("ixcpnt"), lit("."), col("ixsbnt")))\
+        .withColumn("BOM_CNTR_NBR", concat_ws(";", col("ixcpnt"), col("ixsbnt")))\
         .withColumn(
           "BOM_VLD_FROM_DTTM",
           when(
