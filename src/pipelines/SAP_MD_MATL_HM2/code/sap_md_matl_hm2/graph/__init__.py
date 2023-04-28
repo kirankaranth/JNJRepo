@@ -2,7 +2,7 @@ from .T134T import T134T
 from .D_M_OBTAB_KLART import D_M_OBTAB_KLART
 from .DEL_MANDT3 import DEL_MANDT3
 from .MAKTX_LU import MAKTX_LU
-from .DS_SAP_MARA_BBA_BBN import DS_SAP_MARA_BBA_BBN
+from .DS_SAP_MARA_HM2 import DS_SAP_MARA_HM2
 from .DEL_MANDT import DEL_MANDT
 from .MAT_SPEC_LU import MAT_SPEC_LU
 from .DEL_MANDT4 import DEL_MANDT4

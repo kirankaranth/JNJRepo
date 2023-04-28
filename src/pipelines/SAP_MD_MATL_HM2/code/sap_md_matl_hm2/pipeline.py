@@ -60,15 +60,15 @@ def pipeline(spark: SparkSession) -> None:
     MAKTX_LU(spark, df_DEL_MANDT4)
     df_SPEC_VER = SPEC_VER(spark, df_CHARACTERISTICS)
     SPEC_VER_LU(spark, df_SPEC_VER)
-    df_DS_SAP_MARA_BBA_BBN = DS_SAP_MARA_BBA_BBN(spark)
-    df_DS_SAP_MARA_BBA_BBN = collectMetrics(
+    df_DS_SAP_MARA_HM2 = DS_SAP_MARA_HM2(spark)
+    df_DS_SAP_MARA_HM2 = collectMetrics(
         spark, 
-        df_DS_SAP_MARA_BBA_BBN, 
+        df_DS_SAP_MARA_HM2, 
         "graph", 
-        "FtbOy5VAM3PLdrv5DOdSX$$8TDSWjIIoR7sLz_ueyaFO", 
-        "0pFTpMS3lywMyqdXzBawr$$TvJbXNoiQsX4up8G9YHqF"
+        "HfNO990ZZuTw923N8tVWK$$EFcDwi0OfOHsZsJmPxZbx", 
+        "NE3et2tjx-fVp4f4QwZ0q$$Ev8jIzJ8jt_9NrE7XnO6x"
     )
-    df_DEL_MANDT_1 = DEL_MANDT_1(spark, df_DS_SAP_MARA_BBA_BBN)
+    df_DEL_MANDT_1 = DEL_MANDT_1(spark, df_DS_SAP_MARA_HM2)
     df_DEL_MANDT3 = DEL_MANDT3(spark, df_DEL_MANDT_1)
     df_XFORM = XFORM(spark, df_DEL_MANDT3)
     df_SELECT_FIELDS = SELECT_FIELDS(spark, df_XFORM)
