@@ -31,7 +31,7 @@ class Config(ConfigBase):
             FEE_SCHED: str=None,
             DUNS_NUM: str=None,
             DUNS_4: str=None,
-            DESC_INDSTR_KEY: str=None,
+            TAX_NUM5: str=None,
             **kwargs
     ):
         self.spark = None
@@ -62,7 +62,7 @@ class Config(ConfigBase):
             FEE_SCHED, 
             DUNS_NUM, 
             DUNS_4, 
-            DESC_INDSTR_KEY
+            TAX_NUM5
         )
 
     def update(
@@ -78,10 +78,10 @@ class Config(ConfigBase):
             RG_NUM: str="CAST(null as String)",
             ISS_BY: str="CAST(null as String)",
             ST: str="CAST(null as String)",
-            RG_ISU_DTTM: str="CAST(null as String)",
+            RG_ISU_DTTM: str="CAST(null as Timestamp)",
             RIC_NUM: str="CAST(null as String)",
             FRGN_NATL_REGS: str="CAST(null as String)",
-            RNE_ISU_DTTM: str="CAST(null as String)",
+            RNE_ISU_DTTM: str="CAST(null as Timestamp)",
             CNAE: str="CAST(null as String)",
             LEGAL_NATR: str="CAST(null as String)",
             CRT_NUM: str="CAST(null as String)",
@@ -93,7 +93,7 @@ class Config(ConfigBase):
             FEE_SCHED: str="CAST(null as String)",
             DUNS_NUM: str="CAST(null as String)",
             DUNS_4: str="CAST(null as String)",
-            DESC_INDSTR_KEY: str="CAST(null as String)",
+            TAX_NUM5: str="CAST(null as String)",
             **kwargs
     ):
         prophecy_spark = self.spark
@@ -123,5 +123,5 @@ class Config(ConfigBase):
         self.FEE_SCHED = FEE_SCHED
         self.DUNS_NUM = DUNS_NUM
         self.DUNS_4 = DUNS_4
-        self.DESC_INDSTR_KEY = DESC_INDSTR_KEY
+        self.TAX_NUM5 = TAX_NUM5
         pass

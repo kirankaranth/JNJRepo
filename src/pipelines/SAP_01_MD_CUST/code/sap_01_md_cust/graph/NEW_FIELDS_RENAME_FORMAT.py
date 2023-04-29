@@ -42,7 +42,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("TAX_NUM2", trim(col("STCD2")))\
         .withColumn("TAX_NUM3", trim(col("STCD3")))\
         .withColumn("TAX_NUM4", trim(col("STCD4")))\
-        .withColumn("TAX_NUM5", trim(col("STCD5")))\
+        .withColumn("TAX_NUM5", expr(Config.TAX_NUM5))\
         .withColumn("VAT_NUM", trim(col("STCEG")))\
         .withColumn("NTRL_PRSN_IND", trim(col("STKZN")))\
         .withColumn("ICMS_TAX_CD", trim(col("TXLW1")))\
@@ -105,7 +105,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("ID_DFLT_SOLD_TO_PRTY", trim(col("DEAR5")))\
         .withColumn("LEGAL_STS", trim(col("GFORM")))\
         .withColumn("INIT_CNTCT", trim(col("EKONT")))\
-        .withColumn("ANNL_SLS_UMSAT", trim(col("UMSAT")).cast(DecimalType(18, 4)))\
+        .withColumn("ANNL_SLS_UMSAT", col("UMSAT").cast(DecimalType(18, 4)))\
         .withColumn("YR_SLS_GVN", trim(col("UMJAH")))\
         .withColumn("CRNCY_SLS_FIG", trim(col("UWAER")))\
         .withColumn("YR_NUM_EMP", trim(col("JMZAH")))\
@@ -120,7 +120,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("ATTR_8", trim(col("KATR8")))\
         .withColumn("ATTR_9", trim(col("KATR9")))\
         .withColumn("ATTR_10", trim(col("KATR10")))\
-        .withColumn("ANNL_SLS_UMSA1", trim(col("UMSA1")).cast(DecimalType(18, 4)))\
+        .withColumn("ANNL_SLS_UMSA1", col("UMSA1").cast(DecimalType(18, 4)))\
         .withColumn("TAX_JURIS", trim(col("TXJCD")))\
         .withColumn("FISC_YR_VRNT", trim(col("PERIV")))\
         .withColumn("USG_IN", trim(col("ABRVW")))\
