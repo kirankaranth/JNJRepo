@@ -32,6 +32,7 @@ class Config(ConfigBase):
             DUNS_NUM: str=None,
             DUNS_4: str=None,
             TAX_NUM5: str=None,
+            TAX_NUM_6: str=None,
             **kwargs
     ):
         self.spark = None
@@ -62,7 +63,8 @@ class Config(ConfigBase):
             FEE_SCHED, 
             DUNS_NUM, 
             DUNS_4, 
-            TAX_NUM5
+            TAX_NUM5, 
+            TAX_NUM_6
         )
 
     def update(
@@ -94,6 +96,7 @@ class Config(ConfigBase):
             DUNS_NUM: str="CAST(null as String)",
             DUNS_4: str="CAST(null as String)",
             TAX_NUM5: str="CAST(null as String)",
+            TAX_NUM_6: str="CAST(null as String)",
             **kwargs
     ):
         prophecy_spark = self.spark
@@ -124,4 +127,5 @@ class Config(ConfigBase):
         self.DUNS_NUM = DUNS_NUM
         self.DUNS_4 = DUNS_4
         self.TAX_NUM5 = TAX_NUM5
+        self.TAX_NUM_6 = TAX_NUM_6
         pass

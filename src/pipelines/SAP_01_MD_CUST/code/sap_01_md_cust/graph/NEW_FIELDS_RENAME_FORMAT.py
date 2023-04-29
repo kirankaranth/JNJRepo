@@ -144,6 +144,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("CUST_COND_GRP_5", trim(col("KDKG5")))\
         .withColumn("IN_ALT_PYR_USE_ACCT_NUM", trim(col("XKNZA")))\
         .withColumn("TAX_NUM_TYPE", trim(col("STCDT")))\
+        .withColumn("TAX_NUM_6", expr(Config.TAX_NUM_6))\
         .withColumn("IN_BIOCH_WARF_LEGAL_CNTL", trim(col("CCC01")))\
         .withColumn("IN_NUCLR_NONPROLIF_LEGAL_CNTL", trim(col("CCC02")))\
         .withColumn("IN_NATL_SCTY_LEGAL_CNTL", trim(col("CCC03")))\
