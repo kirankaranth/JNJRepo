@@ -101,4 +101,10 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("_deleted_L1", lit("F"))\
         .withColumn("MATL_TYPE_DESC", lookup("T134T_LU", col("MTART")).getField("MTBEZ"))\
         .withColumn("MFR_BOOK_PART_NUM", trim(col("MSBOOKPARTNO")))\
-        .withColumn("DIR_SHP_FL", trim(col("ZZ1_DIRECT_SHIP_FLAG_PRD")))
+        .withColumn("DIR_SHP_FL", trim(col("ZZ1_DIRECT_SHIP_FLAG_PRD")))\
+        .withColumn("FIN_PLNT", trim(col("ZZ1_FINISH_PLANT_PRD")))\
+        .withColumn("MAIN_STRG_LOC", trim(col("ZZ1_MAIN_STORAGE_LOC_PRD")))\
+        .withColumn("PCS_PER_SLS_UNT", trim(col("ZZ1_PCS_SALES_UNIT_PRD")))\
+        .withColumn("PROD_LINE", trim(col("ZZ1_PRODUCT_LINE_PRD")))\
+        .withColumn("MAKE_BUY_IN", trim(col("ZZ1_PUR_MFG_IND_PRD")))\
+        .withColumn("STRT_PLNT", trim(col("ZZ1_START_PLANT_PRD")))

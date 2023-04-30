@@ -68,6 +68,7 @@ def pipeline(spark: SparkSession) -> None:
     NDL_SLS_LU(spark, df_NDL_SLS_TYPE)
     df_NDL_ALLOY = NDL_ALLOY(spark, df_CHARACTERISTICS)
     NDL_ALLOY_LU(spark, df_NDL_ALLOY)
+    OBJEK_LU(spark, df_INOB_DEDUP)
     df_NDL_COLOR = NDL_COLOR(spark, df_CHARACTERISTICS)
     NDL_COL_LU(spark, df_NDL_COLOR)
     df_MAT_TYPE = MAT_TYPE(spark, df_CHARACTERISTICS)
@@ -91,7 +92,25 @@ def pipeline(spark: SparkSession) -> None:
         "5tjEC2R_fitFg858EKn_H$$8zrgDqoYbVtMNO-GK4V6_", 
         "bPAwoIg9wa3XArlXP-7m_$$c1QUVrlfKTD9A8sObAKfS"
     )
+    df_TSPAT = TSPAT(spark)
+    df_TSPAT = collectMetrics(
+        spark, 
+        df_TSPAT, 
+        "graph", 
+        "Fxz52mHvigJCiGTtDShly$$A_d-qQSTnzK19sjyMY90j", 
+        "hHscHRUv3NFgSWjzhGn3r$$ajZaM2NaV4KITq0gsue3m"
+    )
     TARGET(spark, df_SELECT_FIELDS)
+    df_DEL_MANDT4_1_1 = DEL_MANDT4_1_1(spark, df_TSPAT)
+    df_DEL_MANDT4_1_1 = collectMetrics(
+        spark, 
+        df_DEL_MANDT4_1_1, 
+        "graph", 
+        "DB1-X1UNUjNrATmoHHZ9s$$2UejoDAr0DDHgtmkPagIo", 
+        "mG9jjAN_aHlKbl1hDoxu0$$vSS9A4FmuifJX-qSt52BS"
+    )
+    df_DEL_MANDT4_1_1.cache().count()
+    df_DEL_MANDT4_1_1.unpersist()
 
 def main():
     spark = SparkSession.builder\
