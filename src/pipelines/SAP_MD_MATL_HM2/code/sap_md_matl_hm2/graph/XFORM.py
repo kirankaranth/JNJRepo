@@ -33,14 +33,13 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("MATL_DOC_VERS_NUM", trim(col("ZEIVR")))\
         .withColumn("MATL_SHRT_DESC", lookup("LU_MAKT_MAKTX", col("MATNR")).getField("MAKTX"))\
         .withColumn("MATL_CAT_GRP_CD", trim(col("MTPOS_MARA")))\
-        .withColumn("MATL_SPEC_NUM", lookup("MAT_SPEC_LU", col("MATNR")).getField("ATWRT"))\
-        .withColumn("MATL_SPEC_VERS_NUM", lookup("SPEC_VER_LU", col("MATNR")).getField("ATWRT"))\
         .withColumn("CHG_BY", trim(col("AENAM")))\
         .withColumn("DOC_CHG_NUM", trim(col("AESZN")))\
         .withColumn("CNTNR_REQ", trim(col("BEHVO")))\
         .withColumn("OLD_MATL_NUM", trim(col("BISMT")))\
         .withColumn("GRS_WT", col("BRGEW").cast(DecimalType(18, 4)))\
         .withColumn("ORDR_UNIT_PUR_UOM", trim(col("BSTME")))\
+        .withColumn("CHEM_CMPLI", trim(col("CHML_CMPLNC_RLVNCE_IND")))\
         .withColumn("CRT_BY", trim(col("ERNAM")))\
         .withColumn(
           "CRT_ON_DTTM",
@@ -56,8 +55,8 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("PER_IN", trim(col("IPRKZ")))\
         .withColumn(
           "LAST_CHG_DT_TIME_DTTM",
-          when((col("LAEDA") == lit("00000000")), lit(None).cast(TimestampType()))\
-            .otherwise(to_timestamp(col("LAEDA"), "yyyyMMdd"))
+          when((col("LAEDA") == lit(0)), lit(None).cast(TimestampType()))\
+            .otherwise(to_timestamp(concat(col("LAEDA"), col("LAST_CHANGED_TIME")), "yyyyMMddHHmmss"))
         )\
         .withColumn("MATL_GRP_PKGNG_MATL", trim(col("MAGRV")))\
         .withColumn("STRG_PCT", trim(col("MHDLP")))\
@@ -100,4 +99,6 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("_pk_md5_", md5(to_json(expr("named_struct('SRC_SYS_CD', SRC_SYS_CD, 'MATL_NUM', MATL_NUM)"))))\
         .withColumn("_l1_upt_", current_timestamp())\
         .withColumn("_deleted_L1", lit("F"))\
-        .withColumn("MATL_TYPE_DESC", lookup("T134T_LU", col("MTART")).getField("MTBEZ"))
+        .withColumn("MATL_TYPE_DESC", lookup("T134T_LU", col("MTART")).getField("MTBEZ"))\
+        .withColumn("MFR_BOOK_PART_NUM", trim(col("MSBOOKPARTNO")))\
+        .withColumn("DIR_SHP_FL", trim(col("ZZ1_DIRECT_SHIP_FLAG_PRD")))

@@ -7,16 +7,6 @@ from prophecy.utils import *
 from sap_md_matl_hm2.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    df_T134T = T134T(spark)
-    df_T134T = collectMetrics(
-        spark, 
-        df_T134T, 
-        "graph", 
-        "tEXn8WPj6NopoHRdUN2FJ$$cPEcqFbV3nRH3w7HuPiwo", 
-        "ZYM8UAlA6PdKQTWs-lt2_$$LsowlDwrkUzbyvZvQyK6o"
-    )
-    df_DEL_MANDT4_1 = DEL_MANDT4_1(spark, df_T134T)
-    T134T_LU(spark, df_DEL_MANDT4_1)
     df_AUSP = AUSP(spark)
     df_AUSP = collectMetrics(
         spark, 
@@ -46,8 +36,24 @@ def pipeline(spark: SparkSession) -> None:
     df_D_M_OBTAB_KLART = D_M_OBTAB_KLART(spark, df_INOB)
     df_INOB_DEDUP = INOB_DEDUP(spark, df_D_M_OBTAB_KLART)
     df_CHARACTERISTICS = CHARACTERISTICS(spark, df_DEL_MANDT, df_INOB_DEDUP, df_DEL_MANDT2)
-    df_MAT_SPEC = MAT_SPEC(spark, df_CHARACTERISTICS)
-    MAT_SPEC_LU(spark, df_MAT_SPEC)
+    df_SUTUR_USP = SUTUR_USP(spark, df_CHARACTERISTICS)
+    SUTUR_USP_LU(spark, df_SUTUR_USP)
+    df_SUTUR_LEN = SUTUR_LEN(spark, df_CHARACTERISTICS)
+    SUTUR_LEN_LU(spark, df_SUTUR_LEN)
+    df_T134T = T134T(spark)
+    df_T134T = collectMetrics(
+        spark, 
+        df_T134T, 
+        "graph", 
+        "tEXn8WPj6NopoHRdUN2FJ$$cPEcqFbV3nRH3w7HuPiwo", 
+        "ZYM8UAlA6PdKQTWs-lt2_$$LsowlDwrkUzbyvZvQyK6o"
+    )
+    df_DEL_MANDT4_1 = DEL_MANDT4_1(spark, df_T134T)
+    T134T_LU(spark, df_DEL_MANDT4_1)
+    df_STERILE = STERILE(spark, df_CHARACTERISTICS)
+    STERILE_LU(spark, df_STERILE)
+    df_BRAVO = BRAVO(spark, df_CHARACTERISTICS)
+    BRAVO_LU(spark, df_BRAVO)
     df_DS_SAP_MAKT_01 = DS_SAP_MAKT_01(spark)
     df_DS_SAP_MAKT_01 = collectMetrics(
         spark, 
@@ -58,8 +64,14 @@ def pipeline(spark: SparkSession) -> None:
     )
     df_DEL_MANDT4 = DEL_MANDT4(spark, df_DS_SAP_MAKT_01)
     MAKTX_LU(spark, df_DEL_MANDT4)
-    df_SPEC_VER = SPEC_VER(spark, df_CHARACTERISTICS)
-    SPEC_VER_LU(spark, df_SPEC_VER)
+    df_NDL_SLS_TYPE = NDL_SLS_TYPE(spark, df_CHARACTERISTICS)
+    NDL_SLS_LU(spark, df_NDL_SLS_TYPE)
+    df_NDL_ALLOY = NDL_ALLOY(spark, df_CHARACTERISTICS)
+    NDL_ALLOY_LU(spark, df_NDL_ALLOY)
+    df_NDL_COLOR = NDL_COLOR(spark, df_CHARACTERISTICS)
+    NDL_COL_LU(spark, df_NDL_COLOR)
+    df_MAT_TYPE = MAT_TYPE(spark, df_CHARACTERISTICS)
+    MAT_TYPE_LU(spark, df_MAT_TYPE)
     df_DS_SAP_MARA_HM2 = DS_SAP_MARA_HM2(spark)
     df_DS_SAP_MARA_HM2 = collectMetrics(
         spark, 

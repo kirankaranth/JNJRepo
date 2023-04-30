@@ -5,7 +5,7 @@ from prophecy.libs import typed_lit
 from sap_md_matl_hm2.config.ConfigStore import *
 from sap_md_matl_hm2.udfs.UDFs import *
 
-def SPEC_VER_LU(spark: SparkSession, in0: DataFrame):
+def SUTUR_LEN_LU(spark: SparkSession, in0: DataFrame):
     keyColumns = ['''MAT_NUM''']
     valueColumns = ['''ATWRT''']
-    createLookup("SPEC_VER_LU", in0, spark, keyColumns, valueColumns)
+    createLookup("SUTUR_LEN_LU", in0, spark, keyColumns, valueColumns)
