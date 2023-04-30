@@ -62,7 +62,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("PSTL_CD", trim(col("PSTLZ")))\
         .withColumn("RGN", trim(col("REGIO")))\
         .withColumn("TRSPN_ZN", trim(col("LZONE")))\
-        .withColumn("SLS_DOC_BLOK_RSN_TEXT", LU_SAP_TVAST(col("AUFSD")).getField("VTEXT"))\
+        .withColumn("SLS_DOC_BLOK_RSN_TEXT", lookup("LU_SAP_TVAST", col("AUFSD")).getField("VTEXT"))\
         .withColumn("FST_PHN_NUM", trim(col("TELF1")))\
         .withColumn("FAX_NUM", trim(col("TELFX")))\
         .withColumn("IN_ACCT_ONE_TIME_ACCT", trim(col("XCPDK")))\

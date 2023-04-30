@@ -57,7 +57,6 @@ def SET_FIELD_ORDER_REFORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("RGN"), 
         col("TRSPN_ZN"), 
         col("SLS_DOC_BLOK_RSN_TEXT"), 
-        col("DESC_INDSTR_KEY"), 
         col("FST_PHN_NUM"), 
         col("FAX_NUM"), 
         col("IN_ACCT_ONE_TIME_ACCT"), 
