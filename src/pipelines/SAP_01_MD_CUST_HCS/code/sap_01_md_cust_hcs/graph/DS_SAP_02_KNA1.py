@@ -5,7 +5,5 @@ from prophecy.libs import typed_lit
 from sap_01_md_cust_hcs.config.ConfigStore import *
 from sap_01_md_cust_hcs.udfs.UDFs import *
 
-def LU_SAP_T016T(spark: SparkSession, in0: DataFrame):
-    keyColumns = ['''brsch''']
-    valueColumns = ['''brtxt''']
-    createLookup("LU_SAP_T016T", in0, spark, keyColumns, valueColumns)
+def DS_SAP_02_KNA1(spark: SparkSession) -> DataFrame:
+    return spark.read.table(f"{Config.sourceDatabase}.kna1")

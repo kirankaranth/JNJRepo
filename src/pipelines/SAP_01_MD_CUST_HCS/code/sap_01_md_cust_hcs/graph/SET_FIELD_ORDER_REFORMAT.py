@@ -5,7 +5,7 @@ from prophecy.libs import typed_lit
 from sap_01_md_cust_hcs.config.ConfigStore import *
 from sap_01_md_cust_hcs.udfs.UDFs import *
 
-def SET_FIELD_ORDER_REFORMAT_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
+def SET_FIELD_ORDER_REFORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0.select(
         col("SRC_SYS_CD"), 
         col("CUST_NUM"), 
@@ -148,7 +148,7 @@ def SET_FIELD_ORDER_REFORMAT_1(spark: SparkSession, in0: DataFrame) -> DataFrame
         col("TYPE_INDSTR"), 
         col("STS_CHG_AUTH"), 
         col("LAST_CHG_CNFRM_DTTM"), 
-        col("CENT_DEL_BLK_MSTR_REC").alias("CENT_DEL_BLK_MSTR_REC\r\n"), 
+        col("CENT_DEL_BLK_MSTR_REC"), 
         col("BUSN_PRPS_CMPLT_FL"), 
         col("SUFRAMA_CD"), 
         col("RG_NUM"), 
@@ -158,6 +158,7 @@ def SET_FIELD_ORDER_REFORMAT_1(spark: SparkSession, in0: DataFrame) -> DataFrame
         col("RIC_NUM"), 
         col("FRGN_NATL_REGS"), 
         col("RNE_ISU_DTTM"), 
+        col("CNAE"), 
         col("LEGAL_NATR"), 
         col("CRT_NUM"), 
         col("ICMS_TAXPY"), 
