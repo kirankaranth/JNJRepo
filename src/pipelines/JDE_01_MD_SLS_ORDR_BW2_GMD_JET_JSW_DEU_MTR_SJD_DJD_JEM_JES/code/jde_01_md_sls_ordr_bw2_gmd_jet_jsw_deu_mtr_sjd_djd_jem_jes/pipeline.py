@@ -11,6 +11,9 @@ def pipeline(spark: SparkSession) -> None:
     df_JDE_F4201_FILTER = JDE_F4201_FILTER(spark, df_JDE_F4201)
     df_NEW_FIELDS_TRANSFORMATION = NEW_FIELDS_TRANSFORMATION(spark, df_JDE_F4201_FILTER)
     df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS_TRANSFORMATION)
+    df_GET_DUP = GET_DUP(spark, df_SET_FIELD_ORDER_REFORMAT)
+    df_DUP_FILTER = DUP_FILTER(spark, df_GET_DUP)
+    MD_SLS_ORDR(spark, df_SET_FIELD_ORDER_REFORMAT)
 
 def main():
     spark = SparkSession.builder\
