@@ -9,4 +9,4 @@ def Join_1(spark: SparkSession, in0: DataFrame, in1: DataFrame, ) -> DataFrame:
     return in0\
         .alias("in0")\
         .join(in1.alias("in1"), (col("in0.WAERS") == col("in1.CURRKEY")), "left_outer")\
-        .select(col("in0.WAERS").alias("WAERS"), col("in0.ISOCD").alias("ISOCD"), col("in0.ALTWR").alias("ALTWR"), col("in0.GDATU").alias("GDATU"), col("in0.XPRIMARY").alias("XPRIMARY"), col("in1.CURRDEC").alias("CURRDEC"))
+        .select(col("in0.WAERS").alias("WAERS"), col("in0.ISOCD").alias("ISOCD"), col("in0.ALTWR").alias("ALTWR"), col("in0.GDATU").alias("GDATU"), col("in0.XPRIMARY").alias("XPRIMARY"), col("in1.CURRDEC").alias("CURRDEC"), col("in0._upt_").alias("_upt_"))
