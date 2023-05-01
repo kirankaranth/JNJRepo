@@ -12,7 +12,6 @@ def SET_FIELD_ORDER_REFORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("ISO_CRNCY_CD"), 
         col("CRNCY_ALT_CD"), 
         col("VLD_TO_DTTM"), 
-        col("NUM_OF_DEC_PLACES"), 
         col("PRMRY_SAP_CRNCY_CD_ISO_CD"), 
         col("DAI_ETL_ID"), 
         col("DAI_CRT_DTTM"), 
