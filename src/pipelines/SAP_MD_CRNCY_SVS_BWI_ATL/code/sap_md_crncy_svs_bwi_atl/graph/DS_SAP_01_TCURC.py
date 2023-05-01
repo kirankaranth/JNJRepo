@@ -6,4 +6,4 @@ from sap_md_crncy_svs_bwi_atl.config.ConfigStore import *
 from sap_md_crncy_svs_bwi_atl.udfs.UDFs import *
 
 def DS_SAP_01_TCURC(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"svs.tcurc")
+    return spark.read.table(f"{Config.sourceDatabase}.tcurc")
