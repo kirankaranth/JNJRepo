@@ -4,5 +4,7 @@ from .MANDT_FILTER_TCURC import MANDT_FILTER_TCURC
 from .MANDT_FILTER_TCURX import MANDT_FILTER_TCURX
 from .DS_SAP_01_TCURX import DS_SAP_01_TCURX
 from .Join_1 import Join_1
+from .Filter_1 import Filter_1
+from .Aggregate_1 import Aggregate_1
 from .SET_FIELD_ORDER_REFORMAT import SET_FIELD_ORDER_REFORMAT
 from .MD_CRNCY import MD_CRNCY
