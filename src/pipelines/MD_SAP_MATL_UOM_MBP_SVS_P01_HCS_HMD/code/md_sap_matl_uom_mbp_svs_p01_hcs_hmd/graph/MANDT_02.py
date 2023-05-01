@@ -6,4 +6,6 @@ from md_sap_matl_uom_mbp_svs_p01_hcs_hmd.config.ConfigStore import *
 from md_sap_matl_uom_mbp_svs_p01_hcs_hmd.udfs.UDFs import *
 
 def MANDT_02(spark: SparkSession, in0: DataFrame) -> DataFrame:
-    return in0.filter((((col("MANDT") == lit("SMANDT")) & (col("_deleted_") == lit("F"))) & (col("SPRAS") == lit("E"))))
+    return in0.filter(
+        (((col("MANDT") == lit(Config.MANDT)) & (col("_deleted_") == lit("F"))) & (col("SPRAS") == lit("E")))
+    )
