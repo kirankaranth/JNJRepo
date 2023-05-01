@@ -1,10 +1,10 @@
 from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
-from md_sap_matl_uom_atl_bba_bbl_bbn_bwi_fsn_geu_mrs.config.ConfigStore import *
-from md_sap_matl_uom_atl_bba_bbl_bbn_bwi_fsn_geu_mrs.udfs.UDFs import *
+from md_sap_matl_uom_atl_bba_bbl_bbn_bwi_fsn_geu_mrs_tai.config.ConfigStore import *
+from md_sap_matl_uom_atl_bba_bbl_bbn_bwi_fsn_geu_mrs_tai.udfs.UDFs import *
 from prophecy.utils import *
-from md_sap_matl_uom_atl_bba_bbl_bbn_bwi_fsn_geu_mrs.graph import *
+from md_sap_matl_uom_atl_bba_bbl_bbn_bwi_fsn_geu_mrs_tai.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_DS_SAP_02_T006A = DS_SAP_02_T006A(spark)
