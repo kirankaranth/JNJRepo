@@ -1,1 +1,2 @@
 from .DS_SAP_01_TCURC import DS_SAP_01_TCURC
+from .DS_SAP_01_TCURX import DS_SAP_01_TCURX

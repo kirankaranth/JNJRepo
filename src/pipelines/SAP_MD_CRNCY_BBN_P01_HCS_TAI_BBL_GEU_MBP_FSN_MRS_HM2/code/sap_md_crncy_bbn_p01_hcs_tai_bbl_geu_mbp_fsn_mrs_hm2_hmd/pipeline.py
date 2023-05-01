@@ -8,6 +8,7 @@ from sap_md_crncy_bbn_p01_hcs_tai_bbl_geu_mbp_fsn_mrs_hm2_hmd.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_DS_SAP_01_TCURC = DS_SAP_01_TCURC(spark)
+    df_DS_SAP_01_TCURX = DS_SAP_01_TCURX(spark)
 
 def main():
     spark = SparkSession.builder\
