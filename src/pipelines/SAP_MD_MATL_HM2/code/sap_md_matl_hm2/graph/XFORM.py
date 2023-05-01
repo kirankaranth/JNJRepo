@@ -118,4 +118,16 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("BRAVO_MINOR_CODE_DESC", lookup("ATWTB_LU", col("MATNR")).getField("ATWTB"))\
         .withColumn("NDL_SLS_TYPE", lookup("NDL_SLS_LU", col("MATNR")).getField("ATWRT"))\
         .withColumn("SUTURE_LENGTH_INCH", lookup("SUTUR_LEN_LU", col("MATNR")).getField("ATWRT"))\
-        .withColumn("SER_TYPE", trim(col("_STTPEC_SERTYPE")))
+        .withColumn("SER_TYPE", trim(col("_STTPEC_SERTYPE")))\
+        .withColumn("MATL_GRP_DESC", lookup("WGBEZx_LU", col("MATKL")).getField("WGBEZ"))\
+        .withColumn("MATL_GRP_DESC_2", lookup("WGBEZx_LU", col("MATKL")).getField("WGBEZ60"))\
+        .withColumn("CMMDTY", trim(col("COMMODITY")))\
+        .withColumn(
+          "SHRT_MATL_NUM",
+          lit(
+            "#"
+          )
+        )\
+        .withColumn("NDL_COLOR", lookup("NDL_COL_LU", col("MATNR")).getField("ATWRT"))\
+        .withColumn("NDL_ALLOY", lookup("NDL_ALLOY_LU", col("MATNR")).getField("ATWRT"))\
+        .withColumn("SUTURE_USP", lookup("SUTUR_USP_LU", col("MATNR")).getField("ATWRT"))
