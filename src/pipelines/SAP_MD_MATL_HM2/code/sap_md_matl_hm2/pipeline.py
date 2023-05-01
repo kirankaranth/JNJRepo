@@ -38,22 +38,6 @@ def pipeline(spark: SparkSession) -> None:
     df_CHARACTERISTICS = CHARACTERISTICS(spark, df_DEL_MANDT, df_INOB_DEDUP, df_DEL_MANDT2)
     df_SUTUR_USP = SUTUR_USP(spark, df_CHARACTERISTICS)
     SUTUR_USP_LU(spark, df_SUTUR_USP)
-    df_SUTUR_LEN = SUTUR_LEN(spark, df_CHARACTERISTICS)
-    SUTUR_LEN_LU(spark, df_SUTUR_LEN)
-    df_T134T = T134T(spark)
-    df_T134T = collectMetrics(
-        spark, 
-        df_T134T, 
-        "graph", 
-        "tEXn8WPj6NopoHRdUN2FJ$$cPEcqFbV3nRH3w7HuPiwo", 
-        "ZYM8UAlA6PdKQTWs-lt2_$$LsowlDwrkUzbyvZvQyK6o"
-    )
-    df_DEL_MANDT4_1 = DEL_MANDT4_1(spark, df_T134T)
-    T134T_LU(spark, df_DEL_MANDT4_1)
-    df_STERILE = STERILE(spark, df_CHARACTERISTICS)
-    STERILE_LU(spark, df_STERILE)
-    df_BRAVO = BRAVO(spark, df_CHARACTERISTICS)
-    BRAVO_LU(spark, df_BRAVO)
     df_DS_SAP_MAKT_01 = DS_SAP_MAKT_01(spark)
     df_DS_SAP_MAKT_01 = collectMetrics(
         spark, 
@@ -63,6 +47,33 @@ def pipeline(spark: SparkSession) -> None:
         "xR1qB0WHZ0SdHfft86-FR$$oxT476SvRJWV-7WJ6RwWp"
     )
     df_DEL_MANDT4 = DEL_MANDT4(spark, df_DS_SAP_MAKT_01)
+    MAKTG_LU(spark, df_DEL_MANDT4)
+    df_SUTUR_LEN = SUTUR_LEN(spark, df_CHARACTERISTICS)
+    SUTUR_LEN_LU(spark, df_SUTUR_LEN)
+    df_TSPAT = TSPAT(spark)
+    df_TSPAT = collectMetrics(
+        spark, 
+        df_TSPAT, 
+        "graph", 
+        "Fxz52mHvigJCiGTtDShly$$A_d-qQSTnzK19sjyMY90j", 
+        "hHscHRUv3NFgSWjzhGn3r$$ajZaM2NaV4KITq0gsue3m"
+    )
+    df_DEL_MANDT_6 = DEL_MANDT_6(spark, df_TSPAT)
+    VTEXT_LU(spark, df_DEL_MANDT_6)
+    df_T134T = T134T(spark)
+    df_T134T = collectMetrics(
+        spark, 
+        df_T134T, 
+        "graph", 
+        "tEXn8WPj6NopoHRdUN2FJ$$cPEcqFbV3nRH3w7HuPiwo", 
+        "ZYM8UAlA6PdKQTWs-lt2_$$LsowlDwrkUzbyvZvQyK6o"
+    )
+    df_DEL_MANDT_5 = DEL_MANDT_5(spark, df_T134T)
+    MTBEZ_LU(spark, df_DEL_MANDT_5)
+    df_STERILE = STERILE(spark, df_CHARACTERISTICS)
+    STERILE_LU(spark, df_STERILE)
+    df_BRAVO = BRAVO(spark, df_CHARACTERISTICS)
+    BRAVO_LU(spark, df_BRAVO)
     MAKTX_LU(spark, df_DEL_MANDT4)
     df_NDL_SLS_TYPE = NDL_SLS_TYPE(spark, df_CHARACTERISTICS)
     NDL_SLS_LU(spark, df_NDL_SLS_TYPE)
@@ -71,6 +82,16 @@ def pipeline(spark: SparkSession) -> None:
     OBJEK_LU(spark, df_INOB_DEDUP)
     df_NDL_COLOR = NDL_COLOR(spark, df_CHARACTERISTICS)
     NDL_COL_LU(spark, df_NDL_COLOR)
+    df_T006A = T006A(spark)
+    df_T006A = collectMetrics(
+        spark, 
+        df_T006A, 
+        "graph", 
+        "nR5N0Jtgo0SMP_AvBFdRp$$AFYAZXzg_nw4dr4nEO75k", 
+        "93TiFAMOCOU-nvZZBDgQW$$0QIYt9N5wZHp0Js8Od0yX"
+    )
+    df_DEL_MANDT_7 = DEL_MANDT_7(spark, df_T006A)
+    MSEHL_LU(spark, df_DEL_MANDT_7)
     df_MAT_TYPE = MAT_TYPE(spark, df_CHARACTERISTICS)
     MAT_TYPE_LU(spark, df_MAT_TYPE)
     df_DS_SAP_MARA_HM2 = DS_SAP_MARA_HM2(spark)
@@ -92,25 +113,25 @@ def pipeline(spark: SparkSession) -> None:
         "5tjEC2R_fitFg858EKn_H$$8zrgDqoYbVtMNO-GK4V6_", 
         "bPAwoIg9wa3XArlXP-7m_$$c1QUVrlfKTD9A8sObAKfS"
     )
-    df_TSPAT = TSPAT(spark)
-    df_TSPAT = collectMetrics(
-        spark, 
-        df_TSPAT, 
-        "graph", 
-        "Fxz52mHvigJCiGTtDShly$$A_d-qQSTnzK19sjyMY90j", 
-        "hHscHRUv3NFgSWjzhGn3r$$ajZaM2NaV4KITq0gsue3m"
-    )
     TARGET(spark, df_SELECT_FIELDS)
-    df_DEL_MANDT4_1_1 = DEL_MANDT4_1_1(spark, df_TSPAT)
-    df_DEL_MANDT4_1_1 = collectMetrics(
+    df_CAWNT = CAWNT(spark)
+    df_CAWNT = collectMetrics(
         spark, 
-        df_DEL_MANDT4_1_1, 
+        df_CAWNT, 
         "graph", 
-        "DB1-X1UNUjNrATmoHHZ9s$$2UejoDAr0DDHgtmkPagIo", 
-        "mG9jjAN_aHlKbl1hDoxu0$$vSS9A4FmuifJX-qSt52BS"
+        "lw57OayKYQQpq-wv8BwYz$$ZETNvifMTrIl3Xqoh_U9O", 
+        "fVAdaZ17mmn9N9z25Gq-J$$fjH3D0n9k7HgZfus165e7"
     )
-    df_DEL_MANDT4_1_1.cache().count()
-    df_DEL_MANDT4_1_1.unpersist()
+    df_DEL_MANDT_8 = DEL_MANDT_8(spark, df_CAWNT)
+    df_DEL_MANDT_8 = collectMetrics(
+        spark, 
+        df_DEL_MANDT_8, 
+        "graph", 
+        "2EfagNjx6hk3uQo-PxH0U$$ywtsaYt91kFVyOc1cphhn", 
+        "rN1rfaUNm9t20JMNYZZv3$$GmFOAMMeGVxqUPSJBz_If"
+    )
+    df_DEL_MANDT_8.cache().count()
+    df_DEL_MANDT_8.unpersist()
 
 def main():
     spark = SparkSession.builder\

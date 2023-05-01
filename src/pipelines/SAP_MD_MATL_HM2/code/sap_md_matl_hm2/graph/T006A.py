@@ -5,7 +5,5 @@ from prophecy.libs import typed_lit
 from sap_md_matl_hm2.config.ConfigStore import *
 from sap_md_matl_hm2.udfs.UDFs import *
 
-def T134T_LU(spark: SparkSession, in0: DataFrame):
-    keyColumns = ['''MTART''']
-    valueColumns = ['''MTBEZ''']
-    createLookup("T134T_LU", in0, spark, keyColumns, valueColumns)
+def T006A(spark: SparkSession) -> DataFrame:
+    return spark.read.table(f"hm2.t006a")
