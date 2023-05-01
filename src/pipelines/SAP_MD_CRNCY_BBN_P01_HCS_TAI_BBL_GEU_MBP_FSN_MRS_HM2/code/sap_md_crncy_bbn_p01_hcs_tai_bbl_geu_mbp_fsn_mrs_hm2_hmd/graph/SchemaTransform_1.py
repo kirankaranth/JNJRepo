@@ -6,4 +6,4 @@ from sap_md_crncy_bbn_p01_hcs_tai_bbl_geu_mbp_fsn_mrs_hm2_hmd.config.ConfigStore
 from sap_md_crncy_bbn_p01_hcs_tai_bbl_geu_mbp_fsn_mrs_hm2_hmd.udfs.UDFs import *
 
 def SchemaTransform_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
-    return in0
+    pass
