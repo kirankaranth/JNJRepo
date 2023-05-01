@@ -2,8 +2,8 @@ from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from prophecy.libs import typed_lit
-from sap_md_doc_itm_incm_invc_hm2.config.ConfigStore import *
-from sap_md_doc_itm_incm_invc_hm2.udfs.UDFs import *
+from sap_md_doc_itm_incm_invc_hm2_bba_bbl_bbn_geu_mrs_po1_tai.config.ConfigStore import *
+from sap_md_doc_itm_incm_invc_hm2_bba_bbl_bbn_geu_mrs_po1_tai.udfs.UDFs import *
 
 def NEW_FIELDS(spark: SparkSession, MANDT_FILTER: DataFrame) -> DataFrame:
     return MANDT_FILTER\
@@ -45,7 +45,7 @@ def NEW_FIELDS(spark: SparkSession, MANDT_FILTER: DataFrame) -> DataFrame:
         .withColumn("MAN_BLOK_RSN", trim(col("SPGRQ")))\
         .withColumn("BLOK_RSN_ITM_AMT", trim(col("SPGRS")))\
         .withColumn("BLOK_RSN_QUAL", trim(col("SPGRC")))\
-        .withColumn("BLOK_RSN_ENHNC_FLD", trim(col("SPGREXT")))\
+        .withColumn("BLOK_RSN_ENHNC_FLD", expr(Config.BLOK_RSN_ENHNC_FLD).cast(StringType()))\
         .withColumn("PSTNG_STRNG_FOR_VAL", trim(col("BUSTW")))\
         .withColumn("REF_DOC_NUM", trim(col("XBLNR")))\
         .withColumn("IN_DOC_PSTD_PREV_PER", expr(Config.IN_DOC_PSTD_PREV_PER).cast(StringType()))\
@@ -93,9 +93,9 @@ def NEW_FIELDS(spark: SparkSession, MANDT_FILTER: DataFrame) -> DataFrame:
         .withColumn("ITM_NUM_PRIN_PRCH_AGMT", trim(col("ERP_CONTRACT_ITM")))\
         .withColumn("CENT_CNTRC", trim(col("SRM_CONTRACT_ID")))\
         .withColumn("CENT_CNTRC_ITM_NUM", trim(col("SRM_CONTRACT_ITM")))\
-        .withColumn("CONT_ITM_CAT_PRCHSNG_DOC", trim(col("CONT_PSTYP")))\
+        .withColumn("CONT_ITM_CAT_PRCHSNG_DOC", expr(Config.CONT_ITM_CAT_PRCHSNG_DOC).cast(StringType()))\
         .withColumn("ITM_KEY_FOR_ESOA_MSG", trim(col("SRVMAPKEY")))\
-        .withColumn("BTCH_NUM", trim(col("CHARG")))\
+        .withColumn("BTCH_NUM", expr(Config.BTCH_NUM).cast(StringType()))\
         .withColumn("ORIG_INVC_ITM", trim(col("INV_ITM_ORIGIN")))\
         .withColumn("GRP_CHAR_FOR_INVC_VERIF", trim(col("INVREL")))\
         .withColumn("IN_FOR_DIFF_INVC", trim(col("XDINV")))\

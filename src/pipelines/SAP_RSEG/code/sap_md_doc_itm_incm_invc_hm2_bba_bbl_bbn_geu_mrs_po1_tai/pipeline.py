@@ -1,10 +1,10 @@
 from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
-from sap_md_doc_itm_incm_invc_hm2.config.ConfigStore import *
-from sap_md_doc_itm_incm_invc_hm2.udfs.UDFs import *
+from sap_md_doc_itm_incm_invc_hm2_bba_bbl_bbn_geu_mrs_po1_tai.config.ConfigStore import *
+from sap_md_doc_itm_incm_invc_hm2_bba_bbl_bbn_geu_mrs_po1_tai.udfs.UDFs import *
 from prophecy.utils import *
-from sap_md_doc_itm_incm_invc_hm2.graph import *
+from sap_md_doc_itm_incm_invc_hm2_bba_bbl_bbn_geu_mrs_po1_tai.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_DS_SAP_RSEG = DS_SAP_RSEG(spark)
