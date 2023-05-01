@@ -90,6 +90,16 @@ def pipeline(spark: SparkSession) -> None:
     ATWTB_LU(spark, df_BRAVO_DESC)
     df_NDL_ALLOY = NDL_ALLOY(spark, df_CHARACTERISTICS)
     NDL_ALLOY_LU(spark, df_NDL_ALLOY)
+    df_T023T = T023T(spark)
+    df_T023T = collectMetrics(
+        spark, 
+        df_T023T, 
+        "graph", 
+        "721hJuTpWfcK1pilBZsCt$$8kVPKBlTwV_EHgzhUqJ8p", 
+        "2NDEoBs_3_mHkIDt_1Jhg$$pYUBdgKQZNpS4whPIjuQ5"
+    )
+    df_DEL_MANDT_9 = DEL_MANDT_9(spark, df_T023T)
+    WGBEZx_LU(spark, df_DEL_MANDT_9)
     OBJEK_LU(spark, df_INOB_DEDUP)
     df_NDL_COLOR = NDL_COLOR(spark, df_CHARACTERISTICS)
     NDL_COL_LU(spark, df_NDL_COLOR)

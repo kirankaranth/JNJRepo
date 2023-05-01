@@ -2,6 +2,7 @@ from .T134T import T134T
 from .BRAVO_DESC import BRAVO_DESC
 from .NDL_ALLOY_LU import NDL_ALLOY_LU
 from .DEL_MANDT_8 import DEL_MANDT_8
+from .WGBEZx_LU import WGBEZx_LU
 from .T006A import T006A
 from .D_M_OBTAB_KLART import D_M_OBTAB_KLART
 from .NDL_COL_LU import NDL_COL_LU
@@ -21,7 +22,9 @@ from .NDL_SLS_TYPE import NDL_SLS_TYPE
 from .AUSP import AUSP
 from .MAKTG_LU import MAKTG_LU
 from .NDL_COLOR import NDL_COLOR
+from .T023T import T023T
 from .VTEXT_LU import VTEXT_LU
+from .DEL_MANDT_9 import DEL_MANDT_9
 from .DEL_MANDT2 import DEL_MANDT2
 from .NDL_ALLOY import NDL_ALLOY
 from .DEL_MANDT_1 import DEL_MANDT_1
