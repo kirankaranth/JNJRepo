@@ -8,6 +8,8 @@ from jde_md_crncy_bw2_deu_djd_gmd_jet_jem_jes_jsw_sjd.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_DS_JDE_01_F0013 = DS_JDE_01_F0013(spark)
+    df_DELETED_FILTER_F0013 = DELETED_FILTER_F0013(spark, df_DS_JDE_01_F0013)
+    df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_DELETED_FILTER_F0013)
 
 def main():
     spark = SparkSession.builder\
