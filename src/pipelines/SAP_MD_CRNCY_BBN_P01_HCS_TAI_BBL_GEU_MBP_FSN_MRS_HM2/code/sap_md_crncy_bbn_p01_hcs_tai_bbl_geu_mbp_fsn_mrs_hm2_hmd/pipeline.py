@@ -7,7 +7,16 @@ from prophecy.utils import *
 from sap_md_crncy_bbn_p01_hcs_tai_bbl_geu_mbp_fsn_mrs_hm2_hmd.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    pass
+    df_DS_SAP_01_TCURC = DS_SAP_01_TCURC(spark)
+    df_MANDT_FILTER_TCURC = MANDT_FILTER_TCURC(spark, df_DS_SAP_01_TCURC)
+    df_DS_SAP_01_TCURX = DS_SAP_01_TCURX(spark)
+    df_MANDT_FILTER_TCURX = MANDT_FILTER_TCURX(spark, df_DS_SAP_01_TCURX)
+    df_Join_1 = Join_1(spark, df_MANDT_FILTER_TCURC, df_MANDT_FILTER_TCURX)
+    df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_Join_1)
+    df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS_RENAME_FORMAT)
+    df_DUPLICATE_CHECK = DUPLICATE_CHECK(spark, df_SET_FIELD_ORDER_REFORMAT)
+    df_DUPLICATE_CHECK_FILTER = DUPLICATE_CHECK_FILTER(spark, df_DUPLICATE_CHECK)
+    MD_CRNCY(spark, df_SET_FIELD_ORDER_REFORMAT)
 
 def main():
     spark = SparkSession.builder\
