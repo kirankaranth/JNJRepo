@@ -4,7 +4,6 @@ from .NDL_ALLOY_LU import NDL_ALLOY_LU
 from .DEL_MANDT_8 import DEL_MANDT_8
 from .T006A import T006A
 from .D_M_OBTAB_KLART import D_M_OBTAB_KLART
-from .DEL_MANDT3 import DEL_MANDT3
 from .NDL_COL_LU import NDL_COL_LU
 from .SUTUR_USP_LU import SUTUR_USP_LU
 from .ATWTB_LU import ATWTB_LU
@@ -43,5 +42,6 @@ from .INOB_DEDUP import INOB_DEDUP
 from .INOB import INOB
 from .NDL_SLS_LU import NDL_SLS_LU
 from .DEL_MANDT_7 import DEL_MANDT_7
+from .XFORM import XFORM
 from .MTBEZ_LU import MTBEZ_LU
 from .TARGET import TARGET

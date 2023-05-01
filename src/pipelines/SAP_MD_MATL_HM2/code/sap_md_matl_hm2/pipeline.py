@@ -114,8 +114,7 @@ def pipeline(spark: SparkSession) -> None:
         "NE3et2tjx-fVp4f4QwZ0q$$Ev8jIzJ8jt_9NrE7XnO6x"
     )
     df_DEL_MANDT_1 = DEL_MANDT_1(spark, df_DS_SAP_MARA_HM2)
-    df_DEL_MANDT3 = DEL_MANDT3(spark, df_DEL_MANDT_1)
-    df_XFORM = XFORM(spark, df_DEL_MANDT3)
+    df_XFORM = XFORM(spark, df_DEL_MANDT_1)
     df_SELECT_FIELDS = SELECT_FIELDS(spark, df_XFORM)
     df_SELECT_FIELDS = collectMetrics(
         spark, 
