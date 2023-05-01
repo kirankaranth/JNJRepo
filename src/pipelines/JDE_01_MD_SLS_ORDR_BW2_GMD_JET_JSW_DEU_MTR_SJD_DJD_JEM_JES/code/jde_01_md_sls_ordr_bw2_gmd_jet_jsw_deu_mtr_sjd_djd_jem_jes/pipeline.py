@@ -8,6 +8,9 @@ from jde_01_md_sls_ordr_bw2_gmd_jet_jsw_deu_mtr_sjd_djd_jem_jes.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_JDE_F4201 = JDE_F4201(spark)
+    df_JDE_F4201_FILTER = JDE_F4201_FILTER(spark, df_JDE_F4201)
+    df_NEW_FIELDS_TRANSFORMATION = NEW_FIELDS_TRANSFORMATION(spark, df_JDE_F4201_FILTER)
+    df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS_TRANSFORMATION)
 
 def main():
     spark = SparkSession.builder\
