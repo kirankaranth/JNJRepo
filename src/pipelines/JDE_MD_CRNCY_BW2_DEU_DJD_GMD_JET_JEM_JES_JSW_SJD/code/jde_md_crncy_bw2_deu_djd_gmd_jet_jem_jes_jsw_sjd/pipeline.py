@@ -10,6 +10,10 @@ def pipeline(spark: SparkSession) -> None:
     df_DS_JDE_01_F0013 = DS_JDE_01_F0013(spark)
     df_DELETED_FILTER_F0013 = DELETED_FILTER_F0013(spark, df_DS_JDE_01_F0013)
     df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_DELETED_FILTER_F0013)
+    df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS_RENAME_FORMAT)
+    df_Aggregate_1 = Aggregate_1(spark, df_SET_FIELD_ORDER_REFORMAT)
+    df_Filter_1 = Filter_1(spark, df_Aggregate_1)
+    MD_CRNCY(spark, df_SET_FIELD_ORDER_REFORMAT)
 
 def main():
     spark = SparkSession.builder\
