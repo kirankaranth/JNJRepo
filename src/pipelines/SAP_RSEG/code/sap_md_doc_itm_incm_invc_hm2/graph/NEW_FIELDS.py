@@ -48,12 +48,12 @@ def NEW_FIELDS(spark: SparkSession, MANDT_FILTER: DataFrame) -> DataFrame:
         .withColumn("BLOK_RSN_ENHNC_FLD", trim(col("SPGREXT")))\
         .withColumn("PSTNG_STRNG_FOR_VAL", trim(col("BUSTW")))\
         .withColumn("REF_DOC_NUM", trim(col("XBLNR")))\
-        .withColumn("IN_DOC_PSTD_PREV_PER", trim(col("XRUEB")))\
+        .withColumn("IN_DOC_PSTD_PREV_PER", expr(Config.IN_DOC_PSTD_PREV_PER).cast(StringType()))\
         .withColumn("DELV_COST_SHR_ITM_VAL", trim(col("BNKAN")).cast(DecimalType(18, 4)))\
         .withColumn("COND_TYPE", trim(col("KSCHL")))\
         .withColumn("VAL_TOT_VALUT_STK", trim(col("SALK3")).cast(DecimalType(18, 4)))\
         .withColumn("VAL_TOT_STK_PREV_PER", trim(col("VMSAL")).cast(DecimalType(18, 4)))\
-        .withColumn("LIFO_FIFO_RLVNT", trim(col("XLIFO")))\
+        .withColumn("LIFO_FIFO_RLVNT", expr(Config.LIFO_FIFO_RLVNT).cast(StringType()))\
         .withColumn("DOC_NUM_REF_DOC", trim(col("LFBNR")))\
         .withColumn("FISC_YR_OF_CUR_PER", trim(col("LFGJA")))\
         .withColumn("ITM_OF_REF_DOC", trim(col("LFPOS")))\
@@ -87,7 +87,7 @@ def NEW_FIELDS(spark: SparkSession, MANDT_FILTER: DataFrame) -> DataFrame:
           "RETN_DUE_DTTM",
           when((col("RETDUEDT") == lit("00000000")), lit(None)).otherwise(to_timestamp(col("RETDUEDT"), "yyyyMMdd"))
         )\
-        .withColumn("TAX_RDCTN_FOR_RETN", trim(col("XRETTAXNET")))\
+        .withColumn("TAX_RDCTN_FOR_RETN", expr(Config.TAX_RDCTN_FOR_RETN).cast(StringType()))\
         .withColumn("CASH_LDGR_EXP_REVN_ACCT", trim(col("RE_ACCOUNT")))\
         .withColumn("NUM_OF_PRIN_PRCH_AGMT", trim(col("ERP_CONTRACT_ID")))\
         .withColumn("ITM_NUM_PRIN_PRCH_AGMT", trim(col("ERP_CONTRACT_ITM")))\
