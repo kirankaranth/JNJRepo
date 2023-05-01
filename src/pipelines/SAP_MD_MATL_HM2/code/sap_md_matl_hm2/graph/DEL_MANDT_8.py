@@ -6,4 +6,6 @@ from sap_md_matl_hm2.config.ConfigStore import *
 from sap_md_matl_hm2.udfs.UDFs import *
 
 def DEL_MANDT_8(spark: SparkSession, in0: DataFrame) -> DataFrame:
-    return in0.filter(lit(True))
+    return in0.filter(
+        (((col("_deleted_") == lit("F")) & (col("MANDT") == lit(Config.MANDT))) & (col("SPRAS") == lit("E")))
+    )

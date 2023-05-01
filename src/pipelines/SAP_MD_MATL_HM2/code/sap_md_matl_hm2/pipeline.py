@@ -77,6 +77,17 @@ def pipeline(spark: SparkSession) -> None:
     MAKTX_LU(spark, df_DEL_MANDT4)
     df_NDL_SLS_TYPE = NDL_SLS_TYPE(spark, df_CHARACTERISTICS)
     NDL_SLS_LU(spark, df_NDL_SLS_TYPE)
+    df_CAWNT = CAWNT(spark)
+    df_CAWNT = collectMetrics(
+        spark, 
+        df_CAWNT, 
+        "graph", 
+        "lw57OayKYQQpq-wv8BwYz$$ZETNvifMTrIl3Xqoh_U9O", 
+        "fVAdaZ17mmn9N9z25Gq-J$$fjH3D0n9k7HgZfus165e7"
+    )
+    df_DEL_MANDT_8 = DEL_MANDT_8(spark, df_CAWNT)
+    df_BRAVO_DESC = BRAVO_DESC(spark, df_BRAVO, df_DEL_MANDT_8)
+    ATWTB_LU(spark, df_BRAVO_DESC)
     df_NDL_ALLOY = NDL_ALLOY(spark, df_CHARACTERISTICS)
     NDL_ALLOY_LU(spark, df_NDL_ALLOY)
     OBJEK_LU(spark, df_INOB_DEDUP)
@@ -114,24 +125,6 @@ def pipeline(spark: SparkSession) -> None:
         "bPAwoIg9wa3XArlXP-7m_$$c1QUVrlfKTD9A8sObAKfS"
     )
     TARGET(spark, df_SELECT_FIELDS)
-    df_CAWNT = CAWNT(spark)
-    df_CAWNT = collectMetrics(
-        spark, 
-        df_CAWNT, 
-        "graph", 
-        "lw57OayKYQQpq-wv8BwYz$$ZETNvifMTrIl3Xqoh_U9O", 
-        "fVAdaZ17mmn9N9z25Gq-J$$fjH3D0n9k7HgZfus165e7"
-    )
-    df_DEL_MANDT_8 = DEL_MANDT_8(spark, df_CAWNT)
-    df_DEL_MANDT_8 = collectMetrics(
-        spark, 
-        df_DEL_MANDT_8, 
-        "graph", 
-        "2EfagNjx6hk3uQo-PxH0U$$ywtsaYt91kFVyOc1cphhn", 
-        "rN1rfaUNm9t20JMNYZZv3$$GmFOAMMeGVxqUPSJBz_If"
-    )
-    df_DEL_MANDT_8.cache().count()
-    df_DEL_MANDT_8.unpersist()
 
 def main():
     spark = SparkSession.builder\

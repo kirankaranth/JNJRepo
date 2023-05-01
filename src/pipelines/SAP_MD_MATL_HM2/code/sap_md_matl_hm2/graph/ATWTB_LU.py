@@ -5,5 +5,7 @@ from prophecy.libs import typed_lit
 from sap_md_matl_hm2.config.ConfigStore import *
 from sap_md_matl_hm2.udfs.UDFs import *
 
-def T006A(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.sourceDatabase}.t006a")
+def ATWTB_LU(spark: SparkSession, in0: DataFrame):
+    keyColumns = ['''MAT_NUM''']
+    valueColumns = ['''ATWTB''']
+    createLookup("ATWTB_LU", in0, spark, keyColumns, valueColumns)

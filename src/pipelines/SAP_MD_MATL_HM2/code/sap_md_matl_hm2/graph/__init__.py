@@ -1,4 +1,5 @@
 from .T134T import T134T
+from .BRAVO_DESC import BRAVO_DESC
 from .NDL_ALLOY_LU import NDL_ALLOY_LU
 from .DEL_MANDT_8 import DEL_MANDT_8
 from .T006A import T006A
@@ -6,6 +7,7 @@ from .D_M_OBTAB_KLART import D_M_OBTAB_KLART
 from .DEL_MANDT3 import DEL_MANDT3
 from .NDL_COL_LU import NDL_COL_LU
 from .SUTUR_USP_LU import SUTUR_USP_LU
+from .ATWTB_LU import ATWTB_LU
 from .MAKTX_LU import MAKTX_LU
 from .DS_SAP_MARA_HM2 import DS_SAP_MARA_HM2
 from .DEL_MANDT import DEL_MANDT
@@ -32,6 +34,7 @@ from .SUTUR_LEN import SUTUR_LEN
 from .TSPAT import TSPAT
 from .DEL_MANDT_6 import DEL_MANDT_6
 from .DS_SAP_MAKT_01 import DS_SAP_MAKT_01
+from .CAWNT import CAWNT
 from .SUTUR_LEN_LU import SUTUR_LEN_LU
 from .BRAVO import BRAVO
 from .STERILE_LU import STERILE_LU
