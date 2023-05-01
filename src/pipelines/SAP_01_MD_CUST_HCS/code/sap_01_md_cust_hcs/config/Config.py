@@ -31,6 +31,8 @@ class Config(ConfigBase):
             FEE_SCHED: str=None,
             DUNS_NUM: str=None,
             DUNS_4: str=None,
+            SYS_AWRD_MGMT_UNIQ_ENTITY_ID: str=None,
+            SYS_AWRD_MGMT_ELCTRNC_FUND_TFR_IND: str=None,
             **kwargs
     ):
         self.spark = None
@@ -60,7 +62,9 @@ class Config(ConfigBase):
             DCLTN_RGMN_PIS_COFINS, 
             FEE_SCHED, 
             DUNS_NUM, 
-            DUNS_4
+            DUNS_4, 
+            SYS_AWRD_MGMT_UNIQ_ENTITY_ID, 
+            SYS_AWRD_MGMT_ELCTRNC_FUND_TFR_IND
         )
 
     def update(
@@ -91,6 +95,8 @@ class Config(ConfigBase):
             FEE_SCHED: str="CAST(null as String)",
             DUNS_NUM: str="CAST(null as String)",
             DUNS_4: str="CAST(null as String)",
+            SYS_AWRD_MGMT_UNIQ_ENTITY_ID: str="CAST(null as String)",
+            SYS_AWRD_MGMT_ELCTRNC_FUND_TFR_IND: str="CAST(null as String)",
             **kwargs
     ):
         prophecy_spark = self.spark
@@ -120,4 +126,6 @@ class Config(ConfigBase):
         self.FEE_SCHED = FEE_SCHED
         self.DUNS_NUM = DUNS_NUM
         self.DUNS_4 = DUNS_4
+        self.SYS_AWRD_MGMT_UNIQ_ENTITY_ID = SYS_AWRD_MGMT_UNIQ_ENTITY_ID
+        self.SYS_AWRD_MGMT_ELCTRNC_FUND_TFR_IND = SYS_AWRD_MGMT_ELCTRNC_FUND_TFR_IND
         pass

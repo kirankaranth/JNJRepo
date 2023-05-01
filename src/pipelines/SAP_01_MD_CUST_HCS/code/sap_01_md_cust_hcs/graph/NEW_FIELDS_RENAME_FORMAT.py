@@ -189,6 +189,8 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("FEE_SCHED", expr(Config.FEE_SCHED))\
         .withColumn("DUNS_NUM", expr(Config.DUNS_NUM))\
         .withColumn("DUNS_4", expr(Config.DUNS_4))\
+        .withColumn("SYS_AWRD_MGMT_UNIQ_ENTITY_ID", expr(Config.SYS_AWRD_MGMT_UNIQ_ENTITY_ID))\
+        .withColumn("SYS_AWRD_MGMT_ELCTRNC_FUND_TFR_IND", expr(Config.SYS_AWRD_MGMT_ELCTRNC_FUND_TFR_IND))\
         .withColumn("PROC_GRP", trim(col("PSOFG")))\
         .withColumn("SUBLDGR_ACCT_PRPRC_PCDR", trim(col("PSOIS")))\
         .withColumn("NM_1", trim(col("PSON1")))\
