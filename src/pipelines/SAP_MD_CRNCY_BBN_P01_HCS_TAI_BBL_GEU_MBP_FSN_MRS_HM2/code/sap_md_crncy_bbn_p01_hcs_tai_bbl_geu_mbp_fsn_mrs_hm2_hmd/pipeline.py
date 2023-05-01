@@ -12,7 +12,7 @@ def pipeline(spark: SparkSession) -> None:
     df_MANDT_FILTER_TCURX = MANDT_FILTER_TCURX(spark, df_DS_SAP_01_TCURX)
     df_MANDT_FILTER_TCURC = MANDT_FILTER_TCURC(spark, df_DS_SAP_01_TCURC)
     df_Join_1 = Join_1(spark, df_MANDT_FILTER_TCURC, df_MANDT_FILTER_TCURX)
-    df_SchemaTransform_1 = SchemaTransform_1(spark, df_Join_1)
+    df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_Join_1)
 
 def main():
     spark = SparkSession.builder\
