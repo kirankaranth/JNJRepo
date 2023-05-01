@@ -14,8 +14,8 @@ def pipeline(spark: SparkSession) -> None:
     df_Join_1 = Join_1(spark, df_MANDT_FILTER_TCURC, df_MANDT_FILTER_TCURX)
     df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_Join_1)
     df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS_RENAME_FORMAT)
-    df_Aggregate_1 = Aggregate_1(spark, df_SET_FIELD_ORDER_REFORMAT)
-    df_Filter_1 = Filter_1(spark, df_Aggregate_1)
+    df_DUPLICATE_CHECK = DUPLICATE_CHECK(spark, df_SET_FIELD_ORDER_REFORMAT)
+    df_DUPLICATE_CHECK_FILTER = DUPLICATE_CHECK_FILTER(spark, df_DUPLICATE_CHECK)
     MD_CRNCY(spark, df_SET_FIELD_ORDER_REFORMAT)
 
 def main():

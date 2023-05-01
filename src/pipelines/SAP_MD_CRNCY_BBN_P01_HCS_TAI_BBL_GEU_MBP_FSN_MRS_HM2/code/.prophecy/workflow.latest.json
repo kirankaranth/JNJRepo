@@ -155,8 +155,8 @@
       "id" : "VAx3rOkc8D7pIQMQ51iUa$$wPLYnBlokvO9FEhr1VE2c",
       "component" : "Aggregate",
       "metadata" : {
-        "label" : "Aggregate_1",
-        "slug" : "Aggregate_1",
+        "label" : "DUPLICATE_CHECK",
+        "slug" : "DUPLICATE_CHECK",
         "x" : 1040,
         "y" : 20,
         "phase" : 0,
@@ -319,13 +319,37 @@
       "properties" : {
         "allIns" : false,
         "doPivot" : false,
-        "aggregate" : [ ],
+        "aggregate" : [ {
+          "target" : "PK_COUNT",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "count(*)"
+          },
+          "description" : "",
+          "_row_id" : ""
+        } ],
         "allowSelection" : true,
         "pivotColumn" : null,
         "pivotValues" : [ ],
-        "activeTab" : "aggregate",
-        "columnsSelector" : [ ],
-        "groupBy" : [ ]
+        "activeTab" : "groupBy",
+        "columnsSelector" : [ "_dj_zjb1G6dgKr2WJztAG$$3iG1MTBR13tULjX8JBQ7H##CRNCY_CD", "_dj_zjb1G6dgKr2WJztAG$$3iG1MTBR13tULjX8JBQ7H##SRC_SYS_CD" ],
+        "groupBy" : [ {
+          "target" : "SRC_SYS_CD",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "SRC_SYS_CD"
+          },
+          "description" : "",
+          "_row_id" : ""
+        }, {
+          "target" : "CRNCY_CD",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "CRNCY_CD"
+          },
+          "description" : "",
+          "_row_id" : ""
+        } ]
       }
     },
     "m-k9QBhfen2UT-0AvKGT_$$fuawXv4gmuyepbfPb5KFK" : {
@@ -797,8 +821,8 @@
       "id" : "iqQ449NgrHREBvfCAXNO5$$Nb9d1v-_wOeBUmJDGxNub",
       "component" : "Filter",
       "metadata" : {
-        "label" : "Filter_1",
-        "slug" : "Filter_1",
+        "label" : "DUPLICATE_CHECK_FILTER",
+        "slug" : "DUPLICATE_CHECK_FILTER",
         "x" : 1200,
         "y" : 20,
         "phase" : 0,
@@ -809,7 +833,39 @@
       "ports" : {
         "inputs" : [ {
           "id" : "_vkJkV9nY95dou3rAbv-9$$fkfBjIZWONL_JIUDF8qOp",
-          "slug" : "in0"
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "SRC_SYS_CD",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CRNCY_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PK_COUNT",
+              "type" : "long",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
         } ],
         "outputs" : [ {
           "id" : "-24zBXDCcL-9vEIPyaDEG$$Fc5mgYsp60S49wzShVZ84",
@@ -819,10 +875,10 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "_vkJkV9nY95dou3rAbv-9$$fkfBjIZWONL_JIUDF8qOp##PK_COUNT" ],
         "condition" : {
           "format" : "sql",
-          "expression" : "true"
+          "expression" : "PK_COUNT > 1"
         }
       }
     },
@@ -1820,38 +1876,5 @@
     "outputs" : [ ],
     "selectedInputFields" : [ ],
     "isCustomOutputSchema" : false
-  },
-  "diagnostics" : [ {
-    "property" : "$.workflow.processes.VAx3rOkc8D7pIQMQ51iUa$$wPLYnBlokvO9FEhr1VE2c.properties.aggregate",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "At least one aggregate expression is required in Aggregate.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.iqQ449NgrHREBvfCAXNO5$$Nb9d1v-_wOeBUmJDGxNub",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "One of the upstream gems is broken. Please, fix it first.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  } ]
+  }
 }
