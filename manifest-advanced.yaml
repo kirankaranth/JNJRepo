@@ -166,47 +166,22 @@ environments:
     createMergeTags:
       enabled: true
       credentialsId: sourcecode-bitbucket
-    unitTest:
-      enabled: false
-    lint:
-      enabled: false
-    resolveArtifacts:
-      enabled: false
+      BETA:
+
     staticAnalysis:
-      enabled: false
-
-    integrationTest:
-      enabled: false
-
-    buildAnalysis:
-      enabled: false
-
-    lint:
-      enabled: false
-    resolveArtifacts:
-      enabled: false
-    staticAnalysis:
-      enabled: false
-
-    integrationTest:
-      enabled: false
-
-    buildAnalysis:
-      enabled: false
-
+      shortLivedAnalysis: false
     package:
       enabled: false
-
     publish:
       enabled: false
-
-
     deploy:
-        enabled: true
-
-
+      enabled: false
     archive:
       enabled: false
+    regressionTest:
+      enabled: false
+    deploy:
+        enabled: true
 
   #############################
   ############# PQA
@@ -231,35 +206,30 @@ environments:
         screenshotStop: true
         xex: JBGA-7300
 
+    #release:
+    #  type: manual
     versionCalculation:
-      patternType: jnj-dev-branch
-    unitTest:
-      enabled: false
+      enabled: true
+      type: gitversion
+    createMergeTags:
+      enabled: true
+      credentialsId: sourcecode-bitbucket
+      BETA:
 
-    lint:
-      enabled: false
-    resolveArtifacts:
-      enabled: false
     staticAnalysis:
-      enabled: false
-
-    integrationTest:
-      enabled: false
-
-    buildAnalysis:
-      enabled: false
-
+      shortLivedAnalysis: false
     package:
       enabled: false
-
     publish:
       enabled: false
-
     deploy:
       enabled: false
-
     archive:
       enabled: false
+    regressionTest:
+      enabled: false
+    deploy:
+        enabled: true
 
   #############################
   ############# TEST
@@ -282,7 +252,7 @@ environments:
 
     ##This step is to be executed Manually as we need to specify the user story under test and the test execution which will be used
     regressionTest:
-      enabled: true
+      enabled: false
       type: robot-framework
       projectTestFolder: test/robot_lab
       jiraProjectKey: JBGA
@@ -301,36 +271,27 @@ environments:
 
 
     versionCalculation:
-      patternType: jnj-dev-branch
-    unitTest:
-      enabled: false
+      enabled: true
+      type: gitversion
+    createMergeTags:
+      enabled: true
+      credentialsId: sourcecode-bitbucket
+      BETA:
 
-    lint:
-      enabled: false
-    resolveArtifacts:
-      enabled: false
     staticAnalysis:
-      enabled: false
-
-    integrationTest:
-      enabled: false
-
-    buildAnalysis:
-      enabled: false
-
+      shortLivedAnalysis: false
     package:
       enabled: false
-
     publish:
       enabled: false
-
-
     deploy:
-
       enabled: false
-
     archive:
       enabled: false
+    regressionTest:
+      enabled: false
+    deploy:
+        enabled: true
   #############################
   ############# QA
   ###################################
@@ -372,59 +333,59 @@ environments:
             credentialsId: sourcecode-bitbucket
         screenshotStop: true
         moveToComplete: true
+
     versionCalculation:
-      patternType: jnj-dev-branch
-    unitTest:
-      enabled: false
+      enabled: true
+      type: gitversion
+    createMergeTags:
+      enabled: true
+      credentialsId: sourcecode-bitbucket
+    deploy:
+        enabled: true
+  
+  #############################
+  ############# BETA
+  ###################################
 
-    lint:
-      enabled: false
-    resolveArtifacts:
-      enabled: false
+  BETA:
+
     staticAnalysis:
-      enabled: false
-
-    integrationTest:
-      enabled: false
-
-    buildAnalysis:
-      enabled: false
-
+      shortLivedAnalysis: false
     package:
       enabled: false
-
     publish:
       enabled: false
-
-
     deploy:
-
       enabled: false
-
     archive:
       enabled: false
+    regressionTest:
+      enabled: false
+    deploy:
+        enabled: true
   #############################
   ############# PROD
   ###################################
   PROD:
-    #versionCalculation:
-    #  type: helm
-    #  confirmVersion: true
-    #  version: "^0"
-    resolveArtifacts:
+    versionCalculation:
       enabled: true
-      type: helm
+      type: gitversion
+    createMergeTags:
+      enabled: true
+      credentialsId: sourcecode-bitbucket
+      BETA:
 
+    staticAnalysis:
+      shortLivedAnalysis: false
     package:
-        enabled: false
+      enabled: false
     publish:
       enabled: false
-      type: "multi"
-      stages:
-        Helm:
-          enabled: false
-          chartRepo: jbga-helm-charts
-
     deploy:
-
-        enabled: false
+      enabled: false
+    archive:
+      enabled: false
+    regressionTest:
+      enabled: false
+    deploy:
+        enabled: true
