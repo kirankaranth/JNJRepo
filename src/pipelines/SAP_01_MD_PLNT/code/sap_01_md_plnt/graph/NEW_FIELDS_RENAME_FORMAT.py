@@ -16,7 +16,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("VALUT_AREA", trim(col("BWKEY")))\
         .withColumn("CO_CD", trim(col("BUKRS")))\
         .withColumn("CAL_NUM", trim(col("FABKL")))\
-        .withColumn("CTRY_SHRT_NM", lookup("LU_SAP_T005T", col("LAND1")).getField("LANDX"))\
+        .withColumn("CTRY_SHRT_NM", trim(lookup("LU_SAP_T005T", col("LAND1")).getField("LANDX")))\
         .withColumn("ADDR_LINE_1_TXT", trim(col("STRAS")))\
         .withColumn("PSTL_CD_NUM", trim(col("PSTLZ")))\
         .withColumn("CITY_NM", trim(col("ORT01")))\
