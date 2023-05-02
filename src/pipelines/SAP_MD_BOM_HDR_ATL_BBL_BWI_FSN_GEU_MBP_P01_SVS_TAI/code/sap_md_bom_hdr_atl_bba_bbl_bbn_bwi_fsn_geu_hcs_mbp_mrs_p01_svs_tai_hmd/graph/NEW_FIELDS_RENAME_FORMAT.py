@@ -2,8 +2,8 @@ from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from prophecy.libs import typed_lit
-from sap_md_bom_hdr_atl_bbl_bwi_fsn_geu_mbp_p01_svs_tai.config.ConfigStore import *
-from sap_md_bom_hdr_atl_bbl_bwi_fsn_geu_mbp_p01_svs_tai.udfs.UDFs import *
+from sap_md_bom_hdr_atl_bba_bbl_bbn_bwi_fsn_geu_hcs_mbp_mrs_p01_svs_tai_hmd.config.ConfigStore import *
+from sap_md_bom_hdr_atl_bba_bbl_bbn_bwi_fsn_geu_hcs_mbp_mrs_p01_svs_tai_hmd.udfs.UDFs import *
 
 def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
@@ -29,6 +29,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("BOM_UOM_CD", trim(col("bmein")))\
         .withColumn("BOM_TXT", trim(col("stktx")))\
         .withColumn("BOM_STS_CD", trim(col("stlst")))\
+        .withColumn("BOM_VLD_TO_DTTM", expr(Config.BOM_VLD_TO_DTTM))\
         .withColumn("DEL_IND", trim(col("loekz")))\
         .withColumn("BOM_BASE_QTY", trim(col("bmeng")).cast(DecimalType(18, 4)))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\

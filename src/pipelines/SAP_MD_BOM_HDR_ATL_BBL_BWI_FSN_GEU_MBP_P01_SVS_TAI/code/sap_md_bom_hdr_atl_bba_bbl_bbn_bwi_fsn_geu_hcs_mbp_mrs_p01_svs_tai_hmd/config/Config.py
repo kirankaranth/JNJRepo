@@ -11,10 +11,11 @@ class Config(ConfigBase):
             DAI_ETL_ID: int=None,
             targetSchema: str=None,
             ConfigDatabase: str=None,
+            BOM_VLD_TO_DTTM: str=None,
             **kwargs
     ):
         self.spark = None
-        self.update(sourceSystem, MANDT, sourceDatabase, DAI_ETL_ID, targetSchema, ConfigDatabase)
+        self.update(sourceSystem, MANDT, sourceDatabase, DAI_ETL_ID, targetSchema, ConfigDatabase, BOM_VLD_TO_DTTM)
 
     def update(
             self,
@@ -24,6 +25,7 @@ class Config(ConfigBase):
             DAI_ETL_ID: int=0,
             targetSchema: str="dev_md_l1",
             ConfigDatabase: str=" ",
+            BOM_VLD_TO_DTTM: str="CAST(NULL AS datetime)",
             **kwargs
     ):
         prophecy_spark = self.spark
@@ -33,4 +35,5 @@ class Config(ConfigBase):
         self.DAI_ETL_ID = self.get_int_value(DAI_ETL_ID)
         self.targetSchema = targetSchema
         self.ConfigDatabase = ConfigDatabase
+        self.BOM_VLD_TO_DTTM = BOM_VLD_TO_DTTM
         pass
