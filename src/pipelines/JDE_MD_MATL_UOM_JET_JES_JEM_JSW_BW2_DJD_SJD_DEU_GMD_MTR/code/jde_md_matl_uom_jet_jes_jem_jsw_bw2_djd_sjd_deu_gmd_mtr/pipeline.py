@@ -7,8 +7,16 @@ from prophecy.utils import *
 from jde_md_matl_uom_jet_jes_jem_jsw_bw2_djd_sjd_deu_gmd_mtr.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    df_MANDT_04 = MANDT_04(spark)
-    df_NEW_FIELDS_01 = NEW_FIELDS_01(spark, df_MANDT_04)
+    df_DS_JDE_F0005 = DS_JDE_F0005(spark)
+    df_DS_JDE_F0005 = collectMetrics(
+        spark, 
+        df_DS_JDE_F0005, 
+        "graph", 
+        "kQkxUoa_c-GrceYtRMQaX$$MqmKWMNrBEtsQxaVLt6UA", 
+        "g7PnYnbFLx1gPxLaJnp3_$$f3W893l78RYPcvaSU5rD1"
+    )
+    df_FILTER_01 = FILTER_01(spark, df_DS_JDE_F0005)
+    df_NEW_FIELDS_01 = NEW_FIELDS_01(spark, df_FILTER_01)
     df_SET_FIELD_ORDER = SET_FIELD_ORDER(spark, df_NEW_FIELDS_01)
     df_SET_FIELD_ORDER = collectMetrics(
         spark, 
