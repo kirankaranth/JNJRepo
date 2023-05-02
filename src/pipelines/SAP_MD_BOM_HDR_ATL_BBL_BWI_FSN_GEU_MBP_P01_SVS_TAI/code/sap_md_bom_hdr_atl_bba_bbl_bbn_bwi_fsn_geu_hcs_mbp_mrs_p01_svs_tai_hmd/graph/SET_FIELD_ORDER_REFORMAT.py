@@ -20,6 +20,7 @@ def SET_FIELD_ORDER_REFORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("BOM_UOM_CD"), 
         col("BOM_TXT"), 
         col("BOM_STS_CD"), 
+        col("BOM_VLD_TO_DTTM"), 
         col("DEL_IND"), 
         col("BOM_BASE_QTY"), 
         col("DAI_ETL_ID"), 
