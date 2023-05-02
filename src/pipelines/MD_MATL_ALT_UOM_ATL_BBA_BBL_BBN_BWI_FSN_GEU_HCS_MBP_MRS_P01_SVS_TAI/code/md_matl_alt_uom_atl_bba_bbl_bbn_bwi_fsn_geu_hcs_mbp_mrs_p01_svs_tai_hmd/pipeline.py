@@ -15,7 +15,8 @@ def pipeline(spark: SparkSession) -> None:
         "61L0HnhccZW2gq1xdCSDI$$5LB3_g6JdscOYsQolGbBQ", 
         "DTIlKMzDvq6FPJHIrBbud$$Vps9ShjmHDHlIzJf5Nk_h"
     )
-    df_MANDT1 = MANDT1(spark, df_DS_SAP_MARA_01)
+    df_SELECT_FIELDS = SELECT_FIELDS(spark, df_DS_SAP_MARA_01)
+    df_MANDT1 = MANDT1(spark, df_SELECT_FIELDS)
     MEINS_LU(spark, df_MANDT1)
     df_DS_SAP_01_MARM = DS_SAP_01_MARM(spark)
     df_DS_SAP_01_MARM = collectMetrics(

@@ -15,7 +15,8 @@ def pipeline(spark: SparkSession) -> None:
         "jhWAIQ2lr-N0XBZ7aNiZS$$Hx-x4t92qRfqZz7OUiYk6", 
         "USflqvPYmtWT40hK7509j$$GuyLH_elitEHPgEC3JtAY"
     )
-    df_DEL_FILTER1 = DEL_FILTER1(spark, df_DS_JDE_01_F4101)
+    df_SELECT_FIELDS = SELECT_FIELDS(spark, df_DS_JDE_01_F4101)
+    df_DEL_FILTER1 = DEL_FILTER1(spark, df_SELECT_FIELDS)
     IMLITM_LU(spark, df_DEL_FILTER1)
     IMUOM1_LU(spark, df_DEL_FILTER1)
     df_DS_JDE_01_F41002 = DS_JDE_01_F41002(spark)

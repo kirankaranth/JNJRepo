@@ -8,6 +8,7 @@ from .SchemaTransform_1 import SchemaTransform_1
 from .UNION import UNION
 from .DUP_CHECK import DUP_CHECK
 from .IMLITM_LU import IMLITM_LU
+from .SELECT_FIELDS import SELECT_FIELDS
 from .MD_MATL_ALT_UOM import MD_MATL_ALT_UOM
 from .DE_DUP import DE_DUP
 from .IMUOM1_LU import IMUOM1_LU
