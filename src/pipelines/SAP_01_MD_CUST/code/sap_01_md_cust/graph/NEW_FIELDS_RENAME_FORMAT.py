@@ -42,7 +42,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("TAX_NUM2", trim(col("STCD2")))\
         .withColumn("TAX_NUM3", trim(col("STCD3")))\
         .withColumn("TAX_NUM4", trim(col("STCD4")))\
-        .withColumn("TAX_NUM5", trim(col("STCD5")))\
+        .withColumn("TAX_NUM5", expr(Config.TAX_NUM5))\
         .withColumn("VAT_NUM", trim(col("STCEG")))\
         .withColumn("NTRL_PRSN_IND", trim(col("STKZN")))\
         .withColumn("ICMS_TAX_CD", trim(col("TXLW1")))\
@@ -105,7 +105,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("ID_DFLT_SOLD_TO_PRTY", trim(col("DEAR5")))\
         .withColumn("LEGAL_STS", trim(col("GFORM")))\
         .withColumn("INIT_CNTCT", trim(col("EKONT")))\
-        .withColumn("ANNL_SLS_UMSAT", trim(col("UMSAT")).cast(DecimalType(18, 4)))\
+        .withColumn("ANNL_SLS_UMSAT", col("UMSAT").cast(DecimalType(18, 4)))\
         .withColumn("YR_SLS_GVN", trim(col("UMJAH")))\
         .withColumn("CRNCY_SLS_FIG", trim(col("UWAER")))\
         .withColumn("YR_NUM_EMP", trim(col("JMZAH")))\
@@ -120,7 +120,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("ATTR_8", trim(col("KATR8")))\
         .withColumn("ATTR_9", trim(col("KATR9")))\
         .withColumn("ATTR_10", trim(col("KATR10")))\
-        .withColumn("ANNL_SLS_UMSA1", trim(col("UMSA1")).cast(DecimalType(18, 4)))\
+        .withColumn("ANNL_SLS_UMSA1", col("UMSA1").cast(DecimalType(18, 4)))\
         .withColumn("TAX_JURIS", trim(col("TXJCD")))\
         .withColumn("FISC_YR_VRNT", trim(col("PERIV")))\
         .withColumn("USG_IN", trim(col("ABRVW")))\
@@ -144,6 +144,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("CUST_COND_GRP_5", trim(col("KDKG5")))\
         .withColumn("IN_ALT_PYR_USE_ACCT_NUM", trim(col("XKNZA")))\
         .withColumn("TAX_NUM_TYPE", trim(col("STCDT")))\
+        .withColumn("TAX_NUM_6", expr(Config.TAX_NUM_6))\
         .withColumn("IN_BIOCH_WARF_LEGAL_CNTL", trim(col("CCC01")))\
         .withColumn("IN_NUCLR_NONPROLIF_LEGAL_CNTL", trim(col("CCC02")))\
         .withColumn("IN_NATL_SCTY_LEGAL_CNTL", trim(col("CCC03")))\
@@ -158,29 +159,23 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
           when((col("UPTIM") == lit("000000")), lit(None)).otherwise(to_timestamp(col("UPTIM"), "HHmmSS"))
         )\
         .withColumn("CENT_DEL_BLK_MSTR_REC", trim(col("NODEL")))\
-        .withColumn("BUSN_PRPS_CMPLT_FL", trim(col("CVP_XBLCK")))\
-        .withColumn("SUFRAMA_CD", trim(col("SUFRAMA")))\
-        .withColumn("RG_NUM", trim(col("RG")))\
-        .withColumn("ISS_BY", trim(col("EXP")))\
-        .withColumn("ST", trim(col("UF")))\
-        .withColumn(
-          "RG_ISU_DTTM",
-          when((col("RGDATE") == lit("00000000")), lit(None)).otherwise(to_timestamp(col("RGDATE"), "yyyyMMdd"))
-        )\
-        .withColumn("RIC_NUM", trim(col("RIC")))\
-        .withColumn("FRGN_NATL_REGS", trim(col("RNE")))\
-        .withColumn(
-          "RNE_ISU_DTTM",
-          when((col("RNEDATE") == lit("00000000")), lit(None)).otherwise(to_timestamp(col("RNEDATE"), "yyyyMMdd"))
-        )\
-        .withColumn("CNAE", trim(col("CNAE")))\
-        .withColumn("LEGAL_NATR", trim(col("LEGALNAT")))\
-        .withColumn("CRT_NUM", trim(col("CRTN")))\
-        .withColumn("ICMS_TAXPY", trim(col("ICMSTAXPAY")))\
-        .withColumn("INDSTR_MN_TYPE", trim(col("INDTYP")))\
-        .withColumn("TAX_DCLTN_TYPE", trim(col("TDT")))\
-        .withColumn("CO_SIZE", trim(col("COMSIZE")))\
-        .withColumn("DCLTN_RGMN_PIS_COFINS", trim(col("DECREGPC")))\
+        .withColumn("BUSN_PRPS_CMPLT_FL", expr(Config.BUSN_PRPS_CMPLT_FL))\
+        .withColumn("SUFRAMA_CD", expr(Config.SUFRAMA_CD))\
+        .withColumn("RG_NUM", expr(Config.RG_NUM))\
+        .withColumn("ISS_BY", expr(Config.ISS_BY))\
+        .withColumn("ST", expr(Config.ST))\
+        .withColumn("RG_ISU_DTTM", expr(Config.RG_ISU_DTTM))\
+        .withColumn("RIC_NUM", expr(Config.RIC_NUM))\
+        .withColumn("FRGN_NATL_REGS", expr(Config.FRGN_NATL_REGS))\
+        .withColumn("RNE_ISU_DTTM", expr(Config.RNE_ISU_DTTM))\
+        .withColumn("CNAE", expr(Config.CNAE))\
+        .withColumn("LEGAL_NATR", expr(Config.LEGAL_NATR))\
+        .withColumn("CRT_NUM", expr(Config.CRT_NUM))\
+        .withColumn("ICMS_TAXPY", expr(Config.ICMS_TAXPY))\
+        .withColumn("INDSTR_MN_TYPE", expr(Config.INDSTR_MN_TYPE))\
+        .withColumn("TAX_DCLTN_TYPE", expr(Config.TAX_DCLTN_TYPE))\
+        .withColumn("CO_SIZE", expr(Config.CO_SIZE))\
+        .withColumn("DCLTN_RGMN_PIS_COFINS", expr(Config.DCLTN_RGMN_PIS_COFINS))\
         .withColumn("MAX_STCK_HGHT_PKGNG_MATL", trim(col("_VSO_R_PALHGT")).cast(DecimalType(18, 4)))\
         .withColumn("UNIT_LGTH_PKGNG_MATL", trim(col("_VSO_R_PAL_UL")))\
         .withColumn("CUST_RLTD_PACK_EA_PKGNG_MATL", trim(col("_VSO_R_PK_MAT")))\
@@ -193,9 +188,9 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("COLL_UNLD_PT_VSO", trim(col("_VSO_R_DPOINT")))\
         .withColumn("AGN_LOC_CD", trim(col("ALC")))\
         .withColumn("PMT_OFF", trim(col("PMT_OFFICE")))\
-        .withColumn("FEE_SCHED", trim(col("FEE_SCHEDULE")))\
-        .withColumn("DUNS_NUM", trim(col("DUNS")))\
-        .withColumn("DUNS_4", trim(col("DUNS4")))\
+        .withColumn("FEE_SCHED", expr(Config.FEE_SCHED))\
+        .withColumn("DUNS_NUM", expr(Config.DUNS_NUM))\
+        .withColumn("DUNS_4", expr(Config.DUNS_4))\
         .withColumn("PROC_GRP", trim(col("PSOFG")))\
         .withColumn("SUBLDGR_ACCT_PRPRC_PCDR", trim(col("PSOIS")))\
         .withColumn("NM_1", trim(col("PSON1")))\

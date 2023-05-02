@@ -148,7 +148,7 @@ def SET_FIELD_ORDER_REFORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("TYPE_INDSTR"), 
         col("STS_CHG_AUTH"), 
         col("LAST_CHG_CNFRM_DTTM"), 
-        col("CENT_DEL_BLK_MSTR_REC").alias("CENT_DEL_BLK_MSTR_REC\r\n"), 
+        col("CENT_DEL_BLK_MSTR_REC"), 
         col("BUSN_PRPS_CMPLT_FL"), 
         col("SUFRAMA_CD"), 
         col("RG_NUM"), 
