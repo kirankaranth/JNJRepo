@@ -89,8 +89,8 @@
     "interimModeEnabled" : true,
     "visualCodeInterimMode" : "Disabled",
     "recordsLimit" : {
-      "enabled" : false,
-      "value" : 1000
+      "enabled" : true,
+      "value" : 100
     },
     "topLevelPackage" : "sap_md_delv_line_mbp",
     "configurationVersion" : "v1"
@@ -4491,10 +4491,10 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "Vmg5O363YZIjJn5wl0Cdh$$G5gn_HyQEe-skuURG4NJT##MANDT" ],
+        "columnsSelector" : [ "8XB8NUAzTs65ljqrFiHux$$zIxbKIcEtqtLhgEjAQ4vK##MANDT", "8XB8NUAzTs65ljqrFiHux$$zIxbKIcEtqtLhgEjAQ4vK##_deleted_" ],
         "condition" : {
           "format" : "sql",
-          "expression" : "MANDT = '$MANDT'"
+          "expression" : "MANDT = '$MANDT' and _deleted_ = 'F'"
         }
       }
     },
@@ -6932,10 +6932,10 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "kqBjsxt3-BGjdM5EtHTrM$$uxYIa6WgU7xHRVMxxQQN9##MANDT" ],
+        "columnsSelector" : [ "aIPdDNp83o9uhvlkF8GWZ$$ZSy-viRQOIea1nmFXn5rX##MANDT", "aIPdDNp83o9uhvlkF8GWZ$$ZSy-viRQOIea1nmFXn5rX##_deleted_" ],
         "condition" : {
           "format" : "sql",
-          "expression" : "MANDT = '$MANDT'"
+          "expression" : "MANDT = '$MANDT' and _deleted_ = 'F'"
         }
       }
     },
@@ -8284,10 +8284,10 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "kZ8w92oBKsdX1Ryip4Utz$$6TCugpkcSCejgjM5fkrtj##MANDT" ],
+        "columnsSelector" : [ "ULrQ7Lgb41cteNZXhAY6y$$8OdG4XTbi9ifXYj9lEsQ3##_deleted_", "ULrQ7Lgb41cteNZXhAY6y$$8OdG4XTbi9ifXYj9lEsQ3##MANDT" ],
         "condition" : {
           "format" : "sql",
-          "expression" : "MANDT = '$MANDT'"
+          "expression" : "MANDT = '$MANDT' and _deleted_ = 'F'"
         }
       }
     },
@@ -9226,7 +9226,7 @@
             "sourceColumn" : "ACTL_GI_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "case when WADAT_IST= '00000000' then null else to_timestamp(WADAT_IST, 'yyyyMMdd') end"
+              "expression" : "case when WADAT_IST= '00000000' OR length(regexp_replace(WADAT_IST, '(\\\\d+)', ''))> 0 OR LENGTH(WADAT_IST) < 8 THEN NULL ELSE TO_TIMESTAMP(WADAT_IST, 'yyyyMMdd') END"
             }
           },
           "DropColumn" : {
@@ -9338,7 +9338,7 @@
             "sourceColumn" : "MFG_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "case when HSDAT= '00000000' then null else to_timestamp(HSDAT, 'yyyyMMdd') end"
+              "expression" : "case when HSDAT= '00000000' OR length(regexp_replace(HSDAT, '(\\\\d+)', ''))> 0 OR LENGTH(HSDAT) < 8 THEN NULL ELSE TO_TIMESTAMP(HSDAT, 'yyyyMMdd') END"
             }
           },
           "DropColumn" : {
@@ -9418,7 +9418,7 @@
             "sourceColumn" : "EXP_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "case when VFDAT= '00000000' then null else to_timestamp(VFDAT, 'yyyyMMdd') end"
+              "expression" : "case when VFDAT= '00000000' OR length(regexp_replace(vfdat, '(\\\\d+)', ''))> 0 OR LENGTH(vfdat) < 8 THEN NULL ELSE TO_TIMESTAMP(vfdat, 'yyyyMMdd') END"
             }
           },
           "DropColumn" : {
@@ -9802,7 +9802,7 @@
             "sourceColumn" : "CRT_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "CASE WHEN ERDAT = '00000000' THEN NULL ELSE to_timestamp(concat(ERDAT, ERZET),'yyyyMMddHHmmss') end"
+              "expression" : "case when ERDAT= '00000000' OR length(regexp_replace(ERDAT, '(\\\\d+)', ''))> 0 OR LENGTH(ERDAT) < 8 THEN NULL ELSE to_timestamp(concat(ERDAT, ERZET),'yyyyMMddHHmmss') end"
             }
           },
           "DropColumn" : {
@@ -10765,10 +10765,10 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "mRqhMX79qc5c87jRtG5ij$$jsRaiMXj8oh21BM8cYA9c##MANDT" ],
+        "columnsSelector" : [ "HtKLe55nfPwr3pyrVMm3H$$VO5C2yuIIrrLPR0xFDBZk##_deleted_", "HtKLe55nfPwr3pyrVMm3H$$VO5C2yuIIrrLPR0xFDBZk##MANDT" ],
         "condition" : {
           "format" : "sql",
-          "expression" : "MANDT = '$MANDT'"
+          "expression" : "MANDT = '$MANDT' and _deleted_ = 'F'"
         }
       }
     },
@@ -11925,10 +11925,10 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "zBUYYpif4VhhXjwUDRF9h$$Edwm-ViluZ_bZ2de1IG_U##MANDT" ],
+        "columnsSelector" : [ "yR1WGnodRLHEFo5qCuvqu$$qUDg3p3myRSBcMJGomhDz##_deleted_", "yR1WGnodRLHEFo5qCuvqu$$qUDg3p3myRSBcMJGomhDz##MANDT", "yR1WGnodRLHEFo5qCuvqu$$qUDg3p3myRSBcMJGomhDz##SPRAS" ],
         "condition" : {
           "format" : "sql",
-          "expression" : "MANDT = '$MANDT'"
+          "expression" : "MANDT = '$MANDT' and _deleted_ = 'F' and SPRAS = 'E'"
         }
       }
     },
@@ -17772,14 +17772,14 @@
           "alias" : "in2",
           "expression" : {
             "format" : "sql",
-            "expression" : "in0.VGBEL = in2.VBELN"
+            "expression" : "in0.VBELN = in2.VBELN"
           },
           "joinType" : "left_outer"
         }, {
           "alias" : "in3",
           "expression" : {
             "format" : "sql",
-            "expression" : "in0.VGBEL = in3.VBELN and in0.POSNR = in3.POSNR"
+            "expression" : "in0.VBELN = in3.VBELN and in0.POSNR = in3.POSNR"
           },
           "joinType" : "left_outer"
         }, {
@@ -18402,8 +18402,8 @@
           "propagateColumns" : false
         } ],
         "allIn1" : null,
-        "activeTab" : "expressions",
-        "columnsSelector" : [ "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##VBELN", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##VBELN", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##MVGR4", "rcHeF-XNJ8MKSomlYva8H$$0Iym9Ws2dlSaliuX0k_Dw##MVGR4", "AMAzRT0qiRT5KXzIMixWx$$JSB9jqs_lN_9RtvC8Ndvh##VBELN", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##POSNR", "AciqvJ0f1XU0h13CnxeMr$$SltP0Ln75ASmd3S8GFKef##VBELN", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##VGBEL", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##POSNR", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##LICHN", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##WERKS", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##PSTYV", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##UECHA", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##UMVKN", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##UEPOS", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##VGPOS", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##VBELN", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##UVPRS", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##LFPOS", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##VOLEH", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##ABSTA", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##ERDAT", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##BESTA", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##VTWEG", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##UVPIK", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##VGTYP", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##SOBKZ", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##MVGR4", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##POSAR", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##UVVLK", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##MATKL", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##FKIVP", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##NTGEW", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##POSNR", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##RFGSA", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##MATWA", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##MATNR", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##GBSTA", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##BRGEW", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##VFDAT", "AciqvJ0f1XU0h13CnxeMr$$SltP0Ln75ASmd3S8GFKef##BUKRS_VF", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##RFSTA", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##UMWRK", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##HSDAT", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##KOSTA", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##LSSTA", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##KOQUA", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##PKSTA", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##SPART", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##VRKME", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##WBSTA", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##FKSTA", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##UVPAK", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##UVWAK", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##LGMNG", "AMAzRT0qiRT5KXzIMixWx$$JSB9jqs_lN_9RtvC8Ndvh##WADAT_IST", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##_upt_", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##MEINS", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##UMVKZ", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##VGBEL", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##KOMKZ", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##VOLUM", "rcHeF-XNJ8MKSomlYva8H$$0Iym9Ws2dlSaliuX0k_Dw##BEZEI", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##LFGSA", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##LFSTA", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##FKSAA", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##ARKTX", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##CHARG", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##MTART", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##LGORT", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##KCMENG", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##UVALL", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##LVSTA", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##PRODH", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##NETWR", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##GEWEI", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##UVFAK", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##FSSTA", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##ERZET", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##BWART", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##LFIMG", "AMAzRT0qiRT5KXzIMixWx$$JSB9jqs_lN_9RtvC8Ndvh##LFART" ],
+        "activeTab" : "conditions",
+        "columnsSelector" : [ "rcHeF-XNJ8MKSomlYva8H$$0Iym9Ws2dlSaliuX0k_Dw##MVGR4", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##VBELN", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##MVGR4", "AMAzRT0qiRT5KXzIMixWx$$JSB9jqs_lN_9RtvC8Ndvh##VBELN", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##VBELN", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##POSNR", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##POSNR", "AciqvJ0f1XU0h13CnxeMr$$SltP0Ln75ASmd3S8GFKef##VBELN", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##GEWEI", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##ERZET", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##FKSTA", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##LFIMG", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##FKIVP", "AMAzRT0qiRT5KXzIMixWx$$JSB9jqs_lN_9RtvC8Ndvh##WADAT_IST", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##UVFAK", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##_upt_", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##FSSTA", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##LFGSA", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##UMVKZ", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##UVVLK", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##UVPAK", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##BESTA", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##UVPRS", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##LGMNG", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##SOBKZ", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##POSAR", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##UMWRK", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##WBSTA", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##VOLEH", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##MEINS", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##KOSTA", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##BRGEW", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##VTWEG", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##LFSTA", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##PRODH", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##LGORT", "AciqvJ0f1XU0h13CnxeMr$$SltP0Ln75ASmd3S8GFKef##BUKRS_VF", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##GBSTA", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##CHARG", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##PKSTA", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##VFDAT", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##POSNR", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##LICHN", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##RFSTA", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##ARKTX", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##KOQUA", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##LSSTA", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##VBELN", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##MATNR", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##VGTYP", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##FKSAA", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##UECHA", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##UVALL", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##LVSTA", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##BWART", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##UVWAK", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##VRKME", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##ABSTA", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##KCMENG", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##NETWR", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##LFPOS", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##PSTYV", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##UEPOS", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##SPART", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##ERDAT", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##HSDAT", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##VGPOS", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##MTART", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##UVPIK", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##KOMKZ", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##NTGEW", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##VGBEL", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##UMVKN", "rcHeF-XNJ8MKSomlYva8H$$0Iym9Ws2dlSaliuX0k_Dw##BEZEI", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##MVGR4", "AMAzRT0qiRT5KXzIMixWx$$JSB9jqs_lN_9RtvC8Ndvh##LFART", "YN5Avi25rDu6RmwB3TfBu$$2bbNBbRJNQ3jIDsUS5x-A##RFGSA", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##MATWA", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##VOLUM", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##MATKL", "ASvl3xe1UTcnmECES0eRP$$-doMBqY_E9CpbGTiZburL##WERKS" ],
         "allIn0" : null,
         "whereClause" : null,
         "headAlias" : "in0"
