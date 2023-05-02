@@ -19,13 +19,13 @@ class Config(ConfigBase):
 
     def update(
             self,
-            sourceSystem: str="tai",
+            sourceSystem: str="pqa_hm2",
             MANDT: str="100",
-            sourceDatabase: str="tai",
+            sourceDatabase: str="hm2",
             DAI_ETL_ID: int=0,
             targetSchema: str="dev_md_l1",
             ConfigDatabase: str=" ",
-            BOM_VLD_TO_DTTM: str="CAST(NULL AS datetime)",
+            BOM_VLD_TO_DTTM: str="CAST(NULL AS timestamp)",
             **kwargs
     ):
         prophecy_spark = self.spark
