@@ -5,5 +5,5 @@ from prophecy.libs import typed_lit
 from jde_01_md_sls_ordr_bw2_gmd_jet_jsw_deu_mtr_sjd_djd_jem_jes.config.ConfigStore import *
 from jde_01_md_sls_ordr_bw2_gmd_jet_jsw_deu_mtr_sjd_djd_jem_jes.udfs.UDFs import *
 
-def SAP_VBAK(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.sourceDatabase}.vbak")
+def MANDT_FILTER_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
+    return in0.filter(((col("MANDT") == lit(Config.MANDT)) & (col("_deleted_") == lit("F"))))

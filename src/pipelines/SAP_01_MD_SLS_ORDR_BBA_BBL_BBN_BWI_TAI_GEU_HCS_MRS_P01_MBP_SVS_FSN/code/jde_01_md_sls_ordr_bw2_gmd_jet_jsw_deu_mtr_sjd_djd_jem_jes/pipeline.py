@@ -7,6 +7,8 @@ from prophecy.utils import *
 from jde_01_md_sls_ordr_bw2_gmd_jet_jsw_deu_mtr_sjd_djd_jem_jes.graph import *
 
 def pipeline(spark: SparkSession) -> None:
+    df_SAP_TVV2T = SAP_TVV2T(spark)
+    df_SAP_VBUK = SAP_VBUK(spark)
     df_SAP_TVLST = SAP_TVLST(spark)
     df_SAP_VBAK = SAP_VBAK(spark)
     df_MANDT_FILTER = MANDT_FILTER(spark, df_SAP_VBAK)
@@ -16,12 +18,19 @@ def pipeline(spark: SparkSession) -> None:
     df_GET_DUP = GET_DUP(spark, df_SET_FIELD_ORDER_REFORMAT)
     df_DUP_FILTER = DUP_FILTER(spark, df_GET_DUP)
     df_SAP_T176T = SAP_T176T(spark)
+    df_SAP_TVV4T = SAP_TVV4T(spark)
+    df_SAP_TVV3T = SAP_TVV3T(spark)
     df_SAP_TVTWT = SAP_TVTWT(spark)
     df_SAP_TVAUT = SAP_TVAUT(spark)
+    df_SAP_T001 = SAP_T001(spark)
     df_SAP_TVKOT = SAP_TVKOT(spark)
     df_SAP_TSPAT = SAP_TSPAT(spark)
+    df_SAP_TVAU = SAP_TVAU(spark)
     MD_SLS_ORDR(spark, df_SET_FIELD_ORDER_REFORMAT)
     df_SAP_TVAKT = SAP_TVAKT(spark)
+    df_SAP_TVV1T = SAP_TVV1T(spark)
+    df_SAP_TVV5T = SAP_TVV5T(spark)
+    df_MANDT_FILTER_1 = MANDT_FILTER_1(spark, df_SAP_VBUK)
 
 def main():
     spark = SparkSession.builder\
