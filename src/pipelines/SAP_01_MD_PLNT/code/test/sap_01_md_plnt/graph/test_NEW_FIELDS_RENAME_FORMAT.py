@@ -59,3 +59,11 @@ class NEW_FIELDS_RENAME_FORMATTest(BaseTestCase):
               defaultConfFile = None
             )
         )
+        dfgraph_LU_SAP_T005T = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/sap_01_md_plnt/graph/LU_SAP_T005T/schema.json',
+            'test/resources/data/sap_01_md_plnt/graph/LU_SAP_T005T/data.json',
+            "in0"
+        )
+        from sap_01_md_plnt.graph.LU_SAP_T005T import LU_SAP_T005T
+        LU_SAP_T005T(self.spark, dfgraph_LU_SAP_T005T)
