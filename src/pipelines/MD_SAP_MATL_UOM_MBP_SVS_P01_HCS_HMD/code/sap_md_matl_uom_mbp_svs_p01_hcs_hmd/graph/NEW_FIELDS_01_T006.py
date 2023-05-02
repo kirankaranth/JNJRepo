@@ -30,11 +30,11 @@ def NEW_FIELDS_01_T006(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("UOM_FMLY", trim(col("FAMUNIT")))\
         .withColumn("PRESR_VAL", trim(col("PRESS_VAL")))\
         .withColumn("UNIT_OF_PRESR", trim(col("PRESS_UNIT")))\
-        .withColumn("EXTRNL_UOM_COMML_FMT", lookup("LU_T006A_MSEH3", col("MSEHI")).getField("MSEH3"))\
-        .withColumn("EXTRNL_UOM_TECH_FMT", lookup("LU_T006A_MSEH6", col("MSEHI")).getField("MSEH6"))\
-        .withColumn("UOM_SHRT_TEXT", lookup("LU_T006A_MSEHT", col("MSEHI")).getField("MSEHT"))\
-        .withColumn("UOM_LONG_TEXT", lookup("LU_T006A_MSEHL", col("MSEHI")).getField("MSEHL"))\
-        .withColumn("DIM_TEXT", lookup("LU_T006T_TXDIM", col("DIMID")).getField("TXDIM"))\
+        .withColumn("EXTRNL_UOM_COMML_FMT", trim(lookup("LU_T006A_MSEH3", col("MSEHI")).getField("MSEH3")))\
+        .withColumn("EXTRNL_UOM_TECH_FMT", trim(lookup("LU_T006A_MSEH6", col("MSEHI")).getField("MSEH6")))\
+        .withColumn("UOM_SHRT_TEXT", trim(lookup("LU_T006A_MSEHT", col("MSEHI")).getField("MSEHT")))\
+        .withColumn("UOM_LONG_TEXT", trim(lookup("LU_T006A_MSEHL", col("MSEHI")).getField("MSEHL")))\
+        .withColumn("DIM_TEXT", trim(lookup("LU_T006T_TXDIM", col("DIMID")).getField("TXDIM")))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
         .withColumn("DAI_UPDT_DTTM", current_timestamp())\
