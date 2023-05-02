@@ -7,13 +7,21 @@ from prophecy.utils import *
 from jde_01_md_sls_ordr_bw2_gmd_jet_jsw_deu_mtr_sjd_djd_jem_jes.graph import *
 
 def pipeline(spark: SparkSession) -> None:
+    df_SAP_TVLST = SAP_TVLST(spark)
     df_SAP_VBAK = SAP_VBAK(spark)
     df_MANDT_FILTER = MANDT_FILTER(spark, df_SAP_VBAK)
     df_NEW_FIELDS_TRANSFORMATION = NEW_FIELDS_TRANSFORMATION(spark, df_MANDT_FILTER)
     df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS_TRANSFORMATION)
+    df_SAP_TVFST = SAP_TVFST(spark)
     df_GET_DUP = GET_DUP(spark, df_SET_FIELD_ORDER_REFORMAT)
     df_DUP_FILTER = DUP_FILTER(spark, df_GET_DUP)
+    df_SAP_T176T = SAP_T176T(spark)
+    df_SAP_TVTWT = SAP_TVTWT(spark)
+    df_SAP_TVAUT = SAP_TVAUT(spark)
+    df_SAP_TVKOT = SAP_TVKOT(spark)
+    df_SAP_TSPAT = SAP_TSPAT(spark)
     MD_SLS_ORDR(spark, df_SET_FIELD_ORDER_REFORMAT)
+    df_SAP_TVAKT = SAP_TVAKT(spark)
 
 def main():
     spark = SparkSession.builder\
