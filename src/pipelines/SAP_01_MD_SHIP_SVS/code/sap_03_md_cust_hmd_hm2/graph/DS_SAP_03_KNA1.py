@@ -6,4 +6,4 @@ from sap_03_md_cust_hmd_hm2.config.ConfigStore import *
 from sap_03_md_cust_hmd_hm2.udfs.UDFs import *
 
 def DS_SAP_03_KNA1(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.sourceDatabase}.kna1")
+    return spark.read.table(f"hm2.kna1")
