@@ -118,7 +118,7 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("BRAVO_MINOR_CODE_DESC", lookup("ATWTB_LU", col("MATNR")).getField("ATWTB"))\
         .withColumn("NDL_SLS_TYPE", lookup("NDL_SLS_LU", col("MATNR")).getField("ATWRT"))\
         .withColumn("SUTURE_LENGTH_INCH", lookup("SUTUR_LEN_LU", col("MATNR")).getField("ATWRT"))\
-        .withColumn("SER_TYPE", trim(col("_STTPEC_SERTYPE")))\
+        .withColumn("SER_TYPE", col("_STTPEC_SERTYPE").cast(IntegerType()))\
         .withColumn("MATL_GRP_DESC", lookup("WGBEZx_LU", col("MATKL")).getField("WGBEZ"))\
         .withColumn("MATL_GRP_DESC_2", lookup("WGBEZx_LU", col("MATKL")).getField("WGBEZ60"))\
         .withColumn("CMMDTY", trim(col("COMMODITY")))\

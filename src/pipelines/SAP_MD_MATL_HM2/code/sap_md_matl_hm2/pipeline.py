@@ -133,7 +133,19 @@ def pipeline(spark: SparkSession) -> None:
         "5tjEC2R_fitFg858EKn_H$$8zrgDqoYbVtMNO-GK4V6_", 
         "bPAwoIg9wa3XArlXP-7m_$$c1QUVrlfKTD9A8sObAKfS"
     )
+    df_DUP_CHECK = DUP_CHECK(spark, df_SELECT_FIELDS)
     TARGET(spark, df_SELECT_FIELDS)
+    df_DUPLICATES = DUPLICATES(spark, df_DUP_CHECK)
+    df_DUPLICATES = collectMetrics(
+        spark, 
+        df_DUPLICATES, 
+        "graph", 
+        "ow6hcrbk2YIKuXnGg3SW9$$M6ZEx6U4v3yTYJto7p99Z", 
+        "6iWV4DtjbR5h87RDgkvG6$$nHj8D0yULouDmfihuK8J7"
+    )
+    df_DUPLICATES.cache().count()
+    df_DUPLICATES.unpersist()
+    Target_1(spark)
 
 def main():
     spark = SparkSession.builder\

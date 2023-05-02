@@ -33,6 +33,7 @@ from .STERILE import STERILE
 from .BRAVO_LU import BRAVO_LU
 from .SELECT_FIELDS import SELECT_FIELDS
 from .SUTUR_LEN import SUTUR_LEN
+from .DUP_CHECK import DUP_CHECK
 from .TSPAT import TSPAT
 from .DEL_MANDT_6 import DEL_MANDT_6
 from .DS_SAP_MAKT_01 import DS_SAP_MAKT_01
@@ -44,6 +45,7 @@ from .MAT_TYPE import MAT_TYPE
 from .INOB_DEDUP import INOB_DEDUP
 from .INOB import INOB
 from .NDL_SLS_LU import NDL_SLS_LU
+from .DUPLICATES import DUPLICATES
 from .DEL_MANDT_7 import DEL_MANDT_7
 from .XFORM import XFORM
 from .MTBEZ_LU import MTBEZ_LU
