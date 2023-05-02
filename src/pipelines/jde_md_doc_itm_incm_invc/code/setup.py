@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 setup(
-    name = 'jde_md_doc_itm_incm_invc',
+    name = 'jde_md_doc_itm_incm_invc_bw2_deu_gmd_jem_jes_jet_jsw_sjd',
     version = '1.0',
     packages = (
       find_packages(include = ('jde_md_doc_itm_incm_invc_bw2_deu_gmd_jem_jes_jet_jsw_sjd*', ))
