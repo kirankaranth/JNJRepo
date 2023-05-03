@@ -93,10 +93,7 @@ def NEW_FIELDS(spark: SparkSession, MANDT_FILTER: DataFrame) -> DataFrame:
         .withColumn("CMPNT_RSN_IN_INVC", lit(None).cast(StringType()))\
         .withColumn("RETN_AMT_IN_DOC_CRNCY", lit(None).cast(DecimalType(18, 4)))\
         .withColumn("RETN_IN_PCT", lit(None).cast(DecimalType(18, 4)))\
-        .withColumn(
-          "RETN_DUE_DTTM",
-          when((col("oldgl") == lit("00000000")), lit(None)).otherwise(to_timestamp(col("oldgl"), "yyyyMMdd"))
-        )\
+        .withColumn("RETN_DUE_DTTM", to_timestamp(lit(None)))\
         .withColumn("TAX_RDCTN_FOR_RETN", lit(None).cast(StringType()))\
         .withColumn("CASH_LDGR_EXP_REVN_ACCT", lit(None).cast(StringType()))\
         .withColumn("NUM_OF_PRIN_PRCH_AGMT", lit(None).cast(StringType()))\
