@@ -111,4 +111,18 @@ def NEW_FIELDS_TRANSFORMATION(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("EXCH_RT_TYPE", trim(col("KURST")))\
         .withColumn("CR_CNTL_AREA", trim(col("KKBER")))\
         .withColumn("CR_MGMT_RISK_CAT", trim(col("CTLPC")))\
-        .withColumn("ALT_TAX_CLSN", trim(col("TAXK1")))
+        .withColumn("ALT_TAX_CLSN", trim(col("TAXK1")))\
+        .withColumn("TAX_CLSN_2", trim(col("TAXK2")))\
+        .withColumn("TAX_CLSN_3", trim(col("TAXK3")))\
+        .withColumn("TAX_CLSN_4", trim(col("TAXK4")))\
+        .withColumn("TAX_CLSN_5", trim(col("TAXK5")))\
+        .withColumn("TAX_CLSN_6", trim(col("TAXK6")))\
+        .withColumn("TAX_CLSN_7", trim(col("TAXK7")))\
+        .withColumn("TAX_CLSN_8", trim(col("TAXK8")))\
+        .withColumn("TAX_CLSN_9", trim(col("TAXK9")))\
+        .withColumn("REF_DOC_NUM", trim(col("XBLNR")))\
+        .withColumn("ORDR_NUM", trim(col("AUFNR")))\
+        .withColumn("TAX_DEST_CTRY", trim(col("STCEG_L")))\
+        .withColumn("TAX_DPRT_CTRY", trim(col("LANDTX")))\
+        .withColumn("IN_TRNGLR_DEAL_EU", trim(col("XEGDR")))\
+        .withColumn("FORBID_SLS_IN", trim(col("ZZ_FORBID_INDC")))
