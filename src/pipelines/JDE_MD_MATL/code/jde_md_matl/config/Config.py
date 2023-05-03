@@ -16,6 +16,10 @@ class Config(ConfigBase):
             FRAN_CD_FILTER: str=None,
             MATL_GRP_FILTER: str=None,
             MATL_TYPE_DESC_FILTER: str=None,
+            F_C_LU_Field: str=None,
+            B_M_LU_Field: str=None,
+            M_G_LU_Field: str=None,
+            M_T_D_LU_Field: str=None,
             **kwargs
     ):
         self.spark = None
@@ -30,7 +34,11 @@ class Config(ConfigBase):
             BRAVO_MINOR_DESC_FILTER, 
             FRAN_CD_FILTER, 
             MATL_GRP_FILTER, 
-            MATL_TYPE_DESC_FILTER
+            MATL_TYPE_DESC_FILTER, 
+            F_C_LU_Field, 
+            B_M_LU_Field, 
+            M_G_LU_Field, 
+            M_T_D_LU_Field
         )
 
     def update(
@@ -46,6 +54,10 @@ class Config(ConfigBase):
             FRAN_CD_FILTER: str="Filter N/A",
             MATL_GRP_FILTER: str="Filter N/A",
             MATL_TYPE_DESC_FILTER: str="Filter N/A",
+            F_C_LU_Field: str="Field N/A",
+            B_M_LU_Field: str="Field N/A",
+            M_G_LU_Field: str="Field N/A",
+            M_T_D_LU_Field: str="Field N/A",
             **kwargs
     ):
         prophecy_spark = self.spark
@@ -60,4 +72,8 @@ class Config(ConfigBase):
         self.FRAN_CD_FILTER = FRAN_CD_FILTER
         self.MATL_GRP_FILTER = MATL_GRP_FILTER
         self.MATL_TYPE_DESC_FILTER = MATL_TYPE_DESC_FILTER
+        self.F_C_LU_Field = F_C_LU_Field
+        self.B_M_LU_Field = B_M_LU_Field
+        self.M_G_LU_Field = M_G_LU_Field
+        self.M_T_D_LU_Field = M_T_D_LU_Field
         pass
