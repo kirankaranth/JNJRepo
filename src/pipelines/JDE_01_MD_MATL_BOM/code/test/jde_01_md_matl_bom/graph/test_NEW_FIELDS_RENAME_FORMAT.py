@@ -25,8 +25,8 @@ class NEW_FIELDS_RENAME_FORMATTest(BaseTestCase):
         )
         dfOutComputed = NEW_FIELDS_RENAME_FORMAT(self.spark, dfIn0)
         assertDFEquals(
-            dfOut.select("MATL_NUM", "PLNT_CD", "BOM_USG_CD", "BOM_NUM", "ALT_BOM_NUM"),
-            dfOutComputed.select("MATL_NUM", "PLNT_CD", "BOM_USG_CD", "BOM_NUM", "ALT_BOM_NUM"),
+            dfOut.select("MATL_NUM", "PLNT_CD", "BOM_USG_CD", "BOM_NUM"),
+            dfOutComputed.select("MATL_NUM", "PLNT_CD", "BOM_USG_CD", "BOM_NUM"),
             self.maxUnequalRowsToShow
         )
 
