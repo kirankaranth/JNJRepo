@@ -39,4 +39,76 @@ def NEW_FIELDS_TRANSFORMATION(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("_deleted_", lit("F"))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
-        .withColumn("DAI_UPDT_DTTM", current_timestamp())
+        .withColumn("DAI_UPDT_DTTM", current_timestamp())\
+        .withColumn("SLS_ORDR_NUM_REF", trim(col("VGBEL")))\
+        .withColumn("CRT_BY", trim(col("ERNAM")))\
+        .withColumn("BILL_BLK_CD", trim(col("FAKSK")))\
+        .withColumn("DELV_BLK_CD", trim(col("LIFSK")))\
+        .withColumn(
+          "CHG_DTTM",
+          when((col("AEDAT") == lit("00000000")), lit(None).cast(TimestampType()))\
+            .otherwise(to_timestamp(col("AEDAT"), "yyyyMMdd"))
+        )\
+        .withColumn("CUST_PO_TYPE_CD", trim(col("BSARK")))\
+        .withColumn(
+          "VALID_FROM_DTTM",
+          when((col("GUEBG") == lit("00000000")), lit(None).cast(TimestampType()))\
+            .otherwise(to_timestamp(col("GUEBG"), "yyyyMMdd"))
+        )\
+        .withColumn(
+          "VALID_TO_DTTM",
+          when((col("GUEEN") == lit("00000000")), lit(None).cast(TimestampType()))\
+            .otherwise(to_timestamp(col("GUEEN"), "yyyyMMdd"))
+        )\
+        .withColumn(
+          "RQST_DELV_DTTM",
+          when((col("VDATU") == lit("00000000")), lit(None).cast(TimestampType()))\
+            .otherwise(to_timestamp(col("VDATU"), "yyyyMMdd"))
+        )\
+        .withColumn("PRC_PCDR_CD", trim(col("KALSM")))\
+        .withColumn("SLS_ORDR_CRNCY_CD", trim(col("WAERK")))\
+        .withColumn("NET_VAL_AMT", trim(col("NETWR")))\
+        .withColumn("SOLD_TO_CUST_NUM", trim(col("KUNNR")))\
+        .withColumn("SALES_ORGANIZATION_CD", trim(col("VKORG")))\
+        .withColumn("DSTR_CHNL_CD", trim(col("VTWEG")))\
+        .withColumn("DIVISION_CD", trim(col("SPART")))\
+        .withColumn("SHIPPING_COND_CD", trim(col("VSBED")))\
+        .withColumn("CUST_PO_NUM", trim(col("BSTNK")))\
+        .withColumn("PTNR_REF_CD", trim(col("IHREZ")))\
+        .withColumn("SLS_ORDR_CAT_CD", trim(col("VBTYP")))\
+        .withColumn("SALES_ORDER_REASON_CD", trim(col("AUGRU")))\
+        .withColumn("SLS_TERR_ID", trim(col("VKBUR")))\
+        .withColumn("SLS_GRP_CD", trim(col("VKGRP")))\
+        .withColumn(
+          "ORIG_MATL_AVLBLTY_DTTM",
+          when((col("FMBDAT") == lit("00000000")), lit(None).cast(TimestampType()))\
+            .otherwise(to_timestamp(col("FMBDAT"), "yyyyMMdd"))
+        )\
+        .withColumn("CMPLT_DELV_CD", trim(col("AUTLF")))\
+        .withColumn(
+          "RLSE_DTTM",
+          when((col("CMFRE") == lit("00000000")), lit(None).cast(TimestampType()))\
+            .otherwise(to_timestamp(col("CMFRE"), "yyyyMMdd"))
+        )\
+        .withColumn("SRCH_ITM_PROD_PROPS", trim(col("KTEXT")))\
+        .withColumn(
+          "DOC_DTTM",
+          when((col("AUDAT") == lit("00000000")), lit(None).cast(TimestampType()))\
+            .otherwise(to_timestamp(col("AUDAT"), "yyyyMMdd"))
+        )\
+        .withColumn("BUSN_AREA", trim(col("GSBER")))\
+        .withColumn("BUSN_AREA_CC", trim(col("GSKST")))\
+        .withColumn("SD_DOC_IN", trim(col("VBKLT")))\
+        .withColumn("ORDR_RLTD_BILL_TYPE", trim(col("FKARA")))\
+        .withColumn("CC_CD", trim(col("KOSTL")))\
+        .withColumn("UPDT_GRP", trim(col("STAFO")))\
+        .withColumn("CUST_GRP_1", trim(col("KVGR1")))\
+        .withColumn("CUST_GRP_2", trim(col("KVGR2")))\
+        .withColumn("CUST_GRP_3", trim(col("KVGR3")))\
+        .withColumn("CUST_GRP_4", trim(col("KVGR4")))\
+        .withColumn("CUST_GRP_5", trim(col("KVGR5")))\
+        .withColumn("CNTL_AREA", trim(col("KOKRS")))\
+        .withColumn("EXCH_RT_TYPE", trim(col("KURST")))\
+        .withColumn("CR_CNTL_AREA", trim(col("KKBER")))\
+        .withColumn("CR_MGMT_RISK_CAT", trim(col("CTLPC")))\
+        .withColumn("ALT_TAX_CLSN", trim(col("TAXK1")))

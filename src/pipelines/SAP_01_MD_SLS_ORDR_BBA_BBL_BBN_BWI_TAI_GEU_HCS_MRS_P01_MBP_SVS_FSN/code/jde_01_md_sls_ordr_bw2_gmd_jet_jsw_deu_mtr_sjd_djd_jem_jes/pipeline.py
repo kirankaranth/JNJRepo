@@ -59,8 +59,9 @@ def pipeline(spark: SparkSession) -> None:
     df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS_TRANSFORMATION)
     df_GET_DUP = GET_DUP(spark, df_SET_FIELD_ORDER_REFORMAT)
     df_DUP_FILTER = DUP_FILTER(spark, df_GET_DUP)
-    MD_SLS_ORDR(spark, df_SET_FIELD_ORDER_REFORMAT)
     df_MANDT_FILTER_1 = MANDT_FILTER_1(spark, df_SAP_VBUK)
+    df_NEW_FIELDS_TRANSFORMATION_1 = NEW_FIELDS_TRANSFORMATION_1(spark, df_MANDT_FILTER_1)
+    MD_SLS_ORDR(spark, df_SET_FIELD_ORDER_REFORMAT)
 
 def main():
     spark = SparkSession.builder\
