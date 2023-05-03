@@ -8,13 +8,14 @@ from jde_md_matl.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_F0005_41 = F0005_41(spark)
-    df_FRAN_CD = FRAN_CD(spark, df_F0005_41)
+    df_TRIM = TRIM(spark, df_F0005_41)
+    df_FRAN_CD = FRAN_CD(spark, df_TRIM)
     FRAN_LU(spark, df_FRAN_CD)
-    df_BRAVO_MINOR_DESC = BRAVO_MINOR_DESC(spark, df_F0005_41)
+    df_BRAVO_MINOR_DESC = BRAVO_MINOR_DESC(spark, df_TRIM)
     BRAVO_D_LU(spark, df_BRAVO_MINOR_DESC)
-    df_MATL_TYPE_DESC = MATL_TYPE_DESC(spark, df_F0005_41)
+    df_MATL_TYPE_DESC = MATL_TYPE_DESC(spark, df_TRIM)
     MATL_T_LU(spark, df_MATL_TYPE_DESC)
-    df_MATL_GRP = MATL_GRP(spark, df_F0005_41)
+    df_MATL_GRP = MATL_GRP(spark, df_TRIM)
     MATL_GR_LU(spark, df_MATL_GRP)
     df_DS_JDE_01_F4101 = DS_JDE_01_F4101(spark)
     df_F4101_SELECTION = F4101_SELECTION(spark, df_DS_JDE_01_F4101)

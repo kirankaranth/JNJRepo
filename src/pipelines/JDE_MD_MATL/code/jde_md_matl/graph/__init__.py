@@ -1,3 +1,4 @@
+from .TRIM import TRIM
 from .F4101_SELECTION import F4101_SELECTION
 from .MATL_T_LU import MATL_T_LU
 from .FRAN_LU import FRAN_LU

@@ -8,17 +8,16 @@ from jde_md_matl.udfs.UDFs import *
 def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
         .withColumn("MATL_NUM", col("IMLITM"))\
-        .withColumn("BASE_UOM_CD", col("IMUOM1"))\
-        .withColumn("TOT_SHLF_LIF_DAYS_CNT", col("IMSLD"))\
-        .withColumn("MATL_STS_CD", col("IMSTKT"))\
-        .withColumn("MTCH_MNG_IND", col("IMSRCE"))\
-        .withColumn("MATL_DOC_NUM", col("IMDRAW"))\
-        .withColumn("MATL_DOC_VERS_NUM", col("IMRVNO"))\
-        .withColumn("MATL_CATLG_NUM", col("IMAITM"))\
-        .withColumn("CHG_BY", col("IMUSER"))\
-        .withColumn("WT_UNIT", col("IMUWUM"))\
-        .withColumn("DOC_TYPE", col("IMLNTY"))\
-        .withColumn("SHRT_MATL_NUM", col("IMITM"))\
+        .withColumn("BASE_UOM_CD", trim(col("IMUOM1")))\
+        .withColumn("TOT_SHLF_LIF_DAYS_CNT", col("IMSLD").cast(DecimalType(18, 4)))\
+        .withColumn("MATL_STS_CD", trim(col("IMSTKT")))\
+        .withColumn("MATL_DOC_NUM", trim(col("IMDRAW")))\
+        .withColumn("MATL_DOC_VERS_NUM", trim(col("IMRVNO")))\
+        .withColumn("MATL_CATLG_NUM", trim(col("IMAITM")))\
+        .withColumn("CHG_BY", trim(col("IMUSER")))\
+        .withColumn("WT_UNIT", trim(col("IMUWUM")))\
+        .withColumn("DOC_TYPE", trim(col("IMLNTY")))\
+        .withColumn("SHRT_MATL_NUM", trim(col("IMITM")))\
         .withColumn(
           "LAST_CHG_DT_TIME_DTTM",
           when(
@@ -56,5 +55,9 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
             )
           ))
         )\
-        .withColumn("SER_LVL", col("IMMPST"))\
-        .withColumn("SER_TYPE", col("IMPTSC"))
+        .withColumn("SER_LVL", trim(col("IMMPST")))\
+        .withColumn("SER_TYPE", trim(col("IMPTSC")))\
+        .withColumn("BRAVO_MINOR_CODE_DESC", lookup("BRAVO_D_LU", col("B_M_LU")).getField("DRDL01"))\
+        .withColumn("FRAN_CD_DESC", lookup("FRAN_LU", col("F_C_LU")).getField("DRDL01"))\
+        .withColumn("MATL_GRP_DESC", lookup("MATL_GR_LU", col("F_C_LU")).getField("DRDL01"))\
+        .withColumn("MATL_TYPE_DESC", lookup("MATL_T_LU", col("M_T_D_LU")).getField("DRDL01"))
