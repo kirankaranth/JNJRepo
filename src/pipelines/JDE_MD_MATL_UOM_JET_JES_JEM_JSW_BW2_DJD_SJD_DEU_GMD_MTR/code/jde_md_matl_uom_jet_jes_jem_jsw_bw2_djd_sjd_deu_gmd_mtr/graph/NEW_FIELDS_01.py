@@ -16,7 +16,7 @@ def NEW_FIELDS_01(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("VAL_BAS_CMMT_IN", lit(None))\
         .withColumn("UNIT_IN_1", lit(None))\
         .withColumn("UNIT_IN_2", lit(None))\
-        .withColumn("DIM_KEY", col("DRSPHD"))\
+        .withColumn("DIM_KEY", trim(col("DRSPHD")))\
         .withColumn("NUMRTR_FOR_CONV_UNIT", lit(None))\
         .withColumn("DENOM_FOR_CONV_UNIT", lit(None))\
         .withColumn("BASE_TEN_EXP_FOR_CONV", lit(None))\
@@ -32,8 +32,8 @@ def NEW_FIELDS_01(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("UNIT_OF_PRESR", lit(None))\
         .withColumn("EXTRNL_UOM_COMML_FMT", lit(None))\
         .withColumn("EXTRNL_UOM_TECH_FMT", lit(None))\
-        .withColumn("UOM_SHRT_TEXT", col("DRDL02"))\
-        .withColumn("UOM_LONG_TEXT", col("DRDL01"))\
+        .withColumn("UOM_SHRT_TEXT", trim(col("DRDL02")))\
+        .withColumn("UOM_LONG_TEXT", trim(col("DRDL01")))\
         .withColumn("DIM_TEXT", lit(None))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
