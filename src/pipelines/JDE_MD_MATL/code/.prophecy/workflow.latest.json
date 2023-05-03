@@ -1082,6 +1082,24 @@
                 "mappings" : [ ],
                 "tags" : [ ]
               }
+            }, {
+              "name" : "IMMPST",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IMPTSC",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
             } ]
           },
           "isStreaming" : false
@@ -1094,7 +1112,7 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "47_mMPU8CBTBjrhmklALa$$4H0CCgPh4jSUisM3oP3eJ##IMITM", "47_mMPU8CBTBjrhmklALa$$4H0CCgPh4jSUisM3oP3eJ##IMLNTY", "47_mMPU8CBTBjrhmklALa$$4H0CCgPh4jSUisM3oP3eJ##IMAITM", "47_mMPU8CBTBjrhmklALa$$4H0CCgPh4jSUisM3oP3eJ##IMLITM", "47_mMPU8CBTBjrhmklALa$$4H0CCgPh4jSUisM3oP3eJ##IMSLD", "47_mMPU8CBTBjrhmklALa$$4H0CCgPh4jSUisM3oP3eJ##IMSTKT", "47_mMPU8CBTBjrhmklALa$$4H0CCgPh4jSUisM3oP3eJ##IMRVNO", "47_mMPU8CBTBjrhmklALa$$4H0CCgPh4jSUisM3oP3eJ##IMUSER", "47_mMPU8CBTBjrhmklALa$$4H0CCgPh4jSUisM3oP3eJ##IMUWUM", "47_mMPU8CBTBjrhmklALa$$4H0CCgPh4jSUisM3oP3eJ##IMSRCE", "47_mMPU8CBTBjrhmklALa$$4H0CCgPh4jSUisM3oP3eJ##IMUOM1", "47_mMPU8CBTBjrhmklALa$$4H0CCgPh4jSUisM3oP3eJ##IMDRAW" ],
+        "columnsSelector" : [ "47_mMPU8CBTBjrhmklALa$$4H0CCgPh4jSUisM3oP3eJ##IMITM", "47_mMPU8CBTBjrhmklALa$$4H0CCgPh4jSUisM3oP3eJ##IMTDAY", "47_mMPU8CBTBjrhmklALa$$4H0CCgPh4jSUisM3oP3eJ##IMLNTY", "47_mMPU8CBTBjrhmklALa$$4H0CCgPh4jSUisM3oP3eJ##IMAITM", "47_mMPU8CBTBjrhmklALa$$4H0CCgPh4jSUisM3oP3eJ##IMLITM", "47_mMPU8CBTBjrhmklALa$$4H0CCgPh4jSUisM3oP3eJ##IMSLD", "47_mMPU8CBTBjrhmklALa$$4H0CCgPh4jSUisM3oP3eJ##IMSTKT", "47_mMPU8CBTBjrhmklALa$$4H0CCgPh4jSUisM3oP3eJ##IMRVNO", "47_mMPU8CBTBjrhmklALa$$4H0CCgPh4jSUisM3oP3eJ##IMUPMJ", "47_mMPU8CBTBjrhmklALa$$4H0CCgPh4jSUisM3oP3eJ##IMUSER", "47_mMPU8CBTBjrhmklALa$$4H0CCgPh4jSUisM3oP3eJ##IMUWUM", "47_mMPU8CBTBjrhmklALa$$4H0CCgPh4jSUisM3oP3eJ##IMSRCE", "47_mMPU8CBTBjrhmklALa$$4H0CCgPh4jSUisM3oP3eJ##IMUOM1", "47_mMPU8CBTBjrhmklALa$$4H0CCgPh4jSUisM3oP3eJ##IMDRAW" ],
         "transformations" : [ {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
@@ -1278,6 +1296,54 @@
             "expression" : {
               "format" : "sql",
               "expression" : "IMITM"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "LAST_CHG_DT_TIME_DTTM",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "CASE\r\n  WHEN LENGTH(imtday) = 6 THEN to_timestamp(\r\n    CONCAT(\r\n      DATE_ADD(\r\n        CAST(SUBSTRING(IMUPMJ + 1900000, 1, 4) AS DATE),\r\n        CAST(SUBSTRING(IMUPMJ, 4, 3) AS INT) -1\r\n      ),\r\n      \"\"\"\",\r\n      imtday\r\n    ),\r\n    'yyyy-MM-ddHHmmss'\r\n  )\r\n  WHEN LENGTH(imtday) = 5 THEN to_timestamp(\r\n    CONCAT(\r\n      DATE_ADD(\r\n        CAST(SUBSTRING(IMUPMJ + 1900000, 1, 4) AS DATE),\r\n        CAST(SUBSTRING(IMUPMJ, 4, 3) AS INT) -1\r\n      ),\r\n      \"\"\"\",\r\n      concat(0, imtday)\r\n    ),\r\n    'yyyy-MM-ddHHmmss'\r\n  )\r\n  ELSE to_timestamp(\r\n    date_add(\r\n      cast(substring(IMUPMJ + 1900000, 1, 4) AS Date),\r\n      cast(substring(IMUPMJ, 4, 3) as int) -1\r\n    )\r\n  )\r\nEND"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "SER_LVL",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "IMMPST"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "SER_TYPE",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "IMPTSC"
             }
           },
           "DropColumn" : {
@@ -1912,6 +1978,24 @@
               }
             }, {
               "name" : "M_T_D_LU",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IMMPST",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IMPTSC",
               "type" : "string",
               "nullable" : true,
               "metadata" : {
@@ -4312,7 +4396,7 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMDSC2", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMDSC1", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMUWUM", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMSRP4", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMPRP5", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMGLPT", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMPRP1", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##_deleted_", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMPRP4", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMPRP7", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMSRP9", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMPRP9", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMSRP5", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMSRP3", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMPRP2", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMLNTY", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMSRP7", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMSRP8", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMSRP2", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMAITM", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMPRP8", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMUOM1", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMPRP3", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMITM", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMSRP1", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMSRCE", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMUPMJ", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMVCUD", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMPRP0", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMSTKT", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMSRP6", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMUVM1", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMDRAW", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMRVNO", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMTDAY", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMSRP0", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMPRP6", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMSLD", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMUSER", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMLITM" ],
+        "columnsSelector" : [ "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMDSC2", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMDSC1", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMUWUM", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMSRP4", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMPRP5", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMGLPT", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMPRP1", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##_deleted_", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMPRP4", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMPRP7", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMSRP9", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMPRP9", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMSRP5", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMSRP3", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMPTSC", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMPRP2", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMLNTY", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMSRP7", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMSRP8", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMSRP2", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMAITM", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMPRP8", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMUOM1", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMPRP3", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMITM", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMSRP1", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMMPST", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMSRCE", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMVCUD", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMUPMJ", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMPRP0", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMSTKT", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMSRP6", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMUVM1", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMDRAW", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMRVNO", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMTDAY", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMSRP0", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMPRP6", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMSLD", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMUSER", "Yrnw71eQ900Ow8xSIlPvo$$1C9GuPKHLxtLzX0GTXn13##IMLITM" ],
         "expressions" : [ {
           "target" : "IMAITM",
           "expression" : {
@@ -4619,6 +4703,20 @@
           "expression" : {
             "format" : "sql",
             "expression" : "expr('$M_T_D_LU_Field')"
+          },
+          "description" : ""
+        }, {
+          "target" : "IMMPST",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "IMMPST"
+          },
+          "description" : ""
+        }, {
+          "target" : "IMPTSC",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "IMPTSC"
           },
           "description" : ""
         } ]

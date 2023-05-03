@@ -18,4 +18,43 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("CHG_BY", col("IMUSER"))\
         .withColumn("WT_UNIT", col("IMUWUM"))\
         .withColumn("DOC_TYPE", col("IMLNTY"))\
-        .withColumn("SHRT_MATL_NUM", col("IMITM"))
+        .withColumn("SHRT_MATL_NUM", col("IMITM"))\
+        .withColumn(
+          "LAST_CHG_DT_TIME_DTTM",
+          when(
+              (length(col("imtday")) == lit(6)), 
+              to_timestamp(
+                concat(
+                  date_add(
+                    substring((col("IMUPMJ") + lit(1900000)), 1, 4).cast(DateType()), 
+                    (substring(col("IMUPMJ"), 4, 3).cast(IntegerType()) - lit(1))
+                  ), 
+                  lit(""), 
+                  col("imtday")
+                ), 
+                "yyyy-MM-ddHHmmss"
+              )
+            )\
+            .when(
+              (length(col("imtday")) == lit(5)), 
+              to_timestamp(
+                concat(
+                  date_add(
+                    substring((col("IMUPMJ") + lit(1900000)), 1, 4).cast(DateType()), 
+                    (substring(col("IMUPMJ"), 4, 3).cast(IntegerType()) - lit(1))
+                  ), 
+                  lit(""), 
+                  concat(lit(0), col("imtday"))
+                ), 
+                "yyyy-MM-ddHHmmss"
+              )
+            )\
+            .otherwise(to_timestamp(
+            date_add(
+              substring((col("IMUPMJ") + lit(1900000)), 1, 4).cast(DateType()), 
+              (substring(col("IMUPMJ"), 4, 3).cast(IntegerType()) - 1)
+            )
+          ))
+        )\
+        .withColumn("SER_LVL", col("IMMPST"))\
+        .withColumn("SER_TYPE", col("IMPTSC"))
