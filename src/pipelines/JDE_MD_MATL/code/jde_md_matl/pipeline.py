@@ -22,6 +22,7 @@ def pipeline(spark: SparkSession) -> None:
     df_DEL = DEL(spark, df_F4101_SELECTION)
     df_XFORM = XFORM(spark, df_DEL)
     df_FIELD_ORDER = FIELD_ORDER(spark, df_XFORM)
+    TARGET(spark, df_FIELD_ORDER)
 
 def main():
     spark = SparkSession.builder\
