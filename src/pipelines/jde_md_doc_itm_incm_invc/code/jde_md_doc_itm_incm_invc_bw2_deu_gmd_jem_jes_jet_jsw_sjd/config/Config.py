@@ -20,7 +20,7 @@ class Config(ConfigBase):
             sourceTable: str="f43199",
             sourceDatabase: str="bw2",
             DAI_ETL_ID: int=0,
-            sourceSystem: str="BW2",
+            sourceSystem: str="bw2",
             targetSchema: str="dev_md_l1",
             **kwargs
     ):
