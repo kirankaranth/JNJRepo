@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 setup(
-    name = 'SAP_MD_PRCH_DELV_CNFRMS_3_jsw_jem_jet_jes_deu_sjd_gmd_djd',
+    name = 'JDE_MD_PRCH_DELV_CNFRMS_3_jsw_jem_jet_jes_deu_sjd_gmd_djd',
     version = '1.0',
     packages = (
       find_packages(include = ('jde_md_prch_delv_cnfrms_3_jsw_jem_jet_jes_deu_sjd_gmd_djd*', ))
