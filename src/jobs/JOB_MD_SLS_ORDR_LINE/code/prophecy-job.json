@@ -9,7 +9,7 @@
       "clusterMode" : "Single"
     },
     "enabled" : false,
-    "defaultClusterSize" : "Prophecy_Small",
+    "defaultClusterSize" : "Prophecy_Large",
     "alerting" : {
       "emails" : "",
       "onStart" : false,
@@ -29,33 +29,7 @@
     },
     "availableFabrics" : [ {
       "id" : "4",
-      "name" : "dev_ajp_nonprod",
-      "clusterSizes" : {
-        "default" : "small",
-        "availableClusterSizes" : [ "small" ]
-      },
-      "pylibsResolutionMode" : {
-        "PublicCentral" : { }
-      },
-      "scalalibsResolutionMode" : {
-        "PublicCentral" : { }
-      }
-    }, {
-      "id" : "11",
-      "name" : "AZR-AJP-Prod",
-      "clusterSizes" : {
-        "default" : "small",
-        "availableClusterSizes" : [ "small" ]
-      },
-      "pylibsResolutionMode" : {
-        "PublicCentral" : { }
-      },
-      "scalalibsResolutionMode" : {
-        "PublicCentral" : { }
-      }
-    }, {
-      "id" : "9",
-      "name" : "cdl_consume_dev",
+      "name" : "CDL_Dev_Consume_Views",
       "clusterSizes" : {
         "default" : "small",
         "availableClusterSizes" : [ "small" ]
@@ -84,7 +58,7 @@
       "name" : "CDL_L1_Dev",
       "clusterSizes" : {
         "default" : "Prophecy_Small",
-        "availableClusterSizes" : [ "Prophecy_Small" ]
+        "availableClusterSizes" : [ "Prophecy_Small", "Prophecy_Medium", "Prophecy_Large" ]
       },
       "pylibsResolutionMode" : {
         "PublicCentral" : { }
@@ -332,7 +306,7 @@
             "name" : "sourceDatabase",
             "kind" : {
               "type" : "string",
-              "value" : "mpb"
+              "value" : "mbp"
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
@@ -1118,6 +1092,88 @@
           },
           "overrides" : { },
           "selectedInstance" : "jem"
+        }
+      }
+    },
+    "9vCUEiA8ZfSyKPXaGw26b$$jKMoYXOHXB0WuALsFsFf1" : {
+      "id" : "9vCUEiA8ZfSyKPXaGw26b$$jKMoYXOHXB0WuALsFsFf1",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "HMD",
+        "slug" : "HMD",
+        "x" : 1120,
+        "y" : 300
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "xtk_6H2Ax9wv5xdSPWMcn$$KSvcAtrv51F375KbN6qLY",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "Y5Co3dwYqIpuKVlk0gl6R$$6K9nsb7KZ8AyqOkKAhtZN",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/SAP_01_MD_SLS_ORDR_LINE_hmd",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "hmd"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MANDT",
+            "kind" : {
+              "type" : "string",
+              "value" : "100"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "pqa_hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "default", "hmd" ]
+          },
+          "overrides" : {
+            "sourceDatabase" : "hmd"
+          },
+          "selectedInstance" : "hmd"
         }
       }
     },
