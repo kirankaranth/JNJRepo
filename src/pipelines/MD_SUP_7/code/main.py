@@ -1,3 +1,3 @@
-from md_sup_7_atl.pipeline import main
+from sap_md_sup_atl.pipeline import main
 
 main()

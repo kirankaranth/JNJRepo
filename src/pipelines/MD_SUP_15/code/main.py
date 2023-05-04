@@ -1,3 +1,3 @@
-from MD_SUP_15.pipeline import main
+from jde_md_sup_djd.pipeline import main
 
 main()

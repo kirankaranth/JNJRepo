@@ -1,1 +1,1 @@
-from .MD_SUP_5 import *
+from .md_sup_5_geu import *

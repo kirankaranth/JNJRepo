@@ -1,3 +1,3 @@
-from MD_SUP_6.pipeline import main
+from sap_md_sup_bwi.pipeline import main
 
 main()

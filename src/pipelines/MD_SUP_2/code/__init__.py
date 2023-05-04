@@ -1,1 +1,1 @@
-from .MD_SUP_2 import *
+from .sap_md_sup_p01 import *

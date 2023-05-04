@@ -1,3 +1,3 @@
-from md_sup_3_tai.pipeline import main
+from sap_md_sup_tai.pipeline import main
 
 main()

@@ -1,3 +1,3 @@
-from MD_SUP_8.pipeline import main
+from sap_md_sup_fsn.pipeline import main
 
 main()

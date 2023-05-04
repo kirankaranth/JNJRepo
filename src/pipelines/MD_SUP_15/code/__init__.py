@@ -1,1 +1,1 @@
-from .MD_SUP_15 import *
+from .jde_md_sup_djd import *

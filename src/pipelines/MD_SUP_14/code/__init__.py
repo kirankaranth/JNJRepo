@@ -1,1 +1,1 @@
-from .MD_SUP_14 import *
+from .jde_md_sup_jet import *

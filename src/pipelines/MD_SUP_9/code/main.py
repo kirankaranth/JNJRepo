@@ -1,3 +1,3 @@
-from MD_SUP_9.pipeline import main
+from jde_md_sup_bw2.pipeline import main
 
 main()

@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 setup(
-    name = 'MD_SUP_2_p01',
+    name = 'SAP_MD_SUP_p01',
     version = '1.0',
-    packages = find_packages(include = ('MD_SUP_2*', )) + ["prophecy_config_instances"],
+    packages = find_packages(include = ('sap_md_sup_p01*', )) + ["prophecy_config_instances"],
     package_dir = {'prophecy_config_instances' : 'configs/resources/config'},
     package_data = {'prophecy_config_instances' : ['*.json', '*.py']},
     description = 'workflow',
@@ -10,7 +10,7 @@ setup(
 'prophecy-libs==1.5.0'],
     entry_points = {
 'console_scripts' : [
-'main = MD_SUP_2.pipeline:main'], },
+'main = sap_md_sup_p01.pipeline:main'], },
     data_files = [(".prophecy", [".prophecy/workflow.latest.json"])],
     extras_require = {
 'test' : ['pytest', 'pytest-html'], }
