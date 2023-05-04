@@ -114,6 +114,150 @@
           },
           "optional" : false,
           "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "UPDT_MLT_ACCT_ASGNMT",
+          "kind" : {
+            "type" : "spark_expression",
+            "value" : "trim(XHISTMA)"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "CMPNT_RSN_IN_INVC",
+          "kind" : {
+            "type" : "spark_expression",
+            "value" : "trim(COMPLAINT_REASON)"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "RETN_AMT_IN_DOC_CRNCY",
+          "kind" : {
+            "type" : "spark_expression",
+            "value" : "trim(RETAMT_FC)"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "RETN_IN_PCT",
+          "kind" : {
+            "type" : "spark_expression",
+            "value" : "trim(RETPC)"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "RETN_DUE_DTTM",
+          "kind" : {
+            "type" : "spark_expression",
+            "value" : "case\r\n  when RETDUEDT = '00000000' then null\r\n  else to_timestamp (RETDUEDT, \"yyyyMMdd\")\r\nend"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "CASH_LDGR_EXP_REVN_ACCT",
+          "kind" : {
+            "type" : "spark_expression",
+            "value" : "trim(RE_ACCOUNT)"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "NUM_OF_PRIN_PRCH_AGMT",
+          "kind" : {
+            "type" : "spark_expression",
+            "value" : "trim(ERP_CONTRACT_ID)"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "ITM_NUM_PRIN_PRCH_AGMT",
+          "kind" : {
+            "type" : "spark_expression",
+            "value" : "trim(ERP_CONTRACT_ITM)"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "CENT_CNTRC",
+          "kind" : {
+            "type" : "spark_expression",
+            "value" : "trim(SRM_CONTRACT_ID)"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "CENT_CNTRC_ITM_NUM",
+          "kind" : {
+            "type" : "spark_expression",
+            "value" : "trim(SRM_CONTRACT_ITM)"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "ITM_KEY_FOR_ESOA_MSG",
+          "kind" : {
+            "type" : "spark_expression",
+            "value" : "trim(SRVMAPKEY)"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "ORIG_INVC_ITM",
+          "kind" : {
+            "type" : "spark_expression",
+            "value" : "trim(INV_ITM_ORIGIN)"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "GRP_CHAR_FOR_INVC_VERIF",
+          "kind" : {
+            "type" : "spark_expression",
+            "value" : "trim(INVREL)"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "IN_FOR_DIFF_INVC",
+          "kind" : {
+            "type" : "spark_expression",
+            "value" : "trim(XDINV)\r\n"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "DIFF_AMT",
+          "kind" : {
+            "type" : "spark_expression",
+            "value" : "trim(DIFF_AMOUNT)"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "CMMDTY_REPRC_INVC_VERIF",
+          "kind" : {
+            "type" : "spark_expression",
+            "value" : "trim(XCPRF)"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "INTRNL_LIC_NUM",
+          "kind" : {
+            "type" : "spark_expression",
+            "value" : "trim(LICNO)"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "ITM_NUM",
+          "kind" : {
+            "type" : "spark_expression",
+            "value" : "trim(ZEILE)"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
         } ]
       },
       "oldCommon" : {
@@ -122,7 +266,7 @@
       },
       "fabrics" : { },
       "instances" : { },
-      "selected" : "BBA",
+      "selected" : "P01",
       "nonEditable" : [ ],
       "isSubscribedPipelineWithPipelineConfigs" : false
     },
@@ -137,8 +281,8 @@
     "interimModeEnabled" : true,
     "visualCodeInterimMode" : "IO",
     "recordsLimit" : {
-      "enabled" : false,
-      "value" : 10
+      "enabled" : true,
+      "value" : 150
     },
     "topLevelPackage" : "sap_md_doc_itm_incm_invc_hm2_bba_bbl_bbn_geu_mrs_po1_tai",
     "configurationVersion" : "v1"
@@ -1412,7 +1556,7 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##BUSTW", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##SPGRC", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##XDINV", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##STUNR", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##MATNR", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##SGTXT", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##SPGRQ", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##LFEHL", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##LFPOS", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##RBWWR", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##BPRBM", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##BPRME", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##LICNO", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##ZEKKN", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##FRBNR", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##SPGRG", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##SRM_CONTRACT_ID", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##SHKZG", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##MATBF", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##MENGE", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##SRM_CONTRACT_ITM", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##GRIRG", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##EXKBE", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##RE_ACCOUNT", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##INV_ITM_ORIGIN", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##KZMEK", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##GJAHR", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##SRVMAPKEY", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##WRBTR", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##TBTKZ", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##GITYP", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##BNKAN", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##ZAEHK", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##SALK3", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##ERP_CONTRACT_ITM", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##XSKRL", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##XCPRF", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##EBELP", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##BUKRS", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##INVREL", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##PSTYP", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##LBKUM", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##INTROW", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##DIFF_AMOUNT", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##STOCK_POSTING_PP", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##BSTME", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##LFBNR", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##EBELN", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##ERP_CONTRACT_ID", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##TXJCD", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##BWTAR", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##RETPC", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##XBLNR", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##_upt_", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##COMPLAINT_REASON", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##MEINS", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##BELNR", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##RETDUEDT", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##VMSAL", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##WERKS", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##MWSKZ", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##KSCHL", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##BWKEY", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##MRMOK", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##RBMNG", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##BPMNG", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##LFGJA", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##KNTTP", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##LIFNR", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##GRICD", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##BUZEI", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##WEREC", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##SPGRS", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##ZEILE", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##SPGRV", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##STOCK_POSTING_PY", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##XHISTMA", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##SPGRT", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##XEKBZ", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##VRKUM", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##PACKNO", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##SPGRP", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##EREKZ", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##RETAMT_FC", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##SPGRM", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##STOCK_POSTING", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##BKLAS" ],
+        "columnsSelector" : [ "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##MWSKZ", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##FRBNR", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##LBKUM", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##KSCHL", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##MATBF", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##BUKRS", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##BKLAS", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##SPGRG", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##RBMNG", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##SPGRP", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##LFGJA", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##XSKRL", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##BWKEY", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##PSTYP", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##GJAHR", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##_upt_", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##WERKS", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##GRIRG", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##GITYP", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##MEINS", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##EBELN", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##XBLNR", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##BUSTW", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##STOCK_POSTING_PP", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##SPGRC", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##WRBTR", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##BPMNG", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##TXJCD", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##MRMOK", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##BSTME", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##BPRME", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##TBTKZ", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##BNKAN", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##SPGRS", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##BELNR", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##EBELP", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##BPRBM", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##LFEHL", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##BWTAR", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##INTROW", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##SPGRM", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##SPGRV", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##SALK3", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##VMSAL", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##ZAEHK", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##GRICD", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##PACKNO", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##ZEKKN", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##STUNR", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##LFPOS", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##MENGE", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##WEREC", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##KNTTP", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##EREKZ", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##STOCK_POSTING", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##SPGRT", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##RBWWR", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##EXKBE", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##LFBNR", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##KZMEK", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##SHKZG", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##STOCK_POSTING_PY", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##SGTXT", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##XEKBZ", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##BUZEI", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##SPGRQ", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##MATNR", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##LIFNR", "gZd0SEvF05fSNONXKec0G$$QXiITGdH6H_OSj8REfbet##VRKUM" ],
         "transformations" : [ {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
@@ -2571,7 +2715,7 @@
             "sourceColumn" : "UPDT_MLT_ACCT_ASGNMT",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(XHISTMA)\r\n"
+              "expression" : "CAST(expr('$UPDT_MLT_ACCT_ASGNMT') as string)"
             }
           },
           "DropColumn" : {
@@ -2587,7 +2731,7 @@
             "sourceColumn" : "CMPNT_RSN_IN_INVC",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(COMPLAINT_REASON)\r\n"
+              "expression" : "CAST(expr('$CMPNT_RSN_IN_INVC') as string)"
             }
           },
           "DropColumn" : {
@@ -2603,7 +2747,7 @@
             "sourceColumn" : "RETN_AMT_IN_DOC_CRNCY",
             "expression" : {
               "format" : "sql",
-              "expression" : "CAST(trim(RETAMT_FC) as decimal(18,4))\r\n"
+              "expression" : "CAST(expr('$RETN_AMT_IN_DOC_CRNCY') as decimal(18,4))\r\n"
             }
           },
           "DropColumn" : {
@@ -2619,7 +2763,7 @@
             "sourceColumn" : "RETN_IN_PCT",
             "expression" : {
               "format" : "sql",
-              "expression" : "CAST(trim(RETPC) as decimal(18,4))\r\n"
+              "expression" : "CAST(expr('$RETN_IN_PCT') as decimal(18,4))\r\n"
             }
           },
           "DropColumn" : {
@@ -2635,7 +2779,7 @@
             "sourceColumn" : "RETN_DUE_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "case\r\n  when RETDUEDT = '00000000' then null\r\n  else to_timestamp (RETDUEDT, \"yyyyMMdd\")\r\nend"
+              "expression" : "to_timestamp(expr('$RETN_DUE_DTTM'))"
             }
           },
           "DropColumn" : {
@@ -2667,7 +2811,7 @@
             "sourceColumn" : "CASH_LDGR_EXP_REVN_ACCT",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(RE_ACCOUNT)\r\n"
+              "expression" : "CAST(expr('$CASH_LDGR_EXP_REVN_ACCT') AS string)"
             }
           },
           "DropColumn" : {
@@ -2683,7 +2827,7 @@
             "sourceColumn" : "NUM_OF_PRIN_PRCH_AGMT",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(ERP_CONTRACT_ID)\r\n"
+              "expression" : "CAST(expr('$NUM_OF_PRIN_PRCH_AGMT') as string)"
             }
           },
           "DropColumn" : {
@@ -2699,7 +2843,7 @@
             "sourceColumn" : "ITM_NUM_PRIN_PRCH_AGMT",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(ERP_CONTRACT_ITM)\r\n"
+              "expression" : "CAST(expr('$ITM_NUM_PRIN_PRCH_AGMT') as string)"
             }
           },
           "DropColumn" : {
@@ -2715,7 +2859,7 @@
             "sourceColumn" : "CENT_CNTRC",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(SRM_CONTRACT_ID)\r\n"
+              "expression" : "CAST(expr('$CENT_CNTRC') as string)"
             }
           },
           "DropColumn" : {
@@ -2731,7 +2875,7 @@
             "sourceColumn" : "CENT_CNTRC_ITM_NUM",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(SRM_CONTRACT_ITM)\r\n"
+              "expression" : "CAST(expr('$CENT_CNTRC_ITM_NUM') as string)\r\n"
             }
           },
           "DropColumn" : {
@@ -2763,7 +2907,7 @@
             "sourceColumn" : "ITM_KEY_FOR_ESOA_MSG",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(SRVMAPKEY)\r\n"
+              "expression" : "CAST(expr('$ITM_KEY_FOR_ESOA_MSG') as string)"
             }
           },
           "DropColumn" : {
@@ -2795,7 +2939,7 @@
             "sourceColumn" : "ORIG_INVC_ITM",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(INV_ITM_ORIGIN)\r\n"
+              "expression" : "CAST(expr('$ORIG_INVC_ITM') AS string)"
             }
           },
           "DropColumn" : {
@@ -2811,7 +2955,7 @@
             "sourceColumn" : "GRP_CHAR_FOR_INVC_VERIF",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(INVREL)\r\n"
+              "expression" : "CAST(expr('$GRP_CHAR_FOR_INVC_VERIF') as string)\r\n"
             }
           },
           "DropColumn" : {
@@ -2827,7 +2971,7 @@
             "sourceColumn" : "IN_FOR_DIFF_INVC",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(XDINV)\r\n"
+              "expression" : "CAST(expr('$IN_FOR_DIFF_INVC')as string)"
             }
           },
           "DropColumn" : {
@@ -2843,7 +2987,7 @@
             "sourceColumn" : "DIFF_AMT",
             "expression" : {
               "format" : "sql",
-              "expression" : "CAST(trim(DIFF_AMOUNT) as decimal(18,4))\r\n"
+              "expression" : "CAST(expr('$DIFF_AMT') as decimal(18,4))\r\n"
             }
           },
           "DropColumn" : {
@@ -2859,7 +3003,7 @@
             "sourceColumn" : "CMMDTY_REPRC_INVC_VERIF",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(XCPRF)\r\n"
+              "expression" : "CAST(expr('$CMMDTY_REPRC_INVC_VERIF')as string)"
             }
           },
           "DropColumn" : {
@@ -2875,7 +3019,7 @@
             "sourceColumn" : "INTRNL_LIC_NUM",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(LICNO)\r\n"
+              "expression" : "CAST(expr('$INTRNL_LIC_NUM')as string)"
             }
           },
           "DropColumn" : {
@@ -2891,7 +3035,7 @@
             "sourceColumn" : "ITM_NUM",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(ZEILE)\r\n"
+              "expression" : "CAST(expr('$ITM_NUM')as string)"
             }
           },
           "DropColumn" : {

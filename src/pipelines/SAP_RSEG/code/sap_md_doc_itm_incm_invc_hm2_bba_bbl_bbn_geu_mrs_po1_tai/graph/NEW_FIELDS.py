@@ -79,30 +79,27 @@ def NEW_FIELDS(spark: SparkSession, MANDT_FILTER: DataFrame) -> DataFrame:
         .withColumn("CLRNG_GR_IR_PSTNG_EXTRNL", trim(col("WEREC")))\
         .withColumn("ACCT_NUM_OF_VEND_OR_CR", trim(col("LIFNR")))\
         .withColumn("NUM_BILL_LDNG_GOODS_RCPT", trim(col("FRBNR")))\
-        .withColumn("UPDT_MLT_ACCT_ASGNMT", trim(col("XHISTMA")))\
-        .withColumn("CMPNT_RSN_IN_INVC", trim(col("COMPLAINT_REASON")))\
-        .withColumn("RETN_AMT_IN_DOC_CRNCY", trim(col("RETAMT_FC")).cast(DecimalType(18, 4)))\
-        .withColumn("RETN_IN_PCT", trim(col("RETPC")).cast(DecimalType(18, 4)))\
-        .withColumn(
-          "RETN_DUE_DTTM",
-          when((col("RETDUEDT") == lit("00000000")), lit(None)).otherwise(to_timestamp(col("RETDUEDT"), "yyyyMMdd"))
-        )\
+        .withColumn("UPDT_MLT_ACCT_ASGNMT", expr(Config.UPDT_MLT_ACCT_ASGNMT).cast(StringType()))\
+        .withColumn("CMPNT_RSN_IN_INVC", expr(Config.CMPNT_RSN_IN_INVC).cast(StringType()))\
+        .withColumn("RETN_AMT_IN_DOC_CRNCY", expr(Config.RETN_AMT_IN_DOC_CRNCY).cast(DecimalType(18, 4)))\
+        .withColumn("RETN_IN_PCT", expr(Config.RETN_IN_PCT).cast(DecimalType(18, 4)))\
+        .withColumn("RETN_DUE_DTTM", to_timestamp(expr(Config.RETN_DUE_DTTM)))\
         .withColumn("TAX_RDCTN_FOR_RETN", expr(Config.TAX_RDCTN_FOR_RETN).cast(StringType()))\
-        .withColumn("CASH_LDGR_EXP_REVN_ACCT", trim(col("RE_ACCOUNT")))\
-        .withColumn("NUM_OF_PRIN_PRCH_AGMT", trim(col("ERP_CONTRACT_ID")))\
-        .withColumn("ITM_NUM_PRIN_PRCH_AGMT", trim(col("ERP_CONTRACT_ITM")))\
-        .withColumn("CENT_CNTRC", trim(col("SRM_CONTRACT_ID")))\
-        .withColumn("CENT_CNTRC_ITM_NUM", trim(col("SRM_CONTRACT_ITM")))\
+        .withColumn("CASH_LDGR_EXP_REVN_ACCT", expr(Config.CASH_LDGR_EXP_REVN_ACCT).cast(StringType()))\
+        .withColumn("NUM_OF_PRIN_PRCH_AGMT", expr(Config.NUM_OF_PRIN_PRCH_AGMT).cast(StringType()))\
+        .withColumn("ITM_NUM_PRIN_PRCH_AGMT", expr(Config.ITM_NUM_PRIN_PRCH_AGMT).cast(StringType()))\
+        .withColumn("CENT_CNTRC", expr(Config.CENT_CNTRC).cast(StringType()))\
+        .withColumn("CENT_CNTRC_ITM_NUM", expr(Config.CENT_CNTRC_ITM_NUM).cast(StringType()))\
         .withColumn("CONT_ITM_CAT_PRCHSNG_DOC", expr(Config.CONT_ITM_CAT_PRCHSNG_DOC).cast(StringType()))\
-        .withColumn("ITM_KEY_FOR_ESOA_MSG", trim(col("SRVMAPKEY")))\
+        .withColumn("ITM_KEY_FOR_ESOA_MSG", expr(Config.ITM_KEY_FOR_ESOA_MSG).cast(StringType()))\
         .withColumn("BTCH_NUM", expr(Config.BTCH_NUM).cast(StringType()))\
-        .withColumn("ORIG_INVC_ITM", trim(col("INV_ITM_ORIGIN")))\
-        .withColumn("GRP_CHAR_FOR_INVC_VERIF", trim(col("INVREL")))\
-        .withColumn("IN_FOR_DIFF_INVC", trim(col("XDINV")))\
-        .withColumn("DIFF_AMT", trim(col("DIFF_AMOUNT")).cast(DecimalType(18, 4)))\
-        .withColumn("CMMDTY_REPRC_INVC_VERIF", trim(col("XCPRF")))\
-        .withColumn("INTRNL_LIC_NUM", trim(col("LICNO")))\
-        .withColumn("ITM_NUM", trim(col("ZEILE")))\
+        .withColumn("ORIG_INVC_ITM", expr(Config.ORIG_INVC_ITM).cast(StringType()))\
+        .withColumn("GRP_CHAR_FOR_INVC_VERIF", expr(Config.GRP_CHAR_FOR_INVC_VERIF).cast(StringType()))\
+        .withColumn("IN_FOR_DIFF_INVC", expr(Config.IN_FOR_DIFF_INVC).cast(StringType()))\
+        .withColumn("DIFF_AMT", expr(Config.DIFF_AMT).cast(DecimalType(18, 4)))\
+        .withColumn("CMMDTY_REPRC_INVC_VERIF", expr(Config.CMMDTY_REPRC_INVC_VERIF).cast(StringType()))\
+        .withColumn("INTRNL_LIC_NUM", expr(Config.INTRNL_LIC_NUM).cast(StringType()))\
+        .withColumn("ITM_NUM", expr(Config.ITM_NUM).cast(StringType()))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
         .withColumn("DAI_UPDT_DTTM", current_timestamp())\
