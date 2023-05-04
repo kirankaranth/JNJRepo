@@ -8,7 +8,7 @@ from jde_md_matl_uom_jet_jes_jem_jsw_bw2_djd_sjd_deu_gmd_mtr.udfs.UDFs import *
 def NEW_FIELDS_01(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
         .withColumn("SRC_SYS_CD", lit(Config.sourceSystem))\
-        .withColumn("UOM_CD", col("DRKY"))\
+        .withColumn("UOM_CD", trim(col("DRKY")))\
         .withColumn("EXTRNL_UOM_IN", lit(None))\
         .withColumn("EXTRNL_UOM_ID", lit(None))\
         .withColumn("DEC_PLACE_FOR_RD", lit(None))\
