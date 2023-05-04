@@ -58,8 +58,8 @@ def sql_MD_SUP(spark: SparkSession) -> DataFrame:
   TRIM(LFA1.bubkz) AS GLN3_NBR,
   TRIM(LFA1.nodel) AS BLOK_SUP_IND,
   TRIM(LFA1.podkzb) AS POD_IND,
-  TRIM(LFA1.emnfr) AS EXTRNL_MFR_CD,
-    lfa1._upt_ as _l0_upt
+  cast(NULL as string) AS EXTRNL_MFR_CD,
+lfa1._upt_ as _l0_upt_
 FROM
   {Config.sourceDatabase}.LFA1 LFA1
   LEFT JOIN {Config.sourceDatabase}.T005T T005T ON LFA1.LAND1 = T005T.LAND1

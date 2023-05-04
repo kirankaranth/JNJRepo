@@ -13,4 +13,5 @@ def addL1fields(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("_l1_upt_", current_timestamp())\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
-        .withColumn("DAI_UPDT_DTTM", current_timestamp())
+        .withColumn("DAI_UPDT_DTTM", current_timestamp())\
+        .withColumn("_deleted_", lit("F"))
