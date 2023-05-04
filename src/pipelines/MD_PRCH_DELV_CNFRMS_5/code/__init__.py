@@ -1,1 +1,1 @@
-from .MD_PRCH_DELV_CNFRMS_5 import *
+from .sap_md_prch_delv_cnfrms_bbl_bbn import *
