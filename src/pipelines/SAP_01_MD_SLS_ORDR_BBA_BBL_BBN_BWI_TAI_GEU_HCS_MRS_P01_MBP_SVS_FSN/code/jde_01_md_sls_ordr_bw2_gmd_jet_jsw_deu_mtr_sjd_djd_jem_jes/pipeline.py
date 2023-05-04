@@ -24,7 +24,7 @@ def pipeline(spark: SparkSession) -> None:
     LU_SAP_TVV3T(spark, df_MANDT_FILTER_TVV3T)
     df_SAP_TVAKT = SAP_TVAKT(spark)
     df_MANDT_FILTER_TVAKT = MANDT_FILTER_TVAKT(spark, df_SAP_TVAKT)
-    LU_SAP_TVKAT(spark, df_MANDT_FILTER_TVAKT)
+    LU_SAP_TVAKT(spark, df_MANDT_FILTER_TVAKT)
     df_SAP_TVKOT = SAP_TVKOT(spark)
     df_MANDT_FILTER_TVKOT = MANDT_FILTER_TVKOT(spark, df_SAP_TVKOT)
     LU_SAP_TVKOT(spark, df_MANDT_FILTER_TVKOT)

@@ -125,4 +125,19 @@ def NEW_FIELDS_TRANSFORMATION(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("TAX_DEST_CTRY", trim(col("STCEG_L")))\
         .withColumn("TAX_DPRT_CTRY", trim(col("LANDTX")))\
         .withColumn("IN_TRNGLR_DEAL_EU", trim(col("XEGDR")))\
-        .withColumn("FORBID_SLS_IN", trim(col("ZZ_FORBID_INDC")))
+        .withColumn("FORBID_SLS_IN", trim(col("ZZ_FORBID_INDC")))\
+        .withColumn("SLS_ORDR_TYPE_DESC", lookup("LU_SAP_TVAKT", col("AUART")).getField("BEZEI"))\
+        .withColumn("BILL_BLK_DESC", lookup("LU_SAP_TVFST", col("FAKSK")).getField("VTEXT"))\
+        .withColumn("DELV_BLK_DESC", lookup("LU_SAP_TVLST", col("LIFSK")).getField("VTEXT"))\
+        .withColumn("SLORG_NM", lookup("LU_SAP_TVKOT", col("VKORG")).getField("VTEXT"))\
+        .withColumn("DSTR_CHNL_NM", lookup("LU_SAP_TVTWT", col("VTWEG")).getField("VTEXT"))\
+        .withColumn("DIV_NM", lookup("LU_SAP_TSPAT", col("SPART")).getField("VTEXT"))\
+        .withColumn("SLS_ORDR_RSN_DESC", lookup("LU_SAP_TVAUT", col("AUGRU")).getField("BEZEI"))\
+        .withColumn("PO_TYPE_DESC", lookup("LU_SAP_T176T", col("BSARK")).getField("VTEXT"))\
+        .withColumn("RETRO_BILL", lookup("LU_SAP_TVAU", col("AUGRU")).getField("VAUNA"))\
+        .withColumn("CUST_GRP_1_DESC", lookup("LU_SAP_TVV1T", col("KVGR1")).getField("BEZEI"))\
+        .withColumn("CUST_GRP_2_DESC", lookup("LU_SAP_TVV2T", col("KVGR2")).getField("BEZEI"))\
+        .withColumn("CUST_GRP_3_DESC", lookup("LU_SAP_TVV3T", col("KVGR3")).getField("BEZEI"))\
+        .withColumn("CUST_GRP_4_DESC", lookup("LU_SAP_TVV4T", col("KVGR4")).getField("BEZEI"))\
+        .withColumn("CUST_GRP_5_DESC", lookup("LU_SAP_TVV5T", col("KVGR5")).getField("BEZEI"))\
+        .withColumn("CO_CD_DESC", lookup("LU_SAP_T001", col("BUKRS_VF")).getField("BUTXT"))
