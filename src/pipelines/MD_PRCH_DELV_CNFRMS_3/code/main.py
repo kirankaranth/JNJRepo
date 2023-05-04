@@ -1,3 +1,3 @@
-from MD_PRCH_DELV_CNFRMS_3.pipeline import main
+from jde_md_prch_delv_cnfrms_3_jsw_jem_jet_jes_deu_sjd_gmd_djd.pipeline import main
 
 main()

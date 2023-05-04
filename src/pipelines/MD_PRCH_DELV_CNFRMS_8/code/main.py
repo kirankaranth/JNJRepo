@@ -1,3 +1,3 @@
-from MD_PRCH_DELV_CNFRMS_8.pipeline import main
+from sap_md_prch_delv_cnfrms_mrs.pipeline import main
 
 main()

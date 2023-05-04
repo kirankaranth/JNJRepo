@@ -1,1 +1,1 @@
-from .md_prch_delv_cnfrms_12_hmd import *
+from .sap_md_prch_delv_cnfrms_hmd import *
