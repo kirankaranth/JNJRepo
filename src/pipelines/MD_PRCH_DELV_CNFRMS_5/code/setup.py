@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 setup(
-    name = 'MD_PRCH_DELV_CNFRMS_bbl_bbn',
+    name = 'SAP_MD_PRCH_DELV_CNFRMS_bbl_bbn',
     version = '1.0',
     packages = find_packages(include = ('sap_md_prch_delv_cnfrms_bbl_bbn*', )) + ["prophecy_config_instances"],
     package_dir = {'prophecy_config_instances' : 'configs/resources/config'},
