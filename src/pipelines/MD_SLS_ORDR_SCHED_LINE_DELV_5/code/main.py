@@ -1,3 +1,3 @@
-from MD_SLS_ORDR_SCHED_LINE_DELV_5.pipeline import main
+from sap_md_sls_ordr_sched_line_delv_atl_fsn.pipeline import main
 
 main()
