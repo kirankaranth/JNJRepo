@@ -11,11 +11,10 @@ class Config(ConfigBase):
             DAI_ETL_ID: int=None,
             ConfigDatabase: str=None,
             sourceTable: str=None,
-            sourceTable1: str=None,
             **kwargs
     ):
         self.spark = None
-        self.update(sourceSystem, targetSchema, sourceDatabase, DAI_ETL_ID, ConfigDatabase, sourceTable, sourceTable1)
+        self.update(sourceSystem, targetSchema, sourceDatabase, DAI_ETL_ID, ConfigDatabase, sourceTable)
 
     def update(
             self,
@@ -25,7 +24,6 @@ class Config(ConfigBase):
             DAI_ETL_ID: int=0,
             ConfigDatabase: str=" ",
             sourceTable: str="f0101",
-            sourceTable1: str="f0101_adt",
             **kwargs
     ):
         prophecy_spark = self.spark
@@ -35,5 +33,4 @@ class Config(ConfigBase):
         self.DAI_ETL_ID = self.get_int_value(DAI_ETL_ID)
         self.ConfigDatabase = ConfigDatabase
         self.sourceTable = sourceTable
-        self.sourceTable1 = sourceTable1
         pass
