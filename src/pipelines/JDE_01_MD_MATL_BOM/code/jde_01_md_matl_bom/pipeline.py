@@ -17,7 +17,8 @@ def pipeline(spark: SparkSession) -> None:
     )
     df_Filter_SAP_01_MAST = Filter_SAP_01_MAST(spark, df_JDE_f3002_f3002_adt)
     df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_Filter_SAP_01_MAST)
-    df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS_RENAME_FORMAT)
+    df_Deduplicate_1 = Deduplicate_1(spark, df_NEW_FIELDS_RENAME_FORMAT)
+    df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_Deduplicate_1)
     df_SET_FIELD_ORDER_REFORMAT = collectMetrics(
         spark, 
         df_SET_FIELD_ORDER_REFORMAT, 
