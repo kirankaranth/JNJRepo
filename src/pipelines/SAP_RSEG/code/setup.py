@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 setup(
-    name = 'sap_md_doc_itm_incm_invc_hm2_bba_bbl_bbn_geu_mrs_po1_tai',
+    name = 'sap_md_doc_itm_incm_invc_hm2_hmd_bba_bbl_bbn_geu_mrs_po1_tai',
     version = '1.0',
     packages = (
       find_packages(include = ('sap_md_doc_itm_incm_invc_hm2_bba_bbl_bbn_geu_mrs_po1_tai*', ))

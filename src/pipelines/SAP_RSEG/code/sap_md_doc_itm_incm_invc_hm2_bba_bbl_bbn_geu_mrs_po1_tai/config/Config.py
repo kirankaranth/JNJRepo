@@ -77,7 +77,7 @@ class Config(ConfigBase):
             sourceDatabase: str="bbn",
             MANDT: str="100",
             DAI_ETL_ID: int=0,
-            sourceSystem: str="BBN",
+            sourceSystem: str="bbn",
             targetSchema: str="dev_md_l1",
             TAX_RDCTN_FOR_RETN: str="trim(XRETTAXNET)",
             LIFO_FIFO_RLVNT: str="trim(XLIFO)",
