@@ -8,19 +8,14 @@ from jde_md_doc_itm_incm_invc_bw2_deu_gmd_jem_jes_jet_jsw_sjd.udfs.UDFs import *
 def NEW_FIELDS(spark: SparkSession, MANDT_FILTER: DataFrame) -> DataFrame:
     return MANDT_FILTER\
         .withColumn("SRC_SYS_CD", lit(Config.sourceSystem))\
-        .withColumn("ACTG_DOC_NUM", col("olukid"))\
+        .withColumn("ACTG_DOC_NUM", col("OLDOCO"))\
         .withColumn(
           "FISC_YR",
           lit(
             "#"
           )
         )\
-        .withColumn(
-          "DOC_ITM_IN_INVC_DOC",
-          lit(
-            "#"
-          )
-        )\
+        .withColumn("DOC_ITM_IN_INVC_DOC", col("OLITM"))\
         .withColumn("PRCHSNG_DOC_NUM", trim(col("oldoco")))\
         .withColumn("ITM_NUM_OF_PRCHSNG_DOC", trim(col("ollnid")))\
         .withColumn("SEQ_NUM_OF_ACCT_ASGNMT", lit(None).cast(StringType()))\
