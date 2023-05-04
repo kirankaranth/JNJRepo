@@ -58,8 +58,8 @@ def sql_MD_SUP(spark: SparkSession) -> DataFrame:
     LFA1.bubkz AS GLN3_NBR,
     LFA1.nodel AS BLOK_SUP_IND,
     LFA1.podkzb AS POD_IND,
-    NULL AS EXTRNL_MFR_CD,
-    lfa1._upt_ as _l0_upt
+    cast(NULL as string) AS EXTRNL_MFR_CD,
+lfa1._upt_ as _l0_upt_
 FROM {Config.sourceDatabase}.LFA1 LFA1
 LEFT JOIN {Config.sourceDatabase}.T005T T005T
 on LFA1.LAND1=T005T.LAND1

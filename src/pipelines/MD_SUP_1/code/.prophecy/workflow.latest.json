@@ -66,7 +66,7 @@
       },
       "fabrics" : { },
       "instances" : { },
-      "selected" : "default",
+      "selected" : "hcs",
       "nonEditable" : [ ],
       "isSubscribedPipelineWithPipelineConfigs" : false
     },
@@ -606,6 +606,15 @@
                 "mappings" : [ ],
                 "tags" : [ ]
               }
+            }, {
+              "name" : "_deleted_",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
             } ]
           },
           "isStreaming" : false
@@ -1081,7 +1090,7 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "cfe415c2-f38f-499a-9fd5-7553a3865068##SUP_NUM", "cfe415c2-f38f-499a-9fd5-7553a3865068##SRC_SYS_CD" ],
         "transformations" : [ {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
@@ -1185,6 +1194,22 @@
             "expression" : {
               "format" : "sql",
               "expression" : "current_timestamp()"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_deleted_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "'F'"
             }
           },
           "DropColumn" : {
@@ -1657,7 +1682,7 @@
         "isCustomOutputSchema" : true
       },
       "properties" : {
-        "script" : "out0 = spark.sql(f\"\"\"\n    select\n'{Config.sourceSystem}' AS SRC_SYS_CD,\n    LFA1.lifnr AS SUP_NUM,\n    LFA1.name1 AS SUP_NM1,\n    LFA1.name2 AS SUP_NM2,\n    LFA1.name3 AS SUP_NM3,\n    LFA1.name4 AS SUP_NM4,\n    LFA1.sortl AS SUP_SHRT_NM,\n    LFA1.land1 AS CTRY_CD,\n    LFA1.txjcd AS TAX_JURIS_CD,\n    LFA1.lzone AS TRSPN_ZN_CD,\n    LFA1.ort01 AS CITY_NM,\n    LFA1.ort02 AS DSTRC_NM,\n    LFA1.pfach AS PSTL_BOX_CD,\n    LFA1.pstl2 AS PSTL_BOX_PSTL_CD_NUM,\n    LFA1.pstlz AS PSTL_CD_NUM,\n    LFA1.regio AS RGN_NM,\n    LFA1.stras AS ADDR_LINE_1_TXT,\n    T005T.landx AS CTRY_SHRT_NM,\n    LFA1.adrnr AS ADDR_NUM,\n    LFA1.bbbnr AS GLN1_NBR,\n    LFA1.brsch AS SGMNT_CD,\n    CASE\n      WHEN(LFA1.erdat)='00000000' THEN NULL\n      ELSE TO_TIMESTAMP((LFA1.erdat),\\\"yyyyMMdd\\\")\n    END AS CRT_ON_DTTM,\n    LFA1.ktokk AS SUP_TYPE_CD,\n    LFA1.kunnr AS CUST_NUM,\n    LFA1.lnrza AS ALT_PAYEE_NUM,\n    LFA1.loevm AS DEL_IND,\n    LFA1.sperr AS PSTNG_BLK_IND,\n    LFA1.sperm AS PRCH_BLK_IND,\n    LFA1.stcd1 AS TAX_NUM1,\n    LFA1.stcd2 AS TAX_NUM2,\n    LFA1.xcpdk AS ONE_TIME_ACCT_IND,\n    LFA1.vbund AS TRAD_PTNR_CO_CD,\n    LFA1.stceg AS VAT_NUM,\n    LFA1.stkzn AS NTRL_PRSN_IND,\n    LFA1.werks AS PLNT_CD,\n    LFA1.sperz AS PMT_BLK_IND,\n    LFA1.scacd AS STD_CARR_ACCS_CD,\n    LFA1.fityp AS TAX_TYPE_CD,\n    LFA1.stcdt AS TAX_NUM_TYPE_CD,\n    LFA1.stcd3 AS TAX_NUM3,\n    LFA1.bbsnr AS GLN2_NBR,\n    LFA1.stcd4 AS TAX_NUM4,\n    LFA1.stcd5 AS TAX_NUM5,\n    LFA1.bubkz AS GLN3_NBR,\n    LFA1.nodel AS BLOK_SUP_IND,\n    LFA1.podkzb AS POD_IND,\n    NULL AS EXTRNL_MFR_CD,\n    lfa1._upt_ as _l0_upt\nFROM {Config.sourceDatabase}.LFA1 LFA1\nLEFT JOIN {Config.sourceDatabase}.T005T T005T\non LFA1.LAND1=T005T.LAND1\nAND T005T._deleted_ = 'F'\nAND T005T.spras = 'E'\nand T005T.MANDT='100'\nWHERE LFA1._deleted_ = 'F'  and LFA1.MANDT='100'  \n \n\"\"\")",
+        "script" : "out0 = spark.sql(f\"\"\"\n    select\n'{Config.sourceSystem}' AS SRC_SYS_CD,\n    LFA1.lifnr AS SUP_NUM,\n    LFA1.name1 AS SUP_NM1,\n    LFA1.name2 AS SUP_NM2,\n    LFA1.name3 AS SUP_NM3,\n    LFA1.name4 AS SUP_NM4,\n    LFA1.sortl AS SUP_SHRT_NM,\n    LFA1.land1 AS CTRY_CD,\n    LFA1.txjcd AS TAX_JURIS_CD,\n    LFA1.lzone AS TRSPN_ZN_CD,\n    LFA1.ort01 AS CITY_NM,\n    LFA1.ort02 AS DSTRC_NM,\n    LFA1.pfach AS PSTL_BOX_CD,\n    LFA1.pstl2 AS PSTL_BOX_PSTL_CD_NUM,\n    LFA1.pstlz AS PSTL_CD_NUM,\n    LFA1.regio AS RGN_NM,\n    LFA1.stras AS ADDR_LINE_1_TXT,\n    T005T.landx AS CTRY_SHRT_NM,\n    LFA1.adrnr AS ADDR_NUM,\n    LFA1.bbbnr AS GLN1_NBR,\n    LFA1.brsch AS SGMNT_CD,\n    CASE\n      WHEN(LFA1.erdat)='00000000' THEN NULL\n      ELSE TO_TIMESTAMP((LFA1.erdat),\\\"yyyyMMdd\\\")\n    END AS CRT_ON_DTTM,\n    LFA1.ktokk AS SUP_TYPE_CD,\n    LFA1.kunnr AS CUST_NUM,\n    LFA1.lnrza AS ALT_PAYEE_NUM,\n    LFA1.loevm AS DEL_IND,\n    LFA1.sperr AS PSTNG_BLK_IND,\n    LFA1.sperm AS PRCH_BLK_IND,\n    LFA1.stcd1 AS TAX_NUM1,\n    LFA1.stcd2 AS TAX_NUM2,\n    LFA1.xcpdk AS ONE_TIME_ACCT_IND,\n    LFA1.vbund AS TRAD_PTNR_CO_CD,\n    LFA1.stceg AS VAT_NUM,\n    LFA1.stkzn AS NTRL_PRSN_IND,\n    LFA1.werks AS PLNT_CD,\n    LFA1.sperz AS PMT_BLK_IND,\n    LFA1.scacd AS STD_CARR_ACCS_CD,\n    LFA1.fityp AS TAX_TYPE_CD,\n    LFA1.stcdt AS TAX_NUM_TYPE_CD,\n    LFA1.stcd3 AS TAX_NUM3,\n    LFA1.bbsnr AS GLN2_NBR,\n    LFA1.stcd4 AS TAX_NUM4,\n    LFA1.stcd5 AS TAX_NUM5,\n    LFA1.bubkz AS GLN3_NBR,\n    LFA1.nodel AS BLOK_SUP_IND,\n    LFA1.podkzb AS POD_IND,\n    cast(NULL as string) AS EXTRNL_MFR_CD,\nlfa1._upt_ as _l0_upt_\nFROM {Config.sourceDatabase}.LFA1 LFA1\nLEFT JOIN {Config.sourceDatabase}.T005T T005T\non LFA1.LAND1=T005T.LAND1\nAND T005T._deleted_ = 'F'\nAND T005T.spras = 'E'\nand T005T.MANDT='100'\nWHERE LFA1._deleted_ = 'F'  and LFA1.MANDT='100'  \n \n\"\"\")",
         "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
         "scriptMethodFooter" : "    return out0"
       }
