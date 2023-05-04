@@ -18,7 +18,8 @@ def pipeline(spark: SparkSession) -> None:
     df_MATL_GRP = MATL_GRP(spark, df_TRIM)
     MATL_GR_LU(spark, df_MATL_GRP)
     df_DS_JDE_01_F4101 = DS_JDE_01_F4101(spark)
-    df_DEL = DEL(spark, df_DS_JDE_01_F4101)
+    df_F4101_SELECTION = F4101_SELECTION(spark, df_DS_JDE_01_F4101)
+    df_DEL = DEL(spark, df_F4101_SELECTION)
     df_XFORM = XFORM(spark, df_DEL)
 
 def main():
