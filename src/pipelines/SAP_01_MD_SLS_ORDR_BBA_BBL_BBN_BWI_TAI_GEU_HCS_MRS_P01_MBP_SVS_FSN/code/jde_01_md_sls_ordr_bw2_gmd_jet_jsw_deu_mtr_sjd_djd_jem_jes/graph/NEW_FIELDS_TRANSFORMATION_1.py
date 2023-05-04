@@ -28,4 +28,16 @@ def NEW_FIELDS_TRANSFORMATION_1(spark: SparkSession, in0: DataFrame) -> DataFram
         .withColumn("TRNSP_PLAN_STS_CD", trim(col("TRSTA")))\
         .withColumn("ICMPT_TOT_STS_CD", trim(col("UVALS")))\
         .withColumn("BILL_ICMPT_TOT_STS_CD", trim(col("UVFAS")))\
-        .withColumn("PACKICMPT_STS_CD", trim(col("UVPAK")))
+        .withColumn("PACKICMPT_STS_CD", trim(col("UVPAK")))\
+        .withColumn("PACKICMPT_TOT_STS_CD", trim(col("UVPAS")))\
+        .withColumn("PICKICMPT_STS_CD", trim(col("UVPIK")))\
+        .withColumn("PICKICMPT_TOT_STS_CD", trim(col("UVPIS")))\
+        .withColumn("PRCICMPT_STS_CD", trim(col("UVPRS")))\
+        .withColumn("DELVICMPT_TOT_STS_CD", trim(col("UVVLS")))\
+        .withColumn("GMICMPT_TOT_STS_CD", trim(col("UVWAS")))\
+        .withColumn("GM_TOT_STS_CD", trim(col("WBSTK")))\
+        .withColumn("DELV_BLK_STS_CD", trim(col("LSSTK")))\
+        .withColumn("RESV_CD", trim(col("CMPS1")))\
+        .withColumn("OVRL_HDR_CD", trim(col("UVALL")))\
+        .withColumn("BILL_BLK_STS_CD", trim(col("FSSTK")))\
+        .withColumn("OVRL_BLK_STS_CD", trim(col("SPSTG")))
