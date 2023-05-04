@@ -67,7 +67,7 @@ def NEW_FIELDS_TRANSFORMATION(spark: SparkSession, in0: DataFrame) -> DataFrame:
         )\
         .withColumn("PRC_PCDR_CD", trim(col("KALSM")))\
         .withColumn("SLS_ORDR_CRNCY_CD", trim(col("WAERK")))\
-        .withColumn("NET_VAL_AMT", trim(col("NETWR")))\
+        .withColumn("NET_VAL_AMT", trim(col("NETWR")).cast(DecimalType(18, 4)))\
         .withColumn("SOLD_TO_CUST_NUM", trim(col("KUNNR")))\
         .withColumn("SALES_ORGANIZATION_CD", trim(col("VKORG")))\
         .withColumn("DSTR_CHNL_CD", trim(col("VTWEG")))\
