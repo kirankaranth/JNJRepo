@@ -1,3 +1,3 @@
-from MD_SLS_ORDR_SCHED_LINE_DELV_6.pipeline import main
+from md_sls_ordr_sched_line_delv_bwi.pipeline import main
 
 main()

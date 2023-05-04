@@ -1,1 +1,1 @@
-from .MD_SLS_ORDR_SCHED_LINE_DELV_4 import *
+from .sap_md_sls_ordr_sched_line_delv_4_hcs_mrs_bbn_bbl_bba import *
