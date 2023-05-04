@@ -6,4 +6,4 @@ from md_bill_doc_hdr_bbl.config.ConfigStore import *
 from md_bill_doc_hdr_bbl.udfs.UDFs import *
 
 def SAP_VBRK(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.sourceSystem}.vbrk")
+    return spark.read.table(f"{Config.sourceDatabase}.vbrk")

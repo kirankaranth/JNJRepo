@@ -10,37 +10,17 @@ from sap_01_md_bill_doc_hdr.config.ConfigStore import *
 
 class NEW_FIELDS_RENAME_FORMATTest(BaseTestCase):
 
-    def test_decimal_test(self):
+    def test_timestamp(self):
         dfIn0 = createDfFromResourceFiles(
             self.spark,
             'test/resources/data/sap_01_md_bill_doc_hdr/graph/NEW_FIELDS_RENAME_FORMAT/in0/schema.json',
-            'test/resources/data/sap_01_md_bill_doc_hdr/graph/NEW_FIELDS_RENAME_FORMAT/in0/data/test_decimal_test.json',
+            'test/resources/data/sap_01_md_bill_doc_hdr/graph/NEW_FIELDS_RENAME_FORMAT/in0/data/test_timestamp.json',
             'in0'
         )
         dfOut = createDfFromResourceFiles(
             self.spark,
             'test/resources/data/sap_01_md_bill_doc_hdr/graph/NEW_FIELDS_RENAME_FORMAT/out/schema.json',
-            'test/resources/data/sap_01_md_bill_doc_hdr/graph/NEW_FIELDS_RENAME_FORMAT/out/data/test_decimal_test.json',
-            'out'
-        )
-        dfOutComputed = NEW_FIELDS_RENAME_FORMAT(self.spark, dfIn0)
-        assertDFEquals(
-            dfOut.select("EXCH_RT_FIN_PSTNG", "NET_VAL_AMT"),
-            dfOutComputed.select("EXCH_RT_FIN_PSTNG", "NET_VAL_AMT"),
-            self.maxUnequalRowsToShow
-        )
-
-    def test_timestamp_test_(self):
-        dfIn0 = createDfFromResourceFiles(
-            self.spark,
-            'test/resources/data/sap_01_md_bill_doc_hdr/graph/NEW_FIELDS_RENAME_FORMAT/in0/schema.json',
-            'test/resources/data/sap_01_md_bill_doc_hdr/graph/NEW_FIELDS_RENAME_FORMAT/in0/data/test_timestamp_test_.json',
-            'in0'
-        )
-        dfOut = createDfFromResourceFiles(
-            self.spark,
-            'test/resources/data/sap_01_md_bill_doc_hdr/graph/NEW_FIELDS_RENAME_FORMAT/out/schema.json',
-            'test/resources/data/sap_01_md_bill_doc_hdr/graph/NEW_FIELDS_RENAME_FORMAT/out/data/test_timestamp_test_.json',
+            'test/resources/data/sap_01_md_bill_doc_hdr/graph/NEW_FIELDS_RENAME_FORMAT/out/data/test_timestamp.json',
             'out'
         )
         dfOutComputed = NEW_FIELDS_RENAME_FORMAT(self.spark, dfIn0)
@@ -50,21 +30,45 @@ class NEW_FIELDS_RENAME_FORMATTest(BaseTestCase):
             self.maxUnequalRowsToShow
         )
 
-    def test_trimtest_(self):
+    def test_decimals(self):
         dfIn0 = createDfFromResourceFiles(
             self.spark,
             'test/resources/data/sap_01_md_bill_doc_hdr/graph/NEW_FIELDS_RENAME_FORMAT/in0/schema.json',
-            'test/resources/data/sap_01_md_bill_doc_hdr/graph/NEW_FIELDS_RENAME_FORMAT/in0/data/test_trimtest_.json',
+            'test/resources/data/sap_01_md_bill_doc_hdr/graph/NEW_FIELDS_RENAME_FORMAT/in0/data/test_decimals.json',
             'in0'
         )
         dfOut = createDfFromResourceFiles(
             self.spark,
             'test/resources/data/sap_01_md_bill_doc_hdr/graph/NEW_FIELDS_RENAME_FORMAT/out/schema.json',
-            'test/resources/data/sap_01_md_bill_doc_hdr/graph/NEW_FIELDS_RENAME_FORMAT/out/data/test_trimtest_.json',
+            'test/resources/data/sap_01_md_bill_doc_hdr/graph/NEW_FIELDS_RENAME_FORMAT/out/data/test_decimals.json',
             'out'
         )
         dfOutComputed = NEW_FIELDS_RENAME_FORMAT(self.spark, dfIn0)
-        assertDFEquals(dfOut.select("SLORG_CD"), dfOutComputed.select("SLORG_CD"), self.maxUnequalRowsToShow)
+        assertDFEquals(
+            dfOut.select("EXCH_RT_FIN_PSTNG", "NET_VAL_AMT", "BILL_DOC"),
+            dfOutComputed.select("EXCH_RT_FIN_PSTNG", "NET_VAL_AMT", "BILL_DOC"),
+            self.maxUnequalRowsToShow
+        )
+
+    def test_trim(self):
+        dfIn0 = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/sap_01_md_bill_doc_hdr/graph/NEW_FIELDS_RENAME_FORMAT/in0/schema.json',
+            'test/resources/data/sap_01_md_bill_doc_hdr/graph/NEW_FIELDS_RENAME_FORMAT/in0/data/test_trim.json',
+            'in0'
+        )
+        dfOut = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/sap_01_md_bill_doc_hdr/graph/NEW_FIELDS_RENAME_FORMAT/out/schema.json',
+            'test/resources/data/sap_01_md_bill_doc_hdr/graph/NEW_FIELDS_RENAME_FORMAT/out/data/test_trim.json',
+            'out'
+        )
+        dfOutComputed = NEW_FIELDS_RENAME_FORMAT(self.spark, dfIn0)
+        assertDFEquals(
+            dfOut.select("BILL_DOC", "SLORG_DESC", "BILL_DOC_IS_CAN"),
+            dfOutComputed.select("BILL_DOC", "SLORG_DESC", "BILL_DOC_IS_CAN"),
+            self.maxUnequalRowsToShow
+        )
 
     def setUp(self):
         BaseTestCase.setUp(self)
