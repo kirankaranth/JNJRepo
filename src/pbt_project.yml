@@ -591,7 +591,7 @@ pipelines:
     artefactID: ''
     language: python
     createdAt: '2023-03-17 19:02:14'
-    modifiedAt: '2023-04-27 15:27:33'
+    modifiedAt: '2023-05-04 17:19:50'
     datasets:
       inputs:
       - datasets/DS_SAP_01_TSPAT
@@ -792,7 +792,7 @@ pipelines:
     artefactID: ''
     language: python
     createdAt: '2023-04-03 16:23:58'
-    modifiedAt: '2023-04-18 03:23:22'
+    modifiedAt: '2023-05-04 16:06:17'
     datasets:
       inputs:
       - datasets/DS_SAP_01_TSPAT
@@ -1755,6 +1755,26 @@ pipelines:
       - datasets/MD_MATL_UOM
     subgraphs: []
     dependencies: {}
+  pipelines/SAP_MD_BILL_DOC_HDR_BBA_BBN:
+    name: SAP_MD_BILL_DOC_HDR_BBA_BBN
+    description: ''
+    author: jcovezd1@its.jnj.com
+    mode: batch
+    artefactID: ''
+    language: python
+    createdAt: '2023-05-04 16:30:54'
+    modifiedAt: '2023-05-04 17:33:17'
+    datasets:
+      inputs:
+      - datasets/DS_SAP_01_TSPAT
+      - datasets/DS_SAP_01_TVFKT
+      - datasets/DS_SAP_01_TVKOT
+      - datasets/DS_SAP_01_TVTWT
+      - datasets/DS_SAP_01_VBRK
+      outputs:
+      - datasets/MD_BILL_DOC_HDR
+    subgraphs: []
+    dependencies: {}
 datasets:
   datasets/MD_HU_SER:
     name: MD_HU_SER
@@ -2061,7 +2081,7 @@ datasets:
     description: ''
     author: skostadi@its.jnj.com
     createdAt: '2023-03-20 18:20:04'
-    modifiedAt: '2023-04-18 03:57:11'
+    modifiedAt: '2023-05-04 17:28:53'
     mode: batch
     physicalDatasets:
       CDL_L1_Dev:
@@ -5016,7 +5036,7 @@ datasets:
     description: ''
     author: jcovezd1@its.jnj.com
     createdAt: '2023-03-20 11:05:48'
-    modifiedAt: '2023-04-18 03:22:14'
+    modifiedAt: '2023-05-04 17:22:48'
     mode: batch
     physicalDatasets:
       CDL_L1_Dev:
@@ -7627,16 +7647,17 @@ jobs:
       onSuccess: false
       onFailure: false
     pipelines:
-    - pipelines/SAP_01_MD_BILL_DOC_HDR
     - pipelines/MD_BILL_DOC_HDR_BBL
+    - pipelines/SAP_01_MD_BILL_DOC_HDR
     - pipelines/SAP_01_MD_BILL_DOC_HDR_FSN_GEU_HCS_MBP_MRS_P01_SVS_TAI
+    - pipelines/SAP_MD_BILL_DOC_HDR_BBA_BBN
     jobClusterMode:
       clusterMode:
         Single: {}
       clusterId: null
     enabled: null
     createdAt: '2023-03-30 17:13:45'
-    modifiedAt: '2023-04-27 20:57:07'
+    modifiedAt: '2023-05-04 17:34:55'
     author: hgermi1@its.jnj.com
   jobs/JOB_MD_DELV_LINE_HM2:
     name: JOB_MD_DELV_LINE_HM2
@@ -7808,34 +7829,6 @@ jobs:
     createdAt: '2023-04-13 02:26:24'
     modifiedAt: '2023-04-27 20:51:29'
     author: hgermi1@its.jnj.com
-  jobs/HMD_PIPELINE_JOB:
-    name: HMD_PIPELINE_JOB
-    description: ''
-    fabricUID: 32
-    scheduler:
-      Databricks: {}
-    cloudProvider: null
-    jobSize: Prophecy_Large
-    scheduleCron: 0 0 0 ? * 7 *
-    timeout: null
-    alerting:
-      emails: ''
-      onStart: false
-      onSuccess: false
-      onFailure: false
-    pipelines:
-    - pipelines/SAP_01_MD_PO_SCHED_LINE_DELV
-    - pipelines/SAP_MD_MATL_LOC_HMD
-    - pipelines/DART_L1_Purchase_Order_MD_PO_HIST
-    - pipelines/SAP_01_MD_SLS_ORDR_LINE_hmd
-    jobClusterMode:
-      clusterMode:
-        Single: {}
-      clusterId: null
-    enabled: false
-    createdAt: '2023-04-25 20:42:37'
-    modifiedAt: '2023-04-27 20:52:46'
-    author: smille29@its.jnj.com
   jobs/HM2_PIPELINE_JOB:
     name: HM2_PIPELINE_JOB
     description: ''
@@ -7939,6 +7932,34 @@ jobs:
     createdAt: '2023-05-01 17:43:37'
     modifiedAt: '2023-05-01 20:42:17'
     author: ypatel8@its.jnj.com
+  jobs/HMD_PIPELINE_JOB:
+    name: HMD_PIPELINE_JOB
+    description: ''
+    fabricUID: 32
+    scheduler:
+      Databricks: {}
+    cloudProvider: null
+    jobSize: Prophecy_Large
+    scheduleCron: 0 0 0 ? * 7 *
+    timeout: null
+    alerting:
+      emails: ''
+      onStart: false
+      onSuccess: false
+      onFailure: false
+    pipelines:
+    - pipelines/SAP_01_MD_PO_SCHED_LINE_DELV
+    - pipelines/SAP_MD_MATL_LOC_HMD
+    - pipelines/DART_L1_Purchase_Order_MD_PO_HIST
+    - pipelines/SAP_01_MD_SLS_ORDR_LINE_hmd
+    jobClusterMode:
+      clusterMode:
+        Single: {}
+      clusterId: null
+    enabled: false
+    createdAt: '2023-04-25 20:42:37'
+    modifiedAt: '2023-04-27 20:52:46'
+    author: smille29@its.jnj.com
 functions:
   author: null
   createdAt: '2023-03-24 15:42:34'
