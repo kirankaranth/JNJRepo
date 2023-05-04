@@ -1,5 +1,6 @@
 from .TRIM import TRIM
 from .F4101_SELECTION import F4101_SELECTION
+from .FIELD_ORDER import FIELD_ORDER
 from .MATL_T_LU import MATL_T_LU
 from .FRAN_LU import FRAN_LU
 from .DS_JDE_01_F4101 import DS_JDE_01_F4101

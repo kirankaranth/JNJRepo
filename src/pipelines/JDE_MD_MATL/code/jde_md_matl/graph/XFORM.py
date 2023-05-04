@@ -93,4 +93,13 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("TYPE_OF_MATERIAL", expr(Config.TYPE_OF_MATERIAL).cast(StringType()))\
         .withColumn("STERILE", expr(Config.STERILE).cast(StringType()))\
         .withColumn("BRAVO_MINOR_CODE", expr(Config.BRAVO_MINOR_CODE).cast(StringType()))\
-        .withColumn("CMMDTY", expr(Config.CMMDTY).cast(StringType()))
+        .withColumn("CMMDTY", expr(Config.CMMDTY).cast(StringType()))\
+        .withColumn("SRC_SYS_CD", lit(Config.sourceSystem))\
+        .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
+        .withColumn("DAI_CRT_DTTM", current_timestamp())\
+        .withColumn("DAI_UPDT_DTTM", current_timestamp())\
+        .withColumn("_l0_upt_", col("_upt_"))\
+        .withColumn("_pk_", to_json(expr("named_struct('SRC_SYS_CD', SRC_SYS_CD, 'MATL_NUM', MATL_NUM)")))\
+        .withColumn("_pk_md5_", md5(to_json(expr("named_struct('SRC_SYS_CD', SRC_SYS_CD, 'MATL_NUM', MATL_NUM)"))))\
+        .withColumn("_l1_upt_", current_timestamp())\
+        .withColumn("_deleted_", lit("F"))
