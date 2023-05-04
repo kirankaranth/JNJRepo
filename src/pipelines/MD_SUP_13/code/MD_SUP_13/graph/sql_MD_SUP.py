@@ -10,9 +10,9 @@ def sql_MD_SUP(spark: SparkSession) -> DataFrame:
         f"""
     with cte as (
     SELECT
-        ROW_NUMBER() OVER (partition by f0401.a6an8 ORDER BY f0116_adt.aleftb desc) row,
+        ROW_NUMBER() OVER (partition by f0401_adt.a6an8 ORDER BY f0116_adt.aleftb desc) row,
         '{Config.sourceSystem}' AS SRC_SYS_CD,
-        f0401.a6an8 AS SUP_NUM,
+        f0401_adt.a6an8 AS SUP_NUM,
         TRIM(f0101_adt.abalph) AS SUP_NM1,
         CAST(NULL AS STRING) AS SUP_NM2,
         CAST(NULL AS STRING) AS SUP_NM3,
@@ -33,8 +33,8 @@ def sql_MD_SUP(spark: SparkSession) -> DataFrame:
         CAST(NULL AS STRING) AS GLN1_NBR,
         CAST(NULL AS STRING) AS SGMNT_CD,
         CASE
-          WHEN LOWER(TRIM(f0401.a6upmj)) = 'CAST(NULL AS STRING)' OR TRIM(f0401.a6upmj) = '' OR TRIM(f0401.a6upmj) = '0' THEN CAST(NULL AS STRING)
-          ELSE TO_TIMESTAMP(substr(CAST(DATE_ADD(CONCAT(SUBSTR(CAST(CAST(TRIM(f0401.a6upmj) AS INT) + 1900000 AS STRING), 1, 4), '-01-01'), CAST(SUBSTR(CAST(CAST(TRIM(f0401.a6upmj) AS INT) + 1900000 AS string), 5) AS INT ) -1)
+          WHEN LOWER(TRIM(f0401_adt.a6upmj)) = 'CAST(NULL AS STRING)' OR TRIM(f0401_adt.a6upmj) = '' OR TRIM(f0401_adt.a6upmj) = '0' THEN CAST(NULL AS timestamp)
+          ELSE TO_TIMESTAMP(substr(CAST(DATE_ADD(CONCAT(SUBSTR(CAST(CAST(TRIM(f0401_adt.a6upmj) AS INT) + 1900000 AS string), 1, 4), '-01-01'), CAST(SUBSTR(CAST(CAST(TRIM(f0401_adt.a6upmj) AS INT) + 1900000 AS string), 5) AS INT ) -1)
           AS STRING), 1, 10),'yyyy-MM-dd')
         END AS CRT_ON_DTTM,
         TRIM(f0101_adt.abat1) AS SUP_TYPE_CD,
@@ -62,11 +62,11 @@ def sql_MD_SUP(spark: SparkSession) -> DataFrame:
         CAST(NULL AS STRING) AS BLOK_SUP_IND,
         CAST(NULL AS STRING) AS POD_IND,
         TRIM(f0101_adt.abalky) AS EXTRNL_MFR_CD,
-        f0401._upt_ as _l0_upt_
-    FROM {Config.sourceDatabase}.f0401 f0401
- LEFT JOIN {Config.sourceDatabase}.f0101_adt f0101_adt on f0401.a6an8=f0101_adt.aban8 AND f0101_adt._deleted_ = 'F'
- LEFT JOIN {Config.sourceDatabase}.f0116_adt f0116_adt on f0401.a6an8=f0116_adt.alan8 AND f0116_adt._deleted_ = 'F'
- WHERE f0401._deleted_ = 'F'
+        f0401_adt._upt_ as _l0_upt_
+    FROM {Config.sourceDatabase}.f0401_adt f0401_adt
+ LEFT JOIN {Config.sourceDatabase}.f0101_adt f0101_adt on f0401_adt.a6an8=f0101_adt.aban8 AND f0101_adt._deleted_ = 'F'
+ LEFT JOIN {Config.sourceDatabase}.f0116_adt f0116_adt on f0401_adt.a6an8=f0116_adt.alan8 AND f0116_adt._deleted_ = 'F'
+ WHERE f0401_adt._deleted_ = 'F'
 )
 SELECT 
     cte.SRC_SYS_CD, 

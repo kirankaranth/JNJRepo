@@ -54,7 +54,7 @@ NULL AS TAX_NUM5,
 NULL AS GLN3_NBR,
 NULL AS BLOK_SUP_IND,
 NULL AS POD_IND,
-trim(f0101.abalky) AS EXTRNL_MFR_CD,
+
 f0401._upt_ as _l0_upt_
 FROM {Config.sourceDatabase}.f0401  f0401
  left join {Config.sourceDatabase}.f0101 on f0401.a6an8=f0101.aban8 AND   f0101._deleted_ = 'F'   

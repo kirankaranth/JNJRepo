@@ -33,7 +33,7 @@ def sql_MD_SUP(spark: SparkSession) -> DataFrame:
         CAST(NULL AS STRING) AS GLN1_NBR,
         CAST(NULL AS STRING) AS SGMNT_CD,
         CASE
-            WHEN LOWER(TRIM(f0401.a6upmj)) = 'CAST(NULL AS STRING)' OR TRIM(f0401.a6upmj) = '' OR TRIM(f0401.a6upmj) = '0' THEN CAST(NULL AS STRING)
+            WHEN LOWER(TRIM(f0401.a6upmj)) = 'CAST(NULL AS STRING)' OR TRIM(f0401.a6upmj) = '' OR TRIM(f0401.a6upmj) = '0' THEN CAST(NULL AS timestamp)
             ELSE TO_TIMESTAMP(substr(CAST(DATE_ADD(CONCAT(SUBSTR(CAST(CAST(TRIM(f0401.a6upmj) AS INT) + 1900000 AS STRING), 1, 4), '-01-01'), CAST(SUBSTR(CAST(CAST(TRIM(f0401.a6upmj) AS INT) + 1900000 AS string), 5) AS INT ) -1)
             AS STRING), 1, 10),'yyyy-MM-dd')
         END AS CRT_ON_DTTM,
