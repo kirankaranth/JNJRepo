@@ -2,8 +2,8 @@ from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from prophecy.libs import typed_lit
-from MD_SUP_7.config.ConfigStore import *
-from MD_SUP_7.udfs.UDFs import *
+from md_sup_7_atl.config.ConfigStore import *
+from md_sup_7_atl.udfs.UDFs import *
 
 def sql_MD_SUP(spark: SparkSession) -> DataFrame:
     out0 = spark.sql(
