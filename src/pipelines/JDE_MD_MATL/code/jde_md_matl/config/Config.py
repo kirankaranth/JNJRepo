@@ -35,6 +35,7 @@ class Config(ConfigBase):
             SRC_SECTR_CD: str=None,
             MATL_PARNT_CD: str=None,
             MATL_SUB_TYPE_CD: str=None,
+            FIN_HIER_BASE_CD: str=None,
             IMPLNT_INSTM_IND: str=None,
             KIT_IND: str=None,
             DIR_PART_MRKNG_CD: str=None,
@@ -86,6 +87,7 @@ class Config(ConfigBase):
             SRC_SECTR_CD, 
             MATL_PARNT_CD, 
             MATL_SUB_TYPE_CD, 
+            FIN_HIER_BASE_CD, 
             IMPLNT_INSTM_IND, 
             KIT_IND, 
             DIR_PART_MRKNG_CD, 
@@ -114,14 +116,14 @@ class Config(ConfigBase):
             DBTABLE: str="f4101",
             DBTABLE1: str="f0005",
             DAI_ETL_ID: int=0,
-            BRAVO_MINOR_DESC_FILTER: str="Filter N/A",
-            B_M_LU_Field: str="Field N/A",
-            FRAN_CD_FILTER: str="Filter N/A",
-            F_C_LU_Field: str="Field N/A",
-            MATL_GRP_FILTER: str="Filter N/A",
-            M_G_LU_Field: str="Field N/A",
-            MATL_TYPE_DESC_FILTER: str="Filter N/A",
-            M_T_D_LU_Field: str="Field N/A",
+            BRAVO_MINOR_DESC_FILTER: str="\"Filter N/A\"",
+            B_M_LU_Field: str="\"Field N/A\"",
+            FRAN_CD_FILTER: str="\"Filter N/A\"",
+            F_C_LU_Field: str="\"Field N/A\"",
+            MATL_GRP_FILTER: str="\"Filter N/A\"",
+            M_G_LU_Field: str="\"Field N/A\"",
+            MATL_TYPE_DESC_FILTER: str="\"Filter N/A\"",
+            M_T_D_LU_Field: str="\"Field N/A\"",
             MATL_TYPE_CD: str="null",
             BRND_CD: str="null",
             FRANCHISE_CD: str="null",
@@ -137,6 +139,7 @@ class Config(ConfigBase):
             SRC_SECTR_CD: str="null",
             MATL_PARNT_CD: str="null",
             MATL_SUB_TYPE_CD: str="null",
+            FIN_HIER_BASE_CD: str="null",
             IMPLNT_INSTM_IND: str="null",
             KIT_IND: str="null",
             DIR_PART_MRKNG_CD: str="null",
@@ -187,6 +190,7 @@ class Config(ConfigBase):
         self.SRC_SECTR_CD = SRC_SECTR_CD
         self.MATL_PARNT_CD = MATL_PARNT_CD
         self.MATL_SUB_TYPE_CD = MATL_SUB_TYPE_CD
+        self.FIN_HIER_BASE_CD = FIN_HIER_BASE_CD
         self.IMPLNT_INSTM_IND = IMPLNT_INSTM_IND
         self.KIT_IND = KIT_IND
         self.DIR_PART_MRKNG_CD = DIR_PART_MRKNG_CD
