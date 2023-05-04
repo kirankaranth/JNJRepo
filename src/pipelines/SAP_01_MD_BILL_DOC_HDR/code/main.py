@@ -1,3 +1,3 @@
-from sap_01_md_bill_doc_hdr.pipeline import main
+from sap_md_bill_doc_hdr_hmd.pipeline import main
 
 main()
