@@ -1,10 +1,10 @@
 from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
-from sap_01_md_cust.config.ConfigStore import *
-from sap_01_md_cust.udfs.UDFs import *
+from sap_01_md_cust_mrs_fsn_svs_geu.config.ConfigStore import *
+from sap_01_md_cust_mrs_fsn_svs_geu.udfs.UDFs import *
 from prophecy.utils import *
-from sap_01_md_cust.graph import *
+from sap_01_md_cust_mrs_fsn_svs_geu.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_SAP_TVAST = SAP_TVAST(spark)
