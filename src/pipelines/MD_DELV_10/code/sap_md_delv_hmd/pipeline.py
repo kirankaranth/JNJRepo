@@ -8,21 +8,7 @@ from sap_md_delv_hmd.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_sql_MD_DELV = sql_MD_DELV(spark)
-    df_sql_MD_DELV = collectMetrics(
-        spark, 
-        df_sql_MD_DELV, 
-        "graph", 
-        "b4ab0d9a-1549-419d-915f-1e9ddc89d4d4", 
-        "1c710b1c-f605-4a7b-bdd1-251858910819"
-    )
     df_addL1fields = addL1fields(spark, df_sql_MD_DELV)
-    df_addL1fields = collectMetrics(
-        spark, 
-        df_addL1fields, 
-        "graph", 
-        "d3bb4a59-1212-42c2-80e0-bdfe2a5e8094", 
-        "aa6b0086-95c5-448b-813c-efb4cbae5920"
-    )
     df_Deduplicate = Deduplicate(spark, df_addL1fields)
     df_Deduplicate = collectMetrics(
         spark, 

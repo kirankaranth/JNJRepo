@@ -8,13 +8,6 @@ from sap_md_delv_geu.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_sql_MD_DELV = sql_MD_DELV(spark)
-    df_sql_MD_DELV = collectMetrics(
-        spark, 
-        df_sql_MD_DELV, 
-        "graph", 
-        "730b8f1a-e47a-4cc2-87dc-667a456ef437", 
-        "8b66f31c-4d7c-4b84-b5aa-243eb0f9ce09"
-    )
     df_addL1fields = addL1fields(spark, df_sql_MD_DELV)
     df_addL1fields = collectMetrics(
         spark, 
