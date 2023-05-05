@@ -27,17 +27,18 @@ def pipeline(spark: SparkSession) -> None:
     )
     df_MANDT_FILTER_T016T = MANDT_FILTER_T016T(spark, df_SAP_T016T)
     LU_SAP_T016T(spark, df_MANDT_FILTER_T016T)
-    df_SAP_KNA1 = SAP_KNA1(spark)
-    df_SAP_KNA1 = collectMetrics(
+    df_DS_01_SAP_KNA1 = DS_01_SAP_KNA1(spark)
+    df_DS_01_SAP_KNA1 = collectMetrics(
         spark, 
-        df_SAP_KNA1, 
+        df_DS_01_SAP_KNA1, 
         "graph", 
         "7FiguLGhkLkTMjjbuS_-r$$t3i0bcHt7YxTn8u695cVL", 
         "oy_tucL4l59wb13X7ZbqH$$tgBNwLNg-6jZh73to-w_R"
     )
-    df_MANDT_FILTER = MANDT_FILTER(spark, df_SAP_KNA1)
+    df_MANDT_FILTER = MANDT_FILTER(spark, df_DS_01_SAP_KNA1)
     df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_MANDT_FILTER)
-    df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS_RENAME_FORMAT)
+    df_DEDUPLICATE = DEDUPLICATE(spark, df_NEW_FIELDS_RENAME_FORMAT)
+    df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_DEDUPLICATE)
     df_SET_FIELD_ORDER_REFORMAT = collectMetrics(
         spark, 
         df_SET_FIELD_ORDER_REFORMAT, 
@@ -46,17 +47,6 @@ def pipeline(spark: SparkSession) -> None:
         "qwgBUWieqOjTj0_pvmxEY$$sb4OxzWZFV18wT_lmBv2Z"
     )
     MD_CUST(spark, df_SET_FIELD_ORDER_REFORMAT)
-    df_DUPLICATE_CHECK = DUPLICATE_CHECK(spark, df_SET_FIELD_ORDER_REFORMAT)
-    df_DUPLICATE_CHECK_FILTER = DUPLICATE_CHECK_FILTER(spark, df_DUPLICATE_CHECK)
-    df_DUPLICATE_CHECK_FILTER = collectMetrics(
-        spark, 
-        df_DUPLICATE_CHECK_FILTER, 
-        "graph", 
-        "zkHnCR2DxQKyzICR-zI6T$$_ruASN4DZJT6u1TpikfMU", 
-        "h-7_GKX-CZ0gMQZ3BoNcP$$6-Q9jnxdAotp_eGjyG0UE"
-    )
-    df_DUPLICATE_CHECK_FILTER.cache().count()
-    df_DUPLICATE_CHECK_FILTER.unpersist()
 
 def main():
     spark = SparkSession.builder\
