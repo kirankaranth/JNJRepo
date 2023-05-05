@@ -2,8 +2,8 @@ from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from prophecy.libs import typed_lit
-from MD_DELV_1.config.ConfigStore import *
-from MD_DELV_1.udfs.UDFs import *
+from sap_md_delv_bba_bbl_bbn_hcs_mrs.config.ConfigStore import *
+from sap_md_delv_bba_bbl_bbn_hcs_mrs.udfs.UDFs import *
 
 def sql_MD_DELV(spark: SparkSession) -> DataFrame:
     out0 = spark.sql(
