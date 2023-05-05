@@ -153,4 +153,24 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         )\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
-        .withColumn("DAI_UPDT_DTTM", current_timestamp())
+        .withColumn("DAI_UPDT_DTTM", current_timestamp())\
+        .withColumn(
+          "_pk_",
+          to_json(
+            expr(
+              "named_struct('SRC_SYS_CD', SRC_SYS_CD, 'BOM_CAT_CD', BOM_CAT_CD, 'BOM_NUM', BOM_NUM, 'ALT_BOM_NUM', ALT_BOM_NUM, 'BOM_CNTR_NBR', BOM_CNTR_NBR)"
+            )
+          )
+        )\
+        .withColumn(
+          "_pk_md5_",
+          md5(
+            to_json(
+              expr(
+                "named_struct('SRC_SYS_CD', SRC_SYS_CD, 'BOM_CAT_CD', BOM_CAT_CD, 'BOM_NUM', BOM_NUM, 'ALT_BOM_NUM', ALT_BOM_NUM, 'BOM_CNTR_NBR', BOM_CNTR_NBR)"
+              )
+            )
+          )
+        )\
+        .withColumn("_l1_upt_", current_timestamp())\
+        .withColumn("_deleted_", lit("F"))

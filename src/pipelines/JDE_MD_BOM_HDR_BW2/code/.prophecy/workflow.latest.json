@@ -35,7 +35,7 @@
           "optional" : false,
           "isWorkflowNodeConfiguration" : false
         }, {
-          "name" : "DBNAME",
+          "name" : "sourceDatabase",
           "kind" : {
             "type" : "string",
             "value" : "bw2"
@@ -43,7 +43,7 @@
           "optional" : false,
           "isWorkflowNodeConfiguration" : false
         }, {
-          "name" : "TBNAME",
+          "name" : "sourceTable",
           "kind" : {
             "type" : "string",
             "value" : "f3002_adt"
@@ -156,7 +156,7 @@
             }, {
               "name" : "_deleted_",
               "type" : "string",
-              "nullable" : true,
+              "nullable" : false,
               "metadata" : {
                 "description" : "",
                 "mappings" : [ ],
@@ -1109,6 +1109,24 @@
               }
             }, {
               "name" : "DAI_UPDT_DTTM",
+              "type" : "timestamp",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_pk_md5_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_l1_upt_",
               "type" : "timestamp",
               "nullable" : false,
               "metadata" : {
@@ -1752,7 +1770,7 @@
             }, {
               "name" : "_deleted_",
               "type" : "string",
-              "nullable" : true,
+              "nullable" : false,
               "metadata" : {
                 "description" : "",
                 "mappings" : [ ],
@@ -2705,6 +2723,24 @@
               }
             }, {
               "name" : "DAI_UPDT_DTTM",
+              "type" : "timestamp",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_pk_md5_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_l1_upt_",
               "type" : "timestamp",
               "nullable" : false,
               "metadata" : {
@@ -3834,6 +3870,70 @@
             "expression" : {
               "format" : "sql",
               "expression" : "current_timestamp()"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_pk_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'BOM_CAT_CD',BOM_CAT_CD,'BOM_NUM',BOM_NUM,'ALT_BOM_NUM',ALT_BOM_NUM,'BOM_CNTR_NBR',BOM_CNTR_NBR))"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_pk_md5_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'BOM_CAT_CD',BOM_CAT_CD,'BOM_NUM',BOM_NUM,'ALT_BOM_NUM',ALT_BOM_NUM,'BOM_CNTR_NBR',BOM_CNTR_NBR)))"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_l1_upt_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "current_timestamp()"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_deleted_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "'F'"
             }
           },
           "DropColumn" : {
