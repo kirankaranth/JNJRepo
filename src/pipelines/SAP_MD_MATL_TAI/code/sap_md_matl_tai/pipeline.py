@@ -7,6 +7,16 @@ from prophecy.utils import *
 from sap_md_matl_tai.graph import *
 
 def pipeline(spark: SparkSession) -> None:
+    df_T023T = T023T(spark)
+    df_T023T = collectMetrics(
+        spark, 
+        df_T023T, 
+        "graph", 
+        "cmMrkt_otIMo6u6XtvaWf$$aJt-3I7isB6I1132iDkA2", 
+        "CLinUhPe8GEJtEtH5xVnK$$nOaqh0_wjfjuhkK0t4qGl"
+    )
+    df_DEL_MANDT_9 = DEL_MANDT_9(spark, df_T023T)
+    WGBEZx_LU(spark, df_DEL_MANDT_9)
     df_MAKT = MAKT(spark)
     df_MAKT = collectMetrics(
         spark, 
@@ -17,6 +27,16 @@ def pipeline(spark: SparkSession) -> None:
     )
     df_DEL_MANDT1 = DEL_MANDT1(spark, df_MAKT)
     MAKTX_LU(spark, df_DEL_MANDT1)
+    df_T134T = T134T(spark)
+    df_T134T = collectMetrics(
+        spark, 
+        df_T134T, 
+        "graph", 
+        "_RC5pYNatq-hyS0WF6jtO$$Cg24z6xIR4S3Xd51A-uNT", 
+        "vMDdYXHK41os-e0TzJXcE$$KB-FKlS7gIFk54xQ3Hni_"
+    )
+    df_DEL_MANDT_5 = DEL_MANDT_5(spark, df_T134T)
+    MTBEZ_LU(spark, df_DEL_MANDT_5)
     df_MARA = MARA(spark)
     df_MARA = collectMetrics(
         spark, 

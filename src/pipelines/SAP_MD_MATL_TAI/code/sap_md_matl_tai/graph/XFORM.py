@@ -99,4 +99,7 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("_l1_upt_", current_timestamp())\
         .withColumn("_deleted_L1", lit("F"))\
         .withColumn("MATL_SPEC_NUM", trim(col("FERTH")))\
-        .withColumn("MATL_SPEC_VERS_NUM", trim(col("NORMT")))
+        .withColumn("MATL_SPEC_VERS_NUM", trim(col("NORMT")))\
+        .withColumn("MATL_TYPE_DESC", lookup("MTBEZ_LU", col("MTART")).getField("MTBEZ"))\
+        .withColumn("MATL_GRP_DESC", lookup("WGBEZx_LU", col("MATKL")).getField("WGBEZ"))\
+        .withColumn("MATL_GRP_DESC_2", lookup("WGBEZx_LU", col("MATKL")).getField("WGBEZ"))

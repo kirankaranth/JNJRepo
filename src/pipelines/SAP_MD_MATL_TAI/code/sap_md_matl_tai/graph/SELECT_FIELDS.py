@@ -77,5 +77,8 @@ def SELECT_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("_l1_upt_"), 
         col("_deleted_L1").alias("_deleted_"), 
         col("MATL_SPEC_NUM"), 
-        col("MATL_SPEC_VERS_NUM")
+        col("MATL_SPEC_VERS_NUM"), 
+        col("MATL_TYPE_DESC"), 
+        col("MATL_GRP_DESC"), 
+        col("MATL_GRP_DESC_2")
     )
