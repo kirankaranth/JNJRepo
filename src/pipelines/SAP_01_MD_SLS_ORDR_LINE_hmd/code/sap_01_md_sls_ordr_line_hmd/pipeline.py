@@ -17,6 +17,16 @@ def pipeline(spark: SparkSession) -> None:
     )
     df_MANDT_FILTER_1_1_1_2 = MANDT_FILTER_1_1_1_2(spark, df_SAP_TVRO)
     LU_SAP_TVRO(spark, df_MANDT_FILTER_1_1_1_2)
+    df_DS_SAP_01_TVROT = DS_SAP_01_TVROT(spark)
+    df_DS_SAP_01_TVROT = collectMetrics(
+        spark, 
+        df_DS_SAP_01_TVROT, 
+        "graph", 
+        "6q7t-WcM9nRVSEJIO0V_l$$KxW9FjKEDJ0n5QuAo6Ba5", 
+        "hs0TSKMHpMbl7iofxo6Dd$$3P43oio6utN47V4Xyf2AK"
+    )
+    df_Filter_TVROT = Filter_TVROT(spark, df_DS_SAP_01_TVROT)
+    LU_SAP_TVROT(spark, df_Filter_TVROT)
     df_SAP_TVAGT = SAP_TVAGT(spark)
     df_SAP_TVAGT = collectMetrics(
         spark, 
@@ -87,14 +97,6 @@ def pipeline(spark: SparkSession) -> None:
     )
     df_MANDT_FILTER_1_1_1_2_1_1_1_1 = MANDT_FILTER_1_1_1_2_1_1_1_1(spark, df_SAP_TVM5T)
     LU_SAP_TVM5T(spark, df_MANDT_FILTER_1_1_1_2_1_1_1_1)
-    df_DS_SAP_01_TVROT = DS_SAP_01_TVROT(spark)
-    df_DS_SAP_01_TVROT = collectMetrics(
-        spark, 
-        df_DS_SAP_01_TVROT, 
-        "graph", 
-        "6q7t-WcM9nRVSEJIO0V_l$$KxW9FjKEDJ0n5QuAo6Ba5", 
-        "hs0TSKMHpMbl7iofxo6Dd$$3P43oio6utN47V4Xyf2AK"
-    )
     df_SAP_VBAP = SAP_VBAP(spark)
     df_SAP_VBAP = collectMetrics(
         spark, 
@@ -147,8 +149,6 @@ def pipeline(spark: SparkSession) -> None:
         "CNEOYEnXaJkgZWU69c91w$$iKg9J2RNdLawE5-USfbrU"
     )
     MD_SLS_ORDR_LINE(spark, df_NEW_FIEDS)
-    df_Filter_TVROT = Filter_TVROT(spark, df_DS_SAP_01_TVROT)
-    LU_SAP_TVROT(spark, df_Filter_TVROT)
     df_DUPLICATE_CHECK = DUPLICATE_CHECK(spark, df_NEW_FIEDS)
     df_DUPLICATE_CHECK_1 = DUPLICATE_CHECK_1(spark, df_DUPLICATE_CHECK)
     df_DUPLICATE_CHECK_1 = collectMetrics(
