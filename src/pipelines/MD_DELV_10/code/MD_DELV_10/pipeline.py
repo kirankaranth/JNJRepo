@@ -9,7 +9,8 @@ from MD_DELV_10.graph import *
 def pipeline(spark: SparkSession) -> None:
     df_sql_MD_DELV = sql_MD_DELV(spark)
     df_addL1fields = addL1fields(spark, df_sql_MD_DELV)
-    MD_DELV(spark, df_addL1fields)
+    df_Deduplicate = Deduplicate(spark, df_addL1fields)
+    MD_DELV(spark, df_Deduplicate)
 
 def main():
     spark = SparkSession.builder\
