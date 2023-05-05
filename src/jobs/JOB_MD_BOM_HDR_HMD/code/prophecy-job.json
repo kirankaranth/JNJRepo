@@ -1,0 +1,197 @@
+{
+  "metainfo" : {
+    "type" : "Databricks",
+    "fabricId" : "32",
+    "jobId" : "jobs/JOB_MD_BOM_HDR_HMD",
+    "name" : "JOB_MD_BOM_HDR_HMD",
+    "schedule" : "0 0 0 1/1 * ? *",
+    "scheduleTimeZone" : "UTC",
+    "jobClusterMode" : {
+      "clusterMode" : "Single"
+    },
+    "enabled" : false,
+    "defaultClusterSize" : "Prophecy_Small",
+    "alerting" : {
+      "emails" : "",
+      "onStart" : false,
+      "onSuccess" : false,
+      "onFailure" : false
+    },
+    "maxConcurrentRuns" : 1,
+    "processDefaultSettings" : {
+      "type" : "Inherited",
+      "retries" : 0,
+      "alerting" : {
+        "emails" : "",
+        "onStart" : false,
+        "onSuccess" : false,
+        "onFailure" : false
+      }
+    },
+    "availableFabrics" : [ {
+      "id" : "4",
+      "name" : "CDL_Dev_Consume_Views",
+      "clusterSizes" : {
+        "default" : "small",
+        "availableClusterSizes" : [ "small" ]
+      },
+      "pylibsResolutionMode" : {
+        "PublicCentral" : { }
+      },
+      "scalalibsResolutionMode" : {
+        "PublicCentral" : { }
+      }
+    }, {
+      "id" : "16",
+      "name" : "vkalluru-pilot",
+      "clusterSizes" : {
+        "default" : "small",
+        "availableClusterSizes" : [ "small" ]
+      },
+      "pylibsResolutionMode" : {
+        "PublicCentral" : { }
+      },
+      "scalalibsResolutionMode" : {
+        "PublicCentral" : { }
+      }
+    }, {
+      "id" : "32",
+      "name" : "CDL_L1_Dev",
+      "clusterSizes" : {
+        "default" : "Prophecy_Small",
+        "availableClusterSizes" : [ "Prophecy_Small", "Prophecy_Medium", "Prophecy_Large" ]
+      },
+      "pylibsResolutionMode" : {
+        "PublicCentral" : { }
+      },
+      "scalalibsResolutionMode" : {
+        "PublicCentral" : { }
+      }
+    }, {
+      "id" : "14",
+      "name" : "Epicenter",
+      "clusterSizes" : {
+        "default" : "small",
+        "availableClusterSizes" : [ "small", "sk_test" ]
+      },
+      "pylibsResolutionMode" : {
+        "PublicCentral" : { }
+      },
+      "scalalibsResolutionMode" : {
+        "PublicCentral" : { }
+      }
+    }, {
+      "id" : "29",
+      "name" : "affiliate_4",
+      "clusterSizes" : {
+        "default" : "small",
+        "availableClusterSizes" : [ "small" ]
+      },
+      "pylibsResolutionMode" : {
+        "PublicCentral" : { }
+      },
+      "scalalibsResolutionMode" : {
+        "PublicCentral" : { }
+      }
+    } ]
+  },
+  "processes" : {
+    "pBmvuf3QWNHoKkzxODdcS$$L-GkCIQOL1Q_Vhw7HTj24" : {
+      "id" : "pBmvuf3QWNHoKkzxODdcS$$L-GkCIQOL1Q_Vhw7HTj24",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "hmd",
+        "slug" : "hmd",
+        "x" : 140,
+        "y" : 160
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "IDubh0_0sTtlFdLFPV6Qm$$1ZNjWoX_8Iv-uA3g8gL_z",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "Q7SRb9lqTM_ZFy-Hf0Ysu$$YBudkGYzh4pxZu_hpdoWD",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/SAP_MD_BOM_HDR_ATL_BBL_BWI_FSN_GEU_MBP_P01_SVS_TAI",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MANDT",
+            "kind" : {
+              "type" : "string",
+              "value" : "100"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "BOM_VLD_TO_DTTM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "case when valid_to = '00000000' then CAST(NULL AS TIMESTAMP) else to_timestamp(valid_to,'yyyyMMdd') end"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "GEU", "FSN", "ATL", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "BBN", "SVS", "TAI", "BWI" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "HMD"
+        }
+      }
+    }
+  },
+  "connections" : [ ]
+}
