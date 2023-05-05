@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 setup(
-    name = 'SAP_01_MD_SLS_ORDR_BBA',
+    name = 'SAP_01_MD_SLS_ORDR_BBA_MRS_FSN',
     version = '1.0',
     packages = (
       find_packages(include = ('jde_01_md_sls_ordr_bw2_gmd_jet_jsw_deu_mtr_sjd_djd_jem_jes*', ))
