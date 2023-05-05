@@ -1,3 +1,3 @@
-from sap_01_md_matl_loc.pipeline import main
+from jde_md_matl_loc_jem.pipeline import main
 
 main()

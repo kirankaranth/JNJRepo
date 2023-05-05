@@ -29,4 +29,10 @@ def NEW_FIEDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         )\
         .withColumn("DAI_UPDT_DTTM", current_timestamp())\
         .withColumn("_l1_upt_", current_timestamp())\
-        .withColumn("_deleted_", lit("F"))
+        .withColumn("_deleted_", lit("F"))\
+        .withColumn("RTE_FCTRY_CAL", trim(col("RTE_FCTRY_CAL")))\
+        .withColumn("RTE_DESC", trim(col("RTE_DESC")))\
+        .withColumn("DTRMN_PICK_PACK_TIME", trim(col("DTRMN_PICK_PACK_TIME")))\
+        .withColumn("SHIPPING_PT", trim(col("SHIPPING_PT")))\
+        .withColumn("CTRY_CD", trim(col("CTRY_CD")))\
+        .withColumn("ITEM_CAT_CD", trim(col("ITEM_CAT_CD")))
