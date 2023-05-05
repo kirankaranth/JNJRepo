@@ -1589,6 +1589,38 @@ pipelines:
       - datasets/MD_PO_SCHED_LINE_DELV
     subgraphs: []
     dependencies: {}
+  pipelines/SAP_RSEG:
+    name: sap_md_doc_itm_incm_invc_hm2_hmd_bba_bbl_bbn_geu_mrs_po1_tai
+    description: ''
+    author: jcacere7@its.jnj.com
+    mode: batch
+    artefactID: ''
+    language: python
+    createdAt: '2023-04-26 18:25:43'
+    modifiedAt: '2023-05-04 21:49:38'
+    datasets:
+      inputs:
+      - datasets/DS_SAP_RSEG
+      outputs:
+      - datasets/MD_DOC_ITM_INCM_INVC
+    subgraphs: []
+    dependencies: {}
+  pipelines/jde_md_doc_itm_incm_invc:
+    name: jde_md_doc_itm_incm_invc_bw2_deu_gmd_jem_jes_jet_jsw_sjd
+    description: ''
+    author: jcacere7@its.jnj.com
+    mode: batch
+    artefactID: ''
+    language: python
+    createdAt: '2023-05-02 20:47:57'
+    modifiedAt: '2023-05-04 21:22:26'
+    datasets:
+      inputs:
+      - datasets/DS_JDE_01_F43199
+      outputs:
+      - datasets/MD_DOC_ITM_INCM_INVC
+    subgraphs: []
+    dependencies: {}
 datasets:
   datasets/MD_HU_SER:
     name: MD_HU_SER
@@ -1715,7 +1747,7 @@ datasets:
     description: ''
     author: skostadi@its.jnj.com
     createdAt: '2023-03-20 18:20:04'
-    modifiedAt: '2023-03-20 18:20:04'
+    modifiedAt: '2023-05-04 01:55:33'
     mode: batch
     physicalDatasets:
       CDL_L1_Dev:
@@ -6143,6 +6175,36 @@ datasets:
         author: jcacere7@its.jnj.com
         createdAt: '2023-03-21 20:31:38'
         modifiedAt: '2023-03-21 20:31:38'
+  datasets/DS_SAP_RSEG:
+    name: DS_SAP_RSEG
+    description: ''
+    author: jcacere7@its.jnj.com
+    createdAt: '2023-04-26 18:39:08'
+    modifiedAt: '2023-04-26 18:45:03'
+    mode: batch
+    physicalDatasets:
+      CDL_L1_Dev:
+        fabricId: 32
+        datasetType: Database
+        description: ''
+        author: jcacere7@its.jnj.com
+        createdAt: '2023-04-26 18:39:08'
+        modifiedAt: '2023-04-26 18:39:08'
+  datasets/DS_JDE_01_F43199:
+    name: DS_JDE_01_F43199
+    description: ''
+    author: jcacere7@its.jnj.com
+    createdAt: '2023-05-02 22:50:51'
+    modifiedAt: '2023-05-02 22:53:16'
+    mode: batch
+    physicalDatasets:
+      CDL_L1_Dev:
+        fabricId: 32
+        datasetType: Database
+        description: ''
+        author: jcacere7@its.jnj.com
+        createdAt: '2023-05-02 22:50:51'
+        modifiedAt: '2023-05-02 22:50:51'
 templates: {}
 jobs:
   jobs/JOB_MD_SER_NUM_STOCK_SGMNT:
@@ -7218,6 +7280,57 @@ jobs:
     createdAt: '2023-04-03 13:50:02'
     modifiedAt: '2023-04-03 13:59:04'
     author: jcacere7@its.jnj.com
+  jobs/JOB_MD_DOC_ITM_INCM_INVC:
+    name: JOB_MD_DOC_ITM_INCM_INVC
+    description: ''
+    fabricUID: 32
+    scheduler:
+      Databricks: {}
+    cloudProvider: null
+    jobSize: Prophecy_Small
+    scheduleCron: 0 0 0 1/1 * ? *
+    timeout: null
+    alerting:
+      emails: ''
+      onStart: false
+      onSuccess: false
+      onFailure: false
+    pipelines:
+    - pipelines/SAP_RSEG
+    - pipelines/jde_md_doc_itm_incm_invc
+    jobClusterMode:
+      clusterMode:
+        Single: {}
+      clusterId: null
+    enabled: null
+    createdAt: '2023-04-26 20:30:55'
+    modifiedAt: '2023-05-04 20:14:32'
+    author: jcacere7@its.jnj.com
+  jobs/JOB_MD_DOC_ITM_INCM_INVC_HM2:
+    name: JOB_MD_DOC_ITM_INCM_INVC_HM2
+    description: ''
+    fabricUID: 32
+    scheduler:
+      Databricks: {}
+    cloudProvider: null
+    jobSize: Prophecy_Small
+    scheduleCron: 0 0 0 1/1 * ? *
+    timeout: null
+    alerting:
+      emails: ''
+      onStart: false
+      onSuccess: false
+      onFailure: false
+    pipelines:
+    - pipelines/SAP_RSEG
+    jobClusterMode:
+      clusterMode:
+        Single: {}
+      clusterId: null
+    enabled: null
+    createdAt: '2023-05-04 20:15:46'
+    modifiedAt: '2023-05-04 20:16:19'
+    author: jcacere7@its.jnj.com
 functions:
   author: null
   createdAt: '2023-03-24 15:42:34'
@@ -7228,6 +7341,10 @@ functions:
   expressions: {}
 subgraphs: {}
 sqlModels: {}
+sqlMacros: {}
+sqlSeeds: {}
+sqlSources: {}
+sqlUnreferencedSources: {}
 sqlPipeline: null
 dependencies: []
 projectDependencies: {}
