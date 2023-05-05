@@ -12,10 +12,20 @@
     "format" : "MULTI_TASK",
     "name" : "JOB_MD_DELV_LINE_HM2",
     "job_clusters" : [ {
-      "job_cluster_key" : "JOB_MD_DELV_LINE_HM2_default_Prophecy_Small",
+      "job_cluster_key" : "JOB_MD_DELV_LINE_HM2_default_Prophecy_Large",
       "new_cluster" : {
         "spark_version" : "11.3.x-scala2.12",
         "node_type_id" : "Standard_D12_v2",
+        "driver_node_type_id" : "Standard_D12_v2",
+        "autoscale" : {
+          "min_workers" : 2,
+          "max_workers" : 40
+        },
+        "azure_attributes" : {
+          "first_on_demand" : 1,
+          "availability" : "SPOT_WITH_FALLBACK_AZURE",
+          "spot_bid_max_price" : -1
+        },
         "spark_conf" : {
           "prophecy.metadata.fabric.id" : "32",
           "prophecy.metadata.job.uri" : "__PROJECT_ID_PLACEHOLDER__/jobs/JOB_MD_DELV_LINE_HM2",
@@ -27,18 +37,17 @@
           "prophecy.metadata.url" : "__PROPHECY_URL_PLACEHOLDER__",
           "prophecy.execution.metrics.disabled" : false
         },
-        "num_workers" : 3,
-        "azure_attributes" : {
-          "first_on_demand" : 1,
-          "availability" : "SPOT_WITH_FALLBACK_AZURE"
-        },
-        "driver_node_type_id" : "Standard_D12_v2"
+        "custom_tags" : { },
+        "ssh_public_keys" : [ ],
+        "init_scripts" : [ ],
+        "spark_env_vars" : { },
+        "enable_elastic_disk" : true
       }
     } ],
     "email_notifications" : { },
     "tasks" : [ {
       "task_key" : "HM2",
-      "job_cluster_key" : "JOB_MD_DELV_LINE_HM2_default_Prophecy_Small",
+      "job_cluster_key" : "JOB_MD_DELV_LINE_HM2_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_DELV_LINE_HM2",
         "entry_point" : "main",
@@ -46,7 +55,7 @@
       },
       "libraries" : [ {
         "maven" : {
-          "coordinates" : "io.prophecy:prophecy-libs_2.12:3.3.0-7.0.16"
+          "coordinates" : "io.prophecy:prophecy-libs_2.12:3.3.0-7.0.18"
         }
       }, {
         "pypi" : {
@@ -67,5 +76,6 @@
   },
   "cluster_mode" : {
     "clusterMode" : "Single"
-  }
+  },
+  "secret_scope" : "prophecy_jobs_3"
 }
