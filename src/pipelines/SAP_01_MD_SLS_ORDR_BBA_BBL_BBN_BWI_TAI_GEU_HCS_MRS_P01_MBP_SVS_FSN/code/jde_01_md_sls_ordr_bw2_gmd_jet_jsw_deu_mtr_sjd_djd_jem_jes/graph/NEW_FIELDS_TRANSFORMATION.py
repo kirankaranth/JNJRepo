@@ -125,7 +125,8 @@ def NEW_FIELDS_TRANSFORMATION(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("TAX_DEST_CTRY", trim(col("STCEG_L")))\
         .withColumn("TAX_DPRT_CTRY", trim(col("LANDTX")))\
         .withColumn("IN_TRNGLR_DEAL_EU", trim(col("XEGDR")))\
-        .withColumn("FORBID_SLS_IN", trim(col("ZZ_FORBID_INDC")))\
+        .withColumn("CLS_OF_TRD", expr(Config.CLS_OF_TRD))\
+        .withColumn("FORBID_SLS_IN", expr(Config.FORBID_SLS_IN))\
         .withColumn("SLS_ORDR_TYPE_DESC", lookup("LU_SAP_TVAKT", col("AUART")).getField("BEZEI"))\
         .withColumn("BILL_BLK_DESC", lookup("LU_SAP_TVFST", col("FAKSK")).getField("VTEXT"))\
         .withColumn("DELV_BLK_DESC", lookup("LU_SAP_TVLST", col("LIFSK")).getField("VTEXT"))\
