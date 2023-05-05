@@ -67,7 +67,7 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("LCL_PLNG_SUB_FRAN_CD", expr(Config.LCL_PLNG_SUB_FRAN_CD).cast(StringType()))\
         .withColumn("MATL_GRP_CD", expr(Config.MATL_GRP_CD).cast(StringType()))\
         .withColumn("INDSTR_SECTR_CD", expr(Config.INDSTR_SECTR_CD).cast(StringType()))\
-        .withColumn("MIN_SHLF_RMN_LIF_DAYS_CNT", expr(Config.MIN_SHLF_RMN_LIF_DAYS_CNT).cast(DecimalType(18, 4)))\
+        .withColumn("MIN_SHLF_RMN_LIF_DAYS_CNT", lookup("SLD_LU", col("IMLITM")).getField("min_shelf_life_in_days"))\
         .withColumn("DSTN_CHN_STS_CD", expr(Config.DSTN_CHN_STS_CD).cast(StringType()))\
         .withColumn("PROD_HIER_CD", expr(Config.PROD_HIER_CD).cast(StringType()))\
         .withColumn("STRG_CONDS_CD", expr(Config.STRG_CONDS_CD).cast(StringType()))\

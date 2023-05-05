@@ -426,7 +426,7 @@
       },
       "fabrics" : { },
       "instances" : { },
-      "selected" : "default",
+      "selected" : "bw2",
       "nonEditable" : [ ],
       "isSubscribedPipelineWithPipelineConfigs" : false
     },
@@ -531,6 +531,24 @@
     "sourcePort" : "X5_yIddhVngEUR5nfyn0E$$vfGy99rUws5XAaiMCPZQ0",
     "target" : "8kUhyJ4p5Ctirz9zrx4Vt$$kONC4WfRtNgk1f8J8BkUH",
     "targetPort" : "b7vRq0IVWDMlEpVsBh7mH$$QcfHSkynnFicHcdpFAGOR"
+  }, {
+    "id" : "c3PwtKXsIRfGW_RK5gLDA",
+    "source" : "AhOldWo28OZaMGRM3kMAF$$YO5cwlI0MI64GZf-pNDGN",
+    "sourcePort" : "51OcUGRHTy_oQZyUqVD9A$$SCsBUvEj_Lnm-lR5xZH6u",
+    "target" : "gFgxpgLs4T5zFNXurmwXe$$8soH4LjnCw-nr9VzsJqJg",
+    "targetPort" : "nrZ_46EFZOl8zp_oAQpYD$$9UJJGZ6qvzZu_qO-Q2g2S"
+  }, {
+    "id" : "FvHxzdWxy2S-6AgJvSyVy",
+    "source" : "2D2jL0xHw_StxYwSULvFr$$3y-rUjgKLPWgOtxFyG9c0",
+    "sourcePort" : "ME-P7RBtsn0Zy_Ue5ZUwr$$iNQ3HEaSwdL-CZlCP2So3",
+    "target" : "gFgxpgLs4T5zFNXurmwXe$$8soH4LjnCw-nr9VzsJqJg",
+    "targetPort" : "M9FxCizKRtCggMDqxLf8N$$LO6CiRNKBhgpKhqYsv-yP"
+  }, {
+    "id" : "IEER9KGcyAKjKqNxN1OEE$$Gzoy7fMgJdlKBW7mjjuTA",
+    "source" : "gFgxpgLs4T5zFNXurmwXe$$8soH4LjnCw-nr9VzsJqJg",
+    "sourcePort" : "iRWtEGtPdiIoXx0rSR5Gu$$0vEYoE6sNb-2qax02AIa5",
+    "target" : "9RkjL0onmMehaQ90VBAXq$$rwrp9T92CE3UV7g1q7Glh",
+    "targetPort" : "RaOVk1lsK9V9Q0ZBa83sb$$gtHjOYZC1drPYy4dL20kB"
   } ],
   "processes" : {
     "VCAlt5NKEgOYGhLlhn8wH$$vyGq1PhSfRnVDFBVIXIgA" : {
@@ -844,6 +862,58 @@
           },
           "description" : ""
         } ]
+      }
+    },
+    "9RkjL0onmMehaQ90VBAXq$$rwrp9T92CE3UV7g1q7Glh" : {
+      "id" : "9RkjL0onmMehaQ90VBAXq$$rwrp9T92CE3UV7g1q7Glh",
+      "component" : "Lookup",
+      "metadata" : {
+        "label" : "SLD_LU",
+        "slug" : "SLD_LU",
+        "x" : -580,
+        "y" : -440,
+        "phase" : -1,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "RaOVk1lsK9V9Q0ZBa83sb$$gtHjOYZC1drPYy4dL20kB",
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "IVLITM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "min_shelf_life_in_days",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "isRange" : false,
+        "processName" : "SLD_LU",
+        "keyColumns" : [ "IVLITM" ],
+        "valueColumns" : [ "min_shelf_life_in_days" ]
       }
     },
     "2InLH7Cfx3FZncQgOO-I3$$A1HuVOjJlictBUvHoRg9y" : {
@@ -1302,7 +1372,7 @@
             }, {
               "name" : "B_M_LU",
               "type" : "string",
-              "nullable" : false,
+              "nullable" : true,
               "metadata" : {
                 "description" : "",
                 "mappings" : [ ],
@@ -1311,7 +1381,7 @@
             }, {
               "name" : "F_C_LU",
               "type" : "string",
-              "nullable" : false,
+              "nullable" : true,
               "metadata" : {
                 "description" : "",
                 "mappings" : [ ],
@@ -1329,7 +1399,7 @@
             }, {
               "name" : "M_T_D_LU",
               "type" : "string",
-              "nullable" : false,
+              "nullable" : true,
               "metadata" : {
                 "description" : "",
                 "mappings" : [ ],
@@ -1765,7 +1835,7 @@
             "sourceColumn" : "MIN_SHLF_RMN_LIF_DAYS_CNT",
             "expression" : {
               "format" : "sql",
-              "expression" : "CAST(expr('$MIN_SHLF_RMN_LIF_DAYS_CNT') AS decimal(18,4))"
+              "expression" : "SLD_LU(IMLITM)['min_shelf_life_in_days']"
             }
           },
           "DropColumn" : {
@@ -2720,7 +2790,7 @@
             }, {
               "name" : "B_M_LU",
               "type" : "string",
-              "nullable" : false,
+              "nullable" : true,
               "metadata" : {
                 "description" : "",
                 "mappings" : [ ],
@@ -2729,7 +2799,7 @@
             }, {
               "name" : "F_C_LU",
               "type" : "string",
-              "nullable" : false,
+              "nullable" : true,
               "metadata" : {
                 "description" : "",
                 "mappings" : [ ],
@@ -2747,7 +2817,7 @@
             }, {
               "name" : "M_T_D_LU",
               "type" : "string",
-              "nullable" : false,
+              "nullable" : true,
               "metadata" : {
                 "description" : "",
                 "mappings" : [ ],
@@ -2998,7 +3068,7 @@
               }
             }, {
               "name" : "MIN_SHLF_RMN_LIF_DAYS_CNT",
-              "type" : "decimal(18,4)",
+              "type" : "double",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -3035,7 +3105,7 @@
             }, {
               "name" : "BTCH_MNG_IND",
               "type" : "string",
-              "nullable" : true,
+              "nullable" : false,
               "metadata" : {
                 "description" : "",
                 "mappings" : [ ],
@@ -3821,7 +3891,7 @@
               }
             }, {
               "name" : "MIN_SHLF_RMN_LIF_DAYS_CNT",
-              "type" : "decimal(18,4)",
+              "type" : "double",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -3867,7 +3937,7 @@
             }, {
               "name" : "BTCH_MNG_IND",
               "type" : "string",
-              "nullable" : true,
+              "nullable" : false,
               "metadata" : {
                 "description" : "",
                 "mappings" : [ ],
@@ -4330,8 +4400,8 @@
       "metadata" : {
         "label" : "F6060002",
         "slug" : "F6060002",
-        "x" : -1560,
-        "y" : -200,
+        "x" : -1020,
+        "y" : -360,
         "phase" : 0,
         "cache" : false,
         "detailedStats" : false,
@@ -4732,7 +4802,7 @@
             }, {
               "name" : "B_M_LU",
               "type" : "string",
-              "nullable" : false,
+              "nullable" : true,
               "metadata" : {
                 "description" : "",
                 "mappings" : [ ],
@@ -4741,7 +4811,7 @@
             }, {
               "name" : "F_C_LU",
               "type" : "string",
-              "nullable" : false,
+              "nullable" : true,
               "metadata" : {
                 "description" : "",
                 "mappings" : [ ],
@@ -4759,7 +4829,7 @@
             }, {
               "name" : "M_T_D_LU",
               "type" : "string",
-              "nullable" : false,
+              "nullable" : true,
               "metadata" : {
                 "description" : "",
                 "mappings" : [ ],
@@ -7310,8 +7380,8 @@
       "metadata" : {
         "label" : "F4104",
         "slug" : "F4104",
-        "x" : -1560,
-        "y" : -360,
+        "x" : -1020,
+        "y" : -520,
         "phase" : 0,
         "cache" : false,
         "detailedStats" : false,
@@ -7402,6 +7472,567 @@
           "format" : "sql",
           "expression" : "_deleted_ = 'F' AND Trim(DRRT) = '$BRAVO_MINOR_DESC_FILTER'"
         }
+      }
+    },
+    "gFgxpgLs4T5zFNXurmwXe$$8soH4LjnCw-nr9VzsJqJg" : {
+      "id" : "gFgxpgLs4T5zFNXurmwXe$$8soH4LjnCw-nr9VzsJqJg",
+      "component" : "SQLStatement",
+      "metadata" : {
+        "label" : "SHELF_LIFE",
+        "slug" : "SHELF_LIFE",
+        "x" : -780,
+        "y" : -440,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "nrZ_46EFZOl8zp_oAQpYD$$9UJJGZ6qvzZu_qO-Q2g2S",
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "_deleted_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IVXRT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IVITM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IVEXDJ",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IVCITM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IVCIRV",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IVAN8",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IVEFTJ",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IVMCU",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IVDSC1",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IVDSC2",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IVALN",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IVLITM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IVAITM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IVURCD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IVURDT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IVURAT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IVURAB",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IVURRF",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IVUSER",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IVPID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IVJOBN",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IVUPMJ",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IVTDAY",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IVRATO",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IVAPSP",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IVIDEM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IVAPSS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IVADIND",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IVBPIND",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IVCARDNO",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_pk_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_upt_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_kafkaOffset_",
+              "type" : "long",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_createTime_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_kafkaTimestamp_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_infa_bigint_sequence_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        }, {
+          "id" : "M9FxCizKRtCggMDqxLf8N$$LO6CiRNKBhgpKhqYsv-yP",
+          "slug" : "in1",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "GPGS1A",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_deleted_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "GPGS2A",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "GPDS40",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "GPURAB",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "GPURRF",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "GPURAT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "GPURDT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "GPGFL1",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "GPUSER",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "GPPID",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "GPUPMJ",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "GPUPMT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "GPJOBN",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_pk_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_upt_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_kafkaOffset_",
+              "type" : "long",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_createTime_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_kafkaTimestamp_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_infa_bigint_sequence_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "iRWtEGtPdiIoXx0rSR5Gu$$0vEYoE6sNb-2qax02AIa5",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "fileTabs" : [ {
+          "path" : "out",
+          "id" : "iRWtEGtPdiIoXx0rSR5Gu$$0vEYoE6sNb-2qax02AIa5",
+          "language" : "sql",
+          "content" : "SELECT IVLITM, min_shelf_life_in_days FROM\r\n\t(\r\n\t\tSELECT *, ROW_NUMBER () OVER (PARTITION BY IVLITM ORDER BY min_shelf_life_in_days DESC) AS RNK FROM (\r\n\t\tSELECT IVLITM,\r\n\t\t\tCAST(CASE \r\n\t\t\t\tWHEN IVDSC1 IS NOT NULL THEN IVDSC1 * 30\r\n\t\t\t\tELSE\r\n\t\t\t\t\t(SELECT in1.GPURAB * 30\r\n\t\t\t\t\tFROM in1\r\n\t\t\t\t\tWHERE TRIM(in1.GPGS1A) = 'R5841110'\r\n\t\t\t\t\tAND TRIM(in1.GPGS2A) = 'MinShelfLife'\r\n\t\t\t\t\tAND in1._deleted_ = 'F')\r\n\t\t\t\tEND AS DECIMAL(18,4)) AS min_shelf_life_in_days\r\n\t\tFROM in0 \r\n\t\tWHERE in0._deleted_ = 'F'\r\n\t\t\tAND in0.IVXRT='XL' ))\r\n\t\t\tWHERE RNK = 1"
+        } ],
+        "inputPortNames" : [ "in0", "in1" ]
       }
     },
     "Bn_OI-IanG3TuxCAcIsRo$$z1euDI9aUovwAzTqFX38N" : {

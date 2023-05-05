@@ -10,7 +10,9 @@ from .TRIM import TRIM
 from .DS_JDE_01_F4101 import DS_JDE_01_F4101
 from .DEL import DEL
 from .MATL_T_LU import MATL_T_LU
+from .SHELF_LIFE import SHELF_LIFE
 from .MATL_GRP import MATL_GRP
+from .SLD_LU import SLD_LU
 from .MATL_GR_LU import MATL_GR_LU
 from .F6060002 import F6060002
 from .F0005_41 import F0005_41

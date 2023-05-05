@@ -18,6 +18,24 @@ def pipeline(spark: SparkSession) -> None:
     df_TRIM = TRIM(spark, df_F0005_41)
     df_FRAN_CD = FRAN_CD(spark, df_TRIM)
     FRAN_LU(spark, df_FRAN_CD)
+    df_F4104 = F4104(spark)
+    df_F4104 = collectMetrics(
+        spark, 
+        df_F4104, 
+        "graph", 
+        "AhOldWo28OZaMGRM3kMAF$$YO5cwlI0MI64GZf-pNDGN", 
+        "51OcUGRHTy_oQZyUqVD9A$$SCsBUvEj_Lnm-lR5xZH6u"
+    )
+    df_F6060002 = F6060002(spark)
+    df_F6060002 = collectMetrics(
+        spark, 
+        df_F6060002, 
+        "graph", 
+        "2D2jL0xHw_StxYwSULvFr$$3y-rUjgKLPWgOtxFyG9c0", 
+        "ME-P7RBtsn0Zy_Ue5ZUwr$$iNQ3HEaSwdL-CZlCP2So3"
+    )
+    df_SHELF_LIFE = SHELF_LIFE(spark, df_F4104, df_F6060002)
+    SLD_LU(spark, df_SHELF_LIFE)
     df_BRAVO_MINOR_DESC = BRAVO_MINOR_DESC(spark, df_TRIM)
     BRAVO_D_LU(spark, df_BRAVO_MINOR_DESC)
     df_MATL_TYPE_DESC = MATL_TYPE_DESC(spark, df_TRIM)
@@ -44,26 +62,6 @@ def pipeline(spark: SparkSession) -> None:
         "X5_yIddhVngEUR5nfyn0E$$vfGy99rUws5XAaiMCPZQ0"
     )
     TARGET(spark, df_FIELD_ORDER)
-    df_F6060002 = F6060002(spark)
-    df_F6060002 = collectMetrics(
-        spark, 
-        df_F6060002, 
-        "graph", 
-        "2D2jL0xHw_StxYwSULvFr$$3y-rUjgKLPWgOtxFyG9c0", 
-        "ME-P7RBtsn0Zy_Ue5ZUwr$$iNQ3HEaSwdL-CZlCP2So3"
-    )
-    df_F6060002.cache().count()
-    df_F6060002.unpersist()
-    df_F4104 = F4104(spark)
-    df_F4104 = collectMetrics(
-        spark, 
-        df_F4104, 
-        "graph", 
-        "AhOldWo28OZaMGRM3kMAF$$YO5cwlI0MI64GZf-pNDGN", 
-        "51OcUGRHTy_oQZyUqVD9A$$SCsBUvEj_Lnm-lR5xZH6u"
-    )
-    df_F4104.cache().count()
-    df_F4104.unpersist()
 
 def main():
     spark = SparkSession.builder\

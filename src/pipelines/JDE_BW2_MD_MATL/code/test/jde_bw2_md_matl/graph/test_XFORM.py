@@ -47,6 +47,14 @@ class XFORMTest(BaseTestCase):
         )
         from jde_bw2_md_matl.graph.FRAN_LU import FRAN_LU
         FRAN_LU(self.spark, dfgraph_FRAN_LU)
+        dfgraph_SLD_LU = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/jde_bw2_md_matl/graph/SLD_LU/schema.json',
+            'test/resources/data/jde_bw2_md_matl/graph/SLD_LU/data.json',
+            "in0"
+        )
+        from jde_bw2_md_matl.graph.SLD_LU import SLD_LU
+        SLD_LU(self.spark, dfgraph_SLD_LU)
         dfgraph_BRAVO_D_LU = createDfFromResourceFiles(
             self.spark,
             'test/resources/data/jde_bw2_md_matl/graph/BRAVO_D_LU/schema.json',
