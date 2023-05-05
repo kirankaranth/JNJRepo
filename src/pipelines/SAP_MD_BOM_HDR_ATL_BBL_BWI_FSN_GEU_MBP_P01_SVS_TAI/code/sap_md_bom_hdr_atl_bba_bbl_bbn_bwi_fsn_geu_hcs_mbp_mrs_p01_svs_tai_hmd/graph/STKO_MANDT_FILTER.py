@@ -6,4 +6,4 @@ from sap_md_bom_hdr_atl_bba_bbl_bbn_bwi_fsn_geu_hcs_mbp_mrs_p01_svs_tai_hmd.conf
 from sap_md_bom_hdr_atl_bba_bbl_bbn_bwi_fsn_geu_hcs_mbp_mrs_p01_svs_tai_hmd.udfs.UDFs import *
 
 def STKO_MANDT_FILTER(spark: SparkSession, in0: DataFrame) -> DataFrame:
-    return in0.filter(((col("MANDT") == lit(Config.MANDT)) & (col("_deleted_") == lit("F"))))
+    return in0.filter((col("MANDT") == lit(Config.MANDT)))
