@@ -1,10 +1,10 @@
 from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
-from sap_03_md_cust_hmd_hm2.config.ConfigStore import *
-from sap_03_md_cust_hmd_hm2.udfs.UDFs import *
+from sap_01_md_cust_hmd_hm2.config.ConfigStore import *
+from sap_01_md_cust_hmd_hm2.udfs.UDFs import *
 from prophecy.utils import *
-from sap_03_md_cust_hmd_hm2.graph import *
+from sap_01_md_cust_hmd_hm2.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_SAP_T016T = SAP_T016T(spark)
