@@ -1,1 +1,1 @@
-from .sap_md_matl_hm2 import *
+from .sap_md_matl_hmd import *
