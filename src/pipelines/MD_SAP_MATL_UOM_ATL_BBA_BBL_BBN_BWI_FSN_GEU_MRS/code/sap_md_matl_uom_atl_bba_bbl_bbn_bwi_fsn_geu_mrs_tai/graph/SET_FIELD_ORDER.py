@@ -34,7 +34,6 @@ def SET_FIELD_ORDER(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("EXTRNL_UOM_TECH_FMT"), 
         col("UOM_SHRT_TEXT"), 
         col("UOM_LONG_TEXT"), 
-        col("DIM_TEXT"), 
         col("DAI_ETL_ID"), 
         col("DAI_CRT_DTTM"), 
         col("DAI_UPDT_DTTM"), 
