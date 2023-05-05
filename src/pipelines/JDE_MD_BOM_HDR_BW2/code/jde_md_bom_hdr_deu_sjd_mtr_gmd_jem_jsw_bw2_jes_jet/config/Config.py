@@ -18,7 +18,7 @@ class Config(ConfigBase):
     def update(
             self,
             sourceSystem: str="bw2",
-            targetSchema: str="l1_md_prophecy",
+            targetSchema: str="dev_md_l1",
             DBNAME: str="bw2",
             TBNAME: str="f3002_adt",
             DAI_ETL_ID: int=0,
