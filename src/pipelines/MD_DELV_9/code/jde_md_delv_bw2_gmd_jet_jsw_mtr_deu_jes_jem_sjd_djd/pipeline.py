@@ -8,13 +8,6 @@ from jde_md_delv_bw2_gmd_jet_jsw_mtr_deu_jes_jem_sjd_djd.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_sql_MD_DELV = sql_MD_DELV(spark)
-    df_sql_MD_DELV = collectMetrics(
-        spark, 
-        df_sql_MD_DELV, 
-        "graph", 
-        "3cbf48d4-0f72-455b-b31a-325779e1ebb1", 
-        "0f361f84-67aa-451b-8dcf-1606596c17ac"
-    )
     df_addL1fields = addL1fields(spark, df_sql_MD_DELV)
     df_addL1fields = collectMetrics(
         spark, 
