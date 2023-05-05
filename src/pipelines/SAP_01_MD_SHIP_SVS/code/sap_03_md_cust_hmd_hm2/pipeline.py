@@ -7,14 +7,16 @@ from prophecy.utils import *
 from sap_03_md_cust_hmd_hm2.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    df_SAP_TVAST = SAP_TVAST(spark)
-    df_SAP_TVAST = collectMetrics(
+    df_SAP_TBRCT = SAP_TBRCT(spark)
+    df_SAP_TBRCT = collectMetrics(
         spark, 
-        df_SAP_TVAST, 
+        df_SAP_TBRCT, 
         "graph", 
         "C62228oBz0jGVr_17sJC9$$8F-vQbhaubWfZWX32LcZt", 
         "4eWdB2mkUc8laZJCurVxT$$Ej_RE13XVe34BcdqmQ9o5"
     )
+    df_SAP_TBRCT.cache().count()
+    df_SAP_TBRCT.unpersist()
     df_SAP_T016T = SAP_T016T(spark)
     df_SAP_T016T = collectMetrics(
         spark, 
@@ -23,10 +25,18 @@ def pipeline(spark: SparkSession) -> None:
         "6GBasmueoVD5ee8TJdl7v$$1V4RjMs9af9qjy2JTPXsH", 
         "UUTQl86mWJ2bG_k9yMzTH$$dq3A_5BiBSePUEwlA9M-N"
     )
-    df_MANDT_FILTER_TVAST = MANDT_FILTER_TVAST(spark, df_SAP_TVAST)
+    df_DS_SAP_01_TBRCT = DS_SAP_01_TBRCT(spark)
+    df_DS_SAP_01_TBRCT = collectMetrics(
+        spark, 
+        df_DS_SAP_01_TBRCT, 
+        "graph", 
+        "-ZYPpyu0zwycNH4wusoJQ$$oWNVTg6o3namfmChvdUMa", 
+        "qMKjRdlVr7zs1BhDJ_T5B$$muDk5IGGHEuObXaYY3EFW"
+    )
+    df_MANDT_FILTER_TVAST = MANDT_FILTER_TVAST(spark, df_DS_SAP_01_TBRCT)
     df_MANDT_FILTER_T016T = MANDT_FILTER_T016T(spark, df_SAP_T016T)
     LU_SAP_T016T(spark, df_MANDT_FILTER_T016T)
-    LU_SAP_TVAST(spark, df_MANDT_FILTER_TVAST)
+    LU_SAP_TBRCT(spark, df_MANDT_FILTER_TVAST)
     df_DS_SAP_03_KNA1 = DS_SAP_03_KNA1(spark)
     df_DS_SAP_03_KNA1 = collectMetrics(
         spark, 

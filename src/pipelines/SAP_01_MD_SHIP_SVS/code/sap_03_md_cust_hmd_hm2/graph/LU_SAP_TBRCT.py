@@ -5,7 +5,7 @@ from prophecy.libs import typed_lit
 from sap_03_md_cust_hmd_hm2.config.ConfigStore import *
 from sap_03_md_cust_hmd_hm2.udfs.UDFs import *
 
-def LU_SAP_TVAST(spark: SparkSession, in0: DataFrame):
-    keyColumns = ['''AUFSP''']
+def LU_SAP_TBRCT(spark: SparkSession, in0: DataFrame):
+    keyColumns = ['''BRACO''']
     valueColumns = ['''VTEXT''']
-    createLookup("LU_SAP_TVAST", in0, spark, keyColumns, valueColumns)
+    createLookup("LU_SAP_TBRCT", in0, spark, keyColumns, valueColumns)
