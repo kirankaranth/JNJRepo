@@ -53,7 +53,6 @@ class Config(ConfigBase):
             STERILE: str=None,
             BRAVO_MINOR_CODE: str=None,
             CMMDTY: str=None,
-            DBTABLE2: str=None,
             **kwargs
     ):
         self.spark = None
@@ -105,8 +104,7 @@ class Config(ConfigBase):
             TYPE_OF_MATERIAL, 
             STERILE, 
             BRAVO_MINOR_CODE, 
-            CMMDTY, 
-            DBTABLE2
+            CMMDTY
         )
 
     def update(
@@ -159,7 +157,6 @@ class Config(ConfigBase):
             STERILE: str="null",
             BRAVO_MINOR_CODE: str="null",
             CMMDTY: str="null",
-            DBTABLE2: str="f4104",
             **kwargs
     ):
         prophecy_spark = self.spark
@@ -211,5 +208,4 @@ class Config(ConfigBase):
         self.STERILE = STERILE
         self.BRAVO_MINOR_CODE = BRAVO_MINOR_CODE
         self.CMMDTY = CMMDTY
-        self.DBTABLE2 = DBTABLE2
         pass
