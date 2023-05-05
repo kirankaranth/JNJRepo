@@ -58,6 +58,16 @@ def pipeline(spark: SparkSession) -> None:
     )
     df_DEL_MANDT4 = DEL_MANDT4(spark, df_DS_SAP_MAKT_01)
     MAKTX_LU(spark, df_DEL_MANDT4)
+    df_T023T = T023T(spark)
+    df_T023T = collectMetrics(
+        spark, 
+        df_T023T, 
+        "graph", 
+        "Ch3aOlNjNkGAacOYx4_5f$$zzjTBKMZs4TUDsEgXVlMo", 
+        "FCvUguins8xbfmUla0s1D$$J0wmVE1CoOS0EJdwLVj6w"
+    )
+    df_DEL_MANDT_9 = DEL_MANDT_9(spark, df_T023T)
+    WGBEZx_LU(spark, df_DEL_MANDT_9)
     df_SPEC_VER = SPEC_VER(spark, df_CHARACTERISTICS)
     SPEC_VER_LU(spark, df_SPEC_VER)
     df_DS_SAP_MARA_BBA_BBN = DS_SAP_MARA_BBA_BBN(spark)

@@ -1,3 +1,4 @@
+from .DEL_MANDT_9 import DEL_MANDT_9
 from .SPEC_VER_LU import SPEC_VER_LU
 from .SELECT_FIELDS import SELECT_FIELDS
 from .AUSP import AUSP
@@ -20,5 +21,7 @@ from .D_M_OBTAB_KLART import D_M_OBTAB_KLART
 from .DEL_MANDT3 import DEL_MANDT3
 from .INOB import INOB
 from .INOB_DEDUP import INOB_DEDUP
+from .WGBEZx_LU import WGBEZx_LU
 from .SPEC_VER import SPEC_VER
 from .XFORM import XFORM
+from .T023T import T023T
