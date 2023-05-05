@@ -1,14 +1,28 @@
 from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
-from MD_DELV_8.config.ConfigStore import *
-from MD_DELV_8.udfs.UDFs import *
+from sap_md_delv_mbp.config.ConfigStore import *
+from sap_md_delv_mbp.udfs.UDFs import *
 from prophecy.utils import *
-from MD_DELV_8.graph import *
+from sap_md_delv_mbp.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_sql_MD_DELV = sql_MD_DELV(spark)
+    df_sql_MD_DELV = collectMetrics(
+        spark, 
+        df_sql_MD_DELV, 
+        "graph", 
+        "4d09c47e-c766-48a2-a2bd-f38bc831ee31", 
+        "f97f47a6-9f32-45c2-86b1-089367a9720a"
+    )
     df_addL1fields = addL1fields(spark, df_sql_MD_DELV)
+    df_addL1fields = collectMetrics(
+        spark, 
+        df_addL1fields, 
+        "graph", 
+        "b49e90cd-4c26-45de-a3b2-1b0e70e24e78", 
+        "076fd973-3623-4e9b-b9cf-e58a1ce8a089"
+    )
     MD_DELV(spark, df_addL1fields)
 
 def main():
@@ -20,6 +34,10 @@ def main():
                 .getOrCreate()\
                 .newSession()
     Utils.initializeFromArgs(spark, parse_args())
+    MetricsCollector.initializeMetrics(spark)
+    spark.conf.set("prophecy.collect.basic.stats", "true")
+    spark.conf.set("spark.sql.legacy.allowUntypedScalaUDF", "true")
+    spark.conf.set("spark.sql.optimizer.excludedRules", "org.apache.spark.sql.catalyst.optimizer.ColumnPruning")
     spark.conf.set("prophecy.metadata.pipeline.uri", "pipelines/MD_DELV_8")
     
     MetricsCollector.start(spark = spark, pipelineId = "pipelines/MD_DELV_8")
