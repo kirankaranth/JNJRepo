@@ -33,6 +33,16 @@ class Config(ConfigBase):
             DUNS_4: str=None,
             TAX_NUM5: str=None,
             TAX_NUM_6: str=None,
+            MAX_STCK_HGHT_PKGNG_MATL: str=None,
+            UNIT_LGTH_PKGNG_MATL: str=None,
+            CUST_RLTD_PACK_EA_PKGNG_MATL: str=None,
+            PKGNG_MATL_CUST_VSO: str=None,
+            NUM_LYR_UND_INTER_PLLT: str=None,
+            PACK_ONLY_ONE_PKG_TYPE_EA_PKM: str=None,
+            SIDE_PREF_LD_UNLD: str=None,
+            FRN_BK_PREF_LD_UNLD: str=None,
+            COLL_UNLD_PT_VSO: str=None,
+            PACK_MATL_SPEC_EA_PKGNG_MATL: str=None,
             **kwargs
     ):
         self.spark = None
@@ -64,7 +74,17 @@ class Config(ConfigBase):
             DUNS_NUM, 
             DUNS_4, 
             TAX_NUM5, 
-            TAX_NUM_6
+            TAX_NUM_6, 
+            MAX_STCK_HGHT_PKGNG_MATL, 
+            UNIT_LGTH_PKGNG_MATL, 
+            CUST_RLTD_PACK_EA_PKGNG_MATL, 
+            PKGNG_MATL_CUST_VSO, 
+            NUM_LYR_UND_INTER_PLLT, 
+            PACK_ONLY_ONE_PKG_TYPE_EA_PKM, 
+            SIDE_PREF_LD_UNLD, 
+            FRN_BK_PREF_LD_UNLD, 
+            COLL_UNLD_PT_VSO, 
+            PACK_MATL_SPEC_EA_PKGNG_MATL
         )
 
     def update(
@@ -97,6 +117,16 @@ class Config(ConfigBase):
             DUNS_4: str="CAST(null as string)",
             TAX_NUM5: str="CAST(null as string)",
             TAX_NUM_6: str="CAST(null as string)",
+            MAX_STCK_HGHT_PKGNG_MATL: str="CAST(TRIM(_VSO_R_PALHGT) as Decimal (18,4))",
+            UNIT_LGTH_PKGNG_MATL: str="TRIM(_VSO_R_PAL_UL)",
+            CUST_RLTD_PACK_EA_PKGNG_MATL: str="TRIM(_VSO_R_PK_MAT)",
+            PKGNG_MATL_CUST_VSO: str="TRIM(_VSO_R_MATPAL)",
+            NUM_LYR_UND_INTER_PLLT: str="TRIM(_VSO_R_I_NO_LYR)",
+            PACK_ONLY_ONE_PKG_TYPE_EA_PKM: str="trim(_VSO_R_ONE_SORT)",
+            SIDE_PREF_LD_UNLD: str="trim(_VSO_R_ULD_SIDE)",
+            FRN_BK_PREF_LD_UNLD: str="trim(_VSO_R_LOAD_PREF)",
+            COLL_UNLD_PT_VSO: str="trim(_VSO_R_DPOINT)",
+            PACK_MATL_SPEC_EA_PKGNG_MATL: str="trim(_VSO_R_ONE_MAT)",
             **kwargs
     ):
         prophecy_spark = self.spark
@@ -128,4 +158,14 @@ class Config(ConfigBase):
         self.DUNS_4 = DUNS_4
         self.TAX_NUM5 = TAX_NUM5
         self.TAX_NUM_6 = TAX_NUM_6
+        self.MAX_STCK_HGHT_PKGNG_MATL = MAX_STCK_HGHT_PKGNG_MATL
+        self.UNIT_LGTH_PKGNG_MATL = UNIT_LGTH_PKGNG_MATL
+        self.CUST_RLTD_PACK_EA_PKGNG_MATL = CUST_RLTD_PACK_EA_PKGNG_MATL
+        self.PKGNG_MATL_CUST_VSO = PKGNG_MATL_CUST_VSO
+        self.NUM_LYR_UND_INTER_PLLT = NUM_LYR_UND_INTER_PLLT
+        self.PACK_ONLY_ONE_PKG_TYPE_EA_PKM = PACK_ONLY_ONE_PKG_TYPE_EA_PKM
+        self.SIDE_PREF_LD_UNLD = SIDE_PREF_LD_UNLD
+        self.FRN_BK_PREF_LD_UNLD = FRN_BK_PREF_LD_UNLD
+        self.COLL_UNLD_PT_VSO = COLL_UNLD_PT_VSO
+        self.PACK_MATL_SPEC_EA_PKGNG_MATL = PACK_MATL_SPEC_EA_PKGNG_MATL
         pass

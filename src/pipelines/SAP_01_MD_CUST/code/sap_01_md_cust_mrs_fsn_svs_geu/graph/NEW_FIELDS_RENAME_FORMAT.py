@@ -176,16 +176,16 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("TAX_DCLTN_TYPE", expr(Config.TAX_DCLTN_TYPE))\
         .withColumn("CO_SIZE", expr(Config.CO_SIZE))\
         .withColumn("DCLTN_RGMN_PIS_COFINS", expr(Config.DCLTN_RGMN_PIS_COFINS))\
-        .withColumn("MAX_STCK_HGHT_PKGNG_MATL", trim(col("_VSO_R_PALHGT")).cast(DecimalType(18, 4)))\
-        .withColumn("UNIT_LGTH_PKGNG_MATL", trim(col("_VSO_R_PAL_UL")))\
-        .withColumn("CUST_RLTD_PACK_EA_PKGNG_MATL", trim(col("_VSO_R_PK_MAT")))\
-        .withColumn("PKGNG_MATL_CUST_VSO", trim(col("_VSO_R_MATPAL")))\
-        .withColumn("NUM_LYR_UND_INTER_PLLT", trim(col("_VSO_R_I_NO_LYR")))\
-        .withColumn("PACK_MATL_SPEC_EA_PKGNG_MATL", trim(col("_VSO_R_ONE_MAT")))\
-        .withColumn("PACK_ONLY_ONE_PKG_TYPE_EA_PKM", trim(col("_VSO_R_ONE_SORT")))\
-        .withColumn("SIDE_PREF_LD_UNLD", trim(col("_VSO_R_ULD_SIDE")))\
-        .withColumn("FRN_BK_PREF_LD_UNLD", trim(col("_VSO_R_LOAD_PREF")))\
-        .withColumn("COLL_UNLD_PT_VSO", trim(col("_VSO_R_DPOINT")))\
+        .withColumn("MAX_STCK_HGHT_PKGNG_MATL", expr(Config.MAX_STCK_HGHT_PKGNG_MATL))\
+        .withColumn("UNIT_LGTH_PKGNG_MATL", expr(Config.UNIT_LGTH_PKGNG_MATL))\
+        .withColumn("CUST_RLTD_PACK_EA_PKGNG_MATL", expr(Config.CUST_RLTD_PACK_EA_PKGNG_MATL))\
+        .withColumn("PKGNG_MATL_CUST_VSO", expr(Config.PKGNG_MATL_CUST_VSO))\
+        .withColumn("NUM_LYR_UND_INTER_PLLT", expr(Config.NUM_LYR_UND_INTER_PLLT))\
+        .withColumn("PACK_MATL_SPEC_EA_PKGNG_MATL", expr(Config.PACK_MATL_SPEC_EA_PKGNG_MATL))\
+        .withColumn("PACK_ONLY_ONE_PKG_TYPE_EA_PKM", expr(Config.PACK_ONLY_ONE_PKG_TYPE_EA_PKM))\
+        .withColumn("SIDE_PREF_LD_UNLD", expr(Config.SIDE_PREF_LD_UNLD))\
+        .withColumn("FRN_BK_PREF_LD_UNLD", expr(Config.COLL_UNLD_PT_VSO))\
+        .withColumn("COLL_UNLD_PT_VSO", expr(Config.COLL_UNLD_PT_VSO))\
         .withColumn("AGN_LOC_CD", trim(col("ALC")))\
         .withColumn("PMT_OFF", trim(col("PMT_OFFICE")))\
         .withColumn("FEE_SCHED", expr(Config.FEE_SCHED))\
