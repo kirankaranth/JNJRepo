@@ -17,6 +17,26 @@ def pipeline(spark: SparkSession) -> None:
     )
     df_DEL_MANDT4 = DEL_MANDT4(spark, df_MAKT)
     MAKTX_LU(spark, df_DEL_MANDT4)
+    df_T134T = T134T(spark)
+    df_T134T = collectMetrics(
+        spark, 
+        df_T134T, 
+        "graph", 
+        "YtmpUeMmopfqCE5STGr3u$$qgGlMcihRh3rYdsVcXQz-", 
+        "UOGMVOXY8hDQuphCgbR_n$$S7OImORafBf7387p6B4I_"
+    )
+    df_DEL_MANDT_5 = DEL_MANDT_5(spark, df_T134T)
+    MTBEZ_LU(spark, df_DEL_MANDT_5)
+    df_T023T = T023T(spark)
+    df_T023T = collectMetrics(
+        spark, 
+        df_T023T, 
+        "graph", 
+        "F3PTPfLIZSffDxKX9SMQa$$zLS3G2QYqb8pm-Jt44-Nu", 
+        "Cz5C_3EPJM1lecrmvbzw8$$kNlJDJ1jXhYtRMgxx9mSB"
+    )
+    df_DEL_MANDT_9 = DEL_MANDT_9(spark, df_T023T)
+    WGBEZx_LU(spark, df_DEL_MANDT_9)
     df_MARA = MARA(spark)
     df_MARA = collectMetrics(
         spark, 
