@@ -80,5 +80,8 @@ def SELECT_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("MMS_MATL_TYPE_CD"), 
         col("MMS_FIN_CLSN_CD"), 
         col("MMS_TEMP_SENS_IND"), 
-        col("MMS_STERILIZATION_IND")
+        col("MMS_STERILIZATION_IND"), 
+        col("MATL_TYPE_DESC"), 
+        col("MATL_GRP_DESC"), 
+        col("MATL_GRP_DESC_2")
     )

@@ -7,6 +7,26 @@ from prophecy.utils import *
 from sap_md_matl_hcs.graph import *
 
 def pipeline(spark: SparkSession) -> None:
+    df_T134T = T134T(spark)
+    df_T134T = collectMetrics(
+        spark, 
+        df_T134T, 
+        "graph", 
+        "w1_Ig8YgEF05yZXQKs90v$$qM7G7Ftnv349dUEIO7PK2", 
+        "ZukjsOrRWY5Xxl8c1dhWu$$1Vb4qrrfYBcwUhM_m5ZV1"
+    )
+    df_DEL_MANDT_5 = DEL_MANDT_5(spark, df_T134T)
+    MTBEZ_LU(spark, df_DEL_MANDT_5)
+    df_T023T = T023T(spark)
+    df_T023T = collectMetrics(
+        spark, 
+        df_T023T, 
+        "graph", 
+        "5MRcFhgyxpf0aWdf4BSfl$$QRm6-j7Kwyf0l78lGGJHi", 
+        "Gfxq4jmjiR9kmXeE3uLmj$$Ho_buRxciJNsR2ALfA_UA"
+    )
+    df_DEL_MANDT_9 = DEL_MANDT_9(spark, df_T023T)
+    WGBEZx_LU(spark, df_DEL_MANDT_9)
     df_MAKT = MAKT(spark)
     df_MAKT = collectMetrics(
         spark, 
