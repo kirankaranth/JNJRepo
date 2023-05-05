@@ -6,4 +6,4 @@ from sap_md_bom_hdr_atl_bba_bbl_bbn_bwi_fsn_geu_hcs_mbp_mrs_p01_svs_tai_hmd.conf
 from sap_md_bom_hdr_atl_bba_bbl_bbn_bwi_fsn_geu_hcs_mbp_mrs_p01_svs_tai_hmd.udfs.UDFs import *
 
 def SAP_02_STKO(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM {Config.sourceSystem}.stko WHERE _deleted_ = 'F'")
+    return spark.read.table(f"{Config.sourceSystem}.stko")
