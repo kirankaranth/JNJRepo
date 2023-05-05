@@ -15,7 +15,8 @@ def pipeline(spark: SparkSession) -> None:
         "4W3xXLpb9TKm4ObsEcJf5$$oM4QbH6dWecZS3Zvrvyf5", 
         "CG2Fsi16jtfOHV_Tk__SH$$MuWCA1T_AOOleQ8K94RqH"
     )
-    df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_JDE_F3002_ADT)
+    df_deleted_filter = deleted_filter(spark, df_JDE_F3002_ADT)
+    df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_deleted_filter)
     df_Deduplicate = Deduplicate(spark, df_NEW_FIELDS_RENAME_FORMAT)
     df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_Deduplicate)
     df_SET_FIELD_ORDER_REFORMAT = collectMetrics(
