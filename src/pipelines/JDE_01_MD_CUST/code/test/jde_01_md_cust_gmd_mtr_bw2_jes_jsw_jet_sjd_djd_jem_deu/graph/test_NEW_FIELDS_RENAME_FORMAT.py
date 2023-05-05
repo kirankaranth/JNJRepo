@@ -4,8 +4,8 @@ from pyspark.sql.types import *
 from argparse import Namespace
 from prophecy.test import BaseTestCase
 from prophecy.test.utils import *
-from jde_01_md_cust.graph.NEW_FIELDS_RENAME_FORMAT import *
-from jde_01_md_cust.config.ConfigStore import *
+from jde_01_md_cust_gmd_mtr_bw2_jes_jsw_jet_sjd_djd_jem_deu.graph.NEW_FIELDS_RENAME_FORMAT import *
+from jde_01_md_cust_gmd_mtr_bw2_jes_jsw_jet_sjd_djd_jem_deu.config.ConfigStore import *
 
 
 class NEW_FIELDS_RENAME_FORMATTest(BaseTestCase):
@@ -13,14 +13,14 @@ class NEW_FIELDS_RENAME_FORMATTest(BaseTestCase):
     def test_unit_test_(self):
         dfIn0 = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/jde_01_md_cust/graph/NEW_FIELDS_RENAME_FORMAT/in0/schema.json',
-            'test/resources/data/jde_01_md_cust/graph/NEW_FIELDS_RENAME_FORMAT/in0/data/test_unit_test_.json',
+            'test/resources/data/jde_01_md_cust_gmd_mtr_bw2_jes_jsw_jet_sjd_djd_jem_deu/graph/NEW_FIELDS_RENAME_FORMAT/in0/schema.json',
+            'test/resources/data/jde_01_md_cust_gmd_mtr_bw2_jes_jsw_jet_sjd_djd_jem_deu/graph/NEW_FIELDS_RENAME_FORMAT/in0/data/test_unit_test_.json',
             'in0'
         )
         dfOut = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/jde_01_md_cust/graph/NEW_FIELDS_RENAME_FORMAT/out/schema.json',
-            'test/resources/data/jde_01_md_cust/graph/NEW_FIELDS_RENAME_FORMAT/out/data/test_unit_test_.json',
+            'test/resources/data/jde_01_md_cust_gmd_mtr_bw2_jes_jsw_jet_sjd_djd_jem_deu/graph/NEW_FIELDS_RENAME_FORMAT/out/schema.json',
+            'test/resources/data/jde_01_md_cust_gmd_mtr_bw2_jes_jsw_jet_sjd_djd_jem_deu/graph/NEW_FIELDS_RENAME_FORMAT/out/data/test_unit_test_.json',
             'out'
         )
         dfOutComputed = NEW_FIELDS_RENAME_FORMAT(self.spark, dfIn0)
