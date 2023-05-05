@@ -145,7 +145,6 @@ def pipeline(spark: SparkSession) -> None:
     )
     df_DUPLICATES.cache().count()
     df_DUPLICATES.unpersist()
-    Target_1(spark)
 
 def main():
     spark = SparkSession.builder\
