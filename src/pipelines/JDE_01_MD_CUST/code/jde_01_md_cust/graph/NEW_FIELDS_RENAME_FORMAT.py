@@ -210,4 +210,5 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("CUR_SETLM_DTTM", to_timestamp(lit(None)))\
         .withColumn("HRS_PER_MO", lit(None).cast(DecimalType(18, 4)))\
         .withColumn("HRS_PER_DAY", lit(None).cast(DecimalType(18, 4)))\
-        .withColumn("NUM_OF_DAYS_MO", lit(None).cast(DecimalType(18, 4)))
+        .withColumn("NUM_OF_DAYS_MO", lit(None).cast(DecimalType(18, 4)))\
+        .withColumn("LAST_CHG_CNFRM_DTTM", to_timestamp(lit(None)))
