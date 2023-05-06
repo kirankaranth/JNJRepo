@@ -7,7 +7,12 @@ from prophecy.utils import *
 from sap_md_matl_valut.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    pass
+    df_MARA = MARA(spark)
+    df_MANDT = MANDT(spark, df_MARA)
+    MEINS_LU(spark, df_MANDT)
+    df_MBEW = MBEW(spark)
+    df_MANDT_1 = MANDT_1(spark, df_MBEW)
+    df_XFORM = XFORM(spark, df_MANDT_1)
 
 def main():
     spark = SparkSession.builder\
