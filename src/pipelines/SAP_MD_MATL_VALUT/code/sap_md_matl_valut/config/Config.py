@@ -23,7 +23,7 @@ class Config(ConfigBase):
             DBTABLE1: str="MARA",
             MANDT: str="100",
             SRC_SYS_CD: str="bba",
-            TMST: str="CASE WHEN TIMESTAMP = '0' THEN CAST(NULL AS TIMESTAMP) ELSE timestamp(TIMESTAMP'yyyyMMddHHmmss') END",
+            TMST: str="CASE WHEN TIMESTAMP = '0' THEN to_timestamp(NULL) ELSE to_timestamp(TIMESTAMP,'yyyyMMddHHmmss') END",
             **kwargs
     ):
         prophecy_spark = self.spark
