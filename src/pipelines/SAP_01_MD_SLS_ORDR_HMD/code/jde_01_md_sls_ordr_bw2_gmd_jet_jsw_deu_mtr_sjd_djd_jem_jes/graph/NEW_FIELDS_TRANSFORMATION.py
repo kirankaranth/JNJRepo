@@ -13,7 +13,7 @@ def NEW_FIELDS_TRANSFORMATION(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("SLS_ORDR_TYPE_CD", trim(col("AUART")))\
         .withColumn(
           "CRT_DTTM",
-          when(((col("ERDAT") == lit("00000000")) | (col("ERZET") == lit("00000000"))), lit(None).cast(TimestampType()))\
+          when((col("ERDAT") == lit("00000000")), lit(None).cast(TimestampType()))\
             .otherwise(to_timestamp(concat(col("ERDAT"), col("ERZET")), "yyyyMMddHHmmss"))
         )\
         .withColumn("_l0_upt_", col("_upt_"))\
@@ -133,13 +133,13 @@ def NEW_FIELDS_TRANSFORMATION(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("SLORG_NM", lookup("LU_SAP_TVKOT", col("VKORG")).getField("VTEXT"))\
         .withColumn("DSTR_CHNL_NM", lookup("LU_SAP_TVTWT", col("VTWEG")).getField("VTEXT"))\
         .withColumn("DIV_NM", lookup("LU_SAP_TSPAT", col("SPART")).getField("VTEXT"))\
+        .withColumn("SHIPPING_COND_DESC", lookup("LU_SAP_TVSBT", col("VSBED")).getField("VTEXT"))\
         .withColumn("SLS_ORDR_RSN_DESC", lookup("LU_SAP_TVAUT", col("AUGRU")).getField("BEZEI"))\
         .withColumn("PO_TYPE_DESC", lookup("LU_SAP_T176T", col("BSARK")).getField("VTEXT"))\
         .withColumn("RETRO_BILL", lookup("LU_SAP_TVAU", col("AUGRU")).getField("VAUNA"))\
-        .withColumn("CUST_GRP_1_DESC", lookup("LU_SAP_TVV1T", col("KVGR1")).getField("BEZEI"))\
-        .withColumn("CUST_GRP_2_DESC", lookup("LU_SAP_TVV2T", col("KVGR2")).getField("BEZEI"))\
-        .withColumn("CUST_GRP_3_DESC", lookup("LU_SAP_TVV3T", col("KVGR3")).getField("BEZEI"))\
-        .withColumn("CUST_GRP_4_DESC", lookup("LU_SAP_TVV4T", col("KVGR4")).getField("BEZEI"))\
-        .withColumn("CUST_GRP_5_DESC", lookup("LU_SAP_TVV5T", col("KVGR5")).getField("BEZEI"))\
-        .withColumn("CO_CD_DESC", lookup("LU_SAP_T001", col("BUKRS_VF")).getField("BUTXT"))\
-        .withColumn("SHIPPING_COND_DESC", lookup("LU_SAP_TVSBT", col("VSBED")).getField("VTEXT"))
+        .withColumn("CUST_GRP_1_DESC", lit(None).cast(StringType()))\
+        .withColumn("CUST_GRP_2_DESC", lit(None).cast(StringType()))\
+        .withColumn("CUST_GRP_3_DESC", lit(None).cast(StringType()))\
+        .withColumn("CUST_GRP_4_DESC", lit(None).cast(StringType()))\
+        .withColumn("CUST_GRP_5_DESC", lit(None).cast(StringType()))\
+        .withColumn("CO_CD_DESC", lookup("LU_SAP_T001", col("BUKRS_VF")).getField("BUTXT"))
