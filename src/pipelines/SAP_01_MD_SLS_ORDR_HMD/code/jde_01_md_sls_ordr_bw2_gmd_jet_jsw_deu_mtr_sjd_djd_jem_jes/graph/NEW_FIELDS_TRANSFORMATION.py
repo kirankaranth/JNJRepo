@@ -142,4 +142,37 @@ def NEW_FIELDS_TRANSFORMATION(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("CUST_GRP_3_DESC", lit(None).cast(StringType()))\
         .withColumn("CUST_GRP_4_DESC", lit(None).cast(StringType()))\
         .withColumn("CUST_GRP_5_DESC", lit(None).cast(StringType()))\
-        .withColumn("CO_CD_DESC", lookup("LU_SAP_T001", col("BUKRS_VF")).getField("BUTXT"))
+        .withColumn("CO_CD_DESC", lookup("LU_SAP_T001", col("BUKRS_VF")).getField("BUTXT"))\
+        .withColumn("CR_CHK_TOT_STS_CD", trim(col("CMGST")))\
+        .withColumn("REJ_TOT_STS_CD", trim(col("ABSTK")))\
+        .withColumn("CNFRM_STS_CD", trim(col("BESTK")))\
+        .withColumn("PSTNG_BILL_STS_CD", lit(None).cast(StringType()))\
+        .withColumn("INTCO_BILL_TOT_STS_CD", lit(None).cast(StringType()))\
+        .withColumn("ORDR_BILL_STS_CD", trim(col("FKSAK")))\
+        .withColumn("BILL_STS_CD", lit(None).cast(StringType()))\
+        .withColumn("PRCSG_TOT_STS_CD", trim(col("GBSTK")))\
+        .withColumn("PICK_CNFRM_STS_CD", lit(None).cast(StringType()))\
+        .withColumn("PICK_TOT_STS_CD", lit(None).cast(StringType()))\
+        .withColumn("DELV_STS_CD", trim(col("LFSTK")))\
+        .withColumn("DELV_TOT_STS_CD", trim(col("LFGSK")))\
+        .withColumn("WM_TOT_STS_CD", lit(None).cast(StringType()))\
+        .withColumn("PACK_TOT_STS_CD", lit(None).cast(StringType()))\
+        .withColumn("INVC_LIST_STS_CD", lit(None).cast(StringType()))\
+        .withColumn("REF_DOC_TOT_STS_CD", trim(col("RFGSK")))\
+        .withColumn("REF_DOC_STS_CD", trim(col("RFSTK")))\
+        .withColumn("TRNSP_PLAN_STS_CD", trim(col("TRSTA")))\
+        .withColumn("ICMPT_TOT_STS_CD", trim(col("UVALS")))\
+        .withColumn("BILL_ICMPT_TOT_STS_CD", trim(col("UVFAS")))\
+        .withColumn("PACKICMPT_STS_CD", lit(None).cast(StringType()))\
+        .withColumn("PACKICMPT_TOT_STS_CD", lit(None).cast(StringType()))\
+        .withColumn("PICKICMPT_STS_CD", lit(None).cast(StringType()))\
+        .withColumn("PICKICMPT_TOT_STS_CD", lit(None).cast(StringType()))\
+        .withColumn("PRCICMPT_STS_CD", trim(col("UVPRS")))\
+        .withColumn("DELVICMPT_TOT_STS_CD", trim(col("UVVLS")))\
+        .withColumn("GMICMPT_TOT_STS_CD", lit(None).cast(StringType()))\
+        .withColumn("GM_TOT_STS_CD", trim(col("WBSTK")))\
+        .withColumn("DELV_BLK_STS_CD", trim(col("LSSTK")))\
+        .withColumn("RESV_CD", lit(None).cast(StringType()))\
+        .withColumn("OVRL_HDR_CD", trim(col("UVALL")))\
+        .withColumn("BILL_BLK_STS_CD", trim(col("FSSTK")))\
+        .withColumn("OVRL_BLK_STS_CD", trim(col("SPSTG")))
