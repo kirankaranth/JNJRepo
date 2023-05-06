@@ -35,7 +35,16 @@ def pipeline(spark: SparkSession) -> None:
     )
     df_MANDT_FILTER_T001W = MANDT_FILTER_T001W(spark, df_SAP_T001W)
     df_MANDT_FILTER_T001K = MANDT_FILTER_T001K(spark, df_SAP_T001K)
-    df_Join_1 = Join_1(spark, df_MANDT_FILTER_T001W, df_MANDT_FILTER_T001K)
+    df_SAP_T001 = SAP_T001(spark)
+    df_SAP_T001 = collectMetrics(
+        spark, 
+        df_SAP_T001, 
+        "graph", 
+        "028Ymr2Is_JmvbqGTfySB$$-FcRwJFBDErZ1yUYwPnmX", 
+        "3iyBXeoch0HEbCOk5EhKg$$L0iyVifwStMpaxhGi7Hdc"
+    )
+    df_MANDT_FILTER_T001 = MANDT_FILTER_T001(spark, df_SAP_T001)
+    df_Join_1 = Join_1(spark, df_MANDT_FILTER_T001W, df_MANDT_FILTER_T001K, df_MANDT_FILTER_T001)
     df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_Join_1)
     df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS_RENAME_FORMAT)
     df_SET_FIELD_ORDER_REFORMAT = collectMetrics(
