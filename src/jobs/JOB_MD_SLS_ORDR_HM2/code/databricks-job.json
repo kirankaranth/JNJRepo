@@ -2,10 +2,10 @@
   "fabric_id" : "32",
   "components" : [ {
     "PipelineComponent" : {
-      "id" : "",
+      "id" : "pipelines/SAP_01_MD_SLS_ORDR_HMD",
       "nodeName" : "HM2",
-      "path" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/.jar",
-      "language" : "scala"
+      "path" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_01_MD_SLS_ORDR_HMD-1.0-py3-none-any.whl",
+      "language" : "python"
     }
   } ],
   "request" : {
@@ -28,7 +28,7 @@
           "prophecy.metadata.is.interactive.run" : "false",
           "prophecy.project.id" : "__PROJECT_ID_PLACEHOLDER__",
           "prophecy.execution.service.url" : "wss://prophecy.jnj.com/execution/eventws",
-          "prophecy.packages.path" : "{\"\":\"dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/.jar\"}",
+          "prophecy.packages.path" : "{\"pipelines/SAP_01_MD_SLS_ORDR_HMD\":\"dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_01_MD_SLS_ORDR_HMD-1.0-py3-none-any.whl\"}",
           "prophecy.metadata.job.branch" : "__PROJECT_RELEASE_VERSION_PLACEHOLDER__",
           "prophecy.metadata.url" : "__PROPHECY_URL_PLACEHOLDER__",
           "prophecy.execution.metrics.disabled" : false
@@ -39,9 +39,10 @@
     "tasks" : [ {
       "task_key" : "HM2",
       "job_cluster_key" : "JOB_MD_SLS_ORDR_HM2_default_Prophecy_Small",
-      "spark_jar_task" : {
-        "main_class_name" : "Main",
-        "parameters" : [ "-O", "{}" ]
+      "python_wheel_task" : {
+        "package_name" : "SAP_01_MD_SLS_ORDR_HMD",
+        "entry_point" : "main",
+        "parameters" : [ "-i", "HM2", "-O", "{}" ]
       },
       "libraries" : [ {
         "maven" : {
@@ -52,7 +53,7 @@
           "package" : "prophecy-libs==1.5.0"
         }
       }, {
-        "jar" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/.jar"
+        "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_01_MD_SLS_ORDR_HMD-1.0-py3-none-any.whl"
       } ],
       "email_notifications" : { },
       "max_retries" : 0
