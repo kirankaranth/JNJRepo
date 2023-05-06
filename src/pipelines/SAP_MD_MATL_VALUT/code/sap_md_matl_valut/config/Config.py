@@ -10,10 +10,11 @@ class Config(ConfigBase):
             DBTABLE1: str=None,
             MANDT: str=None,
             SRC_SYS_CD: str=None,
+            TMST: str=None,
             **kwargs
     ):
         self.spark = None
-        self.update(sourceDatabase, DBTABLE, DBTABLE1, MANDT, SRC_SYS_CD)
+        self.update(sourceDatabase, DBTABLE, DBTABLE1, MANDT, SRC_SYS_CD, TMST)
 
     def update(
             self,
@@ -22,6 +23,7 @@ class Config(ConfigBase):
             DBTABLE1: str="MARA",
             MANDT: str="100",
             SRC_SYS_CD: str="bba",
+            TMST: str="CASE WHEN TIMESTAMP = '0' THEN CAST(NULL AS TIMESTAMP) ELSE timestamp(TIMESTAMP'yyyyMMddHHmmss') END",
             **kwargs
     ):
         prophecy_spark = self.spark
@@ -30,4 +32,5 @@ class Config(ConfigBase):
         self.DBTABLE1 = DBTABLE1
         self.MANDT = MANDT
         self.SRC_SYS_CD = SRC_SYS_CD
+        self.TMST = TMST
         pass

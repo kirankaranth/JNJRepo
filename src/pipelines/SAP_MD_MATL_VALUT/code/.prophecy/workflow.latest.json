@@ -58,6 +58,14 @@
           },
           "optional" : false,
           "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "TMST",
+          "kind" : {
+            "type" : "spark_expression",
+            "value" : "CASE WHEN TIMESTAMP = '0' THEN CAST(NULL AS TIMESTAMP) ELSE timestamp(TIMESTAMP'yyyyMMddHHmmss') END"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
         } ]
       },
       "oldCommon" : {
@@ -1468,6 +1476,22 @@
             "expression" : {
               "format" : "sql",
               "expression" : "trim(KOSGR)"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "TMST",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "expr('$TMST')"
             }
           },
           "DropColumn" : {
@@ -7930,5 +7954,22 @@
     "outputs" : [ ],
     "selectedInputFields" : [ ],
     "isCustomOutputSchema" : false
-  }
+  },
+  "diagnostics" : [ {
+    "property" : "$.workflow.processes.oKVQ5kxsxZbqe0BCIm5tQ$$v8ZA5legzklJoEMXLWqbr",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "Error: Type: <class 'pyspark.sql.utils.ParseException'>, Value: , Cannot parse the TIMESTAMP value: yyyyMMddHHmmss(line 1, pos 70), , == SQL ==, CASE WHEN TIMESTAMP = '0' THEN CAST(NULL AS TIMESTAMP) ELSE timestamp(TIMESTAMP'yyyyMMddHHmmss') END, ----------------------------------------------------------------------^^^, , Line: 196, Namespace: deco, File: /usr/local/lib/python3.10/dist-packages/pyspark/sql/utils.py, Traceback (most recent call last):,   File \"<string>\", line 96, in schema_analyzer_52ef3a14_fc72_4f3e_9d19_011f6697b773_26,   File \"/usr/local/lib/python3.10/dist-packages/prophecy/cb/server/SchemaAnalyzer.py\", line 52, in AnalyzeSchema,   File \"<string>\", line 88, in schema_analyzer_func_52ef3a14_fc72_4f3e_9d19_011f6697b773_62,   File \"/usr/local/lib/python3.10/dist-packages/pyspark/sql/functions.py\", line 1627, in expr,   File \"/usr/local/lib/python3.10/dist-packages/pyspark/sql/functions.py\", line 85, in _invoke_function,   File \"/usr/local/lib/python3.10/dist-packages/py4j/java_gateway.py\", line 1321, in __call__,   File \"/usr/local/lib/python3.10/dist-packages/pyspark/sql/utils.py\", line 196, in deco",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  } ]
 }
