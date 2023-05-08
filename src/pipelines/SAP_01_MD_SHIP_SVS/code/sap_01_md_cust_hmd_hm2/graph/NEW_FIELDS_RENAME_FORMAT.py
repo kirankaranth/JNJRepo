@@ -255,9 +255,9 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("RET_DT_CNTS_PERF_BAS_EQMNT", trim(col("J_3GABGLG")))\
         .withColumn("RET_DT_CNTS_TIME_BAS_EQMNT", trim(col("J_3GABGVG")))\
         .withColumn("SETLM_TYPE", trim(col("J_3GABRART")))\
-        .withColumn("HRS_PER_MO", trim(col("J_3GSTDMON")))\
-        .withColumn("HRS_PER_DAY", trim(col("J_3GSTDTAG")))\
-        .withColumn("NUM_OF_DAYS_MO", trim(col("J_3GTAGMON")))\
+        .withColumn("HRS_PER_MO", trim(col("J_3GSTDMON")).cast(DecimalType(18, 4)))\
+        .withColumn("HRS_PER_DAY", trim(col("J_3GSTDTAG")).cast(DecimalType(18, 4)))\
+        .withColumn("NUM_OF_DAYS_MO", trim(col("J_3GTAGMON")).cast(DecimalType(18, 4)))\
         .withColumn("FUNC_SETL_ACQ_DT_PBE", trim(col("J_3GZUGTAG")))\
         .withColumn("FILL_PBE_DOC_IN\r\n", trim(col("J_3GMASCHB")))\
         .withColumn("IN_TAKE_MLT_USG_PER_INTO_ACCT", trim(col("J_3GMEINSA")))\
