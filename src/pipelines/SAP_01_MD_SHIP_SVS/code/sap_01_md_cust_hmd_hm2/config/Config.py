@@ -20,7 +20,7 @@ class Config(ConfigBase):
             self,
             sourceSystem: str="hm2",
             DAI_ETL_ID: int=0,
-            MANDT: str="500",
+            MANDT: str="100",
             configDatabase: str=" ",
             sourceDatabase: str="hm2",
             targetSchema: str="dev_md_l1",
