@@ -58,13 +58,6 @@
     }
   }, {
     "PipelineComponent" : {
-      "id" : "pipelines/JES_01_MD_SHIP_JET_JSW_DEU_JEM_SJD_DJD",
-      "nodeName" : "JEM",
-      "path" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/JDE_01_MD_SHIP_JET_JSW_DEU_JEM_SJD_DJD-1.0-py3-none-any.whl",
-      "language" : "python"
-    }
-  }, {
-    "PipelineComponent" : {
       "id" : "pipelines/JDE_01_MD_SHIP_MTK",
       "nodeName" : "JES",
       "path" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/JDE_01_MD_SHIP_MTR_BW2_GMD_JES-1.0-py3-none-any.whl",
@@ -107,6 +100,13 @@
     }
   }, {
     "PipelineComponent" : {
+      "id" : "pipelines/JES_01_MD_SHIP_JET_JSW_DEU_JEM_SJD_DJD",
+      "nodeName" : "JEM",
+      "path" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/JDE_01_MD_SHIP_JET_JSW_DEU_JEM_SJD_DJD-1.0-py3-none-any.whl",
+      "language" : "python"
+    }
+  }, {
+    "PipelineComponent" : {
       "id" : "pipelines/SAP_01_MD_SHIP",
       "nodeName" : "P01",
       "path" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_01_MD_SHIP_BBN_BBL_P01_HCS-1.0-py3-none-any.whl",
@@ -124,7 +124,7 @@
         "driver_node_type_id" : "Standard_D12_v2",
         "autoscale" : {
           "min_workers" : 2,
-          "max_workers" : 40
+          "max_workers" : 6
         },
         "azure_attributes" : {
           "first_on_demand" : 1,
@@ -337,34 +337,7 @@
       "email_notifications" : { },
       "max_retries" : 0
     }, {
-      "task_key" : "JEM",
-      "depends_on" : [ {
-        "task_key" : "GMD"
-      } ],
-      "job_cluster_key" : "JOB_MD_SHIP_default_Prophecy_Large",
-      "python_wheel_task" : {
-        "package_name" : "JDE_01_MD_SHIP_JET_JSW_DEU_JEM_SJD_DJD",
-        "entry_point" : "main",
-        "parameters" : [ "-i", "JEM", "-O", "{}" ]
-      },
-      "libraries" : [ {
-        "maven" : {
-          "coordinates" : "io.prophecy:prophecy-libs_2.12:3.3.0-7.0.18"
-        }
-      }, {
-        "pypi" : {
-          "package" : "prophecy-libs==1.5.0"
-        }
-      }, {
-        "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/JDE_01_MD_SHIP_JET_JSW_DEU_JEM_SJD_DJD-1.0-py3-none-any.whl"
-      } ],
-      "email_notifications" : { },
-      "max_retries" : 0
-    }, {
       "task_key" : "JES",
-      "depends_on" : [ {
-        "task_key" : "JEM"
-      } ],
       "job_cluster_key" : "JOB_MD_SHIP_default_Prophecy_Large",
       "python_wheel_task" : {
         "package_name" : "JDE_01_MD_SHIP_MTR_BW2_GMD_JES",
@@ -505,6 +478,30 @@
       "email_notifications" : { },
       "max_retries" : 0
     }, {
+      "task_key" : "JEM",
+      "depends_on" : [ {
+        "task_key" : "GMD"
+      } ],
+      "job_cluster_key" : "JOB_MD_SHIP_default_Prophecy_Large",
+      "python_wheel_task" : {
+        "package_name" : "JDE_01_MD_SHIP_JET_JSW_DEU_JEM_SJD_DJD",
+        "entry_point" : "main",
+        "parameters" : [ "-i", "JEM", "-O", "{}" ]
+      },
+      "libraries" : [ {
+        "maven" : {
+          "coordinates" : "io.prophecy:prophecy-libs_2.12:3.3.0-7.0.18"
+        }
+      }, {
+        "pypi" : {
+          "package" : "prophecy-libs==1.5.0"
+        }
+      }, {
+        "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/JDE_01_MD_SHIP_JET_JSW_DEU_JEM_SJD_DJD-1.0-py3-none-any.whl"
+      } ],
+      "email_notifications" : { },
+      "max_retries" : 0
+    }, {
       "task_key" : "P01",
       "depends_on" : [ {
         "task_key" : "MBP"
@@ -533,7 +530,7 @@
     "schedule" : {
       "quartz_cron_expression" : "0 0 0 1/1 * ? *",
       "timezone_id" : "GMT",
-      "pause_status" : "PAUSED"
+      "pause_status" : "UNPAUSED"
     }
   },
   "cluster_mode" : {

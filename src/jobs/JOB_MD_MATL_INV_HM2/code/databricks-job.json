@@ -12,19 +12,15 @@
     "format" : "MULTI_TASK",
     "name" : "JOB_MD_MATL_INV_HM2",
     "job_clusters" : [ {
-      "job_cluster_key" : "JOB_MD_MATL_INV_HM2_default_Prophecy_Large",
+      "job_cluster_key" : "JOB_MD_MATL_INV_HM2_default_Prophecy_Medium",
       "new_cluster" : {
         "spark_version" : "11.3.x-scala2.12",
         "node_type_id" : "Standard_D12_v2",
         "driver_node_type_id" : "Standard_D12_v2",
-        "autoscale" : {
-          "min_workers" : 2,
-          "max_workers" : 40
-        },
+        "num_workers" : 10,
         "azure_attributes" : {
           "first_on_demand" : 1,
-          "availability" : "SPOT_WITH_FALLBACK_AZURE",
-          "spot_bid_max_price" : -1
+          "availability" : "SPOT_WITH_FALLBACK_AZURE"
         },
         "spark_conf" : {
           "prophecy.metadata.fabric.id" : "32",
@@ -36,18 +32,13 @@
           "prophecy.metadata.job.branch" : "__PROJECT_RELEASE_VERSION_PLACEHOLDER__",
           "prophecy.metadata.url" : "__PROPHECY_URL_PLACEHOLDER__",
           "prophecy.execution.metrics.disabled" : false
-        },
-        "custom_tags" : { },
-        "ssh_public_keys" : [ ],
-        "init_scripts" : [ ],
-        "spark_env_vars" : { },
-        "enable_elastic_disk" : true
+        }
       }
     } ],
     "email_notifications" : { },
     "tasks" : [ {
       "task_key" : "MD_MATL_INV",
-      "job_cluster_key" : "JOB_MD_MATL_INV_HM2_default_Prophecy_Large",
+      "job_cluster_key" : "JOB_MD_MATL_INV_HM2_default_Prophecy_Medium",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_MATL_INV_HMD",
         "entry_point" : "main",

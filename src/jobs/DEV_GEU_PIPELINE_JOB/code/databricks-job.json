@@ -61,14 +61,14 @@
     "format" : "MULTI_TASK",
     "name" : "GEU_PIPELINE_JOB",
     "job_clusters" : [ {
-      "job_cluster_key" : "GEU_PIPELINE_JOB_default_Prophecy_Large",
+      "job_cluster_key" : "GEU_PIPELINE_JOB_default_Prophecy_Photon_Medium",
       "new_cluster" : {
         "spark_version" : "11.3.x-scala2.12",
-        "node_type_id" : "Standard_D12_v2",
-        "driver_node_type_id" : "Standard_D12_v2",
+        "node_type_id" : "Standard_D16ds_v4",
+        "driver_node_type_id" : "Standard_D8ds_v4",
         "autoscale" : {
           "min_workers" : 2,
-          "max_workers" : 40
+          "max_workers" : 5
         },
         "azure_attributes" : {
           "first_on_demand" : 1,
@@ -89,14 +89,16 @@
         "custom_tags" : { },
         "ssh_public_keys" : [ ],
         "init_scripts" : [ ],
-        "spark_env_vars" : { },
+        "spark_env_vars" : {
+          "x_project" : "MD-L1-DEV"
+        },
         "enable_elastic_disk" : true
       }
     } ],
     "email_notifications" : { },
     "tasks" : [ {
       "task_key" : "MD_SLS_DOC_PTNR_FUNC",
-      "job_cluster_key" : "GEU_PIPELINE_JOB_default_Prophecy_Large",
+      "job_cluster_key" : "GEU_PIPELINE_JOB_default_Prophecy_Photon_Medium",
       "python_wheel_task" : {
         "package_name" : "SAP_01_MD_SLS_DOC_PTNR_FUNC",
         "entry_point" : "main",
@@ -117,7 +119,7 @@
       "max_retries" : 0
     }, {
       "task_key" : "MD_PO_SCHED_LINE_DELV",
-      "job_cluster_key" : "GEU_PIPELINE_JOB_default_Prophecy_Large",
+      "job_cluster_key" : "GEU_PIPELINE_JOB_default_Prophecy_Photon_Medium",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_PO_SCHED_LINE_DELV_ATL_BBA_BBL_BBN_BWI_FSN_GEU_HCS_HMD_MBP_MRS_P01_SVS_TAI_HMD",
         "entry_point" : "main",
@@ -141,7 +143,7 @@
       "depends_on" : [ {
         "task_key" : "MD_PO_SCHED_LINE_DELV"
       } ],
-      "job_cluster_key" : "GEU_PIPELINE_JOB_default_Prophecy_Large",
+      "job_cluster_key" : "GEU_PIPELINE_JOB_default_Prophecy_Photon_Medium",
       "python_wheel_task" : {
         "package_name" : "SAP_01_MD_SLS_ORDR_LINE_geu",
         "entry_point" : "main",
@@ -165,7 +167,7 @@
       "depends_on" : [ {
         "task_key" : "MD_SLS_ORDR_LINE"
       } ],
-      "job_cluster_key" : "GEU_PIPELINE_JOB_default_Prophecy_Large",
+      "job_cluster_key" : "GEU_PIPELINE_JOB_default_Prophecy_Photon_Medium",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_PO_HIST_BBA_BBL_BBN_MBP_MRS_TAI_P01_HMD_GEU_HCS",
         "entry_point" : "main",
@@ -189,7 +191,7 @@
       "depends_on" : [ {
         "task_key" : "MD_PO_HIST"
       } ],
-      "job_cluster_key" : "GEU_PIPELINE_JOB_default_Prophecy_Large",
+      "job_cluster_key" : "GEU_PIPELINE_JOB_default_Prophecy_Photon_Medium",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_MATL_LOC_TAI_MRS_P01_HCS_BWI_GEU_SVS_MBP_FSN",
         "entry_point" : "main",
@@ -213,7 +215,7 @@
       "depends_on" : [ {
         "task_key" : "MD_SLS_DOC_PTNR_FUNC"
       } ],
-      "job_cluster_key" : "GEU_PIPELINE_JOB_default_Prophecy_Large",
+      "job_cluster_key" : "GEU_PIPELINE_JOB_default_Prophecy_Photon_Medium",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_DELV_LINE_FSN_GEU_HCS_MRS_P01_SVS_ATL",
         "entry_point" : "main",
@@ -237,7 +239,7 @@
       "depends_on" : [ {
         "task_key" : "MD_DELV_LINE"
       } ],
-      "job_cluster_key" : "GEU_PIPELINE_JOB_default_Prophecy_Large",
+      "job_cluster_key" : "GEU_PIPELINE_JOB_default_Prophecy_Photon_Medium",
       "python_wheel_task" : {
         "package_name" : "SAP_01_MD_BILL_DOC_HDR_FSN_GEU_HCS_MBP_MRS_P01_SVS_TAI",
         "entry_point" : "main",
@@ -261,7 +263,7 @@
       "depends_on" : [ {
         "task_key" : "MD_BILL_DOC_HDR"
       } ],
-      "job_cluster_key" : "GEU_PIPELINE_JOB_default_Prophecy_Large",
+      "job_cluster_key" : "GEU_PIPELINE_JOB_default_Prophecy_Photon_Medium",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_MATL_INV_BBA_BBL_BBN_GEU_MRS",
         "entry_point" : "main",
