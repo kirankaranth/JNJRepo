@@ -16,9 +16,16 @@
     }
   }, {
     "PipelineComponent" : {
-      "id" : "pipelines/SAP_01_MD_SHIP",
-      "nodeName" : "MD_SHIP",
-      "path" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_01_MD_SHIP_BBN_BBL_P01_HCS-1.0-py3-none-any.whl",
+      "id" : "pipelines/SAP_02_MD_SER_NUM_STOCK_SGMNT",
+      "nodeName" : "MD_SER_NUM_STOCK_SGMNT",
+      "path" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_SER_NUM_STOCK_SGMNT_HCS_MBP_P01_SVS-1.0-py3-none-any.whl",
+      "language" : "python"
+    }
+  }, {
+    "PipelineComponent" : {
+      "id" : "pipelines/SAP_01_MD_SLS_DOC_PTNR_FUNC",
+      "nodeName" : "MD_SLS_DOC_PTNR_FUNC",
+      "path" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_01_MD_SLS_DOC_PTNR_FUNC-1.0-py3-none-any.whl",
       "language" : "python"
     }
   }, {
@@ -37,30 +44,16 @@
     }
   }, {
     "PipelineComponent" : {
+      "id" : "pipelines/SAP_01_MD_SHIP",
+      "nodeName" : "MD_SHIP",
+      "path" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_01_MD_SHIP_BBN_BBL_P01_HCS-1.0-py3-none-any.whl",
+      "language" : "python"
+    }
+  }, {
+    "PipelineComponent" : {
       "id" : "pipelines/SAP_01_MD_SLS_ORDR_LINE_hcs",
       "nodeName" : "MD_SLS_ORDR_LINE",
       "path" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_01_MD_SLS_ORDR_LINE_hcs-1.0-py3-none-any.whl",
-      "language" : "python"
-    }
-  }, {
-    "PipelineComponent" : {
-      "id" : "pipelines/SAP_02_MD_SER_NUM_STOCK_SGMNT",
-      "nodeName" : "MD_SER_NUM_STOCK_SGMNT",
-      "path" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_SER_NUM_STOCK_SGMNT_HCS_MBP_P01_SVS-1.0-py3-none-any.whl",
-      "language" : "python"
-    }
-  }, {
-    "PipelineComponent" : {
-      "id" : "pipelines/SAP_MD_MATL_LOC_TAI_MRS_P01_HCS_BWI_GEU_SVS_MBP_FSN_02",
-      "nodeName" : "MD_MATL_LOC",
-      "path" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_MATL_LOC_TAI_MRS_P01_HCS_BWI_GEU_SVS_MBP_FSN-1.0-py3-none-any.whl",
-      "language" : "python"
-    }
-  }, {
-    "PipelineComponent" : {
-      "id" : "pipelines/SAP_01_MD_SLS_DOC_PTNR_FUNC",
-      "nodeName" : "MD_SLS_DOC_PTNR_FUNC",
-      "path" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_01_MD_SLS_DOC_PTNR_FUNC-1.0-py3-none-any.whl",
       "language" : "python"
     }
   }, {
@@ -70,15 +63,32 @@
       "path" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_PO_HIST_BBA_BBL_BBN_MBP_MRS_TAI_P01_HMD_GEU_HCS-1.0-py3-none-any.whl",
       "language" : "python"
     }
+  }, {
+    "PipelineComponent" : {
+      "id" : "pipelines/SAP_MD_MATL_LOC_TAI_MRS_P01_HCS_BWI_GEU_SVS_MBP_FSN_02",
+      "nodeName" : "MD_MATL_LOC",
+      "path" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_MATL_LOC_TAI_MRS_P01_HCS_BWI_GEU_SVS_MBP_FSN-1.0-py3-none-any.whl",
+      "language" : "python"
+    }
   } ],
   "request" : {
     "format" : "MULTI_TASK",
     "name" : "HCS_PIPELINE_JOB",
     "job_clusters" : [ {
-      "job_cluster_key" : "HCS_PIPELINE_JOB_default_Prophecy_Large",
+      "job_cluster_key" : "HCS_PIPELINE_JOB_default_Prophecy_Photon_Medium",
       "new_cluster" : {
         "spark_version" : "11.3.x-scala2.12",
-        "node_type_id" : "Standard_D12_v2",
+        "node_type_id" : "Standard_D16ds_v4",
+        "driver_node_type_id" : "Standard_D8ds_v4",
+        "autoscale" : {
+          "min_workers" : 2,
+          "max_workers" : 5
+        },
+        "azure_attributes" : {
+          "first_on_demand" : 1,
+          "availability" : "SPOT_WITH_FALLBACK_AZURE",
+          "spot_bid_max_price" : -1
+        },
         "spark_conf" : {
           "prophecy.metadata.fabric.id" : "32",
           "prophecy.metadata.job.uri" : "__PROJECT_ID_PLACEHOLDER__/jobs/DEV_HCS_PIPELINE_JOB",
@@ -93,24 +103,16 @@
         "custom_tags" : { },
         "ssh_public_keys" : [ ],
         "init_scripts" : [ ],
-        "spark_env_vars" : { },
-        "autoscale" : {
-          "min_workers" : 2,
-          "max_workers" : 40
+        "spark_env_vars" : {
+          "x_project" : "MD-L1-DEV"
         },
-        "azure_attributes" : {
-          "first_on_demand" : 1,
-          "availability" : "SPOT_WITH_FALLBACK_AZURE",
-          "spot_bid_max_price" : -1
-        },
-        "driver_node_type_id" : "Standard_D12_v2",
         "enable_elastic_disk" : true
       }
     } ],
     "email_notifications" : { },
     "tasks" : [ {
       "task_key" : "MD_MATL_INV",
-      "job_cluster_key" : "HCS_PIPELINE_JOB_default_Prophecy_Large",
+      "job_cluster_key" : "HCS_PIPELINE_JOB_default_Prophecy_Photon_Medium",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_MATL_INV_HCS",
         "entry_point" : "main",
@@ -118,7 +120,7 @@
       },
       "libraries" : [ {
         "maven" : {
-          "coordinates" : "io.prophecy:prophecy-libs_2.12:3.3.0-7.0.16"
+          "coordinates" : "io.prophecy:prophecy-libs_2.12:3.3.0-7.0.18"
         }
       }, {
         "pypi" : {
@@ -131,7 +133,10 @@
       "max_retries" : 0
     }, {
       "task_key" : "MD_PO_SCHED_LINE_DELV",
-      "job_cluster_key" : "HCS_PIPELINE_JOB_default_Prophecy_Large",
+      "depends_on" : [ {
+        "task_key" : "MD_MATL_INV"
+      } ],
+      "job_cluster_key" : "HCS_PIPELINE_JOB_default_Prophecy_Photon_Medium",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_PO_SCHED_LINE_DELV_ATL_BBA_BBL_BBN_BWI_FSN_GEU_HCS_HMD_MBP_MRS_P01_SVS_TAI_HMD",
         "entry_point" : "main",
@@ -139,7 +144,7 @@
       },
       "libraries" : [ {
         "maven" : {
-          "coordinates" : "io.prophecy:prophecy-libs_2.12:3.3.0-7.0.16"
+          "coordinates" : "io.prophecy:prophecy-libs_2.12:3.3.0-7.0.18"
         }
       }, {
         "pypi" : {
@@ -151,29 +156,56 @@
       "email_notifications" : { },
       "max_retries" : 0
     }, {
-      "task_key" : "MD_SHIP",
-      "job_cluster_key" : "HCS_PIPELINE_JOB_default_Prophecy_Large",
+      "task_key" : "MD_SER_NUM_STOCK_SGMNT",
+      "job_cluster_key" : "HCS_PIPELINE_JOB_default_Prophecy_Photon_Medium",
       "python_wheel_task" : {
-        "package_name" : "SAP_01_MD_SHIP_BBN_BBL_P01_HCS",
+        "package_name" : "SAP_MD_SER_NUM_STOCK_SGMNT_HCS_MBP_P01_SVS",
         "entry_point" : "main",
         "parameters" : [ "-i", "HCS", "-O", "{}" ]
       },
       "libraries" : [ {
         "maven" : {
-          "coordinates" : "io.prophecy:prophecy-libs_2.12:3.3.0-7.0.16"
+          "coordinates" : "io.prophecy:prophecy-libs_2.12:3.3.0-7.0.18"
         }
       }, {
         "pypi" : {
           "package" : "prophecy-libs==1.5.0"
         }
       }, {
-        "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_01_MD_SHIP_BBN_BBL_P01_HCS-1.0-py3-none-any.whl"
+        "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_SER_NUM_STOCK_SGMNT_HCS_MBP_P01_SVS-1.0-py3-none-any.whl"
+      } ],
+      "email_notifications" : { },
+      "max_retries" : 0
+    }, {
+      "task_key" : "MD_SLS_DOC_PTNR_FUNC",
+      "depends_on" : [ {
+        "task_key" : "MD_SER_NUM_STOCK_SGMNT"
+      } ],
+      "job_cluster_key" : "HCS_PIPELINE_JOB_default_Prophecy_Photon_Medium",
+      "python_wheel_task" : {
+        "package_name" : "SAP_01_MD_SLS_DOC_PTNR_FUNC",
+        "entry_point" : "main",
+        "parameters" : [ "-i", "HCS", "-O", "{}" ]
+      },
+      "libraries" : [ {
+        "maven" : {
+          "coordinates" : "io.prophecy:prophecy-libs_2.12:3.3.0-7.0.18"
+        }
+      }, {
+        "pypi" : {
+          "package" : "prophecy-libs==1.5.0"
+        }
+      }, {
+        "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_01_MD_SLS_DOC_PTNR_FUNC-1.0-py3-none-any.whl"
       } ],
       "email_notifications" : { },
       "max_retries" : 0
     }, {
       "task_key" : "MD_DELV_LINE",
-      "job_cluster_key" : "HCS_PIPELINE_JOB_default_Prophecy_Large",
+      "depends_on" : [ {
+        "task_key" : "MD_SLS_DOC_PTNR_FUNC"
+      } ],
+      "job_cluster_key" : "HCS_PIPELINE_JOB_default_Prophecy_Photon_Medium",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_DELV_LINE_FSN_GEU_HCS_MRS_P01_SVS_ATL",
         "entry_point" : "main",
@@ -181,7 +213,7 @@
       },
       "libraries" : [ {
         "maven" : {
-          "coordinates" : "io.prophecy:prophecy-libs_2.12:3.3.0-7.0.16"
+          "coordinates" : "io.prophecy:prophecy-libs_2.12:3.3.0-7.0.18"
         }
       }, {
         "pypi" : {
@@ -194,7 +226,10 @@
       "max_retries" : 0
     }, {
       "task_key" : "MD_BILL_DOC_HDR",
-      "job_cluster_key" : "HCS_PIPELINE_JOB_default_Prophecy_Large",
+      "depends_on" : [ {
+        "task_key" : "MD_DELV_LINE"
+      } ],
+      "job_cluster_key" : "HCS_PIPELINE_JOB_default_Prophecy_Photon_Medium",
       "python_wheel_task" : {
         "package_name" : "SAP_01_MD_BILL_DOC_HDR_FSN_GEU_HCS_MBP_MRS_P01_SVS_TAI",
         "entry_point" : "main",
@@ -202,7 +237,7 @@
       },
       "libraries" : [ {
         "maven" : {
-          "coordinates" : "io.prophecy:prophecy-libs_2.12:3.3.0-7.0.16"
+          "coordinates" : "io.prophecy:prophecy-libs_2.12:3.3.0-7.0.18"
         }
       }, {
         "pypi" : {
@@ -214,8 +249,35 @@
       "email_notifications" : { },
       "max_retries" : 0
     }, {
+      "task_key" : "MD_SHIP",
+      "depends_on" : [ {
+        "task_key" : "MD_BILL_DOC_HDR"
+      } ],
+      "job_cluster_key" : "HCS_PIPELINE_JOB_default_Prophecy_Photon_Medium",
+      "python_wheel_task" : {
+        "package_name" : "SAP_01_MD_SHIP_BBN_BBL_P01_HCS",
+        "entry_point" : "main",
+        "parameters" : [ "-i", "HCS", "-O", "{}" ]
+      },
+      "libraries" : [ {
+        "maven" : {
+          "coordinates" : "io.prophecy:prophecy-libs_2.12:3.3.0-7.0.18"
+        }
+      }, {
+        "pypi" : {
+          "package" : "prophecy-libs==1.5.0"
+        }
+      }, {
+        "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_01_MD_SHIP_BBN_BBL_P01_HCS-1.0-py3-none-any.whl"
+      } ],
+      "email_notifications" : { },
+      "max_retries" : 0
+    }, {
       "task_key" : "MD_SLS_ORDR_LINE",
-      "job_cluster_key" : "HCS_PIPELINE_JOB_default_Prophecy_Large",
+      "depends_on" : [ {
+        "task_key" : "MD_PO_SCHED_LINE_DELV"
+      } ],
+      "job_cluster_key" : "HCS_PIPELINE_JOB_default_Prophecy_Photon_Medium",
       "python_wheel_task" : {
         "package_name" : "SAP_01_MD_SLS_ORDR_LINE_hcs",
         "entry_point" : "main",
@@ -223,7 +285,7 @@
       },
       "libraries" : [ {
         "maven" : {
-          "coordinates" : "io.prophecy:prophecy-libs_2.12:3.3.0-7.0.16"
+          "coordinates" : "io.prophecy:prophecy-libs_2.12:3.3.0-7.0.18"
         }
       }, {
         "pypi" : {
@@ -235,71 +297,11 @@
       "email_notifications" : { },
       "max_retries" : 0
     }, {
-      "task_key" : "MD_SER_NUM_STOCK_SGMNT",
-      "job_cluster_key" : "HCS_PIPELINE_JOB_default_Prophecy_Large",
-      "python_wheel_task" : {
-        "package_name" : "SAP_MD_SER_NUM_STOCK_SGMNT_HCS_MBP_P01_SVS",
-        "entry_point" : "main",
-        "parameters" : [ "-i", "HCS", "-O", "{}" ]
-      },
-      "libraries" : [ {
-        "maven" : {
-          "coordinates" : "io.prophecy:prophecy-libs_2.12:3.3.0-7.0.16"
-        }
-      }, {
-        "pypi" : {
-          "package" : "prophecy-libs==1.5.0"
-        }
-      }, {
-        "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_SER_NUM_STOCK_SGMNT_HCS_MBP_P01_SVS-1.0-py3-none-any.whl"
-      } ],
-      "email_notifications" : { },
-      "max_retries" : 0
-    }, {
-      "task_key" : "MD_MATL_LOC",
-      "job_cluster_key" : "HCS_PIPELINE_JOB_default_Prophecy_Large",
-      "python_wheel_task" : {
-        "package_name" : "SAP_MD_MATL_LOC_TAI_MRS_P01_HCS_BWI_GEU_SVS_MBP_FSN",
-        "entry_point" : "main",
-        "parameters" : [ "-i", "HCS", "-O", "{}" ]
-      },
-      "libraries" : [ {
-        "maven" : {
-          "coordinates" : "io.prophecy:prophecy-libs_2.12:3.3.0-7.0.16"
-        }
-      }, {
-        "pypi" : {
-          "package" : "prophecy-libs==1.5.0"
-        }
-      }, {
-        "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_MATL_LOC_TAI_MRS_P01_HCS_BWI_GEU_SVS_MBP_FSN-1.0-py3-none-any.whl"
-      } ],
-      "email_notifications" : { },
-      "max_retries" : 0
-    }, {
-      "task_key" : "MD_SLS_DOC_PTNR_FUNC",
-      "job_cluster_key" : "HCS_PIPELINE_JOB_default_Prophecy_Large",
-      "python_wheel_task" : {
-        "package_name" : "SAP_01_MD_SLS_DOC_PTNR_FUNC",
-        "entry_point" : "main",
-        "parameters" : [ "-i", "HCS", "-O", "{}" ]
-      },
-      "libraries" : [ {
-        "maven" : {
-          "coordinates" : "io.prophecy:prophecy-libs_2.12:3.3.0-7.0.16"
-        }
-      }, {
-        "pypi" : {
-          "package" : "prophecy-libs==1.5.0"
-        }
-      }, {
-        "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_01_MD_SLS_DOC_PTNR_FUNC-1.0-py3-none-any.whl"
-      } ],
-      "email_notifications" : { },
-      "max_retries" : 0
-    }, {
       "task_key" : "MD_PO_HIST",
-      "job_cluster_key" : "HCS_PIPELINE_JOB_default_Prophecy_Large",
+      "depends_on" : [ {
+        "task_key" : "MD_SLS_ORDR_LINE"
+      } ],
+      "job_cluster_key" : "HCS_PIPELINE_JOB_default_Prophecy_Photon_Medium",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_PO_HIST_BBA_BBL_BBN_MBP_MRS_TAI_P01_HMD_GEU_HCS",
         "entry_point" : "main",
@@ -307,7 +309,7 @@
       },
       "libraries" : [ {
         "maven" : {
-          "coordinates" : "io.prophecy:prophecy-libs_2.12:3.3.0-7.0.16"
+          "coordinates" : "io.prophecy:prophecy-libs_2.12:3.3.0-7.0.18"
         }
       }, {
         "pypi" : {
@@ -315,6 +317,30 @@
         }
       }, {
         "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_PO_HIST_BBA_BBL_BBN_MBP_MRS_TAI_P01_HMD_GEU_HCS-1.0-py3-none-any.whl"
+      } ],
+      "email_notifications" : { },
+      "max_retries" : 0
+    }, {
+      "task_key" : "MD_MATL_LOC",
+      "depends_on" : [ {
+        "task_key" : "MD_PO_HIST"
+      } ],
+      "job_cluster_key" : "HCS_PIPELINE_JOB_default_Prophecy_Photon_Medium",
+      "python_wheel_task" : {
+        "package_name" : "SAP_MD_MATL_LOC_TAI_MRS_P01_HCS_BWI_GEU_SVS_MBP_FSN",
+        "entry_point" : "main",
+        "parameters" : [ "-i", "HCS", "-O", "{}" ]
+      },
+      "libraries" : [ {
+        "maven" : {
+          "coordinates" : "io.prophecy:prophecy-libs_2.12:3.3.0-7.0.18"
+        }
+      }, {
+        "pypi" : {
+          "package" : "prophecy-libs==1.5.0"
+        }
+      }, {
+        "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_MATL_LOC_TAI_MRS_P01_HCS_BWI_GEU_SVS_MBP_FSN-1.0-py3-none-any.whl"
       } ],
       "email_notifications" : { },
       "max_retries" : 0
@@ -328,5 +354,6 @@
   },
   "cluster_mode" : {
     "clusterMode" : "Single"
-  }
+  },
+  "secret_scope" : "prophecy_jobs_3"
 }
