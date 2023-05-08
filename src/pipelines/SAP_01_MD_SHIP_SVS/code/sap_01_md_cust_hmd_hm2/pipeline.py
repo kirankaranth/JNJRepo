@@ -44,8 +44,10 @@ def pipeline(spark: SparkSession) -> None:
     )
     df_MANDT_FILTER_TVAST = MANDT_FILTER_TVAST(spark, df_SAP_TVAST)
     LU_SAP_TVAST(spark, df_MANDT_FILTER_TVAST)
+    LU_SAP_03_T077X(spark, df_MANDT_FILTER_T077X)
     df_MANDT_FILTER_TBRCT = MANDT_FILTER_TBRCT(spark, df_SAP_TBRCT)
     LU_SAP_TBRCT(spark, df_MANDT_FILTER_TBRCT)
+    LU_SAP_02_T077X(spark, df_MANDT_FILTER_T077X)
     LU_SAP_T016T(spark, df_MANDT_FILTER_T016T)
     df_DS_SAP_03_KNA1 = DS_SAP_03_KNA1(spark)
     df_DS_SAP_03_KNA1 = collectMetrics(
@@ -66,6 +68,16 @@ def pipeline(spark: SparkSession) -> None:
         "bXWpFDjTHdH2yBxeeI2XA$$Ety3wHmWL8qDipzXNvxHW", 
         "FLq228VnghXj3TH2maDzc$$ckS75rklFFjfe1z8JCZmY"
     )
+    df_Join_1 = Join_1(spark)
+    df_Join_1 = collectMetrics(
+        spark, 
+        df_Join_1, 
+        "graph", 
+        "NHRJleMYGb7aRWSyHZpFu$$FBh-3BOo0WCR31qQGghQ9", 
+        "T0duAAEOoGUmSl4IlftGx$$F4x6CMZWZJjGqOjPhnspP"
+    )
+    df_Join_1.cache().count()
+    df_Join_1.unpersist()
     MD_CUST(spark, df_SET_FIELD_ORDER_REFORMAT)
 
 def main():
