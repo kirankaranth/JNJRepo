@@ -1,5 +1,4 @@
 from .LU_SAP_TBRCT import LU_SAP_TBRCT
-from .Join_1 import Join_1
 from .LU_SAP_02_T077X import LU_SAP_02_T077X
 from .NEW_FIELDS_RENAME_FORMAT import NEW_FIELDS_RENAME_FORMAT
 from .SAP_T077X import SAP_T077X

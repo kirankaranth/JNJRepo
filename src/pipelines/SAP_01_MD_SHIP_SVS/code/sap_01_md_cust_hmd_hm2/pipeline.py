@@ -68,16 +68,6 @@ def pipeline(spark: SparkSession) -> None:
         "bXWpFDjTHdH2yBxeeI2XA$$Ety3wHmWL8qDipzXNvxHW", 
         "FLq228VnghXj3TH2maDzc$$ckS75rklFFjfe1z8JCZmY"
     )
-    df_Join_1 = Join_1(spark)
-    df_Join_1 = collectMetrics(
-        spark, 
-        df_Join_1, 
-        "graph", 
-        "NHRJleMYGb7aRWSyHZpFu$$FBh-3BOo0WCR31qQGghQ9", 
-        "T0duAAEOoGUmSl4IlftGx$$F4x6CMZWZJjGqOjPhnspP"
-    )
-    df_Join_1.cache().count()
-    df_Join_1.unpersist()
     MD_CUST(spark, df_SET_FIELD_ORDER_REFORMAT)
 
 def main():
