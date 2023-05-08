@@ -5,5 +5,5 @@ from prophecy.libs import typed_lit
 from sap_01_md_sls_doc_ptnr_func.config.ConfigStore import *
 from sap_01_md_sls_doc_ptnr_func.udfs.UDFs import *
 
-def SAP_VBAK(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.sourceDatabase}.vbak")
+def SELECT_VBAK(spark: SparkSession, in0: DataFrame) -> DataFrame:
+    return in0.select(col("VBELN"), col("BUKRS_VF"), col("AUART"))
