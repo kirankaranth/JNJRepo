@@ -38,17 +38,14 @@ def pipeline(spark: SparkSession) -> None:
     df_MANDT_FILTER = MANDT_FILTER(spark, df_SAP_VBAP)
     df_SAP_VBAK = SAP_VBAK(spark)
     df_MANDT_FILTER_1 = MANDT_FILTER_1(spark, df_SAP_VBAK)
+    df_SELECT_VBAK = SELECT_VBAK(spark, df_MANDT_FILTER_1)
     df_SAP_VBKD = SAP_VBKD(spark)
     df_MANDT_FILTER_1_1_1 = MANDT_FILTER_1_1_1(spark, df_SAP_VBKD)
+    df_SELECT_VBKD = SELECT_VBKD(spark, df_MANDT_FILTER_1_1_1)
     df_SAP_TVST = SAP_TVST(spark)
     df_MANDT_FILTER_1_1_1_2_1_1_1_1_1_1 = MANDT_FILTER_1_1_1_2_1_1_1_1_1_1(spark, df_SAP_TVST)
-    df_Join_1 = Join_1(
-        spark, 
-        df_MANDT_FILTER, 
-        df_MANDT_FILTER_1, 
-        df_MANDT_FILTER_1_1_1, 
-        df_MANDT_FILTER_1_1_1_2_1_1_1_1_1_1
-    )
+    df_Reformat_1 = Reformat_1(spark, df_MANDT_FILTER_1_1_1_2_1_1_1_1_1_1)
+    df_Join_1 = Join_1(spark, df_MANDT_FILTER, df_SELECT_VBAK, df_SELECT_VBKD, df_Reformat_1)
     df_NEW_FIEDS = NEW_FIEDS(spark, df_Join_1)
     MD_SLS_ORDR_LINE(spark, df_NEW_FIEDS)
     df_DUPLICATE_CHECK = DUPLICATE_CHECK(spark, df_NEW_FIEDS)
