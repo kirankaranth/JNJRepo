@@ -193,7 +193,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("DATA_ELMNT_FOR_CUST", trim(col("KNA1_EEW_CUST")))\
         .withColumn("ACCT_EXCLU_FROM_RULE_BAS_ASGNMT", trim(col("RULE_EXCLUSION")))\
         .withColumn("CUST_GENL_ADDR_DEP_EXTN", trim(col("KNA1_ADDR_EEW_CUST")))\
-        .withColumn("MAX_STCK_HGHT_PKGNG_MATL", trim(col("_VSO_R_PALHGT")))\
+        .withColumn("MAX_STCK_HGHT_PKGNG_MATL", trim(col("_VSO_R_PALHGT")).cast(DecimalType(18, 4)))\
         .withColumn("UNIT_LGTH_PKGNG_MATL", trim(col("_VSO_R_PAL_UL")))\
         .withColumn("CUST_RLTD_PACK_EA_PKGNG_MATL", trim(col("_VSO_R_PK_MAT")))\
         .withColumn("PKGNG_MATL_CUST_VSO", trim(col("_VSO_R_MATPAL")))\
