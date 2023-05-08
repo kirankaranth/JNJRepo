@@ -7,6 +7,16 @@ from prophecy.utils import *
 from sap_01_md_cust_hmd_hm2.graph import *
 
 def pipeline(spark: SparkSession) -> None:
+    df_SAP_T077X = SAP_T077X(spark)
+    df_SAP_T077X = collectMetrics(
+        spark, 
+        df_SAP_T077X, 
+        "graph", 
+        "KpZ3e4RB1O7lbbls6RYf6$$Atl0h1-c9MlYelA5GGEXu", 
+        "HzJOPpwgLPsF7hktqVMj5$$XTuJ_dAKZt1DReK-MI3Nw"
+    )
+    df_MANDT_FILTER_T077X = MANDT_FILTER_T077X(spark, df_SAP_T077X)
+    LU_SAP_T077X(spark, df_MANDT_FILTER_T077X)
     df_SAP_T016T = SAP_T016T(spark)
     df_SAP_T016T = collectMetrics(
         spark, 

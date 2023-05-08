@@ -5,7 +5,5 @@ from prophecy.libs import typed_lit
 from sap_01_md_cust_hmd_hm2.config.ConfigStore import *
 from sap_01_md_cust_hmd_hm2.udfs.UDFs import *
 
-def LU_SAP_TBRCT(spark: SparkSession, in0: DataFrame):
-    keyColumns = ['''BRACO''']
-    valueColumns = ['''VTEXT''', '''BRACO''']
-    createLookup("LU_SAP_TBRCT", in0, spark, keyColumns, valueColumns)
+def SAP_T077X(spark: SparkSession) -> DataFrame:
+    return spark.read.table(f"pqa_hm2.t077x")
