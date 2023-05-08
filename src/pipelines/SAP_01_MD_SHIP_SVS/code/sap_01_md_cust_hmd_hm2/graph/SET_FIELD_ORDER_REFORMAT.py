@@ -242,7 +242,6 @@ def SET_FIELD_ORDER_REFORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("FUNC_SETL_ACQ_DT_PBE"), 
         col("IN_TAKE_MLT_USG_PER_INTO_ACCT"), 
         col("IN_RLVNT_SHRT_OPR_PER"), 
-        col("FILL_PBE_DOC_IN").alias("FILL_PBE_DOC_IN\r\n"), 
         col("BLOK_IN_DOC_ENT"), 
         col("IN_CALC_PBE_TBE"), 
         col("CAL_ID"), 
@@ -274,5 +273,7 @@ def SET_FIELD_ORDER_REFORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("INDSTR_CD"), 
         col("LANG_KEY"), 
         col("_pk_"), 
-        col("_deleted_")
+        col("_deleted_"), 
+        col("FILL_PBE_DOC_IN"), 
+        col("CNAE")
     )
