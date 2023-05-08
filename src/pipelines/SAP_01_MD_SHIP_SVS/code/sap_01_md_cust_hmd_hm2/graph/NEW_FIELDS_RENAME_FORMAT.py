@@ -163,7 +163,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
           "LAST_CHG_CNFRM_DTTM",
           when((col("UPTIM") == lit("000000")), lit(None)).otherwise(to_timestamp(col("UPTIM"), "HHmmSS"))
         )\
-        .withColumn("CENT_DEL_BLK_MSTR_REC\r\n", trim(col("NODEL")))\
+        .withColumn("CENT_DEL_BLK_MSTR_REC", trim(col("NODEL")))\
         .withColumn("DELV_DT_RULE", trim(col("DELIVERY_DATE_RULE")))\
         .withColumn("BUSN_PRPS_CMPLT_FL", trim(col("CVP_XBLCK")))\
         .withColumn("SUFRAMA_CD", trim(col("SUFRAMA")))\
@@ -193,7 +193,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("DATA_ELMNT_FOR_CUST", trim(col("KNA1_EEW_CUST")))\
         .withColumn("ACCT_EXCLU_FROM_RULE_BAS_ASGNMT", trim(col("RULE_EXCLUSION")))\
         .withColumn("CUST_GENL_ADDR_DEP_EXTN", trim(col("KNA1_ADDR_EEW_CUST")))\
-        .withColumn("MAX_STCK_HGHT_PKGNG_MATL", trim(col("_VSO_R_PALHGT")))\
+        .withColumn("MAX_STCK_HGHT_PKGNG_MATL", trim(col("_VSO_R_PALHGT")).cast(DecimalType(18, 4)))\
         .withColumn("UNIT_LGTH_PKGNG_MATL", trim(col("_VSO_R_PAL_UL")))\
         .withColumn("CUST_RLTD_PACK_EA_PKGNG_MATL", trim(col("_VSO_R_PK_MAT")))\
         .withColumn("PKGNG_MATL_CUST_VSO", trim(col("_VSO_R_MATPAL")))\
@@ -255,11 +255,11 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("RET_DT_CNTS_PERF_BAS_EQMNT", trim(col("J_3GABGLG")))\
         .withColumn("RET_DT_CNTS_TIME_BAS_EQMNT", trim(col("J_3GABGVG")))\
         .withColumn("SETLM_TYPE", trim(col("J_3GABRART")))\
-        .withColumn("HRS_PER_MO", trim(col("J_3GSTDMON")))\
-        .withColumn("HRS_PER_DAY", trim(col("J_3GSTDTAG")))\
-        .withColumn("NUM_OF_DAYS_MO", trim(col("J_3GTAGMON")))\
+        .withColumn("HRS_PER_MO", trim(col("J_3GSTDMON")).cast(DecimalType(18, 4)))\
+        .withColumn("HRS_PER_DAY", trim(col("J_3GSTDTAG")).cast(DecimalType(18, 4)))\
+        .withColumn("NUM_OF_DAYS_MO", trim(col("J_3GTAGMON")).cast(DecimalType(18, 4)))\
         .withColumn("FUNC_SETL_ACQ_DT_PBE", trim(col("J_3GZUGTAG")))\
-        .withColumn("FILL_PBE_DOC_IN\r\n", trim(col("J_3GMASCHB")))\
+        .withColumn("FILL_PBE_DOC_IN", trim(col("J_3GMASCHB")))\
         .withColumn("IN_TAKE_MLT_USG_PER_INTO_ACCT", trim(col("J_3GMEINSA")))\
         .withColumn("IN_RLVNT_SHRT_OPR_PER", trim(col("J_3GKEINSA")))\
         .withColumn("BLOK_IN_DOC_ENT", trim(col("J_3GBLSPER")))\
@@ -294,4 +294,11 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("_pk_", to_json(expr("named_struct('SRC_SYS_CD', SRC_SYS_CD, 'CUST_NUM', CUST_NUM)")))\
         .withColumn("_pk_md5_", md5(to_json(expr("named_struct('SRC_SYS_CD', SRC_SYS_CD, 'CUST_NUM', CUST_NUM)"))))\
         .withColumn("_l1_upt_", current_timestamp())\
-        .withColumn("_deleted_", lit("F"))
+        .withColumn("_deleted_", lit("F"))\
+        .withColumn("DESC_INDSTR_CD_1", trim(lookup("LU_SAP_TBRCT", col("BRAN1")).getField("VTEXT")))\
+        .withColumn("DESC_INDSTR_CD_2", trim(lookup("LU_SAP_TBRCT", col("BRAN2")).getField("VTEXT")))\
+        .withColumn("DESC_INDSTR_CD_3", trim(lookup("LU_SAP_TBRCT", col("BRAN3")).getField("VTEXT")))\
+        .withColumn("ACCT_GRP_NM", trim(lookup("LU_SAP_T077X", col("KTOKD")).getField("TXT30")))\
+        .withColumn("CUST_ACCT_GRP_NM", trim(lookup("LU_SAP_02_T077X", col("KTOKD")).getField("KTOKD")))\
+        .withColumn("INDSTR_CD", trim(col("BRAN1")))\
+        .withColumn("LANG_KEY", trim(lookup("LU_SAP_03_T077X", col("KTOKD")).getField("SPRAS")))

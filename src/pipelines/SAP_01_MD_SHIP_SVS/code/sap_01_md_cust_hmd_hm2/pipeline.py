@@ -7,6 +7,16 @@ from prophecy.utils import *
 from sap_01_md_cust_hmd_hm2.graph import *
 
 def pipeline(spark: SparkSession) -> None:
+    df_SAP_T077X = SAP_T077X(spark)
+    df_SAP_T077X = collectMetrics(
+        spark, 
+        df_SAP_T077X, 
+        "graph", 
+        "KpZ3e4RB1O7lbbls6RYf6$$Atl0h1-c9MlYelA5GGEXu", 
+        "HzJOPpwgLPsF7hktqVMj5$$XTuJ_dAKZt1DReK-MI3Nw"
+    )
+    df_MANDT_FILTER_T077X = MANDT_FILTER_T077X(spark, df_SAP_T077X)
+    LU_SAP_T077X(spark, df_MANDT_FILTER_T077X)
     df_SAP_T016T = SAP_T016T(spark)
     df_SAP_T016T = collectMetrics(
         spark, 
@@ -34,8 +44,10 @@ def pipeline(spark: SparkSession) -> None:
     )
     df_MANDT_FILTER_TVAST = MANDT_FILTER_TVAST(spark, df_SAP_TVAST)
     LU_SAP_TVAST(spark, df_MANDT_FILTER_TVAST)
+    LU_SAP_03_T077X(spark, df_MANDT_FILTER_T077X)
     df_MANDT_FILTER_TBRCT = MANDT_FILTER_TBRCT(spark, df_SAP_TBRCT)
     LU_SAP_TBRCT(spark, df_MANDT_FILTER_TBRCT)
+    LU_SAP_02_T077X(spark, df_MANDT_FILTER_T077X)
     LU_SAP_T016T(spark, df_MANDT_FILTER_T016T)
     df_DS_SAP_03_KNA1 = DS_SAP_03_KNA1(spark)
     df_DS_SAP_03_KNA1 = collectMetrics(
@@ -47,8 +59,7 @@ def pipeline(spark: SparkSession) -> None:
     )
     df_MANDT_FILTER = MANDT_FILTER(spark, df_DS_SAP_03_KNA1)
     df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_MANDT_FILTER)
-    df_DEDUPLICATE = DEDUPLICATE(spark, df_NEW_FIELDS_RENAME_FORMAT)
-    df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_DEDUPLICATE)
+    df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS_RENAME_FORMAT)
     df_SET_FIELD_ORDER_REFORMAT = collectMetrics(
         spark, 
         df_SET_FIELD_ORDER_REFORMAT, 
@@ -56,6 +67,17 @@ def pipeline(spark: SparkSession) -> None:
         "bXWpFDjTHdH2yBxeeI2XA$$Ety3wHmWL8qDipzXNvxHW", 
         "FLq228VnghXj3TH2maDzc$$ckS75rklFFjfe1z8JCZmY"
     )
+    df_DUPLICATE_CHECK = DUPLICATE_CHECK(spark, df_SET_FIELD_ORDER_REFORMAT)
+    df_DUPLICATE_CHECK_FILTER = DUPLICATE_CHECK_FILTER(spark, df_DUPLICATE_CHECK)
+    df_DUPLICATE_CHECK_FILTER = collectMetrics(
+        spark, 
+        df_DUPLICATE_CHECK_FILTER, 
+        "graph", 
+        "Imd7XS6t2L_zT1fY-XbFV$$oe6XwBp-yvxwhFE9xOgj0", 
+        "Tj9XT4hJN94v-DLqCrPZL$$6L1HyQzDixojFSt5O6xop"
+    )
+    df_DUPLICATE_CHECK_FILTER.cache().count()
+    df_DUPLICATE_CHECK_FILTER.unpersist()
     MD_CUST(spark, df_SET_FIELD_ORDER_REFORMAT)
 
 def main():

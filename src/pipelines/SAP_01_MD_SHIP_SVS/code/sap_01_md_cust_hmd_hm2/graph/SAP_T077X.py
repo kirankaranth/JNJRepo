@@ -5,5 +5,5 @@ from prophecy.libs import typed_lit
 from sap_01_md_cust_hmd_hm2.config.ConfigStore import *
 from sap_01_md_cust_hmd_hm2.udfs.UDFs import *
 
-def DS_SAP_03_KNA1(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.sourceDatabase}.KNA1")
+def SAP_T077X(spark: SparkSession) -> DataFrame:
+    return spark.read.table(f"{Config.sourceDatabase}.t077x")
