@@ -16,15 +16,8 @@ def pipeline(spark: SparkSession) -> None:
         "EJUkXbKyNibpO5mLhL7bQ$$lLxo-IjawFsLNBYDUZ2iY"
     )
     df_SAP_MCH1_FILTER = SAP_MCH1_FILTER(spark, df_SAP_MCH1)
-    df_SAP_MCH1_FILTER = collectMetrics(
-        spark, 
-        df_SAP_MCH1_FILTER, 
-        "graph", 
-        "ozYMMcm2ZakfkMSmP_aMP$$MRutNd_vJDVFWju_ahnY2", 
-        "e6X4P6dLRCIXEhnZAuozS$$NDp48YB75EU6o0Q3jWupM"
-    )
-    df_SAP_MCH1_FILTER.cache().count()
-    df_SAP_MCH1_FILTER.unpersist()
+    df_SchemaTransform_MCH1 = SchemaTransform_MCH1(spark, df_SAP_MCH1_FILTER)
+    df_Reformat_MCH1 = Reformat_MCH1(spark, df_SchemaTransform_MCH1)
     df_SAP_MCHA = SAP_MCHA(spark)
     df_SAP_MCHA = collectMetrics(
         spark, 
@@ -34,16 +27,17 @@ def pipeline(spark: SparkSession) -> None:
         "dWVBL007rGO1Y3AmetkDL$$jWDAYLwquMLXziN0IcA7s"
     )
     df_SAP_MCHA_FILTER = SAP_MCHA_FILTER(spark, df_SAP_MCHA)
-    df_SchemaTransform_1 = SchemaTransform_1(spark, df_SAP_MCHA_FILTER)
-    df_SchemaTransform_1 = collectMetrics(
+    df_SchemaTransform_MCHA = SchemaTransform_MCHA(spark, df_SAP_MCHA_FILTER)
+    df_Reformat_MCHA = Reformat_MCHA(spark, df_SchemaTransform_MCHA)
+    df_UNION = UNION(spark, df_Reformat_MCHA, df_Reformat_MCH1)
+    df_UNION = collectMetrics(
         spark, 
-        df_SchemaTransform_1, 
+        df_UNION, 
         "graph", 
-        "s5xK0Q3ueppqhnbIu7eeV$$GzpEJ3zHadu_FSnxxgmo4", 
-        "uOXJJeGi5UWLNjvFtqa4L$$vKF-jCi23r65FPR1byTPU"
+        "lJMnrv5eL7R2Q6XTMZ77V$$ruguIIbHjyLv4ih-xxNo0", 
+        "6ySEpQqbJmmzfphIHlgTZ$$WdVUHW8tEBBfu65iCb-1H"
     )
-    df_SchemaTransform_1.cache().count()
-    df_SchemaTransform_1.unpersist()
+    MD_BTCH(spark, df_UNION)
 
 def main():
     spark = SparkSession.builder\
