@@ -75,6 +75,7 @@ def pipeline(spark: SparkSession) -> None:
         "sjH_LLGBfigv0q-MWiqp1$$G22L17gIO1yk7wrAFjV7H"
     )
     df_MANDT_FILTER_1 = MANDT_FILTER_1(spark, df_SAP_VBAK)
+    df_SELECT_VBAK = SELECT_VBAK(spark, df_MANDT_FILTER_1)
     df_SAP_VBKD = SAP_VBKD(spark)
     df_SAP_VBKD = collectMetrics(
         spark, 
@@ -84,7 +85,8 @@ def pipeline(spark: SparkSession) -> None:
         "Vrb1zO3XQx8eG-gwIAYs3$$l__PwkEUPq7stwQbww9t3"
     )
     df_MANDT_FILTER_1_1_1 = MANDT_FILTER_1_1_1(spark, df_SAP_VBKD)
-    df_Join_1 = Join_1(spark, df_MANDT_FILTER, df_MANDT_FILTER_1, df_MANDT_FILTER_1_1_1)
+    df_SELECT_VBKD = SELECT_VBKD(spark, df_MANDT_FILTER_1_1_1)
+    df_Join_1 = Join_1(spark, df_MANDT_FILTER, df_SELECT_VBAK, df_SELECT_VBKD)
     df_NEW_FIEDS = NEW_FIEDS(spark, df_Join_1)
     df_NEW_FIEDS = collectMetrics(
         spark, 
