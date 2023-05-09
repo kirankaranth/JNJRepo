@@ -1,1 +1,2 @@
+from .test_NEW_FIELDS_TRANSFORMATION_1 import *
 from .test_NEW_FIELDS_TRANSFORMATION import *
