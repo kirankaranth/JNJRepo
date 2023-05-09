@@ -6,4 +6,4 @@ from sap_01_md_sls_ordr_line_geu.config.ConfigStore import *
 from sap_01_md_sls_ordr_line_geu.udfs.UDFs import *
 
 def SAP_TVSTT(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM {Config.sourceDatabase}.tvstt WHERE _deleted_ = 'F' and spras = 'E'")
+    return spark.read.table(f"{Config.sourceDatabase}.tvstt")
