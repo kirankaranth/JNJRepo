@@ -43,6 +43,22 @@ class NEW_FIELDS_TRANSFORMATION_1Test(BaseTestCase):
               defaultConfFile = None
             )
         )
+        dfgraph_LU_SAP_T001 = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/sap_01_md_sls_ordr_atl/graph/LU_SAP_T001/schema.json',
+            'test/resources/data/sap_01_md_sls_ordr_atl/graph/LU_SAP_T001/data.json',
+            "in0"
+        )
+        from sap_01_md_sls_ordr_atl.graph.LU_SAP_T001 import LU_SAP_T001
+        LU_SAP_T001(self.spark, dfgraph_LU_SAP_T001)
+        dfgraph_LU_SAP_TVV2T = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/sap_01_md_sls_ordr_atl/graph/LU_SAP_TVV2T/schema.json',
+            'test/resources/data/sap_01_md_sls_ordr_atl/graph/LU_SAP_TVV2T/data.json',
+            "in0"
+        )
+        from sap_01_md_sls_ordr_atl.graph.LU_SAP_TVV2T import LU_SAP_TVV2T
+        LU_SAP_TVV2T(self.spark, dfgraph_LU_SAP_TVV2T)
         dfgraph_LU_SAP_TVTWT = createDfFromResourceFiles(
             self.spark,
             'test/resources/data/sap_01_md_sls_ordr_atl/graph/LU_SAP_TVTWT/schema.json',
@@ -51,6 +67,14 @@ class NEW_FIELDS_TRANSFORMATION_1Test(BaseTestCase):
         )
         from sap_01_md_sls_ordr_atl.graph.LU_SAP_TVTWT import LU_SAP_TVTWT
         LU_SAP_TVTWT(self.spark, dfgraph_LU_SAP_TVTWT)
+        dfgraph_LU_SAP_TVSBT = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/sap_01_md_sls_ordr_atl/graph/LU_SAP_TVSBT/schema.json',
+            'test/resources/data/sap_01_md_sls_ordr_atl/graph/LU_SAP_TVSBT/data.json',
+            "in0"
+        )
+        from sap_01_md_sls_ordr_atl.graph.LU_SAP_TVSBT import LU_SAP_TVSBT
+        LU_SAP_TVSBT(self.spark, dfgraph_LU_SAP_TVSBT)
         dfgraph_LU_SAP_TVFST = createDfFromResourceFiles(
             self.spark,
             'test/resources/data/sap_01_md_sls_ordr_atl/graph/LU_SAP_TVFST/schema.json',
@@ -59,6 +83,14 @@ class NEW_FIELDS_TRANSFORMATION_1Test(BaseTestCase):
         )
         from sap_01_md_sls_ordr_atl.graph.LU_SAP_TVFST import LU_SAP_TVFST
         LU_SAP_TVFST(self.spark, dfgraph_LU_SAP_TVFST)
+        dfgraph_LU_SAP_TVV3T = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/sap_01_md_sls_ordr_atl/graph/LU_SAP_TVV3T/schema.json',
+            'test/resources/data/sap_01_md_sls_ordr_atl/graph/LU_SAP_TVV3T/data.json',
+            "in0"
+        )
+        from sap_01_md_sls_ordr_atl.graph.LU_SAP_TVV3T import LU_SAP_TVV3T
+        LU_SAP_TVV3T(self.spark, dfgraph_LU_SAP_TVV3T)
         dfgraph_LU_SAP_TVAKT = createDfFromResourceFiles(
             self.spark,
             'test/resources/data/sap_01_md_sls_ordr_atl/graph/LU_SAP_TVAKT/schema.json',
@@ -91,6 +123,22 @@ class NEW_FIELDS_TRANSFORMATION_1Test(BaseTestCase):
         )
         from sap_01_md_sls_ordr_atl.graph.LU_SAP_T176T import LU_SAP_T176T
         LU_SAP_T176T(self.spark, dfgraph_LU_SAP_T176T)
+        dfgraph_LU_SAP_TVV4T = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/sap_01_md_sls_ordr_atl/graph/LU_SAP_TVV4T/schema.json',
+            'test/resources/data/sap_01_md_sls_ordr_atl/graph/LU_SAP_TVV4T/data.json',
+            "in0"
+        )
+        from sap_01_md_sls_ordr_atl.graph.LU_SAP_TVV4T import LU_SAP_TVV4T
+        LU_SAP_TVV4T(self.spark, dfgraph_LU_SAP_TVV4T)
+        dfgraph_LU_SAP_TVV5T = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/sap_01_md_sls_ordr_atl/graph/LU_SAP_TVV5T/schema.json',
+            'test/resources/data/sap_01_md_sls_ordr_atl/graph/LU_SAP_TVV5T/data.json',
+            "in0"
+        )
+        from sap_01_md_sls_ordr_atl.graph.LU_SAP_TVV5T import LU_SAP_TVV5T
+        LU_SAP_TVV5T(self.spark, dfgraph_LU_SAP_TVV5T)
         dfgraph_LU_SAP_TVLST = createDfFromResourceFiles(
             self.spark,
             'test/resources/data/sap_01_md_sls_ordr_atl/graph/LU_SAP_TVLST/schema.json',
