@@ -9,12 +9,13 @@ class Config(ConfigBase):
             DBTABLE: str=None,
             DBTABLE1: str=None,
             MANDT: str=None,
-            SRC_SYS_CD: str=None,
+            sourceSystem: str=None,
             TMST: str=None,
+            DAI_ETL_ID: str=None,
             **kwargs
     ):
         self.spark = None
-        self.update(sourceDatabase, DBTABLE, DBTABLE1, MANDT, SRC_SYS_CD, TMST)
+        self.update(sourceDatabase, DBTABLE, DBTABLE1, MANDT, sourceSystem, TMST, DAI_ETL_ID)
 
     def update(
             self,
@@ -22,8 +23,9 @@ class Config(ConfigBase):
             DBTABLE: str="MBEW",
             DBTABLE1: str="MARA",
             MANDT: str="100",
-            SRC_SYS_CD: str="bba",
+            sourceSystem: str="bba",
             TMST: str="CASE WHEN TIMESTAMP = '0' THEN to_timestamp(NULL) ELSE to_timestamp(TIMESTAMP,'yyyyMMddHHmmss') END",
+            DAI_ETL_ID: str="0",
             **kwargs
     ):
         prophecy_spark = self.spark
@@ -31,6 +33,7 @@ class Config(ConfigBase):
         self.DBTABLE = DBTABLE
         self.DBTABLE1 = DBTABLE1
         self.MANDT = MANDT
-        self.SRC_SYS_CD = SRC_SYS_CD
+        self.sourceSystem = sourceSystem
         self.TMST = TMST
+        self.DAI_ETL_ID = DAI_ETL_ID
         pass
