@@ -12,11 +12,11 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("VALUT_AREA_CD", col("BWKEY"))\
         .withColumn("VALUT_TYPE_CD", col("BWTAR"))\
         .withColumn("PRC_CNTL_IND", trim(col("VPRSV")))\
-        .withColumn("TOT_STK_QTY", col("LBKUM").cast(DecimalType(18, 4)))\
-        .withColumn("TOT_VAL_AMT", col("SALK3").cast(DecimalType(18, 4)))\
-        .withColumn("MVG_AVG_PRC_AMT", col("VERPR").cast(DecimalType(18, 4)))\
-        .withColumn("PRC_AMT", col("STPRS").cast(DecimalType(18, 4)))\
-        .withColumn("PRC_UNIT_NBR", col("PEINH").cast(DecimalType(18, 4)))\
+        .withColumn("TOT_STK_QTY", col("VPRSV").cast(DecimalType(18, 4)))\
+        .withColumn("TOT_VAL_AMT", col("VPRSV").cast(DecimalType(18, 4)))\
+        .withColumn("MVG_AVG_PRC_AMT", col("VPRSV").cast(DecimalType(18, 4)))\
+        .withColumn("PRC_AMT", col("VPRSV").cast(DecimalType(18, 4)))\
+        .withColumn("PRC_UNIT_NBR", col("VPRSV").cast(DecimalType(18, 4)))\
         .withColumn("VALUT_CLS_CD", trim(col("BKLAS")))\
         .withColumn("BASE_UOM_CD", trim(lookup("MEINS_LU", col("MATNR")).getField("MEINS")))\
         .withColumn("DEL_FL", trim(col("LVORM")))\
