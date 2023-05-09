@@ -1627,7 +1627,7 @@
             "fields" : [ {
               "name" : "_deleted_",
               "type" : "string",
-              "nullable" : true,
+              "nullable" : false,
               "metadata" : {
                 "description" : "",
                 "mappings" : [ ],
@@ -2211,6 +2211,33 @@
               }
             }, {
               "name" : "DAI_UPDT_DTTM",
+              "type" : "timestamp",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_l0_upt_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_pk_md5_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_l1_upt_",
               "type" : "timestamp",
               "nullable" : false,
               "metadata" : {
@@ -3148,7 +3175,7 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "PKSFULV67T6p3Q3oPNstH$$YmGJLiqheiGWeo_H7vE_m##LVORM", "PKSFULV67T6p3Q3oPNstH$$YmGJLiqheiGWeo_H7vE_m##LICHA", "PKSFULV67T6p3Q3oPNstH$$YmGJLiqheiGWeo_H7vE_m##LWEDT", "PKSFULV67T6p3Q3oPNstH$$YmGJLiqheiGWeo_H7vE_m##CHARG", "PKSFULV67T6p3Q3oPNstH$$YmGJLiqheiGWeo_H7vE_m##VERAB", "PKSFULV67T6p3Q3oPNstH$$YmGJLiqheiGWeo_H7vE_m##HSDAT", "PKSFULV67T6p3Q3oPNstH$$YmGJLiqheiGWeo_H7vE_m##VFDAT", "PKSFULV67T6p3Q3oPNstH$$YmGJLiqheiGWeo_H7vE_m##LIFNR", "PKSFULV67T6p3Q3oPNstH$$YmGJLiqheiGWeo_H7vE_m##LAEDA", "PKSFULV67T6p3Q3oPNstH$$YmGJLiqheiGWeo_H7vE_m##ZUSTD", "PKSFULV67T6p3Q3oPNstH$$YmGJLiqheiGWeo_H7vE_m##ZAEDT", "PKSFULV67T6p3Q3oPNstH$$YmGJLiqheiGWeo_H7vE_m##WERKS", "PKSFULV67T6p3Q3oPNstH$$YmGJLiqheiGWeo_H7vE_m##ERSDA", "PKSFULV67T6p3Q3oPNstH$$YmGJLiqheiGWeo_H7vE_m##MATNR" ],
+        "columnsSelector" : [ "PKSFULV67T6p3Q3oPNstH$$YmGJLiqheiGWeo_H7vE_m##LVORM", "PKSFULV67T6p3Q3oPNstH$$YmGJLiqheiGWeo_H7vE_m##LICHA", "PKSFULV67T6p3Q3oPNstH$$YmGJLiqheiGWeo_H7vE_m##_upt_", "PKSFULV67T6p3Q3oPNstH$$YmGJLiqheiGWeo_H7vE_m##LWEDT", "PKSFULV67T6p3Q3oPNstH$$YmGJLiqheiGWeo_H7vE_m##CHARG", "PKSFULV67T6p3Q3oPNstH$$YmGJLiqheiGWeo_H7vE_m##VERAB", "PKSFULV67T6p3Q3oPNstH$$YmGJLiqheiGWeo_H7vE_m##HSDAT", "PKSFULV67T6p3Q3oPNstH$$YmGJLiqheiGWeo_H7vE_m##VFDAT", "PKSFULV67T6p3Q3oPNstH$$YmGJLiqheiGWeo_H7vE_m##LIFNR", "PKSFULV67T6p3Q3oPNstH$$YmGJLiqheiGWeo_H7vE_m##LAEDA", "PKSFULV67T6p3Q3oPNstH$$YmGJLiqheiGWeo_H7vE_m##ZAEDT", "PKSFULV67T6p3Q3oPNstH$$YmGJLiqheiGWeo_H7vE_m##ZUSTD", "PKSFULV67T6p3Q3oPNstH$$YmGJLiqheiGWeo_H7vE_m##WERKS", "PKSFULV67T6p3Q3oPNstH$$YmGJLiqheiGWeo_H7vE_m##ERSDA", "PKSFULV67T6p3Q3oPNstH$$YmGJLiqheiGWeo_H7vE_m##MATNR" ],
         "transformations" : [ {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
@@ -3475,7 +3502,7 @@
             "sourceColumn" : "SHRT_MATL_NUM",
             "expression" : {
               "format" : "sql",
-              "expression" : "CAST('#' AS STRING)"
+              "expression" : "'#'"
             }
           },
           "DropColumn" : {
@@ -3524,6 +3551,86 @@
             "expression" : {
               "format" : "sql",
               "expression" : "current_timestamp()"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_l0_upt_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "_upt_"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_pk_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'SRC_TBL_NM',SRC_TBL_NM,'MATL_NUM',MATL_NUM,'BTCH_NUM',BTCH_NUM,'PLNT_CD',PLNT_CD, 'SHRT_MATL_NUM',SHRT_MATL_NUM))"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_pk_md5_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD, 'SRC_TBL_NM',SRC_TBL_NM, 'MATL_NUM',MATL_NUM, 'BTCH_NUM',BTCH_NUM, 'PLNT_CD',PLNT_CD, 'SHRT_MATL_NUM',SHRT_MATL_NUM)))"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_l1_upt_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "current_timestamp()"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_deleted_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "'F'"
             }
           },
           "DropColumn" : {
