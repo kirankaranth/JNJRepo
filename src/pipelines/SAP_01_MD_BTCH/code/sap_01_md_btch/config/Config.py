@@ -13,10 +13,21 @@ class Config(ConfigBase):
             ConfigDatabase: str=None,
             DBTable1: str=None,
             DBTable2: str=None,
+            BTCH_TYPE: str=None,
             **kwargs
     ):
         self.spark = None
-        self.update(sourceSystem, targetSchema, MANDT, sourceDatabase, DAI_ETL_ID, ConfigDatabase, DBTable1, DBTable2)
+        self.update(
+            sourceSystem, 
+            targetSchema, 
+            MANDT, 
+            sourceDatabase, 
+            DAI_ETL_ID, 
+            ConfigDatabase, 
+            DBTable1, 
+            DBTable2, 
+            BTCH_TYPE
+        )
 
     def update(
             self,
@@ -28,6 +39,7 @@ class Config(ConfigBase):
             ConfigDatabase: str=" ",
             DBTable1: str="mcha",
             DBTable2: str="mch1",
+            BTCH_TYPE: str="cast(null as string)",
             **kwargs
     ):
         prophecy_spark = self.spark
@@ -39,4 +51,5 @@ class Config(ConfigBase):
         self.ConfigDatabase = ConfigDatabase
         self.DBTable1 = DBTable1
         self.DBTable2 = DBTable2
+        self.BTCH_TYPE = BTCH_TYPE
         pass

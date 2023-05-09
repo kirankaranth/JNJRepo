@@ -66,7 +66,7 @@ def SchemaTransform_MCHA(spark: SparkSession, in0: DataFrame) -> DataFrame:
             .when((length(col("hsdat")) < lit(8)), lit(None))\
             .otherwise(to_timestamp(col("hsdat"), "yyyyMMdd"))
         )\
-        .withColumn("BTCH_TYPE", lit(None).cast(StringType()))\
+        .withColumn("BTCH_TYPE", expr(Config.BTCH_TYPE))\
         .withColumn("SUI_IND", lit(None).cast(StringType()))\
         .withColumn("LOT_GRADE", lit(None).cast(StringType()))\
         .withColumn("PARENT_CODE", lit(None).cast(StringType()))\
