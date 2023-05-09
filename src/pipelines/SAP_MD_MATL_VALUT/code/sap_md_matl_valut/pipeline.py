@@ -13,6 +13,8 @@ def pipeline(spark: SparkSession) -> None:
     df_MBEW = MBEW(spark)
     df_MANDT_1 = MANDT_1(spark, df_MBEW)
     df_XFORM = XFORM(spark, df_MANDT_1)
+    df_SELECT = SELECT(spark, df_XFORM)
+    TARGET(spark, df_SELECT)
 
 def main():
     spark = SparkSession.builder\
