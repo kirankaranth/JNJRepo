@@ -13,7 +13,6 @@ def SELECT_MSKU(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("SOBKZ"), 
         col("KUNNR"), 
         col("KULAB"), 
-        col("KUUML"), 
         col("KUINS"), 
         col("KUEIN"), 
         col("ERSDA"), 
