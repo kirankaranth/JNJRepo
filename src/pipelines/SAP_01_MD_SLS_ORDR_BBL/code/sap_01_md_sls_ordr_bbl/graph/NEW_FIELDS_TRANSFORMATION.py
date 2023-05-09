@@ -136,10 +136,6 @@ def NEW_FIELDS_TRANSFORMATION(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("SLS_ORDR_RSN_DESC", trim(lookup("LU_SAP_TVAUT", col("AUGRU")).getField("BEZEI")))\
         .withColumn("PO_TYPE_DESC", trim(lookup("LU_SAP_T176T", col("BSARK")).getField("VTEXT")))\
         .withColumn("RETRO_BILL", trim(lookup("LU_SAP_TVAU", col("AUGRU")).getField("VAUNA")))\
-        .withColumn("CUST_GRP_1_DESC", lit(None).cast(StringType()))\
-        .withColumn("CUST_GRP_2_DESC", lit(None).cast(StringType()))\
-        .withColumn("CUST_GRP_3_DESC", lit(None).cast(StringType()))\
         .withColumn("CUST_GRP_4_DESC", trim(lookup("LU_SAP_TVV4T", col("KVGR4")).getField("BEZEI")))\
-        .withColumn("CUST_GRP_5_DESC", lit(None).cast(StringType()))\
         .withColumn("CO_CD_DESC", trim(lookup("LU_SAP_T001", col("BUKRS_VF")).getField("BUTXT")))\
         .withColumn("SHIPPING_COND_DESC", trim(lookup("LU_SAP_TVSBT", col("VSBED")).getField("VTEXT")))

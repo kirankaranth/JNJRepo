@@ -141,5 +141,4 @@ def NEW_FIELDS_TRANSFORMATION(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("CUST_GRP_3_DESC", trim(lookup("LU_SAP_TVV3T", col("KVGR3")).getField("BEZEI")))\
         .withColumn("CUST_GRP_4_DESC", trim(lookup("LU_SAP_TVV4T", col("KVGR4")).getField("BEZEI")))\
         .withColumn("CUST_GRP_5_DESC", trim(lookup("LU_SAP_TVV5T", col("KVGR5")).getField("BEZEI")))\
-        .withColumn("CO_CD_DESC", trim(lookup("LU_SAP_T001", col("BUKRS_VF")).getField("BUTXT")))\
-        .withColumn("SHIPPING_COND_DESC", lit(None).cast(StringType()))
+        .withColumn("CO_CD_DESC", trim(lookup("LU_SAP_T001", col("BUKRS_VF")).getField("BUTXT")))
