@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 setup(
-    name = 'SAP_MD_MATL_MVMT_HDR_HMD',
+    name = 'SAP_MD_MATL_MVMT_HDR_HMD_HM2',
     version = '1.0',
     packages = find_packages(include = ('sap_md_matl_mvmt_hdr_hmd*', )) + ["prophecy_config_instances"],
     package_dir = {'prophecy_config_instances' : 'configs/resources/config'},
