@@ -17,15 +17,26 @@ def pipeline(spark: SparkSession) -> None:
     )
     df_F4108_FILTER = F4108_FILTER(spark, df_JDE_F4108)
     df_NEW_FIELDS = NEW_FIELDS(spark, df_F4108_FILTER)
-    df_NEW_FIELDS = collectMetrics(
+    df_SET_FIELDS_ORDER = SET_FIELDS_ORDER(spark, df_NEW_FIELDS)
+    df_SET_FIELDS_ORDER = collectMetrics(
         spark, 
-        df_NEW_FIELDS, 
+        df_SET_FIELDS_ORDER, 
         "graph", 
-        "JIZXIO5ks9ITA52MdWcuD$$NrGIHPmjKr276iq77ZAsc", 
-        "7whobdQR7Iz85Xz3OD6sa$$sVn3e-ESYLFXePsJa4zF0"
+        "rO4zQy9Tr-kfBefGKlxGh$$BEqz7GpL9S0J3yRR41NLJ", 
+        "Bdcz2WAZGigLd0elgXH9D$$c_p4Byw9EMhXHE57SSbhH"
     )
-    df_NEW_FIELDS.cache().count()
-    df_NEW_FIELDS.unpersist()
+    df_DUPLICATE_CHECK = DUPLICATE_CHECK(spark, df_SET_FIELDS_ORDER)
+    MD_BTCH(spark, df_SET_FIELDS_ORDER)
+    df_DUPLICATE_FILTER = DUPLICATE_FILTER(spark, df_DUPLICATE_CHECK)
+    df_DUPLICATE_FILTER = collectMetrics(
+        spark, 
+        df_DUPLICATE_FILTER, 
+        "graph", 
+        "6evo4pBimFnen-ELJbkkp$$Oo6ifTQrn7Ty_wEJ1r9dT", 
+        "VQkBWC2SM9HBaCLC6JvIe$$Uj9yh9Wr2_mrAD1z5ZZil"
+    )
+    df_DUPLICATE_FILTER.cache().count()
+    df_DUPLICATE_FILTER.unpersist()
 
 def main():
     spark = SparkSession.builder\
