@@ -6,4 +6,4 @@ from jde_01_md_btch.config.ConfigStore import *
 from jde_01_md_btch.udfs.UDFs import *
 
 def JDE_F4108(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.sourceDatabase}.f4108")
+    return spark.read.table(f"{Config.sourceDatabase}.{Config.sourceTable}")

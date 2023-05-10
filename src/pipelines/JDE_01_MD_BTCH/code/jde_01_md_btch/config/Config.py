@@ -13,6 +13,7 @@ class Config(ConfigBase):
             sourceTable: str=None,
             CRT_DTTM: str=None,
             AVAIL_DTTM: str=None,
+            SUI_IND: str=None,
             **kwargs
     ):
         self.spark = None
@@ -24,7 +25,8 @@ class Config(ConfigBase):
             ConfigDatabase, 
             sourceTable, 
             CRT_DTTM, 
-            AVAIL_DTTM
+            AVAIL_DTTM, 
+            SUI_IND
         )
 
     def update(
@@ -37,6 +39,7 @@ class Config(ConfigBase):
             sourceTable: str="f4108",
             CRT_DTTM: str="cast(null as timestamp)",
             AVAIL_DTTM: str="cast(null as timestamp)",
+            SUI_IND: str="cast(null as string)",
             **kwargs
     ):
         prophecy_spark = self.spark
@@ -48,4 +51,5 @@ class Config(ConfigBase):
         self.sourceTable = sourceTable
         self.CRT_DTTM = CRT_DTTM
         self.AVAIL_DTTM = AVAIL_DTTM
+        self.SUI_IND = SUI_IND
         pass

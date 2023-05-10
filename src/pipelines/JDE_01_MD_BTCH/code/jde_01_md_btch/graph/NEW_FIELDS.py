@@ -55,6 +55,7 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("BTCH_LAST_GR_DTTM", lit(None).cast(TimestampType()))\
         .withColumn("BTCH_MFG_DTTM", lit(None).cast(TimestampType()))\
         .withColumn("BTCH_TYPE", trim(col("IODCTO")))\
+        .withColumn("SUI_IND", expr(Config.SUI_IND))\
         .withColumn("LOT_GRADE", trim(col("IOLOTG")))\
         .withColumn("SHRT_MATL_NUM", trim(col("IOITM")))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
