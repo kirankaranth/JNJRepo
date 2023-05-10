@@ -20,7 +20,7 @@ def SchemaTransform_MCHA(spark: SparkSession, in0: DataFrame) -> DataFrame:
             )
           )
         )\
-        .withColumn("DEL_IND", col("LVORM"))\
+        .withColumn("DEL_IND", trim(col("LVORM")))\
         .withColumn(
           "CRT_DTTM",
           when((col("ersda") == lit("00000000")), lit(None))\
@@ -45,15 +45,15 @@ def SchemaTransform_MCHA(spark: SparkSession, in0: DataFrame) -> DataFrame:
             .when((length(col("vfdat")) < lit(8)), lit(None))\
             .otherwise(to_timestamp(col("vfdat"), "yyyyMMdd"))
         )\
-        .withColumn("BTCH_STS_CD", col("ZUSTD"))\
+        .withColumn("BTCH_STS_CD", trim(col("ZUSTD")))\
         .withColumn(
           "BTCH_LAST_STS_DTTM",
           when((col("zaedt") == lit("00000000")), lit(None))\
             .when((length(col("zaedt")) < lit(8)), lit(None))\
             .otherwise(to_timestamp(col("zaedt"), "yyyyMMdd"))
         )\
-        .withColumn("SUP_NUM", col("LIFNR"))\
-        .withColumn("SUP_BTCH_NUM", col("LICHA"))\
+        .withColumn("SUP_NUM", trim(col("LIFNR")))\
+        .withColumn("SUP_BTCH_NUM", trim(col("LICHA")))\
         .withColumn(
           "BTCH_LAST_GR_DTTM",
           when((col("lwedt") == lit("00000000")), lit(None))\
