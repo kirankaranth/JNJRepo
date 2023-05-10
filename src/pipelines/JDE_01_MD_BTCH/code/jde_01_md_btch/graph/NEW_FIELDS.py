@@ -12,7 +12,9 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("MATL_NUM", col("IOLITM"))\
         .withColumn("BTCH_NUM", col("IOLOTN"))\
         .withColumn("PLNT_CD", col("IOMCU"))\
+        .withColumn("CRT_DTTM", expr(Config.CRT_DTTM))\
         .withColumn("CRT_DTTM", lit(None).cast(TimestampType()))\
+        .withColumn("AVAIL_DTTM", expr(Config.AVAIL_DTTM))\
         .withColumn(
           "CHG_DTTM",
           when(
