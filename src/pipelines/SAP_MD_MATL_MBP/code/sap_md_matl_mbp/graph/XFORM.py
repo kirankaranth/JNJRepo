@@ -30,7 +30,7 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("BTCH_MNG_IND", trim(col("XCHPF")))\
         .withColumn("MATL_DOC_NUM", trim(col("ZEINR")))\
         .withColumn("MATL_DOC_VERS_NUM", trim(col("ZEIVR")))\
-        .withColumn("MATL_SHRT_DESC", lookup("LU_MAKT_MAKTX", col("MATNR")).getField("MAKTX"))\
+        .withColumn("MATL_SHRT_DESC", trim(lookup("LU_MAKT_MAKTX", col("MATNR")).getField("MAKTX")))\
         .withColumn("MATL_CAT_GRP_CD", trim(col("MTPOS_MARA")))\
         .withColumn("CHG_BY", trim(col("AENAM")))\
         .withColumn("DOC_CHG_NUM", trim(col("AESZN")))\
@@ -97,9 +97,9 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("_pk_md5_", md5(to_json(expr("named_struct('SRC_SYS_CD', SRC_SYS_CD, 'MATL_NUM', MATL_NUM)"))))\
         .withColumn("_l1_upt_", current_timestamp())\
         .withColumn("_deleted_L1", lit("F"))\
-        .withColumn("MATL_TYPE_DESC", lookup("MTBEZ_LU", col("MTART")).getField("MTBEZ"))\
-        .withColumn("MATL_GRP_DESC", lookup("WGBEZx_LU", col("MATKL")).getField("WGBEZ"))\
-        .withColumn("MATL_GRP_DESC_2", lookup("WGBEZx_LU", col("MATKL")).getField("WGBEZ60"))\
+        .withColumn("MATL_TYPE_DESC", trim(lookup("MTBEZ_LU", col("MTART")).getField("MTBEZ")))\
+        .withColumn("MATL_GRP_DESC", trim(lookup("WGBEZx_LU", col("MATKL")).getField("WGBEZ")))\
+        .withColumn("MATL_GRP_DESC_2", trim(lookup("WGBEZx_LU", col("MATKL")).getField("WGBEZ60")))\
         .withColumn(
         "SHRT_MATL_NUM",
         lit(
