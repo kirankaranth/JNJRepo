@@ -89,7 +89,6 @@ def SET_FIELD_ORDER_REFORMAT_2(spark: SparkSession, in0: DataFrame) -> DataFrame
         col("RETRO_BILL"), 
         col("CUST_GRP_1_DESC"), 
         col("CUST_GRP_2_DESC"), 
-        col("CUST_GRP_3_DESC"), 
         col("CUST_GRP_4_DESC"), 
         col("CUST_GRP_5_DESC"), 
         col("CO_CD_DESC"), 

@@ -138,7 +138,6 @@ def NEW_FIELDS_TRANSFORMATION(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("RETRO_BILL", trim(lookup("LU_SAP_TVAU", col("AUGRU")).getField("VAUNA")))\
         .withColumn("CUST_GRP_1_DESC", trim(lookup("LU_SAP_TVV1T", col("KVGR1")).getField("BEZEI")))\
         .withColumn("CUST_GRP_2_DESC", trim(lookup("LU_SAP_TVV2T", col("KVGR2")).getField("BEZEI")))\
-        .withColumn("CUST_GRP_3_DESC", lit(None).cast(StringType()))\
         .withColumn("CUST_GRP_4_DESC", trim(lookup("LU_SAP_TVV4T", col("KVGR4")).getField("BEZEI")))\
         .withColumn("CUST_GRP_5_DESC", trim(lookup("LU_SAP_TVV5T", col("KVGR5")).getField("BEZEI")))\
         .withColumn("CO_CD_DESC", trim(lookup("LU_SAP_T001", col("BUKRS_VF")).getField("BUTXT")))\
