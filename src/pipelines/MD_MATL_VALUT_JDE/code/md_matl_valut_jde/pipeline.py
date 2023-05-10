@@ -7,11 +7,8 @@ from prophecy.utils import *
 from md_matl_valut_jde.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    df_F41021 = F41021(spark)
-    df_DEL_1 = DEL_1(spark, df_F41021)
-    df_F4101 = F4101(spark)
     df_F4105 = F4105(spark)
-    df_DEL = DEL(spark, df_F4105)
+    df_F41021 = F41021(spark)
 
 def main():
     spark = SparkSession.builder\

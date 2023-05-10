@@ -6,4 +6,4 @@ from md_matl_valut_jde.config.ConfigStore import *
 from md_matl_valut_jde.udfs.UDFs import *
 
 def F41021(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.sourceDatabase}.{Config.F41021}")
+    return spark.read.table(f"{Config.sourceDatabase}.{Config.DBTABLE1}")
