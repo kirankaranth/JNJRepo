@@ -7,7 +7,16 @@ from prophecy.utils import *
 from md_mfg_order_itm.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    pass
+    df_SAP_AUFK = SAP_AUFK(spark)
+    df_MANDT_FILTER_AUFK = MANDT_FILTER_AUFK(spark, df_SAP_AUFK)
+    df_SAP_AFPO = SAP_AFPO(spark)
+    df_MANDT_FILTER_AFPO = MANDT_FILTER_AFPO(spark, df_SAP_AFPO)
+    df_JOIN = JOIN(spark, df_MANDT_FILTER_AUFK, df_MANDT_FILTER_AFPO)
+    df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_JOIN)
+    df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS_RENAME_FORMAT)
+    MD_MFG_ORDER_ITM(spark, df_SET_FIELD_ORDER_REFORMAT)
+    df_DUPLICATE_CHECK = DUPLICATE_CHECK(spark, df_SET_FIELD_ORDER_REFORMAT)
+    df_DUPLICATE_CHECK_FILTER = DUPLICATE_CHECK_FILTER(spark, df_DUPLICATE_CHECK)
 
 def main():
     spark = SparkSession.builder\
