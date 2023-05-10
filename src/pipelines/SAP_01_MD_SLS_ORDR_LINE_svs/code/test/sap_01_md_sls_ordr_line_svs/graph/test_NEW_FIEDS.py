@@ -4,8 +4,8 @@ from pyspark.sql.types import *
 from argparse import Namespace
 from prophecy.test import BaseTestCase
 from prophecy.test.utils import *
-from sap_01_md_sls_ordr_line_bwi.graph.NEW_FIEDS import *
-from sap_01_md_sls_ordr_line_bwi.config.ConfigStore import *
+from sap_01_md_sls_ordr_line_svs.graph.NEW_FIEDS import *
+from sap_01_md_sls_ordr_line_svs.config.ConfigStore import *
 
 
 class NEW_FIEDSTest(BaseTestCase):
@@ -13,14 +13,14 @@ class NEW_FIEDSTest(BaseTestCase):
     def test_unit_test_(self):
         dfIn0 = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/sap_01_md_sls_ordr_line_bwi/graph/NEW_FIEDS/in0/schema.json',
-            'test/resources/data/sap_01_md_sls_ordr_line_bwi/graph/NEW_FIEDS/in0/data/test_unit_test_.json',
+            'test/resources/data/sap_01_md_sls_ordr_line_svs/graph/NEW_FIEDS/in0/schema.json',
+            'test/resources/data/sap_01_md_sls_ordr_line_svs/graph/NEW_FIEDS/in0/data/test_unit_test_.json',
             'in0'
         )
         dfOut = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/sap_01_md_sls_ordr_line_bwi/graph/NEW_FIEDS/out/schema.json',
-            'test/resources/data/sap_01_md_sls_ordr_line_bwi/graph/NEW_FIEDS/out/data/test_unit_test_.json',
+            'test/resources/data/sap_01_md_sls_ordr_line_svs/graph/NEW_FIEDS/out/schema.json',
+            'test/resources/data/sap_01_md_sls_ordr_line_svs/graph/NEW_FIEDS/out/data/test_unit_test_.json',
             'out'
         )
         dfOutComputed = NEW_FIEDS(self.spark, dfIn0)
