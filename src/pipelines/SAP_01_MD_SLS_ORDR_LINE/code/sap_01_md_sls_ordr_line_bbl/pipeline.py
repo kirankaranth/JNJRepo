@@ -97,35 +97,8 @@ def pipeline(spark: SparkSession) -> None:
     )
     df_MANDT_FILTER_1_1_1_2_1_1_1_1 = MANDT_FILTER_1_1_1_2_1_1_1_1(spark, df_SAP_TVM5T)
     LU_SAP_TVM5T(spark, df_MANDT_FILTER_1_1_1_2_1_1_1_1)
-    df_SAP_VBAP = SAP_VBAP(spark)
-    df_SAP_VBAP = collectMetrics(
-        spark, 
-        df_SAP_VBAP, 
-        "graph", 
-        "aLq-bTfxkKYLQ-C3qrbns$$AdFi-f_5eIzBc9bo111G3", 
-        "-5sicrluGo4KP6YxY4ZfA$$8KntWIgxbxcywF5SdcD2h"
-    )
-    df_MANDT_FILTER = MANDT_FILTER(spark, df_SAP_VBAP)
-    df_SAP_VBAK = SAP_VBAK(spark)
-    df_SAP_VBAK = collectMetrics(
-        spark, 
-        df_SAP_VBAK, 
-        "graph", 
-        "V5RlhzURZ3AovBH4EtGoR$$RzAs4L5PxhIDJaZn_M0iF", 
-        "sjH_LLGBfigv0q-MWiqp1$$G22L17gIO1yk7wrAFjV7H"
-    )
-    df_MANDT_FILTER_1 = MANDT_FILTER_1(spark, df_SAP_VBAK)
-    df_SELECT_VBAK = SELECT_VBAK(spark, df_MANDT_FILTER_1)
-    df_SAP_VBKD = SAP_VBKD(spark)
-    df_SAP_VBKD = collectMetrics(
-        spark, 
-        df_SAP_VBKD, 
-        "graph", 
-        "-IVLYiizxuJsVaNAApNn-$$FUWMauCCyRzCP3mv6bnws", 
-        "Vrb1zO3XQx8eG-gwIAYs3$$l__PwkEUPq7stwQbww9t3"
-    )
-    df_MANDT_FILTER_1_1_1 = MANDT_FILTER_1_1_1(spark, df_SAP_VBKD)
-    df_SELECT_VBKD = SELECT_VBKD(spark, df_MANDT_FILTER_1_1_1)
+    df_SELECT_VBAK = SELECT_VBAK(spark)
+    df_SELECT_VBKD = SELECT_VBKD(spark)
     df_SAP_TVST = SAP_TVST(spark)
     df_SAP_TVST = collectMetrics(
         spark, 
@@ -136,7 +109,7 @@ def pipeline(spark: SparkSession) -> None:
     )
     df_MANDT_FILTER_1_1_1_2_1_1_1_1_1_1 = MANDT_FILTER_1_1_1_2_1_1_1_1_1_1(spark, df_SAP_TVST)
     df_SELECT_TVST = SELECT_TVST(spark, df_MANDT_FILTER_1_1_1_2_1_1_1_1_1_1)
-    df_Join_1 = Join_1(spark, df_MANDT_FILTER, df_SELECT_VBAK, df_SELECT_VBKD, df_SELECT_TVST)
+    df_Join_1 = Join_1(spark, df_SELECT_VBAK, df_SELECT_VBKD, df_SELECT_TVST)
     df_NEW_FIEDS = NEW_FIEDS(spark, df_Join_1)
     df_NEW_FIEDS = collectMetrics(
         spark, 
@@ -146,6 +119,15 @@ def pipeline(spark: SparkSession) -> None:
         "CNEOYEnXaJkgZWU69c91w$$iKg9J2RNdLawE5-USfbrU"
     )
     MD_SLS_ORDR_LINE(spark, df_NEW_FIEDS)
+    df_SAP_VBAP = SAP_VBAP(spark)
+    df_SAP_VBAP = collectMetrics(
+        spark, 
+        df_SAP_VBAP, 
+        "graph", 
+        "aLq-bTfxkKYLQ-C3qrbns$$AdFi-f_5eIzBc9bo111G3", 
+        "-5sicrluGo4KP6YxY4ZfA$$8KntWIgxbxcywF5SdcD2h"
+    )
+    df_MANDT_FILTER = MANDT_FILTER(spark, df_SAP_VBAP)
     df_DUPLICATE_CHECK = DUPLICATE_CHECK(spark, df_NEW_FIEDS)
     df_DUPLICATE_CHECK_1 = DUPLICATE_CHECK_1(spark, df_DUPLICATE_CHECK)
     df_DUPLICATE_CHECK_1 = collectMetrics(
@@ -157,6 +139,54 @@ def pipeline(spark: SparkSession) -> None:
     )
     df_DUPLICATE_CHECK_1.cache().count()
     df_DUPLICATE_CHECK_1.unpersist()
+    df_SAP_VBKD = SAP_VBKD(spark)
+    df_SAP_VBKD = collectMetrics(
+        spark, 
+        df_SAP_VBKD, 
+        "graph", 
+        "-IVLYiizxuJsVaNAApNn-$$FUWMauCCyRzCP3mv6bnws", 
+        "Vrb1zO3XQx8eG-gwIAYs3$$l__PwkEUPq7stwQbww9t3"
+    )
+    df_MANDT_FILTER_1_1_1 = MANDT_FILTER_1_1_1(spark, df_SAP_VBKD)
+    df_SAP_VBAK = SAP_VBAK(spark)
+    df_SAP_VBAK = collectMetrics(
+        spark, 
+        df_SAP_VBAK, 
+        "graph", 
+        "V5RlhzURZ3AovBH4EtGoR$$RzAs4L5PxhIDJaZn_M0iF", 
+        "sjH_LLGBfigv0q-MWiqp1$$G22L17gIO1yk7wrAFjV7H"
+    )
+    df_MANDT_FILTER_1 = MANDT_FILTER_1(spark, df_SAP_VBAK)
+    df_nonprodFilter_ERDAT_1 = nonprodFilter_ERDAT_1(spark, df_MANDT_FILTER_1)
+    df_nonprodFilter_ERDAT_1 = collectMetrics(
+        spark, 
+        df_nonprodFilter_ERDAT_1, 
+        "graph", 
+        "SB5nxAJ4p_NmTZ9hwF2j-$$Ykbwg4iH9MH1a56pkImii", 
+        "JD0vJQQHThVj8E21WWgYY$$GYbnkaykZ7qJfw5x8FtAJ"
+    )
+    df_nonprodFilter_ERDAT_1.cache().count()
+    df_nonprodFilter_ERDAT_1.unpersist()
+    df_nonprodFilter_vbkd = nonprodFilter_vbkd(spark, df_MANDT_FILTER_1_1_1)
+    df_nonprodFilter_vbkd = collectMetrics(
+        spark, 
+        df_nonprodFilter_vbkd, 
+        "graph", 
+        "POoKAmMPJTjcZsZgoCsfN$$dCGvbt7B8J_uEJTFmmAUV", 
+        "zTUqrfYKDo1gmtraVmQ5S$$FT_RjtP8GgrveRiakXXMx"
+    )
+    df_nonprodFilter_vbkd.cache().count()
+    df_nonprodFilter_vbkd.unpersist()
+    df_nonprodFilter_ERDAT = nonprodFilter_ERDAT(spark, df_MANDT_FILTER)
+    df_nonprodFilter_ERDAT = collectMetrics(
+        spark, 
+        df_nonprodFilter_ERDAT, 
+        "graph", 
+        "aTufEx4D76pvLUfIpr67q$$1BrgEGSrAO44c_XVuPtXR", 
+        "q5ZcskaI0DsYn751fKMYd$$OZvgEEQ8kSt05sTlWCRDV"
+    )
+    df_nonprodFilter_ERDAT.cache().count()
+    df_nonprodFilter_ERDAT.unpersist()
 
 def main():
     spark = SparkSession.builder\
