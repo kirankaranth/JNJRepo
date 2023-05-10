@@ -7,12 +7,17 @@ from prophecy.utils import *
 from md_matl_valut_jde.graph import *
 
 def pipeline(spark: SparkSession) -> None:
+    df_F4101 = F4101(spark)
+    df_SELECT = SELECT(spark, df_F4101)
+    df_DEL1 = DEL1(spark, df_SELECT)
+    LITM_LU(spark, df_DEL1)
+    UOM_GLPT(spark, df_DEL1)
     df_F41021 = F41021(spark)
+    df_DEL = DEL(spark, df_F41021)
+    df_INV_SUM = INV_SUM(spark, df_DEL)
     df_F4105 = F4105(spark)
     df_COLEDG = COLEDG(spark, df_F4105)
-    df_F4101 = F4101(spark)
-    df_DEL1 = DEL1(spark, df_F4101)
-    df_DEL = DEL(spark, df_F41021)
+    TEST(spark, df_INV_SUM)
 
 def main():
     spark = SparkSession.builder\
