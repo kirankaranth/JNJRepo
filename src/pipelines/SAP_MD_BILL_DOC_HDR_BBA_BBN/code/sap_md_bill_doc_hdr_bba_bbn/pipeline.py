@@ -7,22 +7,6 @@ from prophecy.utils import *
 from sap_md_bill_doc_hdr_bba_bbn.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    df_DS_SAP_01_VBRK = DS_SAP_01_VBRK(spark)
-    df_DS_SAP_01_VBRK = collectMetrics(
-        spark, 
-        df_DS_SAP_01_VBRK, 
-        "graph", 
-        "ZkhBFp2QdFgX6ukfOgXLw$$FnnuP_Lx7_Qgrj6W9o5XW", 
-        "enrOKVhTmV3EQHGKZLf70$$dAxwmYiRye6v9URwZ3Uab"
-    )
-    df_MANDT_FILTER = MANDT_FILTER(spark, df_DS_SAP_01_VBRK)
-    df_MANDT_FILTER = collectMetrics(
-        spark, 
-        df_MANDT_FILTER, 
-        "graph", 
-        "deXvkRShBftNgQerXTRbl$$BOxY3jUjvkEYtA6tHcqFH", 
-        "ogoK3AsMdRcHyRM2yUJYo$$huGt4oxK2EafOaulThExc"
-    )
     df_DS_SAP_01_TSPAT = DS_SAP_01_TSPAT(spark)
     df_DS_SAP_01_TSPAT = collectMetrics(
         spark, 
@@ -87,9 +71,33 @@ def pipeline(spark: SparkSession) -> None:
         "JZXDvDbS9kNKa1NRZeekV$$5XlZ-goj_GMIED0j7jekQ", 
         "LHTkNegAbW1b0dokiOa-1$$0Cs-IqeKbAQNnUASwO7UI"
     )
-    df_Join_1 = Join_1(
+    df_DS_SAP_01_VBRK = DS_SAP_01_VBRK(spark)
+    df_DS_SAP_01_VBRK = collectMetrics(
+        spark, 
+        df_DS_SAP_01_VBRK, 
+        "graph", 
+        "ZkhBFp2QdFgX6ukfOgXLw$$FnnuP_Lx7_Qgrj6W9o5XW", 
+        "enrOKVhTmV3EQHGKZLf70$$dAxwmYiRye6v9URwZ3Uab"
+    )
+    df_MANDT_FILTER = MANDT_FILTER(spark, df_DS_SAP_01_VBRK)
+    df_MANDT_FILTER = collectMetrics(
         spark, 
         df_MANDT_FILTER, 
+        "graph", 
+        "deXvkRShBftNgQerXTRbl$$BOxY3jUjvkEYtA6tHcqFH", 
+        "ogoK3AsMdRcHyRM2yUJYo$$huGt4oxK2EafOaulThExc"
+    )
+    df_SELECT_VBRK = SELECT_VBRK(spark, df_MANDT_FILTER)
+    df_SELECT_VBRK = collectMetrics(
+        spark, 
+        df_SELECT_VBRK, 
+        "graph", 
+        "cMJQGfxROpKRVrwwKelq7$$3V928EZBQAIJy9vZoZbcy", 
+        "RRIw9rmN8bNFoRDZL_3DG$$zhwQF7lfxellvu-5k0D0f"
+    )
+    df_Join_1 = Join_1(
+        spark, 
+        df_SELECT_VBRK, 
         df_MANDT_FILTER_TSPAT, 
         df_MANDT_FILTER_TVFKT, 
         df_MANDT_FILTER_TVKOT, 
