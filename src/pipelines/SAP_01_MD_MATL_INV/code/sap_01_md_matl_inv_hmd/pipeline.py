@@ -26,7 +26,8 @@ def pipeline(spark: SparkSession) -> None:
         "D_qFnYIYQV4HHNOjpY3xf$$8uKRp-2H0Pu6stMnBc0Kl"
     )
     df_MANDT_1 = MANDT_1(spark, df_DS_SAP_01_NSDM_V_MARD)
-    df_SchemaTransform_1_MARD = SchemaTransform_1_MARD(spark, df_MANDT_1)
+    df_Select_MARD_Columns = Select_MARD_Columns(spark, df_MANDT_1)
+    df_SchemaTransform_1_MARD = SchemaTransform_1_MARD(spark, df_Select_MARD_Columns)
     df_DS_SAP_03_NSDM_V_MSKU = DS_SAP_03_NSDM_V_MSKU(spark)
     df_DS_SAP_03_NSDM_V_MSKU = collectMetrics(
         spark, 
@@ -37,7 +38,6 @@ def pipeline(spark: SparkSession) -> None:
     )
     df_MANDT_3 = MANDT_3(spark, df_DS_SAP_03_NSDM_V_MSKU)
     df_SchemaTransform_3_MSKU = SchemaTransform_3_MSKU(spark, df_MANDT_3)
-    df_SET_FIELD_ORDER = SET_FIELD_ORDER(spark, df_SchemaTransform_1_MARD)
     df_DS_SAP_02_NSDM_V_MCHB = DS_SAP_02_NSDM_V_MCHB(spark)
     df_DS_SAP_02_NSDM_V_MCHB = collectMetrics(
         spark, 
@@ -50,9 +50,10 @@ def pipeline(spark: SparkSession) -> None:
     df_SchemaTransform_2_MCHB = SchemaTransform_2_MCHB(spark, df_MANDT_2)
     df_SET_FIELD_ORDER_1 = SET_FIELD_ORDER_1(spark, df_SchemaTransform_2_MCHB)
     df_SET_FIELD_ORDER_3 = SET_FIELD_ORDER_3(spark, df_SchemaTransform_3_MSKU)
+    df_SET_FIELD_ORDER_1_1 = SET_FIELD_ORDER_1_1(spark, df_SchemaTransform_1_MARD)
     df_SetOperation_1_Union = SetOperation_1_Union(
         spark, 
-        df_SET_FIELD_ORDER, 
+        df_SET_FIELD_ORDER_1_1, 
         df_SET_FIELD_ORDER_1, 
         df_SET_FIELD_ORDER_3
     )

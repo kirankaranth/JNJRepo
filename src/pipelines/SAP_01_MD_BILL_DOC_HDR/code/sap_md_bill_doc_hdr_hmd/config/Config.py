@@ -21,7 +21,7 @@ class Config(ConfigBase):
             sourceSystem: str="hm2",
             targetSchema: str="dev_md_l1",
             MANDT: str="100",
-            sourceDatabase: str="pqa_hm2",
+            sourceDatabase: str="hm2",
             DAI_ETL_ID: int=0,
             ConfigDatabase: str=" ",
             **kwargs
