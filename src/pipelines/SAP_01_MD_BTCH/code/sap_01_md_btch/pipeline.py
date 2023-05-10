@@ -37,6 +37,17 @@ def pipeline(spark: SparkSession) -> None:
         "lJMnrv5eL7R2Q6XTMZ77V$$ruguIIbHjyLv4ih-xxNo0", 
         "6ySEpQqbJmmzfphIHlgTZ$$WdVUHW8tEBBfu65iCb-1H"
     )
+    df_DUPLICATE_CHECK = DUPLICATE_CHECK(spark, df_UNION)
+    df_DUPLICATE_CHECK_FILTER = DUPLICATE_CHECK_FILTER(spark, df_DUPLICATE_CHECK)
+    df_DUPLICATE_CHECK_FILTER = collectMetrics(
+        spark, 
+        df_DUPLICATE_CHECK_FILTER, 
+        "graph", 
+        "wVDEL4SW73AVPyzvv_hOK$$dchd1al0lMuZFdrttEJA4", 
+        "pkc2c03g86qy8k73lo3S1$$wTp2fHUv9UnLIlOY35h5F"
+    )
+    df_DUPLICATE_CHECK_FILTER.cache().count()
+    df_DUPLICATE_CHECK_FILTER.unpersist()
     MD_BTCH(spark, df_UNION)
 
 def main():
