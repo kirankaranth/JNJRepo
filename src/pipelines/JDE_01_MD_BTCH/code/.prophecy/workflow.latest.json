@@ -1158,7 +1158,7 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IOLOTG", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IOITM", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IOLITM", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IOMCU", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IOVEND", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##_upt_", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IORLOT", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IODCTO", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IOLOTN", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IOLOTS" ],
+        "columnsSelector" : [ "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IOLOTG", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IOUPMJ", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IOITM", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IOLITM", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IOMCU", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IOVEND", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##_upt_", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IOMMEJ", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IORLOT", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IODCTO", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IOLOTN", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IOLOTS" ],
         "transformations" : [ {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
@@ -1261,7 +1261,7 @@
             "sourceColumn" : "CHG_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "CASE\r\n\r\n  WHEN LOWER(TRIM(ioupmj)) = 'null'\r\n\r\n  OR TRIM(ioupmj) = ''\r\n\r\n  OR TRIM(ioupmj) = '0' THEN NULL\r\n\r\n  ELSE to_timestamp (\r\n\r\n      substring(\r\n\r\n        CAST(\r\n\r\n          date_add(\r\n\r\n              substring(\r\n\r\n                CAST(CAST(TRIM(ioupmj) AS INT) + 1900000 as string),\r\n\r\n                1,\r\n\r\n                4\r\n\r\n              ),\r\n\r\n              '-01-01'\r\n\r\n            ),\r\n\r\n            CAST(\r\n\r\n              substring(\r\n\r\n                CAST(CAST(TRIM(ioupmj) AS INT) + 1900000 AS string),\r\n\r\n                5,\r\n\r\n                8\r\n\r\n              ) AS INT\r\n\r\n            ) -1\r\n\r\n          ) AS string\r\n\r\n        ),\r\n\r\n        1,\r\n\r\n        10,\r\nEND"
+              "expression" : "CASE WHEN LOWER(TRIM(ioupmj)) IS NULL OR TRIM(ioupmj) = '' OR TRIM(ioupmj) = '0' THEN NULL ELSE to_timestamp(date_add(cast(substring(ioupmj + 1900000,1,4) AS Date),cast(substring(ioupmj,4,3) as int)-1)) end"
             }
           },
           "DropColumn" : {
@@ -1293,7 +1293,7 @@
             "sourceColumn" : "BTCH_EXP_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "CASE\r\n\r\n  WHEN LOWER(TRIM(iommej)) = 'null'\r\n\r\n  OR TRIM(iommej) = ''\r\n\r\n  OR TRIM(iommej) = '0' THEN NULL\r\n\r\n  ELSE to_timestamp (\r\n\r\n    concat(\r\n\r\n      substring(\r\n\r\n        CAST(\r\n\r\n          date_add(\r\n\r\n            concat(\r\n\r\n              substring(\r\n\r\n                CAST(CAST(TRIM(iommej) AS INT) + 1900000 as string),\r\n\r\n                1,\r\n\r\n                4\r\n\r\n              ),\r\n\r\n              '-01-01'\r\n\r\n            ),\r\n\r\n            CAST(\r\n\r\n              substring(\r\n\r\n                CAST(CAST(TRIM(iommej) AS INT) + 1900000 AS string),\r\n\r\n                5,\r\n\r\n                8\r\n\r\n              ) AS INT\r\n\r\n            ) -1\r\n\r\n          ) AS string\r\n\r\n        ),\r\n\r\n        1,\r\n\r\n        10\r\n\r\n      ),\r\n\r\n  )\r\n\r\nEND"
+              "expression" : "CASE WHEN LOWER(TRIM(iommej)) IS NULL OR TRIM(iommej) = '' OR TRIM(iommej) = '0' THEN NULL ELSE to_timestamp(date_add(cast(substring(iommej + 1900000,1,4) AS Date),cast(substring(iommej,4,3) as int)-1)) end"
             }
           },
           "DropColumn" : {
@@ -1533,7 +1533,7 @@
             "sourceColumn" : "_pk_md5_",
             "expression" : {
               "format" : "sql",
-              "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD, 'SRC_TBL_NM',SRC_TBL_NM, 'MATL_NUM',MATL_NUM, 'BTCH_NUM',BTCH_NUM, 'PLNT_CD',PLNT_CD, 'SHRT_MATL_NUM',SHRT_MATL_NUM )))0"
+              "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD, 'SRC_TBL_NM',SRC_TBL_NM, 'MATL_NUM',MATL_NUM, 'BTCH_NUM',BTCH_NUM, 'PLNT_CD',PLNT_CD, 'SHRT_MATL_NUM',SHRT_MATL_NUM )))"
             }
           },
           "DropColumn" : {
@@ -1584,22 +1584,5 @@
     "outputs" : [ ],
     "selectedInputFields" : [ ],
     "isCustomOutputSchema" : false
-  },
-  "diagnostics" : [ {
-    "property" : "$.workflow.processes.JIZXIO5ks9ITA52MdWcuD$$NrGIHPmjKr276iq77ZAsc",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Error occurred while generating code for component:NEW_FIELDS error: could not parse expression, error: \nSyntax error at or near 'LOWER'(line 1, pos 15)\n\n== SQL ==\nCASE\r \r   WHEN LOWER(TRIM(ioupmj)) = 'null'\r \r   OR TRIM(ioupmj) = ''\r \r   OR TRIM(ioupmj) = '0' THEN NULL\r \r   ELSE to_timestamp (\r \r       substring(\r \r         CAST(\r \r           date_add(\r \r               substring(\r \r                 CAST(CAST(TRIM(ioupmj) AS INT) + 1900000 as string),\r \r                 1,\r \r                 4\r \r               ),\r \r               '-01-01'\r \r             ),\r \r             CAST(\r \r               substring(\r \r                 CAST(CAST(TRIM(ioupmj) AS INT) + 1900000 AS string),\r \r                 5,\r \r                 8\r \r               ) AS INT\r \r             ) -1\r \r           ) AS string\r \r         ),\r \r         1,\r \r         10,\r END\n---------------^^^\n",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  } ]
+  }
 }
