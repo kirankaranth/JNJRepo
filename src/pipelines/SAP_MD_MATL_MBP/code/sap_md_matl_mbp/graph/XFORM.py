@@ -32,8 +32,6 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("MATL_DOC_VERS_NUM", trim(col("ZEIVR")))\
         .withColumn("MATL_SHRT_DESC", lookup("LU_MAKT_MAKTX", col("MATNR")).getField("MAKTX"))\
         .withColumn("MATL_CAT_GRP_CD", trim(col("MTPOS_MARA")))\
-        .withColumn("MATL_SPEC_NUM", trim(col("FERTH")))\
-        .withColumn("MATL_SPEC_VERS_NUM", trim(col("NORMT")))\
         .withColumn("CHG_BY", trim(col("AENAM")))\
         .withColumn("DOC_CHG_NUM", trim(col("AESZN")))\
         .withColumn("CNTNR_REQ", trim(col("BEHVO")))\
