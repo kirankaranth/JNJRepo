@@ -1,1 +1,1 @@
-from .md_mfg_order_itm import *
+from .sap_md_mfg_order_itm import *
