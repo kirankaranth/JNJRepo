@@ -6,4 +6,4 @@ from sap_01_md_sls_ordr_line_hcs.config.ConfigStore import *
 from sap_01_md_sls_ordr_line_hcs.udfs.UDFs import *
 
 def SAP_TVM4T(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.sourceDatabase}.tvm4t")
+    return spark.sql(f"SELECT * FROM {Config.sourceDatabase}.tvm4t WHERE spras = 'E'")

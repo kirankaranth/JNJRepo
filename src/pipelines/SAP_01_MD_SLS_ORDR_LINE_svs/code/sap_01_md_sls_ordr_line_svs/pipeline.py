@@ -107,15 +107,6 @@ def pipeline(spark: SparkSession) -> None:
     )
     df_MANDT_FILTER_TVM4T = MANDT_FILTER_TVM4T(spark, df_SAP_TVM4T)
     LU_SAP_TVM4T(spark, df_MANDT_FILTER_TVM4T)
-    df_SAP_VBAP = SAP_VBAP(spark)
-    df_SAP_VBAP = collectMetrics(
-        spark, 
-        df_SAP_VBAP, 
-        "graph", 
-        "aLq-bTfxkKYLQ-C3qrbns$$AdFi-f_5eIzBc9bo111G3", 
-        "-5sicrluGo4KP6YxY4ZfA$$8KntWIgxbxcywF5SdcD2h"
-    )
-    df_MANDT_FILTER = MANDT_FILTER(spark, df_SAP_VBAP)
     df_SAP_VBAK = SAP_VBAK(spark)
     df_SAP_VBAK = collectMetrics(
         spark, 
@@ -125,7 +116,8 @@ def pipeline(spark: SparkSession) -> None:
         "sjH_LLGBfigv0q-MWiqp1$$G22L17gIO1yk7wrAFjV7H"
     )
     df_MANDT_FILTER_1 = MANDT_FILTER_1(spark, df_SAP_VBAK)
-    df_SELECT_VBAK = SELECT_VBAK(spark, df_MANDT_FILTER_1)
+    df_nonprodFilter_ERDAT_1 = nonprodFilter_ERDAT_1(spark, df_MANDT_FILTER_1)
+    df_SELECT_VBAK = SELECT_VBAK(spark, df_nonprodFilter_ERDAT_1)
     df_SAP_VBKD = SAP_VBKD(spark)
     df_SAP_VBKD = collectMetrics(
         spark, 
@@ -135,7 +127,8 @@ def pipeline(spark: SparkSession) -> None:
         "Vrb1zO3XQx8eG-gwIAYs3$$l__PwkEUPq7stwQbww9t3"
     )
     df_MANDT_FILTER_1_1_1 = MANDT_FILTER_1_1_1(spark, df_SAP_VBKD)
-    df_SELECT_VBKD = SELECT_VBKD(spark, df_MANDT_FILTER_1_1_1)
+    df_nonprodFilter_vbkd = nonprodFilter_vbkd(spark, df_MANDT_FILTER_1_1_1)
+    df_SELECT_VBKD = SELECT_VBKD(spark, df_nonprodFilter_vbkd)
     df_SAP_TVST = SAP_TVST(spark)
     df_SAP_TVST = collectMetrics(
         spark, 
@@ -146,7 +139,17 @@ def pipeline(spark: SparkSession) -> None:
     )
     df_MANDT_FILTER_1_1_1_2_1_1_1_1_1_1 = MANDT_FILTER_1_1_1_2_1_1_1_1_1_1(spark, df_SAP_TVST)
     df_SELECT_TVST = SELECT_TVST(spark, df_MANDT_FILTER_1_1_1_2_1_1_1_1_1_1)
-    df_Join_1 = Join_1(spark, df_MANDT_FILTER, df_SELECT_VBAK, df_SELECT_VBKD, df_SELECT_TVST)
+    df_SAP_VBAP = SAP_VBAP(spark)
+    df_SAP_VBAP = collectMetrics(
+        spark, 
+        df_SAP_VBAP, 
+        "graph", 
+        "aLq-bTfxkKYLQ-C3qrbns$$AdFi-f_5eIzBc9bo111G3", 
+        "-5sicrluGo4KP6YxY4ZfA$$8KntWIgxbxcywF5SdcD2h"
+    )
+    df_MANDT_FILTER = MANDT_FILTER(spark, df_SAP_VBAP)
+    df_nonprodFilter_ERDAT = nonprodFilter_ERDAT(spark, df_MANDT_FILTER)
+    df_Join_1 = Join_1(spark, df_nonprodFilter_ERDAT, df_SELECT_VBAK, df_SELECT_VBKD, df_SELECT_TVST)
     df_NEW_FIEDS = NEW_FIEDS(spark, df_Join_1)
     df_NEW_FIEDS = collectMetrics(
         spark, 
