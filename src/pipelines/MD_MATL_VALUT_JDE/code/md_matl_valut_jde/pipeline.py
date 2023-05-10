@@ -9,6 +9,7 @@ from md_matl_valut_jde.graph import *
 def pipeline(spark: SparkSession) -> None:
     df_F4105 = F4105(spark)
     df_F41021 = F41021(spark)
+    df_F4101 = F4101(spark)
 
 def main():
     spark = SparkSession.builder\
