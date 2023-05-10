@@ -31,7 +31,7 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("BTCH_MNG_IND", trim(col("XCHPF")))\
         .withColumn("MATL_DOC_NUM", trim(col("ZEINR")))\
         .withColumn("MATL_DOC_VERS_NUM", trim(col("ZEIVR")))\
-        .withColumn("MATL_SHRT_DESC", lookup("LU_MAKT_MAKTX", col("MATNR")).getField("MAKTX"))\
+        .withColumn("MATL_SHRT_DESC", trim(lookup("LU_MAKT_MAKTX", col("MATNR")).getField("MAKTX")))\
         .withColumn("MATL_CAT_GRP_CD", trim(col("MTPOS_MARA")))\
         .withColumn("CHG_BY", trim(col("AENAM")))\
         .withColumn("DOC_CHG_NUM", trim(col("AESZN")))\
@@ -99,7 +99,7 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("_pk_md5_", md5(to_json(expr("named_struct('SRC_SYS_CD', SRC_SYS_CD, 'MATL_NUM', MATL_NUM)"))))\
         .withColumn("_l1_upt_", current_timestamp())\
         .withColumn("_deleted_L1", lit("F"))\
-        .withColumn("MATL_TYPE_DESC", lookup("MTBEZ_LU", col("MTART")).getField("MTBEZ"))\
+        .withColumn("MATL_TYPE_DESC", trim(lookup("MTBEZ_LU", col("MTART")).getField("MTBEZ")))\
         .withColumn("MFR_BOOK_PART_NUM", trim(col("MSBOOKPARTNO")))\
         .withColumn("DIR_SHP_FL", trim(col("ZZ1_DIRECT_SHIP_FLAG_PRD")))\
         .withColumn("FIN_PLNT", trim(col("ZZ1_FINISH_PLANT_PRD")))\
@@ -108,19 +108,19 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("PROD_LINE", trim(col("ZZ1_PRODUCT_LINE_PRD")))\
         .withColumn("MAKE_BUY_IN", trim(col("ZZ1_PUR_MFG_IND_PRD")))\
         .withColumn("STRT_PLNT", trim(col("ZZ1_START_PLANT_PRD")))\
-        .withColumn("MATL_SHRT_DESC_UP_CASE", lookup("LU_MAKT_MAKTG", col("MATNR")).getField("MAKTG"))\
-        .withColumn("FRAN_CD_DESC", lookup("VTEXT_LU", col("SPART")).getField("VTEXT"))\
-        .withColumn("BASE_UOM_DESC", lookup("MSEHL_LU", col("MEINS")).getField("MSEHL"))\
-        .withColumn("OBJ_NUM", lookup("OBJEK_LU", col("MATNR")).getField("OBJEK"))\
-        .withColumn("TYPE_OF_MATERIAL", lookup("MAT_TYPE_LU", col("MATNR")).getField("ATWRT"))\
-        .withColumn("STERILE", lookup("STERILE_LU", col("MATNR")).getField("ATWRT"))\
-        .withColumn("BRAVO_MINOR_CODE", lookup("BRAVO_LU", col("MATNR")).getField("ATWRT"))\
-        .withColumn("BRAVO_MINOR_CODE_DESC", lookup("ATWTB_LU", col("MATNR")).getField("ATWTB"))\
-        .withColumn("NDL_SLS_TYPE", lookup("NDL_SLS_LU", col("MATNR")).getField("ATWRT"))\
-        .withColumn("SUTURE_LENGTH_INCH", lookup("SUTUR_LEN_LU", col("MATNR")).getField("ATWRT"))\
+        .withColumn("MATL_SHRT_DESC_UP_CASE", trim(lookup("LU_MAKT_MAKTG", col("MATNR")).getField("MAKTG")))\
+        .withColumn("FRAN_CD_DESC", trim(lookup("VTEXT_LU", col("SPART")).getField("VTEXT")))\
+        .withColumn("BASE_UOM_DESC", trim(lookup("MSEHL_LU", col("MEINS")).getField("MSEHL")))\
+        .withColumn("OBJ_NUM", trim(lookup("OBJEK_LU", col("MATNR")).getField("OBJEK")))\
+        .withColumn("TYPE_OF_MATERIAL", trim(lookup("MAT_TYPE_LU", col("MATNR")).getField("ATWRT")))\
+        .withColumn("STERILE", trim(lookup("STERILE_LU", col("MATNR")).getField("ATWRT")))\
+        .withColumn("BRAVO_MINOR_CODE", trim(lookup("BRAVO_LU", col("MATNR")).getField("ATWRT")))\
+        .withColumn("BRAVO_MINOR_CODE_DESC", trim(lookup("ATWTB_LU", col("MATNR")).getField("ATWTB")))\
+        .withColumn("NDL_SLS_TYPE", trim(lookup("NDL_SLS_LU", col("MATNR")).getField("ATWRT")))\
+        .withColumn("SUTURE_LENGTH_INCH", trim(lookup("SUTUR_LEN_LU", col("MATNR")).getField("ATWRT")))\
         .withColumn("SER_TYPE", col("_STTPEC_SERTYPE").cast(IntegerType()))\
-        .withColumn("MATL_GRP_DESC", lookup("WGBEZx_LU", col("MATKL")).getField("WGBEZ"))\
-        .withColumn("MATL_GRP_DESC_2", lookup("WGBEZx_LU", col("MATKL")).getField("WGBEZ60"))\
+        .withColumn("MATL_GRP_DESC", trim(lookup("WGBEZx_LU", col("MATKL")).getField("WGBEZ")))\
+        .withColumn("MATL_GRP_DESC_2", trim(lookup("WGBEZx_LU", col("MATKL")).getField("WGBEZ60")))\
         .withColumn("CMMDTY", trim(col("COMMODITY")))\
         .withColumn(
           "SHRT_MATL_NUM",
@@ -128,6 +128,6 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
             "#"
           )
         )\
-        .withColumn("NDL_COLOR", lookup("NDL_COL_LU", col("MATNR")).getField("ATWRT"))\
-        .withColumn("NDL_ALLOY", lookup("NDL_ALLOY_LU", col("MATNR")).getField("ATWRT"))\
-        .withColumn("SUTURE_USP", lookup("SUTUR_USP_LU", col("MATNR")).getField("ATWRT"))
+        .withColumn("NDL_COLOR", trim(lookup("NDL_COL_LU", col("MATNR")).getField("ATWRT")))\
+        .withColumn("NDL_ALLOY", trim(lookup("NDL_ALLOY_LU", col("MATNR")).getField("ATWRT")))\
+        .withColumn("SUTURE_USP", trim(lookup("SUTUR_USP_LU", col("MATNR")).getField("ATWRT")))

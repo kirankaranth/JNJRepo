@@ -31,10 +31,10 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("BTCH_MNG_IND", trim(col("XCHPF")))\
         .withColumn("MATL_DOC_NUM", trim(col("ZEINR")))\
         .withColumn("MATL_DOC_VERS_NUM", trim(col("ZEIVR")))\
-        .withColumn("MATL_SHRT_DESC", lookup("LU_MAKT_MAKTX", col("MATNR")).getField("MAKTX"))\
+        .withColumn("MATL_SHRT_DESC", trim(lookup("LU_MAKT_MAKTX", col("MATNR")).getField("MAKTX")))\
         .withColumn("MATL_CAT_GRP_CD", trim(col("MTPOS_MARA")))\
-        .withColumn("MATL_SPEC_NUM", lookup("MAT_SPEC_LU", col("MATNR")).getField("ATWRT"))\
-        .withColumn("MATL_SPEC_VERS_NUM", lookup("SPEC_VER_LU", col("MATNR")).getField("ATWRT"))\
+        .withColumn("MATL_SPEC_NUM", trim(lookup("MAT_SPEC_LU", col("MATNR")).getField("ATWRT")))\
+        .withColumn("MATL_SPEC_VERS_NUM", trim(lookup("SPEC_VER_LU", col("MATNR")).getField("ATWRT")))\
         .withColumn("CHG_BY", trim(col("AENAM")))\
         .withColumn("DOC_CHG_NUM", trim(col("AESZN")))\
         .withColumn("CNTNR_REQ", trim(col("BEHVO")))\
@@ -114,9 +114,9 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("KIT_IND", trim(col("zzkit_ind")))\
         .withColumn("MMS_TEMP_SENS_IND", trim(col("zzmmsts")))\
         .withColumn("PLNG_HIER3_CD", trim(col("zzp3_low_level")))\
-        .withColumn("MATL_TYPE_DESC", lookup("T134T_LU", col("MTART")).getField("MTBEZ"))\
-        .withColumn("MATL_GRP_DESC", lookup("WGBEZx_LU", col("MATKL")).getField("WGBEZ"))\
-        .withColumn("MATL_GRP_DESC_2", lookup("WGBEZx_LU", col("MATKL")).getField("WGBEZ60"))\
+        .withColumn("MATL_TYPE_DESC", trim(lookup("T134T_LU", col("MTART")).getField("MTBEZ")))\
+        .withColumn("MATL_GRP_DESC", trim(lookup("WGBEZx_LU", col("MATKL")).getField("WGBEZ")))\
+        .withColumn("MATL_GRP_DESC_2", trim(lookup("WGBEZx_LU", col("MATKL")).getField("WGBEZ60")))\
         .withColumn(
         "SHRT_MATL_NUM",
         lit(
