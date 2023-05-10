@@ -5,5 +5,11 @@ from prophecy.libs import typed_lit
 from sap_01_md_sls_ordr_line_atl.config.ConfigStore import *
 from sap_01_md_sls_ordr_line_atl.udfs.UDFs import *
 
-def SAP_TVSTT(spark: SparkSession) -> DataFrame:
-    return spark.sql(f"SELECT * FROM {Config.sourceDatabase}.tvstt WHERE _deleted_ = 'F' and spras = 'E'")
+def nonprodFilter_ERDAT_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
+
+    if Config.nonProdFilter:
+        out0 = in0.filter((col("ERDAT") > lit(f"{Config.nonProdFilterDate}")))
+    else:
+        out0 = in0
+
+    return out0
