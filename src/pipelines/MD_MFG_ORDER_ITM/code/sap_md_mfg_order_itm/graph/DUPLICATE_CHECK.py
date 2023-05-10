@@ -6,4 +6,6 @@ from sap_md_mfg_order_itm.config.ConfigStore import *
 from sap_md_mfg_order_itm.udfs.UDFs import *
 
 def DUPLICATE_CHECK(spark: SparkSession, in0: DataFrame) -> DataFrame:
-    return in0.agg(count(lit(1)).alias("PK_COUNT"))
+    df1 = in0.groupBy(col("SRC_SYS_CD"), col("MFG_ORDR_TYP_CD"), col("MFG_ORDR_NUM"), col("LN_ITM_NBR"))
+
+    return df1.agg(count(lit(1)).alias("PK_COUNT"))

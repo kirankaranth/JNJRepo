@@ -6,4 +6,4 @@ from sap_md_mfg_order_itm.config.ConfigStore import *
 from sap_md_mfg_order_itm.udfs.UDFs import *
 
 def DUPLICATE_CHECK_FILTER(spark: SparkSession, in0: DataFrame) -> DataFrame:
-    return in0.filter(lit(True))
+    return in0.filter((col("PK_COUNT") > lit(1)))
