@@ -161,6 +161,13 @@
       "path" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/JDE_02_MD_PLNT_MTR-1.0-py3-none-any.whl",
       "language" : "python"
     }
+  }, {
+    "PipelineComponent" : {
+      "id" : "pipelines/SAP_01_MD_PLNT",
+      "nodeName" : "HM2",
+      "path" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_01_MD_PLNT-1.0-py3-none-any.whl",
+      "language" : "python"
+    }
   } ],
   "request" : {
     "format" : "MULTI_TASK",
@@ -736,6 +743,32 @@
         }
       }, {
         "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/JDE_02_MD_PLNT_MTR-1.0-py3-none-any.whl"
+      } ],
+      "email_notifications" : { },
+      "max_retries" : 0
+    }, {
+      "task_key" : "HM2",
+      "depends_on" : [ {
+        "task_key" : "MTR"
+      }, {
+        "task_key" : "MTR"
+      } ],
+      "job_cluster_key" : "JOB_MD_PLNT_default_Prophecy_Small",
+      "python_wheel_task" : {
+        "package_name" : "SAP_01_MD_PLNT",
+        "entry_point" : "main",
+        "parameters" : [ "-i", "HM2", "-O", "{}" ]
+      },
+      "libraries" : [ {
+        "maven" : {
+          "coordinates" : "io.prophecy:prophecy-libs_2.12:3.3.0-7.0.18"
+        }
+      }, {
+        "pypi" : {
+          "package" : "prophecy-libs==1.5.0"
+        }
+      }, {
+        "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_01_MD_PLNT-1.0-py3-none-any.whl"
       } ],
       "email_notifications" : { },
       "max_retries" : 0
