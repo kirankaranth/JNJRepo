@@ -33,7 +33,7 @@
       "name" : "CDL_L1_Dev",
       "clusterSizes" : {
         "default" : "Prophecy_Small",
-        "availableClusterSizes" : [ "Prophecy_Small", "Prophecy_Medium", "Prophecy_Large" ]
+        "availableClusterSizes" : [ "Prophecy_Small", "Prophecy_Medium", "Prophecy_Large", "Prophecy_Photon_Medium", "Compute_Medium" ]
       },
       "pylibsResolutionMode" : {
         "PublicCentral" : { }
@@ -1404,7 +1404,7 @@
             "name" : "MATL_SHRT_DESC",
             "kind" : {
               "type" : "spark_expression",
-              "value" : "CONCAT(TRIM(IMDSC1),'; ',TRIM(IMDSC2))"
+              "value" : "CASE WHEN Length(Trim(IMDSC2)) = 0 THEN Trim(IMDSC1) ELSE CONCAT(Trim(IMDSC1),';',Trim(IMDSC2)) END"
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
@@ -1969,6 +1969,134 @@
         }
       }
     },
+    "pUq8EJK3XgPYPZDwbX1I3$$YHlZIalc_M8ds4a29nDdw" : {
+      "id" : "pUq8EJK3XgPYPZDwbX1I3$$YHlZIalc_M8ds4a29nDdw",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "HM2",
+        "slug" : "HM2",
+        "x" : 20,
+        "y" : 160
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "jJoWAS6nFlH8RNrmcUYjl$$NGOXP2btynaRB4lKT-H1j",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "_UnHZRO_UORErPPcUvVTq$$P-rWDsSkFQy3ZfYRWbWRZ",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/SAP_MD_MATL_HM2",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "configDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MANDT",
+            "kind" : {
+              "type" : "string",
+              "value" : "100"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTABLE1",
+            "kind" : {
+              "type" : "string",
+              "value" : "mara"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTABLE2",
+            "kind" : {
+              "type" : "string",
+              "value" : "makt"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTABLE3",
+            "kind" : {
+              "type" : "string",
+              "value" : "ausp"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTABLE4",
+            "kind" : {
+              "type" : "string",
+              "value" : "inob"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTABLE5",
+            "kind" : {
+              "type" : "string",
+              "value" : "cabn"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "default", "hm2" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "hm2"
+        }
+      }
+    },
     "Gc3WpZZE099jnYQvihVXS" : {
       "id" : "Gc3WpZZE099jnYQvihVXS",
       "component" : "Pipeline",
@@ -2452,7 +2580,7 @@
             "name" : "BTCH_MNG_IND",
             "kind" : {
               "type" : "spark_expression",
-              "value" : "CASE WHEN TRIM(IMSRCE) in ('0',' ', null) THEN ' ' ELSE 'X' END"
+              "value" : "CASE WHEN TRIM(IMSRCE) in ('0',' ', null) THEN '' ELSE 'X' END"
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
@@ -2884,7 +3012,7 @@
             "name" : "MATL_SHRT_DESC",
             "kind" : {
               "type" : "spark_expression",
-              "value" : "CONCAT(TRIM(IMDSC1),'; ',TRIM(IMDSC2))"
+              "value" : "CASE WHEN Length(Trim(IMDSC2)) = 0 THEN Trim(IMDSC1) ELSE CONCAT(Trim(IMDSC1),';',Trim(IMDSC2)) END"
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
@@ -4196,7 +4324,7 @@
             "name" : "MATL_SHRT_DESC",
             "kind" : {
               "type" : "spark_expression",
-              "value" : "CONCAT(TRIM(IMDSC1),'; ',TRIM(IMDSC2))"
+              "value" : "CASE WHEN Length(Trim(IMDSC2)) = 0 THEN Trim(IMDSC1) ELSE CONCAT(Trim(IMDSC1),';',Trim(IMDSC2)) END"
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
@@ -4620,7 +4748,7 @@
             "name" : "MATL_SHRT_DESC",
             "kind" : {
               "type" : "spark_expression",
-              "value" : "CONCAT(TRIM(IMDSC1),'; ',TRIM(IMDSC2))"
+              "value" : "CASE WHEN Length(Trim(IMDSC2)) = 0 THEN Trim(IMDSC1) ELSE CONCAT(Trim(IMDSC1),';',Trim(IMDSC2)) END"
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
@@ -5044,7 +5172,7 @@
             "name" : "MATL_SHRT_DESC",
             "kind" : {
               "type" : "spark_expression",
-              "value" : "CONCAT(TRIM(IMDSC1),'; ',TRIM(IMDSC2))"
+              "value" : "CASE WHEN Length(Trim(IMDSC2)) = 0 THEN Trim(IMDSC1) ELSE CONCAT(Trim(IMDSC1),';',Trim(IMDSC2)) END"
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
@@ -5222,134 +5350,6 @@
           },
           "overrides" : { },
           "selectedInstance" : "gmd"
-        }
-      }
-    },
-    "Lx2OeRwXcNAnkY-r4ihMO$$UzykPJ2yawmkO40zCj8s1" : {
-      "id" : "Lx2OeRwXcNAnkY-r4ihMO$$UzykPJ2yawmkO40zCj8s1",
-      "component" : "Pipeline",
-      "metadata" : {
-        "label" : "HMD",
-        "slug" : "HMD",
-        "x" : -85.5999984741211,
-        "y" : -37.599998474121094
-      },
-      "ports" : {
-        "inputs" : [ {
-          "id" : "n7__ttaDM_X7g0ZwMtME9$$omK26ckMCqH91wOoPGcJm",
-          "slug" : ""
-        } ],
-        "outputs" : [ {
-          "id" : "-qOYoF11mI9TCn_hMtBT5$$ej6_RgrWByLwoP0aEQdgP",
-          "slug" : ""
-        } ]
-      },
-      "settings" : {
-        "type" : "Inherited",
-        "alerting" : {
-          "emails" : "",
-          "onStart" : false,
-          "onSuccess" : false,
-          "onFailure" : false
-        }
-      },
-      "properties" : {
-        "pipelineId" : "pipelines/SAP_MD_MATL_HMD1",
-        "configurations" : {
-          "schema" : [ {
-            "name" : "sourceSystem",
-            "kind" : {
-              "type" : "string",
-              "value" : "hmd"
-            },
-            "optional" : false,
-            "isWorkflowNodeConfiguration" : false
-          }, {
-            "name" : "targetSchema",
-            "kind" : {
-              "type" : "string",
-              "value" : "dev_md_l1"
-            },
-            "optional" : false,
-            "isWorkflowNodeConfiguration" : false
-          }, {
-            "name" : "sourceDatabase",
-            "kind" : {
-              "type" : "string",
-              "value" : "hmd"
-            },
-            "optional" : false,
-            "isWorkflowNodeConfiguration" : false
-          }, {
-            "name" : "configDatabase",
-            "kind" : {
-              "type" : "string",
-              "value" : " "
-            },
-            "optional" : false,
-            "isWorkflowNodeConfiguration" : false
-          }, {
-            "name" : "MANDT",
-            "kind" : {
-              "type" : "string",
-              "value" : "500"
-            },
-            "optional" : false,
-            "isWorkflowNodeConfiguration" : false
-          }, {
-            "name" : "DBTABLE1",
-            "kind" : {
-              "type" : "string",
-              "value" : "mara"
-            },
-            "optional" : false,
-            "isWorkflowNodeConfiguration" : false
-          }, {
-            "name" : "DBTABLE2",
-            "kind" : {
-              "type" : "string",
-              "value" : "makt"
-            },
-            "optional" : false,
-            "isWorkflowNodeConfiguration" : false
-          }, {
-            "name" : "DAI_ETL_ID",
-            "kind" : {
-              "type" : "int",
-              "value" : 0
-            },
-            "optional" : false,
-            "isWorkflowNodeConfiguration" : false
-          }, {
-            "name" : "DBTABLE3",
-            "kind" : {
-              "type" : "string",
-              "value" : "ausp"
-            },
-            "optional" : false,
-            "isWorkflowNodeConfiguration" : false
-          }, {
-            "name" : "DBTABLE4",
-            "kind" : {
-              "type" : "string",
-              "value" : "inob"
-            },
-            "optional" : false,
-            "isWorkflowNodeConfiguration" : false
-          }, {
-            "name" : "DBTABLE5",
-            "kind" : {
-              "type" : "string",
-              "value" : "cabn"
-            },
-            "optional" : false,
-            "isWorkflowNodeConfiguration" : false
-          } ],
-          "instances" : {
-            "CDL_MD_L1" : [ "default", "hmd" ]
-          },
-          "overrides" : { },
-          "selectedInstance" : "hmd"
         }
       }
     },
@@ -6034,5 +6034,143 @@
       }
     }
   },
-  "connections" : [ ]
+  "connections" : [ {
+    "id" : "samhOIFS5s3q9XDOc6Ti2",
+    "source" : "pUq8EJK3XgPYPZDwbX1I3$$YHlZIalc_M8ds4a29nDdw",
+    "target" : "rVvtQT8RPH9fVtnn2p-yG$$IfL8GHWickaoQwou8ZoxQ",
+    "sourcePort" : "_UnHZRO_UORErPPcUvVTq$$P-rWDsSkFQy3ZfYRWbWRZ",
+    "targetPort" : "cRhkgTNi7cQi0kOhDQq-E$$eH2L-f_tCGLgMyILMzRHd"
+  }, {
+    "id" : "vFp_dVw-aOFv4bITVUN8r",
+    "source" : "rVvtQT8RPH9fVtnn2p-yG$$IfL8GHWickaoQwou8ZoxQ",
+    "target" : "EDjf0cxo35j79wU-iFVWb$$xQbyVkGokM5_dWFVUrpJQ",
+    "sourcePort" : "txUw6gwcvoRpWiPV2Li6o$$GSzhKKM_YjtBe3WjCN6RM",
+    "targetPort" : "zuWDqj6v-o8sHT7eNpUgz$$1jd_R45NhNqMRml8g3KdG"
+  }, {
+    "id" : "IzN_fgEfT1OlRHY1CVMi1",
+    "source" : "EDjf0cxo35j79wU-iFVWb$$xQbyVkGokM5_dWFVUrpJQ",
+    "target" : "wpnO-7VRFTJqTMZPYK7Aj$$00rGggaG-S8OqoAMSjc26",
+    "sourcePort" : "A8cp5HNCxlCBODbPMqbvw$$Ae1JRY0oG3dDDr9nw3u07",
+    "targetPort" : "tZ-mNNfXkZXi5suzlGE1w$$3JzPJ8oF9p1XyffpsVohM"
+  }, {
+    "id" : "6XB_gBytot4WgKF1Sv6gM",
+    "source" : "wpnO-7VRFTJqTMZPYK7Aj$$00rGggaG-S8OqoAMSjc26",
+    "target" : "Pk3ASZCrG10dOvMVSTNSv$$UH5oQkgNdtcTaLMh9aqXN",
+    "sourcePort" : "eIr-HXcEst7ri70KJKaaZ$$VHx-SAIHJ5WY0yiKDcx0R",
+    "targetPort" : "AGNDDXVewQrRXRmQr5zzS$$IJbAzZJenuTwm-RMLLqJQ"
+  }, {
+    "id" : "4Kt5Y45irjnFZ09pp1W07",
+    "source" : "Pk3ASZCrG10dOvMVSTNSv$$UH5oQkgNdtcTaLMh9aqXN",
+    "target" : "ty5a5oEgMELMJf5ULwV3V$$ulz9fSJ1WSZxonaiteeE9",
+    "sourcePort" : "5wWLNQ4TMWcjKit619q92$$Drw6h4eqfhTxwU7rerv84",
+    "targetPort" : "chlhB-Oz3JoEUnMbJlJ0G$$Crclck2tisImeloZsOijs"
+  }, {
+    "id" : "-A65NtvsgxAuRcUH6-PoO",
+    "source" : "ty5a5oEgMELMJf5ULwV3V$$ulz9fSJ1WSZxonaiteeE9",
+    "target" : "5EaPVzELQRMZUzmj4WZ-k$$V3ZiJQBlR3k9zVQIxh4WQ",
+    "sourcePort" : "_zrjaujHfj3PvVFmLvygv$$Gg0Tasra8Vizanad02RD2",
+    "targetPort" : "-zOmDXnPQTm1NqvjLmrda$$0uANzxUQ2M1YlnWnXN8Cv"
+  }, {
+    "id" : "ynFRrV3ij-q05E5XaOJCf",
+    "source" : "5EaPVzELQRMZUzmj4WZ-k$$V3ZiJQBlR3k9zVQIxh4WQ",
+    "target" : "A8zWP1GQox3qrRgls0-tT$$YK4HZgVTPJu38kndQfonp",
+    "sourcePort" : "KBcoZ9b7Q3jse1FucIiml$$YFhOzIBzFjroNa7dJNZVC",
+    "targetPort" : "hL1I7ttY-SQvu5m2jAbRF$$3eJqTk7VxpgCCryfzgZxk"
+  }, {
+    "id" : "voogsMgTtZluoFuzuaanh",
+    "source" : "A8zWP1GQox3qrRgls0-tT$$YK4HZgVTPJu38kndQfonp",
+    "target" : "Gc3WpZZE099jnYQvihVXS",
+    "sourcePort" : "Clhz4HLLbzaAfCkskhETI$$82dA92NT57rw1HhWKqsT4",
+    "targetPort" : "QOqE8MtcNeM4ZvdPOKfAT"
+  }, {
+    "id" : "ttG4g7YTWR9ByJhh3pKJq",
+    "source" : "Gc3WpZZE099jnYQvihVXS",
+    "target" : "6O9MtBBKvIkUU1Oud5QPM",
+    "sourcePort" : "Ka0xfPWqjolmpegfT0zpV",
+    "targetPort" : "4E1jTH68seIyT7OP2hG-6"
+  }, {
+    "id" : "sOxS784d35VvPZK2d0jrE",
+    "source" : "6O9MtBBKvIkUU1Oud5QPM",
+    "target" : "csn32yZEIYvUt9lBTzMIF",
+    "sourcePort" : "DUliYuK48x1h5jn3uxYG1",
+    "targetPort" : "wCre9ls3_HR6AzKHiDSa6"
+  }, {
+    "id" : "D0-_6E0X59tx1xU2pD4N2",
+    "source" : "csn32yZEIYvUt9lBTzMIF",
+    "target" : "qcudzAHujmbkDtklaV_HA",
+    "sourcePort" : "Kbzg6z7bJqNWSm7j0loV9",
+    "targetPort" : "VL4YcWsVp2J7C3GmA6plZ"
+  }, {
+    "id" : "LXOZQMOcSzm3C7S8GqDUW",
+    "source" : "qcudzAHujmbkDtklaV_HA",
+    "target" : "VyfWY656iK5uqraHCbXEk",
+    "sourcePort" : "xC_ZWYaNnR5WUwn-p9XnF",
+    "targetPort" : "3jJf2dRJn_-7ZWE_GO0kV"
+  }, {
+    "id" : "q8zh_K0xrCOhJnPNvH8Hv",
+    "source" : "VyfWY656iK5uqraHCbXEk",
+    "target" : "rD65mq1o2E-LepPGdsshV",
+    "sourcePort" : "8pXkCM-uYztyAJbIU51Zo",
+    "targetPort" : "SVuqDUPaN2l-8QBXVGjnh"
+  }, {
+    "id" : "69-zpQrN4cXJPk4a8_Ldv",
+    "source" : "rD65mq1o2E-LepPGdsshV",
+    "target" : "ZOIDqCdvUjc48Rl9tkDVY$$pN04bAd-I_gqvSzGsj2oR",
+    "sourcePort" : "XfsxsvpBpyI0KB5zTqqXC",
+    "targetPort" : "gd2hgQb4QTIRMDjD9P0hC$$23ksJKL6msSgS2Scb0ceM"
+  }, {
+    "id" : "3JWm39QhM1oPswZ_zZSFJ",
+    "source" : "ZOIDqCdvUjc48Rl9tkDVY$$pN04bAd-I_gqvSzGsj2oR",
+    "target" : "CnSKJk6PlvrCpLT3qBT2y$$3O3NpVukFY3sBVdLzT69j",
+    "sourcePort" : "IfgybBahBosrGBJg5DwEi$$EyBOAp8eQw_KjCU5hhGYu",
+    "targetPort" : "LXAkKwSVdqXR6F86E5P8x$$NdsGEfbvNkU65tz7CFw4C"
+  }, {
+    "id" : "bCBrIN4iQFZqPwov1uarq",
+    "source" : "CnSKJk6PlvrCpLT3qBT2y$$3O3NpVukFY3sBVdLzT69j",
+    "target" : "KZW7HgqCC5wXNtitr_0zr",
+    "sourcePort" : "rFqLQk9vKmp8nzlriFVRJ$$oowACcYZZd2zxwV0LhgNk",
+    "targetPort" : "5dOISMLdMjEFnGPOhbOK7"
+  }, {
+    "id" : "EOI-uKdGrqPc2Y7mwxxA-",
+    "source" : "KZW7HgqCC5wXNtitr_0zr",
+    "target" : "8_qUyhSSHJGlgvDT8V4Ug",
+    "sourcePort" : "RZUdra7E5nJps-uQl6vBa",
+    "targetPort" : "Y3zo0KhPtVmpCBvoPKzVT"
+  }, {
+    "id" : "k4_GzXFG18sH7Ig4WZrU5",
+    "source" : "8_qUyhSSHJGlgvDT8V4Ug",
+    "target" : "6XHHJZoFx9F1nzjBXgLSb",
+    "sourcePort" : "rBPIuXLd0UV2nDQDR_6H2",
+    "targetPort" : "H0S1SmFUTarPa7RwnUOZG"
+  }, {
+    "id" : "iGfBhyq0XjqLLdtAApIwJ",
+    "source" : "6XHHJZoFx9F1nzjBXgLSb",
+    "target" : "POym1XSM-u_l-8vS4tfGf",
+    "sourcePort" : "eWZ6YxcXY93vxBxpBAGnh",
+    "targetPort" : "bw-8kOUxzNHOIWs3FqxZQ"
+  }, {
+    "id" : "1_-oIG787vrbJzYZHEqje",
+    "source" : "POym1XSM-u_l-8vS4tfGf",
+    "target" : "_94FwQAM9BzJgWauarcQ6",
+    "sourcePort" : "Y3CkUNgK2-2smoMfoS9RU",
+    "targetPort" : "QhYTz38rRpAUUz4imrRPQ"
+  }, {
+    "id" : "jaj84ctegM9mNJKmRKOl2",
+    "source" : "_94FwQAM9BzJgWauarcQ6",
+    "target" : "B_SlI5fDhvgn7I4hKrEMQ",
+    "sourcePort" : "-5HN9Sq3ad1RQItG3ztdD",
+    "targetPort" : "gh4bnc4FHgPaZbfDsINP4"
+  }, {
+    "id" : "myQKVmR2gagcLkOEd1p1R",
+    "source" : "B_SlI5fDhvgn7I4hKrEMQ",
+    "target" : "nTWPRF2a5TYymIOV16GJv",
+    "sourcePort" : "M6XiOefym7zdU4f83NyLo",
+    "targetPort" : "h8lEwZmVPgGrWWoJl3vF3"
+  }, {
+    "id" : "o4ndK5awAfaJbMBbA8Vu0",
+    "source" : "nTWPRF2a5TYymIOV16GJv",
+    "target" : "1mrpViMIEsVtTKEOdOqtd",
+    "sourcePort" : "mqtOR34oQEKO_3UbFA208",
+    "targetPort" : "bpetY4jh_HWzk62NChr1D"
+  } ]
 }
