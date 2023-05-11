@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 setup(
-    name = 'SAP_MD_MFG_ORDER_ITM',
+    name = 'SAP_MD_MFG_ORDER_ITM_MBP_BWI_BBN_BBL_BBA_MRS_P01_TAI',
     version = '1.0',
     packages = find_packages(include = ('sap_md_mfg_order_itm*', )) + ["prophecy_config_instances"],
     package_dir = {'prophecy_config_instances' : 'configs/resources/config'},
