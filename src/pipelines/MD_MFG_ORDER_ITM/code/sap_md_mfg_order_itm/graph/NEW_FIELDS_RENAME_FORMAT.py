@@ -125,6 +125,16 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("CNFG_INTRNAL_OBJ_NUM", trim(col("CUOBJ_ROOT")))\
         .withColumn("MRP_AREA", trim(col("BERID")))\
         .withColumn("PARM_VRNT", trim(col("TECHS_COPY")))\
+        .withColumn("STK_SGMNT", expr(Config.STK_SGMNT))\
+        .withColumn("CUST_NUM1", expr(Config.CUST_NUM1))\
+        .withColumn("SEASN_YR", expr(Config.SEASN_YR))\
+        .withColumn("SEASN", expr(Config.SEASN))\
+        .withColumn("FSHN_CLCT", expr(Config.FSHN_CLCT))\
+        .withColumn("FSHN_THEME", expr(Config.FSHN_THEME))\
+        .withColumn("ALC_STK_QTY", expr(Config.ALC_STK_QTY))\
+        .withColumn("NUM_OF_ORIG_ORDR", expr(Config.NUM_OF_ORIG_ORDR))\
+        .withColumn("CNFRM_QTY_FOR_ITM", expr(Config.CNFRM_QTY_FOR_ITM))\
+        .withColumn("ITM_SEQ", expr(Config.ITM_SEQ))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
         .withColumn("DAI_UPDT_DTTM", current_timestamp())\
