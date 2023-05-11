@@ -16,7 +16,8 @@ def pipeline(spark: SparkSession) -> None:
         "sYtSVk2q9sfJq89d59kPC$$uwmR95vlmXB4Ekch2-dTy"
     )
     df_MANDT_5 = MANDT_5(spark, df_DS_SAP_005_MARA)
-    Lookup_1_MARA(spark, df_MANDT_5)
+    df_SELECT_MARA = SELECT_MARA(spark, df_MANDT_5)
+    Lookup_1_MARA(spark, df_SELECT_MARA)
     df_DS_SAP_001_MARD = DS_SAP_001_MARD(spark)
     df_DS_SAP_001_MARD = collectMetrics(
         spark, 
@@ -26,7 +27,8 @@ def pipeline(spark: SparkSession) -> None:
         "3CrnM5rIp04ipW5DJukD9$$MBoUj4bDaXIF3R2Z5W2fM"
     )
     df_MANDT_1 = MANDT_1(spark, df_DS_SAP_001_MARD)
-    df_SchemaTransform_1_MARD = SchemaTransform_1_MARD(spark, df_MANDT_1)
+    df_Select_MARD_Columns = Select_MARD_Columns(spark, df_MANDT_1)
+    df_SchemaTransform_1_MARD = SchemaTransform_1_MARD(spark, df_Select_MARD_Columns)
     df_SET_FIELD_ORDER_1 = SET_FIELD_ORDER_1(spark, df_SchemaTransform_1_MARD)
     df_DS_SAP_002_MCHB = DS_SAP_002_MCHB(spark)
     df_DS_SAP_002_MCHB = collectMetrics(
@@ -37,7 +39,8 @@ def pipeline(spark: SparkSession) -> None:
         "2CE0qLvskoOXN-3tnf2yw$$S3QTH4i3L4b0kt-OIpfg-"
     )
     df_MANDT_2 = MANDT_2(spark, df_DS_SAP_002_MCHB)
-    df_SchemaTransform_2_MCHB = SchemaTransform_2_MCHB(spark, df_MANDT_2)
+    df_Select_MCHB = Select_MCHB(spark, df_MANDT_2)
+    df_SchemaTransform_2_MCHB = SchemaTransform_2_MCHB(spark, df_Select_MCHB)
     df_SET_FIELD_ORDER_2 = SET_FIELD_ORDER_2(spark, df_SchemaTransform_2_MCHB)
     df_DS_SAP_004_MSSL = DS_SAP_004_MSSL(spark)
     df_DS_SAP_004_MSSL = collectMetrics(
@@ -48,7 +51,8 @@ def pipeline(spark: SparkSession) -> None:
         "DoqLyVIfU0kJCdG1-zyzr$$o4VTVFc--qBf9R7H5zY2D"
     )
     df_MANDT_4 = MANDT_4(spark, df_DS_SAP_004_MSSL)
-    df_SchemaTransform_4_MSSL = SchemaTransform_4_MSSL(spark, df_MANDT_4)
+    df_SELECT_MSSL = SELECT_MSSL(spark, df_MANDT_4)
+    df_SchemaTransform_4_MSSL = SchemaTransform_4_MSSL(spark, df_SELECT_MSSL)
     df_SET_FIELD_ORDER_4 = SET_FIELD_ORDER_4(spark, df_SchemaTransform_4_MSSL)
     df_DS_SAP_003_MSLB = DS_SAP_003_MSLB(spark)
     df_DS_SAP_003_MSLB = collectMetrics(
@@ -59,7 +63,8 @@ def pipeline(spark: SparkSession) -> None:
         "Bzh0-f39qLTOGxgov8-eB$$KoTcE351jqpLBK5lwQ3wz"
     )
     df_MANDT_3 = MANDT_3(spark, df_DS_SAP_003_MSLB)
-    df_SchemaTransform_3_MSLB = SchemaTransform_3_MSLB(spark, df_MANDT_3)
+    df_SELECT_MSLB = SELECT_MSLB(spark, df_MANDT_3)
+    df_SchemaTransform_3_MSLB = SchemaTransform_3_MSLB(spark, df_SELECT_MSLB)
     df_SET_FIELD_ORDER_3 = SET_FIELD_ORDER_3(spark, df_SchemaTransform_3_MSLB)
     df_SetOperation_1_Union = SetOperation_1_Union(
         spark, 
