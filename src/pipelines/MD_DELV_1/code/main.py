@@ -1,3 +1,3 @@
-from MD_DELV_1.pipeline import main
+from sap_md_delv_bba_bbl_bbn_hcs_mrs.pipeline import main
 
 main()

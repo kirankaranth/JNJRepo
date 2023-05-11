@@ -1,1 +1,1 @@
-from .MD_DELV_7 import *
+from .sap_md_delv_svs import *

@@ -1,3 +1,3 @@
-from MD_DELV_6.pipeline import main
+from sap_md_delv_geu.pipeline import main
 
 main()
