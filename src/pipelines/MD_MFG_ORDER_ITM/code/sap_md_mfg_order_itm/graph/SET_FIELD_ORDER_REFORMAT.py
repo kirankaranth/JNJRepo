@@ -43,6 +43,7 @@ def SET_FIELD_ORDER_REFORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("PLAN_TOT_ORDR_QTY"), 
         col("ACCT_ASGNMT_CAT"), 
         col("PRTL_CONV_IN"), 
+        col("PLAN_ORDR_DELV_DTTM"), 
         col("COST_EST_NUM"), 
         col("OVERDELV_TLRNC"), 
         col("UNLMTED_OVERDELV_ALLW"), 
