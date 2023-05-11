@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 setup(
-    name = 'SAP_MD_DELV_HMD',
+    name = 'MD_DELV_10_hm2',
     version = '1.0',
     packages = find_packages(include = ('sap_md_delv_hmd*', )) + ["prophecy_config_instances"],
     package_dir = {'prophecy_config_instances' : 'configs/resources/config'},
