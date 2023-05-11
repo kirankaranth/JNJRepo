@@ -7,7 +7,7 @@ from sap_md_mfg_order_itm.udfs.UDFs import *
 
 def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
-        .withColumn("SRC_SYS_CD", lit(""))\
+        .withColumn("SRC_SYS_CD", lit(Config.sourceSystem))\
         .withColumn("MFG_ORDR_TYP_CD", col("AUART"))\
         .withColumn("MFG_ORDR_NUM", col("AUFNR"))\
         .withColumn("LN_ITM_NBR", col("POSNR"))\
