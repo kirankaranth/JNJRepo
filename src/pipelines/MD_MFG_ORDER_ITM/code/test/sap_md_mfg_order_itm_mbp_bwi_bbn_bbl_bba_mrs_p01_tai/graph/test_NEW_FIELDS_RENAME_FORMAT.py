@@ -4,8 +4,8 @@ from pyspark.sql.types import *
 from argparse import Namespace
 from prophecy.test import BaseTestCase
 from prophecy.test.utils import *
-from sap_md_mfg_order_itm.graph.NEW_FIELDS_RENAME_FORMAT import *
-from sap_md_mfg_order_itm.config.ConfigStore import *
+from sap_md_mfg_order_itm_mbp_bwi_bbn_bbl_bba_mrs_p01_tai.graph.NEW_FIELDS_RENAME_FORMAT import *
+from sap_md_mfg_order_itm_mbp_bwi_bbn_bbl_bba_mrs_p01_tai.config.ConfigStore import *
 
 
 class NEW_FIELDS_RENAME_FORMATTest(BaseTestCase):
@@ -13,14 +13,14 @@ class NEW_FIELDS_RENAME_FORMATTest(BaseTestCase):
     def test_trim_test_(self):
         dfIn0 = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/sap_md_mfg_order_itm/graph/NEW_FIELDS_RENAME_FORMAT/in0/schema.json',
-            'test/resources/data/sap_md_mfg_order_itm/graph/NEW_FIELDS_RENAME_FORMAT/in0/data/test_trim_test_.json',
+            'test/resources/data/sap_md_mfg_order_itm_mbp_bwi_bbn_bbl_bba_mrs_p01_tai/graph/NEW_FIELDS_RENAME_FORMAT/in0/schema.json',
+            'test/resources/data/sap_md_mfg_order_itm_mbp_bwi_bbn_bbl_bba_mrs_p01_tai/graph/NEW_FIELDS_RENAME_FORMAT/in0/data/test_trim_test_.json',
             'in0'
         )
         dfOut = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/sap_md_mfg_order_itm/graph/NEW_FIELDS_RENAME_FORMAT/out/schema.json',
-            'test/resources/data/sap_md_mfg_order_itm/graph/NEW_FIELDS_RENAME_FORMAT/out/data/test_trim_test_.json',
+            'test/resources/data/sap_md_mfg_order_itm_mbp_bwi_bbn_bbl_bba_mrs_p01_tai/graph/NEW_FIELDS_RENAME_FORMAT/out/schema.json',
+            'test/resources/data/sap_md_mfg_order_itm_mbp_bwi_bbn_bbl_bba_mrs_p01_tai/graph/NEW_FIELDS_RENAME_FORMAT/out/data/test_trim_test_.json',
             'out'
         )
         dfOutComputed = NEW_FIELDS_RENAME_FORMAT(self.spark, dfIn0)
@@ -29,14 +29,14 @@ class NEW_FIELDS_RENAME_FORMATTest(BaseTestCase):
     def test_decimal_test_(self):
         dfIn0 = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/sap_md_mfg_order_itm/graph/NEW_FIELDS_RENAME_FORMAT/in0/schema.json',
-            'test/resources/data/sap_md_mfg_order_itm/graph/NEW_FIELDS_RENAME_FORMAT/in0/data/test_decimal_test_.json',
+            'test/resources/data/sap_md_mfg_order_itm_mbp_bwi_bbn_bbl_bba_mrs_p01_tai/graph/NEW_FIELDS_RENAME_FORMAT/in0/schema.json',
+            'test/resources/data/sap_md_mfg_order_itm_mbp_bwi_bbn_bbl_bba_mrs_p01_tai/graph/NEW_FIELDS_RENAME_FORMAT/in0/data/test_decimal_test_.json',
             'in0'
         )
         dfOut = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/sap_md_mfg_order_itm/graph/NEW_FIELDS_RENAME_FORMAT/out/schema.json',
-            'test/resources/data/sap_md_mfg_order_itm/graph/NEW_FIELDS_RENAME_FORMAT/out/data/test_decimal_test_.json',
+            'test/resources/data/sap_md_mfg_order_itm_mbp_bwi_bbn_bbl_bba_mrs_p01_tai/graph/NEW_FIELDS_RENAME_FORMAT/out/schema.json',
+            'test/resources/data/sap_md_mfg_order_itm_mbp_bwi_bbn_bbl_bba_mrs_p01_tai/graph/NEW_FIELDS_RENAME_FORMAT/out/data/test_decimal_test_.json',
             'out'
         )
         dfOutComputed = NEW_FIELDS_RENAME_FORMAT(self.spark, dfIn0)
@@ -45,14 +45,14 @@ class NEW_FIELDS_RENAME_FORMATTest(BaseTestCase):
     def test_timestamp_test_(self):
         dfIn0 = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/sap_md_mfg_order_itm/graph/NEW_FIELDS_RENAME_FORMAT/in0/schema.json',
-            'test/resources/data/sap_md_mfg_order_itm/graph/NEW_FIELDS_RENAME_FORMAT/in0/data/test_timestamp_test_.json',
+            'test/resources/data/sap_md_mfg_order_itm_mbp_bwi_bbn_bbl_bba_mrs_p01_tai/graph/NEW_FIELDS_RENAME_FORMAT/in0/schema.json',
+            'test/resources/data/sap_md_mfg_order_itm_mbp_bwi_bbn_bbl_bba_mrs_p01_tai/graph/NEW_FIELDS_RENAME_FORMAT/in0/data/test_timestamp_test_.json',
             'in0'
         )
         dfOut = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/sap_md_mfg_order_itm/graph/NEW_FIELDS_RENAME_FORMAT/out/schema.json',
-            'test/resources/data/sap_md_mfg_order_itm/graph/NEW_FIELDS_RENAME_FORMAT/out/data/test_timestamp_test_.json',
+            'test/resources/data/sap_md_mfg_order_itm_mbp_bwi_bbn_bbl_bba_mrs_p01_tai/graph/NEW_FIELDS_RENAME_FORMAT/out/schema.json',
+            'test/resources/data/sap_md_mfg_order_itm_mbp_bwi_bbn_bbl_bba_mrs_p01_tai/graph/NEW_FIELDS_RENAME_FORMAT/out/data/test_timestamp_test_.json',
             'out'
         )
         dfOutComputed = NEW_FIELDS_RENAME_FORMAT(self.spark, dfIn0)
