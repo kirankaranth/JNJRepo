@@ -6,4 +6,4 @@ from sap_md_co_cd_hmd.config.ConfigStore import *
 from sap_md_co_cd_hmd.udfs.UDFs import *
 
 def NEW_FIELDS_TRANSFORMATION(spark: SparkSession, in0: DataFrame) -> DataFrame:
-    return in0
+    pass
