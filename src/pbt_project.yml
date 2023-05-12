@@ -9,8 +9,8 @@ buildSystemDetails:
   parentArtefactID: cdl_l1_team
   buildSystem: wheel
   author: null
-  createdAt: '2023-03-24 12:57:11'
-  modifiedAt: '2023-03-24 12:57:11'
+  createdAt: '2023-03-24 11:49:16'
+  modifiedAt: '2023-03-24 11:49:16'
 pipelines:
   pipelines/SAP_01_MD_SER_NUM_STOCK_SGMNT:
     name: SAP_MD_SER_NUM_STOCK_SGMNT_ATL_BBA_BBL_BBN_MRS
@@ -1969,6 +1969,26 @@ pipelines:
       - datasets/DS_SAP_01_VBRK
       outputs:
       - datasets/MD_BILL_DOC_HDR
+    subgraphs: []
+    dependencies: {}
+  pipelines/SAP_01_MD_MATL_LOC:
+    name: SAP_01_MD_MATL_LOC_HM2
+    description: ''
+    author: mbolado1@its.jnj.com
+    mode: batch
+    artefactID: ''
+    language: python
+    createdAt: '2023-04-06 15:55:44'
+    modifiedAt: '2023-05-11 15:08:59'
+    datasets:
+      inputs:
+      - datasets/DS_SAP_01_NSDM_V_MARC
+      - datasets/DS_SAP_01_T024
+      - datasets/DS_SAP_01_T024D
+      - datasets/DS_SAP_01_T024F
+      - datasets/DS_SAP_01_T141T
+      outputs:
+      - datasets/MD_MATL_LOC
     subgraphs: []
     dependencies: {}
 datasets:
@@ -6727,6 +6747,81 @@ datasets:
         author: hgermi1@its.jnj.com
         createdAt: '2023-04-05 18:43:35'
         modifiedAt: '2023-04-05 18:43:35'
+  datasets/DS_SAP_01_NSDM_V_MARC:
+    name: DS_SAP_01_NSDM_V_MARC
+    description: ''
+    author: mbolado1@its.jnj.com
+    createdAt: '2023-04-06 16:08:14'
+    modifiedAt: '2023-04-06 16:08:14'
+    mode: batch
+    physicalDatasets:
+      CDL_L1_Dev:
+        fabricId: 32
+        datasetType: Database
+        description: ''
+        author: mbolado1@its.jnj.com
+        createdAt: '2023-04-06 16:08:14'
+        modifiedAt: '2023-04-06 16:08:14'
+  datasets/DS_SAP_01_T141T:
+    name: DS_SAP_01_T141T
+    description: ''
+    author: mbolado1@its.jnj.com
+    createdAt: '2023-04-06 16:11:55'
+    modifiedAt: '2023-04-06 16:11:55'
+    mode: batch
+    physicalDatasets:
+      CDL_L1_Dev:
+        fabricId: 32
+        datasetType: Database
+        description: ''
+        author: mbolado1@its.jnj.com
+        createdAt: '2023-04-06 16:11:55'
+        modifiedAt: '2023-04-06 16:11:55'
+  datasets/DS_SAP_01_T024D:
+    name: DS_SAP_01_T024D
+    description: ''
+    author: mbolado1@its.jnj.com
+    createdAt: '2023-04-06 16:14:32'
+    modifiedAt: '2023-04-06 16:14:32'
+    mode: batch
+    physicalDatasets:
+      CDL_L1_Dev:
+        fabricId: 32
+        datasetType: Database
+        description: ''
+        author: mbolado1@its.jnj.com
+        createdAt: '2023-04-06 16:14:32'
+        modifiedAt: '2023-04-06 16:14:32'
+  datasets/DS_SAP_01_T024F:
+    name: DS_SAP_01_T024F
+    description: ''
+    author: mbolado1@its.jnj.com
+    createdAt: '2023-04-06 16:17:18'
+    modifiedAt: '2023-04-06 16:17:18'
+    mode: batch
+    physicalDatasets:
+      CDL_L1_Dev:
+        fabricId: 32
+        datasetType: Database
+        description: ''
+        author: mbolado1@its.jnj.com
+        createdAt: '2023-04-06 16:17:18'
+        modifiedAt: '2023-04-06 16:17:18'
+  datasets/DS_SAP_01_T024:
+    name: DS_SAP_01_T024
+    description: ''
+    author: mbolado1@its.jnj.com
+    createdAt: '2023-04-06 16:19:32'
+    modifiedAt: '2023-04-06 16:19:32'
+    mode: batch
+    physicalDatasets:
+      CDL_L1_Dev:
+        fabricId: 32
+        datasetType: Database
+        description: ''
+        author: mbolado1@its.jnj.com
+        createdAt: '2023-04-06 16:19:32'
+        modifiedAt: '2023-04-06 16:19:32'
 templates: {}
 jobs:
   jobs/DEV_ATL_PIPELINE_JOB:
@@ -8252,6 +8347,31 @@ jobs:
     createdAt: '2023-04-19 13:29:27'
     modifiedAt: '2023-05-10 03:54:48'
     author: smille29@its.jnj.com
+  jobs/JOB_MD_MATL_LOC_HM2:
+    name: JOB_MD_MATL_LOC_HM2
+    description: ''
+    fabricUID: 32
+    scheduler:
+      Databricks: {}
+    cloudProvider: null
+    jobSize: Prophecy_Small
+    scheduleCron: 0 0 0 1/1 * ? *
+    timeout: null
+    alerting:
+      emails: ''
+      onStart: false
+      onSuccess: false
+      onFailure: false
+    pipelines:
+    - pipelines/SAP_01_MD_MATL_LOC
+    jobClusterMode:
+      clusterMode:
+        Single: {}
+      clusterId: null
+    enabled: null
+    createdAt: '2023-05-11 12:37:15'
+    modifiedAt: '2023-05-11 15:13:23'
+    author: mbolado1@its.jnj.com
 functions:
   author: null
   createdAt: '2023-03-24 15:42:34'
