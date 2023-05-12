@@ -7,8 +7,6 @@ from prophecy.utils import *
 from sap_md_bill_doc_hdr_hmd.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    df_DS_SAP_01_VBRK = DS_SAP_01_VBRK(spark)
-    df_MANDT_FILTER = MANDT_FILTER(spark, df_DS_SAP_01_VBRK)
     df_DS_SAP_01_TSPAT = DS_SAP_01_TSPAT(spark)
     df_MANDT_FILTER_TSPAT = MANDT_FILTER_TSPAT(spark, df_DS_SAP_01_TSPAT)
     df_DS_SAP_01_TVFKT = DS_SAP_01_TVFKT(spark)
@@ -17,9 +15,12 @@ def pipeline(spark: SparkSession) -> None:
     df_MANDT_FILTER_TVKOT = MANDT_FILTER_TVKOT(spark, df_DS_SAP_01_TVKOT)
     df_DS_SAP_01_TVTWT = DS_SAP_01_TVTWT(spark)
     df_MANDT_FILTER_TVTWT = MANDT_FILTER_TVTWT(spark, df_DS_SAP_01_TVTWT)
+    df_DS_SAP_01_VBRK = DS_SAP_01_VBRK(spark)
+    df_MANDT_FILTER = MANDT_FILTER(spark, df_DS_SAP_01_VBRK)
+    df_SELECT_VBRK = SELECT_VBRK(spark, df_MANDT_FILTER)
     df_Join_1 = Join_1(
         spark, 
-        df_MANDT_FILTER, 
+        df_SELECT_VBRK, 
         df_MANDT_FILTER_TSPAT, 
         df_MANDT_FILTER_TVFKT, 
         df_MANDT_FILTER_TVKOT, 
