@@ -1,0 +1,2882 @@
+{
+  "metainfo" : {
+    "type" : "Databricks",
+    "fabricId" : "32",
+    "jobId" : "jobs/JOB_MD_BTCH",
+    "name" : "JOB_MD_BTCH",
+    "schedule" : "0 0 0 1/1 * ? *",
+    "scheduleTimeZone" : "UTC",
+    "jobClusterMode" : {
+      "clusterMode" : "Single"
+    },
+    "enabled" : false,
+    "defaultClusterSize" : "Prophecy_Small",
+    "alerting" : {
+      "emails" : "",
+      "onStart" : false,
+      "onSuccess" : false,
+      "onFailure" : false
+    },
+    "maxConcurrentRuns" : 1,
+    "processDefaultSettings" : {
+      "type" : "Inherited",
+      "retries" : 0,
+      "alerting" : {
+        "emails" : "",
+        "onStart" : false,
+        "onSuccess" : false,
+        "onFailure" : false
+      }
+    },
+    "availableFabrics" : [ {
+      "id" : "32",
+      "name" : "CDL_L1_Dev",
+      "clusterSizes" : {
+        "default" : "Prophecy_Small",
+        "availableClusterSizes" : [ "Prophecy_Small", "Prophecy_Medium", "Prophecy_Large", "Prophecy_Photon_Medium", "Compute_Medium" ]
+      },
+      "pylibsResolutionMode" : {
+        "PublicCentral" : { }
+      },
+      "scalalibsResolutionMode" : {
+        "PublicCentral" : { }
+      }
+    }, {
+      "id" : "4",
+      "name" : "CDL_Dev_Consume_Views",
+      "clusterSizes" : {
+        "default" : "small",
+        "availableClusterSizes" : [ "small" ]
+      },
+      "pylibsResolutionMode" : {
+        "PublicCentral" : { }
+      },
+      "scalalibsResolutionMode" : {
+        "PublicCentral" : { }
+      }
+    } ]
+  },
+  "processes" : {
+    "CuavmcB1ZUgNFzMEQ09J4$$erc7y3FR9MpRrIWcV87Ke" : {
+      "id" : "CuavmcB1ZUgNFzMEQ09J4$$erc7y3FR9MpRrIWcV87Ke",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "JES",
+        "slug" : "JES",
+        "x" : 1400,
+        "y" : 440
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "uYKqUxVzStBbP4DXdHmke$$OPejbdWwcBsZJ1tAugR9T",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "jCy-7ljbIBl0eBP_YFaq2$$xW7VwhpFPuQswPDF03Y19",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/JDE_01_MD_BTCH",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "jes"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "jes"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceTable",
+            "kind" : {
+              "type" : "string",
+              "value" : "f4108_adt"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CRT_DTTM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CASE WHEN LOWER(TRIM(ioohdj)) IS NULL OR TRIM(ioohdj) = '' OR TRIM(ioohdj) = '0' THEN NULL ELSE to_timestamp(date_add(cast(substring(ioohdj + 1900000,1,4) AS Date),cast(substring(ioohdj,4,3) as int)-1)) end"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "AVAIL_DTTM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CASE WHEN LOWER(TRIM(iodlej)) IS NULL OR TRIM(iodlej) = '' OR TRIM(iodlej) = '0' THEN NULL ELSE to_timestamp(date_add(cast(substring(iodlej + 1900000,1,4) AS Date),cast(substring(iodlej,4,3) as int)-1)) end"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SUI_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(iochdf)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "DJD", "MTR", "JET", "JES", "BW2", "SJD", "default", "GMD", "JSW", "JEM", "DEU" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "JES"
+        }
+      }
+    },
+    "piNZ2ikKSZDhABnIhI9pi$$8neYwasAfVEc7TIUfuDqN" : {
+      "id" : "piNZ2ikKSZDhABnIhI9pi$$8neYwasAfVEc7TIUfuDqN",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "BW2",
+        "slug" : "BW2",
+        "x" : 140,
+        "y" : 440
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "7f09pgkj9Hv_ASa-4EoYV$$NNSeJb-ss5oa3uSK9IhTi",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "6x_w2c_Vwq_3pTmiYrHsN$$aMm20N3JggsDxqvwhYMtK",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/JDE_01_MD_BTCH",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "bw2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "bw2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceTable",
+            "kind" : {
+              "type" : "string",
+              "value" : "f4108_adt"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CRT_DTTM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CASE WHEN LOWER(TRIM(ioohdj)) IS NULL OR TRIM(ioohdj) = '' OR TRIM(ioohdj) = '0' THEN NULL ELSE to_timestamp(date_add(cast(substring(ioohdj + 1900000,1,4) AS Date),cast(substring(ioohdj,4,3) as int)-1)) end"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "AVAIL_DTTM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CASE WHEN LOWER(TRIM(iodlej)) IS NULL OR TRIM(iodlej) = '' OR TRIM(iodlej) = '0' THEN NULL ELSE to_timestamp(date_add(cast(substring(iodlej + 1900000,1,4) AS Date),cast(substring(iodlej,4,3) as int)-1)) end"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SUI_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(iochdf)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "DJD", "MTR", "JET", "JES", "BW2", "SJD", "default", "GMD", "JSW", "JEM", "DEU" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "BW2"
+        }
+      }
+    },
+    "ypgnupmqowaemjSWZkMkC$$mHguiO5o8MUDOiT3e8OU5" : {
+      "id" : "ypgnupmqowaemjSWZkMkC$$mHguiO5o8MUDOiT3e8OU5",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "MTR",
+        "slug" : "MTR",
+        "x" : 840,
+        "y" : 440
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "74di21UDswtZ9_5ohiV1C$$zgaOPnlQIXaG8zgDAA0kn",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "ImAqrzZ-5iCEPlGFs1EPD$$HOGkdFW2r585SyQ9iJd9x",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/JDE_01_MD_BTCH",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "mtr"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "mtr"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceTable",
+            "kind" : {
+              "type" : "string",
+              "value" : "f4108"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CRT_DTTM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CASE WHEN LOWER(TRIM(ioohdj)) IS NULL OR TRIM(ioohdj) = '' OR TRIM(ioohdj) = '0' THEN NULL ELSE to_timestamp(date_add(cast(substring(ioohdj + 1900000,1,4) AS Date),cast(substring(ioohdj,4,3) as int)-1)) end"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "AVAIL_DTTM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CASE WHEN LOWER(TRIM(iodlej)) IS NULL OR TRIM(iodlej) = '' OR TRIM(iodlej) = '0' THEN NULL ELSE to_timestamp(date_add(cast(substring(iodlej + 1900000,1,4) AS Date),cast(substring(iodlej,4,3) as int)-1)) end"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SUI_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(iochdf)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "DJD", "MTR", "JET", "JES", "BW2", "SJD", "default", "GMD", "JSW", "JEM", "DEU" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "MTR"
+        }
+      }
+    },
+    "jNjJDgdVOpQX7aOHTyqgO$$qEpi0zM9tnea23sTPno3A" : {
+      "id" : "jNjJDgdVOpQX7aOHTyqgO$$qEpi0zM9tnea23sTPno3A",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "GMD",
+        "slug" : "GMD",
+        "x" : 280,
+        "y" : 440
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "HVLBNusJunHmAfu0kMSjK$$7mVJC6ANrSdKWR1a3fPxU",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "FaDtxiHUwmB4dFem6rJeg$$kTI4MCospffhaSv7KXuJw",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/JDE_01_MD_BTCH",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "gmd"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "gmd"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceTable",
+            "kind" : {
+              "type" : "string",
+              "value" : "f4108"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CRT_DTTM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CASE WHEN LOWER(TRIM(ioohdj)) IS NULL OR TRIM(ioohdj) = '' OR TRIM(ioohdj) = '0' THEN NULL ELSE to_timestamp(date_add(cast(substring(ioohdj + 1900000,1,4) AS Date),cast(substring(ioohdj,4,3) as int)-1)) end"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "AVAIL_DTTM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CASE WHEN LOWER(TRIM(iodlej)) IS NULL OR TRIM(iodlej) = '' OR TRIM(iodlej) = '0' THEN NULL ELSE to_timestamp(date_add(cast(substring(iodlej + 1900000,1,4) AS Date),cast(substring(iodlej,4,3) as int)-1)) end"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SUI_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(iochdf)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "DJD", "MTR", "JET", "JES", "BW2", "SJD", "default", "GMD", "JSW", "JEM", "DEU" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "GMD"
+        }
+      }
+    },
+    "EKaXoHZmsftKD5AkvOZKp$$IvcDpUx5mA0H435h-XThw" : {
+      "id" : "EKaXoHZmsftKD5AkvOZKp$$IvcDpUx5mA0H435h-XThw",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "HMD",
+        "slug" : "HMD",
+        "x" : 420,
+        "y" : 300
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "AELsIs70bfFv_r-H53Yts$$VDOFR_Ttm3hkBk0YqvkL7",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "XXNEsjPaaFSlW8HQGkKdh$$NOPDaUP7eGeBf04loGw6a",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/SAP_01_MD_BTCH",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MANDT",
+            "kind" : {
+              "type" : "string",
+              "value" : "100"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTable1",
+            "kind" : {
+              "type" : "string",
+              "value" : "mcha"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTable2",
+            "kind" : {
+              "type" : "string",
+              "value" : "mch1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "BTCH_TYPE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(batch_type)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "GEU", "FSN", "ATL", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "HM2", "BBN", "SVS", "TAI", "BWI" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "HM2"
+        }
+      }
+    },
+    "aMZkhQsrWnE_maWXS_TMb$$vhEVwY9b8gqzcwro4JHnk" : {
+      "id" : "aMZkhQsrWnE_maWXS_TMb$$vhEVwY9b8gqzcwro4JHnk",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "SVS",
+        "slug" : "SVS",
+        "x" : 1540,
+        "y" : 160
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "ewFVKR8MQAuwyRsiyGQ22$$-5wymZwV6iff3yfsT5L1E",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "T1EuqglLQeVYffEH5Wnvb$$s04zJMkHNyXExYGBuSKCB",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/SAP_01_MD_BTCH",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "svs"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MANDT",
+            "kind" : {
+              "type" : "string",
+              "value" : "050"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "svs"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTable1",
+            "kind" : {
+              "type" : "string",
+              "value" : "mcha"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTable2",
+            "kind" : {
+              "type" : "string",
+              "value" : "mch1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "BTCH_TYPE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(batch_type)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "GEU", "FSN", "ATL", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "HM2", "BBN", "SVS", "TAI", "BWI" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "SVS"
+        }
+      }
+    },
+    "5UUjQ-MVVbIpha3CURwFW$$LbLUKS37zdLniqNe2Du_C" : {
+      "id" : "5UUjQ-MVVbIpha3CURwFW$$LbLUKS37zdLniqNe2Du_C",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "DJD",
+        "slug" : "DJD",
+        "x" : 1120,
+        "y" : 440
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "1J4ohXvtKMNphLioM0gpp$$mqGCallyOf6aThWehe5PP",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "S3u6Tp3qAT8Wm1iI_ept9$$YrwAMdOqttfsFuXVeCAU-",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/JDE_01_MD_BTCH",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "djd"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "djd"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceTable",
+            "kind" : {
+              "type" : "string",
+              "value" : "f4108"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CRT_DTTM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as timestamp)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "AVAIL_DTTM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as timestamp)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SUI_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "DJD", "MTR", "JET", "JES", "BW2", "SJD", "default", "GMD", "JSW", "JEM", "DEU" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "DJD"
+        }
+      }
+    },
+    "RsWTKomkPk53jACYCwyGO$$kLvansyMtg9Pq5qCxwsmP" : {
+      "id" : "RsWTKomkPk53jACYCwyGO$$kLvansyMtg9Pq5qCxwsmP",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "BBL",
+        "slug" : "BBL",
+        "x" : 280,
+        "y" : 160
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "e_SDjbIQ3xHzMW9Ez_v7i$$0TAR1AQw8EUoaK753zuRg",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "hVL0eSac399nHSp2UNcok$$OWEyu4U7jh1JgOUykbumm",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/SAP_01_MD_BTCH",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "bbl"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MANDT",
+            "kind" : {
+              "type" : "string",
+              "value" : "100"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "bbl"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTable1",
+            "kind" : {
+              "type" : "string",
+              "value" : "mcha"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTable2",
+            "kind" : {
+              "type" : "string",
+              "value" : "mch1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "BTCH_TYPE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(batch_type)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "GEU", "FSN", "ATL", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "HM2", "BBN", "SVS", "TAI", "BWI" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "BBL"
+        }
+      }
+    },
+    "tyVRV1AZejoRELtiTAcqw$$b4mhzCR8c6PlF284oHtv2" : {
+      "id" : "tyVRV1AZejoRELtiTAcqw$$b4mhzCR8c6PlF284oHtv2",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "P01",
+        "slug" : "P01",
+        "x" : 1260,
+        "y" : 160
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "jCkx1xt-uBadgOm6JxmAT$$WivxJJGQwoyAszPtnSc6s",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "jWOXsfngzZd7TW1qQOUfk$$TTLyDmujmVuzaGS3Nlv19",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/SAP_01_MD_BTCH",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "p01"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MANDT",
+            "kind" : {
+              "type" : "string",
+              "value" : "020"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "p01"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTable1",
+            "kind" : {
+              "type" : "string",
+              "value" : "mcha"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTable2",
+            "kind" : {
+              "type" : "string",
+              "value" : "mch1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "BTCH_TYPE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(batch_type)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "GEU", "FSN", "ATL", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "HM2", "BBN", "SVS", "TAI", "BWI" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "P01"
+        }
+      }
+    },
+    "EtnBqo_scnsdlMwLjpmbB$$Fu6JqWhgGadJ-GEOoz030" : {
+      "id" : "EtnBqo_scnsdlMwLjpmbB$$Fu6JqWhgGadJ-GEOoz030",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "TAI",
+        "slug" : "TAI",
+        "x" : 700,
+        "y" : 160
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "LvleSlYgXeohOgun6qiz0$$J0he5sUh7dn2SeRnIAlxZ",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "jGqJlJPMUgOwXPmaG10-H$$o7RyGf1CKgtZkJebNokzI",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/SAP_01_MD_BTCH",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "tai"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MANDT",
+            "kind" : {
+              "type" : "string",
+              "value" : "800"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "tai"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTable1",
+            "kind" : {
+              "type" : "string",
+              "value" : "mcha"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTable2",
+            "kind" : {
+              "type" : "string",
+              "value" : "mch1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "BTCH_TYPE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "GEU", "FSN", "ATL", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "HM2", "BBN", "SVS", "TAI", "BWI" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "TAI"
+        }
+      }
+    },
+    "44pmbCZMtcR4x_Dn6Odtc$$20OcyXH6zYZyKQn2JVPCN" : {
+      "id" : "44pmbCZMtcR4x_Dn6Odtc$$20OcyXH6zYZyKQn2JVPCN",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "JSW",
+        "slug" : "JSW",
+        "x" : 560,
+        "y" : 440
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "M5BVDPejGgVjPVJpmmMvE$$wIQODIKHRNBcSyI-RaQz4",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "VK4ezqSSH4uCpFl5tMn7z$$SZ31XrsXILzzy52ow7BZI",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/JDE_01_MD_BTCH",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "jsw"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "jsw"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceTable",
+            "kind" : {
+              "type" : "string",
+              "value" : "f4108"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CRT_DTTM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as timestamp)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "AVAIL_DTTM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as timestamp)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SUI_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "DJD", "MTR", "JET", "JES", "BW2", "SJD", "default", "GMD", "JSW", "JEM", "DEU" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "JSW"
+        }
+      }
+    },
+    "0twDaPx5itCm4bJliGEcG$$laOIgK_7CJ7oYC7jsFAyy" : {
+      "id" : "0twDaPx5itCm4bJliGEcG$$laOIgK_7CJ7oYC7jsFAyy",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "SJD",
+        "slug" : "SJD",
+        "x" : 980,
+        "y" : 440
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "EKqZHL7IXQx_UjCacV15b$$dgaTSKSBnik9GotA4U_JE",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "zC0NyK07TzjFJ63G6VYff$$bvKdbORycZT4iuvhf8v_4",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/JDE_01_MD_BTCH",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "sjd"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "sjd"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceTable",
+            "kind" : {
+              "type" : "string",
+              "value" : "f4108"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CRT_DTTM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as timestamp)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "AVAIL_DTTM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as timestamp)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SUI_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "DJD", "MTR", "JET", "JES", "BW2", "SJD", "default", "GMD", "JSW", "JEM", "DEU" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "SJD"
+        }
+      }
+    },
+    "av_L2C50w7eP3Sim-2krc$$1PpVKrgj4PxKJyL_GCSFH" : {
+      "id" : "av_L2C50w7eP3Sim-2krc$$1PpVKrgj4PxKJyL_GCSFH",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "MBP",
+        "slug" : "MBP",
+        "x" : 1400,
+        "y" : 160
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "lWgNy9ol5YCbKl1p-w9Jb$$4nLV0tIk0L3AzE-67XYu7",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "liZ9Y8r0GoNtWp4KWRszh$$_LgPfq9kXzY-MImPIXw1W",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/SAP_01_MD_BTCH",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "mbp"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MANDT",
+            "kind" : {
+              "type" : "string",
+              "value" : "600"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "mbp"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTable1",
+            "kind" : {
+              "type" : "string",
+              "value" : "mcha"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTable2",
+            "kind" : {
+              "type" : "string",
+              "value" : "mch1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "BTCH_TYPE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "GEU", "FSN", "ATL", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "HM2", "BBN", "SVS", "TAI", "BWI" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "MBP"
+        }
+      }
+    },
+    "EMui1D6jOZ-vaemhzWzHW$$E7IFsmBF23Vu2NwNGIeMc" : {
+      "id" : "EMui1D6jOZ-vaemhzWzHW$$E7IFsmBF23Vu2NwNGIeMc",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "GEU",
+        "slug" : "GEU",
+        "x" : 840,
+        "y" : 160
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "QsMrVNS2sFUtyHlHd7Z26$$cIlCJ4LRCYf-Sd3_SdFgC",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "E8_aBX3yCxV86kuRN5w_g$$PWIzSyoOgQovBJK1xRlVE",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/SAP_01_MD_BTCH",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "geu"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MANDT",
+            "kind" : {
+              "type" : "string",
+              "value" : "232"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "geu"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTable1",
+            "kind" : {
+              "type" : "string",
+              "value" : "mcha"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTable2",
+            "kind" : {
+              "type" : "string",
+              "value" : "mch1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "BTCH_TYPE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(batch_type)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "GEU", "FSN", "ATL", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "HM2", "BBN", "SVS", "TAI", "BWI" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "GEU"
+        }
+      }
+    },
+    "Oqr_tthMVSUyMngli1Q4k$$ItzwpysAUPnbkhZGQhm6Y" : {
+      "id" : "Oqr_tthMVSUyMngli1Q4k$$ItzwpysAUPnbkhZGQhm6Y",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "FSN",
+        "slug" : "FSN",
+        "x" : 140,
+        "y" : 300
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "QEZ6eFycoREZ4V1ML3I3o$$8Y8za-3dSnr0Fbd8RImfE",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "wf5CvppZXhPAMbWoYGX5e$$bYDA3pmibHwKuvJMt0sv0",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/SAP_01_MD_BTCH",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "fsn"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MANDT",
+            "kind" : {
+              "type" : "string",
+              "value" : "100"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "fsn"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTable1",
+            "kind" : {
+              "type" : "string",
+              "value" : "mcha"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTable2",
+            "kind" : {
+              "type" : "string",
+              "value" : "mch1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "BTCH_TYPE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "GEU", "FSN", "ATL", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "HM2", "BBN", "SVS", "TAI", "BWI" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "FSN"
+        }
+      }
+    },
+    "Td2fRKggE1Rb-A7t503VQ$$ROB0yFBrY-OJuWTEERFtk" : {
+      "id" : "Td2fRKggE1Rb-A7t503VQ$$ROB0yFBrY-OJuWTEERFtk",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "BBN",
+        "slug" : "BBN",
+        "x" : 420,
+        "y" : 160
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "i3euPr06OeEwMvpFAsAcO$$wTQJtyF_phaKjQxe7mlMD",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "omhGuRZsMx1zwOfcnti0W$$cU96Mn_ORpuqQqfqx63D5",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/SAP_01_MD_BTCH",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "bbn"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MANDT",
+            "kind" : {
+              "type" : "string",
+              "value" : "100"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "bbn"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTable1",
+            "kind" : {
+              "type" : "string",
+              "value" : "mcha"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTable2",
+            "kind" : {
+              "type" : "string",
+              "value" : "mch1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "BTCH_TYPE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(batch_type)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "GEU", "FSN", "ATL", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "HM2", "BBN", "SVS", "TAI", "BWI" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "BBN"
+        }
+      }
+    },
+    "Siq6P-s49uzKyRyAy5Hp2$$CFirCy8N15VXNLNL89hIP" : {
+      "id" : "Siq6P-s49uzKyRyAy5Hp2$$CFirCy8N15VXNLNL89hIP",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "JET",
+        "slug" : "JET",
+        "x" : 420,
+        "y" : 440
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "YoA7gcSxd5EKIKupCLnNH$$D_rAg4Dq-w83H2tPnQjP2",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "v9ptvEkI-H7H8QJa1pzEY$$D4tfM_u3iplLJcejpg4kq",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/JDE_01_MD_BTCH",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "jet"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "jet"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceTable",
+            "kind" : {
+              "type" : "string",
+              "value" : "f4108_adt"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CRT_DTTM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as timestamp)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "AVAIL_DTTM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as timestamp)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SUI_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "DJD", "MTR", "JET", "JES", "BW2", "SJD", "default", "GMD", "JSW", "JEM", "DEU" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "JET"
+        }
+      }
+    },
+    "V2iVt0uP_EszBewg98p3y$$mRuoZUkltD-gMfIXJjf65" : {
+      "id" : "V2iVt0uP_EszBewg98p3y$$mRuoZUkltD-gMfIXJjf65",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "ATL",
+        "slug" : "ATL",
+        "x" : 280,
+        "y" : 300
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "HbBB6Y9HMKCNWYXUTmtag$$4r1_affa7l5HyAa9SYtjn",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "AHMN6DNLUwa74soNZ1QZy$$ApaAoRA9dXB8e_NUWvYg3",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/SAP_01_MD_BTCH",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "atl"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MANDT",
+            "kind" : {
+              "type" : "string",
+              "value" : "100"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "atl"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTable1",
+            "kind" : {
+              "type" : "string",
+              "value" : "mcha"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTable2",
+            "kind" : {
+              "type" : "string",
+              "value" : "mch1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "BTCH_TYPE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(batch_type)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "GEU", "FSN", "ATL", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "HM2", "BBN", "SVS", "TAI", "BWI" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "ATL"
+        }
+      }
+    },
+    "Ow3XWsXwstiJK-_LVCdsz$$kQVYJ3ApQjja-wokIJb9w" : {
+      "id" : "Ow3XWsXwstiJK-_LVCdsz$$kQVYJ3ApQjja-wokIJb9w",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "MRS",
+        "slug" : "MRS",
+        "x" : 1120,
+        "y" : 160
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "atmVrKZNPLG7wTdwSMV5n$$i-W6aCyuiXvSS8Lb7jhx6",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "WLbeUc_cQiJdvub3xVjUw$$ET6ylonypeYGBvU_8Nqvf",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/SAP_01_MD_BTCH",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "mrs"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MANDT",
+            "kind" : {
+              "type" : "string",
+              "value" : "100"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "mrs"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTable1",
+            "kind" : {
+              "type" : "string",
+              "value" : "mcha"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTable2",
+            "kind" : {
+              "type" : "string",
+              "value" : "mch1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "BTCH_TYPE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(batch_type)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "GEU", "FSN", "ATL", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "HM2", "BBN", "SVS", "TAI", "BWI" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "MRS"
+        }
+      }
+    },
+    "DBoEArFBH8j_tlk5RVeYu$$xtJJIGQflorCRHqyMa8ZF" : {
+      "id" : "DBoEArFBH8j_tlk5RVeYu$$xtJJIGQflorCRHqyMa8ZF",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "BWI",
+        "slug" : "BWI",
+        "x" : 560,
+        "y" : 160
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "o8m7J8sLZw1YbDfQkJHV0$$6w99AILc_MWB-_d86Ws3D",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "D7zuMxnZ66XdNFonnNw4P$$E1DXf-aS3MJxyMps_nFBa",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/SAP_01_MD_BTCH",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "bwi"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MANDT",
+            "kind" : {
+              "type" : "string",
+              "value" : "400"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "bwi"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTable1",
+            "kind" : {
+              "type" : "string",
+              "value" : "mcha"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTable2",
+            "kind" : {
+              "type" : "string",
+              "value" : "mch1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "BTCH_TYPE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(batch_type)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "GEU", "FSN", "ATL", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "HM2", "BBN", "SVS", "TAI", "BWI" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "BWI"
+        }
+      }
+    },
+    "mpwte530sXj1eAfZ4b46D$$jQyqTNsRpU7o-NC4FeS24" : {
+      "id" : "mpwte530sXj1eAfZ4b46D$$jQyqTNsRpU7o-NC4FeS24",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "DEU",
+        "slug" : "DEU",
+        "x" : 700,
+        "y" : 440
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "G93yzPOUhDQ2BwWxR3VBI$$uJt__ZZ2ccUdiUQmwdsdu",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "7NJJJBuGfTIyAnW4lKX29$$lqJlbg9x1ktV8IvbcuQO4",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/JDE_01_MD_BTCH",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "deu"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "deu"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceTable",
+            "kind" : {
+              "type" : "string",
+              "value" : "f4108"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CRT_DTTM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as timestamp)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "AVAIL_DTTM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as timestamp)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SUI_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "DJD", "MTR", "JET", "JES", "BW2", "SJD", "default", "GMD", "JSW", "JEM", "DEU" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "DEU"
+        }
+      }
+    },
+    "R4kfhLaRYSv1sJ1kVWrSI$$S4R6fqu0HUqmL-yNqNBLe" : {
+      "id" : "R4kfhLaRYSv1sJ1kVWrSI$$S4R6fqu0HUqmL-yNqNBLe",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "JEM",
+        "slug" : "JEM",
+        "x" : 1260,
+        "y" : 440
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "paMAAJz1Fx6qP-B3OSRh9$$d7zo6Ett-a4BYvfx3g1yO",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "y2wP1lvunuwKJAYLm8tC3$$PFAyZeQvseD7XAidtxtq3",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/JDE_01_MD_BTCH",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "jem"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "jem"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceTable",
+            "kind" : {
+              "type" : "string",
+              "value" : "f4108"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CRT_DTTM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as timestamp)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "AVAIL_DTTM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as timestamp)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SUI_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "DJD", "MTR", "JET", "JES", "BW2", "SJD", "default", "GMD", "JSW", "JEM", "DEU" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "JEM"
+        }
+      }
+    },
+    "eK84egdbskraeFPyn14M-$$jCoH0T4IAn7ruEBHpwIE6" : {
+      "id" : "eK84egdbskraeFPyn14M-$$jCoH0T4IAn7ruEBHpwIE6",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "HCS",
+        "slug" : "HCS",
+        "x" : 980,
+        "y" : 160
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "6JJAN_An_-9SI2STe3vLN$$y1ZX1CmibANsLymyPfR2h",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "wnrnhhurAXCL1eTfn9rXm$$8wW02mnHpp6QE-Gb8Sacw",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/SAP_01_MD_BTCH",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "hcs"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MANDT",
+            "kind" : {
+              "type" : "string",
+              "value" : "100"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "hcs"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTable1",
+            "kind" : {
+              "type" : "string",
+              "value" : "mcha"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTable2",
+            "kind" : {
+              "type" : "string",
+              "value" : "mch1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "BTCH_TYPE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(batch_type)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "GEU", "FSN", "ATL", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "HM2", "BBN", "SVS", "TAI", "BWI" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "HCS"
+        }
+      }
+    },
+    "k7koMiLB2mGHNMPIsKFDv$$owkU1VvsiSvGwREzib_dw" : {
+      "id" : "k7koMiLB2mGHNMPIsKFDv$$owkU1VvsiSvGwREzib_dw",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "BBA",
+        "slug" : "BBA",
+        "x" : 140,
+        "y" : 160
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "_uw4IwqTqkLrwR9ty4Qdw$$3pQ4b6Pv2JLExHE2xZ0Q-",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "K5lxnId85_JVUfpMz93Qu$$visUBD1SNLdlsf-zu0QAD",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/SAP_01_MD_BTCH",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "bba"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MANDT",
+            "kind" : {
+              "type" : "string",
+              "value" : "100"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "bba"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTable1",
+            "kind" : {
+              "type" : "string",
+              "value" : "mcha"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTable2",
+            "kind" : {
+              "type" : "string",
+              "value" : "mch1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "BTCH_TYPE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(batch_type)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "GEU", "FSN", "ATL", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "HM2", "BBN", "SVS", "TAI", "BWI" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "BBA"
+        }
+      }
+    }
+  },
+  "connections" : [ {
+    "id" : "8gvfy8sST0WOP_QDoPT-u",
+    "source" : "k7koMiLB2mGHNMPIsKFDv$$owkU1VvsiSvGwREzib_dw",
+    "target" : "RsWTKomkPk53jACYCwyGO$$kLvansyMtg9Pq5qCxwsmP",
+    "sourcePort" : "K5lxnId85_JVUfpMz93Qu$$visUBD1SNLdlsf-zu0QAD",
+    "targetPort" : "e_SDjbIQ3xHzMW9Ez_v7i$$0TAR1AQw8EUoaK753zuRg"
+  }, {
+    "id" : "epsV0AzJpO2kR3Pm4pdmK",
+    "source" : "RsWTKomkPk53jACYCwyGO$$kLvansyMtg9Pq5qCxwsmP",
+    "target" : "Td2fRKggE1Rb-A7t503VQ$$ROB0yFBrY-OJuWTEERFtk",
+    "sourcePort" : "hVL0eSac399nHSp2UNcok$$OWEyu4U7jh1JgOUykbumm",
+    "targetPort" : "i3euPr06OeEwMvpFAsAcO$$wTQJtyF_phaKjQxe7mlMD"
+  }, {
+    "id" : "R-oh_WOD_QTokcwCko8uD",
+    "source" : "Td2fRKggE1Rb-A7t503VQ$$ROB0yFBrY-OJuWTEERFtk",
+    "target" : "DBoEArFBH8j_tlk5RVeYu$$xtJJIGQflorCRHqyMa8ZF",
+    "sourcePort" : "omhGuRZsMx1zwOfcnti0W$$cU96Mn_ORpuqQqfqx63D5",
+    "targetPort" : "o8m7J8sLZw1YbDfQkJHV0$$6w99AILc_MWB-_d86Ws3D"
+  }, {
+    "id" : "sVvy1XHUhSplU_vZN4QgM",
+    "source" : "DBoEArFBH8j_tlk5RVeYu$$xtJJIGQflorCRHqyMa8ZF",
+    "target" : "EtnBqo_scnsdlMwLjpmbB$$Fu6JqWhgGadJ-GEOoz030",
+    "sourcePort" : "D7zuMxnZ66XdNFonnNw4P$$E1DXf-aS3MJxyMps_nFBa",
+    "targetPort" : "LvleSlYgXeohOgun6qiz0$$J0he5sUh7dn2SeRnIAlxZ"
+  }, {
+    "id" : "qP-b9URoBcBb8u3qJXRbR",
+    "source" : "EtnBqo_scnsdlMwLjpmbB$$Fu6JqWhgGadJ-GEOoz030",
+    "target" : "EMui1D6jOZ-vaemhzWzHW$$E7IFsmBF23Vu2NwNGIeMc",
+    "sourcePort" : "jGqJlJPMUgOwXPmaG10-H$$o7RyGf1CKgtZkJebNokzI",
+    "targetPort" : "QsMrVNS2sFUtyHlHd7Z26$$cIlCJ4LRCYf-Sd3_SdFgC"
+  }, {
+    "id" : "1sa7Z1trG8l7gHMrv_kj-",
+    "source" : "EMui1D6jOZ-vaemhzWzHW$$E7IFsmBF23Vu2NwNGIeMc",
+    "target" : "eK84egdbskraeFPyn14M-$$jCoH0T4IAn7ruEBHpwIE6",
+    "sourcePort" : "E8_aBX3yCxV86kuRN5w_g$$PWIzSyoOgQovBJK1xRlVE",
+    "targetPort" : "6JJAN_An_-9SI2STe3vLN$$y1ZX1CmibANsLymyPfR2h"
+  }, {
+    "id" : "U3DyXFhLaaHawI4-yZqoj",
+    "source" : "eK84egdbskraeFPyn14M-$$jCoH0T4IAn7ruEBHpwIE6",
+    "target" : "Ow3XWsXwstiJK-_LVCdsz$$kQVYJ3ApQjja-wokIJb9w",
+    "sourcePort" : "wnrnhhurAXCL1eTfn9rXm$$8wW02mnHpp6QE-Gb8Sacw",
+    "targetPort" : "atmVrKZNPLG7wTdwSMV5n$$i-W6aCyuiXvSS8Lb7jhx6"
+  }, {
+    "id" : "QLwD16JTAQxYhPjLwxDrE",
+    "source" : "Ow3XWsXwstiJK-_LVCdsz$$kQVYJ3ApQjja-wokIJb9w",
+    "target" : "tyVRV1AZejoRELtiTAcqw$$b4mhzCR8c6PlF284oHtv2",
+    "sourcePort" : "WLbeUc_cQiJdvub3xVjUw$$ET6ylonypeYGBvU_8Nqvf",
+    "targetPort" : "jCkx1xt-uBadgOm6JxmAT$$WivxJJGQwoyAszPtnSc6s"
+  }, {
+    "id" : "EIZmaXBEtxuZd4daYGsFr",
+    "source" : "tyVRV1AZejoRELtiTAcqw$$b4mhzCR8c6PlF284oHtv2",
+    "target" : "av_L2C50w7eP3Sim-2krc$$1PpVKrgj4PxKJyL_GCSFH",
+    "sourcePort" : "jWOXsfngzZd7TW1qQOUfk$$TTLyDmujmVuzaGS3Nlv19",
+    "targetPort" : "lWgNy9ol5YCbKl1p-w9Jb$$4nLV0tIk0L3AzE-67XYu7"
+  }, {
+    "id" : "W-TGENX6oxDy9l3Z1TW6L",
+    "source" : "av_L2C50w7eP3Sim-2krc$$1PpVKrgj4PxKJyL_GCSFH",
+    "target" : "aMZkhQsrWnE_maWXS_TMb$$vhEVwY9b8gqzcwro4JHnk",
+    "sourcePort" : "liZ9Y8r0GoNtWp4KWRszh$$_LgPfq9kXzY-MImPIXw1W",
+    "targetPort" : "ewFVKR8MQAuwyRsiyGQ22$$-5wymZwV6iff3yfsT5L1E"
+  }, {
+    "id" : "tMIKybOHT3OSnPA3wkttt",
+    "source" : "aMZkhQsrWnE_maWXS_TMb$$vhEVwY9b8gqzcwro4JHnk",
+    "target" : "Oqr_tthMVSUyMngli1Q4k$$ItzwpysAUPnbkhZGQhm6Y",
+    "sourcePort" : "T1EuqglLQeVYffEH5Wnvb$$s04zJMkHNyXExYGBuSKCB",
+    "targetPort" : "QEZ6eFycoREZ4V1ML3I3o$$8Y8za-3dSnr0Fbd8RImfE"
+  }, {
+    "id" : "cOPh318ijx-unwWYTcqxb",
+    "source" : "Oqr_tthMVSUyMngli1Q4k$$ItzwpysAUPnbkhZGQhm6Y",
+    "target" : "V2iVt0uP_EszBewg98p3y$$mRuoZUkltD-gMfIXJjf65",
+    "sourcePort" : "wf5CvppZXhPAMbWoYGX5e$$bYDA3pmibHwKuvJMt0sv0",
+    "targetPort" : "HbBB6Y9HMKCNWYXUTmtag$$4r1_affa7l5HyAa9SYtjn"
+  }, {
+    "id" : "PHBsU7huCxZYL3d1GPddJ",
+    "source" : "V2iVt0uP_EszBewg98p3y$$mRuoZUkltD-gMfIXJjf65",
+    "target" : "EKaXoHZmsftKD5AkvOZKp$$IvcDpUx5mA0H435h-XThw",
+    "sourcePort" : "AHMN6DNLUwa74soNZ1QZy$$ApaAoRA9dXB8e_NUWvYg3",
+    "targetPort" : "AELsIs70bfFv_r-H53Yts$$VDOFR_Ttm3hkBk0YqvkL7"
+  }, {
+    "id" : "Smfv-geYBpBZ1OtLLsXZq$$iKC0ZqJVjev41mYeBHVsE",
+    "source" : "piNZ2ikKSZDhABnIhI9pi$$8neYwasAfVEc7TIUfuDqN",
+    "target" : "jNjJDgdVOpQX7aOHTyqgO$$qEpi0zM9tnea23sTPno3A",
+    "sourcePort" : "6x_w2c_Vwq_3pTmiYrHsN$$aMm20N3JggsDxqvwhYMtK",
+    "targetPort" : "HVLBNusJunHmAfu0kMSjK$$7mVJC6ANrSdKWR1a3fPxU"
+  }, {
+    "id" : "J89VuqJy0YvmhsE5Oh4h_$$y0U5H4f3R5mvYed_oksjb",
+    "source" : "jNjJDgdVOpQX7aOHTyqgO$$qEpi0zM9tnea23sTPno3A",
+    "target" : "Siq6P-s49uzKyRyAy5Hp2$$CFirCy8N15VXNLNL89hIP",
+    "sourcePort" : "FaDtxiHUwmB4dFem6rJeg$$kTI4MCospffhaSv7KXuJw",
+    "targetPort" : "YoA7gcSxd5EKIKupCLnNH$$D_rAg4Dq-w83H2tPnQjP2"
+  }, {
+    "id" : "NZ-q7xHAU9jCifI9qg7Uy$$qtUM4FQOFRoiwL8I3bQOD",
+    "source" : "Siq6P-s49uzKyRyAy5Hp2$$CFirCy8N15VXNLNL89hIP",
+    "target" : "44pmbCZMtcR4x_Dn6Odtc$$20OcyXH6zYZyKQn2JVPCN",
+    "sourcePort" : "v9ptvEkI-H7H8QJa1pzEY$$D4tfM_u3iplLJcejpg4kq",
+    "targetPort" : "M5BVDPejGgVjPVJpmmMvE$$wIQODIKHRNBcSyI-RaQz4"
+  }, {
+    "id" : "4nH8611EQo_uFAUHNaiiH$$VKENZNvgjvDk1vGapF-iB",
+    "source" : "44pmbCZMtcR4x_Dn6Odtc$$20OcyXH6zYZyKQn2JVPCN",
+    "target" : "mpwte530sXj1eAfZ4b46D$$jQyqTNsRpU7o-NC4FeS24",
+    "sourcePort" : "VK4ezqSSH4uCpFl5tMn7z$$SZ31XrsXILzzy52ow7BZI",
+    "targetPort" : "G93yzPOUhDQ2BwWxR3VBI$$uJt__ZZ2ccUdiUQmwdsdu"
+  }, {
+    "id" : "MD0zC_D_BIbPGY7R3Uyar$$5xeAYGPVQoSNvHegTYuwG",
+    "source" : "mpwte530sXj1eAfZ4b46D$$jQyqTNsRpU7o-NC4FeS24",
+    "target" : "ypgnupmqowaemjSWZkMkC$$mHguiO5o8MUDOiT3e8OU5",
+    "sourcePort" : "7NJJJBuGfTIyAnW4lKX29$$lqJlbg9x1ktV8IvbcuQO4",
+    "targetPort" : "74di21UDswtZ9_5ohiV1C$$zgaOPnlQIXaG8zgDAA0kn"
+  }, {
+    "id" : "XtBmhSJeStimXKzgaI2V8$$AO5ydwSQvLZzDHNNPUPeR",
+    "source" : "ypgnupmqowaemjSWZkMkC$$mHguiO5o8MUDOiT3e8OU5",
+    "target" : "0twDaPx5itCm4bJliGEcG$$laOIgK_7CJ7oYC7jsFAyy",
+    "sourcePort" : "ImAqrzZ-5iCEPlGFs1EPD$$HOGkdFW2r585SyQ9iJd9x",
+    "targetPort" : "EKqZHL7IXQx_UjCacV15b$$dgaTSKSBnik9GotA4U_JE"
+  }, {
+    "id" : "Slcgp_ZShB0CJU4U90oCK$$HaFnqGgvY3GAa9wVWmUNY",
+    "source" : "0twDaPx5itCm4bJliGEcG$$laOIgK_7CJ7oYC7jsFAyy",
+    "target" : "5UUjQ-MVVbIpha3CURwFW$$LbLUKS37zdLniqNe2Du_C",
+    "sourcePort" : "zC0NyK07TzjFJ63G6VYff$$bvKdbORycZT4iuvhf8v_4",
+    "targetPort" : "1J4ohXvtKMNphLioM0gpp$$mqGCallyOf6aThWehe5PP"
+  }, {
+    "id" : "0xFIe-1Zn-5faC8yOL8fQ$$Ph5xa8-h9NWpkvaFP4GRC",
+    "source" : "5UUjQ-MVVbIpha3CURwFW$$LbLUKS37zdLniqNe2Du_C",
+    "target" : "R4kfhLaRYSv1sJ1kVWrSI$$S4R6fqu0HUqmL-yNqNBLe",
+    "sourcePort" : "S3u6Tp3qAT8Wm1iI_ept9$$YrwAMdOqttfsFuXVeCAU-",
+    "targetPort" : "paMAAJz1Fx6qP-B3OSRh9$$d7zo6Ett-a4BYvfx3g1yO"
+  }, {
+    "id" : "Kvgsc_ne782eR_omTTl4Q$$1Zvz1y2Nw1h66e55oUWaA",
+    "source" : "R4kfhLaRYSv1sJ1kVWrSI$$S4R6fqu0HUqmL-yNqNBLe",
+    "target" : "CuavmcB1ZUgNFzMEQ09J4$$erc7y3FR9MpRrIWcV87Ke",
+    "sourcePort" : "y2wP1lvunuwKJAYLm8tC3$$PFAyZeQvseD7XAidtxtq3",
+    "targetPort" : "uYKqUxVzStBbP4DXdHmke$$OPejbdWwcBsZJ1tAugR9T"
+  } ]
+}
