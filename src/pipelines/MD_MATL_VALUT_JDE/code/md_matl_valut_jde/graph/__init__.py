@@ -7,7 +7,7 @@ from .XFORM import XFORM
 from .DEL1 import DEL1
 from .DEL import DEL
 from .INV_LU import INV_LU
-from .SQL import SQL
+from .SQLStatement_1 import SQLStatement_1
 from .F41021 import F41021
 from .UOM_GLPT import UOM_GLPT
 from .SELECT import SELECT
