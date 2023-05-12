@@ -19,6 +19,22 @@
       "common" : {
         "type" : "record",
         "fields" : [ {
+          "name" : "sourceSystem",
+          "kind" : {
+            "type" : "string",
+            "value" : null
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "configDatabase",
+          "kind" : {
+            "type" : "string",
+            "value" : null
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
           "name" : "F4101",
           "kind" : {
             "type" : "string",
@@ -43,10 +59,18 @@
           "optional" : false,
           "isWorkflowNodeConfiguration" : false
         }, {
-          "name" : "sourceDatabase",
+          "name" : "DAI_ETL_ID",
           "kind" : {
             "type" : "string",
-            "value" : "gmd"
+            "value" : null
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "targetSchema",
+          "kind" : {
+            "type" : "string",
+            "value" : null
           },
           "optional" : false,
           "isWorkflowNodeConfiguration" : false
@@ -70,7 +94,7 @@
     "dependentProjectExternalDependencies" : [ ],
     "isImported" : false,
     "interimMode" : "Full",
-    "interimModeEnabled" : true,
+    "interimModeEnabled" : false,
     "visualCodeInterimMode" : "Disabled",
     "recordsLimit" : {
       "enabled" : false,
@@ -122,9 +146,15 @@
     "target" : "n8v-l9sOjzqAMSVkB5mHb$$mmYty7nC1AYmPAcyb7rbg",
     "targetPort" : "34ZBkXcauwknUV5b7HVsK$$wFq9vqjlhkn22Vn3FgyrH"
   }, {
-    "id" : "UUIbhFGdwA3EURrrdGRt4$$6XW1sI_z469wowEk1qp-9",
+    "id" : "9BnTRB4lfgpW-UB-qjE1D$$ryZ8Ehq2etL8I6Lrazlpx",
     "source" : "ZWx24KB0wZyiThCTZypgP$$C8M7qgQuMKNFlR0aO9dUk",
     "sourcePort" : "Pg9Dqk7sCEIlr0iPnQ3gI$$IIg4XFGsaedf0TOPKy23q",
+    "target" : "VzzYJa4gWkS95cl7pKk4l$$gbr6rvaD7iy3hc69X8-H8",
+    "targetPort" : "FPwsOtEiLLngjxBHYQgkw$$gDTIoDX7VBF65Uag21maZ"
+  }, {
+    "id" : "FTYucPgRoZXSBUfkAAX37",
+    "source" : "VzzYJa4gWkS95cl7pKk4l$$gbr6rvaD7iy3hc69X8-H8",
+    "sourcePort" : "Yyk-Jlds2C81sKgp16RRm$$bA_otKECFIU2IUvgZ7-Rf",
     "target" : "NdkKzboDzJmtMzakDP9M_$$UKIK3QXyKrPf074GsJSKI",
     "targetPort" : "Pr4u_271GpFyGPMwd4EUu$$qGjKv9UY3izqAVCsRELcJ"
   } ],
@@ -135,7 +165,7 @@
       "metadata" : {
         "label" : "INV_SUM",
         "slug" : "INV_SUM",
-        "x" : 440,
+        "x" : 320,
         "y" : 320,
         "phase" : 0,
         "cache" : false,
@@ -3037,6 +3067,82 @@
         }
       }
     },
+    "VzzYJa4gWkS95cl7pKk4l$$gbr6rvaD7iy3hc69X8-H8" : {
+      "id" : "VzzYJa4gWkS95cl7pKk4l$$gbr6rvaD7iy3hc69X8-H8",
+      "component" : "SQLStatement",
+      "metadata" : {
+        "label" : "SQL",
+        "slug" : "SQL",
+        "x" : 540,
+        "y" : 320,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "FPwsOtEiLLngjxBHYQgkw$$gDTIoDX7VBF65Uag21maZ",
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "LIITM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "LIMCU",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IMLITM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "TOT_INV",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Yyk-Jlds2C81sKgp16RRm$$bA_otKECFIU2IUvgZ7-Rf",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "fileTabs" : [ {
+          "path" : "out",
+          "id" : "Yyk-Jlds2C81sKgp16RRm$$bA_otKECFIU2IUvgZ7-Rf",
+          "language" : "sql",
+          "content" : "SELECT LIITM, LIMCU AS PLNT_CD, IMLITM, TOT_INV FROM in0 WHERE TOT_INV != 0"
+        } ],
+        "inputPortNames" : [ "in0" ]
+      }
+    },
     "F3sijqseNhGrCvF0lnkOY$$J4Tehc34NV7Gqd7CrVqGg" : {
       "id" : "F3sijqseNhGrCvF0lnkOY$$J4Tehc34NV7Gqd7CrVqGg",
       "component" : "Source",
@@ -3148,7 +3254,7 @@
       "metadata" : {
         "label" : "TEST",
         "slug" : "TEST",
-        "x" : 660,
+        "x" : 720,
         "y" : 320,
         "phase" : 0,
         "cache" : false,
@@ -3171,7 +3277,7 @@
                 "tags" : [ ]
               }
             }, {
-              "name" : "LIMCU",
+              "name" : "PLNT_CD",
               "type" : "string",
               "nullable" : true,
               "metadata" : {
@@ -3990,5 +4096,70 @@
     "outputs" : [ ],
     "selectedInputFields" : [ ],
     "isCustomOutputSchema" : false
-  }
+  },
+  "diagnostics" : [ {
+    "property" : "$.workflow.metainfo.configuration.common.fields[0].kind.value",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "default values error for key: sourceSystem value: null",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.metainfo.configuration.common.fields[1].kind.value",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "default values error for key: configDatabase value: null",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.metainfo.configuration.common.fields[5].kind.value",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "default values error for key: DAI_ETL_ID value: null",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.metainfo.configuration.common.fields[6].kind.value",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "default values error for key: targetSchema value: null",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  } ]
 }

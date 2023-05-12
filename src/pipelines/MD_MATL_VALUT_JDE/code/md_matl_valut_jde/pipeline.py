@@ -17,7 +17,8 @@ def pipeline(spark: SparkSession) -> None:
     df_INV_SUM = INV_SUM(spark, df_DEL)
     df_F4105 = F4105(spark)
     df_COLEDG = COLEDG(spark, df_F4105)
-    TEST(spark, df_INV_SUM)
+    df_SQL = SQL(spark, df_INV_SUM)
+    TEST(spark, df_SQL)
 
 def main():
     spark = SparkSession.builder\
