@@ -5,5 +5,5 @@ from prophecy.libs import typed_lit
 from md_matl_valut_jde.config.ConfigStore import *
 from md_matl_valut_jde.udfs.UDFs import *
 
-def COLEDG(spark: SparkSession, in0: DataFrame) -> DataFrame:
-    return in0.filter(((col("COLEDG") == lit("07")) & (col("_deleted_") == lit("F"))))
+def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
+    return in0

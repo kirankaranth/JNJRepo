@@ -15,9 +15,12 @@ def pipeline(spark: SparkSession) -> None:
     df_F41021 = F41021(spark)
     df_DEL = DEL(spark, df_F41021)
     df_INV_SUM = INV_SUM(spark, df_DEL)
+    INV_LU(spark, df_INV_SUM)
     df_F4105 = F4105(spark)
-    df_COLEDG = COLEDG(spark, df_F4105)
-    df_SQL = SQL(spark, df_INV_SUM)
+    df_COLEDG_COCSIN = COLEDG_COCSIN(spark, df_F4105)
+    df_DE_DUP_COST_AVG = DE_DUP_COST_AVG(spark, df_COLEDG_COCSIN)
+    df_XFORM = XFORM(spark, df_DE_DUP_COST_AVG)
+    df_SQL = SQL(spark)
     TEST(spark, df_SQL)
 
 def main():
