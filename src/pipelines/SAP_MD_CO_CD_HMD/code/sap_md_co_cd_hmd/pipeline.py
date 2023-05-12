@@ -7,7 +7,8 @@ from prophecy.utils import *
 from sap_md_co_cd_hmd.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    pass
+    df_DS_SAP_HMD_KNB1 = DS_SAP_HMD_KNB1(spark)
+    df_MANDT_FILTER_KNB1 = MANDT_FILTER_KNB1(spark, df_DS_SAP_HMD_KNB1)
 
 def main():
     spark = SparkSession.builder\
