@@ -9,7 +9,7 @@
       "clusterMode" : "Single"
     },
     "enabled" : false,
-    "defaultClusterSize" : "Prophecy_Small",
+    "defaultClusterSize" : "Compute_Medium",
     "alerting" : {
       "emails" : "",
       "onStart" : false,
@@ -29,7 +29,20 @@
     },
     "availableFabrics" : [ {
       "id" : "4",
-      "name" : "dev_ajp_nonprod",
+      "name" : "CDL_Dev_Consume_Views",
+      "clusterSizes" : {
+        "default" : "small",
+        "availableClusterSizes" : [ "small" ]
+      },
+      "pylibsResolutionMode" : {
+        "PublicCentral" : { }
+      },
+      "scalalibsResolutionMode" : {
+        "PublicCentral" : { }
+      }
+    }, {
+      "id" : "16",
+      "name" : "vkalluru-pilot",
       "clusterSizes" : {
         "default" : "small",
         "availableClusterSizes" : [ "small" ]
@@ -45,7 +58,46 @@
       "name" : "CDL_L1_Dev",
       "clusterSizes" : {
         "default" : "Prophecy_Small",
-        "availableClusterSizes" : [ "Prophecy_Small" ]
+        "availableClusterSizes" : [ "Prophecy_Small", "Prophecy_Medium", "Prophecy_Large", "Prophecy_Photon_Medium", "Compute_Medium" ]
+      },
+      "pylibsResolutionMode" : {
+        "PublicCentral" : { }
+      },
+      "scalalibsResolutionMode" : {
+        "PublicCentral" : { }
+      }
+    }, {
+      "id" : "36",
+      "name" : "CDL_L1_QA",
+      "clusterSizes" : {
+        "default" : "small",
+        "availableClusterSizes" : [ "small" ]
+      },
+      "pylibsResolutionMode" : {
+        "PublicCentral" : { }
+      },
+      "scalalibsResolutionMode" : {
+        "PublicCentral" : { }
+      }
+    }, {
+      "id" : "14",
+      "name" : "Epicenter",
+      "clusterSizes" : {
+        "default" : "small",
+        "availableClusterSizes" : [ "small", "sk_test" ]
+      },
+      "pylibsResolutionMode" : {
+        "PublicCentral" : { }
+      },
+      "scalalibsResolutionMode" : {
+        "PublicCentral" : { }
+      }
+    }, {
+      "id" : "29",
+      "name" : "affiliate_4",
+      "clusterSizes" : {
+        "default" : "small",
+        "availableClusterSizes" : [ "small" ]
       },
       "pylibsResolutionMode" : {
         "PublicCentral" : { }
@@ -67,10 +119,12 @@
       },
       "ports" : {
         "inputs" : [ {
-          "id" : "GGmmcec_s4--oujiTkEcu$$K_HYP163vZPz7RjaErbFO"
+          "id" : "GGmmcec_s4--oujiTkEcu$$K_HYP163vZPz7RjaErbFO",
+          "slug" : ""
         } ],
         "outputs" : [ {
-          "id" : "SgntM1ewatlS5mcEeIfd2$$qD-S3abYLkm5UqqaSiaqH"
+          "id" : "SgntM1ewatlS5mcEeIfd2$$qD-S3abYLkm5UqqaSiaqH",
+          "slug" : ""
         } ]
       },
       "settings" : {
@@ -142,21 +196,111 @@
         }
       }
     },
+    "wZF2xCN3DbuUyPjt3p1FO$$x_991hA76FtD6pLE5YgNU" : {
+      "id" : "wZF2xCN3DbuUyPjt3p1FO$$x_991hA76FtD6pLE5YgNU",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "HMD",
+        "slug" : "HMD",
+        "x" : -2040,
+        "y" : -160
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "_le7TkFH2cAvo35jqlpK-$$cfNFDrhDG9I3V7wCO_ROj",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "YACvwBsdZvSMpiSSqyJiH$$Sg91IQ6B0aqdJObSNuw02",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/SAP_01_MD_BILL_DOC_HDR",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MANDT",
+            "kind" : {
+              "type" : "string",
+              "value" : "100"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "HM2", "default", "HMD" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "HM2"
+        }
+      }
+    },
     "M2EfqmUO7d-d-JlgScWpZ$$DK9OvSmcULmH_4i5HjWo_" : {
       "id" : "M2EfqmUO7d-d-JlgScWpZ$$DK9OvSmcULmH_4i5HjWo_",
       "component" : "Pipeline",
       "metadata" : {
         "label" : "P01",
         "slug" : "P01",
-        "x" : -1700,
-        "y" : -380
+        "x" : -2400,
+        "y" : -160
       },
       "ports" : {
         "inputs" : [ {
-          "id" : "4NPB7E6tW194dMUm3eX7N$$z8dZJ8aTpccEIsc-O2LFn"
+          "id" : "4NPB7E6tW194dMUm3eX7N$$z8dZJ8aTpccEIsc-O2LFn",
+          "slug" : ""
         } ],
         "outputs" : [ {
-          "id" : "WgA36EzOmxylSgW74Gs60$$uNPeNsurjUNX9bsgVKqwN"
+          "id" : "WgA36EzOmxylSgW74Gs60$$uNPeNsurjUNX9bsgVKqwN",
+          "slug" : ""
         } ]
       },
       "settings" : {
@@ -234,15 +378,17 @@
       "metadata" : {
         "label" : "BBA",
         "slug" : "BBA",
-        "x" : -2660,
+        "x" : -2700,
         "y" : -380
       },
       "ports" : {
         "inputs" : [ {
-          "id" : "1POztmOri88HBtdfC9VyJ$$MRjJnJ6ge1Efnopw7siHs"
+          "id" : "1POztmOri88HBtdfC9VyJ$$MRjJnJ6ge1Efnopw7siHs",
+          "slug" : ""
         } ],
         "outputs" : [ {
-          "id" : "d5VxhnIrDozVyx_EIwGiw$$TRkBs1_MI-tHRZmsxTdIU"
+          "id" : "d5VxhnIrDozVyx_EIwGiw$$TRkBs1_MI-tHRZmsxTdIU",
+          "slug" : ""
         } ]
       },
       "settings" : {
@@ -255,7 +401,7 @@
         }
       },
       "properties" : {
-        "pipelineId" : "pipelines/SAP_01_MD_BILL_DOC_HDR",
+        "pipelineId" : "pipelines/SAP_MD_BILL_DOC_HDR_BBA_BBN",
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
@@ -283,12 +429,11 @@
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceDatabase",
-            "optional" : false,
-            "comment" : "",
             "kind" : {
               "type" : "string",
               "value" : "bba"
             },
+            "optional" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DAI_ETL_ID",
@@ -321,15 +466,17 @@
       "metadata" : {
         "label" : "FSN",
         "slug" : "FSN",
-        "x" : -2300,
+        "x" : -2280,
         "y" : -380
       },
       "ports" : {
         "inputs" : [ {
-          "id" : "zZy4VzE4C9F_JhBvnTC2V$$WUFBaliMv7_CZv-RD3l9N"
+          "id" : "zZy4VzE4C9F_JhBvnTC2V$$WUFBaliMv7_CZv-RD3l9N",
+          "slug" : ""
         } ],
         "outputs" : [ {
-          "id" : "9OjtRbIe5lBb2-ZXKIvro$$WH9Vyll1D4zNTQVrtD39t"
+          "id" : "9OjtRbIe5lBb2-ZXKIvro$$WH9Vyll1D4zNTQVrtD39t",
+          "slug" : ""
         } ]
       },
       "settings" : {
@@ -407,15 +554,17 @@
       "metadata" : {
         "label" : "BBN",
         "slug" : "BBN",
-        "x" : -2540,
+        "x" : -2560,
         "y" : -380
       },
       "ports" : {
         "inputs" : [ {
-          "id" : "8pdbK0zfAVXTT4Av5t08V$$gP0bdwdLYFpnxHOHOkMDR"
+          "id" : "8pdbK0zfAVXTT4Av5t08V$$gP0bdwdLYFpnxHOHOkMDR",
+          "slug" : ""
         } ],
         "outputs" : [ {
-          "id" : "2DEUtJ6YGIb-eiBwbQQRs$$_GCG_XryDEiI-OEySKwAT"
+          "id" : "2DEUtJ6YGIb-eiBwbQQRs$$_GCG_XryDEiI-OEySKwAT",
+          "slug" : ""
         } ]
       },
       "settings" : {
@@ -428,7 +577,7 @@
         }
       },
       "properties" : {
-        "pipelineId" : "pipelines/SAP_01_MD_BILL_DOC_HDR",
+        "pipelineId" : "pipelines/SAP_MD_BILL_DOC_HDR_BBA_BBN",
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
@@ -456,12 +605,11 @@
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceDatabase",
-            "optional" : false,
-            "comment" : "",
             "kind" : {
               "type" : "string",
               "value" : "bbn"
             },
+            "optional" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DAI_ETL_ID",
@@ -494,15 +642,17 @@
       "metadata" : {
         "label" : "MRS",
         "slug" : "MRS",
-        "x" : -1820,
-        "y" : -380
+        "x" : -2520,
+        "y" : -160
       },
       "ports" : {
         "inputs" : [ {
-          "id" : "BHQ-hrqQENHyQQdgNTd3c$$87GPD8Fw636pT8lMi4_UD"
+          "id" : "BHQ-hrqQENHyQQdgNTd3c$$87GPD8Fw636pT8lMi4_UD",
+          "slug" : ""
         } ],
         "outputs" : [ {
-          "id" : "Ir2JnUK700uwtRbCq9WxG$$KjX0ruPxsTEshFB_nLMrj"
+          "id" : "Ir2JnUK700uwtRbCq9WxG$$KjX0ruPxsTEshFB_nLMrj",
+          "slug" : ""
         } ]
       },
       "settings" : {
@@ -580,15 +730,17 @@
       "metadata" : {
         "label" : "MBP",
         "slug" : "MBP",
-        "x" : -1940,
-        "y" : -380
+        "x" : -2660,
+        "y" : -160
       },
       "ports" : {
         "inputs" : [ {
-          "id" : "PpnL8US2JIGYay8bFCHtB$$z_N_b0IXDNQt9RueTapYy"
+          "id" : "PpnL8US2JIGYay8bFCHtB$$z_N_b0IXDNQt9RueTapYy",
+          "slug" : ""
         } ],
         "outputs" : [ {
-          "id" : "zJvEbpnhUaihVTlN2KJjB$$IC1g9i3Uj8u40RNqO1uyz"
+          "id" : "zJvEbpnhUaihVTlN2KJjB$$IC1g9i3Uj8u40RNqO1uyz",
+          "slug" : ""
         } ]
       },
       "settings" : {
@@ -666,15 +818,17 @@
       "metadata" : {
         "label" : "GEU",
         "slug" : "GEU",
-        "x" : -2180,
+        "x" : -2160,
         "y" : -380
       },
       "ports" : {
         "inputs" : [ {
-          "id" : "VEpdgqQTZuFxO8_wzmMAR$$LygnqdG2_pMcG1-fhd8D_"
+          "id" : "VEpdgqQTZuFxO8_wzmMAR$$LygnqdG2_pMcG1-fhd8D_",
+          "slug" : ""
         } ],
         "outputs" : [ {
-          "id" : "kqBxsljSKVrbhTRet6DvS$$FJvnCnBjc3Sk6xxaJsidf"
+          "id" : "kqBxsljSKVrbhTRet6DvS$$FJvnCnBjc3Sk6xxaJsidf",
+          "slug" : ""
         } ]
       },
       "settings" : {
@@ -752,15 +906,17 @@
       "metadata" : {
         "label" : "SVS",
         "slug" : "SVS",
-        "x" : -1580,
-        "y" : -380
+        "x" : -2280,
+        "y" : -160
       },
       "ports" : {
         "inputs" : [ {
-          "id" : "tcGo6nYoetAd2q7fQuU1m$$C-cVw0W_0JGtfbNJU64xZ"
+          "id" : "tcGo6nYoetAd2q7fQuU1m$$C-cVw0W_0JGtfbNJU64xZ",
+          "slug" : ""
         } ],
         "outputs" : [ {
-          "id" : "FmDpxCMBU98P1SI7BWYjm$$odkIU1gzYZdXEoygXlgoB"
+          "id" : "FmDpxCMBU98P1SI7BWYjm$$odkIU1gzYZdXEoygXlgoB",
+          "slug" : ""
         } ]
       },
       "settings" : {
@@ -838,15 +994,17 @@
       "metadata" : {
         "label" : "HCS",
         "slug" : "HCS",
-        "x" : -2060,
+        "x" : -2020,
         "y" : -380
       },
       "ports" : {
         "inputs" : [ {
-          "id" : "HliJUi_PVkx6QrlSQqxs3$$LYbJYy0jZTpzrffVrk8oI"
+          "id" : "HliJUi_PVkx6QrlSQqxs3$$LYbJYy0jZTpzrffVrk8oI",
+          "slug" : ""
         } ],
         "outputs" : [ {
-          "id" : "Rn_l0RnvdLSBHeULa9Mdp$$SwWRbQ6N28fSC9JaK31g5"
+          "id" : "Rn_l0RnvdLSBHeULa9Mdp$$SwWRbQ6N28fSC9JaK31g5",
+          "slug" : ""
         } ]
       },
       "settings" : {
@@ -924,15 +1082,17 @@
       "metadata" : {
         "label" : "TAI",
         "slug" : "TAI",
-        "x" : -1460,
-        "y" : -380
+        "x" : -2160,
+        "y" : -160
       },
       "ports" : {
         "inputs" : [ {
-          "id" : "ALKTVF6mArAuEdQkCuiBM$$v8Sb3ydqU5vLzsiU_4DJu"
+          "id" : "ALKTVF6mArAuEdQkCuiBM$$v8Sb3ydqU5vLzsiU_4DJu",
+          "slug" : ""
         } ],
         "outputs" : [ {
-          "id" : "IM-IgDeIoBDswM_5V5vvL$$cEysvFWONOCNB3I0bO-ys"
+          "id" : "IM-IgDeIoBDswM_5V5vvL$$cEysvFWONOCNB3I0bO-ys",
+          "slug" : ""
         } ]
       },
       "settings" : {
@@ -1005,5 +1165,65 @@
       }
     }
   },
-  "connections" : [ ]
+  "connections" : [ {
+    "id" : "2J0uakix4Z67ht5loO37I$$weCSBLjVTvxpqFnkvRIxo",
+    "source" : "HY2TGmePIQcn9CmvcVCWf$$2O6oaa2MBEeSPxm0cHtii",
+    "target" : "NkIOdj03qtzAmOEj69-Te$$049_2cNcOnB15e1XWJrUj",
+    "sourcePort" : "d5VxhnIrDozVyx_EIwGiw$$TRkBs1_MI-tHRZmsxTdIU",
+    "targetPort" : "8pdbK0zfAVXTT4Av5t08V$$gP0bdwdLYFpnxHOHOkMDR"
+  }, {
+    "id" : "xhQ__SKZ2PCdQi84CB8ln$$4M_MCH4PKaMZSy9yb2h6J",
+    "source" : "NkIOdj03qtzAmOEj69-Te$$049_2cNcOnB15e1XWJrUj",
+    "target" : "IYsFHetcKT25v3nmqiixj$$YH__iHrBaQ3f0vwZbJLSm",
+    "sourcePort" : "2DEUtJ6YGIb-eiBwbQQRs$$_GCG_XryDEiI-OEySKwAT",
+    "targetPort" : "GGmmcec_s4--oujiTkEcu$$K_HYP163vZPz7RjaErbFO"
+  }, {
+    "id" : "uGoQUrCu0wvmbQqUlJ3Sq$$u7mNRblyf8JAwcHHFQaOo",
+    "source" : "IYsFHetcKT25v3nmqiixj$$YH__iHrBaQ3f0vwZbJLSm",
+    "target" : "egqNd49NCEhPhcw2rzfCd$$-2VCoC3Xs9KA-s0e2-qoT",
+    "sourcePort" : "SgntM1ewatlS5mcEeIfd2$$qD-S3abYLkm5UqqaSiaqH",
+    "targetPort" : "zZy4VzE4C9F_JhBvnTC2V$$WUFBaliMv7_CZv-RD3l9N"
+  }, {
+    "id" : "4dXLXkXLsfHt3u_ckBV_e$$UxY3QyAq10RyQc9b6QRcu",
+    "source" : "egqNd49NCEhPhcw2rzfCd$$-2VCoC3Xs9KA-s0e2-qoT",
+    "target" : "blVa8Li923odZB4s8bE2T$$Y6tP1Z4Ty9QaFM6Gv3RlL",
+    "sourcePort" : "9OjtRbIe5lBb2-ZXKIvro$$WH9Vyll1D4zNTQVrtD39t",
+    "targetPort" : "VEpdgqQTZuFxO8_wzmMAR$$LygnqdG2_pMcG1-fhd8D_"
+  }, {
+    "id" : "8l70rId5RZ_u_skPDxoN8$$cCBw9fz2q5AiMYSRqmdPX",
+    "source" : "blVa8Li923odZB4s8bE2T$$Y6tP1Z4Ty9QaFM6Gv3RlL",
+    "target" : "kAREg3oQYFzmnicQFGoqg$$jEWAv2mVhUI8-0_armAjk",
+    "sourcePort" : "kqBxsljSKVrbhTRet6DvS$$FJvnCnBjc3Sk6xxaJsidf",
+    "targetPort" : "HliJUi_PVkx6QrlSQqxs3$$LYbJYy0jZTpzrffVrk8oI"
+  }, {
+    "id" : "bDk_pdCta8qB23mKRmENM$$zZ0p0IY7urUgTpuLZRgyf",
+    "source" : "zP4NS3u9h2xQcfIn9VWXv$$kJsI9gGSPPBiEy9cng8aJ",
+    "target" : "LA3aLQX21QpTEzT9ynyDK$$RmyeP0a0qvpXvOh8n5DGI",
+    "sourcePort" : "zJvEbpnhUaihVTlN2KJjB$$IC1g9i3Uj8u40RNqO1uyz",
+    "targetPort" : "BHQ-hrqQENHyQQdgNTd3c$$87GPD8Fw636pT8lMi4_UD"
+  }, {
+    "id" : "cRLzO41hZTb5SbljLzp9l$$OocF9j0pfXSXqXCL3TJVX",
+    "source" : "LA3aLQX21QpTEzT9ynyDK$$RmyeP0a0qvpXvOh8n5DGI",
+    "target" : "M2EfqmUO7d-d-JlgScWpZ$$DK9OvSmcULmH_4i5HjWo_",
+    "sourcePort" : "Ir2JnUK700uwtRbCq9WxG$$KjX0ruPxsTEshFB_nLMrj",
+    "targetPort" : "4NPB7E6tW194dMUm3eX7N$$z8dZJ8aTpccEIsc-O2LFn"
+  }, {
+    "id" : "o8z2RDn2niHRX2qPCj_PZ$$Twk9KQ079SNlWH7uRV6ly",
+    "source" : "M2EfqmUO7d-d-JlgScWpZ$$DK9OvSmcULmH_4i5HjWo_",
+    "target" : "8z5Tq55ouW_F71zjAxo44$$XpAsdo7AP4pqo4WIbEiHa",
+    "sourcePort" : "WgA36EzOmxylSgW74Gs60$$uNPeNsurjUNX9bsgVKqwN",
+    "targetPort" : "tcGo6nYoetAd2q7fQuU1m$$C-cVw0W_0JGtfbNJU64xZ"
+  }, {
+    "id" : "OyE6W9McegMiLRK_nf9Qr$$qLWvnLttTZN68VUDor3n9",
+    "source" : "8z5Tq55ouW_F71zjAxo44$$XpAsdo7AP4pqo4WIbEiHa",
+    "target" : "w8j7Ece2ORnXdcOAc16Az$$cu5KEN_bVYrDB3zZXMUDA",
+    "sourcePort" : "FmDpxCMBU98P1SI7BWYjm$$odkIU1gzYZdXEoygXlgoB",
+    "targetPort" : "ALKTVF6mArAuEdQkCuiBM$$v8Sb3ydqU5vLzsiU_4DJu"
+  }, {
+    "id" : "YWut_dYcthug2Bu_SKY5P$$r5AzJkVtuczBowGaLgKS-",
+    "source" : "w8j7Ece2ORnXdcOAc16Az$$cu5KEN_bVYrDB3zZXMUDA",
+    "target" : "wZF2xCN3DbuUyPjt3p1FO$$x_991hA76FtD6pLE5YgNU",
+    "sourcePort" : "IM-IgDeIoBDswM_5V5vvL$$cEysvFWONOCNB3I0bO-ys",
+    "targetPort" : "_le7TkFH2cAvo35jqlpK-$$cfNFDrhDG9I3V7wCO_ROj"
+  } ]
 }
