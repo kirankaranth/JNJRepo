@@ -12,16 +12,16 @@ def pipeline(spark: SparkSession) -> None:
     df_DEL1 = DEL1(spark, df_SELECT)
     LITM_LU(spark, df_DEL1)
     UOM_GLPT(spark, df_DEL1)
+    INV_LU(spark)
+    df_SQLStatement_1 = SQLStatement_1(spark)
+    TEST(spark, df_SQLStatement_1)
     df_F41021 = F41021(spark)
     df_DEL = DEL(spark, df_F41021)
     df_INV_SUM = INV_SUM(spark, df_DEL)
-    INV_LU(spark, df_INV_SUM)
+    df_XFORM = XFORM(spark, df_INV_SUM)
     df_F4105 = F4105(spark)
     df_COLEDG_COCSIN = COLEDG_COCSIN(spark, df_F4105)
     df_DE_DUP_COST_AVG = DE_DUP_COST_AVG(spark, df_COLEDG_COCSIN)
-    df_XFORM = XFORM(spark, df_DE_DUP_COST_AVG)
-    df_SQLStatement_1 = SQLStatement_1(spark, df_XFORM)
-    TEST(spark, df_SQLStatement_1)
 
 def main():
     spark = SparkSession.builder\

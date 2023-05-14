@@ -3,7 +3,6 @@ from .TEST import TEST
 from .COLEDG_COCSIN import COLEDG_COCSIN
 from .INV_SUM import INV_SUM
 from .LITM_LU import LITM_LU
-from .XFORM import XFORM
 from .DEL1 import DEL1
 from .DEL import DEL
 from .INV_LU import INV_LU
