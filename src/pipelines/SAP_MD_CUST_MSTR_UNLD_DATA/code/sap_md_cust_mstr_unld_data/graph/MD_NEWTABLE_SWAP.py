@@ -5,7 +5,7 @@ from prophecy.libs import typed_lit
 from sap_md_cust_mstr_unld_data.config.ConfigStore import *
 from sap_md_cust_mstr_unld_data.udfs.UDFs import *
 
-def Reformat_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
+def MD_NEWTABLE_SWAP(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0.select(
         col("SRC_SYS_CD"), 
         col("CUST_NUM"), 

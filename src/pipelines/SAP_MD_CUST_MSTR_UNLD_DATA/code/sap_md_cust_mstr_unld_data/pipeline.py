@@ -10,10 +10,10 @@ def pipeline(spark: SparkSession) -> None:
     df_DS_SAP_01_KNVA = DS_SAP_01_KNVA(spark)
     df_MANDT_FILTER = MANDT_FILTER(spark, df_DS_SAP_01_KNVA)
     df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_MANDT_FILTER)
-    df_Reformat_1 = Reformat_1(spark, df_NEW_FIELDS_RENAME_FORMAT)
-    df_Aggregate_1 = Aggregate_1(spark, df_Reformat_1)
-    df_Filter_1 = Filter_1(spark, df_Aggregate_1)
-    MD_CUST_MSTR_UNLD_DATA(spark, df_Reformat_1)
+    df_MD_NEWTABLE_SWAP = MD_NEWTABLE_SWAP(spark, df_NEW_FIELDS_RENAME_FORMAT)
+    df_DUPLICATE_CHECK = DUPLICATE_CHECK(spark, df_MD_NEWTABLE_SWAP)
+    df_DUPLICATE_CHECK_FILTER = DUPLICATE_CHECK_FILTER(spark, df_DUPLICATE_CHECK)
+    MD_CUST_MSTR_UNLD_DATA(spark, df_MD_NEWTABLE_SWAP)
 
 def main():
     spark = SparkSession.builder\

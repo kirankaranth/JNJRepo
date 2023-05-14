@@ -20,4 +20,6 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("RCPT_TIMES_MON_MORNING_FROM", trim(col("MOAB1")))\
         .withColumn("RECV_HRS_MON_MORNING_UNTL", trim(col("MOBI1")))\
         .withColumn("RECV_HRS_MON_PM_FROM", trim(col("MOAB2")))\
-        .withColumn("RECV_HRS_MON_PM_UNTL", trim(col("MOBI2")))
+        .withColumn("RECV_HRS_MON_PM_UNTL", trim(col("MOBI2")))\
+        .withColumn("RECV_HRS_TUE_MORNING_FROM", trim(col("DIAB1")))\
+        .withColumn("RCPT_TIMES_TUE_MORNING_UNTL", trim(col("DIBI1")))
