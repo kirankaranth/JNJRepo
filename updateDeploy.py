@@ -28,14 +28,17 @@ for item in os.scandir("./src/jobs/"):
                     a = json.loads(task["python_wheel_task"]["parameters"][3])
                     #print(a)
                     if env == "prod" and task["python_wheel_task"]["parameters"][1].upper() == "HM2":
-                        print(jsonObject)
-                        b = json.loads('{"targetSchema":"'+envFolder+'_'+app+'","targetEnv":"'+envFolder+'","targetApp":"'+app+'","sourceDatabase":"hmd","sourceSystem":"hmd"}')
+                        #print(jsonObject)
+                        b = json.loads('{"targetSchema":"'+envFolder+'_'+app+'","targetEnv":"'+envFolder+'","targetApp":"'+app+'","sourceDatabase":"hmd","sourceSystem":"hmd","nonProdFilter":false}')
                         print("Updating platform environment details for HM2 -> HMD")
 
                     elif env == "pqa" and task["python_wheel_task"]["parameters"][1].upper() == "HM2":
-                        print(jsonObject)
+                        #print(jsonObject)
                         b = json.loads('{"targetSchema":"'+envFolder+'_'+app+'","targetEnv":"'+envFolder+'","targetApp":"'+app+'","sourceDatabase":"pqa_hm2","sourceSystem":"hm2"}')
                         print("Updating platform environment details for HM2 -> HMD")
+                    elif env == "prod":
+                        b = json.loads('{"targetSchema":"'+envFolder+'_'+app+'","targetEnv":"'+envFolder+'","targetApp":"'+app+'","nonProdFilter":false}')
+                        
                     else:
                         b = json.loads('{"targetSchema":"'+envFolder+'_'+app+'","targetEnv":"'+envFolder+'","targetApp":"'+app+'"}')
                     a.update(b)

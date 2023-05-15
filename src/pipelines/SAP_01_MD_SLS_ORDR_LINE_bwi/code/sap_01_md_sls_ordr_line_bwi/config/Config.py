@@ -10,10 +10,12 @@ class Config(ConfigBase):
             sourceDatabase: str=None,
             DAI_ETL_ID: int=None,
             targetSchema: str=None,
+            nonProdFilter: bool=None,
+            nonProdFilterDate: str=None,
             **kwargs
     ):
         self.spark = None
-        self.update(sourceSystem, MANDT, sourceDatabase, DAI_ETL_ID, targetSchema)
+        self.update(sourceSystem, MANDT, sourceDatabase, DAI_ETL_ID, targetSchema, nonProdFilter, nonProdFilterDate)
 
     def update(
             self,
@@ -22,6 +24,8 @@ class Config(ConfigBase):
             sourceDatabase: str="bwi",
             DAI_ETL_ID: int=0,
             targetSchema: str="dev_md_l1",
+            nonProdFilter: bool=True,
+            nonProdFilterDate: str="20230101",
             **kwargs
     ):
         prophecy_spark = self.spark
@@ -30,4 +34,6 @@ class Config(ConfigBase):
         self.sourceDatabase = sourceDatabase
         self.DAI_ETL_ID = self.get_int_value(DAI_ETL_ID)
         self.targetSchema = targetSchema
+        self.nonProdFilter = self.get_bool_value(nonProdFilter)
+        self.nonProdFilterDate = nonProdFilterDate
         pass
