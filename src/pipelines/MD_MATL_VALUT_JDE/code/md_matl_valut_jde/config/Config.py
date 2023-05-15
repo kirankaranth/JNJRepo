@@ -11,7 +11,7 @@ class Config(ConfigBase):
             F41021: str=None,
             divisor: str=None,
             costDivisor: str=None,
-            DAI_ETL_ID: str=None,
+            DAI_ETL_ID: int=None,
             configDatabase: str=None,
             targetSchema: str=None,
             **kwargs
@@ -27,7 +27,7 @@ class Config(ConfigBase):
             F41021: str="f41021",
             divisor: str="1",
             costDivisor: str="10000",
-            DAI_ETL_ID: str="0",
+            DAI_ETL_ID: int=0,
             configDatabase: str="  ",
             targetSchema: str="dev_md_l1",
             **kwargs
@@ -39,7 +39,7 @@ class Config(ConfigBase):
         self.F41021 = F41021
         self.divisor = divisor
         self.costDivisor = costDivisor
-        self.DAI_ETL_ID = DAI_ETL_ID
+        self.DAI_ETL_ID = self.get_int_value(DAI_ETL_ID)
         self.configDatabase = configDatabase
         self.targetSchema = targetSchema
         pass
