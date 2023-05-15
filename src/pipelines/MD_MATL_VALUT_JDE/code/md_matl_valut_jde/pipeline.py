@@ -19,8 +19,6 @@ def pipeline(spark: SparkSession) -> None:
     df_DEL = DEL(spark, df_F41021)
     df_INV_SUM = INV_SUM(spark, df_DEL)
     df_XFORM = XFORM(spark, df_INV_SUM)
-    df_SQLStatement_1 = SQLStatement_1(spark, df_XFORM)
-    TEST(spark, df_SQLStatement_1)
 
 def main():
     spark = SparkSession.builder\

@@ -15,4 +15,6 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("TOT_STK_QTY", col("TOT_INV"))\
         .withColumn("VALUT_CLS_CD", trim(lookup("F4101_LU", col("LIITM")).getField("IMGLPT")))\
         .withColumn("BASE_UOM_CD", trim(lookup("F4101_LU", col("LIITM")).getField("IMUOM1")))\
-        .withColumn("PRC_AMT", lookup("F4105_LU", col("LIITM"), col("LIMCU")).getField("COUNCS").cast(DecimalType(18, 4)))
+        .withColumn("PRC_AMT", lookup("F4105_LU", col("LIITM"), col("LIMCU")).getField("COUNCS").cast(DecimalType(18, 4)))\
+        .withColumn("PRC_UNIT_NBR", lit(10000))\
+        .withColumn("VALUT_TYPE_CD", col("LIPBIN"))
