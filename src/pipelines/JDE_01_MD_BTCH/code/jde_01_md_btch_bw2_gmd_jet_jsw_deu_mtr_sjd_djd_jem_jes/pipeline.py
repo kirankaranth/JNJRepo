@@ -17,7 +17,8 @@ def pipeline(spark: SparkSession) -> None:
     )
     df_F4108_FILTER = F4108_FILTER(spark, df_JDE_F4108)
     df_NEW_FIELDS = NEW_FIELDS(spark, df_F4108_FILTER)
-    df_SET_FIELDS_ORDER = SET_FIELDS_ORDER(spark, df_NEW_FIELDS)
+    df_DEDUPLICATE = DEDUPLICATE(spark, df_NEW_FIELDS)
+    df_SET_FIELDS_ORDER = SET_FIELDS_ORDER(spark, df_DEDUPLICATE)
     df_SET_FIELDS_ORDER = collectMetrics(
         spark, 
         df_SET_FIELDS_ORDER, 
