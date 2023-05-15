@@ -1788,14 +1788,14 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "IMINFECUMZmPNMD84ovGQ$$AginJ-XLneVD1fKCE5uji##ZAMIV", "IMINFECUMZmPNMD84ovGQ$$AginJ-XLneVD1fKCE5uji##LOEVM", "IMINFECUMZmPNMD84ovGQ$$AginJ-XLneVD1fKCE5uji##FDGRV", "IMINFECUMZmPNMD84ovGQ$$AginJ-XLneVD1fKCE5uji##BEGRU", "IMINFECUMZmPNMD84ovGQ$$AginJ-XLneVD1fKCE5uji##ERNAM", "IMINFECUMZmPNMD84ovGQ$$AginJ-XLneVD1fKCE5uji##ZAMIB", "IMINFECUMZmPNMD84ovGQ$$AginJ-XLneVD1fKCE5uji##SPERR", "IMINFECUMZmPNMD84ovGQ$$AginJ-XLneVD1fKCE5uji##PERNR", "IMINFECUMZmPNMD84ovGQ$$AginJ-XLneVD1fKCE5uji##ERDAT", "IMINFECUMZmPNMD84ovGQ$$AginJ-XLneVD1fKCE5uji##EKVBD", "IMINFECUMZmPNMD84ovGQ$$AginJ-XLneVD1fKCE5uji##ZAMIM", "IMINFECUMZmPNMD84ovGQ$$AginJ-XLneVD1fKCE5uji##ZAMIR", "IMINFECUMZmPNMD84ovGQ$$AginJ-XLneVD1fKCE5uji##KUNNR", "IMINFECUMZmPNMD84ovGQ$$AginJ-XLneVD1fKCE5uji##KNB1_EEW_CC", "IMINFECUMZmPNMD84ovGQ$$AginJ-XLneVD1fKCE5uji##ZUAWA", "IMINFECUMZmPNMD84ovGQ$$AginJ-XLneVD1fKCE5uji##BUKRS", "IMINFECUMZmPNMD84ovGQ$$AginJ-XLneVD1fKCE5uji##KNRZE", "IMINFECUMZmPNMD84ovGQ$$AginJ-XLneVD1fKCE5uji##KNRZB", "IMINFECUMZmPNMD84ovGQ$$AginJ-XLneVD1fKCE5uji##BUSAB", "IMINFECUMZmPNMD84ovGQ$$AginJ-XLneVD1fKCE5uji##ZTERM", "IMINFECUMZmPNMD84ovGQ$$AginJ-XLneVD1fKCE5uji##AKONT" ],
         "transformations" : [ {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
             "sourceColumn" : "SRC_SYS_CD",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "'$sourceSystem'"
             }
           },
           "DropColumn" : {
@@ -1811,7 +1811,7 @@
             "sourceColumn" : "CO_CD",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "BUKRS"
             }
           },
           "DropColumn" : {
@@ -1827,7 +1827,7 @@
             "sourceColumn" : "CUST_NUM",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "KUNNR"
             }
           },
           "DropColumn" : {
@@ -1843,7 +1843,7 @@
             "sourceColumn" : "BUY_GRP_CD",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "trim(EKVBD)"
             }
           },
           "DropColumn" : {
@@ -1859,7 +1859,7 @@
             "sourceColumn" : "PLNG_CUST_IND",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "trim(FDGRV)"
             }
           },
           "DropColumn" : {
@@ -1875,7 +1875,7 @@
             "sourceColumn" : "TERM_PMT_KEY",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "trim(ZTERM)"
             }
           },
           "DropColumn" : {
@@ -1891,7 +1891,7 @@
             "sourceColumn" : "PERS_NUM",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "trim(PERNR)"
             }
           },
           "DropColumn" : {
@@ -1907,7 +1907,7 @@
             "sourceColumn" : "EXTN_ENABL_CO_CD",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "trim(KNB1_EEW_CC)"
             }
           },
           "DropColumn" : {
@@ -1923,7 +1923,7 @@
             "sourceColumn" : "REC_CRT_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "CASE WHEN ERDAT = '00000000' OR length(regexp_replace(ERDAT, '(\\\\d+)', ''))> 0 OR LENGTH(ERDAT) < 8 THEN NULL ELSE TO_TIMESTAMP(ERDAT, 'yyyyMMdd') END"
             }
           },
           "DropColumn" : {
@@ -1939,7 +1939,7 @@
             "sourceColumn" : "NM_PRSNCRT_OBJ",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "trim(ERNAM)"
             }
           },
           "DropColumn" : {
@@ -1955,7 +1955,7 @@
             "sourceColumn" : "PSTNG_BLK_CO_CD",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "trim(SPERR)"
             }
           },
           "DropColumn" : {
@@ -1971,7 +1971,7 @@
             "sourceColumn" : "DEL_FL_MSTR_REC",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "trim(LOEVM)"
             }
           },
           "DropColumn" : {
@@ -1987,7 +1987,7 @@
             "sourceColumn" : "KEY_SRT_ACCORD_ASGNMT_NUM",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "trim(ZUAWA)"
             }
           },
           "DropColumn" : {
@@ -2003,7 +2003,7 @@
             "sourceColumn" : "ACTG_CLERK_ABBR",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "trim(BUSAB)"
             }
           },
           "DropColumn" : {
@@ -2019,7 +2019,7 @@
             "sourceColumn" : "RCNL_ACCT_GENL_LDGR",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "trim(AKONT)"
             }
           },
           "DropColumn" : {
@@ -2035,7 +2035,7 @@
             "sourceColumn" : "AUTH_GRP",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "trim(BEGRU)"
             }
           },
           "DropColumn" : {
@@ -2051,7 +2051,7 @@
             "sourceColumn" : "HD_OFF_ACCT_NUM",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "trim(KNRZE)"
             }
           },
           "DropColumn" : {
@@ -2067,7 +2067,7 @@
             "sourceColumn" : "ACCT_NUM_ALT_PYR",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "trim(KNRZB)"
             }
           },
           "DropColumn" : {
@@ -2083,7 +2083,7 @@
             "sourceColumn" : "IN_PMT_NOTC_CUST_WTH_CLR_ITM",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "trim(ZAMIM)"
             }
           },
           "DropColumn" : {
@@ -2099,7 +2099,7 @@
             "sourceColumn" : "IN_PMT_NOTC_SLS_DEPT",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "trim(ZAMIV)"
             }
           },
           "DropColumn" : {
@@ -2115,7 +2115,7 @@
             "sourceColumn" : "IN_PMT_NOTC_LEGAL_DEPT",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "trim(ZAMIR)"
             }
           },
           "DropColumn" : {
@@ -2131,7 +2131,7 @@
             "sourceColumn" : "IN_PMT_NOTC_ACTG_DEPT",
             "expression" : {
               "format" : "sql",
-              "expression" : ""
+              "expression" : "trim(ZAMIB)"
             }
           },
           "DropColumn" : {
@@ -3240,358 +3240,6 @@
     "isCustomOutputSchema" : false
   },
   "diagnostics" : [ {
-    "property" : "$.workflow.processes.D2NQeWQ9L9UYukK_0g8Q5$$E4AchzylxD3RQvGq8PkCl.properties.transformations[0].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Expression can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.D2NQeWQ9L9UYukK_0g8Q5$$E4AchzylxD3RQvGq8PkCl.properties.transformations[1].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Expression can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.D2NQeWQ9L9UYukK_0g8Q5$$E4AchzylxD3RQvGq8PkCl.properties.transformations[2].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Expression can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.D2NQeWQ9L9UYukK_0g8Q5$$E4AchzylxD3RQvGq8PkCl.properties.transformations[3].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Expression can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.D2NQeWQ9L9UYukK_0g8Q5$$E4AchzylxD3RQvGq8PkCl.properties.transformations[4].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Expression can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.D2NQeWQ9L9UYukK_0g8Q5$$E4AchzylxD3RQvGq8PkCl.properties.transformations[5].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Expression can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.D2NQeWQ9L9UYukK_0g8Q5$$E4AchzylxD3RQvGq8PkCl.properties.transformations[6].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Expression can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.D2NQeWQ9L9UYukK_0g8Q5$$E4AchzylxD3RQvGq8PkCl.properties.transformations[7].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Expression can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.D2NQeWQ9L9UYukK_0g8Q5$$E4AchzylxD3RQvGq8PkCl.properties.transformations[8].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Expression can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.D2NQeWQ9L9UYukK_0g8Q5$$E4AchzylxD3RQvGq8PkCl.properties.transformations[9].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Expression can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.D2NQeWQ9L9UYukK_0g8Q5$$E4AchzylxD3RQvGq8PkCl.properties.transformations[10].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Expression can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.D2NQeWQ9L9UYukK_0g8Q5$$E4AchzylxD3RQvGq8PkCl.properties.transformations[11].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Expression can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.D2NQeWQ9L9UYukK_0g8Q5$$E4AchzylxD3RQvGq8PkCl.properties.transformations[12].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Expression can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.D2NQeWQ9L9UYukK_0g8Q5$$E4AchzylxD3RQvGq8PkCl.properties.transformations[13].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Expression can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.D2NQeWQ9L9UYukK_0g8Q5$$E4AchzylxD3RQvGq8PkCl.properties.transformations[14].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Expression can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.D2NQeWQ9L9UYukK_0g8Q5$$E4AchzylxD3RQvGq8PkCl.properties.transformations[15].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Expression can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.D2NQeWQ9L9UYukK_0g8Q5$$E4AchzylxD3RQvGq8PkCl.properties.transformations[16].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Expression can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.D2NQeWQ9L9UYukK_0g8Q5$$E4AchzylxD3RQvGq8PkCl.properties.transformations[17].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Expression can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.D2NQeWQ9L9UYukK_0g8Q5$$E4AchzylxD3RQvGq8PkCl.properties.transformations[18].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Expression can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.D2NQeWQ9L9UYukK_0g8Q5$$E4AchzylxD3RQvGq8PkCl.properties.transformations[19].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Expression can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.D2NQeWQ9L9UYukK_0g8Q5$$E4AchzylxD3RQvGq8PkCl.properties.transformations[20].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Expression can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.D2NQeWQ9L9UYukK_0g8Q5$$E4AchzylxD3RQvGq8PkCl.properties.transformations[21].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "Expression can't be empty.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
     "property" : "$.workflow.processes.D2NQeWQ9L9UYukK_0g8Q5$$E4AchzylxD3RQvGq8PkCl.properties.transformations[22].expression.expression",
     "range" : {
       "start" : {
