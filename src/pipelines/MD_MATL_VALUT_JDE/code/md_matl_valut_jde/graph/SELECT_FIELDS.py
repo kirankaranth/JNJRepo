@@ -16,5 +16,6 @@ def SELECT_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("VALUT_CLS_CD"), 
         col("BASE_UOM_CD"), 
         col("PRC_AMT"), 
-        col("PRC_UNIT_NBR")
+        col("PRC_UNIT_NBR"), 
+        col("TOT_VAL_AMT")
     )

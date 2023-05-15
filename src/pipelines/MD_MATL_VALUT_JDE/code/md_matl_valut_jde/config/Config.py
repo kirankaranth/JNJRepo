@@ -10,13 +10,14 @@ class Config(ConfigBase):
             F4105: str=None,
             F41021: str=None,
             divisor: str=None,
+            costDivisor: str=None,
             DAI_ETL_ID: str=None,
             configDatabase: str=None,
             targetSchema: str=None,
             **kwargs
     ):
         self.spark = None
-        self.update(sourceSystem, F4101, F4105, F41021, divisor, DAI_ETL_ID, configDatabase, targetSchema)
+        self.update(sourceSystem, F4101, F4105, F41021, divisor, costDivisor, DAI_ETL_ID, configDatabase, targetSchema)
 
     def update(
             self,
@@ -25,6 +26,7 @@ class Config(ConfigBase):
             F4105: str="f4105",
             F41021: str="f41021",
             divisor: str="1",
+            costDivisor: str="10000",
             DAI_ETL_ID: str="0",
             configDatabase: str="  ",
             targetSchema: str="dev_md_l1",
@@ -36,6 +38,7 @@ class Config(ConfigBase):
         self.F4105 = F4105
         self.F41021 = F41021
         self.divisor = divisor
+        self.costDivisor = costDivisor
         self.DAI_ETL_ID = DAI_ETL_ID
         self.configDatabase = configDatabase
         self.targetSchema = targetSchema

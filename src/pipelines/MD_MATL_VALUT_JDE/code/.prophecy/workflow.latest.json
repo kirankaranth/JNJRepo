@@ -59,6 +59,14 @@
           "optional" : false,
           "isWorkflowNodeConfiguration" : false
         }, {
+          "name" : "costDivisor",
+          "kind" : {
+            "type" : "string",
+            "value" : "10000"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
           "name" : "DAI_ETL_ID",
           "kind" : {
             "type" : "string",
@@ -90,7 +98,7 @@
       },
       "fabrics" : { },
       "instances" : { },
-      "selected" : "djd",
+      "selected" : "mtr",
       "nonEditable" : [ ],
       "isSubscribedPipelineWithPipelineConfigs" : false
     },
@@ -907,6 +915,15 @@
                 "mappings" : [ ],
                 "tags" : [ ]
               }
+            }, {
+              "name" : "_upt_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
             } ]
           },
           "isStreaming" : false
@@ -1065,6 +1082,15 @@
                 "tags" : [ ]
               }
             }, {
+              "name" : "_upt_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
               "name" : "LIITM",
               "type" : "string",
               "nullable" : true,
@@ -1112,7 +1138,7 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "WegjLQlISnnGPPRfpoJlk$$MFd-rEMZ7JhyZZuzSeBkb##COUNCS", "WegjLQlISnnGPPRfpoJlk$$MFd-rEMZ7JhyZZuzSeBkb##LIITM", "WegjLQlISnnGPPRfpoJlk$$MFd-rEMZ7JhyZZuzSeBkb##TOT_INV", "WegjLQlISnnGPPRfpoJlk$$MFd-rEMZ7JhyZZuzSeBkb##COITM", "WegjLQlISnnGPPRfpoJlk$$MFd-rEMZ7JhyZZuzSeBkb##LIPBIN", "WegjLQlISnnGPPRfpoJlk$$MFd-rEMZ7JhyZZuzSeBkb##COMCU" ],
+        "columnsSelector" : [ "WegjLQlISnnGPPRfpoJlk$$MFd-rEMZ7JhyZZuzSeBkb##COUNCS", "WegjLQlISnnGPPRfpoJlk$$MFd-rEMZ7JhyZZuzSeBkb##_upt_", "WegjLQlISnnGPPRfpoJlk$$MFd-rEMZ7JhyZZuzSeBkb##LIITM", "WegjLQlISnnGPPRfpoJlk$$MFd-rEMZ7JhyZZuzSeBkb##TOT_INV", "WegjLQlISnnGPPRfpoJlk$$MFd-rEMZ7JhyZZuzSeBkb##COITM", "WegjLQlISnnGPPRfpoJlk$$MFd-rEMZ7JhyZZuzSeBkb##LIPBIN", "WegjLQlISnnGPPRfpoJlk$$MFd-rEMZ7JhyZZuzSeBkb##SRC_SYS_CD", "WegjLQlISnnGPPRfpoJlk$$MFd-rEMZ7JhyZZuzSeBkb##COMCU" ],
         "transformations" : [ {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
@@ -1263,7 +1289,151 @@
             "sourceColumn" : "PRC_UNIT_NBR",
             "expression" : {
               "format" : "sql",
-              "expression" : "10000"
+              "expression" : "CAST('$costDivisor' AS DECIMAL (18,4))"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "TOT_VAL_AMT",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "CAST((TOT_INV/'$divisor') * (COUNCS/'$costDivisor') AS DECIMAL (18,4))"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_l0_upt_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "_upt_"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "DAI_ETL_ID",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "'$DAI_ETL_ID'"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "DAI_CRT_DTTM",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "current_timestamp()"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "DAI_UPDT_DTTM",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "current_timestamp()"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_l1_upt_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "current_timestamp()"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_pk_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'MATL_NUM',MATL_NUM,'VALUT_AREA_CD',VALUT_AREA_CD,'VALUT_TYPE_CD',VALUT_TYPE_CD))"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_pk_md5_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'MATL_NUM',MATL_NUM,'VALUT_AREA_CD',VALUT_AREA_CD,'VALUT_TYPE_CD',VALUT_TYPE_CD)))"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_deleted_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "'F'"
             }
           },
           "DropColumn" : {
@@ -3609,6 +3779,15 @@
                 "tags" : [ ]
               }
             }, {
+              "name" : "_upt_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
               "name" : "LIITM",
               "type" : "string",
               "nullable" : true,
@@ -3718,7 +3897,88 @@
               }
             }, {
               "name" : "PRC_UNIT_NBR",
-              "type" : "integer",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "TOT_VAL_AMT",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_l0_upt_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DAI_ETL_ID",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DAI_CRT_DTTM",
+              "type" : "timestamp",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DAI_UPDT_DTTM",
+              "type" : "timestamp",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_l1_upt_",
+              "type" : "timestamp",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_pk_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_pk_md5_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_deleted_",
+              "type" : "string",
               "nullable" : false,
               "metadata" : {
                 "description" : "",
@@ -3737,7 +3997,7 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "CKURtXF03yMAQR62vFSj3$$-vj2lrNNtXtR63FGVOH35##VALUT_CLS_CD", "CKURtXF03yMAQR62vFSj3$$-vj2lrNNtXtR63FGVOH35##SRC_SYS_CD", "CKURtXF03yMAQR62vFSj3$$-vj2lrNNtXtR63FGVOH35##VALUT_AREA_CD", "CKURtXF03yMAQR62vFSj3$$-vj2lrNNtXtR63FGVOH35##PRC_CNTL_IND", "CKURtXF03yMAQR62vFSj3$$-vj2lrNNtXtR63FGVOH35##PRC_UNIT_NBR", "CKURtXF03yMAQR62vFSj3$$-vj2lrNNtXtR63FGVOH35##MATL_NUM", "CKURtXF03yMAQR62vFSj3$$-vj2lrNNtXtR63FGVOH35##BASE_UOM_CD", "CKURtXF03yMAQR62vFSj3$$-vj2lrNNtXtR63FGVOH35##VALUT_TYPE_CD", "CKURtXF03yMAQR62vFSj3$$-vj2lrNNtXtR63FGVOH35##PRC_AMT", "CKURtXF03yMAQR62vFSj3$$-vj2lrNNtXtR63FGVOH35##TOT_STK_QTY" ],
+        "columnsSelector" : [ "CKURtXF03yMAQR62vFSj3$$-vj2lrNNtXtR63FGVOH35##VALUT_CLS_CD", "CKURtXF03yMAQR62vFSj3$$-vj2lrNNtXtR63FGVOH35##SRC_SYS_CD", "CKURtXF03yMAQR62vFSj3$$-vj2lrNNtXtR63FGVOH35##TOT_VAL_AMT", "CKURtXF03yMAQR62vFSj3$$-vj2lrNNtXtR63FGVOH35##VALUT_AREA_CD", "CKURtXF03yMAQR62vFSj3$$-vj2lrNNtXtR63FGVOH35##PRC_UNIT_NBR", "CKURtXF03yMAQR62vFSj3$$-vj2lrNNtXtR63FGVOH35##PRC_CNTL_IND", "CKURtXF03yMAQR62vFSj3$$-vj2lrNNtXtR63FGVOH35##MATL_NUM", "CKURtXF03yMAQR62vFSj3$$-vj2lrNNtXtR63FGVOH35##BASE_UOM_CD", "CKURtXF03yMAQR62vFSj3$$-vj2lrNNtXtR63FGVOH35##VALUT_TYPE_CD", "CKURtXF03yMAQR62vFSj3$$-vj2lrNNtXtR63FGVOH35##PRC_AMT", "CKURtXF03yMAQR62vFSj3$$-vj2lrNNtXtR63FGVOH35##TOT_STK_QTY" ],
         "expressions" : [ {
           "target" : "SRC_SYS_CD",
           "expression" : {
@@ -3806,6 +4066,13 @@
           "expression" : {
             "format" : "sql",
             "expression" : "PRC_UNIT_NBR"
+          },
+          "description" : ""
+        }, {
+          "target" : "TOT_VAL_AMT",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "TOT_VAL_AMT"
           },
           "description" : ""
         } ]
@@ -3939,8 +4206,17 @@
               }
             }, {
               "name" : "PRC_UNIT_NBR",
-              "type" : "integer",
-              "nullable" : false,
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "TOT_VAL_AMT",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
               "metadata" : {
                 "description" : "",
                 "mappings" : [ ],
@@ -4366,12 +4642,20 @@
           },
           "description" : "",
           "_row_id" : null
+        }, {
+          "target" : "_upt_",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "max(_upt_)"
+          },
+          "description" : "",
+          "_row_id" : null
         } ],
         "allowSelection" : true,
         "pivotColumn" : null,
         "pivotValues" : [ ],
-        "activeTab" : "groupBy",
-        "columnsSelector" : [ "mqGVCkP0POwQLjhdxT5is$$Q4W4kGTLWnxEZz5upPqt1##COMCU", "mqGVCkP0POwQLjhdxT5is$$Q4W4kGTLWnxEZz5upPqt1##COUNCS", "mqGVCkP0POwQLjhdxT5is$$Q4W4kGTLWnxEZz5upPqt1##COLITM", "mqGVCkP0POwQLjhdxT5is$$Q4W4kGTLWnxEZz5upPqt1##COLEDG", "mqGVCkP0POwQLjhdxT5is$$Q4W4kGTLWnxEZz5upPqt1##COITM" ],
+        "activeTab" : "aggregate",
+        "columnsSelector" : [ "mqGVCkP0POwQLjhdxT5is$$Q4W4kGTLWnxEZz5upPqt1##_upt_", "mqGVCkP0POwQLjhdxT5is$$Q4W4kGTLWnxEZz5upPqt1##COMCU", "mqGVCkP0POwQLjhdxT5is$$Q4W4kGTLWnxEZz5upPqt1##COUNCS", "mqGVCkP0POwQLjhdxT5is$$Q4W4kGTLWnxEZz5upPqt1##COLITM", "mqGVCkP0POwQLjhdxT5is$$Q4W4kGTLWnxEZz5upPqt1##COLEDG", "mqGVCkP0POwQLjhdxT5is$$Q4W4kGTLWnxEZz5upPqt1##COITM" ],
         "groupBy" : [ {
           "target" : "SRC_SYS_CD",
           "expression" : {

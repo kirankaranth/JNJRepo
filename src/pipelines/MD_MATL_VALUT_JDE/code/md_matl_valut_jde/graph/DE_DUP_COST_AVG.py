@@ -14,4 +14,4 @@ def DE_DUP_COST_AVG(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("COITM")
     )
 
-    return df1.agg(mean(col("COUNCS")).alias("COUNCS"))
+    return df1.agg(mean(col("COUNCS")).alias("COUNCS"), max(col("_upt_")).alias("_upt_"))
