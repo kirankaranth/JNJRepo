@@ -6,4 +6,4 @@ from sap_md_co_cd_bbl.config.ConfigStore import *
 from sap_md_co_cd_bbl.udfs.UDFs import *
 
 def DS_SAP_HMD_KNB1(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"bbl.knb1")
+    return spark.read.table(f"{Config.sourceDatabase}.knb1")
