@@ -7,7 +7,36 @@ from prophecy.utils import *
 from sap_md_co_cd_mbp_fsn_atl.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    pass
+    df_DS_SAP_HMD_KNB1 = DS_SAP_HMD_KNB1(spark)
+    df_DS_SAP_HMD_KNB1 = collectMetrics(
+        spark, 
+        df_DS_SAP_HMD_KNB1, 
+        "graph", 
+        "emiI_yom1y6w5OjRkfMZW$$ZMqLmCzq8O498Gp3kJimy", 
+        "FdFYmWVcZxCjUJUfKIlR2$$ZZHwMIiDgmx18PNdZ-g3M"
+    )
+    df_MANDT_FILTER_KNB1 = MANDT_FILTER_KNB1(spark, df_DS_SAP_HMD_KNB1)
+    df_NEW_FIELDS_TRANSFORMATION = NEW_FIELDS_TRANSFORMATION(spark, df_MANDT_FILTER_KNB1)
+    df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS_TRANSFORMATION)
+    df_SET_FIELD_ORDER_REFORMAT = collectMetrics(
+        spark, 
+        df_SET_FIELD_ORDER_REFORMAT, 
+        "graph", 
+        "KDnE4a3-i7i8jPR9w8ps-$$v7WSsnis3v8FUXGyanHmR", 
+        "EfrICXb1yucfi2O7H7p7Z$$qd1GWza0gBJifhXb1_vnw"
+    )
+    df_DUPLICATE_CHECK = DUPLICATE_CHECK(spark, df_SET_FIELD_ORDER_REFORMAT)
+    MD_CO_CD(spark, df_SET_FIELD_ORDER_REFORMAT)
+    df_DUPLICATE_CHECK_FILTER = DUPLICATE_CHECK_FILTER(spark, df_DUPLICATE_CHECK)
+    df_DUPLICATE_CHECK_FILTER = collectMetrics(
+        spark, 
+        df_DUPLICATE_CHECK_FILTER, 
+        "graph", 
+        "ckYKqaK_sIrAq_4dexM71$$RrIWmR4CXEp0fF8H849BG", 
+        "_2wc4qJwyLuTK9QeRrKBA$$ToYdv4VZKOpQw3HYI2IjS"
+    )
+    df_DUPLICATE_CHECK_FILTER.cache().count()
+    df_DUPLICATE_CHECK_FILTER.unpersist()
 
 def main():
     spark = SparkSession.builder\
