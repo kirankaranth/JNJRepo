@@ -1,10 +1,10 @@
 from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
-from sap_md_co_cd_p01_bbl_geu_svs.config.ConfigStore import *
-from sap_md_co_cd_p01_bbl_geu_svs.udfs.UDFs import *
+from sap_md_co_cd_p01_geu_svs.config.ConfigStore import *
+from sap_md_co_cd_p01_geu_svs.udfs.UDFs import *
 from prophecy.utils import *
-from sap_md_co_cd_p01_bbl_geu_svs.graph import *
+from sap_md_co_cd_p01_geu_svs.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_DS_SAP_P01_BBL_GEU_SVS_KNB1 = DS_SAP_P01_BBL_GEU_SVS_KNB1(spark)

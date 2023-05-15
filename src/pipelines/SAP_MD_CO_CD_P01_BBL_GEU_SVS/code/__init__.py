@@ -1,1 +1,1 @@
-from .sap_md_co_cd_p01_bbl_geu_svs import *
+from .sap_md_co_cd_p01_geu_svs import *
