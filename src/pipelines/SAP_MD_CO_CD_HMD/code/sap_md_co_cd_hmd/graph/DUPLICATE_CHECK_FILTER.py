@@ -5,5 +5,5 @@ from prophecy.libs import typed_lit
 from sap_md_co_cd_hmd.config.ConfigStore import *
 from sap_md_co_cd_hmd.udfs.UDFs import *
 
-def DS_SAP_HMD_KNB1(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.sourceDatabase}.knb1")
+def DUPLICATE_CHECK_FILTER(spark: SparkSession, in0: DataFrame) -> DataFrame:
+    return in0.filter((col("PK_COUNT") > lit(1)))

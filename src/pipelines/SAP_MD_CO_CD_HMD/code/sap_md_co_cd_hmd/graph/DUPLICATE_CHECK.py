@@ -5,5 +5,7 @@ from prophecy.libs import typed_lit
 from sap_md_co_cd_hmd.config.ConfigStore import *
 from sap_md_co_cd_hmd.udfs.UDFs import *
 
-def DS_SAP_HMD_KNB1(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.sourceDatabase}.knb1")
+def DUPLICATE_CHECK(spark: SparkSession, in0: DataFrame) -> DataFrame:
+    df1 = in0.groupBy(col("SRC_SYS_CD"), col("CO_CD"), col("CUST_NUM"))
+
+    return df1.agg(count(lit(1)).alias("PK_COUNT"))
