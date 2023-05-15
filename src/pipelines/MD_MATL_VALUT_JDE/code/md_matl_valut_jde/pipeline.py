@@ -7,10 +7,6 @@ from prophecy.utils import *
 from md_matl_valut_jde.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    df_F4105 = F4105(spark)
-    df_COLEDG_COCSIN = COLEDG_COCSIN(spark, df_F4105)
-    df_DE_DUP_COST_AVG = DE_DUP_COST_AVG(spark, df_COLEDG_COCSIN)
-    F4105_LU(spark, df_DE_DUP_COST_AVG)
     df_F4101 = F4101(spark)
     df_SELECT = SELECT(spark, df_F4101)
     df_DEL1 = DEL1(spark, df_SELECT)
@@ -18,7 +14,13 @@ def pipeline(spark: SparkSession) -> None:
     df_F41021 = F41021(spark)
     df_DEL = DEL(spark, df_F41021)
     df_INV_SUM = INV_SUM(spark, df_DEL)
-    df_XFORM = XFORM(spark, df_INV_SUM)
+    df_F4105 = F4105(spark)
+    df_COLEDG_COCSIN = COLEDG_COCSIN(spark, df_F4105)
+    df_DE_DUP_COST_AVG = DE_DUP_COST_AVG(spark, df_COLEDG_COCSIN)
+    df_JOIN = JOIN(spark, df_DE_DUP_COST_AVG, df_INV_SUM)
+    df_XFORM = XFORM(spark, df_JOIN)
+    df_SELECT_FIELDS = SELECT_FIELDS(spark, df_XFORM)
+    MATL_VALUT(spark, df_SELECT_FIELDS)
 
 def main():
     spark = SparkSession.builder\
