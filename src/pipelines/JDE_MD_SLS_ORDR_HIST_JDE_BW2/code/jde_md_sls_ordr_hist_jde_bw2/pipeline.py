@@ -9,7 +9,8 @@ from jde_md_sls_ordr_hist_jde_bw2.graph import *
 def pipeline(spark: SparkSession) -> None:
     df_F42199 = F42199(spark)
     df_DELETED = DELETED(spark, df_F42199)
-    df_TRANSFORM = TRANSFORM(spark, df_DELETED)
+    df_NEW_FIELDS = NEW_FIELDS(spark, df_DELETED)
+    df_SET_FIELDS_ORDER = SET_FIELDS_ORDER(spark, df_NEW_FIELDS)
 
 def main():
     spark = SparkSession.builder\
