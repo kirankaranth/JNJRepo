@@ -46,6 +46,22 @@ class XFORMTest(BaseTestCase):
             self.maxUnequalRowsToShow
         )
 
+    def test_decimal(self):
+        dfIn0 = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/md_matl_valut_jde/graph/XFORM/in0/schema.json',
+            'test/resources/data/md_matl_valut_jde/graph/XFORM/in0/data/test_decimal.json',
+            'in0'
+        )
+        dfOut = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/md_matl_valut_jde/graph/XFORM/out/schema.json',
+            'test/resources/data/md_matl_valut_jde/graph/XFORM/out/data/test_decimal.json',
+            'out'
+        )
+        dfOutComputed = XFORM(self.spark, dfIn0)
+        assertDFEquals(dfOut.select("PRC_AMT"), dfOutComputed.select("PRC_AMT"), self.maxUnequalRowsToShow)
+
     def setUp(self):
         BaseTestCase.setUp(self)
         import os
