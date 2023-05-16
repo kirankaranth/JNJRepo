@@ -46,6 +46,26 @@ class SchemaTransform_MCH1Test(BaseTestCase):
         dfOutComputed = SchemaTransform_MCH1(self.spark, dfIn0)
         assertDFEquals(dfOut.select("AVAIL_DTTM"), dfOutComputed.select("AVAIL_DTTM"), self.maxUnequalRowsToShow)
 
+    def test_trim(self):
+        dfIn0 = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/sap_01_md_btch_bba_bbl_bbn_bwi_tai_geu_hcs_mrs_p01_mbp_svs_fsn_atl_hm2_hmd/graph/SchemaTransform_MCH1/in0/schema.json',
+            'test/resources/data/sap_01_md_btch_bba_bbl_bbn_bwi_tai_geu_hcs_mrs_p01_mbp_svs_fsn_atl_hm2_hmd/graph/SchemaTransform_MCH1/in0/data/test_trim.json',
+            'in0'
+        )
+        dfOut = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/sap_01_md_btch_bba_bbl_bbn_bwi_tai_geu_hcs_mrs_p01_mbp_svs_fsn_atl_hm2_hmd/graph/SchemaTransform_MCH1/out/schema.json',
+            'test/resources/data/sap_01_md_btch_bba_bbl_bbn_bwi_tai_geu_hcs_mrs_p01_mbp_svs_fsn_atl_hm2_hmd/graph/SchemaTransform_MCH1/out/data/test_trim.json',
+            'out'
+        )
+        dfOutComputed = SchemaTransform_MCH1(self.spark, dfIn0)
+        assertDFEquals(
+            dfOut.select("DEL_IND", "SUP_NUM", "SUP_BTCH_NUM"),
+            dfOutComputed.select("DEL_IND", "SUP_NUM", "SUP_BTCH_NUM"),
+            self.maxUnequalRowsToShow
+        )
+
     def setUp(self):
         BaseTestCase.setUp(self)
         import os
