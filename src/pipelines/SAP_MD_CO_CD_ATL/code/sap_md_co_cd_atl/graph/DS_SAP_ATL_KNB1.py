@@ -6,4 +6,4 @@ from sap_md_co_cd_atl.config.ConfigStore import *
 from sap_md_co_cd_atl.udfs.UDFs import *
 
 def DS_SAP_ATL_KNB1(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"atl.knb1")
+    return spark.read.table(f"{Config.sourceDatabase}.knb1")
