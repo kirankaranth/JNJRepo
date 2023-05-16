@@ -1,0 +1,189 @@
+{
+  "metainfo" : {
+    "id" : "1",
+    "language" : "python",
+    "fabricId" : "32",
+    "frontEndLanguage" : "sql",
+    "mode" : "batch",
+    "udfs" : {
+      "language" : "python",
+      "udfs" : [ ],
+      "functionPackageName" : "cdl_l1_team.cdl_md_l1.functions",
+      "sharedFunctionPackageNames" : [ ]
+    },
+    "udafs" : {
+      "language" : "python",
+      "code" : ""
+    },
+    "configuration" : {
+      "common" : {
+        "type" : "record",
+        "fields" : [ {
+          "name" : "SRC_SYS_CD",
+          "kind" : {
+            "type" : "string",
+            "value" : "bbl"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "MANDT",
+          "kind" : {
+            "type" : "string",
+            "value" : "100"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "DAI_ETL_ID",
+          "kind" : {
+            "type" : "int",
+            "value" : 0
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "sourceTable",
+          "kind" : {
+            "type" : "string",
+            "value" : "mvke"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        } ]
+      },
+      "oldCommon" : {
+        "type" : "record",
+        "fields" : [ ]
+      },
+      "fabrics" : { },
+      "instances" : { },
+      "selected" : "default",
+      "nonEditable" : [ ],
+      "isSubscribedPipelineWithPipelineConfigs" : false
+    },
+    "sparkConf" : [ ],
+    "hadoopConf" : [ ],
+    "codeMode" : "sparse",
+    "buildSystem" : "maven",
+    "externalDependencies" : [ ],
+    "dependentProjectExternalDependencies" : [ ],
+    "isImported" : false,
+    "interimMode" : "Full",
+    "interimModeEnabled" : true,
+    "visualCodeInterimMode" : "Disabled",
+    "recordsLimit" : {
+      "enabled" : false,
+      "value" : 1000
+    },
+    "topLevelPackage" : "sap_01_md_matl_dstn_chn",
+    "configurationVersion" : "v1"
+  },
+  "connections" : [ {
+    "id" : "uUVCoTjxRzAUWx_DhnASB$$9jBuX0NZA6bGgmQQE9qoj",
+    "source" : "d47JMjE5wgKv1mqAViKIo$$fu3Gx9WRBcmB52bsPdri5",
+    "sourcePort" : "UBwVO_QJdcVFzJwoZYTAb$$EbEjqySFvZtvz19p3lkkk",
+    "target" : "3_b232PPZCAUEdGUHJLKG$$9HyyLkSwEtxyWu3013mB8",
+    "targetPort" : "a8dxn-lseHerwmNvVsuGD$$erltidGcIiB10DtJ-Hf-8"
+  } ],
+  "processes" : {
+    "d47JMjE5wgKv1mqAViKIo$$fu3Gx9WRBcmB52bsPdri5" : {
+      "id" : "d47JMjE5wgKv1mqAViKIo$$fu3Gx9WRBcmB52bsPdri5",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "DS_SAP_01_MVKE",
+        "slug" : "DS_SAP_01_MVKE",
+        "x" : -200,
+        "y" : 60,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "UBwVO_QJdcVFzJwoZYTAb$$EbEjqySFvZtvz19p3lkkk",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/DS_SAP_01_MVKE"
+      }
+    },
+    "3_b232PPZCAUEdGUHJLKG$$9HyyLkSwEtxyWu3013mB8" : {
+      "id" : "3_b232PPZCAUEdGUHJLKG$$9HyyLkSwEtxyWu3013mB8",
+      "component" : "Filter",
+      "metadata" : {
+        "label" : "MANDT_FILTER",
+        "slug" : "MANDT_FILTER",
+        "x" : -40,
+        "y" : 60,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "a8dxn-lseHerwmNvVsuGD$$erltidGcIiB10DtJ-Hf-8",
+          "slug" : "in0"
+        } ],
+        "outputs" : [ {
+          "id" : "a6zsKaM4usNNYIs2ty1UN$$Qfd2J4zAdZD4ymfycYEZk",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "condition" : {
+          "format" : "sql",
+          "expression" : "_deleted_ = 'F' and MANDT = '$MANDT'"
+        }
+      }
+    }
+  },
+  "ports" : {
+    "inputs" : [ ],
+    "outputs" : [ ],
+    "selectedInputFields" : [ ],
+    "isCustomOutputSchema" : false
+  },
+  "diagnostics" : [ {
+    "property" : "$.workflow.processes.d47JMjE5wgKv1mqAViKIo$$fu3Gx9WRBcmB52bsPdri5.properties.dataset.schema",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 2,
+    "message" : "Missing Schema. Please infer schema or provide it manually.",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  }, {
+    "property" : "$.workflow.processes.3_b232PPZCAUEdGUHJLKG$$9HyyLkSwEtxyWu3013mB8",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 1,
+    "message" : "One of the upstream gems is broken. Please, fix it first.",
+    "tags" : [ ],
+    "relatedInformation" : [ ]
+  } ]
+}
