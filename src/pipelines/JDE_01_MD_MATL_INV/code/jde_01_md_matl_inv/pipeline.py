@@ -8,13 +8,36 @@ from jde_01_md_matl_inv.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_JDE_F4101 = JDE_F4101(spark)
-    df_JDE_F41021 = JDE_F41021(spark)
-    df_DEL_FILTER = DEL_FILTER(spark, df_JDE_F41021)
+    df_JDE_F4101 = collectMetrics(
+        spark, 
+        df_JDE_F4101, 
+        "graph", 
+        "0Lhszmn7DhrOVbS6PTGma$$d5Kj6tlMD5fUdmVz8b70W", 
+        "vQEAYCSsSfGZ8y2hiXHli$$ieCg1G8Y7sZ1-hkOXC2hc"
+    )
     df_DEL_FILTER2 = DEL_FILTER2(spark, df_JDE_F4101)
-    df_JOIN = JOIN(spark, df_DEL_FILTER, df_DEL_FILTER2)
+    df_Reformat_1 = Reformat_1(spark, df_DEL_FILTER2)
+    df_JDE_F41021 = JDE_F41021(spark)
+    df_JDE_F41021 = collectMetrics(
+        spark, 
+        df_JDE_F41021, 
+        "graph", 
+        "l4XknEJa4nItR14JB7_y1$$cmLxEc1Wo1pK2xBRr2dzE", 
+        "LCkx_vF1km9v1e2jHuJdU$$eivPtVkto7F6j3n8lTiw1"
+    )
+    df_DEL_FILTER = DEL_FILTER(spark, df_JDE_F41021)
+    df_Reformat_2 = Reformat_2(spark, df_DEL_FILTER)
+    df_JOIN = JOIN(spark, df_Reformat_2, df_Reformat_1)
     df_TRANSFORM = TRANSFORM(spark, df_JOIN)
     df_DEDUPLICATE = DEDUPLICATE(spark, df_TRANSFORM)
     df_SET_FIELD_ORDER = SET_FIELD_ORDER(spark, df_DEDUPLICATE)
+    df_SET_FIELD_ORDER = collectMetrics(
+        spark, 
+        df_SET_FIELD_ORDER, 
+        "graph", 
+        "eocfCGB_Ntnf-mPShLDUL$$OSsJliJS0uB5U--nSZvGI", 
+        "b46Ffqs-8HbCWzHvxvAmg$$W2KWWaiMsXop1XLVR4F8y"
+    )
     MD_MATL_INV(spark, df_SET_FIELD_ORDER)
 
 def main():
@@ -26,6 +49,10 @@ def main():
                 .getOrCreate()\
                 .newSession()
     Utils.initializeFromArgs(spark, parse_args())
+    MetricsCollector.initializeMetrics(spark)
+    spark.conf.set("prophecy.collect.basic.stats", "true")
+    spark.conf.set("spark.sql.legacy.allowUntypedScalaUDF", "true")
+    spark.conf.set("spark.sql.optimizer.excludedRules", "org.apache.spark.sql.catalyst.optimizer.ColumnPruning")
     spark.conf.set("prophecy.metadata.pipeline.uri", "pipelines/JDE_01_MD_MATL_INV")
     
     MetricsCollector.start(spark = spark, pipelineId = "pipelines/JDE_01_MD_MATL_INV")
