@@ -9,6 +9,10 @@ from sap_01_md_matl_dstn_chn.graph import *
 def pipeline(spark: SparkSession) -> None:
     df_DS_SAP_01_MVKE = DS_SAP_01_MVKE(spark)
     df_MANDT_FILTER = MANDT_FILTER(spark, df_DS_SAP_01_MVKE)
+    df_NEW_FIELDS = NEW_FIELDS(spark, df_MANDT_FILTER)
+    df_ORDER = ORDER(spark, df_NEW_FIELDS)
+    df_DEDUPLICATE = DEDUPLICATE(spark, df_ORDER)
+    MD_MATL_DSTN_CHN(spark, df_DEDUPLICATE)
 
 def main():
     spark = SparkSession.builder\

@@ -1,2 +1,6 @@
 from .DS_SAP_01_MVKE import DS_SAP_01_MVKE
 from .MANDT_FILTER import MANDT_FILTER
+from .NEW_FIELDS import NEW_FIELDS
+from .MD_MATL_DSTN_CHN import MD_MATL_DSTN_CHN
+from .DEDUPLICATE import DEDUPLICATE
+from .ORDER import ORDER

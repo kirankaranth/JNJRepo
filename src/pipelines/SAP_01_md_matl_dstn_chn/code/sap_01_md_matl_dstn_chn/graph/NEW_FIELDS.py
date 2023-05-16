@@ -5,5 +5,5 @@ from prophecy.libs import typed_lit
 from sap_01_md_matl_dstn_chn.config.ConfigStore import *
 from sap_01_md_matl_dstn_chn.udfs.UDFs import *
 
-def DS_SAP_01_MVKE(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.sourceDatabase}.{Config.sourceTable}")
+def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
+    return in0
