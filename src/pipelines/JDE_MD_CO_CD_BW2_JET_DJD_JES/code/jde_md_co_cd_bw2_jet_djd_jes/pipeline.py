@@ -7,7 +7,16 @@ from prophecy.utils import *
 from jde_md_co_cd_bw2_jet_djd_jes.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    pass
+    df_DS_JDE_F0101_adt = DS_JDE_F0101_adt(spark)
+    df_DS_JDE_F0101_adt = collectMetrics(
+        spark, 
+        df_DS_JDE_F0101_adt, 
+        "graph", 
+        "pOhePJ2y3XrQ0CqBcZG5t$$egSZA1Bab_xa_YW6Eftl4", 
+        "yBEqnYoWsymFpTjrJ88WK$$_HNA_LSxn7jnxwtsv0ksF"
+    )
+    df_DS_JDE_F0101_adt.cache().count()
+    df_DS_JDE_F0101_adt.unpersist()
 
 def main():
     spark = SparkSession.builder\

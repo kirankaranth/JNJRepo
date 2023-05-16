@@ -20,7 +20,7 @@ class Config(ConfigBase):
             self,
             sourceSystem: str="bw2",
             targetSchema: str="dev_md_l1",
-            sourceTable: str="F0101_adt",
+            sourceTable: str="f0101_adt",
             sourceDatabase: str="bw2",
             DAI_ETL_ID: int=0,
             ConfigDatabase: str=" ",
