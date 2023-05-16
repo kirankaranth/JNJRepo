@@ -11,7 +11,7 @@ class Config(ConfigBase):
             DBTABLE: str=None,
             DBTABLE1: str=None,
             TMST: str=None,
-            DAI_ETL_ID: str=None,
+            DAI_ETL_ID: int=None,
             configDatabase: str=None,
             targetSchema: str=None,
             **kwargs
@@ -37,7 +37,7 @@ class Config(ConfigBase):
             DBTABLE: str="MBEW",
             DBTABLE1: str="MARA",
             TMST: str="CASE WHEN TIMESTAMP = '0' THEN to_timestamp(NULL) ELSE to_timestamp(TIMESTAMP,'yyyyMMddHHmmss') END",
-            DAI_ETL_ID: str="0",
+            DAI_ETL_ID: int=0,
             configDatabase: str=" ",
             targetSchema: str="dev_md_l1",
             **kwargs
@@ -49,7 +49,7 @@ class Config(ConfigBase):
         self.DBTABLE = DBTABLE
         self.DBTABLE1 = DBTABLE1
         self.TMST = TMST
-        self.DAI_ETL_ID = DAI_ETL_ID
+        self.DAI_ETL_ID = self.get_int_value(DAI_ETL_ID)
         self.configDatabase = configDatabase
         self.targetSchema = targetSchema
         pass

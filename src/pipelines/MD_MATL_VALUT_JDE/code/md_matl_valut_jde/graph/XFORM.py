@@ -12,14 +12,23 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("VALUT_AREA_CD", col("COMCU"))\
         .withColumn("PRC_CNTL_IND", lit("07"))\
         .withColumn("VALUT_TYPE_CD", col("LIPBIN"))\
-        .withColumn("TOT_STK_QTY", (col("TOT_INV") / lit(Config.divisor)).cast(DecimalType(18, 4)))\
+        .withColumn(
+          "TOT_STK_QTY",
+          ((col("TOT_INV") / lit(Config.divisor)) + (col("INSP") / lit(Config.divisor))).cast(DecimalType(18, 4))
+        )\
         .withColumn("VALUT_CLS_CD", trim(lookup("F4101_LU", col("LIITM")).getField("IMGLPT")))\
         .withColumn("BASE_UOM_CD", trim(lookup("F4101_LU", col("LIITM")).getField("IMUOM1")))\
         .withColumn("PRC_AMT", col("COUNCS").cast(DecimalType(18, 4)))\
         .withColumn("PRC_UNIT_NBR", lit(Config.costDivisor).cast(DecimalType(18, 4)))\
         .withColumn(
           "TOT_VAL_AMT",
-          ((col("TOT_INV") / lit(Config.divisor)) * (col("COUNCS") / lit(Config.costDivisor))).cast(DecimalType(18, 4))
+          (
+            (col("TOT_INV") / lit(Config.divisor))
+            + ((col("INSP") / lit(Config.divisor)) * (col("COUNCS") / lit(Config.costDivisor)))
+          )\
+            .cast(
+            DecimalType(18, 4)
+          )
         )\
         .withColumn("_l0_upt_", col("_upt_"))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\

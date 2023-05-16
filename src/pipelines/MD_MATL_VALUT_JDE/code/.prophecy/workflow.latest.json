@@ -783,12 +783,20 @@
           },
           "description" : "",
           "_row_id" : ""
+        }, {
+          "target" : "INSP",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "CAST(SUM(LIQTIN) AS DECIMAL (18,4))"
+          },
+          "description" : "",
+          "_row_id" : ""
         } ],
         "allowSelection" : true,
         "pivotColumn" : null,
         "pivotValues" : [ ],
-        "activeTab" : "groupBy",
-        "columnsSelector" : [ "An3ob7PcYqdpnjUp0CHHn$$vXlIYNSMNk10tsyXR8pkT##LIMCU", "An3ob7PcYqdpnjUp0CHHn$$vXlIYNSMNk10tsyXR8pkT##LIPBIN", "An3ob7PcYqdpnjUp0CHHn$$vXlIYNSMNk10tsyXR8pkT##LIITM", "An3ob7PcYqdpnjUp0CHHn$$vXlIYNSMNk10tsyXR8pkT##LIPQOH" ],
+        "activeTab" : "aggregate",
+        "columnsSelector" : [ "An3ob7PcYqdpnjUp0CHHn$$vXlIYNSMNk10tsyXR8pkT##LIITM", "An3ob7PcYqdpnjUp0CHHn$$vXlIYNSMNk10tsyXR8pkT##LIPQOH", "An3ob7PcYqdpnjUp0CHHn$$vXlIYNSMNk10tsyXR8pkT##LIMCU", "An3ob7PcYqdpnjUp0CHHn$$vXlIYNSMNk10tsyXR8pkT##LIQTIN", "An3ob7PcYqdpnjUp0CHHn$$vXlIYNSMNk10tsyXR8pkT##LIPBIN" ],
         "groupBy" : [ {
           "target" : "LIITM",
           "expression" : {
@@ -968,6 +976,15 @@
                 "mappings" : [ ],
                 "tags" : [ ]
               }
+            }, {
+              "name" : "INSP",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
             } ]
           },
           "isStreaming" : false
@@ -1126,6 +1143,15 @@
                 "mappings" : [ ],
                 "tags" : [ ]
               }
+            }, {
+              "name" : "INSP",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
             } ]
           },
           "isStreaming" : false
@@ -1138,7 +1164,7 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "WegjLQlISnnGPPRfpoJlk$$MFd-rEMZ7JhyZZuzSeBkb##COUNCS", "WegjLQlISnnGPPRfpoJlk$$MFd-rEMZ7JhyZZuzSeBkb##_upt_", "WegjLQlISnnGPPRfpoJlk$$MFd-rEMZ7JhyZZuzSeBkb##LIITM", "WegjLQlISnnGPPRfpoJlk$$MFd-rEMZ7JhyZZuzSeBkb##TOT_INV", "WegjLQlISnnGPPRfpoJlk$$MFd-rEMZ7JhyZZuzSeBkb##COITM", "WegjLQlISnnGPPRfpoJlk$$MFd-rEMZ7JhyZZuzSeBkb##LIPBIN", "WegjLQlISnnGPPRfpoJlk$$MFd-rEMZ7JhyZZuzSeBkb##SRC_SYS_CD", "WegjLQlISnnGPPRfpoJlk$$MFd-rEMZ7JhyZZuzSeBkb##COMCU" ],
+        "columnsSelector" : [ "WegjLQlISnnGPPRfpoJlk$$MFd-rEMZ7JhyZZuzSeBkb##COUNCS", "WegjLQlISnnGPPRfpoJlk$$MFd-rEMZ7JhyZZuzSeBkb##_upt_", "WegjLQlISnnGPPRfpoJlk$$MFd-rEMZ7JhyZZuzSeBkb##LIITM", "WegjLQlISnnGPPRfpoJlk$$MFd-rEMZ7JhyZZuzSeBkb##TOT_INV", "WegjLQlISnnGPPRfpoJlk$$MFd-rEMZ7JhyZZuzSeBkb##COITM", "WegjLQlISnnGPPRfpoJlk$$MFd-rEMZ7JhyZZuzSeBkb##LIPBIN", "WegjLQlISnnGPPRfpoJlk$$MFd-rEMZ7JhyZZuzSeBkb##SRC_SYS_CD", "WegjLQlISnnGPPRfpoJlk$$MFd-rEMZ7JhyZZuzSeBkb##INSP", "WegjLQlISnnGPPRfpoJlk$$MFd-rEMZ7JhyZZuzSeBkb##COMCU" ],
         "transformations" : [ {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
@@ -1225,7 +1251,7 @@
             "sourceColumn" : "TOT_STK_QTY",
             "expression" : {
               "format" : "sql",
-              "expression" : "CAST(TOT_INV/'$divisor' AS DECIMAL (18,4))"
+              "expression" : "CAST((TOT_INV/'$divisor') + (INSP/'$divisor') AS DECIMAL (18,4))"
             }
           },
           "DropColumn" : {
@@ -1305,7 +1331,7 @@
             "sourceColumn" : "TOT_VAL_AMT",
             "expression" : {
               "format" : "sql",
-              "expression" : "CAST((TOT_INV/'$divisor') * (COUNCS/'$costDivisor') AS DECIMAL (18,4))"
+              "expression" : "CAST((TOT_INV/'$divisor') + (INSP/'$divisor') * (COUNCS/'$costDivisor') AS DECIMAL (18,4))"
             }
           },
           "DropColumn" : {
@@ -3816,6 +3842,15 @@
               }
             }, {
               "name" : "TOT_INV",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "INSP",
               "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
