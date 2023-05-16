@@ -98,7 +98,7 @@
       },
       "fabrics" : { },
       "instances" : { },
-      "selected" : "default",
+      "selected" : "deu",
       "nonEditable" : [ ],
       "isSubscribedPipelineWithPipelineConfigs" : false
     },
@@ -1235,7 +1235,7 @@
             "sourceColumn" : "VALUT_TYPE_CD",
             "expression" : {
               "format" : "sql",
-              "expression" : "LIPBIN"
+              "expression" : "COALESCE(LIPBIN,'#')"
             }
           },
           "DropColumn" : {
@@ -1251,7 +1251,7 @@
             "sourceColumn" : "TOT_STK_QTY",
             "expression" : {
               "format" : "sql",
-              "expression" : "CAST((TOT_INV/'$divisor') + (INSP/'$divisor') AS DECIMAL (18,4))"
+              "expression" : "CASE WHEN (TOT_INV/'$divisor') + (INSP/'$divisor') IS NULL THEN CAST(0 AS DECIMAL(18,4)) ELSE\r\nCAST((TOT_INV/'$divisor') + (INSP/'$divisor') AS DECIMAL (18,4)) END"
             }
           },
           "DropColumn" : {
@@ -1331,7 +1331,7 @@
             "sourceColumn" : "TOT_VAL_AMT",
             "expression" : {
               "format" : "sql",
-              "expression" : "CAST((TOT_INV/'$divisor') + (INSP/'$divisor') * (COUNCS/'$costDivisor') AS DECIMAL (18,4))"
+              "expression" : "CASE WHEN (COUNCS/'$costDivisor')  * ((TOT_INV/'$divisor') + (INSP/'$divisor'))  IS NULL THEN CAST(0 AS DECIMAL(18,4)) ELSE\r\nCAST((COUNCS/'$costDivisor')  * ((TOT_INV/'$divisor') + (INSP/'$divisor')) AS DECIMAL (18,4)) END"
             }
           },
           "DropColumn" : {
@@ -3888,7 +3888,7 @@
             }, {
               "name" : "VALUT_TYPE_CD",
               "type" : "string",
-              "nullable" : true,
+              "nullable" : false,
               "metadata" : {
                 "description" : "",
                 "mappings" : [ ],
@@ -4253,7 +4253,7 @@
             }, {
               "name" : "VALUT_TYPE_CD",
               "type" : "string",
-              "nullable" : true,
+              "nullable" : false,
               "metadata" : {
                 "description" : "",
                 "mappings" : [ ],
