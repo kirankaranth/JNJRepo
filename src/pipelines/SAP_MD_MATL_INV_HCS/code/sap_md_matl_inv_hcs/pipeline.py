@@ -16,7 +16,8 @@ def pipeline(spark: SparkSession) -> None:
         "xAy0LCYJVQ7sX47AmC0Zr$$v93XErYDcpTZolFVAYiWU"
     )
     df_MANDT_4 = MANDT_4(spark, df_DS_SAP_0004_MARA)
-    Lookup_1_MARA(spark, df_MANDT_4)
+    df_SELECT_MARA = SELECT_MARA(spark, df_MANDT_4)
+    Lookup_1_MARA(spark, df_SELECT_MARA)
     df_DS_SAP_0002_MCHB = DS_SAP_0002_MCHB(spark)
     df_DS_SAP_0002_MCHB = collectMetrics(
         spark, 
@@ -26,7 +27,8 @@ def pipeline(spark: SparkSession) -> None:
         "Ypyt8HuunR29tLTrRGrzo$$1lduUmJiu816Fl2gsblMz"
     )
     df_MANDT_2 = MANDT_2(spark, df_DS_SAP_0002_MCHB)
-    df_SchemaTransform_2_MCHB = SchemaTransform_2_MCHB(spark, df_MANDT_2)
+    df_Select_MCHB = Select_MCHB(spark, df_MANDT_2)
+    df_SchemaTransform_2_MCHB = SchemaTransform_2_MCHB(spark, df_Select_MCHB)
     df_DS_SAP_0003_MSKU = DS_SAP_0003_MSKU(spark)
     df_DS_SAP_0003_MSKU = collectMetrics(
         spark, 
@@ -36,9 +38,9 @@ def pipeline(spark: SparkSession) -> None:
         "Yi-ibPOH3YlFvtMXvJEIn$$3yAMBbW_siLQPu8vntC13"
     )
     df_MANDT_3 = MANDT_3(spark, df_DS_SAP_0003_MSKU)
-    df_SchemaTransform_3_MSKU = SchemaTransform_3_MSKU(spark, df_MANDT_3)
+    df_SELECT_MSKU = SELECT_MSKU(spark, df_MANDT_3)
+    df_SchemaTransform_3_MSKU = SchemaTransform_3_MSKU(spark, df_SELECT_MSKU)
     df_SET_FIELD_ORDER_3 = SET_FIELD_ORDER_3(spark, df_SchemaTransform_3_MSKU)
-    df_SET_FIELD_ORDER_2 = SET_FIELD_ORDER_2(spark, df_SchemaTransform_2_MCHB)
     df_DS_SAP_0001_MARD = DS_SAP_0001_MARD(spark)
     df_DS_SAP_0001_MARD = collectMetrics(
         spark, 
@@ -48,7 +50,9 @@ def pipeline(spark: SparkSession) -> None:
         "qhk613LfIhVL7qGJ2t7w2$$BY6-4gRN_DifAaZjo-3OH"
     )
     df_MANDT_1 = MANDT_1(spark, df_DS_SAP_0001_MARD)
-    df_SchemaTransform_1_MARD = SchemaTransform_1_MARD(spark, df_MANDT_1)
+    df_Select_MARD_Columns = Select_MARD_Columns(spark, df_MANDT_1)
+    df_SET_FIELD_ORDER_2 = SET_FIELD_ORDER_2(spark, df_SchemaTransform_2_MCHB)
+    df_SchemaTransform_1_MARD = SchemaTransform_1_MARD(spark, df_Select_MARD_Columns)
     df_SET_FIELD_ORDER_1 = SET_FIELD_ORDER_1(spark, df_SchemaTransform_1_MARD)
     df_SetOperation_1_Union = SetOperation_1_Union(
         spark, 

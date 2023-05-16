@@ -16,7 +16,8 @@ def pipeline(spark: SparkSession) -> None:
         "uYsXrXc8oA-bMrSrRl6v4$$ijzptWqnkWqtTczSRcpB5"
     )
     df_MANDT_6 = MANDT_6(spark, df_DS_SAP_06_MARA)
-    Lookup_1_MARA(spark, df_MANDT_6)
+    df_SELECT_MARA = SELECT_MARA(spark, df_MANDT_6)
+    Lookup_1_MARA(spark, df_SELECT_MARA)
     df_DS_SAP_02_MCHB = DS_SAP_02_MCHB(spark)
     df_DS_SAP_02_MCHB = collectMetrics(
         spark, 
@@ -25,6 +26,18 @@ def pipeline(spark: SparkSession) -> None:
         "1YKeBqNZH7LIuzxHjp9f4$$S65o6_pMG3W2OjRYrDd9s", 
         "a3c4fqA0dJ5GH0iqcdnMT$$vF08UI9hvWSIRQROMxXEt"
     )
+    df_MANDT_2 = MANDT_2(spark, df_DS_SAP_02_MCHB)
+    df_Select_MCHB = Select_MCHB(spark, df_MANDT_2)
+    df_DS_SAP_01_MARD = DS_SAP_01_MARD(spark)
+    df_DS_SAP_01_MARD = collectMetrics(
+        spark, 
+        df_DS_SAP_01_MARD, 
+        "graph", 
+        "v3iQSr3X0y28FIeXtXF0z$$RE7gI3cSL1QbOT8RRRBfA", 
+        "O6PaMEs_KRNQQOoq38tCt$$sJhnklnoJ0csmH_spMtcL"
+    )
+    df_MANDT_1 = MANDT_1(spark, df_DS_SAP_01_MARD)
+    df_Select_MARD_Columns = Select_MARD_Columns(spark, df_MANDT_1)
     df_DS_SAP_03_MSKU = DS_SAP_03_MSKU(spark)
     df_DS_SAP_03_MSKU = collectMetrics(
         spark, 
@@ -50,27 +63,20 @@ def pipeline(spark: SparkSession) -> None:
         "1aRW56Ssp2kr_ydusfzFJ$$5eh8tOUvzam7bVuYL02pR"
     )
     df_MANDT_4 = MANDT_4(spark, df_DS_SAP_04_MSLB)
-    df_DS_SAP_01_MARD = DS_SAP_01_MARD(spark)
-    df_DS_SAP_01_MARD = collectMetrics(
-        spark, 
-        df_DS_SAP_01_MARD, 
-        "graph", 
-        "v3iQSr3X0y28FIeXtXF0z$$RE7gI3cSL1QbOT8RRRBfA", 
-        "O6PaMEs_KRNQQOoq38tCt$$sJhnklnoJ0csmH_spMtcL"
-    )
     df_MANDT_5 = MANDT_5(spark, df_DS_SAP_05_MSSL)
-    df_SchemaTransform_5_MSSL = SchemaTransform_5_MSSL(spark, df_MANDT_5)
+    df_SELECT_MSSL = SELECT_MSSL(spark, df_MANDT_5)
+    df_SchemaTransform_5_MSSL = SchemaTransform_5_MSSL(spark, df_SELECT_MSSL)
     df_SET_FIELD_ORDER_5 = SET_FIELD_ORDER_5(spark, df_SchemaTransform_5_MSSL)
-    df_SchemaTransform_4_MSLB = SchemaTransform_4_MSLB(spark, df_MANDT_4)
+    df_SELECT_MSLB = SELECT_MSLB(spark, df_MANDT_4)
+    df_SchemaTransform_4_MSLB = SchemaTransform_4_MSLB(spark, df_SELECT_MSLB)
     df_SET_FIELD_ORDER_4 = SET_FIELD_ORDER_4(spark, df_SchemaTransform_4_MSLB)
-    df_MANDT_1 = MANDT_1(spark, df_DS_SAP_01_MARD)
-    df_SchemaTransform_1_MARD = SchemaTransform_1_MARD(spark, df_MANDT_1)
+    df_SchemaTransform_1_MARD = SchemaTransform_1_MARD(spark, df_Select_MARD_Columns)
     df_SET_FIELD_ORDER_1 = SET_FIELD_ORDER_1(spark, df_SchemaTransform_1_MARD)
-    df_MANDT_2 = MANDT_2(spark, df_DS_SAP_02_MCHB)
-    df_SchemaTransform_2_MCHB = SchemaTransform_2_MCHB(spark, df_MANDT_2)
+    df_SchemaTransform_2_MCHB = SchemaTransform_2_MCHB(spark, df_Select_MCHB)
     df_SET_FIELD_ORDER_2 = SET_FIELD_ORDER_2(spark, df_SchemaTransform_2_MCHB)
     df_MANDT_3 = MANDT_3(spark, df_DS_SAP_03_MSKU)
-    df_SchemaTransform_3_MSKU = SchemaTransform_3_MSKU(spark, df_MANDT_3)
+    df_SELECT_MSKU = SELECT_MSKU(spark, df_MANDT_3)
+    df_SchemaTransform_3_MSKU = SchemaTransform_3_MSKU(spark, df_SELECT_MSKU)
     df_SET_FIELD_ORDER_3 = SET_FIELD_ORDER_3(spark, df_SchemaTransform_3_MSKU)
     df_SetOperation_1_Union = SetOperation_1_Union(
         spark, 

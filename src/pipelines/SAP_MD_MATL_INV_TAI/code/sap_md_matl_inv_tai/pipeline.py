@@ -16,7 +16,8 @@ def pipeline(spark: SparkSession) -> None:
         "nmovwnBrLfOxqDRiqGSqN$$sjTTbrqza2bbx6SMFJr84"
     )
     df_MANDT_6 = MANDT_6(spark, df_DS_SAP_000003_MARA)
-    Lookup_1_MARA(spark, df_MANDT_6)
+    df_SELECT_MARA = SELECT_MARA(spark, df_MANDT_6)
+    Lookup_1_MARA(spark, df_SELECT_MARA)
     df_DS_SAP_000002_MCHB = DS_SAP_000002_MCHB(spark)
     df_DS_SAP_000002_MCHB = collectMetrics(
         spark, 
@@ -26,7 +27,8 @@ def pipeline(spark: SparkSession) -> None:
         "eb9xIQp4bIuVtFoeti1M3$$hPOPHbRRZTugKr6eyfO2B"
     )
     df_MANDT_2 = MANDT_2(spark, df_DS_SAP_000002_MCHB)
-    df_SchemaTransform_2_MCHB = SchemaTransform_2_MCHB(spark, df_MANDT_2)
+    df_Select_MCHB = Select_MCHB(spark, df_MANDT_2)
+    df_SchemaTransform_2_MCHB = SchemaTransform_2_MCHB(spark, df_Select_MCHB)
     df_SET_FIELD_ORDER_2 = SET_FIELD_ORDER_2(spark, df_SchemaTransform_2_MCHB)
     df_DS_SAP_000001_MARD = DS_SAP_000001_MARD(spark)
     df_DS_SAP_000001_MARD = collectMetrics(
@@ -37,7 +39,8 @@ def pipeline(spark: SparkSession) -> None:
         "2SD-yEF9cQ-YZkHKE8Gwp$$3VllkXOiAJYb4OMot6ukk"
     )
     df_MANDT_1 = MANDT_1(spark, df_DS_SAP_000001_MARD)
-    df_SchemaTransform_1_MARD = SchemaTransform_1_MARD(spark, df_MANDT_1)
+    df_Select_MARD_Columns = Select_MARD_Columns(spark, df_MANDT_1)
+    df_SchemaTransform_1_MARD = SchemaTransform_1_MARD(spark, df_Select_MARD_Columns)
     df_SET_FIELD_ORDER_1 = SET_FIELD_ORDER_1(spark, df_SchemaTransform_1_MARD)
     df_SetOperation_1_Union = SetOperation_1_Union(spark, df_SET_FIELD_ORDER_1, df_SET_FIELD_ORDER_2)
     df_SetOperation_1_Union = collectMetrics(
