@@ -5,7 +5,7 @@ from prophecy.libs import typed_lit
 from sap_md_matl_loc_mbp_svs_bbl_bbn_hcs_p01_mrs_tai.config.ConfigStore import *
 from sap_md_matl_loc_mbp_svs_bbl_bbn_hcs_p01_mrs_tai.udfs.UDFs import *
 
-def NEW_FIELDS_PK(spark: SparkSession, in0: DataFrame) -> DataFrame:
+def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
         .withColumn("SRC_SYS_CD", lit(Config.sourceSystem))\
         .withColumn("MATL_NUM", col("MATNR"))\
@@ -41,7 +41,7 @@ def NEW_FIELDS_PK(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("RD_VAL_QTY", col("BSTRF").cast(DecimalType(18, 4)))\
         .withColumn("LOT_SIZE_FX_QTY", col("BSTFE").cast(DecimalType(18, 4)))\
         .withColumn("GOOD_RCPT_LEAD_DAYS_QTY", col("WEBAZ").cast(DecimalType(18, 4)))\
-        .withColumn("LOT_SIZE_MAX_QTY", col("BSTMA").cast(DecimalType(18, 4)))\
+        .withColumn("LOT_SIZE_MAX_QTY", col("BSTMA").cast(DecimalType(22, 4)))\
         .withColumn("LOT_SIZE_MIN_QTY", col("BSTMI").cast(DecimalType(18, 4)))\
         .withColumn("SFTY_STK_QTY", col("EISBE").cast(DecimalType(18, 4)))\
         .withColumn("PLNG_TIME_FENCE_DAYS_CNT", trim(col("FXHOR")))\
@@ -73,13 +73,13 @@ def NEW_FIELDS_PK(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("FLLP_MATL", trim(col("NFMAT")))\
         .withColumn("RQR_GRP_IN", trim(col("KZBED")))\
         .withColumn("MIX_MRP_IN", trim(col("MISKZ")))\
-        .withColumn("BASE_QTY", trim(col("BASMG")))\
-        .withColumn("MAX_STRG_PER", trim(col("MAXLZ")))\
+        .withColumn("BASE_QTY", col("BASMG").cast(DecimalType(18, 4)))\
+        .withColumn("MAX_STRG_PER", col("MAXLZ").cast(DecimalType(18, 4)))\
         .withColumn("UNIT_FOR_MAX_STRG", trim(col("LZEIH")))\
-        .withColumn("OVR_DELV_TLRNC", trim(col("UEETO")))\
+        .withColumn("OVR_DELV_TLRNC", col("UEETO").cast(DecimalType(18, 4)))\
         .withColumn("UNLTD_OVER_DELV_IN", trim(col("UEETK")))\
-        .withColumn("UND_DELV_TLRNC", trim(col("UNETO")))\
-        .withColumn("TOT_REPLN_LT", trim(col("WZEIT")))\
+        .withColumn("UND_DELV_TLRNC", col("UNETO").cast(DecimalType(18, 4)))\
+        .withColumn("TOT_REPLN_LT", col("WZEIT").cast(DecimalType(18, 4)))\
         .withColumn("INSP_STK", trim(col("INSMK")))\
         .withColumn("BTCH_MGMT_PLNT_IN", trim(col("XCHPF")))\
         .withColumn("FISC_YR_VRNT", trim(col("PERIV")))\
@@ -94,7 +94,7 @@ def NEW_FIELDS_PK(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("GRP_CNTR", trim(col("APLAL")))\
         .withColumn("ISS_STRG_LOC", trim(col("LGPRO")))\
         .withColumn("MRP_GRP", trim(col("DISGR")))\
-        .withColumn("CMPNT_SCRAP_PCT", trim(col("KAUSF")))\
+        .withColumn("CMPNT_SCRAP_PCT", col("KAUSF").cast(DecimalType(18, 4)))\
         .withColumn("CERT_TYPE", trim(col("QZGTP")))\
         .withColumn("INSP_SETUP_FOR_MATL", trim(col("QMATV")))\
         .withColumn("PHY_INV_CC", trim(col("ABCIN")))\
@@ -107,8 +107,8 @@ def NEW_FIELDS_PK(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("BULK_MATL_IN", trim(col("SCHGT")))\
         .withColumn("FIX_CC_IN", trim(col("CCFIX")))\
         .withColumn("PROD_SCHDLNG_PRFL", trim(col("SFCPF")))\
-        .withColumn("CUR_PER", trim(col("LFMON")))\
-        .withColumn("INSP_INTV", trim(col("PRFRQ")))\
+        .withColumn("CUR_PER", col("LFMON").cast(IntegerType()))\
+        .withColumn("INSP_INTV", col("PRFRQ").cast(DecimalType(18, 4)))\
         .withColumn("DOC_REQ_IN", trim(col("KZDKZ")))\
         .withColumn("MATL_FRGHT_GRP", trim(col("MFRGR")))\
         .withColumn("MATL_AUTH_QM", trim(col("QMATA")))\
@@ -119,4 +119,41 @@ def NEW_FIELDS_PK(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("EXPT_IMPT_GRP", trim(col("MTVER")))\
         .withColumn("BACKFLUSH_IN", trim(col("RGEKZ")))\
         .withColumn("MM_DFLT_SUPP_AREA", trim(col("VSPVB")))\
-        .withColumn("BTCH_ENT_PO", trim(col("KZECH")))
+        .withColumn("BTCH_ENT_PO", trim(col("KZECH")))\
+        .withColumn("ORIG_BATCH_MGMT", trim(col("UCHKZ")))\
+        .withColumn("MATL_CFOP_CAT", trim(col("INDUS")))\
+        .withColumn("STRG_LOC_EXTRNL_PRCMT", trim(col("LGFSB")))\
+        .withColumn("STK_DTRMN_GRP", trim(col("EPRIO")))\
+        .withColumn("DO_NOT_COST_IN", trim(col("NCOST")))\
+        .withColumn("SPL_PRCMT_TYPE_COST", trim(col("SOBSK")))\
+        .withColumn("CVGE_PRFL_RNG", trim(col("RWPRO")))\
+        .withColumn("EXPT_CERT_NUM", trim(col("PRENO")))\
+        .withColumn(
+          "EXPT_CERT_DTTM",
+          when((col("PREND") == lit("00000000")), lit(None).cast(TimestampType()))\
+            .otherwise(to_timestamp(col("PREND"), "yyyyMMdd"))
+        )\
+        .withColumn("ORIG_BATCH_REF_MATL", trim(col("UCMAT")))\
+        .withColumn("RESET_FCST_MDL", trim(col("AUTRU")))\
+        .withColumn("SRVC_LVL", col("LGRAD").cast(DecimalType(18, 4)))\
+        .withColumn("ACT_PUSH", expr(Config.ACT_PUSH))\
+        .withColumn("MTS_MTO_FL", expr(Config.MTS_MTO_FL))\
+        .withColumn("CNSMPTN_MODE", expr(Config.CNSMPTN_MODE))\
+        .withColumn("MATL_STS_DESC", lookup("LU_SAP_T141T", col("MMSTA")).getField("MTSTB"))\
+        .withColumn("MATL_PLNR_NM", lookup("LU_SAP_T024D", col("WERKS"), col("DISPO")).getField("DSNAM"))\
+        .withColumn("PRDTN_SUPR_NM", lit(None).cast(StringType()))\
+        .withColumn("PRCHSNG_GRP_DESC", lookup("LU_SAP_T024", col("EKGRP")).getField("EKNAM"))\
+        .withColumn("EXCSE_TAX_RLVNCE", lit(None).cast(StringType()))\
+        .withColumn("SEQ_NUM", lit(None).cast(StringType()))\
+        .withColumn("MAINT_STS", lit(None).cast(StringType()))\
+        .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
+        .withColumn("DAI_CRT_DTTM", current_timestamp())\
+        .withColumn("DAI_UPDT_DTTM", current_timestamp())\
+        .withColumn("_l0_upt_", col("_upt_"))\
+        .withColumn("_pk_", to_json(expr("named_struct('SRC_SYS_CD', SRC_SYS_CD, 'MATL_NUM', MATL_NUM, 'PLNT_CD', PLNT_CD)")))\
+        .withColumn(
+          "_pk_md5_",
+          md5(to_json(expr("named_struct('SRC_SYS_CD', SRC_SYS_CD, 'MATL_NUM', MATL_NUM, 'PLNT_CD', PLNT_CD)")))
+        )\
+        .withColumn("_l1_upt_", current_timestamp())\
+        .withColumn("_deleted_", col("_deleted_"))

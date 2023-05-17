@@ -46,8 +46,8 @@ def pipeline(spark: SparkSession) -> None:
         "XKQAzwCyxKqPPiRqgbCB_$$oQrRD8nAiVmZB6zBLPCWx"
     )
     df_MANDT_FILTER = MANDT_FILTER(spark, df_SAP_MARC)
-    df_NEW_FIELDS_PK = NEW_FIELDS_PK(spark, df_MANDT_FILTER)
-    df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS_PK)
+    df_NEW_FIELDS = NEW_FIELDS(spark, df_MANDT_FILTER)
+    df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS)
     df_SET_FIELD_ORDER_REFORMAT = collectMetrics(
         spark, 
         df_SET_FIELD_ORDER_REFORMAT, 
