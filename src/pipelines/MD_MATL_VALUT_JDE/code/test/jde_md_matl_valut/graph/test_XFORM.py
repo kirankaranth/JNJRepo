@@ -4,8 +4,8 @@ from pyspark.sql.types import *
 from argparse import Namespace
 from prophecy.test import BaseTestCase
 from prophecy.test.utils import *
-from md_matl_valut_jde.graph.XFORM import *
-from md_matl_valut_jde.config.ConfigStore import *
+from jde_md_matl_valut.graph.XFORM import *
+from jde_md_matl_valut.config.ConfigStore import *
 
 
 class XFORMTest(BaseTestCase):
@@ -13,14 +13,14 @@ class XFORMTest(BaseTestCase):
     def test_unit_test_(self):
         dfIn0 = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/md_matl_valut_jde/graph/XFORM/in0/schema.json',
-            'test/resources/data/md_matl_valut_jde/graph/XFORM/in0/data/test_unit_test_.json',
+            'test/resources/data/jde_md_matl_valut/graph/XFORM/in0/schema.json',
+            'test/resources/data/jde_md_matl_valut/graph/XFORM/in0/data/test_unit_test_.json',
             'in0'
         )
         dfOut = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/md_matl_valut_jde/graph/XFORM/out/schema.json',
-            'test/resources/data/md_matl_valut_jde/graph/XFORM/out/data/test_unit_test_.json',
+            'test/resources/data/jde_md_matl_valut/graph/XFORM/out/schema.json',
+            'test/resources/data/jde_md_matl_valut/graph/XFORM/out/data/test_unit_test_.json',
             'out'
         )
         dfOutComputed = XFORM(self.spark, dfIn0)
@@ -29,14 +29,14 @@ class XFORMTest(BaseTestCase):
     def test_lookup(self):
         dfIn0 = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/md_matl_valut_jde/graph/XFORM/in0/schema.json',
-            'test/resources/data/md_matl_valut_jde/graph/XFORM/in0/data/test_lookup.json',
+            'test/resources/data/jde_md_matl_valut/graph/XFORM/in0/schema.json',
+            'test/resources/data/jde_md_matl_valut/graph/XFORM/in0/data/test_lookup.json',
             'in0'
         )
         dfOut = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/md_matl_valut_jde/graph/XFORM/out/schema.json',
-            'test/resources/data/md_matl_valut_jde/graph/XFORM/out/data/test_lookup.json',
+            'test/resources/data/jde_md_matl_valut/graph/XFORM/out/schema.json',
+            'test/resources/data/jde_md_matl_valut/graph/XFORM/out/data/test_lookup.json',
             'out'
         )
         dfOutComputed = XFORM(self.spark, dfIn0)
@@ -49,14 +49,14 @@ class XFORMTest(BaseTestCase):
     def test_decimal(self):
         dfIn0 = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/md_matl_valut_jde/graph/XFORM/in0/schema.json',
-            'test/resources/data/md_matl_valut_jde/graph/XFORM/in0/data/test_decimal.json',
+            'test/resources/data/jde_md_matl_valut/graph/XFORM/in0/schema.json',
+            'test/resources/data/jde_md_matl_valut/graph/XFORM/in0/data/test_decimal.json',
             'in0'
         )
         dfOut = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/md_matl_valut_jde/graph/XFORM/out/schema.json',
-            'test/resources/data/md_matl_valut_jde/graph/XFORM/out/data/test_decimal.json',
+            'test/resources/data/jde_md_matl_valut/graph/XFORM/out/schema.json',
+            'test/resources/data/jde_md_matl_valut/graph/XFORM/out/data/test_decimal.json',
             'out'
         )
         dfOutComputed = XFORM(self.spark, dfIn0)
@@ -77,9 +77,9 @@ class XFORMTest(BaseTestCase):
         )
         dfgraph_F4101_LU = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/md_matl_valut_jde/graph/F4101_LU/schema.json',
-            'test/resources/data/md_matl_valut_jde/graph/F4101_LU/data.json',
+            'test/resources/data/jde_md_matl_valut/graph/F4101_LU/schema.json',
+            'test/resources/data/jde_md_matl_valut/graph/F4101_LU/data.json',
             "in0"
         )
-        from md_matl_valut_jde.graph.F4101_LU import F4101_LU
+        from jde_md_matl_valut.graph.F4101_LU import F4101_LU
         F4101_LU(self.spark, dfgraph_F4101_LU)

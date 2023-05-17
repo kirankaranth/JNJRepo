@@ -2,15 +2,15 @@ from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from prophecy.libs import typed_lit
-from md_matl_valut_jde.config.ConfigStore import *
-from md_matl_valut_jde.udfs.UDFs import *
+from jde_md_matl_valut.config.ConfigStore import *
+from jde_md_matl_valut.udfs.UDFs import *
 
 def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
         .withColumn("SRC_SYS_CD", lit(Config.sourceSystem))\
         .withColumn("MATL_NUM", coalesce(lookup("F4101_LU", col("COITM")).getField("IMLITM"), col("COITM")))\
         .withColumn("VALUT_AREA_CD", col("COMCU"))\
-        .withColumn("PRC_CNTL_IND", lit("07"))\
+        .withColumn("PRC_CNTL_IND", trim(col("COLEDG")))\
         .withColumn(
           "VALUT_TYPE_CD",
           coalesce(

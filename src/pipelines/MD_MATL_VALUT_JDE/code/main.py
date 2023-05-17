@@ -1,3 +1,3 @@
-from md_matl_valut_jde.pipeline import main
+from jde_md_matl_valut.pipeline import main
 
 main()
