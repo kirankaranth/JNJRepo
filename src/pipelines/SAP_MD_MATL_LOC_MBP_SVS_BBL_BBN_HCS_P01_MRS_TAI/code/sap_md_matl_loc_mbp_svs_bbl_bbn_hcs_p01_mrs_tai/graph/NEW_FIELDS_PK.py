@@ -79,4 +79,44 @@ def NEW_FIELDS_PK(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("OVR_DELV_TLRNC", trim(col("UEETO")))\
         .withColumn("UNLTD_OVER_DELV_IN", trim(col("UEETK")))\
         .withColumn("UND_DELV_TLRNC", trim(col("UNETO")))\
-        .withColumn("TOT_REPLN_LT", trim(col("WZEIT")))
+        .withColumn("TOT_REPLN_LT", trim(col("WZEIT")))\
+        .withColumn("INSP_STK", trim(col("INSMK")))\
+        .withColumn("BTCH_MGMT_PLNT_IN", trim(col("XCHPF")))\
+        .withColumn("FISC_YR_VRNT", trim(col("PERIV")))\
+        .withColumn("CMMDTY_CD", trim(col("STAWN")))\
+        .withColumn("RGN_OF_ORIG_OF_MATL", trim(col("HERKR")))\
+        .withColumn("CMMDTY_CD_UOM", trim(col("EXPME")))\
+        .withColumn("REP_MFG_IN", trim(col("SAUFT")))\
+        .withColumn("VERS_IN", trim(col("VERKZ")))\
+        .withColumn("ALT_BOM", trim(col("STLAL")))\
+        .withColumn("BOM_USG", trim(col("STLAN")))\
+        .withColumn("KEY_TASK_LIST", trim(col("PLNNR")))\
+        .withColumn("GRP_CNTR", trim(col("APLAL")))\
+        .withColumn("ISS_STRG_LOC", trim(col("LGPRO")))\
+        .withColumn("MRP_GRP", trim(col("DISGR")))\
+        .withColumn("CMPNT_SCRAP_PCT", trim(col("KAUSF")))\
+        .withColumn("CERT_TYPE", trim(col("QZGTP")))\
+        .withColumn("INSP_SETUP_FOR_MATL", trim(col("QMATV")))\
+        .withColumn("PHY_INV_CC", trim(col("ABCIN")))\
+        .withColumn("CONFIG_MATL", trim(col("STDPD")))\
+        .withColumn("REP_MFG_PRFL", trim(col("SFEPR")))\
+        .withColumn("NEG_STK_PLNT", trim(col("XMCNG")))\
+        .withColumn("PLNG_CYC", trim(col("LFRHY")))\
+        .withColumn("RD_PRFL", trim(col("RDPRF")))\
+        .withColumn("CO_PROD_IN", trim(col("KZKUP")))\
+        .withColumn("BULK_MATL_IN", trim(col("SCHGT")))\
+        .withColumn("FIX_CC_IN", trim(col("CCFIX")))\
+        .withColumn("PROD_SCHDLNG_PRFL", trim(col("SFCPF")))\
+        .withColumn("CUR_PER", trim(col("LFMON")))\
+        .withColumn("INSP_INTV", trim(col("PRFRQ")))\
+        .withColumn("DOC_REQ_IN", trim(col("KZDKZ")))\
+        .withColumn("MATL_FRGHT_GRP", trim(col("MFRGR")))\
+        .withColumn("MATL_AUTH_QM", trim(col("QMATA")))\
+        .withColumn("CNTL_CODE", trim(col("STEUC")))\
+        .withColumn("UNIT_OF_ISS", trim(col("AUSME")))\
+        .withColumn("ALT_BOM_METH", trim(col("ALTSL")))\
+        .withColumn("SCHDLNG_MRGN_KEY", trim(col("FHORI")))\
+        .withColumn("EXPT_IMPT_GRP", trim(col("MTVER")))\
+        .withColumn("BACKFLUSH_IN", trim(col("RGEKZ")))\
+        .withColumn("MM_DFLT_SUPP_AREA", trim(col("VSPVB")))\
+        .withColumn("BTCH_ENT_PO", trim(col("KZECH")))
