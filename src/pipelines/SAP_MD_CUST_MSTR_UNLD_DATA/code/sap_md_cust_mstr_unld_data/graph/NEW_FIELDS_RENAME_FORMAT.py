@@ -7,7 +7,7 @@ from sap_md_cust_mstr_unld_data.udfs.UDFs import *
 
 def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
-        .withColumn("SRC_SYS_CD", lit(Config.DAI_ETL_ID))\
+        .withColumn("SRC_SYS_CD", lit(Config.sourceSystem))\
         .withColumn("CUST_NUM", col("KUNNR"))\
         .withColumn("UNLOADING_PT", col("ABLAD"))\
         .withColumn("SEQ_NUM_FOR_UNLOADING_PT", trim(col("LFDNR")))\

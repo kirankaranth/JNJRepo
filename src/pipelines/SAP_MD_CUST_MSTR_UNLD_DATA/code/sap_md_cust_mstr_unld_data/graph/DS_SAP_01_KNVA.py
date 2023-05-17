@@ -6,4 +6,4 @@ from sap_md_cust_mstr_unld_data.config.ConfigStore import *
 from sap_md_cust_mstr_unld_data.udfs.UDFs import *
 
 def DS_SAP_01_KNVA(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"p01.knva")
+    return spark.read.table(f"{Config.sourceDatabase}.knva")
