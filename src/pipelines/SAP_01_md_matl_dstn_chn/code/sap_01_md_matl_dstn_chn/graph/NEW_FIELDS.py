@@ -6,4 +6,4 @@ from sap_01_md_matl_dstn_chn.config.ConfigStore import *
 from sap_01_md_matl_dstn_chn.udfs.UDFs import *
 
 def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
-    return in0
+    pass
