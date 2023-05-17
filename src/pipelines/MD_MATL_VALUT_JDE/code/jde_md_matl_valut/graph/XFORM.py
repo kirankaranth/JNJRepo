@@ -10,7 +10,7 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("SRC_SYS_CD", lit(Config.sourceSystem))\
         .withColumn("MATL_NUM", coalesce(lookup("F4101_LU", col("COITM")).getField("IMLITM"), col("COITM")))\
         .withColumn("VALUT_AREA_CD", col("COMCU"))\
-        .withColumn("PRC_CNTL_IND", lit("07"))\
+        .withColumn("PRC_CNTL_IND", trim(col("COLEDG")))\
         .withColumn(
           "VALUT_TYPE_CD",
           coalesce(
