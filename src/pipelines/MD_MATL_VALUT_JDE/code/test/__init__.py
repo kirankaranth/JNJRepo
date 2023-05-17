@@ -1,3 +1,3 @@
-from .md_matl_valut_jde import *
+from .jde_md_matl_valut import *
 from .conftest import *
 from .TestSuite import *

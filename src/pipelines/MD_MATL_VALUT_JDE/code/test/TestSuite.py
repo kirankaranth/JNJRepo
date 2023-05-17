@@ -1,6 +1,6 @@
 import unittest
 
-from test.md_matl_valut_jde.graph.test_XFORM import *
+from test.jde_md_matl_valut.graph.test_XFORM import *
 
 if __name__ == "__main__":
     runner = unittest.TextTestRunner()
