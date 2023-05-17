@@ -1,3 +1,3 @@
-from jde_md_matl.pipeline import main
+from jde_md_matl_jet.pipeline import main
 
 main()
