@@ -11,6 +11,7 @@ def pipeline(spark: SparkSession) -> None:
     df_DELETED = DELETED(spark, df_F42199)
     df_NEW_FIELDS = NEW_FIELDS(spark, df_DELETED)
     df_SET_FIELDS_ORDER = SET_FIELDS_ORDER(spark, df_NEW_FIELDS)
+    MD_SLS_ORDR_HIST_JDE(spark, df_SET_FIELDS_ORDER)
 
 def main():
     spark = SparkSession.builder\

@@ -8,7 +8,7 @@ class Config(ConfigBase):
             targetSchema: str=None,
             sourceDatabase: str=None,
             sourceSystem: str=None,
-            DAI_ETL_ID: str=None,
+            DAI_ETL_ID: int=None,
             configDatabase: str=None,
             **kwargs
     ):
@@ -20,7 +20,7 @@ class Config(ConfigBase):
             targetSchema: str="dev_md_l1",
             sourceDatabase: str="bw2",
             sourceSystem: str="bw2",
-            DAI_ETL_ID: str="0",
+            DAI_ETL_ID: int=0,
             configDatabase: str=" ",
             **kwargs
     ):
@@ -28,6 +28,6 @@ class Config(ConfigBase):
         self.targetSchema = targetSchema
         self.sourceDatabase = sourceDatabase
         self.sourceSystem = sourceSystem
-        self.DAI_ETL_ID = DAI_ETL_ID
+        self.DAI_ETL_ID = self.get_int_value(DAI_ETL_ID)
         self.configDatabase = configDatabase
         pass

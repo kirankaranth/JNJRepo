@@ -247,7 +247,7 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("SLS_ORDR_STS_04", trim(col("SLSO04")))\
         .withColumn("SUBST_ITM_IN", trim(col("SLSO05")))\
         .withColumn("PREF_CMMT_IN", trim(col("SLSO06")))\
-        .withColumn("SHIP_OVRD_DTTM", trim(col("SLSO07")))\
+        .withColumn("SHIP_DT_OVRD", trim(col("SLSO07")))\
         .withColumn("PRC_ADJ_LINE_IN", trim(col("SLSO08")))\
         .withColumn("PRC_ADJ_HIST_IN", trim(col("SLSO09")))\
         .withColumn("PREF_PRDTN_ALLC", trim(col("SLSO10")))\
@@ -320,7 +320,7 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
             )
           )
         )\
-        .withColumn("RQST_DELV_TI", trim(col("SLDRQT")))\
+        .withColumn("RQST_DELV_TIME", trim(col("SLDRQT")))\
         .withColumn("ACTL_SHIP_TIME", trim(col("SLADTM")))\
         .withColumn("TIME_ORIG_PROM_DELV", trim(col("SLOPTT")))\
         .withColumn("TIME_SCHD_PICK", trim(col("SLPDTT")))\
@@ -393,7 +393,7 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("DAI_UPDT_DTTM", current_timestamp())\
         .withColumn("_l0_upt_", col("_upt_"))\
         .withColumn("_l1_upt_", current_timestamp())\
-        .withColumn("_deleted_", lit("F"))\
+        .withColumn("_deleted_", col("_deleted_"))\
         .withColumn(
           "_pk_",
           to_json(
