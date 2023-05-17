@@ -7,6 +7,46 @@ from prophecy.utils import *
 from sap_01_md_matl_dstn_chn_bba_bbl_bbn_bwi_geu_hcs_mbp_mrs_p01_tai_svs_hmd_hm2_atl_fsn.graph import *
 
 def pipeline(spark: SparkSession) -> None:
+    df_DS_SAP_03_t179t = DS_SAP_03_t179t(spark)
+    df_DS_SAP_03_t179t = collectMetrics(
+        spark, 
+        df_DS_SAP_03_t179t, 
+        "graph", 
+        "4lGPhcNh0VPhlNyxvz4uN$$lvqkl57I59o7UBLlgkn9s", 
+        "zYOcFSRmhhfW94CrYd92L$$Dx0s1ZPxBkoHHcMVTpMTS"
+    )
+    df_MANDT_FILTER_t179t = MANDT_FILTER_t179t(spark, df_DS_SAP_03_t179t)
+    LU_t179t(spark, df_MANDT_FILTER_t179t)
+    df_DS_SAP_03_tvmst = DS_SAP_03_tvmst(spark)
+    df_DS_SAP_03_tvmst = collectMetrics(
+        spark, 
+        df_DS_SAP_03_tvmst, 
+        "graph", 
+        "gUKnjceV_oUskzoT57LGm$$vLJDUqVmFQRDlrkiNrZdd", 
+        "A5bRoQ1Gyavafl1q3scaC$$wYrNFuftUbNTlmtGN_plz"
+    )
+    df_MANDT_FILTER_tvmst = MANDT_FILTER_tvmst(spark, df_DS_SAP_03_tvmst)
+    LU_tvmst(spark, df_MANDT_FILTER_tvmst)
+    df_DS_SAP_04_tvms = DS_SAP_04_tvms(spark)
+    df_DS_SAP_04_tvms = collectMetrics(
+        spark, 
+        df_DS_SAP_04_tvms, 
+        "graph", 
+        "U7nrx53myvMzgAtWNDf49$$jr0xjw5LaKf_nlvGO5W9a", 
+        "h5KZ1yWysyvSNK7Ftz2RP$$DbqudD_qYAApaY95_DWKb"
+    )
+    df_MANDT_FILTER_tvms = MANDT_FILTER_tvms(spark, df_DS_SAP_04_tvms)
+    LU_tvms(spark, df_MANDT_FILTER_tvms)
+    df_DS_SAP_02_T179 = DS_SAP_02_T179(spark)
+    df_DS_SAP_02_T179 = collectMetrics(
+        spark, 
+        df_DS_SAP_02_T179, 
+        "graph", 
+        "X6TqXG-PiEJyHY_LvYozj$$il7RW9i4DI0mLHXOpzcAJ", 
+        "kqX9GWvvUo-GfKkwxDL0-$$qsyZVtDneSVJy1eyHGNva"
+    )
+    df_MANDT_FILTER_t179 = MANDT_FILTER_t179(spark, df_DS_SAP_02_T179)
+    LU_t179(spark, df_MANDT_FILTER_t179)
     df_DS_SAP_01_MVKE = DS_SAP_01_MVKE(spark)
     df_DS_SAP_01_MVKE = collectMetrics(
         spark, 
