@@ -51,6 +51,13 @@
     }
   }, {
     "PipelineComponent" : {
+      "id" : "",
+      "nodeName" : "Pipeline_12",
+      "path" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/.jar",
+      "language" : "scala"
+    }
+  }, {
+    "PipelineComponent" : {
       "id" : "pipelines/SAP_01_MD_SER_NUM_STOCK_SGMNT",
       "nodeName" : "MD_SER_NUM_STOCK_SGMNT",
       "path" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_SER_NUM_STOCK_SGMNT_ATL_BBA_BBL_BBN_MRS-1.0-py3-none-any.whl",
@@ -97,13 +104,6 @@
       "nodeName" : "MD_MATL_INV",
       "path" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_MATL_INV_ATL-1.0-py3-none-any.whl",
       "language" : "python"
-    }
-  }, {
-    "PipelineComponent" : {
-      "id" : "",
-      "nodeName" : "Pipeline_12",
-      "path" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/.jar",
-      "language" : "scala"
     }
   }, {
     "PipelineComponent" : {
@@ -319,7 +319,30 @@
       "email_notifications" : { },
       "max_retries" : 0
     }, {
+      "task_key" : "Pipeline_12",
+      "job_cluster_key" : "ATL_PIPELINE_JOB_default_Prophecy_Photon_Medium",
+      "spark_jar_task" : {
+        "main_class_name" : "Main",
+        "parameters" : [ "-O", "{}" ]
+      },
+      "libraries" : [ {
+        "maven" : {
+          "coordinates" : "io.prophecy:prophecy-libs_2.12:3.3.0-7.0.18"
+        }
+      }, {
+        "pypi" : {
+          "package" : "prophecy-libs==1.5.0"
+        }
+      }, {
+        "jar" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/.jar"
+      } ],
+      "email_notifications" : { },
+      "max_retries" : 0
+    }, {
       "task_key" : "MD_SER_NUM_STOCK_SGMNT",
+      "depends_on" : [ {
+        "task_key" : "Pipeline_12"
+      } ],
       "job_cluster_key" : "ATL_PIPELINE_JOB_default_Prophecy_Photon_Medium",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_SER_NUM_STOCK_SGMNT_ATL_BBA_BBL_BBN_MRS",
@@ -469,26 +492,6 @@
         }
       }, {
         "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_MATL_INV_ATL-1.0-py3-none-any.whl"
-      } ],
-      "email_notifications" : { },
-      "max_retries" : 0
-    }, {
-      "task_key" : "Pipeline_12",
-      "job_cluster_key" : "ATL_PIPELINE_JOB_default_Prophecy_Photon_Medium",
-      "spark_jar_task" : {
-        "main_class_name" : "Main",
-        "parameters" : [ "-O", "{}" ]
-      },
-      "libraries" : [ {
-        "maven" : {
-          "coordinates" : "io.prophecy:prophecy-libs_2.12:3.3.0-7.0.18"
-        }
-      }, {
-        "pypi" : {
-          "package" : "prophecy-libs==1.5.0"
-        }
-      }, {
-        "jar" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/.jar"
       } ],
       "email_notifications" : { },
       "max_retries" : 0
