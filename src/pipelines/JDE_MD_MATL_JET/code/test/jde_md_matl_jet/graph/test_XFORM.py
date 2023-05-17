@@ -71,3 +71,11 @@ class XFORMTest(BaseTestCase):
         )
         from jde_md_matl_jet.graph.MATL_GR_LU import MATL_GR_LU
         MATL_GR_LU(self.spark, dfgraph_MATL_GR_LU)
+        dfgraph_MATL_GR_LU_1 = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/jde_md_matl_jet/graph/MATL_GR_LU_1/schema.json',
+            'test/resources/data/jde_md_matl_jet/graph/MATL_GR_LU_1/data.json',
+            "in0"
+        )
+        from jde_md_matl_jet.graph.MATL_GR_LU_1 import MATL_GR_LU_1
+        MATL_GR_LU_1(self.spark, dfgraph_MATL_GR_LU_1)
