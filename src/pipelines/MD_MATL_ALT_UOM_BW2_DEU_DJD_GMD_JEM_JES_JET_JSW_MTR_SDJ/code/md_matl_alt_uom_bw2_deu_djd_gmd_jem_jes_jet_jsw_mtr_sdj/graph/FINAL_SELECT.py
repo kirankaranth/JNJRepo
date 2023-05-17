@@ -11,7 +11,6 @@ def FINAL_SELECT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("MATL_NUM"), 
         col("ALT_UOM_CD"), 
         col("BASE_UOM_CD"), 
-        col("STD_UOM_CD"), 
         col("FACT_NUMRTR_MEAS"), 
         col("_deleted_"), 
         col("_l0_upt_"), 
