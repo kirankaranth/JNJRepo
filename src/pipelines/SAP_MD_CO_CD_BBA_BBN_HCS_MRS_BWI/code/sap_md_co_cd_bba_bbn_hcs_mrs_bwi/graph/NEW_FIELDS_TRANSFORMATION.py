@@ -126,7 +126,7 @@ def NEW_FIELDS_TRANSFORMATION(spark: SparkSession, in0: DataFrame) -> DataFrame:
             )\
             .otherwise(to_timestamp(col("UPDAT"), "yyyyMMdd"))
         )\
-        .withColumn("LAST_CHG_CNFRM_DTTM", to_timestamp(col("UPTIM"), "HHmmSS").alias("end"))\
+        .withColumn("LAST_CHG_CNFRM_DTTM", trim(col("UPTIM")))\
         .withColumn("DEL_BOCK_MSTR_REC", trim(col("NODEL")))\
         .withColumn("ACTG_CLERK_PHN_NUM_BUSN_PTNR", trim(col("TLFNS")))\
         .withColumn("ACCT_RCVBL_PLDG_IN", trim(col("CESSION_KZ")))\
@@ -143,4 +143,4 @@ def NEW_FIELDS_TRANSFORMATION(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("_pk_", to_json(expr("named_struct('SRC_SYS_CD', SRC_SYS_CD, 'CO_CD', CO_CD, 'CUST_NUM', CUST_NUM)")))\
         .withColumn("_pk_md5_", md5(to_json(expr("named_struct('SRC_SYS_CD', SRC_SYS_CD, 'CO_CD', CO_CD, 'CUST_NUM', CUST_NUM)"))))\
         .withColumn("_l1_upt_", current_timestamp())\
-        .withColumn("_deleted_", lit("F"))
+        .withColumn("_deleted_", col("_deleted_"))
