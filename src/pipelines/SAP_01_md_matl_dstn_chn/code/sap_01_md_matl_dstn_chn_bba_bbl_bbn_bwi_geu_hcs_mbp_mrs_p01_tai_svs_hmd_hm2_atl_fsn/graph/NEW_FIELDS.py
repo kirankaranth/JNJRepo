@@ -40,10 +40,10 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("MATL_STATS_GRP", trim(col("VERSG")))\
         .withColumn("MATL_DSTN_CHN", trim(col("VTWEG")))\
         .withColumn("DEL_IN", trim(col("LVORM")))\
-        .withColumn("MIN_ORDR_QTY", trim(col("AUMNG")))\
-        .withColumn("MIN_DELV_QTY", trim(col("LFMNG")))\
-        .withColumn("MIN_MTO_QTY", trim(col("EFMNG")))\
-        .withColumn("DELV_UNIT", trim(col("SCMNG")))\
+        .withColumn("MIN_ORDR_QTY", trim(col("AUMNG")).cast(DecimalType(18, 4)))\
+        .withColumn("MIN_DELV_QTY", trim(col("LFMNG")).cast(DecimalType(18, 4)))\
+        .withColumn("MIN_MTO_QTY", trim(col("EFMNG")).cast(DecimalType(18, 4)))\
+        .withColumn("DELV_UNIT", trim(col("SCMNG")).cast(DecimalType(18, 4)))\
         .withColumn("UOM_DELV_UNIT", trim(col("SCHME")))\
         .withColumn("SLS_UNIT", trim(col("VRKME")))\
         .withColumn("ASRTMNT_GRADE", trim(col("SSTUF")))\
@@ -99,12 +99,12 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("PROD_ATTR_ID_9", trim(col("PRAT9")))\
         .withColumn("PROD_ATTR_ID_10", trim(col("PRATA")))\
         .withColumn("UOM_GRP", trim(col("MEGRU")))\
-        .withColumn("MAX_DELV_QTY", trim(col("LFMAX")))\
+        .withColumn("MAX_DELV_QTY", trim(col("LFMAX")).cast(DecimalType(18, 4)))\
         .withColumn("RACKJOBBER_MATL", trim(col("RJART")))\
         .withColumn("PRC_FIX_IN", trim(col("PBIND")))\
         .withColumn("VAR_SLS_UNIT_IN", trim(col("VAVME")))\
         .withColumn("MATL_CMPT_CHAR", trim(col("MATKC")))\
-        .withColumn("MATL_SORT", trim(col("PVMSO")))\
+        .withColumn("MATL_SORT", trim(col("PVMSO")).cast(IntegerType()))\
         .withColumn("PRC_BND_CAT", lit(Config.PRC_BND_CAT))\
         .withColumn("MATL_SLS_CAT_GRP_DESC", lit(Config.MATL_SLS_CAT_GRP_DESC))\
         .withColumn("PROD_HIER_LVL_NUM", lit(Config.PROD_HIER_LVL_NUM).cast(IntegerType()))\
