@@ -5,5 +5,5 @@ from prophecy.libs import typed_lit
 from jde_md_matl_jet.config.ConfigStore import *
 from jde_md_matl_jet.udfs.UDFs import *
 
-def T_O_MAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
-    return in0.filter(expr(Config.TYPE_O_MAT_Filter))
+def F0005_NC(spark: SparkSession) -> DataFrame:
+    return spark.read.table(f"{Config.sourceSystem}.{Config.F0005}")

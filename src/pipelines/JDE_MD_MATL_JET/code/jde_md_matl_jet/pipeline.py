@@ -26,9 +26,17 @@ def pipeline(spark: SparkSession) -> None:
     MATL_GR_LU(spark, df_MATL_GRP)
     df_MATL_GRP_2 = MATL_GRP_2(spark, df_TRIM)
     MATL_GR_LU_1(spark, df_MATL_GRP_2)
-    df_MAT_SPEC = MAT_SPEC(spark)
+    df_F0005_NC = F0005_NC(spark)
+    df_F0005_NC = collectMetrics(
+        spark, 
+        df_F0005_NC, 
+        "graph", 
+        "nS93-IpKKya1ivhyJS2Jc$$GW9Cm1rFo8CfN__9KYXrR", 
+        "1CmECpvjpb-TFVSF23HNg$$VWqeqTcky5Fi2zyqw-M2O"
+    )
+    df_MAT_SPEC = MAT_SPEC(spark, df_F0005_NC)
     MAT_SPEC_LU(spark, df_MAT_SPEC)
-    df_T_O_MAT = T_O_MAT(spark)
+    df_T_O_MAT = T_O_MAT(spark, df_F0005_NC)
     T_O_MAT_LU(spark, df_T_O_MAT)
     df_DS_JDE_01_F4101 = DS_JDE_01_F4101(spark)
     df_DS_JDE_01_F4101 = collectMetrics(

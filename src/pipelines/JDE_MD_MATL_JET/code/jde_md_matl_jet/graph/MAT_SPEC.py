@@ -6,4 +6,4 @@ from jde_md_matl_jet.config.ConfigStore import *
 from jde_md_matl_jet.udfs.UDFs import *
 
 def MAT_SPEC(spark: SparkSession, in0: DataFrame) -> DataFrame:
-    return in0.filter(((col("_deleted_") == lit("F")) & (trim(col("DRRT")) == lit(Config.BRAVO_MINOR_DESC_FILTER))))
+    return in0.filter(expr(Config.MAT_SPEC_Filter))

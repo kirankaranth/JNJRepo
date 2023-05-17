@@ -11,6 +11,7 @@ class Config(ConfigBase):
             configDatabase: str=None,
             DBTABLE: str=None,
             DBTABLE1: str=None,
+            F0005: str=None,
             DAI_ETL_ID: int=None,
             BRAVO_MINOR_DESC_FILTER: str=None,
             B_M_LU_Field: str=None,
@@ -55,6 +56,8 @@ class Config(ConfigBase):
             CMMDTY: str=None,
             MATL_GRP_DESC_2_FILTER: str=None,
             M_G_2_Field: str=None,
+            MAT_SPEC_Filter: str=None,
+            TYPE_O_MAT_Filter: str=None,
             **kwargs
     ):
         self.spark = None
@@ -65,6 +68,7 @@ class Config(ConfigBase):
             configDatabase, 
             DBTABLE, 
             DBTABLE1, 
+            F0005, 
             DAI_ETL_ID, 
             BRAVO_MINOR_DESC_FILTER, 
             B_M_LU_Field, 
@@ -108,7 +112,9 @@ class Config(ConfigBase):
             BRAVO_MINOR_CODE, 
             CMMDTY, 
             MATL_GRP_DESC_2_FILTER, 
-            M_G_2_Field
+            M_G_2_Field, 
+            MAT_SPEC_Filter, 
+            TYPE_O_MAT_Filter
         )
 
     def update(
@@ -119,6 +125,7 @@ class Config(ConfigBase):
             configDatabase: str=" ",
             DBTABLE: str="f4101_adt",
             DBTABLE1: str="f0005",
+            F0005: str="f0005",
             DAI_ETL_ID: int=0,
             BRAVO_MINOR_DESC_FILTER: str="10",
             B_M_LU_Field: str="IMSRP0",
@@ -163,6 +170,8 @@ class Config(ConfigBase):
             CMMDTY: str="null",
             MATL_GRP_DESC_2_FILTER: str="P4",
             M_G_2_Field: str="IMPRP4",
+            MAT_SPEC_Filter: str="_deleted_ = 'F' AND Trim(DRSY) = '58' AND Trim(DRRT) = '03'",
+            TYPE_O_MAT_Filter: str="_deleted_ = 'F' AND Trim(DRSY) = '59' AND Trim(DRRT) = '62'",
             **kwargs
     ):
         prophecy_spark = self.spark
@@ -172,6 +181,7 @@ class Config(ConfigBase):
         self.configDatabase = configDatabase
         self.DBTABLE = DBTABLE
         self.DBTABLE1 = DBTABLE1
+        self.F0005 = F0005
         self.DAI_ETL_ID = self.get_int_value(DAI_ETL_ID)
         self.BRAVO_MINOR_DESC_FILTER = BRAVO_MINOR_DESC_FILTER
         self.B_M_LU_Field = B_M_LU_Field
@@ -216,4 +226,6 @@ class Config(ConfigBase):
         self.CMMDTY = CMMDTY
         self.MATL_GRP_DESC_2_FILTER = MATL_GRP_DESC_2_FILTER
         self.M_G_2_Field = M_G_2_Field
+        self.MAT_SPEC_Filter = MAT_SPEC_Filter
+        self.TYPE_O_MAT_Filter = TYPE_O_MAT_Filter
         pass
