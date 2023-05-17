@@ -1,10 +1,10 @@
 from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
-from sap_01_md_matl_dstn_chn.config.ConfigStore import *
-from sap_01_md_matl_dstn_chn.udfs.UDFs import *
+from sap_01_md_matl_dstn_chn_bba_bbl_bbn_bwi_geu_hcs_mbp_mrs_p01_tai_svs_hmd_hm2_atl_fsn.config.ConfigStore import *
+from sap_01_md_matl_dstn_chn_bba_bbl_bbn_bwi_geu_hcs_mbp_mrs_p01_tai_svs_hmd_hm2_atl_fsn.udfs.UDFs import *
 from prophecy.utils import *
-from sap_01_md_matl_dstn_chn.graph import *
+from sap_01_md_matl_dstn_chn_bba_bbl_bbn_bwi_geu_hcs_mbp_mrs_p01_tai_svs_hmd_hm2_atl_fsn.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_DS_SAP_01_MVKE = DS_SAP_01_MVKE(spark)
