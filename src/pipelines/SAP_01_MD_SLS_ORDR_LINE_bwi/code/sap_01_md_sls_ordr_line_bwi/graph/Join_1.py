@@ -44,8 +44,8 @@ def Join_1(spark: SparkSession, VBAP: DataFrame, VBAK: DataFrame, VBKD: DataFram
         when((col("VBAP.erdat") == lit("00000000")), lit(None).cast(TimestampType()))\
           .otherwise(to_timestamp(concat(col("VBAP.erdat"), col("VBAP.erzet")), "yyyyMMddHHmmss"))\
           .alias("CR_DTTM"), 
-        lookup("LU_SAP_TVAGT", col("ABGRU")).getField("BEZEI").alias("REJ_RSN_DESC"), 
-        lookup("LU_SAP_TVAPT", col("PSTYV")).getField("VTEXT").alias("LINE_ITEM_CAT_DESC"), 
+        trim(lookup("LU_SAP_TVAGT", col("ABGRU")).getField("BEZEI")).alias("REJ_RSN_DESC"), 
+        trim(lookup("LU_SAP_TVAPT", col("PSTYV")).getField("VTEXT")).alias("LINE_ITEM_CAT_DESC"), 
         col("NETPR").cast(DecimalType(18, 4)).alias("NET_PRC_AMT"), 
         trim(col("VBAP.MATWA")).alias("ENT_MATL_NUM"), 
         trim(col("VBAP.MEINS")).alias("BASE_UOM_CD"), 
@@ -93,10 +93,10 @@ def Join_1(spark: SparkSession, VBAP: DataFrame, VBAK: DataFrame, VBKD: DataFram
         trim(col("VBAP.MVGR5")).alias("MATL_GRP_5"), 
         trim(col("VBAP.AUFNR")).alias("ORDR_NUM"), 
         col("VBAP.KPEIN").cast(DecimalType(18, 4)).alias("COND_PRC_UNIT"), 
-        lookup("LU_SAP_TVRO", col("ROUTE")).getField("SPFBK").alias("RTE_FCTRY_CAL"), 
-        lookup("LU_SAP_TVRO", col("ROUTE")).getField("TDVZTD").alias("TRSPN_LEAD_TIME_IN_CAL_DAYS"), 
-        lookup("LU_SAP_TVRO", col("ROUTE")).getField("TRAZTD").alias("TRST_DUR_IN_CAL_DAYS"), 
-        lookup("LU_SAP_TVROT", col("ROUTE")).getField("BEZEI").alias("RTE_DESC"), 
+        trim(lookup("LU_SAP_TVRO", col("ROUTE")).getField("SPFBK")).alias("RTE_FCTRY_CAL"), 
+        trim(lookup("LU_SAP_TVRO", col("ROUTE")).getField("TDVZTD")).alias("TRSPN_LEAD_TIME_IN_CAL_DAYS"), 
+        trim(lookup("LU_SAP_TVRO", col("ROUTE")).getField("TRAZTD")).alias("TRST_DUR_IN_CAL_DAYS"), 
+        trim(lookup("LU_SAP_TVROT", col("ROUTE")).getField("BEZEI")).alias("RTE_DESC"), 
         when((trim(col("VBKD.bstdk")) == lit("00000000")), lit(None).cast(TimestampType()))\
           .otherwise(to_timestamp(trim(col("VBKD.bstdk")), "yyyyMMdd"))\
           .alias("CUST_PO_DTTM"), 
@@ -128,7 +128,7 @@ def Join_1(spark: SparkSession, VBAP: DataFrame, VBAK: DataFrame, VBKD: DataFram
         trim(col("VBAP.POSNV")).alias("ORIG_ITM"), 
         trim(col("VBAP.VGBEL")).alias("REF_DOC_NUM"), 
         trim(col("VBAP.VGPOS")).alias("REF_ITM_NUM"), 
-        lookup("LU_SAP_TVAPT", col("PSTYV")).getField("PSTYV").alias("ITEM_CAT_CD"), 
+        trim(lookup("LU_SAP_TVAPT", col("PSTYV")).getField("PSTYV")).alias("ITEM_CAT_CD"), 
         lit(
             "#"
           )\
