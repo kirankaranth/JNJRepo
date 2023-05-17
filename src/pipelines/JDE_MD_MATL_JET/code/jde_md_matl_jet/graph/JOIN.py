@@ -5,7 +5,5 @@ from prophecy.libs import typed_lit
 from jde_md_matl_jet.config.ConfigStore import *
 from jde_md_matl_jet.udfs.UDFs import *
 
-def T_O_MAT_LU(spark: SparkSession, in0: DataFrame):
-    keyColumns = ['''DRKY''']
-    valueColumns = ['''DRDL01''']
-    createLookup("TYPE_O_MAT_LU", in0, spark, keyColumns, valueColumns)
+def JOIN(spark: SparkSession, in0: DataFrame, in1: DataFrame, ) -> DataFrame:
+    return in0.alias("in0").join(in1.alias("in1"), (col("in0.IMITM") == col("in1.XBITM")), "left_outer")

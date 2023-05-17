@@ -6,6 +6,6 @@ from jde_md_matl_jet.config.ConfigStore import *
 from jde_md_matl_jet.udfs.UDFs import *
 
 def MAT_SPEC_LU(spark: SparkSession, in0: DataFrame):
-    keyColumns = []
-    valueColumns = []
-    createLookup("", in0, spark, keyColumns, valueColumns)
+    keyColumns = ['''DRKY''']
+    valueColumns = ['''DRDL01''']
+    createLookup("MAT_SPEC_LU", in0, spark, keyColumns, valueColumns)

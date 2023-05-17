@@ -34,10 +34,21 @@ def pipeline(spark: SparkSession) -> None:
         "nS93-IpKKya1ivhyJS2Jc$$GW9Cm1rFo8CfN__9KYXrR", 
         "1CmECpvjpb-TFVSF23HNg$$VWqeqTcky5Fi2zyqw-M2O"
     )
-    df_MAT_SPEC = MAT_SPEC(spark, df_F0005_NC)
+    df_TRIM_1 = TRIM_1(spark, df_F0005_NC)
+    df_MAT_SPEC = MAT_SPEC(spark, df_TRIM_1)
     MAT_SPEC_LU(spark, df_MAT_SPEC)
-    df_T_O_MAT = T_O_MAT(spark, df_F0005_NC)
+    df_T_O_MAT = T_O_MAT(spark, df_TRIM_1)
     T_O_MAT_LU(spark, df_T_O_MAT)
+    df_DS_JDE_F554101B_NC = DS_JDE_F554101B_NC(spark)
+    df_DS_JDE_F554101B_NC = collectMetrics(
+        spark, 
+        df_DS_JDE_F554101B_NC, 
+        "graph", 
+        "_ybg5H9hcJk4bK_aoxPKn$$CbIfKX2_jNCCamrHaBfPG", 
+        "g7LzFHP4I6_lnxYYu4CZl$$Df7LseVuPSOlHSe83TuRK"
+    )
+    df_F554101B_SELEC = F554101B_SELEC(spark, df_DS_JDE_F554101B_NC)
+    df_DEL1 = DEL1(spark, df_F554101B_SELEC)
     df_DS_JDE_01_F4101 = DS_JDE_01_F4101(spark)
     df_DS_JDE_01_F4101 = collectMetrics(
         spark, 
@@ -48,7 +59,8 @@ def pipeline(spark: SparkSession) -> None:
     )
     df_F4101_SELECTION = F4101_SELECTION(spark, df_DS_JDE_01_F4101)
     df_DEL = DEL(spark, df_F4101_SELECTION)
-    df_XFORM = XFORM(spark, df_DEL)
+    df_JOIN = JOIN(spark, df_DEL, df_DEL1)
+    df_XFORM = XFORM(spark, df_JOIN)
     df_FIELD_ORDER = FIELD_ORDER(spark, df_XFORM)
     df_FIELD_ORDER = collectMetrics(
         spark, 

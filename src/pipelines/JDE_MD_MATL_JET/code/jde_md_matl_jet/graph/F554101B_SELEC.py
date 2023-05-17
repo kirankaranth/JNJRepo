@@ -5,7 +5,5 @@ from prophecy.libs import typed_lit
 from jde_md_matl_jet.config.ConfigStore import *
 from jde_md_matl_jet.udfs.UDFs import *
 
-def T_O_MAT_LU(spark: SparkSession, in0: DataFrame):
-    keyColumns = ['''DRKY''']
-    valueColumns = ['''DRDL01''']
-    createLookup("TYPE_O_MAT_LU", in0, spark, keyColumns, valueColumns)
+def F554101B_SELEC(spark: SparkSession, in0: DataFrame) -> DataFrame:
+    return in0.select(col("XBITM"), col("XB_T003"), col("XB_T162"), col("_deleted_"))

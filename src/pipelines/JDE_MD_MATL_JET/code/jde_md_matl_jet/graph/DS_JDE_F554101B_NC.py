@@ -5,7 +5,5 @@ from prophecy.libs import typed_lit
 from jde_md_matl_jet.config.ConfigStore import *
 from jde_md_matl_jet.udfs.UDFs import *
 
-def T_O_MAT_LU(spark: SparkSession, in0: DataFrame):
-    keyColumns = ['''DRKY''']
-    valueColumns = ['''DRDL01''']
-    createLookup("TYPE_O_MAT_LU", in0, spark, keyColumns, valueColumns)
+def DS_JDE_F554101B_NC(spark: SparkSession) -> DataFrame:
+    return spark.read.table(f"{Config.sourceDatabase}.{Config.F554101B}")

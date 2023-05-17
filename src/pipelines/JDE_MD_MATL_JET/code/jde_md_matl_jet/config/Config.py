@@ -58,6 +58,7 @@ class Config(ConfigBase):
             M_G_2_Field: str=None,
             MAT_SPEC_Filter: str=None,
             TYPE_O_MAT_Filter: str=None,
+            F554101B: str=None,
             **kwargs
     ):
         self.spark = None
@@ -114,7 +115,8 @@ class Config(ConfigBase):
             MATL_GRP_DESC_2_FILTER, 
             M_G_2_Field, 
             MAT_SPEC_Filter, 
-            TYPE_O_MAT_Filter
+            TYPE_O_MAT_Filter, 
+            F554101B
         )
 
     def update(
@@ -172,6 +174,7 @@ class Config(ConfigBase):
             M_G_2_Field: str="IMPRP4",
             MAT_SPEC_Filter: str="_deleted_ = 'F' AND Trim(DRSY) = '58' AND Trim(DRRT) = '03'",
             TYPE_O_MAT_Filter: str="_deleted_ = 'F' AND Trim(DRSY) = '59' AND Trim(DRRT) = '62'",
+            F554101B: str="F554101B_ADT",
             **kwargs
     ):
         prophecy_spark = self.spark
@@ -228,4 +231,5 @@ class Config(ConfigBase):
         self.M_G_2_Field = M_G_2_Field
         self.MAT_SPEC_Filter = MAT_SPEC_Filter
         self.TYPE_O_MAT_Filter = TYPE_O_MAT_Filter
+        self.F554101B = F554101B
         pass
