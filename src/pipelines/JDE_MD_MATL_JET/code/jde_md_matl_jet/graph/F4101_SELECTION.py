@@ -53,5 +53,6 @@ def F4101_SELECTION(spark: SparkSession, in0: DataFrame) -> DataFrame:
         expr(Config.M_T_D_LU_Field).alias("M_T_D_LU"), 
         col("IMMPST"), 
         col("IMPTSC"), 
-        col("_upt_")
+        col("_upt_"), 
+        expr(Config.M_G_2_Field).alias("M_G2_LU")
     )

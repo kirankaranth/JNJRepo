@@ -53,6 +53,8 @@ class Config(ConfigBase):
             STERILE: str=None,
             BRAVO_MINOR_CODE: str=None,
             CMMDTY: str=None,
+            MATL_GRP_DESC_2_FILTER: str=None,
+            M_G_2_Field: str=None,
             **kwargs
     ):
         self.spark = None
@@ -104,7 +106,9 @@ class Config(ConfigBase):
             TYPE_OF_MATERIAL, 
             STERILE, 
             BRAVO_MINOR_CODE, 
-            CMMDTY
+            CMMDTY, 
+            MATL_GRP_DESC_2_FILTER, 
+            M_G_2_Field
         )
 
     def update(
@@ -157,6 +161,8 @@ class Config(ConfigBase):
             STERILE: str="null",
             BRAVO_MINOR_CODE: str="TRIM(IMSRP0)",
             CMMDTY: str="null",
+            MATL_GRP_DESC_2_FILTER: str="P4",
+            M_G_2_Field: str="IMPRP4",
             **kwargs
     ):
         prophecy_spark = self.spark
@@ -208,4 +214,6 @@ class Config(ConfigBase):
         self.STERILE = STERILE
         self.BRAVO_MINOR_CODE = BRAVO_MINOR_CODE
         self.CMMDTY = CMMDTY
+        self.MATL_GRP_DESC_2_FILTER = MATL_GRP_DESC_2_FILTER
+        self.M_G_2_Field = M_G_2_Field
         pass
