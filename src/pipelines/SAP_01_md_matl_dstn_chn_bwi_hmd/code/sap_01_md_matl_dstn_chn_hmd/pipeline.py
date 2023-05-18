@@ -1,10 +1,10 @@
 from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
-from sap_01_md_matl_dstn_chn_bba_bbl_bbn_bwi_geu_hcs_mbp_mrs_p01_tai_svs_hmd_hm2_atl_fsn.config.ConfigStore import *
-from sap_01_md_matl_dstn_chn_bba_bbl_bbn_bwi_geu_hcs_mbp_mrs_p01_tai_svs_hmd_hm2_atl_fsn.udfs.UDFs import *
+from sap_01_md_matl_dstn_chn_hmd.config.ConfigStore import *
+from sap_01_md_matl_dstn_chn_hmd.udfs.UDFs import *
 from prophecy.utils import *
-from sap_01_md_matl_dstn_chn_bba_bbl_bbn_bwi_geu_hcs_mbp_mrs_p01_tai_svs_hmd_hm2_atl_fsn.graph import *
+from sap_01_md_matl_dstn_chn_hmd.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_SAP_t179t = SAP_t179t(spark)
@@ -17,16 +17,6 @@ def pipeline(spark: SparkSession) -> None:
     )
     df_MANDT_FILTER_t179t = MANDT_FILTER_t179t(spark, df_SAP_t179t)
     LU_SAP_t179t(spark, df_MANDT_FILTER_t179t)
-    df_SAP_tvmst = SAP_tvmst(spark)
-    df_SAP_tvmst = collectMetrics(
-        spark, 
-        df_SAP_tvmst, 
-        "graph", 
-        "gUKnjceV_oUskzoT57LGm$$vLJDUqVmFQRDlrkiNrZdd", 
-        "A5bRoQ1Gyavafl1q3scaC$$wYrNFuftUbNTlmtGN_plz"
-    )
-    df_MANDT_FILTER_tvmst = MANDT_FILTER_tvmst(spark, df_SAP_tvmst)
-    LU_SAP_tvmst(spark, df_MANDT_FILTER_tvmst)
     df_SAP_tvms = SAP_tvms(spark)
     df_SAP_tvms = collectMetrics(
         spark, 
@@ -81,9 +71,9 @@ def main():
     spark.conf.set("prophecy.collect.basic.stats", "true")
     spark.conf.set("spark.sql.legacy.allowUntypedScalaUDF", "true")
     spark.conf.set("spark.sql.optimizer.excludedRules", "org.apache.spark.sql.catalyst.optimizer.ColumnPruning")
-    spark.conf.set("prophecy.metadata.pipeline.uri", "pipelines/SAP_01_md_matl_dstn_chn")
+    spark.conf.set("prophecy.metadata.pipeline.uri", "pipelines/SAP_01_md_matl_dstn_chn_bwi_hmd")
     
-    MetricsCollector.start(spark = spark, pipelineId = "pipelines/SAP_01_md_matl_dstn_chn")
+    MetricsCollector.start(spark = spark, pipelineId = "pipelines/SAP_01_md_matl_dstn_chn_bwi_hmd")
     pipeline(spark)
     MetricsCollector.end(spark)
 
