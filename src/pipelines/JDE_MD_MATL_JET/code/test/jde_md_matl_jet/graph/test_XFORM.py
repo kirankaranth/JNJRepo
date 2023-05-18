@@ -26,6 +26,46 @@ class XFORMTest(BaseTestCase):
         dfOutComputed = XFORM(self.spark, dfIn0)
         assertDFEquals(dfOut.select("CHG_BY"), dfOutComputed.select("CHG_BY"), self.maxUnequalRowsToShow)
 
+    def test_datetime_test(self):
+        dfIn0 = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/jde_md_matl_jet/graph/XFORM/in0/schema.json',
+            'test/resources/data/jde_md_matl_jet/graph/XFORM/in0/data/test_datetime_test.json',
+            'in0'
+        )
+        dfOut = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/jde_md_matl_jet/graph/XFORM/out/schema.json',
+            'test/resources/data/jde_md_matl_jet/graph/XFORM/out/data/test_datetime_test.json',
+            'out'
+        )
+        dfOutComputed = XFORM(self.spark, dfIn0)
+        assertDFEquals(
+            dfOut.select("LAST_CHG_DT_TIME_DTTM"),
+            dfOutComputed.select("LAST_CHG_DT_TIME_DTTM"),
+            self.maxUnequalRowsToShow
+        )
+
+    def test_decimal(self):
+        dfIn0 = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/jde_md_matl_jet/graph/XFORM/in0/schema.json',
+            'test/resources/data/jde_md_matl_jet/graph/XFORM/in0/data/test_decimal.json',
+            'in0'
+        )
+        dfOut = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/jde_md_matl_jet/graph/XFORM/out/schema.json',
+            'test/resources/data/jde_md_matl_jet/graph/XFORM/out/data/test_decimal.json',
+            'out'
+        )
+        dfOutComputed = XFORM(self.spark, dfIn0)
+        assertDFEquals(
+            dfOut.select("TOT_SHLF_LIF_DAYS_CNT"),
+            dfOutComputed.select("TOT_SHLF_LIF_DAYS_CNT"),
+            self.maxUnequalRowsToShow
+        )
+
     def setUp(self):
         BaseTestCase.setUp(self)
         import os
