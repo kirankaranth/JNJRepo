@@ -1,0 +1,3 @@
+from jde_01_md_matl_dstn_chn_deu_djd_sjd_bw2_gmd_jes_jet_jsw.pipeline import main
+
+main()
