@@ -1,1 +1,1 @@
-from .jde_md_sls_ordr_hist_jde_gmd import *
+from .jde_md_sls_ordr_hist_ldgr_gmd import *
