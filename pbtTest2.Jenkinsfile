@@ -42,7 +42,7 @@ def expectsManifest() {
  * Test the project
  */
 def prophecyTest(folder) {
-    ensure.insideDockerContainer('jekt-docker.artifactrepo.jnj.com/cdl-prophecy-deploy:1.0.4.2b') {
+    ensure.insideDockerContainer('jekt-docker.artifactrepo.jnj.com/cdl-prophecy-deploy:1.1.1') {
         checkout scm
 
             sh """

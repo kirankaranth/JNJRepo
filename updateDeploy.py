@@ -1,7 +1,7 @@
 import sys
 import os
 import json
-
+import re
 #Used to handle the environment substitution
 dbLoc = "code/databricks-job.json"
 env = sys.argv[1]
@@ -27,6 +27,7 @@ app = sys.argv[2]
 for item in os.scandir("./src/jobs/"):
     if item.is_dir():
         if os.path.isfile(item.path+"/"+dbLoc):
+
             #print(item.path+"/"+dbLoc)
             f = open(item.path+"/"+dbLoc)
             #print(f)
@@ -39,11 +40,43 @@ for item in os.scandir("./src/jobs/"):
             for task in jsonObject["request"]["tasks"]:
 
                 if 'python_wheel_task' in task:
+                    pipelinePath = getPipelinePath(task["task_key"], jsonObject)
+                    packageName = ""
+                    d = {}
+                    try:
+                        import sys
+                        pipelinePath = getPipelinePath(task["task_key"], jsonObject)
 
-                    ##Address bug with configs dropping out 
-                    orConfig = open("./src/"+getPipelinePath(task["task_key"], jsonObject)+"/code/configs/"
+                        fo = open("./src/"+pipelinePath+"/code/setup.py", "r")
+                        setupFile = fo.read()
+                        packageName = re.findall("'main = (.*)\.",setupFile)[0]
+
+                        sys.path.insert(0,"./src/"+pipelinePath+"/code/"+packageName)
+                        fo.close()
+
+                        #print("./src/"+pipelinePath+"/code/"+task["python_wheel_task"]["package_name"])
+                        from config.Config import Config
+                        c1 = Config()
+                        c1.update()
+                        ##Address bug with configs dropping out 
+                        d = c1.__dict__
+                        d.pop("spark")
+                        
+                        sys.path.pop(0)
+                    except Exception as e:
+                        print("ERROR WITH: "+"./src/"+pipelinePath+"/code/"+task["python_wheel_task"]["package_name"] \
+                            +"----"+jsonObject["request"]["name"] \
+                            +"  cannot find package  " + packageName )
+                            # task["python_wheel_task"]["package_name"])
+                    
+
+                    orConfig = open("./src/"+pipelinePath+"/code/configs/"
                         + "resources/config/" + task["python_wheel_task"]["parameters"][1] + ".json")
                     a = json.load(orConfig)
+                    a.update(d)
+
+                    # if task["python_wheel_task"]["parameters"][1] == "BW2":
+                    #     print(a)
                     #components -> nodename ->  get id
                     #loop through  jsonObject["components"]
                     #    task["key"]
@@ -55,7 +88,7 @@ for item in os.scandir("./src/jobs/"):
                     # Then load the overwrites 
                     c = json.loads(task["python_wheel_task"]["parameters"][3])
                     a.update(c)
-                    #print(a)
+
                     if env == "prod" and task["python_wheel_task"]["parameters"][1].upper() == "HM2":
                         #print(jsonObject)
                         b = json.loads('{"targetSchema":"'+envFolder+'_'+app+'","targetEnv":"'+envFolder+'","targetApp":"'+app+'","sourceDatabase":"hmd","sourceSystem":"hmd","nonProdFilter":false}')
@@ -73,7 +106,8 @@ for item in os.scandir("./src/jobs/"):
                     a.update(b)
                     #print(a)
                     task["python_wheel_task"]["parameters"][3] = json.dumps(a) #'{"targetSchema":"'+envFolder+'_'+app+'","targetEnv":"'+envFolder+'","targetApp":"'+app+'"}'
-                
+                    if task["python_wheel_task"]["parameters"][1] == "BW2":
+                        print(a)                
             f.close()
             f = open(item.path+"/"+dbLoc,'w')
             json.dump(jsonObject,f)
