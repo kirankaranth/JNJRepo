@@ -145,7 +145,7 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("PRCHSNG_GRP_DESC", lookup("LU_SAP_T024", col("EKGRP")).getField("EKNAM"))\
         .withColumn("EXCSE_TAX_RLVNCE", lit(None).cast(StringType()))\
         .withColumn("SEQ_NUM", lit(None).cast(StringType()))\
-        .withColumn("MAINT_STS", lit(None).cast(StringType()))\
+        .withColumn("MAINT_STS", trim(col("PSTAT")))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
         .withColumn("DAI_UPDT_DTTM", current_timestamp())\
