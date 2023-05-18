@@ -91,14 +91,6 @@
           "optional" : false,
           "isWorkflowNodeConfiguration" : false
         }, {
-          "name" : "MATL_SLS_CAT_GRP_DESC",
-          "kind" : {
-            "type" : "spark_expression",
-            "value" : "null"
-          },
-          "optional" : false,
-          "isWorkflowNodeConfiguration" : false
-        }, {
           "name" : "PRC_BND_CAT",
           "kind" : {
             "type" : "spark_expression",
@@ -114,7 +106,7 @@
       },
       "fabrics" : { },
       "instances" : { },
-      "selected" : "fsn",
+      "selected" : "hm2",
       "nonEditable" : [ ],
       "isSubscribedPipelineWithPipelineConfigs" : false
     },
@@ -129,10 +121,10 @@
     "interimModeEnabled" : true,
     "visualCodeInterimMode" : "IO",
     "recordsLimit" : {
-      "enabled" : true,
+      "enabled" : false,
       "value" : 100
     },
-    "topLevelPackage" : "sap_01_md_matl_dstn_chn_bba_bbl_bbn_bwi_geu_hcs_mbp_mrs_p01_tai_svs_hmd_hm2_atl_fsn",
+    "topLevelPackage" : "sap_01_md_matl_dstn_chn_hm2",
     "configurationVersion" : "v1"
   },
   "connections" : [ {
@@ -213,6 +205,18 @@
     "sourcePort" : "5Ba3KgeHPRa55p2PkRdH-$$qyWug9CK0mlajCNYBLipL",
     "target" : "PvGwDDwRJH0ORNLr0RmaI$$ghsrRUNnEMj3Dt_uRmkJq",
     "targetPort" : "umxsQ64f-Grg14vOC4LiL$$HKDWgJkd699v3Or8zg_4D"
+  }, {
+    "id" : "CGKVwnwTaT7wp5iIO2ZHi$$uAUzCLF4TVcBA9cWQxvxd",
+    "source" : "IFUDlBuaO7FAe70lp_ClF$$HsEm6LuMEjihdvn0onZz3",
+    "sourcePort" : "DLEYyDfRPbyFg-g-k4oGk$$oVNDSKIvsUmMHU4acJd2d",
+    "target" : "3VrI0_sM_98giCOOljje7$$FsqffrH__1zDGDR-sgcEm",
+    "targetPort" : "GRy6PAeiD-8HhEkumkw19$$ek5IpdBed-9T6h1bf4Aez"
+  }, {
+    "id" : "RwedxB5Ts7WhPZ-AXfjMn$$Tei6nCh6Yk-hgZ4csKW7P",
+    "source" : "3VrI0_sM_98giCOOljje7$$FsqffrH__1zDGDR-sgcEm",
+    "sourcePort" : "KHzIt9VYYhrApw_WZxmmj$$_K126_o8P9uRJrsSmv75b",
+    "target" : "yd19Whb_2sSnO5IwBTjss$$vf6WxYZ0EUYuAFz-XSE9I",
+    "targetPort" : "W5zUUeLKGru4lcoNEpH0j$$_TzF9Z9IcStyH_jAMIX89"
   } ],
   "processes" : {
     "4lGPhcNh0VPhlNyxvz4uN$$lvqkl57I59o7UBLlgkn9s" : {
@@ -1621,7 +1625,7 @@
               }
             }, {
               "name" : "MATL_SLS_CAT_GRP_DESC",
-              "type" : "void",
+              "type" : "string",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -3018,7 +3022,7 @@
               }
             }, {
               "name" : "MATL_SLS_CAT_GRP_DESC",
-              "type" : "void",
+              "type" : "string",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -5865,7 +5869,7 @@
             "sourceColumn" : "MATL_SLS_CAT_GRP_DESC",
             "expression" : {
               "format" : "sql",
-              "expression" : "expr('$MATL_SLS_CAT_GRP_DESC')"
+              "expression" : "trim(LU_SAP_tptmt(MTPOS)[BEZEI])"
             }
           },
           "DropColumn" : {
@@ -6205,6 +6209,32 @@
           "format" : "sql",
           "expression" : "MANDT = '$MANDT' and _deleted_ = 'F' and SPRAS = 'E'"
         }
+      }
+    },
+    "IFUDlBuaO7FAe70lp_ClF$$HsEm6LuMEjihdvn0onZz3" : {
+      "id" : "IFUDlBuaO7FAe70lp_ClF$$HsEm6LuMEjihdvn0onZz3",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "SAP_tptmt",
+        "slug" : "SAP_tptmt",
+        "x" : 80,
+        "y" : 180,
+        "phase" : -1,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "DLEYyDfRPbyFg-g-k4oGk$$oVNDSKIvsUmMHU4acJd2d",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/DS_SAP_05_tptmt"
       }
     },
     "rLvW9ajrHCDstRlOW-0wy$$Axd2CxBJHZKuMN3Sf6tW3" : {
@@ -7741,7 +7771,7 @@
               }
             }, {
               "name" : "MATL_SLS_CAT_GRP_DESC",
-              "type" : "void",
+              "type" : "string",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -8711,6 +8741,134 @@
         "datasetId" : "datasets/DS_SAP_04_tvms"
       }
     },
+    "3VrI0_sM_98giCOOljje7$$FsqffrH__1zDGDR-sgcEm" : {
+      "id" : "3VrI0_sM_98giCOOljje7$$FsqffrH__1zDGDR-sgcEm",
+      "component" : "Filter",
+      "metadata" : {
+        "label" : "MANDT_FILTER_tptmt",
+        "slug" : "MANDT_FILTER_tptmt",
+        "x" : 200,
+        "y" : 180,
+        "phase" : -1,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "GRy6PAeiD-8HhEkumkw19$$ek5IpdBed-9T6h1bf4Aez",
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "MANDT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPRAS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MTPOS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BEZEI",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_pk_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_upt_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_kafkaOffset_",
+              "type" : "long",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_createTime_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_kafkaTimestamp_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_deleted_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "KHzIt9VYYhrApw_WZxmmj$$_K126_o8P9uRJrsSmv75b",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ "GRy6PAeiD-8HhEkumkw19$$ek5IpdBed-9T6h1bf4Aez##SPRAS", "GRy6PAeiD-8HhEkumkw19$$ek5IpdBed-9T6h1bf4Aez##MANDT", "GRy6PAeiD-8HhEkumkw19$$ek5IpdBed-9T6h1bf4Aez##_deleted_" ],
+        "condition" : {
+          "format" : "sql",
+          "expression" : "MANDT = '$MANDT' and SPRAS = 'E' and _deleted_ = 'F'"
+        }
+      }
+    },
     "rObkaZ8kT_27n-pZrLsUR$$1grYL7jQQH6fL2RPRm4S7" : {
       "id" : "rObkaZ8kT_27n-pZrLsUR$$1grYL7jQQH6fL2RPRm4S7",
       "component" : "Filter",
@@ -8846,6 +9004,130 @@
           "format" : "sql",
           "expression" : "MANDT = '$MANDT' and _deleted_ = 'F' and SPRAS = 'E'"
         }
+      }
+    },
+    "yd19Whb_2sSnO5IwBTjss$$vf6WxYZ0EUYuAFz-XSE9I" : {
+      "id" : "yd19Whb_2sSnO5IwBTjss$$vf6WxYZ0EUYuAFz-XSE9I",
+      "component" : "Lookup",
+      "metadata" : {
+        "label" : "LU_SAP_tptmt",
+        "slug" : "LU_SAP_tptmt",
+        "x" : 320,
+        "y" : 180,
+        "phase" : -1,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "W5zUUeLKGru4lcoNEpH0j$$_TzF9Z9IcStyH_jAMIX89",
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "MANDT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SPRAS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MTPOS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BEZEI",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_pk_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_upt_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_kafkaOffset_",
+              "type" : "long",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_createTime_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_kafkaTimestamp_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_deleted_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "isRange" : false,
+        "processName" : "LU_SAP_tptmt",
+        "keyColumns" : [ "MTPOS" ],
+        "valueColumns" : [ "BEZEI" ]
       }
     }
   },
