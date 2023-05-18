@@ -5,7 +5,7 @@ from prophecy.libs import typed_lit
 from sap_01_md_matl_dstn_chn_bba_bbl_bbn_bwi_geu_hcs_mbp_mrs_p01_tai_svs_hmd_hm2_atl_fsn.config.ConfigStore import *
 from sap_01_md_matl_dstn_chn_bba_bbl_bbn_bwi_geu_hcs_mbp_mrs_p01_tai_svs_hmd_hm2_atl_fsn.udfs.UDFs import *
 
-def LU_t179t(spark: SparkSession, in0: DataFrame):
-    keyColumns = ['''PRODH''']
-    valueColumns = ['''VTEXT''']
-    createLookup("LU_t179t", in0, spark, keyColumns, valueColumns)
+def LU_SAP_tvmst(spark: SparkSession, in0: DataFrame):
+    keyColumns = ['''VMSTA''']
+    valueColumns = ['''VMSTB''']
+    createLookup("LU_SAP_tvmst", in0, spark, keyColumns, valueColumns)

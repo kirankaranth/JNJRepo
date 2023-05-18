@@ -21,8 +21,8 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
           when((col("VMSTD") == lit("00000000")), lit(None).cast(TimestampType()))\
             .otherwise(to_timestamp(col("VMSTD"), "yyyyMMdd"))
         )\
-        .withColumn("ENTRP_DSTN_CHN_STS_CD", lit(Config.ENTRP_DSTN_CHN_STS_CD))\
-        .withColumn("MATL_BASE_CD", lit(Config.MATL_BASE_CD))\
+        .withColumn("ENTRP_DSTN_CHN_STS_CD", expr(Config.ENTRP_DSTN_CHN_STS_CD))\
+        .withColumn("MATL_BASE_CD", expr(Config.MATL_BASE_CD))\
         .withColumn("VOL_REBT_GRP", trim(col("BONUS")))\
         .withColumn("MATL_PRC_GRP", trim(col("KONDM")))\
         .withColumn("MATL_GRP_1", trim(col("MVGR1")))\
@@ -105,12 +105,12 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("VAR_SLS_UNIT_IN", trim(col("VAVME")))\
         .withColumn("MATL_CMPT_CHAR", trim(col("MATKC")))\
         .withColumn("MATL_SORT", trim(col("PVMSO")).cast(IntegerType()))\
-        .withColumn("PRC_BND_CAT", lit(Config.PRC_BND_CAT))\
-        .withColumn("MATL_SLS_CAT_GRP_DESC", lit(Config.MATL_SLS_CAT_GRP_DESC))\
-        .withColumn("PROD_HIER_LVL_NUM", lit(Config.PROD_HIER_LVL_NUM).cast(IntegerType()))\
-        .withColumn("PROD_HIER_DESC", lit(Config.PROD_HIER_DESC))\
-        .withColumn("DSTN_CHN_STS_CD_DESC", lit(Config.DSTN_CHN_STS_CD_DESC))\
-        .withColumn("BLOK_FOR_SLS_ORDR", lit(Config.BLOK_FOR_SLS_ORDR))\
+        .withColumn("PRC_BND_CAT", expr(Config.PRC_BND_CAT))\
+        .withColumn("MATL_SLS_CAT_GRP_DESC", expr(Config.MATL_SLS_CAT_GRP_DESC))\
+        .withColumn("PROD_HIER_LVL_NUM", trim(lookup("LU_SAP_t179", col("prodh")).getField("stufe")).cast(IntegerType()))\
+        .withColumn("PROD_HIER_DESC", trim(lookup("LU_SAP_t179t", col("prodh")).getField("vtext")))\
+        .withColumn("DSTN_CHN_STS_CD_DESC", trim(lookup("LU_SAP_tvmst", col("vmsta")).getField("vmstb")))\
+        .withColumn("BLOK_FOR_SLS_ORDR", trim(lookup("LU_SAP_tvms", col("vmsta")).getField("spvbc")))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
         .withColumn("DAI_UPDT_DTTM", current_timestamp())\
