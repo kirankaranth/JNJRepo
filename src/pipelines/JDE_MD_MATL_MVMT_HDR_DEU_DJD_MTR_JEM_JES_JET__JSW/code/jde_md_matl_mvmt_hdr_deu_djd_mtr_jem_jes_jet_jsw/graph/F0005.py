@@ -6,4 +6,4 @@ from jde_md_matl_mvmt_hdr_deu_djd_mtr_jem_jes_jet_jsw.config.ConfigStore import 
 from jde_md_matl_mvmt_hdr_deu_djd_mtr_jem_jes_jet_jsw.udfs.UDFs import *
 
 def F0005(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.sourceSystem}.f0005_adt")
+    return spark.read.table(f"{Config.sourceSystem}.f0005")
