@@ -10,17 +10,17 @@ from jde_md_matl_jet.config.ConfigStore import *
 
 class XFORMTest(BaseTestCase):
 
-    def test_unit_test_(self):
+    def test_trim_test_(self):
         dfIn0 = createDfFromResourceFiles(
             self.spark,
             'test/resources/data/jde_md_matl_jet/graph/XFORM/in0/schema.json',
-            'test/resources/data/jde_md_matl_jet/graph/XFORM/in0/data/test_unit_test_.json',
+            'test/resources/data/jde_md_matl_jet/graph/XFORM/in0/data/test_trim_test_.json',
             'in0'
         )
         dfOut = createDfFromResourceFiles(
             self.spark,
             'test/resources/data/jde_md_matl_jet/graph/XFORM/out/schema.json',
-            'test/resources/data/jde_md_matl_jet/graph/XFORM/out/data/test_unit_test_.json',
+            'test/resources/data/jde_md_matl_jet/graph/XFORM/out/data/test_trim_test_.json',
             'out'
         )
         dfOutComputed = XFORM(self.spark, dfIn0)
@@ -79,3 +79,19 @@ class XFORMTest(BaseTestCase):
         )
         from jde_md_matl_jet.graph.MATL_GR_2_LU import MATL_GR_2_LU
         MATL_GR_2_LU(self.spark, dfgraph_MATL_GR_2_LU)
+        dfgraph_MAT_SPEC_LU = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/jde_md_matl_jet/graph/MAT_SPEC_LU/schema.json',
+            'test/resources/data/jde_md_matl_jet/graph/MAT_SPEC_LU/data.json',
+            "in0"
+        )
+        from jde_md_matl_jet.graph.MAT_SPEC_LU import MAT_SPEC_LU
+        MAT_SPEC_LU(self.spark, dfgraph_MAT_SPEC_LU)
+        dfgraph_T_O_MAT_LU = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/jde_md_matl_jet/graph/T_O_MAT_LU/schema.json',
+            'test/resources/data/jde_md_matl_jet/graph/T_O_MAT_LU/data.json',
+            "in0"
+        )
+        from jde_md_matl_jet.graph.T_O_MAT_LU import T_O_MAT_LU
+        T_O_MAT_LU(self.spark, dfgraph_T_O_MAT_LU)
