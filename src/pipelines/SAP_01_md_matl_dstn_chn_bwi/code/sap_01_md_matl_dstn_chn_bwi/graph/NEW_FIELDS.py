@@ -2,8 +2,8 @@ from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from prophecy.libs import typed_lit
-from sap_01_md_matl_dstn_chn_bba_bbl_bbn_bwi_geu_hcs_mbp_mrs_p01_tai_svs_hmd_hm2_atl_fsn.config.ConfigStore import *
-from sap_01_md_matl_dstn_chn_bba_bbl_bbn_bwi_geu_hcs_mbp_mrs_p01_tai_svs_hmd_hm2_atl_fsn.udfs.UDFs import *
+from sap_01_md_matl_dstn_chn_bwi.config.ConfigStore import *
+from sap_01_md_matl_dstn_chn_bwi.udfs.UDFs import *
 
 def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
@@ -107,10 +107,10 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("MATL_SORT", trim(col("PVMSO")).cast(IntegerType()))\
         .withColumn("PRC_BND_CAT", expr(Config.PRC_BND_CAT))\
         .withColumn("MATL_SLS_CAT_GRP_DESC", expr(Config.MATL_SLS_CAT_GRP_DESC))\
-        .withColumn("PROD_HIER_LVL_NUM", trim(lookup("LU_SAP_t179", col("prodh")).getField("stufe")).cast(IntegerType()))\
+        .withColumn("PROD_HIER_LVL_NUM", lit(None).cast(IntegerType()))\
         .withColumn("PROD_HIER_DESC", trim(lookup("LU_SAP_t179t", col("prodh")).getField("vtext")))\
-        .withColumn("DSTN_CHN_STS_CD_DESC", trim(lookup("LU_SAP_tvmst", col("vmsta")).getField("vmstb")))\
-        .withColumn("BLOK_FOR_SLS_ORDR", trim(lookup("LU_SAP_tvms", col("vmsta")).getField("spvbc")))\
+        .withColumn("DSTN_CHN_STS_CD_DESC", lit(None).cast(StringType()))\
+        .withColumn("BLOK_FOR_SLS_ORDR", lit(None).cast(StringType()))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
         .withColumn("DAI_UPDT_DTTM", current_timestamp())\
