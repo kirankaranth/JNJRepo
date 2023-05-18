@@ -1631,7 +1631,7 @@
               }
             }, {
               "name" : "LAST_CHG_CNFRM_DTTM",
-              "type" : "string",
+              "type" : "timestamp",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -3311,7 +3311,7 @@
               }
             }, {
               "name" : "LAST_CHG_CNFRM_DTTM",
-              "type" : "string",
+              "type" : "timestamp",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -5996,7 +5996,7 @@
             "sourceColumn" : "CHG_CNFRM_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "CASE WHEN UPDAT = '00000000' OR length(regexp_replace(UPDAT, '(\\\\d+)', ''))> 0 OR LENGTH(UPDAT) < 8 THEN NULL ELSE TO_TIMESTAMP(UPDAT, 'yyyyMMdd') END"
+              "expression" : "case when UPDAT= '00000000' OR length(regexp_replace(UPDAT, '(\\\\d+)', ''))> 0 OR LENGTH(UPDAT) < 8 THEN NULL ELSE to_timestamp(concat(UPDAT, UPTIM),'yyyyMMddHHmmss') END"
             }
           },
           "DropColumn" : {
@@ -6012,7 +6012,7 @@
             "sourceColumn" : "LAST_CHG_CNFRM_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(UPTIM)"
+              "expression" : "case when UPDAT= '00000000' OR length(regexp_replace(UPDAT, '(\\\\d+)', ''))> 0 OR LENGTH(UPDAT) < 8 THEN NULL ELSE to_timestamp(concat(UPDAT, UPTIM),'yyyyMMddHHmmss') END"
             }
           },
           "DropColumn" : {
@@ -6939,7 +6939,7 @@
               }
             }, {
               "name" : "LAST_CHG_CNFRM_DTTM",
-              "type" : "string",
+              "type" : "timestamp",
               "nullable" : true,
               "metadata" : {
                 "description" : "",

@@ -124,9 +124,19 @@ def NEW_FIELDS_TRANSFORMATION(spark: SparkSession, in0: DataFrame) -> DataFrame:
               ), 
               lit(None)
             )\
-            .otherwise(to_timestamp(col("UPDAT"), "yyyyMMdd"))
+            .otherwise(to_timestamp(concat(col("UPDAT"), col("UPTIM")), "yyyyMMddHHmmss"))
         )\
-        .withColumn("LAST_CHG_CNFRM_DTTM", trim(col("UPTIM")))\
+        .withColumn(
+          "LAST_CHG_CNFRM_DTTM",
+          when(
+              (
+                ((col("UPDAT") == lit("00000000")) | (length(regexp_replace(col("UPDAT"), "(\\d+)", "")) > lit(0)))
+                | (length(col("UPDAT")) < lit(8))
+              ), 
+              lit(None)
+            )\
+            .otherwise(to_timestamp(concat(col("UPDAT"), col("UPTIM")), "yyyyMMddHHmmss"))
+        )\
         .withColumn("DEL_BOCK_MSTR_REC", trim(col("NODEL")))\
         .withColumn("ACTG_CLERK_PHN_NUM_BUSN_PTNR", trim(col("TLFNS")))\
         .withColumn("ACCT_RCVBL_PLDG_IN", trim(col("CESSION_KZ")))\
