@@ -47,6 +47,14 @@ def pipeline(spark: SparkSession) -> None:
         "_ybg5H9hcJk4bK_aoxPKn$$CbIfKX2_jNCCamrHaBfPG", 
         "g7LzFHP4I6_lnxYYu4CZl$$Df7LseVuPSOlHSe83TuRK"
     )
+    df_F554101B_SELEC = F554101B_SELEC(spark, df_DS_JDE_F554101B_NC)
+    df_T162 = T162(spark, df_F554101B_SELEC)
+    df_SORT_VALUES = SORT_VALUES(spark, df_T162)
+    df_DE_DUP = DE_DUP(spark, df_SORT_VALUES)
+    df_T003 = T003(spark, df_F554101B_SELEC)
+    df_SORT_VALUES_1 = SORT_VALUES_1(spark, df_T003)
+    df_DE_DUP_1 = DE_DUP_1(spark, df_SORT_VALUES_1)
+    df_RE_JOIN = RE_JOIN(spark, df_DE_DUP, df_DE_DUP_1)
     df_DS_JDE_01_F4101 = DS_JDE_01_F4101(spark)
     df_DS_JDE_01_F4101 = collectMetrics(
         spark, 
@@ -57,9 +65,7 @@ def pipeline(spark: SparkSession) -> None:
     )
     df_F4101_SELECTION = F4101_SELECTION(spark, df_DS_JDE_01_F4101)
     df_DEL = DEL(spark, df_F4101_SELECTION)
-    df_F554101B_SELEC = F554101B_SELEC(spark, df_DS_JDE_F554101B_NC)
-    df_FILTER_DEL = FILTER_DEL(spark, df_F554101B_SELEC)
-    df_JOIN = JOIN(spark, df_DEL, df_FILTER_DEL)
+    df_JOIN = JOIN(spark, df_DEL, df_RE_JOIN)
     df_XFORM = XFORM(spark, df_JOIN)
     df_FIELD_ORDER = FIELD_ORDER(spark, df_XFORM)
     df_FIELD_ORDER = collectMetrics(
