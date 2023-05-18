@@ -5,5 +5,5 @@ from prophecy.libs import typed_lit
 from sap_md_matl_hm2.config.ConfigStore import *
 from sap_md_matl_hm2.udfs.UDFs import *
 
-def T006A(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.sourceSystem}.{Config.DBTABLE2}")
+def DS_SAP_T006A_NC(spark: SparkSession) -> DataFrame:
+    return spark.read.table(f"{Config.sourceDatabase}.t006a")
