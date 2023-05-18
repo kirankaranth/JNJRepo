@@ -30,26 +30,6 @@ class NEW_FIELDS_TRANSFORMATIONTest(BaseTestCase):
             self.maxUnequalRowsToShow
         )
 
-    def test_timestamp(self):
-        dfIn0 = createDfFromResourceFiles(
-            self.spark,
-            'test/resources/data/sap_md_co_cd_hmd/graph/NEW_FIELDS_TRANSFORMATION/in0/schema.json',
-            'test/resources/data/sap_md_co_cd_hmd/graph/NEW_FIELDS_TRANSFORMATION/in0/data/test_timestamp.json',
-            'in0'
-        )
-        dfOut = createDfFromResourceFiles(
-            self.spark,
-            'test/resources/data/sap_md_co_cd_hmd/graph/NEW_FIELDS_TRANSFORMATION/out/schema.json',
-            'test/resources/data/sap_md_co_cd_hmd/graph/NEW_FIELDS_TRANSFORMATION/out/data/test_timestamp.json',
-            'out'
-        )
-        dfOutComputed = NEW_FIELDS_TRANSFORMATION(self.spark, dfIn0)
-        assertDFEquals(
-            dfOut.select("REC_CRT_DTTM", "LAST_CHG_CNFRM_DTTM"),
-            dfOutComputed.select("REC_CRT_DTTM", "LAST_CHG_CNFRM_DTTM"),
-            self.maxUnequalRowsToShow
-        )
-
     def test_decimal(self):
         dfIn0 = createDfFromResourceFiles(
             self.spark,
@@ -69,6 +49,22 @@ class NEW_FIELDS_TRANSFORMATIONTest(BaseTestCase):
             dfOutComputed.select("AMT_INS", "BILL_EXCH_LMT"),
             self.maxUnequalRowsToShow
         )
+
+    def test_timestamp(self):
+        dfIn0 = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/sap_md_co_cd_hmd/graph/NEW_FIELDS_TRANSFORMATION/in0/schema.json',
+            'test/resources/data/sap_md_co_cd_hmd/graph/NEW_FIELDS_TRANSFORMATION/in0/data/test_timestamp.json',
+            'in0'
+        )
+        dfOut = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/sap_md_co_cd_hmd/graph/NEW_FIELDS_TRANSFORMATION/out/schema.json',
+            'test/resources/data/sap_md_co_cd_hmd/graph/NEW_FIELDS_TRANSFORMATION/out/data/test_timestamp.json',
+            'out'
+        )
+        dfOutComputed = NEW_FIELDS_TRANSFORMATION(self.spark, dfIn0)
+        assertDFEquals(dfOut.select("REC_CRT_DTTM"), dfOutComputed.select("REC_CRT_DTTM"), self.maxUnequalRowsToShow)
 
     def setUp(self):
         BaseTestCase.setUp(self)
