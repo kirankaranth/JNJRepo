@@ -105,4 +105,4 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("_deleted_", col("_deleted_"))\
         .withColumn("MATL_SPEC_NUM", lookup("MAT_SPEC_LU", trim(col("XB_T003"))).getField("DRDL01"))\
         .withColumn("TYPE_OF_MATERIAL", lookup("TYPE_O_MAT_LU", trim(col("XB_T162"))).getField("DRDL01"))\
-        .withColumn("MATL_GRP_DESC_2", lookup("MATL_GR_2_LU", trim(col("M_T_D_LU"))).getField("DRDL01"))
+        .withColumn("MATL_GRP_DESC_2", lookup("MATL_GR_2_LU", trim(col("IMPRP4"))).getField("DRDL01"))
