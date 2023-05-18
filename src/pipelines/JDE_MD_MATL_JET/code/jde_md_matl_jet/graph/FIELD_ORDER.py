@@ -62,5 +62,6 @@ def FIELD_ORDER(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("_l0_upt_"), 
         col("_pk_"), 
         col("_pk_md5_"), 
-        col("_l1_upt_")
+        col("_l1_upt_"), 
+        col("MATL_GRP_DESC_2")
     )

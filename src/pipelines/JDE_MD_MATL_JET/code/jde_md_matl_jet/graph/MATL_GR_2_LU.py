@@ -5,5 +5,7 @@ from prophecy.libs import typed_lit
 from jde_md_matl_jet.config.ConfigStore import *
 from jde_md_matl_jet.udfs.UDFs import *
 
-def DEL1(spark: SparkSession, in0: DataFrame) -> DataFrame:
-    return in0.filter((col("_deleted_") == lit("F")))
+def MATL_GR_2_LU(spark: SparkSession, in0: DataFrame):
+    keyColumns = ['''DRKY''']
+    valueColumns = ['''DRDL01''']
+    createLookup("MATL_GR_2_LU", in0, spark, keyColumns, valueColumns)

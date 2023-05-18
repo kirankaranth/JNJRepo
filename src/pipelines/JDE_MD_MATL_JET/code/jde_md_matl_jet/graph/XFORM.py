@@ -102,4 +102,7 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("_pk_", to_json(expr("named_struct('SRC_SYS_CD', SRC_SYS_CD, 'MATL_NUM', MATL_NUM)")))\
         .withColumn("_pk_md5_", md5(to_json(expr("named_struct('SRC_SYS_CD', SRC_SYS_CD, 'MATL_NUM', MATL_NUM)"))))\
         .withColumn("_l1_upt_", current_timestamp())\
-        .withColumn("_deleted_", lit("F"))
+        .withColumn("_deleted_", col("_deleted_"))\
+        .withColumn("MATL_SPEC_NUM", lookup("MAT_SPEC_LU", trim(col("XB_T003"))).getField("DRDL01"))\
+        .withColumn("TYPE_OF_MATERIAL", lookup("TYPE_O_MAT_LU", trim(col("XB_T162"))).getField("DRDL01"))\
+        .withColumn("MATL_GRP_DESC_2", lookup("MATL_GR_2_LU", trim(col("M_T_D_LU"))).getField("DRDL01"))
