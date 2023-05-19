@@ -2,8 +2,8 @@ from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from prophecy.libs import typed_lit
-from sap_md_co_cd_mbp_fsn_atl.config.ConfigStore import *
-from sap_md_co_cd_mbp_fsn_atl.udfs.UDFs import *
+from sap_md_co_cd_mbp_fsn.config.ConfigStore import *
+from sap_md_co_cd_mbp_fsn.udfs.UDFs import *
 
 def DUPLICATE_CHECK(spark: SparkSession, in0: DataFrame) -> DataFrame:
     df1 = in0.groupBy(col("SRC_SYS_CD"), col("CO_CD"), col("CUST_NUM"))

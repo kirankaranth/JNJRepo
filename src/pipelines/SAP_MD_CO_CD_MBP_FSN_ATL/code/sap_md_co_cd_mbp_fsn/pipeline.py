@@ -1,10 +1,10 @@
 from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
-from sap_md_co_cd_mbp_fsn_atl.config.ConfigStore import *
-from sap_md_co_cd_mbp_fsn_atl.udfs.UDFs import *
+from sap_md_co_cd_mbp_fsn.config.ConfigStore import *
+from sap_md_co_cd_mbp_fsn.udfs.UDFs import *
 from prophecy.utils import *
-from sap_md_co_cd_mbp_fsn_atl.graph import *
+from sap_md_co_cd_mbp_fsn.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_DS_SAP_HMD_KNB1 = DS_SAP_HMD_KNB1(spark)
