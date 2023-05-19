@@ -46,6 +46,8 @@ def prophecyTest(folder) {
         checkout scm
 
             sh """
+                git diff --name-only origin/beta..HEAD src/ | grep src/pipelines/ | awk -F'/' '{print \$3}' | sort | uniq > diff.txt
+                python pbtscripts/pbtTestOnly.py
                 export LC_ALL=en_US.UTF-8
                 pbt test --path  $folder
             """
