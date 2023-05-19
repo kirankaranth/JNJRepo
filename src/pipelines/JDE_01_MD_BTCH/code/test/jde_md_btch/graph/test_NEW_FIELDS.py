@@ -30,6 +30,22 @@ class NEW_FIELDSTest(BaseTestCase):
             self.maxUnequalRowsToShow
         )
 
+    def test_timestamp(self):
+        dfIn0 = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/jde_md_btch/graph/NEW_FIELDS/in0/schema.json',
+            'test/resources/data/jde_md_btch/graph/NEW_FIELDS/in0/data/test_timestamp.json',
+            'in0'
+        )
+        dfOut = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/jde_md_btch/graph/NEW_FIELDS/out/schema.json',
+            'test/resources/data/jde_md_btch/graph/NEW_FIELDS/out/data/test_timestamp.json',
+            'out'
+        )
+        dfOutComputed = NEW_FIELDS(self.spark, dfIn0)
+        assertDFEquals(dfOut.select("CHG_DTTM"), dfOutComputed.select("CHG_DTTM"), self.maxUnequalRowsToShow)
+
     def test_trim(self):
         dfIn0 = createDfFromResourceFiles(
             self.spark,
@@ -45,8 +61,8 @@ class NEW_FIELDSTest(BaseTestCase):
         )
         dfOutComputed = NEW_FIELDS(self.spark, dfIn0)
         assertDFEquals(
-            dfOut.select("BTCH_STS_CD", "SUP_NUM", "SUP_BTCH_NUM", "BTCH_TYPE"),
-            dfOutComputed.select("BTCH_STS_CD", "SUP_NUM", "SUP_BTCH_NUM", "BTCH_TYPE"),
+            dfOut.select("BTCH_STS_CD", "SUP_NUM", "SUP_BTCH_NUM", "BTCH_TYPE", "LOT_GRADE"),
+            dfOutComputed.select("BTCH_STS_CD", "SUP_NUM", "SUP_BTCH_NUM", "BTCH_TYPE", "LOT_GRADE"),
             self.maxUnequalRowsToShow
         )
 

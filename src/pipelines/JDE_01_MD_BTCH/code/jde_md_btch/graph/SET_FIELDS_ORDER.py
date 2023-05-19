@@ -31,6 +31,5 @@ def SET_FIELDS_ORDER(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("_l1_upt_"), 
         col("_pk_md5_"), 
         col("_pk_"), 
-        col("_deleted_"), 
-        col("DAI_UPDT_DTTM")
+        col("_deleted_")
     )

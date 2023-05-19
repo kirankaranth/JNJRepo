@@ -13,10 +13,41 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("BTCH_NUM", col("IOLOTN"))\
         .withColumn("PLNT_CD", col("IOMCU"))\
         .withColumn("CRT_DTTM", expr(Config.CRT_DTTM))\
+        .withColumn("CRT_DTTM", lit(None).cast(TimestampType()))\
         .withColumn("AVAIL_DTTM", expr(Config.AVAIL_DTTM))\
-        .withColumn("CHG_DTTM", expr(Config.CHG_DTTM))\
-        .withColumn("AVAIL_DTTM", expr(Config.AVAIL_DTTM))\
-        .withColumn("BTCH_EXP_DTTM", expr(Config.BTCH_EXP_DTTM))\
+        .withColumn(
+          "CHG_DTTM",
+          when(
+              (
+                (lower(trim(col("ioupmj"))).isNull() | (trim(col("ioupmj")) == lit("")))
+                | (trim(col("ioupmj")) == lit("0"))
+              ), 
+              lit(None)
+            )\
+            .otherwise(to_timestamp(
+            date_add(
+              substring((col("ioupmj") + lit(1900000)), 1, 4).cast(DateType()), 
+              (substring(col("ioupmj"), 4, 3).cast(IntegerType()) - 1)
+            )
+          ))
+        )\
+        .withColumn("AVAIL_DTTM", lit(None).cast(TimestampType()))\
+        .withColumn(
+          "BTCH_EXP_DTTM",
+          when(
+              (
+                (lower(trim(col("iommej"))).isNull() | (trim(col("iommej")) == lit("")))
+                | (trim(col("iommej")) == lit("0"))
+              ), 
+              lit(None)
+            )\
+            .otherwise(to_timestamp(
+            date_add(
+              substring((col("iommej") + lit(1900000)), 1, 4).cast(DateType()), 
+              (substring(col("iommej"), 4, 3).cast(IntegerType()) - 1)
+            )
+          ))
+        )\
         .withColumn("BTCH_STS_CD", trim(col("IOLOTS")))\
         .withColumn("BTCH_LAST_STS_DTTM", lit(None).cast(TimestampType()))\
         .withColumn("SUP_NUM", trim(col("IOVEND")))\
