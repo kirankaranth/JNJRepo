@@ -70,7 +70,7 @@
           "name" : "CRT_DTTM",
           "kind" : {
             "type" : "spark_expression",
-            "value" : "cast(null as timestamp)"
+            "value" : "CASE WHEN LOWER(TRIM(ioohdj)) IS NULL OR TRIM(ioohdj) = '' OR TRIM(ioohdj) = '0' THEN NULL ELSE to_timestamp(date_add(cast(substring(ioohdj+ 1900000,1,4) AS Date),cast(substring(ioohdj,4,3) as int)-1)) end"
           },
           "optional" : false,
           "isWorkflowNodeConfiguration" : false
@@ -78,7 +78,23 @@
           "name" : "AVAIL_DTTM",
           "kind" : {
             "type" : "spark_expression",
-            "value" : "cast(null as timestamp)"
+            "value" : "CASE WHEN LOWER(TRIM(iodlej)) IS NULL OR TRIM(iodlej) = '' OR TRIM(iodlej) = '0' THEN NULL ELSE to_timestamp(date_add(cast(substring(iodlej+ 1900000,1,4) AS Date),cast(substring(iodlej,4,3) as int)-1)) end"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "CHG_DTTM",
+          "kind" : {
+            "type" : "spark_expression",
+            "value" : "CASE WHEN LOWER(TRIM(ioupmj)) IS NULL OR TRIM(ioupmj) = '' OR TRIM(ioupmj) = '0' THEN NULL ELSE to_timestamp(date_add(cast(substring(ioupmj+ 1900000,1,4) AS Date),cast(substring(ioupmj,4,3) as int)-1)) end"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "BTCH_EXP_DTTM",
+          "kind" : {
+            "type" : "spark_expression",
+            "value" : "CASE WHEN LOWER(TRIM(iommej)) IS NULL OR TRIM(iommej) = '' OR TRIM(iommej) = '0' THEN NULL ELSE to_timestamp(date_add(cast(substring(iommej+ 1900000,1,4) AS Date),cast(substring(iommej,4,3) as int)-1)) end"
           },
           "optional" : false,
           "isWorkflowNodeConfiguration" : false
@@ -98,7 +114,7 @@
       },
       "fabrics" : { },
       "instances" : { },
-      "selected" : "JES",
+      "selected" : "MTR",
       "nonEditable" : [ ],
       "isSubscribedPipelineWithPipelineConfigs" : false
     },
@@ -113,8 +129,8 @@
     "interimModeEnabled" : true,
     "visualCodeInterimMode" : "IO",
     "recordsLimit" : {
-      "enabled" : false,
-      "value" : 10000
+      "enabled" : true,
+      "value" : 1000
     },
     "topLevelPackage" : "jde_01_md_btch_bw2_gmd_jet_jsw_deu_mtr_sjd_djd_jem_jes",
     "configurationVersion" : "v1"
@@ -183,34 +199,7 @@
           "schema" : {
             "type" : "struct",
             "fields" : [ {
-              "name" : "_deleted_",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "IOMCU",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
               "name" : "IOLOTN",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "IOITM",
               "type" : "string",
               "nullable" : true,
               "metadata" : {
@@ -229,6 +218,24 @@
               }
             }, {
               "name" : "IOLOTS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IOMCU",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IOITM",
               "type" : "string",
               "nullable" : true,
               "metadata" : {
@@ -741,60 +748,6 @@
                 "tags" : [ ]
               }
             }, {
-              "name" : "IOCFRGUID",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "IOCFRMKEY",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "IOCFRPID",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "IOCFRUSER",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "IOISDELETE",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "IOCFRSEQN",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
               "name" : "_pk_",
               "type" : "string",
               "nullable" : true,
@@ -840,7 +793,7 @@
                 "tags" : [ ]
               }
             }, {
-              "name" : "_infa_bigint_sequence_",
+              "name" : "_deleted_",
               "type" : "string",
               "nullable" : true,
               "metadata" : {
@@ -860,7 +813,7 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IOLOTG", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IOUPMJ", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IOITM", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IOLITM", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IOMCU", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IOVEND", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##_upt_", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IOMMEJ", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IORLOT", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IODCTO", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IOLOTN", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IOLOTS" ],
+        "columnsSelector" : [ "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IOLOTG", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IOITM", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IOLITM", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IOMCU", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IOVEND", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##_upt_", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IORLOT", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IODCTO", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IOLOTN", "QM1RHdSDcnEhK15D2Dqaz$$4F3mVFhMBg3wGWw7iSZCV##IOLOTS" ],
         "transformations" : [ {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
@@ -960,10 +913,26 @@
         }, {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
-            "sourceColumn" : "CRT_DTTM",
+            "sourceColumn" : "AVAIL_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "cast(null as timestamp)"
+              "expression" : "expr('$AVAIL_DTTM')"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "CHG_DTTM",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "expr('$CHG_DTTM')"
             }
           },
           "DropColumn" : {
@@ -992,42 +961,10 @@
         }, {
           "kind" : "AddReplaceColumn",
           "AddReplaceColumn" : {
-            "sourceColumn" : "CHG_DTTM",
-            "expression" : {
-              "format" : "sql",
-              "expression" : "CASE WHEN LOWER(TRIM(ioupmj)) IS NULL OR TRIM(ioupmj) = '' OR TRIM(ioupmj) = '0' THEN NULL ELSE to_timestamp(date_add(cast(substring(ioupmj + 1900000,1,4) AS Date),cast(substring(ioupmj,4,3) as int)-1)) end"
-            }
-          },
-          "DropColumn" : {
-            "sourceColumn" : ""
-          },
-          "RenameColumn" : {
-            "sourceColumn" : "",
-            "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
-          "AddReplaceColumn" : {
-            "sourceColumn" : "AVAIL_DTTM",
-            "expression" : {
-              "format" : "sql",
-              "expression" : "cast(null as timestamp)"
-            }
-          },
-          "DropColumn" : {
-            "sourceColumn" : ""
-          },
-          "RenameColumn" : {
-            "sourceColumn" : "",
-            "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
-          "AddReplaceColumn" : {
             "sourceColumn" : "BTCH_EXP_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "CASE WHEN LOWER(TRIM(iommej)) IS NULL OR TRIM(iommej) = '' OR TRIM(iommej) = '0' THEN NULL ELSE to_timestamp(date_add(cast(substring(iommej + 1900000,1,4) AS Date),cast(substring(iommej,4,3) as int)-1)) end"
+              "expression" : "expr('$BTCH_EXP_DTTM')"
             }
           },
           "DropColumn" : {
@@ -1348,34 +1285,7 @@
           "schema" : {
             "type" : "struct",
             "fields" : [ {
-              "name" : "_deleted_",
-              "type" : "string",
-              "nullable" : false,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "IOMCU",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
               "name" : "IOLOTN",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "IOITM",
               "type" : "string",
               "nullable" : true,
               "metadata" : {
@@ -1394,6 +1304,24 @@
               }
             }, {
               "name" : "IOLOTS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IOMCU",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IOITM",
               "type" : "string",
               "nullable" : true,
               "metadata" : {
@@ -1906,60 +1834,6 @@
                 "tags" : [ ]
               }
             }, {
-              "name" : "IOCFRGUID",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "IOCFRMKEY",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "IOCFRPID",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "IOCFRUSER",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "IOISDELETE",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "IOCFRSEQN",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
               "name" : "_pk_",
               "type" : "string",
               "nullable" : true,
@@ -2005,9 +1879,9 @@
                 "tags" : [ ]
               }
             }, {
-              "name" : "_infa_bigint_sequence_",
+              "name" : "_deleted_",
               "type" : "string",
-              "nullable" : true,
+              "nullable" : false,
               "metadata" : {
                 "description" : "",
                 "mappings" : [ ],
@@ -2289,34 +2163,7 @@
           "schema" : {
             "type" : "struct",
             "fields" : [ {
-              "name" : "_deleted_",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "IOMCU",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
               "name" : "IOLOTN",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "IOITM",
               "type" : "string",
               "nullable" : true,
               "metadata" : {
@@ -2335,6 +2182,24 @@
               }
             }, {
               "name" : "IOLOTS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IOMCU",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IOITM",
               "type" : "string",
               "nullable" : true,
               "metadata" : {
@@ -2847,60 +2712,6 @@
                 "tags" : [ ]
               }
             }, {
-              "name" : "IOCFRGUID",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "IOCFRMKEY",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "IOCFRPID",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "IOCFRUSER",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "IOISDELETE",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "IOCFRSEQN",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
               "name" : "_pk_",
               "type" : "string",
               "nullable" : true,
@@ -2946,7 +2757,7 @@
                 "tags" : [ ]
               }
             }, {
-              "name" : "_infa_bigint_sequence_",
+              "name" : "_deleted_",
               "type" : "string",
               "nullable" : true,
               "metadata" : {
@@ -3699,34 +3510,7 @@
           "schema" : {
             "type" : "struct",
             "fields" : [ {
-              "name" : "_deleted_",
-              "type" : "string",
-              "nullable" : false,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "IOMCU",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
               "name" : "IOLOTN",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "IOITM",
               "type" : "string",
               "nullable" : true,
               "metadata" : {
@@ -3745,6 +3529,24 @@
               }
             }, {
               "name" : "IOLOTS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IOMCU",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "IOITM",
               "type" : "string",
               "nullable" : true,
               "metadata" : {
@@ -4257,60 +4059,6 @@
                 "tags" : [ ]
               }
             }, {
-              "name" : "IOCFRGUID",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "IOCFRMKEY",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "IOCFRPID",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "IOCFRUSER",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "IOISDELETE",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "IOCFRSEQN",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
               "name" : "_pk_",
               "type" : "string",
               "nullable" : true,
@@ -4356,9 +4104,9 @@
                 "tags" : [ ]
               }
             }, {
-              "name" : "_infa_bigint_sequence_",
+              "name" : "_deleted_",
               "type" : "string",
-              "nullable" : true,
+              "nullable" : false,
               "metadata" : {
                 "description" : "",
                 "mappings" : [ ],
