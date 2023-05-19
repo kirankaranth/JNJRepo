@@ -4,8 +4,8 @@ from pyspark.sql.types import *
 from argparse import Namespace
 from prophecy.test import BaseTestCase
 from prophecy.test.utils import *
-from sap_md_co_cd_mbp_fsn_atl.graph.NEW_FIELDS_TRANSFORMATION import *
-from sap_md_co_cd_mbp_fsn_atl.config.ConfigStore import *
+from sap_md_co_cd_mbp_fsn.graph.NEW_FIELDS_TRANSFORMATION import *
+from sap_md_co_cd_mbp_fsn.config.ConfigStore import *
 
 
 class NEW_FIELDS_TRANSFORMATIONTest(BaseTestCase):
@@ -13,14 +13,14 @@ class NEW_FIELDS_TRANSFORMATIONTest(BaseTestCase):
     def test_trim(self):
         dfIn0 = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/sap_md_co_cd_mbp_fsn_atl/graph/NEW_FIELDS_TRANSFORMATION/in0/schema.json',
-            'test/resources/data/sap_md_co_cd_mbp_fsn_atl/graph/NEW_FIELDS_TRANSFORMATION/in0/data/test_trim.json',
+            'test/resources/data/sap_md_co_cd_mbp_fsn/graph/NEW_FIELDS_TRANSFORMATION/in0/schema.json',
+            'test/resources/data/sap_md_co_cd_mbp_fsn/graph/NEW_FIELDS_TRANSFORMATION/in0/data/test_trim.json',
             'in0'
         )
         dfOut = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/sap_md_co_cd_mbp_fsn_atl/graph/NEW_FIELDS_TRANSFORMATION/out/schema.json',
-            'test/resources/data/sap_md_co_cd_mbp_fsn_atl/graph/NEW_FIELDS_TRANSFORMATION/out/data/test_trim.json',
+            'test/resources/data/sap_md_co_cd_mbp_fsn/graph/NEW_FIELDS_TRANSFORMATION/out/schema.json',
+            'test/resources/data/sap_md_co_cd_mbp_fsn/graph/NEW_FIELDS_TRANSFORMATION/out/data/test_trim.json',
             'out'
         )
         dfOutComputed = NEW_FIELDS_TRANSFORMATION(self.spark, dfIn0)
@@ -33,14 +33,14 @@ class NEW_FIELDS_TRANSFORMATIONTest(BaseTestCase):
     def test_decimal(self):
         dfIn0 = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/sap_md_co_cd_mbp_fsn_atl/graph/NEW_FIELDS_TRANSFORMATION/in0/schema.json',
-            'test/resources/data/sap_md_co_cd_mbp_fsn_atl/graph/NEW_FIELDS_TRANSFORMATION/in0/data/test_decimal.json',
+            'test/resources/data/sap_md_co_cd_mbp_fsn/graph/NEW_FIELDS_TRANSFORMATION/in0/schema.json',
+            'test/resources/data/sap_md_co_cd_mbp_fsn/graph/NEW_FIELDS_TRANSFORMATION/in0/data/test_decimal.json',
             'in0'
         )
         dfOut = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/sap_md_co_cd_mbp_fsn_atl/graph/NEW_FIELDS_TRANSFORMATION/out/schema.json',
-            'test/resources/data/sap_md_co_cd_mbp_fsn_atl/graph/NEW_FIELDS_TRANSFORMATION/out/data/test_decimal.json',
+            'test/resources/data/sap_md_co_cd_mbp_fsn/graph/NEW_FIELDS_TRANSFORMATION/out/schema.json',
+            'test/resources/data/sap_md_co_cd_mbp_fsn/graph/NEW_FIELDS_TRANSFORMATION/out/data/test_decimal.json',
             'out'
         )
         dfOutComputed = NEW_FIELDS_TRANSFORMATION(self.spark, dfIn0)
@@ -53,14 +53,14 @@ class NEW_FIELDS_TRANSFORMATIONTest(BaseTestCase):
     def test_timestamp(self):
         dfIn0 = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/sap_md_co_cd_mbp_fsn_atl/graph/NEW_FIELDS_TRANSFORMATION/in0/schema.json',
-            'test/resources/data/sap_md_co_cd_mbp_fsn_atl/graph/NEW_FIELDS_TRANSFORMATION/in0/data/test_timestamp.json',
+            'test/resources/data/sap_md_co_cd_mbp_fsn/graph/NEW_FIELDS_TRANSFORMATION/in0/schema.json',
+            'test/resources/data/sap_md_co_cd_mbp_fsn/graph/NEW_FIELDS_TRANSFORMATION/in0/data/test_timestamp.json',
             'in0'
         )
         dfOut = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/sap_md_co_cd_mbp_fsn_atl/graph/NEW_FIELDS_TRANSFORMATION/out/schema.json',
-            'test/resources/data/sap_md_co_cd_mbp_fsn_atl/graph/NEW_FIELDS_TRANSFORMATION/out/data/test_timestamp.json',
+            'test/resources/data/sap_md_co_cd_mbp_fsn/graph/NEW_FIELDS_TRANSFORMATION/out/schema.json',
+            'test/resources/data/sap_md_co_cd_mbp_fsn/graph/NEW_FIELDS_TRANSFORMATION/out/data/test_timestamp.json',
             'out'
         )
         dfOutComputed = NEW_FIELDS_TRANSFORMATION(self.spark, dfIn0)
