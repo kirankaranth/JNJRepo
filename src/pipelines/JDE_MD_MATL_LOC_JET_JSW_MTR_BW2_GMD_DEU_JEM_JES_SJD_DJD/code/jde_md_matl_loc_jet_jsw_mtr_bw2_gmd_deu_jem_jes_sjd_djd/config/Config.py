@@ -21,6 +21,7 @@ class Config(ConfigBase):
             PLNG_STRTGY_GRP_CD: str=None,
             PLAN_DELV_DAYS_CNT: str=None,
             INHS_PRDTN_DAYS_CNT: str=None,
+            PRCHSNG_GRP_CD: str=None,
             VMI_IND: str=None,
             MSTR_PLNG_FMLY_CD: str=None,
             ENTR_PRCMT_TYPE_CD: str=None,
@@ -53,6 +54,7 @@ class Config(ConfigBase):
             PLNG_STRTGY_GRP_CD, 
             PLAN_DELV_DAYS_CNT, 
             INHS_PRDTN_DAYS_CNT, 
+            PRCHSNG_GRP_CD, 
             VMI_IND, 
             MSTR_PLNG_FMLY_CD, 
             ENTR_PRCMT_TYPE_CD, 
@@ -85,6 +87,7 @@ class Config(ConfigBase):
             PLNG_STRTGY_GRP_CD: str="cast(null as string)",
             PLAN_DELV_DAYS_CNT: str="cast(null as decimal(18,4))",
             INHS_PRDTN_DAYS_CNT: str="cast(null as decimal(18,4))",
+            PRCHSNG_GRP_CD: str="cast(null as string)",
             VMI_IND: str="cast(null as string)",
             MSTR_PLNG_FMLY_CD: str="cast(null as string)",
             ENTR_PRCMT_TYPE_CD: str="cast(null as string)",
@@ -116,6 +119,7 @@ class Config(ConfigBase):
         self.PLNG_STRTGY_GRP_CD = PLNG_STRTGY_GRP_CD
         self.PLAN_DELV_DAYS_CNT = PLAN_DELV_DAYS_CNT
         self.INHS_PRDTN_DAYS_CNT = INHS_PRDTN_DAYS_CNT
+        self.PRCHSNG_GRP_CD = PRCHSNG_GRP_CD
         self.VMI_IND = VMI_IND
         self.MSTR_PLNG_FMLY_CD = MSTR_PLNG_FMLY_CD
         self.ENTR_PRCMT_TYPE_CD = ENTR_PRCMT_TYPE_CD

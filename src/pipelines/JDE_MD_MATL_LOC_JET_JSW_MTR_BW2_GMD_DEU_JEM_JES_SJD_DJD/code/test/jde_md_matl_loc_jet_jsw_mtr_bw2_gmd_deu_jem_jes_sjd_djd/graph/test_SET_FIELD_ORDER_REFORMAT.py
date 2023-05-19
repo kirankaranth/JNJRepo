@@ -4,8 +4,8 @@ from pyspark.sql.types import *
 from argparse import Namespace
 from prophecy.test import BaseTestCase
 from prophecy.test.utils import *
-from jde_md_matl_loc_deu.graph.SET_FIELD_ORDER_REFORMAT import *
-from jde_md_matl_loc_deu.config.ConfigStore import *
+from jde_md_matl_loc_jet_jsw_mtr_bw2_gmd_deu_jem_jes_sjd_djd.graph.SET_FIELD_ORDER_REFORMAT import *
+from jde_md_matl_loc_jet_jsw_mtr_bw2_gmd_deu_jem_jes_sjd_djd.config.ConfigStore import *
 
 
 class SET_FIELD_ORDER_REFORMATTest(BaseTestCase):
@@ -13,14 +13,14 @@ class SET_FIELD_ORDER_REFORMATTest(BaseTestCase):
     def test_unit_test_(self):
         dfIn0 = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/jde_md_matl_loc_deu/graph/SET_FIELD_ORDER_REFORMAT/in0/schema.json',
-            'test/resources/data/jde_md_matl_loc_deu/graph/SET_FIELD_ORDER_REFORMAT/in0/data/test_unit_test_.json',
+            'test/resources/data/jde_md_matl_loc_jet_jsw_mtr_bw2_gmd_deu_jem_jes_sjd_djd/graph/SET_FIELD_ORDER_REFORMAT/in0/schema.json',
+            'test/resources/data/jde_md_matl_loc_jet_jsw_mtr_bw2_gmd_deu_jem_jes_sjd_djd/graph/SET_FIELD_ORDER_REFORMAT/in0/data/test_unit_test_.json',
             'in0'
         )
         dfOut = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/jde_md_matl_loc_deu/graph/SET_FIELD_ORDER_REFORMAT/out/schema.json',
-            'test/resources/data/jde_md_matl_loc_deu/graph/SET_FIELD_ORDER_REFORMAT/out/data/test_unit_test_.json',
+            'test/resources/data/jde_md_matl_loc_jet_jsw_mtr_bw2_gmd_deu_jem_jes_sjd_djd/graph/SET_FIELD_ORDER_REFORMAT/out/schema.json',
+            'test/resources/data/jde_md_matl_loc_jet_jsw_mtr_bw2_gmd_deu_jem_jes_sjd_djd/graph/SET_FIELD_ORDER_REFORMAT/out/data/test_unit_test_.json',
             'out'
         )
         dfOutComputed = SET_FIELD_ORDER_REFORMAT(self.spark, dfIn0)

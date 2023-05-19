@@ -1,23 +1,12 @@
 from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
-from jde_md_matl_loc_deu.config.ConfigStore import *
-from jde_md_matl_loc_deu.udfs.UDFs import *
+from jde_md_matl_loc_jet_jsw_mtr_bw2_gmd_deu_jem_jes_sjd_djd.config.ConfigStore import *
+from jde_md_matl_loc_jet_jsw_mtr_bw2_gmd_deu_jem_jes_sjd_djd.udfs.UDFs import *
 from prophecy.utils import *
-from jde_md_matl_loc_deu.graph import *
+from jde_md_matl_loc_jet_jsw_mtr_bw2_gmd_deu_jem_jes_sjd_djd.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    df_GET_DUP = GET_DUP(spark)
-    df_DUP_FILTER = DUP_FILTER(spark, df_GET_DUP)
-    df_DUP_FILTER = collectMetrics(
-        spark, 
-        df_DUP_FILTER, 
-        "graph", 
-        "tJbB3Et6-T73M0IAn21Ri$$K5hOcNE8jppnliCBLUtcZ", 
-        "VFGQTK8mmpdRwWk2K7b44$$fb6zN7utDpfdW5K-A-g3K"
-    )
-    df_DUP_FILTER.cache().count()
-    df_DUP_FILTER.unpersist()
     df_JDE_F4102 = JDE_F4102(spark)
     df_JDE_F4102 = collectMetrics(
         spark, 
@@ -36,6 +25,17 @@ def pipeline(spark: SparkSession) -> None:
         "zqgwxFtlSFlDyzhEbnTk6$$d-94H6BgyeU15erzMnsDT", 
         "NnAGYtZnDQCWq1rBcnPym$$K9nn3cuIq6Mwyd4w4i5w2"
     )
+    df_GET_DUP = GET_DUP(spark, df_SET_FIELD_ORDER_REFORMAT)
+    df_DUP_FILTER = DUP_FILTER(spark, df_GET_DUP)
+    df_DUP_FILTER = collectMetrics(
+        spark, 
+        df_DUP_FILTER, 
+        "graph", 
+        "tJbB3Et6-T73M0IAn21Ri$$K5hOcNE8jppnliCBLUtcZ", 
+        "VFGQTK8mmpdRwWk2K7b44$$fb6zN7utDpfdW5K-A-g3K"
+    )
+    df_DUP_FILTER.cache().count()
+    df_DUP_FILTER.unpersist()
     MD_MATL_LOC(spark, df_SET_FIELD_ORDER_REFORMAT)
 
 def main():

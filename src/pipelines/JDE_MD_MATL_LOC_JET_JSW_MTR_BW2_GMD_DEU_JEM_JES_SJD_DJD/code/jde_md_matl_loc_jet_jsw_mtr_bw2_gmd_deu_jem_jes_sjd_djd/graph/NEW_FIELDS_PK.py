@@ -2,8 +2,8 @@ from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from prophecy.libs import typed_lit
-from jde_md_matl_loc_deu.config.ConfigStore import *
-from jde_md_matl_loc_deu.udfs.UDFs import *
+from jde_md_matl_loc_jet_jsw_mtr_bw2_gmd_deu_jem_jes_sjd_djd.config.ConfigStore import *
+from jde_md_matl_loc_jet_jsw_mtr_bw2_gmd_deu_jem_jes_sjd_djd.udfs.UDFs import *
 
 def NEW_FIELDS_PK(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
@@ -24,15 +24,15 @@ def NEW_FIELDS_PK(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("MRP_TYPE_CD", expr(Config.MRP_TYPE_CD))\
         .withColumn("ORIG_CTRY_CD", trim(col("iborig")))\
         .withColumn("PLNG_STRTGY_GRP_CD", expr(Config.PLNG_STRTGY_GRP_CD))\
-        .withColumn("RD_VAL_QTY", trim(col("ibmult")).cast(DecimalType(18, 4)))\
-        .withColumn("LOT_SIZE_FX_QTY", trim(col("ibopv")).cast(DecimalType(18, 4)))\
-        .withColumn("LOT_SIZE_MAX_QTY", trim(col("ibrqmx")).cast(DecimalType(22, 4)))\
-        .withColumn("LOT_SIZE_MIN_QTY", trim(col("ibrqmn")).cast(DecimalType(18, 4)))\
-        .withColumn("SFTY_STK_QTY", trim(col("ibsafe")).cast(DecimalType(18, 4)))\
+        .withColumn("RD_VAL_QTY", col("ibmult").cast(DecimalType(18, 4)))\
+        .withColumn("LOT_SIZE_FX_QTY", col("ibopv").cast(DecimalType(18, 4)))\
+        .withColumn("LOT_SIZE_MAX_QTY", col("ibrqmx").cast(DecimalType(22, 4)))\
+        .withColumn("LOT_SIZE_MIN_QTY", col("ibrqmn").cast(DecimalType(18, 4)))\
+        .withColumn("SFTY_STK_QTY", col("ibsafe").cast(DecimalType(18, 4)))\
         .withColumn("PLNG_TIME_FENCE_DAYS_CNT", trim(col("ibltlv")))\
         .withColumn("PLAN_DELV_DAYS_CNT", expr(Config.PLAN_DELV_DAYS_CNT))\
         .withColumn("INHS_PRDTN_DAYS_CNT", expr(Config.INHS_PRDTN_DAYS_CNT))\
-        .withColumn("PRCHSNG_GRP_CD", trim(col("ibvend")))\
+        .withColumn("PRCHSNG_GRP_CD", expr(Config.PRCHSNG_GRP_CD))\
         .withColumn("VMI_IND", expr(Config.VMI_IND))\
         .withColumn("MSTR_PLNG_FMLY_CD", expr(Config.MSTR_PLNG_FMLY_CD))\
         .withColumn("ENTR_PRCMT_TYPE_CD", expr(Config.ENTR_PRCMT_TYPE_CD))\
