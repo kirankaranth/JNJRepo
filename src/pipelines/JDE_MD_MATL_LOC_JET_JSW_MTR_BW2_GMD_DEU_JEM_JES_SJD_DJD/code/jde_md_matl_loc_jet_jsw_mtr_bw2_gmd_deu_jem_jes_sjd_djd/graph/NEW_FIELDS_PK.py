@@ -45,6 +45,9 @@ def NEW_FIELDS_PK(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("CNTL_CODE", expr(Config.CNTL_CODE))\
         .withColumn("MM_DFLT_SUPP_AREA", expr(Config.MM_DFLT_SUPP_AREA))\
         .withColumn("MTS_MTO_FL", expr(Config.MTS_MTO_FL))\
+        .withColumn("BUY_NUM", trim(col("IBBUYR")))\
+        .withColumn("LINE_TYPE", trim(col("IBLNTY")))\
+        .withColumn("SHIPPING_CMMDTY_CLS", trim(col("IBSHCM")))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
         .withColumn("DAI_UPDT_DTTM", current_timestamp())\
