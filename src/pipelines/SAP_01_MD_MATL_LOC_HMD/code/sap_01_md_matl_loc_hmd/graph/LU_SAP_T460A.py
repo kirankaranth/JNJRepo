@@ -7,5 +7,5 @@ from sap_01_md_matl_loc_hmd.udfs.UDFs import *
 
 def LU_SAP_T460A(spark: SparkSession, in0: DataFrame):
     keyColumns = ['''WERKS''', '''SOBSL''']
-    valueColumns = ['''WERKS''']
+    valueColumns = ['''WRK02''']
     createLookup("LU_SAP_T460A", in0, spark, keyColumns, valueColumns)

@@ -3,6 +3,7 @@ from .MD_MATL_LOC import MD_MATL_LOC
 from .MANDT_FILTER_T024F import MANDT_FILTER_T024F
 from .LU_SAP_T141T import LU_SAP_T141T
 from .SAP_T024 import SAP_T024
+from .NEW_FIELDS import NEW_FIELDS
 from .DUP_FILTER import DUP_FILTER
 from .LU_SAP_T460A import LU_SAP_T460A
 from .SAP_T024F import SAP_T024F
