@@ -23,7 +23,7 @@
           "name" : "sourceSystem",
           "kind" : {
             "type" : "string",
-            "value" : "bbl"
+            "value" : "bbn"
           },
           "optional" : false,
           "isWorkflowNodeConfiguration" : false
@@ -47,7 +47,7 @@
           "name" : "sourceDatabase",
           "kind" : {
             "type" : "string",
-            "value" : "bbl"
+            "value" : "bbn"
           },
           "optional" : false,
           "isWorkflowNodeConfiguration" : false
@@ -139,7 +139,7 @@
       },
       "fabrics" : { },
       "instances" : { },
-      "selected" : "BBL",
+      "selected" : "MRS",
       "nonEditable" : [ ],
       "isSubscribedPipelineWithPipelineConfigs" : false
     },
@@ -157,7 +157,7 @@
       "enabled" : true,
       "value" : 5000
     },
-    "topLevelPackage" : "sap_md_matl_loc_mbp_svs_bbl_bbn_hcs_p01_mrs_tai",
+    "topLevelPackage" : "sap_md_matl_loc_mbp_svs_bbn_p01_mrs",
     "configurationVersion" : "v1"
   },
   "connections" : [ {
@@ -178,12 +178,6 @@
     "sourcePort" : "zluE_iOWt6V_xX3pJbias$$tbD0Wi6N8OEk-kvMWja53",
     "target" : "PuUulAwL8YC_QYvjZP51C$$kAfwKXNZM2N0UcsblEB-C",
     "targetPort" : "s85lTAzJSxJy5sTAphai-$$qrnWXyclDx7qlqZz_t_d-"
-  }, {
-    "id" : "xcDNfG6OXpqTqY9Iit3oc",
-    "source" : "PuUulAwL8YC_QYvjZP51C$$kAfwKXNZM2N0UcsblEB-C",
-    "sourcePort" : "TgDBvHKvgKpjEuJK0APqw$$aypv0AQTBzAePQ6oBT37T",
-    "target" : "zqgwxFtlSFlDyzhEbnTk6$$d-94H6BgyeU15erzMnsDT",
-    "targetPort" : "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf"
   }, {
     "id" : "YdGzStgVp5xJ1foWWKeLj",
     "source" : "zqgwxFtlSFlDyzhEbnTk6$$d-94H6BgyeU15erzMnsDT",
@@ -232,6 +226,24 @@
     "sourcePort" : "muQh1-Nq_KVaA3xx7llbI$$SLUoNjUWRMOmP3fHfWqKx",
     "target" : "6hGlhqm8vBi1HKOBZg8ep$$vKZmE1ehIviDe21P_IhLF",
     "targetPort" : "SgZEjeVMPm9T8xA9570qD$$rpE1Ygs9Q2ED7i3RrbPFl"
+  }, {
+    "id" : "FKOvrPoafHeY_umKhPaiq",
+    "source" : "qanaR_et-lRJ8GxCfKvPx$$2I2Z5Aqi8maQNaw41D5oz",
+    "sourcePort" : "T-E0q-KqWOUJ13ap65-O9$$vasxfzK5jGPq1semo3myz",
+    "target" : "5LnVRnt7IjbmUSju0s5X8$$s3d1xC4Z--YP3vOS86Qac",
+    "targetPort" : "smIPy8DICbmqx11jWh_FH$$23Kr_31P91mBSZSBMZtRO"
+  }, {
+    "id" : "ZuoHrYlqhuqb84T67VDlP$$5zoIjrpTej3Ci3WcfmwRY",
+    "source" : "5LnVRnt7IjbmUSju0s5X8$$s3d1xC4Z--YP3vOS86Qac",
+    "sourcePort" : "G70iO3nt5XSI3O-WCEdnG$$BydJm6vlVspchE7DQqmNP",
+    "target" : "pvBWEt30L0c86ovArQ8GY$$g_xm0vC87QPQGj9tvn759",
+    "targetPort" : "iTXcnPsRPscnXcFF6S7jl$$GiNQokJLS6uSydNn5TScZ"
+  }, {
+    "id" : "KEzGMATfJ4LPMtYs9iXio$$h2Zs_bOi0qZYo8QkKtUbl",
+    "source" : "PuUulAwL8YC_QYvjZP51C$$kAfwKXNZM2N0UcsblEB-C",
+    "sourcePort" : "TgDBvHKvgKpjEuJK0APqw$$aypv0AQTBzAePQ6oBT37T",
+    "target" : "zqgwxFtlSFlDyzhEbnTk6$$d-94H6BgyeU15erzMnsDT",
+    "targetPort" : "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf"
   } ],
   "processes" : {
     "ch1EJ8FCq9pW3x5LmD8qN$$_wgE8xjVxNP45lp2LdP1E" : {
@@ -4704,7 +4716,7 @@
             "sourceColumn" : "MATL_STS_DESC",
             "expression" : {
               "format" : "sql",
-              "expression" : "LU_SAP_T141T(MMSTA)['MTSTB']"
+              "expression" : "trim(LU_SAP_T141T(MMSTA)['MTSTB'])"
             }
           },
           "DropColumn" : {
@@ -4720,23 +4732,7 @@
             "sourceColumn" : "MATL_PLNR_NM",
             "expression" : {
               "format" : "sql",
-              "expression" : "LU_SAP_T024D(WERKS,DISPO)['DSNAM']"
-            }
-          },
-          "DropColumn" : {
-            "sourceColumn" : ""
-          },
-          "RenameColumn" : {
-            "sourceColumn" : "",
-            "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
-          "AddReplaceColumn" : {
-            "sourceColumn" : "PRDTN_SUPR_NM",
-            "expression" : {
-              "format" : "sql",
-              "expression" : "cast(null as string)"
+              "expression" : "trim(LU_SAP_T024D(WERKS,DISPO)['DSNAM'])"
             }
           },
           "DropColumn" : {
@@ -4752,39 +4748,7 @@
             "sourceColumn" : "PRCHSNG_GRP_DESC",
             "expression" : {
               "format" : "sql",
-              "expression" : "LU_SAP_T024(EKGRP)['EKNAM']"
-            }
-          },
-          "DropColumn" : {
-            "sourceColumn" : ""
-          },
-          "RenameColumn" : {
-            "sourceColumn" : "",
-            "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
-          "AddReplaceColumn" : {
-            "sourceColumn" : "EXCSE_TAX_RLVNCE",
-            "expression" : {
-              "format" : "sql",
-              "expression" : "cast(null as string)"
-            }
-          },
-          "DropColumn" : {
-            "sourceColumn" : ""
-          },
-          "RenameColumn" : {
-            "sourceColumn" : "",
-            "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
-          "AddReplaceColumn" : {
-            "sourceColumn" : "SEQ_NUM",
-            "expression" : {
-              "format" : "sql",
-              "expression" : "cast(null as string)"
+              "expression" : "trim(LU_SAP_T024(EKGRP)['EKNAM'])"
             }
           },
           "DropColumn" : {
@@ -4929,6 +4893,22 @@
             "expression" : {
               "format" : "sql",
               "expression" : "_deleted_"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "PLNG_PLNT_CD",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "trim(LU_SAP_T460A(WERKS,SOBSL)['WRK02'])"
             }
           },
           "DropColumn" : {
@@ -8363,34 +8343,7 @@
                 "tags" : [ ]
               }
             }, {
-              "name" : "PRDTN_SUPR_NM",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
               "name" : "PRCHSNG_GRP_DESC",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "EXCSE_TAX_RLVNCE",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "SEQ_NUM",
               "type" : "string",
               "nullable" : true,
               "metadata" : {
@@ -8461,6 +8414,15 @@
                 "mappings" : [ ],
                 "tags" : [ ]
               }
+            }, {
+              "name" : "PLNG_PLNT_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
             } ]
           },
           "isStreaming" : false
@@ -8473,7 +8435,7 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##KEY_TASK_LIST", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##COST_LOT_SIZE_VAL", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##PHY_INV_CC", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##PLNG_STRTGY_GRP_CD", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##DSCNT_IN", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##UNLTD_OVER_DELV_IN", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##EXPT_IMPT_GRP", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##MATL_FRGHT_GRP", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##ALT_BOM", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##DAI_CRT_DTTM", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##MIX_MRP_IN", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##EXCSE_TAX_RLVNCE", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##QUAL_MGMT_CNTL_CD", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##REP_MFG_IN", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##BOM_USG", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##DEL_IND", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##MATL_NUM", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##MAX_STRG_PER", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##FIX_CC_IN", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##CNSMPTN_MODE", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##SFTY_STK_QTY", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##GOOD_RCPT_LEAD_DAYS_QTY", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##MM_DFLT_SUPP_AREA", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##_l1_upt_", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##VAR_CNTL_CD", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##ORIG_BATCH_REF_MATL", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##SPEC_MATL_PLNT_STS_DTTM", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##MRP_TYPE_CD", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##REORDR_QTY", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##STRG_LOC_EXTRNL_PRCMT", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##MATL_PLNR_NUM", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##PRCHSNG_GRP_DESC", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##DAI_ETL_ID", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##SPL_PRCMT_TYPE_COST", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##ISS_STRG_LOC", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##PRCMT_TYPE_CD", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##CVGE_PRFL_RNG", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##SFTY_TIME_DAYS_CNT", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##AVLBLTY_CHK_IND", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##SFTY_TIME_IND", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##ALT_BOM_METH", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##MATL_PLNR_NM", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##RGN_OF_ORIG_OF_MATL", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##SEQ_NUM", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##SCRAP_PCT", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##SCHDLNG_MRGN_KEY", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##_pk_md5_", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##BTCH_ENT_PO", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##CMMDTY_CD_UOM", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##RQR_GRP_IN", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##MAINT_STS", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##ORIG_BATCH_MGMT", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##CMMDTY_CD", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##BTCH_MGMT_PLNT_IN", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##PRDTN_UOM_CD", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##BKWRD_CNSMPTN_DAYS_CNT", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##CNTL_CODE", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##LOT_SIZE_MIN_QTY", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##MRP_GRP", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##REP_MFG_PRFL", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##DAI_UPDT_DTTM", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##EXPT_CERT_NUM", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##INSP_SETUP_FOR_MATL", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##STK_DTRMN_GRP", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##VERS_IN", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##CMPNT_SCRAP_PCT", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##MATL_STS_DESC", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##BULK_MATL_IN", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##UNIT_FOR_MAX_STRG", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##STRG_COST_PCT_CD", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##VALUT_CAT", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##SPL_PRCMT_TYPE_CD", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##UNIT_OF_ISS", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##BASE_QTY", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##BACKFLUSH_IN", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##_pk_", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##LD_GRP_CD", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##INSP_INTV", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##MRP_PRFL", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##CO_PROD_IN", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##LOT_SIZE_FX_QTY", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##SRVC_LVL", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##FRWD_CNSMPTN_DAYS_CNT", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##PLNG_CYC", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##ACT_PUSH", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##BTCH_MGMT_IN_INTRNL", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##RD_VAL_QTY", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##DO_NOT_COST_IN", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##PRCHSNG_GRP_CD", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##GRP_CNTR", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##MMS_FIN_CLSN_CD", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##TOT_REPLN_LT", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##MATL_CFOP_CAT", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##MIN_SFTY_STK_QTY", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##FLLP_MATL", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##CONFIG_MATL", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##PLNT_CD", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##RESET_FCST_MDL", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##_l0_upt_", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##UND_DELV_TLRNC", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##LOT_SIZE_VAL", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##AUTO_PO_IND", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##PRCTR_CD", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##MTS_MTO_FL", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##CUR_PER", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##NEG_STK_PLNT", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##PROD_SCHDLNG_PRFL", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##CERT_TYPE", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##OVR_DELV_TLRNC", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##MATL_ABC_CLSN_CD", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##PLAN_DELV_DAYS_CNT", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##FISC_YR_VRNT", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##SERIZATION_PRFL_CD", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##ORIG_CTRY_CD", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##VMI_IND", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##PER_IN", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##DEPN_REQ_IN", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##INSP_STK", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##MAX_STK_LVL_QTY", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##RD_PRFL", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##INHS_PRDTN_DAYS_CNT", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##PLNG_TIME_FENCE_DAYS_CNT", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##SPEC_MATL_PLNT_STS_CD", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##EXPT_CERT_DTTM", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##CNSMPTN_MODE_CD", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##PRDTN_SUPR_NM", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##LOT_SIZE_MAX_QTY", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##MATL_AUTH_QM", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##SRC_SYS_CD", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##EFF_OUT_DTTM", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##DOC_REQ_IN", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##MSTR_PLNG_FMLY_CD", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##SRC_LIST_IND", "rooLDApZ1kcSyjmf6OE3B$$-VtKw-ZeJt2etk5CkGxTf##PRDTN_SUPR_CD" ],
+        "columnsSelector" : [ ],
         "expressions" : [ {
           "target" : "SRC_SYS_CD",
           "expression" : {
@@ -9329,31 +9291,10 @@
           },
           "description" : ""
         }, {
-          "target" : "PRDTN_SUPR_NM",
-          "expression" : {
-            "format" : "sql",
-            "expression" : "PRDTN_SUPR_NM"
-          },
-          "description" : ""
-        }, {
           "target" : "PRCHSNG_GRP_DESC",
           "expression" : {
             "format" : "sql",
             "expression" : "PRCHSNG_GRP_DESC"
-          },
-          "description" : ""
-        }, {
-          "target" : "EXCSE_TAX_RLVNCE",
-          "expression" : {
-            "format" : "sql",
-            "expression" : "EXCSE_TAX_RLVNCE"
-          },
-          "description" : ""
-        }, {
-          "target" : "SEQ_NUM",
-          "expression" : {
-            "format" : "sql",
-            "expression" : "SEQ_NUM"
           },
           "description" : ""
         }, {
@@ -9410,6 +9351,13 @@
           "expression" : {
             "format" : "sql",
             "expression" : "_l1_upt_"
+          },
+          "description" : ""
+        }, {
+          "target" : "PLNG_PLNT_CD",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "PLNG_PLNT_CD"
           },
           "description" : ""
         } ]
@@ -13238,34 +13186,7 @@
                 "tags" : [ ]
               }
             }, {
-              "name" : "PRDTN_SUPR_NM",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
               "name" : "PRCHSNG_GRP_DESC",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "EXCSE_TAX_RLVNCE",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "SEQ_NUM",
               "type" : "string",
               "nullable" : true,
               "metadata" : {
@@ -13340,6 +13261,15 @@
               "name" : "_l1_upt_",
               "type" : "timestamp",
               "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PLNG_PLNT_CD",
+              "type" : "string",
+              "nullable" : true,
               "metadata" : {
                 "description" : "",
                 "mappings" : [ ],
@@ -14502,34 +14432,7 @@
                 "tags" : [ ]
               }
             }, {
-              "name" : "PRDTN_SUPR_NM",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
               "name" : "PRCHSNG_GRP_DESC",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "EXCSE_TAX_RLVNCE",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "SEQ_NUM",
               "type" : "string",
               "nullable" : true,
               "metadata" : {
@@ -14604,6 +14507,15 @@
               "name" : "_l1_upt_",
               "type" : "timestamp",
               "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PLNG_PLNT_CD",
+              "type" : "string",
+              "nullable" : true,
               "metadata" : {
                 "description" : "",
                 "mappings" : [ ],
@@ -14903,6 +14815,438 @@
         }
       }
     },
+    "5LnVRnt7IjbmUSju0s5X8$$s3d1xC4Z--YP3vOS86Qac" : {
+      "id" : "5LnVRnt7IjbmUSju0s5X8$$s3d1xC4Z--YP3vOS86Qac",
+      "component" : "Filter",
+      "metadata" : {
+        "label" : "MANDT_FILTER_T141T_1",
+        "slug" : "MANDT_FILTER_T141T_1",
+        "x" : -380,
+        "y" : 820,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "smIPy8DICbmqx11jWh_FH$$23Kr_31P91mBSZSBMZtRO",
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "_deleted_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WERKS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SOBSL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MANDT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BESKZ",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SOBES",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WRK02",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CLCOR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DUMPS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "REWFG",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "REWRK",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DIRPR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "UMLDB",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ADDIN",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_pk_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_upt_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_kafkaOffset_",
+              "type" : "long",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_createTime_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_kafkaTimestamp_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_infa_bigint_sequence_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "G70iO3nt5XSI3O-WCEdnG$$BydJm6vlVspchE7DQqmNP",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ "smIPy8DICbmqx11jWh_FH$$23Kr_31P91mBSZSBMZtRO##MANDT", "smIPy8DICbmqx11jWh_FH$$23Kr_31P91mBSZSBMZtRO##_deleted_" ],
+        "condition" : {
+          "format" : "sql",
+          "expression" : "MANDT='$MANDT' and _deleted_='F'"
+        }
+      }
+    },
+    "pvBWEt30L0c86ovArQ8GY$$g_xm0vC87QPQGj9tvn759" : {
+      "id" : "pvBWEt30L0c86ovArQ8GY$$g_xm0vC87QPQGj9tvn759",
+      "component" : "Lookup",
+      "metadata" : {
+        "label" : "LU_SAP_T460A",
+        "slug" : "LU_SAP_T460A",
+        "x" : -240,
+        "y" : 820,
+        "phase" : -1,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "iTXcnPsRPscnXcFF6S7jl$$GiNQokJLS6uSydNn5TScZ",
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "_deleted_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WERKS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SOBSL",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MANDT",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BESKZ",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SOBES",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WRK02",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CLCOR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DUMPS",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "REWFG",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "REWRK",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DIRPR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "UMLDB",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ADDIN",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_pk_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_upt_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_kafkaOffset_",
+              "type" : "long",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_createTime_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_kafkaTimestamp_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_infa_bigint_sequence_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "isRange" : false,
+        "processName" : "LU_SAP_T460A",
+        "keyColumns" : [ "WERKS", "SOBSL" ],
+        "valueColumns" : [ "WRK02" ]
+      }
+    },
     "6hGlhqm8vBi1HKOBZg8ep$$vKZmE1ehIviDe21P_IhLF" : {
       "id" : "6hGlhqm8vBi1HKOBZg8ep$$vKZmE1ehIviDe21P_IhLF",
       "component" : "Lookup",
@@ -15097,6 +15441,32 @@
         "processName" : "LU_SAP_T024D",
         "keyColumns" : [ "WERKS", "DISPO" ],
         "valueColumns" : [ "DSNAM" ]
+      }
+    },
+    "qanaR_et-lRJ8GxCfKvPx$$2I2Z5Aqi8maQNaw41D5oz" : {
+      "id" : "qanaR_et-lRJ8GxCfKvPx$$2I2Z5Aqi8maQNaw41D5oz",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "SAP_T460A",
+        "slug" : "SAP_T460A",
+        "x" : -520,
+        "y" : 820,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "T-E0q-KqWOUJ13ap65-O9$$vasxfzK5jGPq1semo3myz",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/DS_T460A"
       }
     },
     "YvQ-MBxkLuDHGeIa5R1zN$$Q9y5_oL37CoEYktlhS6jD" : {

@@ -21,7 +21,7 @@ class Config(ConfigBase):
             self,
             sourceSystem: str="hm2",
             targetSchema: str="dev_md_l1",
-            MANDT: str="100",
+            MANDT: str="500",
             sourceDatabase: str="hm2",
             sourceTable: str="NSDM_V_MARC",
             DAI_ETL_ID: int=0,
