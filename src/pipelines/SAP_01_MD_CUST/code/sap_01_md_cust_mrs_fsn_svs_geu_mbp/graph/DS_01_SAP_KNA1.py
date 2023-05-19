@@ -6,4 +6,4 @@ from sap_01_md_cust_mrs_fsn_svs_geu_mbp.config.ConfigStore import *
 from sap_01_md_cust_mrs_fsn_svs_geu_mbp.udfs.UDFs import *
 
 def DS_01_SAP_KNA1(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"https://jira.jnj.com/browse/JEKT-1735.kna1")
+    return spark.read.table(f"{Config.sourceDatabase}.kna1")
