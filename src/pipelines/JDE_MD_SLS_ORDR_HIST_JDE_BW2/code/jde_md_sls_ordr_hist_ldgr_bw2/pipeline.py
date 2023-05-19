@@ -11,7 +11,8 @@ def pipeline(spark: SparkSession) -> None:
     df_DELETED = DELETED(spark, df_F42199)
     df_NEW_FIELDS = NEW_FIELDS(spark, df_DELETED)
     df_SET_FIELDS_ORDER = SET_FIELDS_ORDER(spark, df_NEW_FIELDS)
-    MD_SLS_ORDR_HIST_LDGR(spark, df_SET_FIELDS_ORDER)
+    df_REMOVE_DUPLICATES = REMOVE_DUPLICATES(spark, df_SET_FIELDS_ORDER)
+    MD_SLS_ORDR_HIST_LDGR(spark, df_REMOVE_DUPLICATES)
 
 def main():
     spark = SparkSession.builder\
