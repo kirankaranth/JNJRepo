@@ -1,1 +1,1 @@
-from .sap_01_md_matl_dstn_chn_hm2 import *
+from .sap_md_matl_dstn_chn_hmd import *

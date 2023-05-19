@@ -19,14 +19,6 @@
       "common" : {
         "type" : "record",
         "fields" : [ {
-          "name" : "SRC_SYS_CD",
-          "kind" : {
-            "type" : "string",
-            "value" : "bbl"
-          },
-          "optional" : false,
-          "isWorkflowNodeConfiguration" : false
-        }, {
           "name" : "sourceDatabase",
           "kind" : {
             "type" : "string",
@@ -59,42 +51,10 @@
           "optional" : false,
           "isWorkflowNodeConfiguration" : false
         }, {
-          "name" : "sourceTable",
-          "kind" : {
-            "type" : "string",
-            "value" : "mvke"
-          },
-          "optional" : false,
-          "isWorkflowNodeConfiguration" : false
-        }, {
           "name" : "targetSchema",
           "kind" : {
             "type" : "string",
             "value" : "dev_md_l1"
-          },
-          "optional" : false,
-          "isWorkflowNodeConfiguration" : false
-        }, {
-          "name" : "ENTRP_DSTN_CHN_STS_CD",
-          "kind" : {
-            "type" : "spark_expression",
-            "value" : "null"
-          },
-          "optional" : false,
-          "isWorkflowNodeConfiguration" : false
-        }, {
-          "name" : "MATL_BASE_CD",
-          "kind" : {
-            "type" : "spark_expression",
-            "value" : "null"
-          },
-          "optional" : false,
-          "isWorkflowNodeConfiguration" : false
-        }, {
-          "name" : "MATL_SLS_CAT_GRP_DESC",
-          "kind" : {
-            "type" : "spark_expression",
-            "value" : "null"
           },
           "optional" : false,
           "isWorkflowNodeConfiguration" : false
@@ -106,6 +66,14 @@
           },
           "optional" : false,
           "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "ConfigDatabase",
+          "kind" : {
+            "type" : "string",
+            "value" : " "
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
         } ]
       },
       "oldCommon" : {
@@ -114,7 +82,7 @@
       },
       "fabrics" : { },
       "instances" : { },
-      "selected" : "atl",
+      "selected" : "default",
       "nonEditable" : [ ],
       "isSubscribedPipelineWithPipelineConfigs" : false
     },
@@ -132,7 +100,7 @@
       "enabled" : false,
       "value" : 100
     },
-    "topLevelPackage" : "sap_01_md_matl_dstn_chn_bba_bbl_bbn_geu_hcs_mbp_mrs_p01_tai_svs_atl_fsn",
+    "topLevelPackage" : "sap_md_matl_dstn_chn_bba_bbl_bbn_geu_hcs_mbp_mrs_p01_tai_svs_atl_fsn",
     "configurationVersion" : "v1"
   },
   "connections" : [ {
@@ -1144,7 +1112,7 @@
               }
             }, {
               "name" : "ENTRP_DSTN_CHN_STS_CD",
-              "type" : "void",
+              "type" : "string",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -1153,7 +1121,7 @@
               }
             }, {
               "name" : "MATL_BASE_CD",
-              "type" : "void",
+              "type" : "string",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -1621,7 +1589,7 @@
               }
             }, {
               "name" : "MATL_SLS_CAT_GRP_DESC",
-              "type" : "void",
+              "type" : "string",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -2541,7 +2509,7 @@
               }
             }, {
               "name" : "ENTRP_DSTN_CHN_STS_CD",
-              "type" : "void",
+              "type" : "string",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -2550,7 +2518,7 @@
               }
             }, {
               "name" : "MATL_BASE_CD",
-              "type" : "void",
+              "type" : "string",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -3018,7 +2986,7 @@
               }
             }, {
               "name" : "MATL_SLS_CAT_GRP_DESC",
-              "type" : "void",
+              "type" : "string",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -4857,7 +4825,7 @@
             "sourceColumn" : "SRC_SYS_CD",
             "expression" : {
               "format" : "sql",
-              "expression" : "'$SRC_SYS_CD'"
+              "expression" : "'$sourceSystem'"
             }
           },
           "DropColumn" : {
@@ -5017,7 +4985,7 @@
             "sourceColumn" : "ENTRP_DSTN_CHN_STS_CD",
             "expression" : {
               "format" : "sql",
-              "expression" : "expr('$ENTRP_DSTN_CHN_STS_CD')"
+              "expression" : "cast(null as string)"
             }
           },
           "DropColumn" : {
@@ -5033,7 +5001,7 @@
             "sourceColumn" : "MATL_BASE_CD",
             "expression" : {
               "format" : "sql",
-              "expression" : "expr('$MATL_BASE_CD')"
+              "expression" : "cast(null as string)"
             }
           },
           "DropColumn" : {
@@ -5865,7 +5833,7 @@
             "sourceColumn" : "MATL_SLS_CAT_GRP_DESC",
             "expression" : {
               "format" : "sql",
-              "expression" : "expr('$MATL_SLS_CAT_GRP_DESC')"
+              "expression" : "cast(null as string)"
             }
           },
           "DropColumn" : {
@@ -7264,7 +7232,7 @@
               }
             }, {
               "name" : "ENTRP_DSTN_CHN_STS_CD",
-              "type" : "void",
+              "type" : "string",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -7273,7 +7241,7 @@
               }
             }, {
               "name" : "MATL_BASE_CD",
-              "type" : "void",
+              "type" : "string",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -7741,7 +7709,7 @@
               }
             }, {
               "name" : "MATL_SLS_CAT_GRP_DESC",
-              "type" : "void",
+              "type" : "string",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
