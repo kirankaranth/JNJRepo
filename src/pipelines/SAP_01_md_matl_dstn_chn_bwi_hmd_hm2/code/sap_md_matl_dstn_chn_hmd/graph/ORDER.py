@@ -17,8 +17,6 @@ def ORDER(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("ACTG_GRP_CD"), 
         col("DSTN_CHN_STS_CD"), 
         col("VLD_FROM_DTTM"), 
-        col("ENTRP_DSTN_CHN_STS_CD"), 
-        col("MATL_BASE_CD"), 
         col("VOL_REBT_GRP"), 
         col("MATL_PRC_GRP"), 
         col("MATL_GRP_1"), 

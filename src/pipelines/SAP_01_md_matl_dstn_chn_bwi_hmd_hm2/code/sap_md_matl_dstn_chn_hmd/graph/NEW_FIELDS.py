@@ -21,8 +21,6 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
           when((col("VMSTD") == lit("00000000")), lit(None).cast(TimestampType()))\
             .otherwise(to_timestamp(col("VMSTD"), "yyyyMMdd"))
         )\
-        .withColumn("ENTRP_DSTN_CHN_STS_CD", lit(None).cast(StringType()))\
-        .withColumn("MATL_BASE_CD", lit(None).cast(StringType()))\
         .withColumn("VOL_REBT_GRP", trim(col("BONUS")))\
         .withColumn("MATL_PRC_GRP", trim(col("KONDM")))\
         .withColumn("MATL_GRP_1", trim(col("MVGR1")))\

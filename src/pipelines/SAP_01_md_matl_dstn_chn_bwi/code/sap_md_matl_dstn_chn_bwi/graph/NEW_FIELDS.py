@@ -21,8 +21,6 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
           when((col("VMSTD") == lit("00000000")), lit(None).cast(TimestampType()))\
             .otherwise(to_timestamp(col("VMSTD"), "yyyyMMdd"))
         )\
-        .withColumn("ENTRP_DSTN_CHN_STS_CD", lit(None).cast(StringType()))\
-        .withColumn("MATL_BASE_CD", lit(None).cast(StringType()))\
         .withColumn("VOL_REBT_GRP", trim(col("BONUS")))\
         .withColumn("MATL_PRC_GRP", trim(col("KONDM")))\
         .withColumn("MATL_GRP_1", trim(col("MVGR1")))\
@@ -106,11 +104,7 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("MATL_CMPT_CHAR", trim(col("MATKC")))\
         .withColumn("MATL_SORT", trim(col("PVMSO")).cast(IntegerType()))\
         .withColumn("PRC_BND_CAT", trim(col("PLGTP")))\
-        .withColumn("MATL_SLS_CAT_GRP_DESC", lit(None).cast(StringType()))\
-        .withColumn("PROD_HIER_LVL_NUM", lit(None).cast(IntegerType()))\
         .withColumn("PROD_HIER_DESC", trim(lookup("LU_SAP_t179t", col("prodh")).getField("vtext")))\
-        .withColumn("DSTN_CHN_STS_CD_DESC", lit(None).cast(StringType()))\
-        .withColumn("BLOK_FOR_SLS_ORDR", lit(None).cast(StringType()))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
         .withColumn("DAI_UPDT_DTTM", current_timestamp())\
