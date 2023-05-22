@@ -6,4 +6,4 @@ from sap_md_matl_inv_fsn.config.ConfigStore import *
 from sap_md_matl_inv_fsn.udfs.UDFs import *
 
 def DS_SAP_00000004_MSLB(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.sourceSystem}.mslb")
+    return spark.read.table(f"{Config.sourceDatabase}.mslb")
