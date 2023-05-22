@@ -17,5 +17,6 @@ def Select_MKOL(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("SEINM"), 
         col("ERSDA"), 
         col("_upt_"), 
-        col("LGORT")
+        col("LGORT"), 
+        col("_deleted_")
     )
