@@ -8,7 +8,7 @@ from sap_01_md_matl_inv_hmd.udfs.UDFs import *
 def SchemaTransform_2_MCHB(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
         .withColumn("SRC_SYS_CD", lit(Config.sourceSystem))\
-        .withColumn("SRC_TBL_NM", lit(Config.DBTABLE2))\
+        .withColumn("SRC_TBL_NM", lit(Config.NSDM_V_MCHB))\
         .withColumn("MATL_NUM", col("MATNR"))\
         .withColumn("PLNT_CD", col("WERKS"))\
         .withColumn("SLOC_CD", col("LGORT"))\
@@ -72,4 +72,4 @@ def SchemaTransform_2_MCHB(spark: SparkSession, in0: DataFrame) -> DataFrame:
             )
           )
         )\
-        .withColumn("_deleted_", lit("F"))
+        .withColumn("_deleted_", col("_deleted_"))
