@@ -42,10 +42,12 @@ def expectsManifest() {
  * Test the project
  */
 def prophecyTest(folder) {
-    ensure.insideDockerContainer('jekt-docker.artifactrepo.jnj.com/cdl-prophecy-deploy:1.0.4.2b') {
+    ensure.insideDockerContainer('jekt-docker.artifactrepo.jnj.com/cdl-prophecy-deploy:1.1.1') {
         checkout scm
 
             sh """
+                git diff --name-only origin/beta..HEAD src/ | grep src/pipelines/ | awk -F'/' '{print \$3}' | sort | uniq > diff.txt
+                python pbtscripts/pbtTestOnly.py
                 export LC_ALL=en_US.UTF-8
                 pbt test --path  $folder
             """
