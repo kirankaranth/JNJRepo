@@ -6,4 +6,4 @@ from sap_md_matl_mbp.config.ConfigStore import *
 from sap_md_matl_mbp.udfs.UDFs import *
 
 def MAKT(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.sourceDatabase}.{Config.DBTABLE2}")
+    return spark.read.table(f"{Config.sourceDatabase}.makt")
