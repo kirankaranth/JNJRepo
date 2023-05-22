@@ -18,6 +18,7 @@ from .CABN import CABN
 from .SUTUR_USP import SUTUR_USP
 from .CHARACTERISTICS import CHARACTERISTICS
 from .NDL_SLS_TYPE import NDL_SLS_TYPE
+from .T006A_HMD import T006A_HMD
 from .AUSP import AUSP
 from .MAKTG_LU import MAKTG_LU
 from .NDL_COLOR import NDL_COLOR
@@ -28,7 +29,6 @@ from .DEL_MANDT2 import DEL_MANDT2
 from .NDL_ALLOY import NDL_ALLOY
 from .DEL_MANDT_1 import DEL_MANDT_1
 from .OBJEK_LU import OBJEK_LU
-from .DS_SAP_T006A_NC import DS_SAP_T006A_NC
 from .STERILE import STERILE
 from .BRAVO_LU import BRAVO_LU
 from .SELECT_FIELDS import SELECT_FIELDS
