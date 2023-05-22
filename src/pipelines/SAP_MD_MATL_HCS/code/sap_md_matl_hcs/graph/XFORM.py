@@ -97,7 +97,7 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("_pk_L1", to_json(expr("named_struct('SRC_SYS_CD', SRC_SYS_CD, 'MATL_NUM', MATL_NUM)")))\
         .withColumn("_pk_md5_", md5(to_json(expr("named_struct('SRC_SYS_CD', SRC_SYS_CD, 'MATL_NUM', MATL_NUM)"))))\
         .withColumn("_l1_upt_", current_timestamp())\
-        .withColumn("_deleted_L1", lit("F"))\
+        .withColumn("_deleted_L1", col("_deleted_"))\
         .withColumn("MMS_SURGERY_TYPE_CD", trim(col("zzmmssurgtype")))\
         .withColumn("MMS_MATL_TYPE_CD", trim(col("zzmmstype")))\
         .withColumn("MMS_FIN_CLSN_CD", trim(col("zzmmsficlass")))\
