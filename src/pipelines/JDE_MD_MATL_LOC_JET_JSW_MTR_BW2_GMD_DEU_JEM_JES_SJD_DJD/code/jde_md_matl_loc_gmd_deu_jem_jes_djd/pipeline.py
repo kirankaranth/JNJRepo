@@ -1,10 +1,10 @@
 from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
-from jde_md_matl_loc_jet_jsw_mtr_bw2_gmd_deu_jem_jes_sjd_djd.config.ConfigStore import *
-from jde_md_matl_loc_jet_jsw_mtr_bw2_gmd_deu_jem_jes_sjd_djd.udfs.UDFs import *
+from jde_md_matl_loc_gmd_deu_jem_jes_djd.config.ConfigStore import *
+from jde_md_matl_loc_gmd_deu_jem_jes_djd.udfs.UDFs import *
 from prophecy.utils import *
-from jde_md_matl_loc_jet_jsw_mtr_bw2_gmd_deu_jem_jes_sjd_djd.graph import *
+from jde_md_matl_loc_gmd_deu_jem_jes_djd.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_JDE_F4102 = JDE_F4102(spark)
@@ -16,8 +16,9 @@ def pipeline(spark: SparkSession) -> None:
         "XKQAzwCyxKqPPiRqgbCB_$$oQrRD8nAiVmZB6zBLPCWx"
     )
     df_JDE_F4102_FILTER = JDE_F4102_FILTER(spark, df_JDE_F4102)
-    df_NEW_FIELDS_PK = NEW_FIELDS_PK(spark, df_JDE_F4102_FILTER)
-    df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS_PK)
+    df_NEW_FIELDS_TRANSFORMATION = NEW_FIELDS_TRANSFORMATION(spark, df_JDE_F4102_FILTER)
+    df_DUPLICATE = DUPLICATE(spark, df_NEW_FIELDS_TRANSFORMATION)
+    df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_DUPLICATE)
     df_SET_FIELD_ORDER_REFORMAT = collectMetrics(
         spark, 
         df_SET_FIELD_ORDER_REFORMAT, 
