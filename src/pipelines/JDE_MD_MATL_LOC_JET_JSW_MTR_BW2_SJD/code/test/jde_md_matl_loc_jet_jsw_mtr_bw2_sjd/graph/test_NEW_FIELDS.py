@@ -25,8 +25,22 @@ class NEW_FIELDSTest(BaseTestCase):
         )
         dfOutComputed = NEW_FIELDS(self.spark, dfIn0)
         assertDFEquals(
-            dfOut.select("LOT_SIZE_VAL", "RD_VAL_QTY", "LOT_SIZE_MAX_QTY"),
-            dfOutComputed.select("LOT_SIZE_VAL", "RD_VAL_QTY", "LOT_SIZE_MAX_QTY"),
+            dfOut.select(
+              "LOT_SIZE_VAL",
+              "RD_VAL_QTY",
+              "LOT_SIZE_MAX_QTY",
+              "BUY_NUM",
+              "LINE_TYPE",
+              "SHIPPING_CMMDTY_CLS"
+            ),
+            dfOutComputed.select(
+              "LOT_SIZE_VAL",
+              "RD_VAL_QTY",
+              "LOT_SIZE_MAX_QTY",
+              "BUY_NUM",
+              "LINE_TYPE",
+              "SHIPPING_CMMDTY_CLS"
+            ),
             self.maxUnequalRowsToShow
         )
 
