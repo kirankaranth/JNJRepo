@@ -136,9 +136,7 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("ORIG_BATCH_REF_MATL", trim(col("UCMAT")))\
         .withColumn("RESET_FCST_MDL", trim(col("AUTRU")))\
         .withColumn("SRVC_LVL", col("LGRAD").cast(DecimalType(18, 4)))\
-        .withColumn("ACT_PUSH", expr(Config.ACT_PUSH))\
         .withColumn("MTS_MTO_FL", expr(Config.MTS_MTO_FL))\
-        .withColumn("CNSMPTN_MODE", expr(Config.CNSMPTN_MODE))\
         .withColumn("MATL_STS_DESC", trim(lookup("LU_SAP_T141T", col("MMSTA")).getField("MTSTB")))\
         .withColumn("MATL_PLNR_NM", trim(lookup("LU_SAP_T024D", col("WERKS"), col("DISPO")).getField("DSNAM")))\
         .withColumn("PRCHSNG_GRP_DESC", trim(lookup("LU_SAP_T024", col("EKGRP")).getField("EKNAM")))\
