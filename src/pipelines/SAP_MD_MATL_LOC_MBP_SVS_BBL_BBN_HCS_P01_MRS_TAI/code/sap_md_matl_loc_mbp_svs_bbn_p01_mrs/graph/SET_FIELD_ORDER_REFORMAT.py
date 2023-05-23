@@ -124,9 +124,6 @@ def SET_FIELD_ORDER_REFORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("ORIG_BATCH_REF_MATL"), 
         col("RESET_FCST_MDL"), 
         col("SRVC_LVL"), 
-        col("ACT_PUSH"), 
-        col("MTS_MTO_FL"), 
-        col("CNSMPTN_MODE"), 
         col("MATL_STS_DESC"), 
         col("MATL_PLNR_NM"), 
         col("PRCHSNG_GRP_DESC"), 
@@ -138,5 +135,6 @@ def SET_FIELD_ORDER_REFORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("_pk_"), 
         col("_pk_md5_"), 
         col("_l1_upt_"), 
-        col("PLNG_PLNT_CD")
+        col("PLNG_PLNT_CD"), 
+        col("_deleted_")
     )
