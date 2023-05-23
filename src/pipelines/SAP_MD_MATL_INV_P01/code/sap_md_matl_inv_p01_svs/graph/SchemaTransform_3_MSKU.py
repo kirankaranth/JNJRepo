@@ -43,7 +43,7 @@ def SchemaTransform_3_MSKU(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("PLNT_IN_TRNST_QTY", lit(None).cast(DecimalType(18, 4)))\
         .withColumn("FISC_YR_OF_CUR_PER", col("LFGJA").cast(IntegerType()))\
         .withColumn("CUR_PER", col("LFMON").cast(IntegerType()))\
-        .withColumn("SHRT_MATL_NUM", lit(None))\
+        .withColumn("SHRT_MATL_NUM", lit(None).cast(StringType()))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
         .withColumn("DAI_UPDT_DTTM", current_timestamp())\
@@ -67,4 +67,4 @@ def SchemaTransform_3_MSKU(spark: SparkSession, in0: DataFrame) -> DataFrame:
             )
           )
         )\
-        .withColumn("_deleted_", lit("F"))
+        .withColumn("_deleted_", col("_deleted_"))

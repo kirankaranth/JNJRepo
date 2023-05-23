@@ -20,5 +20,6 @@ def Select_MCHB(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("ERSDA"), 
         col("LFGJA"), 
         col("LFMON"), 
-        col("_upt_")
+        col("_upt_"), 
+        col("_deleted_")
     )
