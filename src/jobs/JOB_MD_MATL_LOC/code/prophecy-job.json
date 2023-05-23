@@ -9,7 +9,7 @@
       "clusterMode" : "Single"
     },
     "enabled" : true,
-    "defaultClusterSize" : "Prophecy_Photon_Medium",
+    "defaultClusterSize" : "Prophecy_Small",
     "alerting" : {
       "emails" : "",
       "onStart" : false,
@@ -28,37 +28,11 @@
       }
     },
     "availableFabrics" : [ {
-      "id" : "4",
-      "name" : "CDL_Dev_Consume_Views",
-      "clusterSizes" : {
-        "default" : "small",
-        "availableClusterSizes" : [ "small" ]
-      },
-      "pylibsResolutionMode" : {
-        "PublicCentral" : { }
-      },
-      "scalalibsResolutionMode" : {
-        "PublicCentral" : { }
-      }
-    }, {
-      "id" : "16",
-      "name" : "vkalluru-pilot",
-      "clusterSizes" : {
-        "default" : "small",
-        "availableClusterSizes" : [ "small" ]
-      },
-      "pylibsResolutionMode" : {
-        "PublicCentral" : { }
-      },
-      "scalalibsResolutionMode" : {
-        "PublicCentral" : { }
-      }
-    }, {
       "id" : "32",
       "name" : "CDL_L1_Dev",
       "clusterSizes" : {
         "default" : "Prophecy_Small",
-        "availableClusterSizes" : [ "Prophecy_Small", "Prophecy_Medium", "Prophecy_Large", "Prophecy_Photon_Medium" ]
+        "availableClusterSizes" : [ "Prophecy_Small", "Prophecy_Medium", "Prophecy_Large", "Prophecy_Photon_Medium", "Compute_Medium" ]
       },
       "pylibsResolutionMode" : {
         "PublicCentral" : { }
@@ -67,34 +41,8 @@
         "PublicCentral" : { }
       }
     }, {
-      "id" : "36",
-      "name" : "CDL_L1_QA",
-      "clusterSizes" : {
-        "default" : "small",
-        "availableClusterSizes" : [ "small" ]
-      },
-      "pylibsResolutionMode" : {
-        "PublicCentral" : { }
-      },
-      "scalalibsResolutionMode" : {
-        "PublicCentral" : { }
-      }
-    }, {
-      "id" : "14",
-      "name" : "Epicenter",
-      "clusterSizes" : {
-        "default" : "small",
-        "availableClusterSizes" : [ "small", "sk_test" ]
-      },
-      "pylibsResolutionMode" : {
-        "PublicCentral" : { }
-      },
-      "scalalibsResolutionMode" : {
-        "PublicCentral" : { }
-      }
-    }, {
-      "id" : "29",
-      "name" : "affiliate_4",
+      "id" : "4",
+      "name" : "CDL_Dev_Consume_Views",
       "clusterSizes" : {
         "default" : "small",
         "availableClusterSizes" : [ "small" ]
@@ -114,8 +62,8 @@
       "metadata" : {
         "label" : "BBN",
         "slug" : "BBN",
-        "x" : 260,
-        "y" : -180
+        "x" : 0,
+        "y" : -160
       },
       "ports" : {
         "inputs" : [ {
@@ -137,7 +85,7 @@
         }
       },
       "properties" : {
-        "pipelineId" : "pipelines/SAP_MD_MATL_LOC_BBA_BBL_BBN_02",
+        "pipelineId" : "pipelines/SAP_MD_MATL_LOC_MBP_SVS_BBL_BBN_HCS_P01_MRS_TAI",
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
@@ -195,9 +143,65 @@
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MMS_FIN_CLSN_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ZZMMSFICLASS)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VMI_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ZZSMIIND)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MSTR_PLNG_FMLY_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ZZMPFAMILY)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ACT_PUSH",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MTS_MTO_FL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DUAL_SRCNG_WIP",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CNSMPTN_MODE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "BBN", "default", "BBA", "BBL" ]
+            "CDL_MD_L1" : [ "MBP", "P01", "MRS", "default", "BBN", "SVS" ]
           },
           "overrides" : { },
           "selectedInstance" : "BBN"
@@ -210,8 +214,8 @@
       "metadata" : {
         "label" : "BBA",
         "slug" : "BBA",
-        "x" : 0,
-        "y" : -200
+        "x" : -20,
+        "y" : -320
       },
       "ports" : {
         "inputs" : [ {
@@ -233,13 +237,13 @@
         }
       },
       "properties" : {
-        "pipelineId" : "pipelines/SAP_MD_MATL_LOC_BBA_BBL_BBN_02",
+        "pipelineId" : "pipelines/SAP_MD_MATL_LOC_FSN_GEU_BBA_ATL",
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
             "kind" : {
               "type" : "string",
-              "value" : "bba"
+              "value" : "bba "
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
@@ -291,9 +295,65 @@
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MMS_FIN_CLSN_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ZZMMSFICLASS)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VMI_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ZZSMIIND)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MSTR_PLNG_FMLY_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ZZMPFAMILY)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ACT_PUSH",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MTS_MTO_FL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(ZZMTOMTSIND as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DUAL_SRCNG_WIP",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CNSMPTN_MODE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "BBN", "default", "BBA", "BBL" ]
+            "CDL_MD_L1" : [ "GEU", "FSN", "ATL", "BBA", "default" ]
           },
           "overrides" : { },
           "selectedInstance" : "BBA"
@@ -306,8 +366,8 @@
       "metadata" : {
         "label" : "GEU",
         "slug" : "GEU",
-        "x" : 660,
-        "y" : -180
+        "x" : 260,
+        "y" : -320
       },
       "ports" : {
         "inputs" : [ {
@@ -329,7 +389,7 @@
         }
       },
       "properties" : {
-        "pipelineId" : "pipelines/SAP_MD_MATL_LOC_TAI_MRS_P01_HCS_BWI_GEU_SVS_MBP_FSN_02",
+        "pipelineId" : "pipelines/SAP_MD_MATL_LOC_FSN_GEU_BBA_ATL",
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
@@ -380,16 +440,72 @@
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
-            "name" : "configDatabase",
+            "name" : "ConfigDatabase",
             "kind" : {
               "type" : "string",
               "value" : " "
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MMS_FIN_CLSN_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VMI_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MSTR_PLNG_FMLY_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ACT_PUSH",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MTS_MTO_FL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DUAL_SRCNG_WIP",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CNSMPTN_MODE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "GEU", "FSN", "MBP", "P01", "MRS", "default", "HCS", "SVS", "TAI", "BWI" ]
+            "CDL_MD_L1" : [ "GEU", "FSN", "ATL", "BBA", "default" ]
           },
           "overrides" : { },
           "selectedInstance" : "GEU"
@@ -402,8 +518,8 @@
       "metadata" : {
         "label" : "BBL",
         "slug" : "BBL",
-        "x" : 140,
-        "y" : -180
+        "x" : 680,
+        "y" : -320
       },
       "ports" : {
         "inputs" : [ {
@@ -425,7 +541,7 @@
         }
       },
       "properties" : {
-        "pipelineId" : "pipelines/SAP_MD_MATL_LOC_BBA_BBL_BBN_02",
+        "pipelineId" : "pipelines/SAP_MD_MATL_LOC_BBL_HCS_TAI",
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
@@ -483,9 +599,65 @@
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MMS_FIN_CLSN_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ZZMMSFICLASS)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VMI_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ZZSMIIND)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MSTR_PLNG_FMLY_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ZZMPFAMILY)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ACT_PUSH",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MTS_MTO_FL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(ZZMTOMTSIND as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DUAL_SRCNG_WIP",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CNSMPTN_MODE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "BBN", "default", "BBA", "BBL" ]
+            "CDL_MD_L1" : [ "default", "HCS", "TAI", "BBL" ]
           },
           "overrides" : { },
           "selectedInstance" : "BBL"
@@ -521,7 +693,7 @@
         }
       },
       "properties" : {
-        "pipelineId" : "pipelines/JDE_MD_MATL_LOC_JSW",
+        "pipelineId" : "pipelines/JDE_MD_MATL_LOC_JET_JSW_MTR_BW2_SJD",
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
@@ -556,6 +728,14 @@
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
+            "name" : "sourceTable1",
+            "kind" : {
+              "type" : "string",
+              "value" : "f4101"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
             "name" : "DAI_ETL_ID",
             "kind" : {
               "type" : "int",
@@ -571,9 +751,193 @@
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRCTR_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SRC_LIST_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "LD_GRP_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRDTN_SUPR_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SPL_PRCMT_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(iblnty)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRCMT_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibstkt)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MRP_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibsrp6)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PLNG_STRTGY_GRP_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PLAN_DELV_DAYS_CNT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(ibltlv as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "INHS_PRDTN_DAYS_CNT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(ibltlv as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRCHSNG_GRP_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VMI_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibpdgr)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MSTR_PLNG_FMLY_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ENTR_PRCMT_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VALUT_CAT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MRP_PRFL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "FLLP_MATL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "TOT_REPLN_LT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CMMDTY_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MRP_GRP",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CNTL_CODE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MM_DFLT_SUPP_AREA",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MTS_MTO_FL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "default", "JSW" ]
+            "CDL_MD_L1" : [ "MTR", "JET", "BW2", "SJD", "default", "JSW" ]
           },
           "overrides" : { },
           "selectedInstance" : "JSW"
@@ -609,7 +973,7 @@
         }
       },
       "properties" : {
-        "pipelineId" : "pipelines/JDE_MD_MATL_LOC_JET",
+        "pipelineId" : "pipelines/JDE_MD_MATL_LOC_JET_JSW_MTR_BW2_SJD",
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
@@ -644,6 +1008,14 @@
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
+            "name" : "sourceTable1",
+            "kind" : {
+              "type" : "string",
+              "value" : "f4101_adt"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
             "name" : "DAI_ETL_ID",
             "kind" : {
               "type" : "int",
@@ -659,9 +1031,193 @@
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRCTR_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SRC_LIST_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "LD_GRP_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRDTN_SUPR_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SPL_PRCMT_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(iblnty)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRCMT_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibstkt)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MRP_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibsrp6)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PLNG_STRTGY_GRP_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PLAN_DELV_DAYS_CNT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(ibltlv as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "INHS_PRDTN_DAYS_CNT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(ibltlv as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRCHSNG_GRP_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VMI_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MSTR_PLNG_FMLY_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ENTR_PRCMT_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VALUT_CAT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MRP_PRFL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "FLLP_MATL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "TOT_REPLN_LT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CMMDTY_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MRP_GRP",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CNTL_CODE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MM_DFLT_SUPP_AREA",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MTS_MTO_FL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "default", "JET" ]
+            "CDL_MD_L1" : [ "MTR", "JET", "BW2", "SJD", "default", "JSW" ]
           },
           "overrides" : { },
           "selectedInstance" : "JET"
@@ -674,8 +1230,8 @@
       "metadata" : {
         "label" : "MBP",
         "slug" : "MBP",
-        "x" : 140,
-        "y" : -60
+        "x" : 120,
+        "y" : -160
       },
       "ports" : {
         "inputs" : [ {
@@ -697,7 +1253,7 @@
         }
       },
       "properties" : {
-        "pipelineId" : "pipelines/SAP_MD_MATL_LOC_TAI_MRS_P01_HCS_BWI_GEU_SVS_MBP_FSN_02",
+        "pipelineId" : "pipelines/SAP_MD_MATL_LOC_MBP_SVS_BBL_BBN_HCS_P01_MRS_TAI",
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
@@ -748,16 +1304,72 @@
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
-            "name" : "configDatabase",
+            "name" : "ConfigDatabase",
             "kind" : {
               "type" : "string",
               "value" : " "
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MMS_FIN_CLSN_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VMI_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MSTR_PLNG_FMLY_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ACT_PUSH",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MTS_MTO_FL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DUAL_SRCNG_WIP",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CNSMPTN_MODE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "GEU", "FSN", "MBP", "P01", "MRS", "default", "HCS", "SVS", "TAI", "BWI" ]
+            "CDL_MD_L1" : [ "MBP", "P01", "MRS", "default", "BBN", "SVS" ]
           },
           "overrides" : { },
           "selectedInstance" : "MBP"
@@ -793,7 +1405,7 @@
         }
       },
       "properties" : {
-        "pipelineId" : "pipelines/JDE_MD_MATL_BW2",
+        "pipelineId" : "pipelines/JDE_MD_MATL_LOC_JET_JSW_MTR_BW2_SJD",
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
@@ -828,6 +1440,14 @@
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
+            "name" : "sourceTable1",
+            "kind" : {
+              "type" : "string",
+              "value" : "f4101_adt"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
             "name" : "DAI_ETL_ID",
             "kind" : {
               "type" : "int",
@@ -843,9 +1463,193 @@
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRCTR_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SRC_LIST_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "LD_GRP_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRDTN_SUPR_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SPL_PRCMT_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibprp0)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRCMT_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibstkt)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MRP_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibsrp6)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PLNG_STRTGY_GRP_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PLAN_DELV_DAYS_CNT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(ibltlv as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "INHS_PRDTN_DAYS_CNT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(ibltlv as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRCHSNG_GRP_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VMI_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MSTR_PLNG_FMLY_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibprp4)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ENTR_PRCMT_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VALUT_CAT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MRP_PRFL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "FLLP_MATL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "TOT_REPLN_LT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CMMDTY_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MRP_GRP",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CNTL_CODE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MM_DFLT_SUPP_AREA",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MTS_MTO_FL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "default", "BW2" ]
+            "CDL_MD_L1" : [ "MTR", "JET", "BW2", "SJD", "default", "JSW" ]
           },
           "overrides" : { },
           "selectedInstance" : "BW2"
@@ -881,7 +1685,7 @@
         }
       },
       "properties" : {
-        "pipelineId" : "pipelines/JDE_MD_MATL_LOC_GMD",
+        "pipelineId" : "pipelines/JDE_MD_MATL_LOC_JET_JSW_MTR_BW2_GMD_DEU_JEM_JES_SJD_DJD",
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
@@ -931,9 +1735,193 @@
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRCTR_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SRC_LIST_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "LD_GRP_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRDTN_SUPR_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SPL_PRCMT_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRCMT_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibstkt)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MRP_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibsrp6)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PLNG_STRTGY_GRP_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PLAN_DELV_DAYS_CNT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(ibltlv as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "INHS_PRDTN_DAYS_CNT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(ibltlv as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRCHSNG_GRP_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibvend)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VMI_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MSTR_PLNG_FMLY_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibsrp7)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ENTR_PRCMT_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VALUT_CAT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibglpt)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MRP_PRFL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "FLLP_MATL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibaitm)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "TOT_REPLN_LT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CMMDTY_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MRP_GRP",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CNTL_CODE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibsrp5)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MM_DFLT_SUPP_AREA",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibprp3)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MTS_MTO_FL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibprp2)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "default", "GMD" ]
+            "CDL_MD_L1" : [ "DJD", "JES", "default", "GMD", "JEM", "DEU" ]
           },
           "overrides" : { },
           "selectedInstance" : "GMD"
@@ -947,7 +1935,7 @@
         "label" : "SVS",
         "slug" : "SVS",
         "x" : 540,
-        "y" : -60
+        "y" : -160
       },
       "ports" : {
         "inputs" : [ {
@@ -969,7 +1957,7 @@
         }
       },
       "properties" : {
-        "pipelineId" : "pipelines/SAP_MD_MATL_LOC_TAI_MRS_P01_HCS_BWI_GEU_SVS_MBP_FSN_02",
+        "pipelineId" : "pipelines/SAP_MD_MATL_LOC_MBP_SVS_BBL_BBN_HCS_P01_MRS_TAI",
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
@@ -1020,16 +2008,72 @@
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
-            "name" : "configDatabase",
+            "name" : "ConfigDatabase",
             "kind" : {
               "type" : "string",
               "value" : " "
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MMS_FIN_CLSN_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VMI_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MSTR_PLNG_FMLY_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ACT_PUSH",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MTS_MTO_FL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DUAL_SRCNG_WIP",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CNSMPTN_MODE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "GEU", "FSN", "MBP", "P01", "MRS", "default", "HCS", "SVS", "TAI", "BWI" ]
+            "CDL_MD_L1" : [ "MBP", "P01", "MRS", "default", "BBN", "SVS" ]
           },
           "overrides" : { },
           "selectedInstance" : "SVS"
@@ -1065,7 +2109,7 @@
         }
       },
       "properties" : {
-        "pipelineId" : "pipelines/JDE_MD_MATL_LOC_DEU",
+        "pipelineId" : "pipelines/JDE_MD_MATL_LOC_JET_JSW_MTR_BW2_GMD_DEU_JEM_JES_SJD_DJD",
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
@@ -1115,9 +2159,193 @@
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRCTR_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibsrp2)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SRC_LIST_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibsrp4)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "LD_GRP_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibsrp1)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRDTN_SUPR_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibsrp5)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SPL_PRCMT_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRCMT_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibsrp0)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MRP_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibprp1)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PLNG_STRTGY_GRP_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibprp2)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PLAN_DELV_DAYS_CNT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "INHS_PRDTN_DAYS_CNT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(trim(ibltmf) as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRCHSNG_GRP_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibvend)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VMI_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MSTR_PLNG_FMLY_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibsrp7)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ENTR_PRCMT_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibsrp3)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VALUT_CAT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibglpt)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MRP_PRFL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibsrp5)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "FLLP_MATL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "TOT_REPLN_LT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(trim(ibltcm) as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CMMDTY_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibshcm)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MRP_GRP",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibsrp6)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CNTL_CODE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MM_DFLT_SUPP_AREA",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MTS_MTO_FL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "default", "DEU" ]
+            "CDL_MD_L1" : [ "DJD", "JES", "default", "GMD", "JEM", "DEU" ]
           },
           "overrides" : { },
           "selectedInstance" : "DEU"
@@ -1130,8 +2358,8 @@
       "metadata" : {
         "label" : "HCS",
         "slug" : "HCS",
-        "x" : 0,
-        "y" : -60
+        "x" : 820,
+        "y" : -320
       },
       "ports" : {
         "inputs" : [ {
@@ -1153,7 +2381,7 @@
         }
       },
       "properties" : {
-        "pipelineId" : "pipelines/SAP_MD_MATL_LOC_TAI_MRS_P01_HCS_BWI_GEU_SVS_MBP_FSN_02",
+        "pipelineId" : "pipelines/SAP_MD_MATL_LOC_BBL_HCS_TAI",
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
@@ -1183,7 +2411,7 @@
             "name" : "sourceDatabase",
             "kind" : {
               "type" : "string",
-              "value" : "hcs"
+              "value" : "bbl"
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
@@ -1191,7 +2419,7 @@
             "name" : "sourceTable",
             "kind" : {
               "type" : "string",
-              "value" : "marc"
+              "value" : "hcs"
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
@@ -1204,16 +2432,72 @@
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
-            "name" : "configDatabase",
+            "name" : "ConfigDatabase",
             "kind" : {
               "type" : "string",
               "value" : " "
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MMS_FIN_CLSN_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VMI_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MSTR_PLNG_FMLY_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ACT_PUSH",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MTS_MTO_FL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DUAL_SRCNG_WIP",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CNSMPTN_MODE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "GEU", "FSN", "MBP", "P01", "MRS", "default", "HCS", "SVS", "TAI", "BWI" ]
+            "CDL_MD_L1" : [ "default", "HCS", "TAI", "BBL" ]
           },
           "overrides" : { },
           "selectedInstance" : "HCS"
@@ -1226,8 +2510,8 @@
       "metadata" : {
         "label" : "FSN",
         "slug" : "FSN",
-        "x" : 520,
-        "y" : -180
+        "x" : 120,
+        "y" : -320
       },
       "ports" : {
         "inputs" : [ {
@@ -1249,7 +2533,7 @@
         }
       },
       "properties" : {
-        "pipelineId" : "pipelines/SAP_MD_MATL_LOC_TAI_MRS_P01_HCS_BWI_GEU_SVS_MBP_FSN_02",
+        "pipelineId" : "pipelines/SAP_MD_MATL_LOC_FSN_GEU_BBA_ATL",
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
@@ -1300,16 +2584,72 @@
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
-            "name" : "configDatabase",
+            "name" : "ConfigDatabase",
             "kind" : {
               "type" : "string",
               "value" : " "
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MMS_FIN_CLSN_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VMI_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MSTR_PLNG_FMLY_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ACT_PUSH",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MTS_MTO_FL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DUAL_SRCNG_WIP",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CNSMPTN_MODE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "GEU", "FSN", "MBP", "P01", "MRS", "default", "HCS", "SVS", "TAI", "BWI" ]
+            "CDL_MD_L1" : [ "GEU", "FSN", "ATL", "BBA", "default" ]
           },
           "overrides" : { },
           "selectedInstance" : "FSN"
@@ -1322,8 +2662,8 @@
       "metadata" : {
         "label" : "TAI",
         "slug" : "TAI",
-        "x" : 680,
-        "y" : -60
+        "x" : 980,
+        "y" : -320
       },
       "ports" : {
         "inputs" : [ {
@@ -1345,7 +2685,7 @@
         }
       },
       "properties" : {
-        "pipelineId" : "pipelines/SAP_MD_MATL_LOC_TAI_MRS_P01_HCS_BWI_GEU_SVS_MBP_FSN_02",
+        "pipelineId" : "pipelines/SAP_MD_MATL_LOC_BBL_HCS_TAI",
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
@@ -1396,16 +2736,72 @@
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
-            "name" : "configDatabase",
+            "name" : "ConfigDatabase",
             "kind" : {
               "type" : "string",
               "value" : " "
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MMS_FIN_CLSN_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VMI_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MSTR_PLNG_FMLY_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ACT_PUSH",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MTS_MTO_FL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DUAL_SRCNG_WIP",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CNSMPTN_MODE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "GEU", "FSN", "MBP", "P01", "MRS", "default", "HCS", "SVS", "TAI", "BWI" ]
+            "CDL_MD_L1" : [ "default", "HCS", "TAI", "BBL" ]
           },
           "overrides" : { },
           "selectedInstance" : "TAI"
@@ -1441,7 +2837,7 @@
         }
       },
       "properties" : {
-        "pipelineId" : "pipelines/JDE_MD_MATL_LOC_MTR",
+        "pipelineId" : "pipelines/JDE_MD_MATL_LOC_JET_JSW_MTR_BW2_SJD",
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
@@ -1476,6 +2872,14 @@
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
+            "name" : "sourceTable1",
+            "kind" : {
+              "type" : "string",
+              "value" : "f4101"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
             "name" : "DAI_ETL_ID",
             "kind" : {
               "type" : "int",
@@ -1491,9 +2895,193 @@
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRCTR_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SRC_LIST_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "LD_GRP_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRDTN_SUPR_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SPL_PRCMT_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(iblnty)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRCMT_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibstkt)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MRP_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibsrp6)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PLNG_STRTGY_GRP_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PLAN_DELV_DAYS_CNT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(ibltlv as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "INHS_PRDTN_DAYS_CNT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(ibltlv as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRCHSNG_GRP_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VMI_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MSTR_PLNG_FMLY_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibprp4)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ENTR_PRCMT_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VALUT_CAT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MRP_PRFL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "FLLP_MATL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "TOT_REPLN_LT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CMMDTY_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MRP_GRP",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CNTL_CODE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MM_DFLT_SUPP_AREA",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MTS_MTO_FL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "MTR", "default" ]
+            "CDL_MD_L1" : [ "MTR", "JET", "BW2", "SJD", "default", "JSW" ]
           },
           "overrides" : { },
           "selectedInstance" : "MTR"
@@ -1529,7 +3117,7 @@
         }
       },
       "properties" : {
-        "pipelineId" : "pipelines/JDE_MD_MATL_LOC_DJD",
+        "pipelineId" : "pipelines/JDE_MD_MATL_LOC_JET_JSW_MTR_BW2_GMD_DEU_JEM_JES_SJD_DJD",
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
@@ -1579,9 +3167,193 @@
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRCTR_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SRC_LIST_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "LD_GRP_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRDTN_SUPR_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SPL_PRCMT_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRCMT_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibstkt)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MRP_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PLNG_STRTGY_GRP_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PLAN_DELV_DAYS_CNT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(ibltlv as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "INHS_PRDTN_DAYS_CNT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(ibltlv as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRCHSNG_GRP_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibvend)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VMI_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MSTR_PLNG_FMLY_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ENTR_PRCMT_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VALUT_CAT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibglpt)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MRP_PRFL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "FLLP_MATL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibaitm)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "TOT_REPLN_LT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CMMDTY_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MRP_GRP",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CNTL_CODE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MM_DFLT_SUPP_AREA",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MTS_MTO_FL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "DJD", "default" ]
+            "CDL_MD_L1" : [ "DJD", "JES", "default", "GMD", "JEM", "DEU" ]
           },
           "overrides" : { },
           "selectedInstance" : "DJD"
@@ -1617,7 +3389,7 @@
         }
       },
       "properties" : {
-        "pipelineId" : "pipelines/JDE_MD_MATL_LOC_JEM",
+        "pipelineId" : "pipelines/JDE_MD_MATL_LOC_JET_JSW_MTR_BW2_GMD_DEU_JEM_JES_SJD_DJD",
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
@@ -1667,9 +3439,193 @@
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRCTR_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SRC_LIST_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "LD_GRP_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibprp6)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRDTN_SUPR_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SPL_PRCMT_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRCMT_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibsrp5)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MRP_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibprp1)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PLNG_STRTGY_GRP_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibsrp3)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PLAN_DELV_DAYS_CNT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "INHS_PRDTN_DAYS_CNT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(ibltmf as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRCHSNG_GRP_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibvend)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VMI_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MSTR_PLNG_FMLY_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ENTR_PRCMT_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VALUT_CAT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibglpt)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MRP_PRFL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibsrp0)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "FLLP_MATL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "TOT_REPLN_LT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CMMDTY_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MRP_GRP",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CNTL_CODE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MM_DFLT_SUPP_AREA",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MTS_MTO_FL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibprp2)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "default", "JEM" ]
+            "CDL_MD_L1" : [ "DJD", "JES", "default", "GMD", "JEM", "DEU" ]
           },
           "overrides" : { },
           "selectedInstance" : "JEM"
@@ -1682,8 +3638,8 @@
       "metadata" : {
         "label" : "BWI",
         "slug" : "BWI",
-        "x" : 400,
-        "y" : -180
+        "x" : 540,
+        "y" : -320
       },
       "ports" : {
         "inputs" : [ {
@@ -1705,7 +3661,7 @@
         }
       },
       "properties" : {
-        "pipelineId" : "pipelines/SAP_MD_MATL_LOC_TAI_MRS_P01_HCS_BWI_GEU_SVS_MBP_FSN_02",
+        "pipelineId" : "pipelines/SAP_MD_MATL_LOC_BWI",
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
@@ -1756,16 +3712,72 @@
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
-            "name" : "configDatabase",
+            "name" : "ConfigDatabase",
             "kind" : {
               "type" : "string",
               "value" : " "
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MMS_FIN_CLSN_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VMI_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MSTR_PLNG_FMLY_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ACT_PUSH",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MTS_MTO_FL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DUAL_SRCNG_WIP",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CNSMPTN_MODE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "GEU", "FSN", "MBP", "P01", "MRS", "default", "HCS", "SVS", "TAI", "BWI" ]
+            "CDL_MD_L1" : [ "default", "BWI" ]
           },
           "overrides" : { },
           "selectedInstance" : "BWI"
@@ -1778,8 +3790,8 @@
       "metadata" : {
         "label" : "HMD",
         "slug" : "HMD",
-        "x" : 840,
-        "y" : -60
+        "x" : 680,
+        "y" : -160
       },
       "ports" : {
         "inputs" : [ {
@@ -1801,7 +3813,7 @@
         }
       },
       "properties" : {
-        "pipelineId" : "pipelines/SAP_MD_MATL_LOC_HMD",
+        "pipelineId" : "pipelines/SAP_01_MD_MATL_LOC_HMD",
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
@@ -1839,6 +3851,102 @@
             "name" : "sourceTable",
             "kind" : {
               "type" : "string",
+              "value" : "NSDM_V_MARC"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "HM2", "default", "HMD" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "HM2"
+        }
+      }
+    },
+    "WRQo5_PUp3BsDb7GK0_M4$$ifp6mvog51_5uygqWfDnO" : {
+      "id" : "WRQo5_PUp3BsDb7GK0_M4$$ifp6mvog51_5uygqWfDnO",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "ATL",
+        "slug" : "ATL",
+        "x" : 400,
+        "y" : -320
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "6xXJ8qGtukrTt-wwVFoTE$$VaEH-SAtu7OfG1Xqbs0df",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "OhxN14svITjs_-6XaUnEc$$mtbyyLInwplyNVodOg21H",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/SAP_MD_MATL_LOC_FSN_GEU_BBA_ATL",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "atl"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MANDT",
+            "kind" : {
+              "type" : "string",
+              "value" : "100"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "atl"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceTable",
+            "kind" : {
+              "type" : "string",
               "value" : "marc"
             },
             "optional" : false,
@@ -1852,19 +3960,75 @@
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
-            "name" : "configDatabase",
+            "name" : "ConfigDatabase",
             "kind" : {
               "type" : "string",
               "value" : " "
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MMS_FIN_CLSN_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VMI_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MSTR_PLNG_FMLY_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ACT_PUSH",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MTS_MTO_FL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DUAL_SRCNG_WIP",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CNSMPTN_MODE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "HM2", "default", "HMD" ]
+            "CDL_MD_L1" : [ "GEU", "FSN", "ATL", "BBA", "default" ]
           },
           "overrides" : { },
-          "selectedInstance" : "HM2"
+          "selectedInstance" : "ATL"
         }
       }
     },
@@ -1897,7 +4061,7 @@
         }
       },
       "properties" : {
-        "pipelineId" : "pipelines/JDE_MD_MATL_LOC_JES",
+        "pipelineId" : "pipelines/JDE_MD_MATL_LOC_JET_JSW_MTR_BW2_GMD_DEU_JEM_JES_SJD_DJD",
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
@@ -1947,9 +4111,193 @@
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRCTR_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SRC_LIST_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "LD_GRP_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRDTN_SUPR_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SPL_PRCMT_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRCMT_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibprp2)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MRP_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibsrp6)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PLNG_STRTGY_GRP_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PLAN_DELV_DAYS_CNT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "INHS_PRDTN_DAYS_CNT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRCHSNG_GRP_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibvend)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VMI_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MSTR_PLNG_FMLY_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibprp1)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ENTR_PRCMT_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VALUT_CAT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibglpt)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MRP_PRFL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "FLLP_MATL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "TOT_REPLN_LT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CMMDTY_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MRP_GRP",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CNTL_CODE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MM_DFLT_SUPP_AREA",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MTS_MTO_FL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "default", "JES" ]
+            "CDL_MD_L1" : [ "DJD", "JES", "default", "GMD", "JEM", "DEU" ]
           },
           "overrides" : { },
           "selectedInstance" : "JES"
@@ -1962,8 +4310,8 @@
       "metadata" : {
         "label" : "MRS",
         "slug" : "MRS",
-        "x" : 280,
-        "y" : -60
+        "x" : 260,
+        "y" : -160
       },
       "ports" : {
         "inputs" : [ {
@@ -1985,7 +4333,7 @@
         }
       },
       "properties" : {
-        "pipelineId" : "pipelines/SAP_MD_MATL_LOC_TAI_MRS_P01_HCS_BWI_GEU_SVS_MBP_FSN_02",
+        "pipelineId" : "pipelines/SAP_MD_MATL_LOC_MBP_SVS_BBL_BBN_HCS_P01_MRS_TAI",
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
@@ -2036,16 +4384,72 @@
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
-            "name" : "configDatabase",
+            "name" : "ConfigDatabase",
             "kind" : {
               "type" : "string",
               "value" : " "
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MMS_FIN_CLSN_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VMI_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MSTR_PLNG_FMLY_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ACT_PUSH",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MTS_MTO_FL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DUAL_SRCNG_WIP",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CNSMPTN_MODE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "GEU", "FSN", "MBP", "P01", "MRS", "default", "HCS", "SVS", "TAI", "BWI" ]
+            "CDL_MD_L1" : [ "MBP", "P01", "MRS", "default", "BBN", "SVS" ]
           },
           "overrides" : { },
           "selectedInstance" : "MRS"
@@ -2058,8 +4462,8 @@
       "metadata" : {
         "label" : "P01",
         "slug" : "P01",
-        "x" : 420,
-        "y" : -60
+        "x" : 400,
+        "y" : -160
       },
       "ports" : {
         "inputs" : [ {
@@ -2081,7 +4485,7 @@
         }
       },
       "properties" : {
-        "pipelineId" : "pipelines/SAP_MD_MATL_LOC_TAI_MRS_P01_HCS_BWI_GEU_SVS_MBP_FSN_02",
+        "pipelineId" : "pipelines/SAP_MD_MATL_LOC_MBP_SVS_BBL_BBN_HCS_P01_MRS_TAI",
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
@@ -2132,16 +4536,72 @@
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
-            "name" : "configDatabase",
+            "name" : "ConfigDatabase",
             "kind" : {
               "type" : "string",
               "value" : " "
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MMS_FIN_CLSN_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VMI_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MSTR_PLNG_FMLY_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ACT_PUSH",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MTS_MTO_FL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DUAL_SRCNG_WIP",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CNSMPTN_MODE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "GEU", "FSN", "MBP", "P01", "MRS", "default", "HCS", "SVS", "TAI", "BWI" ]
+            "CDL_MD_L1" : [ "MBP", "P01", "MRS", "default", "BBN", "SVS" ]
           },
           "overrides" : { },
           "selectedInstance" : "P01"
@@ -2177,7 +4637,7 @@
         }
       },
       "properties" : {
-        "pipelineId" : "pipelines/JDE_MD_MATL_LOC_SJD",
+        "pipelineId" : "pipelines/JDE_MD_MATL_LOC_JET_JSW_MTR_BW2_SJD",
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
@@ -2212,6 +4672,14 @@
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
+            "name" : "sourceTable1",
+            "kind" : {
+              "type" : "string",
+              "value" : "f4101"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
             "name" : "DAI_ETL_ID",
             "kind" : {
               "type" : "int",
@@ -2227,9 +4695,193 @@
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRCTR_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SRC_LIST_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "LD_GRP_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRDTN_SUPR_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SPL_PRCMT_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRCMT_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibstkt)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MRP_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibsrp6)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PLNG_STRTGY_GRP_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PLAN_DELV_DAYS_CNT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(ibltlv as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "INHS_PRDTN_DAYS_CNT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(ibltlv as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PRCHSNG_GRP_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibvend)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VMI_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MSTR_PLNG_FMLY_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ENTR_PRCMT_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VALUT_CAT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibglpt)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MRP_PRFL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "FLLP_MATL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibaitm)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "TOT_REPLN_LT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as decimal(18,4))"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CMMDTY_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MRP_GRP",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast(null as string)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CNTL_CODE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibsrp5)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MM_DFLT_SUPP_AREA",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibprp3)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MTS_MTO_FL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ibprp2)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "default", "SJD" ]
+            "CDL_MD_L1" : [ "MTR", "JET", "BW2", "SJD", "default", "JSW" ]
           },
           "overrides" : { },
           "selectedInstance" : "SJD"
@@ -2238,42 +4890,6 @@
     }
   },
   "connections" : [ {
-    "id" : "GW1fam-UKWYFFUWP2DD4o$$FmPHRIAsQNC8X1vdINXxl",
-    "source" : "G2IGjK3IyJhGOy9_Lx18N$$dESqnRX0h4jvxVOlRE3-2",
-    "target" : "8c7puKwdIApsJsZ9QmDEU$$NwEwAc2aP6h9vmLWlQA0u",
-    "sourcePort" : "6x5kASjX7mZa_SiLtbJY0$$JYjXcvf-7wUf1EZTB1jhf",
-    "targetPort" : "Mkgi6jE3ySOrz2vs2_pHZ$$EQxMM72yHMnfeAJvv3sQE"
-  }, {
-    "id" : "3p0ZXXjsXbaP4loZVw3_E$$wMjngaIDBkZ6HdLgWBphP",
-    "source" : "8c7puKwdIApsJsZ9QmDEU$$NwEwAc2aP6h9vmLWlQA0u",
-    "target" : "T7SE80jVlazbI39ZCHxkA$$hjBTnJS8wZZ22NGR_LNjh",
-    "sourcePort" : "R97hsM7gmKMMpormoPOkH$$OEnTu1RzslcFM4UDK5Dse",
-    "targetPort" : "9cicdjMd-kTUvWQnB9OBg$$RA03ogi5Jv3g4Jw9JIHCs"
-  }, {
-    "id" : "OgpW58D31Qb1jjtqAAZqH$$yZhlU6UMzfZuD6P0TbPv3",
-    "source" : "T7SE80jVlazbI39ZCHxkA$$hjBTnJS8wZZ22NGR_LNjh",
-    "target" : "L3AdkX3D9jWhVLuSEn077$$ywkL2VC6SuaUJ9U7SFfi9",
-    "sourcePort" : "AB4xK0_w27sNOvGDvvcKl$$wZwdQnPGZDGZazNvCWtQU",
-    "targetPort" : "hhvFsXK7eKIdaby0rsWDz$$IFwDDrZAxbEw-1OkY1Q0l"
-  }, {
-    "id" : "UmY3kHhF1daqGtP_nGSNL$$mhqawnx-KDz0RTmpXEL17",
-    "source" : "L3AdkX3D9jWhVLuSEn077$$ywkL2VC6SuaUJ9U7SFfi9",
-    "target" : "-v_TXtoazd_18tJifl9TW$$Ok-8N-QwYKq0PPlg_Ml8v",
-    "sourcePort" : "Z2QPOHwnlrN9_YjA-l00D$$NGq03ONVxbBkSJUHuttth",
-    "targetPort" : "Wx_0V4uhTJOtrb4DPSt2u$$q1qNLgxcqkkNkbhfwNLeI"
-  }, {
-    "id" : "qmfm84tjsONwrd5qc306C$$A9HRY2NBdzrR6LV_xmphK",
-    "source" : "-v_TXtoazd_18tJifl9TW$$Ok-8N-QwYKq0PPlg_Ml8v",
-    "target" : "Yq7RdYwrzXDmJ16cTAGlS$$bYEdG0-l3LkwWkWNCB42I",
-    "sourcePort" : "Fi9yQbQFreqKvYw0ptLML$$WYTdIiT1kRVZa4FO13AOL",
-    "targetPort" : "0I5zJgi9lrJBo2tANvg6b$$x1Ij-X8_X6k8w44x1q_WN"
-  }, {
-    "id" : "MWcokzLMdxSTmrP_D77Kg$$OcQLEO2-SgOc-2-FV4iWp",
-    "source" : "Qr3WRs8cnnGJHqOlf9G5C$$Uhg1s6Mnar8X8RC2_4d1E",
-    "target" : "Qfda5e8dTXhiY_4nSM227$$FrIVQgef2lD_aQIWkymol",
-    "sourcePort" : "dSLOuDANyH3IXfMxxz8LP$$RiMEUL9N_ODcozZxBD-jT",
-    "targetPort" : "HEvZ8P3np1cPVrt18x2MO$$cojW78hpBLUYagOfkgl37"
-  }, {
     "id" : "D0wLdzltpr-PvSEpVGO3d$$5R9eqydm8Dj7tPFDr-9ts",
     "source" : "Qfda5e8dTXhiY_4nSM227$$FrIVQgef2lD_aQIWkymol",
     "target" : "R_MgoirGnuK60k16xJRmE$$CL9UxkKawyxsjncprVhEY",
@@ -2291,18 +4907,6 @@
     "target" : "_eDRLKDiW3XP2maMaRlWt$$FaSJr37VNqsufdGXsaIwk",
     "sourcePort" : "mQtQ1S7hnN6PSG2nAN5rX$$Gp0cnQ_6eqD0QbuwqRE5N",
     "targetPort" : "emSBJKrD1X_NHrvHhxob_$$6bANr-hnvzedEdrtHWX6P"
-  }, {
-    "id" : "fapkSYGGW0PQuzN76QZb7$$XVgoC89-Kjg250nd5cI4b",
-    "source" : "_eDRLKDiW3XP2maMaRlWt$$FaSJr37VNqsufdGXsaIwk",
-    "target" : "qovEC0meVW_m_cXLQQI5J$$jmRmj7LdO5aXzVTldex-E",
-    "sourcePort" : "4V3hVvbuTbVyt0yAdSkNp$$7XsuGx57Pq9OzXyHz1syd",
-    "targetPort" : "xyXu8ICkuYR47NgWusPdB$$4eJ4gdtcYxcBdYWgpaXQ1"
-  }, {
-    "id" : "9BVGFxxj4vbd9CB0csStn$$Qb-i2LC5P_6qTHNtiq3TA",
-    "source" : "qovEC0meVW_m_cXLQQI5J$$jmRmj7LdO5aXzVTldex-E",
-    "target" : "_fiAd7lu4mIN86ximC3Xi$$RNpDaKGDVUKJpai1IWu2L",
-    "sourcePort" : "dzFx2gnpfkUyLCJ5HQYOc$$CQsZ70WUC3YbCc7aguIdW",
-    "targetPort" : "O5G0fhOzxzSdVVKUwoEKR$$Ra0gUhlrZud7Aowga5Y37"
   }, {
     "id" : "kX0YEiK3a26NMBsGAijLa$$hJVmpYNDE7SFr9HZA_ymS",
     "source" : "VSf2RpSjLrXcflnu_MNgr$$UvJoZ96jSRJr-9_cQHSvo",
@@ -2357,5 +4961,71 @@
     "target" : "Vv8Dh7xzzC4E6lLjO3UzV$$bleeCzRD368i7w7LCrs1T",
     "sourcePort" : "2ub-_xGG_U2RkhXDfqntd$$riQU3iTtgW3uEZjb6IhYk",
     "targetPort" : "5cH5yTtJ0iwBWhyFlyoeU$$SFF-jT_AZYlCUDrck7f2L"
+  }, {
+    "id" : "qodpMo7-2THfQ7xjZ50LC$$vR4GUDBYpu2_hYpoIsmd_",
+    "source" : "G2IGjK3IyJhGOy9_Lx18N$$dESqnRX0h4jvxVOlRE3-2",
+    "target" : "-v_TXtoazd_18tJifl9TW$$Ok-8N-QwYKq0PPlg_Ml8v",
+    "sourcePort" : "6x5kASjX7mZa_SiLtbJY0$$JYjXcvf-7wUf1EZTB1jhf",
+    "targetPort" : "Wx_0V4uhTJOtrb4DPSt2u$$q1qNLgxcqkkNkbhfwNLeI"
+  }, {
+    "id" : "pfVvvd7IJSOoBAQElODx4$$nrGZYpLU2hcYf2iXkugua",
+    "source" : "-v_TXtoazd_18tJifl9TW$$Ok-8N-QwYKq0PPlg_Ml8v",
+    "target" : "Yq7RdYwrzXDmJ16cTAGlS$$bYEdG0-l3LkwWkWNCB42I",
+    "sourcePort" : "Fi9yQbQFreqKvYw0ptLML$$WYTdIiT1kRVZa4FO13AOL",
+    "targetPort" : "0I5zJgi9lrJBo2tANvg6b$$x1Ij-X8_X6k8w44x1q_WN"
+  }, {
+    "id" : "SbzEcMwd4td9XBgyzMlp5$$LfauGYqJCp52D5q_KI6Db",
+    "source" : "Yq7RdYwrzXDmJ16cTAGlS$$bYEdG0-l3LkwWkWNCB42I",
+    "target" : "WRQo5_PUp3BsDb7GK0_M4$$ifp6mvog51_5uygqWfDnO",
+    "sourcePort" : "FYh8ZOp6oOaHbJSlDdaET$$0TnPsEM_V7x41nglaLauf",
+    "targetPort" : "6xXJ8qGtukrTt-wwVFoTE$$VaEH-SAtu7OfG1Xqbs0df"
+  }, {
+    "id" : "vks76z2x7LpHzRZ-tk623$$_uXowuQpzGSDGCG16xCJZ",
+    "source" : "WRQo5_PUp3BsDb7GK0_M4$$ifp6mvog51_5uygqWfDnO",
+    "target" : "L3AdkX3D9jWhVLuSEn077$$ywkL2VC6SuaUJ9U7SFfi9",
+    "sourcePort" : "OhxN14svITjs_-6XaUnEc$$mtbyyLInwplyNVodOg21H",
+    "targetPort" : "hhvFsXK7eKIdaby0rsWDz$$IFwDDrZAxbEw-1OkY1Q0l"
+  }, {
+    "id" : "MLqv69sKHC1HuEY3Q5z3a$$hzuzfY7QCbLALGSGXW6GJ",
+    "source" : "L3AdkX3D9jWhVLuSEn077$$ywkL2VC6SuaUJ9U7SFfi9",
+    "target" : "8c7puKwdIApsJsZ9QmDEU$$NwEwAc2aP6h9vmLWlQA0u",
+    "sourcePort" : "Z2QPOHwnlrN9_YjA-l00D$$NGq03ONVxbBkSJUHuttth",
+    "targetPort" : "Mkgi6jE3ySOrz2vs2_pHZ$$EQxMM72yHMnfeAJvv3sQE"
+  }, {
+    "id" : "aBqDzvQ6LzLoW4iH69N1S$$qbLzh17u-gna1-eMLvZPe",
+    "source" : "8c7puKwdIApsJsZ9QmDEU$$NwEwAc2aP6h9vmLWlQA0u",
+    "target" : "Qr3WRs8cnnGJHqOlf9G5C$$Uhg1s6Mnar8X8RC2_4d1E",
+    "sourcePort" : "R97hsM7gmKMMpormoPOkH$$OEnTu1RzslcFM4UDK5Dse",
+    "targetPort" : "No3kHxqouFQKqivdOLv-N$$7K2dk2vouWvNWZiaq8fg7"
+  }, {
+    "id" : "6FpGMZ551rlyxIWakRcOc$$htd-MOWNadcGW9_vBeqb6",
+    "source" : "Qr3WRs8cnnGJHqOlf9G5C$$Uhg1s6Mnar8X8RC2_4d1E",
+    "target" : "qovEC0meVW_m_cXLQQI5J$$jmRmj7LdO5aXzVTldex-E",
+    "sourcePort" : "dSLOuDANyH3IXfMxxz8LP$$RiMEUL9N_ODcozZxBD-jT",
+    "targetPort" : "xyXu8ICkuYR47NgWusPdB$$4eJ4gdtcYxcBdYWgpaXQ1"
+  }, {
+    "id" : "zRotutIxzsaibJBT9xrpK$$k3ECLFO-qpEf2IJDPpX2R",
+    "source" : "T7SE80jVlazbI39ZCHxkA$$hjBTnJS8wZZ22NGR_LNjh",
+    "target" : "Qfda5e8dTXhiY_4nSM227$$FrIVQgef2lD_aQIWkymol",
+    "sourcePort" : "AB4xK0_w27sNOvGDvvcKl$$wZwdQnPGZDGZazNvCWtQU",
+    "targetPort" : "HEvZ8P3np1cPVrt18x2MO$$cojW78hpBLUYagOfkgl37"
+  }, {
+    "id" : "meJTc1rW5BloojwXmKJ7U$$qxzTlhXrFDwVGganEvcxF",
+    "source" : "_eDRLKDiW3XP2maMaRlWt$$FaSJr37VNqsufdGXsaIwk",
+    "target" : "_fiAd7lu4mIN86ximC3Xi$$RNpDaKGDVUKJpai1IWu2L",
+    "sourcePort" : "4V3hVvbuTbVyt0yAdSkNp$$7XsuGx57Pq9OzXyHz1syd",
+    "targetPort" : "O5G0fhOzxzSdVVKUwoEKR$$Ra0gUhlrZud7Aowga5Y37"
+  }, {
+    "id" : "XEShq9jwNYsJp25n-8cNa",
+    "source" : "qovEC0meVW_m_cXLQQI5J$$jmRmj7LdO5aXzVTldex-E",
+    "target" : "T7SE80jVlazbI39ZCHxkA$$hjBTnJS8wZZ22NGR_LNjh",
+    "sourcePort" : "dzFx2gnpfkUyLCJ5HQYOc$$CQsZ70WUC3YbCc7aguIdW",
+    "targetPort" : "9cicdjMd-kTUvWQnB9OBg$$RA03ogi5Jv3g4Jw9JIHCs"
+  }, {
+    "id" : "4yDG_Z9CqDstA2cA5jBrl",
+    "source" : "_fiAd7lu4mIN86ximC3Xi$$RNpDaKGDVUKJpai1IWu2L",
+    "target" : "VSf2RpSjLrXcflnu_MNgr$$UvJoZ96jSRJr-9_cQHSvo",
+    "sourcePort" : "Zuz-sIuOnR4gmZDG_B60q$$kg12V6u4abyE32W5tpxq-",
+    "targetPort" : "yelXxj3U33sg5Z0GyXX5P$$rECBU05IXKR1-8P9SgIxQ"
   } ]
 }
