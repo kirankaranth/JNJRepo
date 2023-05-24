@@ -1,3 +1,3 @@
-from MD_PRCH_DELV_CNFRMS_7.pipeline import main
+from md_prch_delv_cnfrms_7_hcs.pipeline import main
 
 main()
