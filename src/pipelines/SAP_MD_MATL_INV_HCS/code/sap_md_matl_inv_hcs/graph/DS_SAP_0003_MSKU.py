@@ -6,4 +6,4 @@ from sap_md_matl_inv_hcs.config.ConfigStore import *
 from sap_md_matl_inv_hcs.udfs.UDFs import *
 
 def DS_SAP_0003_MSKU(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.sourceSystem}.msku")
+    return spark.read.table(f"{Config.sourceDatabase}.msku")
