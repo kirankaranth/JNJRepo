@@ -19,9 +19,14 @@ def getPipelinePath(pipelineName, jsonObject):
         #print(item["PipelineComponent"]["nodeName"] + "==" + pipelineName)
         try:
             if item["PipelineComponent"]["nodeName"] == pipelineName:
-                return item["PipelineComponent"]["id"]
+                if "pipelines" in item["PipelineComponent"]["id"]:
+                    return item["PipelineComponent"]["id"]
+                else:
+                    return item["PipelineComponent"]["pipelineId"]
+
         except:
-            pass
+            return None
+    return None
 
 if env == "prod":
   envFolder = "prd"
@@ -29,7 +34,7 @@ else:
   envFolder = env
 
 app = sys.argv[2]
-
+print ("HELLO WORLD")
 for item in os.scandir("./src/jobs/"):
     if item.is_dir():
         if os.path.isfile(item.path+"/"+dbLoc):
@@ -43,7 +48,8 @@ for item in os.scandir("./src/jobs/"):
             ##Auto disable jobs that don't have PIPELINE in their name 
             if "PIPELINE" not in jsonObject["request"]["name"].upper():
                 jsonObject["request"]["schedule"]["pause_status"] = "PAUSED"
-
+            #TODO: For prod switch them to daily automatically
+            #TODO: For pqa if HMD/HM2 make it run daily at 8AM 
             #For each task in the pipeline we:
             # Read the default configuration from the python package
             # We overlay the chosen config set
@@ -54,6 +60,7 @@ for item in os.scandir("./src/jobs/"):
                 if 'python_wheel_task' in task:
                     targetConfig = task["python_wheel_task"]["parameters"][1]
                     pipelinePath = getPipelinePath(task["task_key"], jsonObject)
+
                     packageName = ""
                     d = {}
                     a = {}
@@ -92,34 +99,36 @@ for item in os.scandir("./src/jobs/"):
                             +"  cannot find package  " + packageName )
                             # task["python_wheel_task"]["package_name"])
                     
+                    if pipelinePath != None:
+                        orConfig = open("./src/"+pipelinePath+"/code/configs/"+ "resources/config/" + task["python_wheel_task"]["parameters"][1] + ".json")
 
-                    orConfig = open("./src/"+pipelinePath+"/code/configs/"+ "resources/config/" + task["python_wheel_task"]["parameters"][1] + ".json")
+                        d = json.load(orConfig)
 
-                    d = json.load(orConfig)
+                        a.update(d)
 
-                    a.update(d)
+                        c = json.loads(task["python_wheel_task"]["parameters"][3])
+                        #print(c)
+                        a.update(c)
+                        if env == "prod" and task["python_wheel_task"]["parameters"][1].upper() == "HM2":
+                            #print(jsonObject)
+                            b = json.loads('{"targetSchema":"'+envFolder+'_'+app+'","targetEnv":"'+envFolder+'","targetApp":"'+app+'","sourceDatabase":"hmd","sourceSystem":"hmd","nonProdFilter":false}')
+                            print("Updating platform environment details for HM2 -> HMD")
 
-                    c = json.loads(task["python_wheel_task"]["parameters"][3])
-                    #print(c)
-                    a.update(c)
-                    if env == "prod" and task["python_wheel_task"]["parameters"][1].upper() == "HM2":
-                        #print(jsonObject)
-                        b = json.loads('{"targetSchema":"'+envFolder+'_'+app+'","targetEnv":"'+envFolder+'","targetApp":"'+app+'","sourceDatabase":"hmd","sourceSystem":"hmd","nonProdFilter":false}')
-                        print("Updating platform environment details for HM2 -> HMD")
-
-                    elif env == "pqa" and task["python_wheel_task"]["parameters"][1].upper() == "HM2":
-                        #print(jsonObject)
-                        b = json.loads('{"targetSchema":"'+envFolder+'_'+app+'","targetEnv":"'+envFolder+'","targetApp":"'+app+'","sourceDatabase":"pqa_hm2","sourceSystem":"hm2"}')
-                        print("Updating platform environment details for HM2 -> HMD")
-                    elif env == "prod":
-                        b = json.loads('{"targetSchema":"'+envFolder+'_'+app+'","targetEnv":"'+envFolder+'","targetApp":"'+app+'","nonProdFilter":false}')
-                        
+                        elif env == "pqa" and task["python_wheel_task"]["parameters"][1].upper() == "HM2":
+                            #print(jsonObject)
+                            b = json.loads('{"targetSchema":"'+envFolder+'_'+app+'","targetEnv":"'+envFolder+'","targetApp":"'+app+'","sourceDatabase":"pqa_hm2","sourceSystem":"hm2"}')
+                            print("Updating platform environment details for HM2 -> HMD")
+                        elif env == "prod":
+                            b = json.loads('{"targetSchema":"'+envFolder+'_'+app+'","targetEnv":"'+envFolder+'","targetApp":"'+app+'","nonProdFilter":false}')
+                            
+                        else:
+                            b = json.loads('{"targetSchema":"'+envFolder+'_'+app+'","targetEnv":"'+envFolder+'","targetApp":"'+app+'"}')
+                        a.update(b)
+                        task["python_wheel_task"]["parameters"][3] = json.dumps(a) #'{"targetSchema":"'+envFolder+'_'+app+'","targetEnv":"'+envFolder+'","targetApp":"'+app+'"}'
+                        #if task["python_wheel_task"]["parameters"][1] == "BW2":
+                        #    print(jsonObject["request"]["name"] + str(a))
                     else:
-                        b = json.loads('{"targetSchema":"'+envFolder+'_'+app+'","targetEnv":"'+envFolder+'","targetApp":"'+app+'"}')
-                    a.update(b)
-                    task["python_wheel_task"]["parameters"][3] = json.dumps(a) #'{"targetSchema":"'+envFolder+'_'+app+'","targetEnv":"'+envFolder+'","targetApp":"'+app+'"}'
-                    #if task["python_wheel_task"]["parameters"][1] == "BW2":
-                    #    print(jsonObject["request"]["name"] + str(a))                
+                        print(jsonObject)                
             f.close()
             f = open(item.path+"/"+dbLoc,'w')
             json.dump(jsonObject,f)
