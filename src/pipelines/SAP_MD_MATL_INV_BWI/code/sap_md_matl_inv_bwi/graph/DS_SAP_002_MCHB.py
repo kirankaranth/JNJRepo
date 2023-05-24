@@ -6,4 +6,4 @@ from sap_md_matl_inv_bwi.config.ConfigStore import *
 from sap_md_matl_inv_bwi.udfs.UDFs import *
 
 def DS_SAP_002_MCHB(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.sourceSystem}.mchb")
+    return spark.read.table(f"{Config.sourceDatabase}.mchb")
