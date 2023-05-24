@@ -9,8 +9,8 @@ from sap_md_matl_valut_hist.graph import *
 def pipeline(spark: SparkSession) -> None:
     df_DS_SAP_01_MBEWH = DS_SAP_01_MBEWH(spark)
     df_DS_SAP_02_MARA = DS_SAP_02_MARA(spark)
-    df_Filter_1 = Filter_1(spark, df_DS_SAP_02_MARA)
-    df_Reformat_MARA = Reformat_MARA(spark, df_Filter_1)
+    df_MANDT_FILTER_MARA = MANDT_FILTER_MARA(spark, df_DS_SAP_02_MARA)
+    df_Reformat_MARA = Reformat_MARA(spark, df_MANDT_FILTER_MARA)
     df_MANDT_FILTER = MANDT_FILTER(spark, df_DS_SAP_01_MBEWH)
     df_Join_1 = Join_1(spark, df_MANDT_FILTER, df_Reformat_MARA)
     df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_Join_1)

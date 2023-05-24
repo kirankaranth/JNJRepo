@@ -5,5 +5,5 @@ from prophecy.libs import typed_lit
 from sap_md_matl_valut_hist.config.ConfigStore import *
 from sap_md_matl_valut_hist.udfs.UDFs import *
 
-def Filter_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
+def MANDT_FILTER_MARA(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0.filter((col("_deleted_") == lit("F")))

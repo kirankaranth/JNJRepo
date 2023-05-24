@@ -6,4 +6,4 @@ from sap_md_matl_valut_hist.config.ConfigStore import *
 from sap_md_matl_valut_hist.udfs.UDFs import *
 
 def DS_SAP_01_MBEWH(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"bba.mbewh")
+    return spark.read.table(f"{Config.sourceDatabase}.mbewh")
