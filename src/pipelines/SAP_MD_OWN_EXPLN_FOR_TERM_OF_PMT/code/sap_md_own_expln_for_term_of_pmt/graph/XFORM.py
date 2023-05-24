@@ -14,9 +14,25 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
         .withColumn("DAI_UPDT_DTTM", current_timestamp())\
         .withColumn("_l1_upt_", current_timestamp())\
-        .withColumn("l1_pk_", to_json(expr("named_struct('SRC_SYS_CD', SRC_SYS_CD)")))\
-        .withColumn("_pk_md5_", md5(to_json(expr("named_struct('SRC_SYS_CD', SRC_SYS_CD)"))))\
-        .withColumn("L1name_SPRAS", col("SPRAS"))\
-        .withColumn("L1name_ZTERM", col("ZTERM"))\
-        .withColumn("L1name_ZTAGG", col("ZTAGG"))\
-        .withColumn("L1name_TEXT1", col("TEXT1"))
+        .withColumn("LANG_KEY", col("SPRAS"))\
+        .withColumn("DAY_LMT", col("ZTAGG").cast(IntegerType()))\
+        .withColumn("TERM_OF_PMT_KEY", col("ZTERM"))\
+        .withColumn(
+          "l1_pk_",
+          to_json(
+            expr(
+              "named_struct('SRC_SYS_CD', SRC_SYS_CD, 'LANG_KEY', LANG_KEY, 'TERM_OF_PMT_KEY', TERM_OF_PMT_KEY, 'DAY_LMT', DAY_LMT)"
+            )
+          )
+        )\
+        .withColumn(
+          "_pk_md5_",
+          md5(
+            to_json(
+              expr(
+                "named_struct('SRC_SYS_CD', SRC_SYS_CD, 'LANG_KEY', LANG_KEY, 'TERM_OF_PMT_KEY', TERM_OF_PMT_KEY, 'DAY_LMT', DAY_LMT)"
+              )
+            )
+          )
+        )\
+        .withColumn("OWN_EXPLN_OF_TERM_OF_PMT", col("TEXT1"))
