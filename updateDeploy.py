@@ -127,20 +127,21 @@ for item in os.scandir("./src/jobs/"):
                         if env == "prod" and task["python_wheel_task"]["parameters"][1].upper() == "HM2":
                             #print(jsonObject)
                             b = json.loads('{"targetSchema":"'+envFolder+'_'+app+'","targetEnv":"'+envFolder+'","targetApp":"'+app+'","sourceDatabase":"hmd","sourceSystem":"hmd","nonProdFilter":false}')
-                            print("Updating task: "+jsonObject["request"]["name"]+"/"+task["python_wheel_task"]["parameters"][3] +"platform environment details for HM2 -> HMD - prod")
+                            print("Updating task: "+jsonObject["request"]["name"]+"/"+task["task_key"] +"platform environment details for HM2 -> HMD - prod")
 
                         elif env == "pqa" and task["python_wheel_task"]["parameters"][1].upper() == "HM2":
                             #print(jsonObject)
                             b = json.loads('{"targetSchema":"'+envFolder+'_'+app+'","targetEnv":"'+envFolder+'","targetApp":"'+app+'","sourceDatabase":"pqa_hm2","sourceSystem":"hm2"}')
-                            print("Updating task: "+jsonObject["request"]["name"]+"/"+task["python_wheel_task"]["parameters"][3] +"platform environment details for HM2 -> HMD - pqa")
+                            print("Updating task: "+jsonObject["request"]["name"]+"/"+task["task_key"] +"platform environment details for HM2 -> HMD - pqa")
                         elif env == "prod":
                             b = json.loads('{"targetSchema":"'+envFolder+'_'+app+'","targetEnv":"'+envFolder+'","targetApp":"'+app+'","nonProdFilter":false}')
-                            print("Updating task: "+jsonObject["request"]["name"]+"/"+task["python_wheel_task"]["parameters"][3] +" environment details for prod")
+                            print("Updating task: "+jsonObject["request"]["name"]+"/"+task["task_key"] +" environment details for prod")
                         else:
                             b = json.loads('{"targetSchema":"'+envFolder+'_'+app+'","targetEnv":"'+envFolder+'","targetApp":"'+app+'"}')
-                            print("Updating task: "+jsonObject["request"]["name"]+"/"+task["python_wheel_task"]["parameters"][3] +" environment details for " + env)
+                            print("Updating task: "+jsonObject["request"]["name"]+"/"+task["task_key"] +" environment details for " + env)
                         a.update(b)
                         task["python_wheel_task"]["parameters"][3] = json.dumps(a) #'{"targetSchema":"'+envFolder+'_'+app+'","targetEnv":"'+envFolder+'","targetApp":"'+app+'"}'
+                        print("New config: " + json.dumps(a))
                         #if task["python_wheel_task"]["parameters"][1] == "BW2":
                         #    print(jsonObject["request"]["name"] + str(a))
                     else:
