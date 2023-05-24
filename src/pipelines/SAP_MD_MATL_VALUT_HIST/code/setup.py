@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 setup(
-    name = 'SAP_MD_MATL_VALUT_HIST',
+    name = 'SAP_MD_MATL_VALUT_HIST_BBN_BBA_BBL_P01_TAI_MRS_HCS_GEU_BWI_MBP_FSN_ATL_SVS_HM2',
     version = '1.0',
     packages = (
       find_packages(include = ('sap_md_matl_valut_hist_bba_bbl_bbn_geu_hcs_mrs_tai_p01_mbp_bwi_fsn_atl_svs_hm2*', ))
