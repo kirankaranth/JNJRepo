@@ -35,4 +35,4 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
             )
           )
         )\
-        .withColumn("OWN_EXPLN_OF_TERM_OF_PMT", col("TEXT1"))
+        .withColumn("OWN_EXPLN_OF_TERM_OF_PMT", trim(col("TEXT1")))
