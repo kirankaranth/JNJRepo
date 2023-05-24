@@ -6,4 +6,4 @@ from sap_md_matl_inv_hcs.config.ConfigStore import *
 from sap_md_matl_inv_hcs.udfs.UDFs import *
 
 def DS_SAP_0001_MARD(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.sourceSystem}.mard")
+    return spark.read.table(f"{Config.sourceDatabase}.mard")
