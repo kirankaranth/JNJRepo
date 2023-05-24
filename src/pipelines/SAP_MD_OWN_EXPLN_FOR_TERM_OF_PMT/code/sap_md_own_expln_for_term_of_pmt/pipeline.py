@@ -9,6 +9,8 @@ from sap_md_own_expln_for_term_of_pmt.graph import *
 def pipeline(spark: SparkSession) -> None:
     df_T052U = T052U(spark)
     df_DEL = DEL(spark, df_T052U)
+    df_XFORM = XFORM(spark, df_DEL)
+    df_SELECT_FIELDS = SELECT_FIELDS(spark, df_XFORM)
 
 def main():
     spark = SparkSession.builder\
