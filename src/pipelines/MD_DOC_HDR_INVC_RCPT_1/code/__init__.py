@@ -1,0 +1,1 @@
+from .MD_DOC_HDR_INVC_RCPT_1 import *
