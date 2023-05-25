@@ -23,11 +23,10 @@ else to_timestamp(stas.andat, \"yyyyMMdd\") end as  CRT_DTTM
 , case when stas.aedat = '00000000' then CAST(NULL AS timestamp)
 else to_timestamp(stas.aedat, \"yyyyMMdd\") end as  CHG_DTTM
 , TRIM(stas.lkenz) as DEL_IND,
-stas._upt_ as _l0_upt_
+stas._upt_ as _l0_upt_,
+stas._deleted_
 FROM  {Config.sourceDatabase}.stas as stas  WHERE stas._deleted_ = 'F'
-and stas.MANDT=100
-  
- 
+and stas.MANDT = {Config.MANDT} 
 """
     )
 
