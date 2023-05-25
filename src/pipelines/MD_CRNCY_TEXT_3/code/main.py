@@ -1,3 +1,3 @@
-from MD_CRNCY_TEXT_3.pipeline import main
+from md_crncy_text_hmd.pipeline import main
 
 main()

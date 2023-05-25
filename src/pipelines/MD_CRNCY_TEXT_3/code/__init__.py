@@ -1,1 +1,1 @@
-from .MD_CRNCY_TEXT_3 import *
+from .md_crncy_text_hmd import *

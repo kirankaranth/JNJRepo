@@ -2,8 +2,8 @@ from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from prophecy.libs import typed_lit
-from MD_CRNCY_TEXT_3.config.ConfigStore import *
-from MD_CRNCY_TEXT_3.udfs.UDFs import *
+from md_crncy_text_hmd.config.ConfigStore import *
+from md_crncy_text_hmd.udfs.UDFs import *
 
 def sql_MD_CRNCY_TEXT(spark: SparkSession) -> DataFrame:
     out0 = spark.sql(
