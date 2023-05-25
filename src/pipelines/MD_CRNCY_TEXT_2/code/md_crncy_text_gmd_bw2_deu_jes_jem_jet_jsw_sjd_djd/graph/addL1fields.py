@@ -2,8 +2,8 @@ from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from prophecy.libs import typed_lit
-from MD_CRNCY_TEXT_2.config.ConfigStore import *
-from MD_CRNCY_TEXT_2.udfs.UDFs import *
+from md_crncy_text_gmd_bw2_deu_jes_jem_jet_jsw_sjd_djd.config.ConfigStore import *
+from md_crncy_text_gmd_bw2_deu_jes_jem_jet_jsw_sjd_djd.udfs.UDFs import *
 
 def addL1fields(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
