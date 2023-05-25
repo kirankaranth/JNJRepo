@@ -19,7 +19,7 @@ class Config(ConfigBase):
 
     def update(
             self,
-            sourceSystem: str="pqa_hm2",
+            sourceSystem: str="hm2",
             MANDT: str="100",
             sourceDatabase: str="hm2",
             DAI_ETL_ID: int=0,
