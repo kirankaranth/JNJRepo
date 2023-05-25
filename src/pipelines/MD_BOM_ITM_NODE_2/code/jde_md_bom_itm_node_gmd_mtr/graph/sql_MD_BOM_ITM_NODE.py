@@ -2,8 +2,8 @@ from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from prophecy.libs import typed_lit
-from MD_BOM_ITM_NODE_2.config.ConfigStore import *
-from MD_BOM_ITM_NODE_2.udfs.UDFs import *
+from jde_md_bom_itm_node_gmd_mtr.config.ConfigStore import *
+from jde_md_bom_itm_node_gmd_mtr.udfs.UDFs import *
 
 def sql_MD_BOM_ITM_NODE(spark: SparkSession) -> DataFrame:
     out0 = spark.sql(
@@ -20,7 +20,8 @@ def sql_MD_BOM_ITM_NODE(spark: SparkSession) -> DataFrame:
 , CASE WHEN LOWER(TRIM(f3002.ixefff)) = 'CAST(NULL AS timestamp)' OR TRIM(f3002.ixefff) = '' OR TRIM(f3002.ixefff) = '0' THEN NULL ELSE to_timestamp(substr(CAST(date_add(concat(substr(CAST(CAST(TRIM(f3002.ixefff) AS INT) + 1900000 AS STRING),1,4),'-01-01'), CAST(substr(CAST(CAST(TRIM(f3002.ixefff) AS INT) + 1900000 AS string),5) AS INT )-1) AS STRING), 1, 10),'yyyy-MM-dd') END AS CRT_DTTM
 , CASE WHEN LOWER(TRIM(f3002.ixupmj)) = 'CAST(NULL AS timestamp)' OR TRIM(f3002.ixupmj) = '' OR TRIM(f3002.ixupmj) = '0' THEN CAST(NULL AS TIMESTAMP) ELSE to_timestamp(concat(substr(CAST(date_add(concat(substr(CAST(CAST(TRIM(f3002.ixupmj) AS INT) + 1900000 as string),1,4),'-01-01'), CAST(substr(CAST(CAST(TRIM(f3002.ixupmj) AS INT) + 1900000 AS string),5) AS INT )-1) AS string), 1, 10),' ', lpad(TRIM(f3002.ixtday), 6, '0')), \"yyyy-MM-dd HHmmss\") END AS CHG_DTTM
 , NULL as DEL_IND,
-f3002._upt_ as _l0_upt_
+f3002._upt_ as _l0_upt_,
+f3002._deleted_
 FROM  {Config.sourceDatabase}.f3002 as f3002  WHERE f3002._deleted_ = 'F'
   
  

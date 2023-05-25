@@ -1,3 +1,3 @@
-from MD_BOM_ITM_NODE_2.pipeline import main
+from jde_md_bom_itm_node_gmd_mtr.pipeline import main
 
 main()

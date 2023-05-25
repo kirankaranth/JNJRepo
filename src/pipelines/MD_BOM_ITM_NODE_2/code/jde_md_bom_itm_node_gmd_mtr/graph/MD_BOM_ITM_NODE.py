@@ -2,8 +2,8 @@ from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from prophecy.libs import typed_lit
-from MD_BOM_ITM_NODE_2.config.ConfigStore import *
-from MD_BOM_ITM_NODE_2.udfs.UDFs import *
+from jde_md_bom_itm_node_gmd_mtr.config.ConfigStore import *
+from jde_md_bom_itm_node_gmd_mtr.udfs.UDFs import *
 
 def MD_BOM_ITM_NODE(spark: SparkSession, in0: DataFrame):
     in0.write\
