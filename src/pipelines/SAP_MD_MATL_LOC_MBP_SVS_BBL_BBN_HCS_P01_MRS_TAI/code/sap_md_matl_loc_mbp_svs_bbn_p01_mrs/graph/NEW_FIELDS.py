@@ -151,4 +151,5 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         )\
         .withColumn("_l1_upt_", current_timestamp())\
         .withColumn("_deleted_", col("_deleted_"))\
-        .withColumn("PLNG_PLNT_CD", trim(lookup("LU_SAP_T460A", col("WERKS"), col("SOBSL")).getField("WRK02")))
+        .withColumn("PLNG_PLNT_CD", trim(lookup("LU_SAP_T460A", col("WERKS"), col("SOBSL")).getField("WRK02")))\
+        .withColumn("MTS_MTO_FL", expr(Config.MTS_MTO_FL))
