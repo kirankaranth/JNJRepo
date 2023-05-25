@@ -20,7 +20,8 @@ STAS.aennr as CHG_NUM,
 case when STAS.andat = '00000000' then null else to_timestamp(STAS.andat,\"yyyyMMdd\") end AS CRT_DTTM,
 case when STAS.aedat = '00000000' then null else to_timestamp(STAS.aedat,\"yyyyMMdd\") end AS CHG_DTTM,
 STAS.lkenz as DEL_IND,
-stas._upt_ as _l0_upt_
+stas._upt_ as _l0_upt_,
+stas._deleted_
 FROM {Config.sourceDatabase}.STAS STAS
 where
 STAS._deleted_=\"F\" AND
