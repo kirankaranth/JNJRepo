@@ -1,1 +1,1 @@
-from .MD_BOM_ITM_NODE_6 import *
+from .jde_md_bom_itm_node_jet import *

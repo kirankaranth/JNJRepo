@@ -8,26 +8,29 @@ class Config(ConfigBase):
             targetSchema: str=None,
             sourceSystem: str=None,
             sourceDatabase: str=None,
-            MANDT: str=None,
+            sourceTable: str=None,
             DAI_ETL_ID: int=None,
+            ConfigDatabase: str=None,
             **kwargs
     ):
         self.spark = None
-        self.update(targetSchema, sourceSystem, sourceDatabase, MANDT, DAI_ETL_ID)
+        self.update(targetSchema, sourceSystem, sourceDatabase, sourceTable, DAI_ETL_ID, ConfigDatabase)
 
     def update(
             self,
-            targetSchema: str="sbx_md_l1",
+            targetSchema: str="dev_md_l1",
             sourceSystem: str="jet",
             sourceDatabase: str="jet",
-            MANDT: str=None,
+            sourceTable: str=None,
             DAI_ETL_ID: int=0,
+            ConfigDatabase: str=" ",
             **kwargs
     ):
         prophecy_spark = self.spark
         self.targetSchema = targetSchema
         self.sourceSystem = sourceSystem
         self.sourceDatabase = sourceDatabase
-        self.MANDT = MANDT
+        self.sourceTable = sourceTable
         self.DAI_ETL_ID = self.get_int_value(DAI_ETL_ID)
+        self.ConfigDatabase = ConfigDatabase
         pass
