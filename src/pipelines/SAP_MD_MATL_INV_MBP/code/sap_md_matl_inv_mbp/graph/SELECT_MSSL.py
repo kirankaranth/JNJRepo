@@ -15,5 +15,6 @@ def SELECT_MSSL(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("ERSDA"), 
         col("_upt_"), 
         col("LIFNR"), 
-        col("SLEIN")
+        col("SLEIN"), 
+        col("_deleted_")
     )
