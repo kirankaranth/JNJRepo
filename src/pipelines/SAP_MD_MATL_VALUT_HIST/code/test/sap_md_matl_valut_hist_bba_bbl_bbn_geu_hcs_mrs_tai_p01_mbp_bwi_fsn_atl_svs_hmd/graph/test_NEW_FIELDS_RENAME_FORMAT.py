@@ -25,7 +25,11 @@ class NEW_FIELDS_RENAME_FORMATTest(BaseTestCase):
             'out'
         )
         dfOutComputed = NEW_FIELDS_RENAME_FORMAT(self.spark, dfIn0)
-        assertDFEquals(dfOut.select("PRC_CNTL_IND"), dfOutComputed.select("PRC_CNTL_IND"), self.maxUnequalRowsToShow)
+        assertDFEquals(
+            dfOut.select("PRC_CNTL_IND", "VALUT_CLS_CD", "BASE_UOM_CD"),
+            dfOutComputed.select("PRC_CNTL_IND", "VALUT_CLS_CD", "BASE_UOM_CD"),
+            self.maxUnequalRowsToShow
+        )
 
     def test_decimal_test_(self):
         dfIn0 = createDfFromResourceFiles(
@@ -62,6 +66,26 @@ class NEW_FIELDS_RENAME_FORMATTest(BaseTestCase):
         )
         dfOutComputed = NEW_FIELDS_RENAME_FORMAT(self.spark, dfIn0)
         assertDFEquals(dfOut.select("_l0_upt_"), dfOutComputed.select("_l0_upt_"), self.maxUnequalRowsToShow)
+
+    def test_decimal_test_2_(self):
+        dfIn0 = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/sap_md_matl_valut_hist_bba_bbl_bbn_geu_hcs_mrs_tai_p01_mbp_bwi_fsn_atl_svs_hmd/graph/NEW_FIELDS_RENAME_FORMAT/in0/schema.json',
+            'test/resources/data/sap_md_matl_valut_hist_bba_bbl_bbn_geu_hcs_mrs_tai_p01_mbp_bwi_fsn_atl_svs_hmd/graph/NEW_FIELDS_RENAME_FORMAT/in0/data/test_decimal_test_2_.json',
+            'in0'
+        )
+        dfOut = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/sap_md_matl_valut_hist_bba_bbl_bbn_geu_hcs_mrs_tai_p01_mbp_bwi_fsn_atl_svs_hmd/graph/NEW_FIELDS_RENAME_FORMAT/out/schema.json',
+            'test/resources/data/sap_md_matl_valut_hist_bba_bbl_bbn_geu_hcs_mrs_tai_p01_mbp_bwi_fsn_atl_svs_hmd/graph/NEW_FIELDS_RENAME_FORMAT/out/data/test_decimal_test_2_.json',
+            'out'
+        )
+        dfOutComputed = NEW_FIELDS_RENAME_FORMAT(self.spark, dfIn0)
+        assertDFEquals(
+            dfOut.select("TOT_STK_QTY", "TOT_VAL_AMT", "MVG_AVG_PRC_AMT", "PRC_AMT", "PRC_UNIT_NBR"),
+            dfOutComputed.select("TOT_STK_QTY", "TOT_VAL_AMT", "MVG_AVG_PRC_AMT", "PRC_AMT", "PRC_UNIT_NBR"),
+            self.maxUnequalRowsToShow
+        )
 
     def setUp(self):
         BaseTestCase.setUp(self)
