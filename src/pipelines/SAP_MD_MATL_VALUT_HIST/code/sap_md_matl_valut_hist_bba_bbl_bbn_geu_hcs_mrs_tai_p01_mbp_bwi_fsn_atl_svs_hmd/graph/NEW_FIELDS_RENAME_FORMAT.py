@@ -20,7 +20,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("PRC_AMT", col("STPRS").cast(DecimalType(18, 4)))\
         .withColumn("PRC_UNIT_NBR", col("PEINH").cast(DecimalType(18, 4)))\
         .withColumn("VALUT_CLS_CD", trim(col("BKLAS")))\
-        .withColumn("BASE_UOM_CD", trim(col("MEINS")))\
+        .withColumn("BASE_UOM_CD", trim(lookup("LU_SAP_MARA", col("MATNR")).getField("MEINS")))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
         .withColumn("DAI_UPDT_DTTM", current_timestamp())\

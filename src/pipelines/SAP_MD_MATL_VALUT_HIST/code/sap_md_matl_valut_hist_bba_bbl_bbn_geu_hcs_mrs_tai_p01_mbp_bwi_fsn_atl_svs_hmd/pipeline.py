@@ -7,14 +7,6 @@ from prophecy.utils import *
 from sap_md_matl_valut_hist_bba_bbl_bbn_geu_hcs_mrs_tai_p01_mbp_bwi_fsn_atl_svs_hmd.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    df_DS_SAP_01_MBEWH = DS_SAP_01_MBEWH(spark)
-    df_DS_SAP_01_MBEWH = collectMetrics(
-        spark, 
-        df_DS_SAP_01_MBEWH, 
-        "graph", 
-        "cxoCuDHwAQVV9qAxaDLKI$$Tl4xcoH6KgRgjEmXm92lI", 
-        "Oscv_qhLxsQIK_Vv9ITnp$$PJ4FDPzWeiVCvgfd1K8Ix"
-    )
     df_DS_SAP_02_MARA = DS_SAP_02_MARA(spark)
     df_DS_SAP_02_MARA = collectMetrics(
         spark, 
@@ -24,10 +16,17 @@ def pipeline(spark: SparkSession) -> None:
         "SZCF7qX6TbjS4EeicJJIE$$o8iRpzGk1mKBDAQ0Oivig"
     )
     df_MANDT_FILTER_MARA = MANDT_FILTER_MARA(spark, df_DS_SAP_02_MARA)
-    df_Reformat_MARA = Reformat_MARA(spark, df_MANDT_FILTER_MARA)
+    LU_SAP_MARA(spark, df_MANDT_FILTER_MARA)
+    df_DS_SAP_01_MBEWH = DS_SAP_01_MBEWH(spark)
+    df_DS_SAP_01_MBEWH = collectMetrics(
+        spark, 
+        df_DS_SAP_01_MBEWH, 
+        "graph", 
+        "cxoCuDHwAQVV9qAxaDLKI$$Tl4xcoH6KgRgjEmXm92lI", 
+        "Oscv_qhLxsQIK_Vv9ITnp$$PJ4FDPzWeiVCvgfd1K8Ix"
+    )
     df_MANDT_FILTER = MANDT_FILTER(spark, df_DS_SAP_01_MBEWH)
-    df_Join_1 = Join_1(spark, df_MANDT_FILTER, df_Reformat_MARA)
-    df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_Join_1)
+    df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_MANDT_FILTER)
     df_SET_ORDER_FIELD_REFORMAT = SET_ORDER_FIELD_REFORMAT(spark, df_NEW_FIELDS_RENAME_FORMAT)
     df_SET_ORDER_FIELD_REFORMAT = collectMetrics(
         spark, 

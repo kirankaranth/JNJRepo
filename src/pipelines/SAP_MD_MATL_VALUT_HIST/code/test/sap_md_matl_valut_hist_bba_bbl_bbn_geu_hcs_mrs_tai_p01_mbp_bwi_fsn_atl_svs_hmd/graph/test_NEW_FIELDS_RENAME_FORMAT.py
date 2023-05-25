@@ -26,8 +26,8 @@ class NEW_FIELDS_RENAME_FORMATTest(BaseTestCase):
         )
         dfOutComputed = NEW_FIELDS_RENAME_FORMAT(self.spark, dfIn0)
         assertDFEquals(
-            dfOut.select("PRC_CNTL_IND", "VALUT_CLS_CD", "BASE_UOM_CD"),
-            dfOutComputed.select("PRC_CNTL_IND", "VALUT_CLS_CD", "BASE_UOM_CD"),
+            dfOut.select("PRC_CNTL_IND", "VALUT_CLS_CD"),
+            dfOutComputed.select("PRC_CNTL_IND", "VALUT_CLS_CD"),
             self.maxUnequalRowsToShow
         )
 
@@ -87,6 +87,22 @@ class NEW_FIELDS_RENAME_FORMATTest(BaseTestCase):
             self.maxUnequalRowsToShow
         )
 
+    def test_lu_test_(self):
+        dfIn0 = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/sap_md_matl_valut_hist_bba_bbl_bbn_geu_hcs_mrs_tai_p01_mbp_bwi_fsn_atl_svs_hmd/graph/NEW_FIELDS_RENAME_FORMAT/in0/schema.json',
+            'test/resources/data/sap_md_matl_valut_hist_bba_bbl_bbn_geu_hcs_mrs_tai_p01_mbp_bwi_fsn_atl_svs_hmd/graph/NEW_FIELDS_RENAME_FORMAT/in0/data/test_lu_test_.json',
+            'in0'
+        )
+        dfOut = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/sap_md_matl_valut_hist_bba_bbl_bbn_geu_hcs_mrs_tai_p01_mbp_bwi_fsn_atl_svs_hmd/graph/NEW_FIELDS_RENAME_FORMAT/out/schema.json',
+            'test/resources/data/sap_md_matl_valut_hist_bba_bbl_bbn_geu_hcs_mrs_tai_p01_mbp_bwi_fsn_atl_svs_hmd/graph/NEW_FIELDS_RENAME_FORMAT/out/data/test_lu_test_.json',
+            'out'
+        )
+        dfOutComputed = NEW_FIELDS_RENAME_FORMAT(self.spark, dfIn0)
+        assertDFEquals(dfOut.select("BASE_UOM_CD"), dfOutComputed.select("BASE_UOM_CD"), self.maxUnequalRowsToShow)
+
     def setUp(self):
         BaseTestCase.setUp(self)
         import os
@@ -100,3 +116,13 @@ class NEW_FIELDS_RENAME_FORMATTest(BaseTestCase):
               defaultConfFile = None
             )
         )
+        dfgraph_LU_SAP_MARA = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/sap_md_matl_valut_hist_bba_bbl_bbn_geu_hcs_mrs_tai_p01_mbp_bwi_fsn_atl_svs_hmd/graph/LU_SAP_MARA/schema.json',
+            'test/resources/data/sap_md_matl_valut_hist_bba_bbl_bbn_geu_hcs_mrs_tai_p01_mbp_bwi_fsn_atl_svs_hmd/graph/LU_SAP_MARA/data.json',
+            "in0"
+        )
+        from sap_md_matl_valut_hist_bba_bbl_bbn_geu_hcs_mrs_tai_p01_mbp_bwi_fsn_atl_svs_hmd.graph.LU_SAP_MARA import (
+            LU_SAP_MARA
+        )
+        LU_SAP_MARA(self.spark, dfgraph_LU_SAP_MARA)
