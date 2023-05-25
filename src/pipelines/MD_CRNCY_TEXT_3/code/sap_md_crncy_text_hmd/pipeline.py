@@ -1,10 +1,10 @@
 from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
-from md_crncy_text_hmd.config.ConfigStore import *
-from md_crncy_text_hmd.udfs.UDFs import *
+from sap_md_crncy_text_hmd.config.ConfigStore import *
+from sap_md_crncy_text_hmd.udfs.UDFs import *
 from prophecy.utils import *
-from md_crncy_text_hmd.graph import *
+from sap_md_crncy_text_hmd.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_sql_MD_CRNCY_TEXT = sql_MD_CRNCY_TEXT(spark)
