@@ -22,7 +22,7 @@
           "name" : "targetSchema",
           "kind" : {
             "type" : "string",
-            "value" : "sbx_ph_mdh_l1"
+            "value" : "dev_md_l1"
           },
           "optional" : false,
           "isWorkflowNodeConfiguration" : false
@@ -43,10 +43,10 @@
           "optional" : false,
           "isWorkflowNodeConfiguration" : false
         }, {
-          "name" : "MANDT",
+          "name" : "sourceTable",
           "kind" : {
             "type" : "string",
-            "value" : ""
+            "value" : "f3002"
           },
           "optional" : true,
           "isWorkflowNodeConfiguration" : false
@@ -54,7 +54,15 @@
           "name" : "DAI_ETL_ID",
           "kind" : {
             "type" : "int",
-            "value" : "0"
+            "value" : 0
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "ConfigDatabase",
+          "kind" : {
+            "type" : "string",
+            "value" : " "
           },
           "optional" : false,
           "isWorkflowNodeConfiguration" : false
@@ -66,7 +74,7 @@
       },
       "fabrics" : { },
       "instances" : { },
-      "selected" : "default",
+      "selected" : "jem",
       "nonEditable" : [ ],
       "isSubscribedPipelineWithPipelineConfigs" : false
     },
@@ -79,12 +87,12 @@
     "isImported" : false,
     "interimMode" : "Full",
     "interimModeEnabled" : true,
-    "visualCodeInterimMode" : "Disabled",
+    "visualCodeInterimMode" : "IO",
     "recordsLimit" : {
       "enabled" : false,
       "value" : 1000
     },
-    "topLevelPackage" : "MD_BOM_ITM_NODE_3",
+    "topLevelPackage" : "jde_md_bom_itm_node_deu_jem",
     "configurationVersion" : "v1"
   },
   "connections" : [ {
@@ -229,6 +237,15 @@
                 "tags" : [ ]
               }
             }, {
+              "name" : "_deleted_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
               "name" : "_pk_",
               "type" : "string",
               "nullable" : true,
@@ -276,15 +293,6 @@
             }, {
               "name" : "DAI_UPDT_DTTM",
               "type" : "timestamp",
-              "nullable" : false,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "_deleted_",
-              "type" : "string",
               "nullable" : false,
               "metadata" : {
                 "description" : "",
@@ -430,6 +438,15 @@
                 "mappings" : [ ],
                 "tags" : [ ]
               }
+            }, {
+              "name" : "_deleted_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
             } ]
           },
           "isStreaming" : false
@@ -442,136 +459,195 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ ],
+        "importLanguage" : "${$.workflow.metainfo.frontEndLanguage}",
+        "importString" : "",
         "transformations" : [ {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
           "kind" : "AddReplaceColumn",
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "SRC_SYS_CD",
             "expression" : {
               "format" : "sql",
               "expression" : "'$sourceSystem'"
             }
+          }
+        }, {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
           },
           "DropColumn" : {
             "sourceColumn" : ""
           },
+          "kind" : "AddReplaceColumn",
           "RenameColumn" : {
             "sourceColumn" : "",
             "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "_pk_",
             "expression" : {
               "format" : "sql",
               "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'BOM_CAT_CD',BOM_CAT_CD,'BOM_NUM',BOM_NUM,'ALT_BOM_NUM',ALT_BOM_NUM,'BOM_ITM_NODE_NUM',BOM_ITM_NODE_NUM,'BOM_ITM_NODE_CNTR_NBR',BOM_ITM_NODE_CNTR_NBR))"
             }
+          }
+        }, {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
           },
           "DropColumn" : {
             "sourceColumn" : ""
           },
+          "kind" : "AddReplaceColumn",
           "RenameColumn" : {
             "sourceColumn" : "",
             "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "_pk_md5_",
             "expression" : {
               "format" : "sql",
               "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'BOM_CAT_CD',BOM_CAT_CD,'BOM_NUM',BOM_NUM,'ALT_BOM_NUM',ALT_BOM_NUM,'BOM_ITM_NODE_NUM',BOM_ITM_NODE_NUM,'BOM_ITM_NODE_CNTR_NBR',BOM_ITM_NODE_CNTR_NBR)))"
             }
+          }
+        }, {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
           },
           "DropColumn" : {
             "sourceColumn" : ""
           },
+          "kind" : "AddReplaceColumn",
           "RenameColumn" : {
             "sourceColumn" : "",
             "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "_l1_upt_",
             "expression" : {
               "format" : "sql",
               "expression" : "current_timestamp()"
             }
+          }
+        }, {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
           },
           "DropColumn" : {
             "sourceColumn" : ""
           },
+          "kind" : "AddReplaceColumn",
           "RenameColumn" : {
             "sourceColumn" : "",
             "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "DAI_ETL_ID",
             "expression" : {
               "format" : "sql",
               "expression" : "'$DAI_ETL_ID'"
             }
+          }
+        }, {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
           },
           "DropColumn" : {
             "sourceColumn" : ""
           },
+          "kind" : "AddReplaceColumn",
           "RenameColumn" : {
             "sourceColumn" : "",
             "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "DAI_CRT_DTTM",
             "expression" : {
               "format" : "sql",
               "expression" : "current_timestamp()"
             }
+          }
+        }, {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
           },
           "DropColumn" : {
             "sourceColumn" : ""
           },
+          "kind" : "AddReplaceColumn",
           "RenameColumn" : {
             "sourceColumn" : "",
             "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "DAI_UPDT_DTTM",
             "expression" : {
               "format" : "sql",
               "expression" : "current_timestamp()"
             }
-          },
-          "DropColumn" : {
-            "sourceColumn" : ""
-          },
-          "RenameColumn" : {
-            "sourceColumn" : "",
-            "targetColumn" : ""
           }
         }, {
-          "kind" : "AddReplaceColumn",
-          "AddReplaceColumn" : {
-            "sourceColumn" : "_deleted_",
-            "expression" : {
-              "format" : "sql",
-              "expression" : "'F'"
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
             }
           },
           "DropColumn" : {
             "sourceColumn" : ""
           },
+          "kind" : "AddReplaceColumn",
           "RenameColumn" : {
             "sourceColumn" : "",
             "targetColumn" : ""
+          },
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_deleted_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "_deleted_"
+            }
           }
-        } ]
+        } ],
+        "activeTab" : "transformations",
+        "columnsSelector" : [ "f217cad7-9808-41f8-8ffc-7789bf716443##_deleted_", "f217cad7-9808-41f8-8ffc-7789bf716443##SRC_SYS_CD", "f217cad7-9808-41f8-8ffc-7789bf716443##BOM_CAT_CD", "f217cad7-9808-41f8-8ffc-7789bf716443##BOM_NUM", "f217cad7-9808-41f8-8ffc-7789bf716443##BOM_ITM_NODE_NUM", "f217cad7-9808-41f8-8ffc-7789bf716443##ALT_BOM_NUM", "f217cad7-9808-41f8-8ffc-7789bf716443##BOM_ITM_NODE_CNTR_NBR" ]
       }
     },
     "146dd01f-32f0-4d9c-b8a4-d9de40e54fc2" : {
@@ -702,6 +778,15 @@
                 "mappings" : [ ],
                 "tags" : [ ]
               }
+            }, {
+              "name" : "_deleted_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
             } ]
           },
           "isStreaming" : false
@@ -710,7 +795,7 @@
         "isCustomOutputSchema" : true
       },
       "properties" : {
-        "script" : "out0 = spark.sql(f\"\"\"\n    SELECT\n'{Config.sourceSystem}' AS SRC_SYS_CD\n, f3002.ixtbm as BOM_CAT_CD\n,concat(f3002.ixkit,';',f3002.ixmmcu,';' ,f3002.ixtbm,';',f3002.ixbqty,';',f3002.ixcoby,';',f3002.ixcpnt,';',f3002.ixsbnt) AS BOM_NUM\n, \\\"01\\\" AS ALT_BOM_NUM\n, f3002.ixitm AS BOM_ITM_NODE_NUM\n,concat(f3002.ixcpnt,\\\".\\\",f3002.ixsbnt) AS BOM_ITM_NODE_CNTR_NBR\n, CASE WHEN LOWER(TRIM(f3002.ixefff)) = 'CAST(NULL AS timestamp)' OR TRIM(f3002.ixefff) = '' OR TRIM(f3002.ixefff) = '0' THEN NULL ELSE to_timestamp(substr(CAST(date_add(concat(substr(CAST(CAST(TRIM(f3002.ixefff) AS INT) + 1900000 AS STRING),1,4),'-01-01'), CAST(substr(CAST(CAST(TRIM(f3002.ixefff) AS INT) + 1900000 AS string),5) AS INT )-1) AS STRING), 1, 10),'yyyy-MM-dd') END AS BOM_ITM_VLD_FROM_DTTM\n, TRIM(f3002.ixrvno) as CHG_NUM\n, CASE WHEN LOWER(TRIM(f3002.ixefff)) = 'CAST(NULL AS timestamp)' OR TRIM(f3002.ixefff) = '' OR TRIM(f3002.ixefff) = '0' THEN NULL ELSE to_timestamp(substr(CAST(date_add(concat(substr(CAST(CAST(TRIM(f3002.ixefff) AS INT) + 1900000 AS STRING),1,4),'-01-01'), CAST(substr(CAST(CAST(TRIM(f3002.ixefff) AS INT) + 1900000 AS string),5) AS INT )-1) AS STRING), 1, 10),'yyyy-MM-dd') END AS CRT_DTTM\n, CASE WHEN LOWER(TRIM(f3002.ixupmj)) = 'CAST(NULL AS timestamp)' OR TRIM(f3002.ixupmj) = '' OR TRIM(f3002.ixupmj) = '0' THEN CAST(NULL AS TIMESTAMP) ELSE to_timestamp(concat(substr(CAST(date_add(concat(substr(CAST(CAST(TRIM(f3002.ixupmj) AS INT) + 1900000 as string),1,4),'-01-01'), CAST(substr(CAST(CAST(TRIM(f3002.ixupmj) AS INT) + 1900000 AS string),5) AS INT )-1) AS string), 1, 10),' ', lpad(TRIM(f3002.ixtday), 6, '0')), \\\"yyyy-MM-dd HHmmss\\\") END AS CHG_DTTM\n, NULL as DEL_IND,\nf3002._upt_ as _l0_upt_\nFROM  {Config.sourceDatabase}.f3002 as f3002  WHERE f3002._deleted_ = 'F' \n  \n \n\"\"\")",
+        "script" : "out0 = spark.sql(f\"\"\"\n    SELECT\n'{Config.sourceSystem}' AS SRC_SYS_CD\n, f3002.ixtbm as BOM_CAT_CD\n,concat(f3002.ixkit,';',f3002.ixmmcu,';' ,f3002.ixtbm,';',f3002.ixbqty,';',f3002.ixcoby,';',f3002.ixcpnt,';',f3002.ixsbnt) AS BOM_NUM\n, \\\"01\\\" AS ALT_BOM_NUM\n, f3002.ixitm AS BOM_ITM_NODE_NUM\n,concat(f3002.ixcpnt,\\\".\\\",f3002.ixsbnt) AS BOM_ITM_NODE_CNTR_NBR\n, CASE WHEN LOWER(TRIM(f3002.ixefff)) = 'CAST(NULL AS timestamp)' OR TRIM(f3002.ixefff) = '' OR TRIM(f3002.ixefff) = '0' THEN NULL ELSE to_timestamp(substr(CAST(date_add(concat(substr(CAST(CAST(TRIM(f3002.ixefff) AS INT) + 1900000 AS STRING),1,4),'-01-01'), CAST(substr(CAST(CAST(TRIM(f3002.ixefff) AS INT) + 1900000 AS string),5) AS INT )-1) AS STRING), 1, 10),'yyyy-MM-dd') END AS BOM_ITM_VLD_FROM_DTTM\n, TRIM(f3002.ixrvno) as CHG_NUM\n, CASE WHEN LOWER(TRIM(f3002.ixefff)) = 'CAST(NULL AS timestamp)' OR TRIM(f3002.ixefff) = '' OR TRIM(f3002.ixefff) = '0' THEN NULL ELSE to_timestamp(substr(CAST(date_add(concat(substr(CAST(CAST(TRIM(f3002.ixefff) AS INT) + 1900000 AS STRING),1,4),'-01-01'), CAST(substr(CAST(CAST(TRIM(f3002.ixefff) AS INT) + 1900000 AS string),5) AS INT )-1) AS STRING), 1, 10),'yyyy-MM-dd') END AS CRT_DTTM\n, CASE WHEN LOWER(TRIM(f3002.ixupmj)) = 'CAST(NULL AS timestamp)' OR TRIM(f3002.ixupmj) = '' OR TRIM(f3002.ixupmj) = '0' THEN CAST(NULL AS TIMESTAMP) ELSE to_timestamp(concat(substr(CAST(date_add(concat(substr(CAST(CAST(TRIM(f3002.ixupmj) AS INT) + 1900000 as string),1,4),'-01-01'), CAST(substr(CAST(CAST(TRIM(f3002.ixupmj) AS INT) + 1900000 AS string),5) AS INT )-1) AS string), 1, 10),' ', lpad(TRIM(f3002.ixtday), 6, '0')), \\\"yyyy-MM-dd HHmmss\\\") END AS CHG_DTTM\n, NULL as DEL_IND,\nf3002._upt_ as _l0_upt_,\nf3002._deleted_\nFROM  {Config.sourceDatabase}.f3002 as f3002  WHERE f3002._deleted_ = 'F' \n  \n \n\"\"\")",
         "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
         "scriptMethodFooter" : "    return out0"
       }
