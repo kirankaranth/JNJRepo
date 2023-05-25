@@ -67,6 +67,9 @@ def SELECT_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("EAN_UPC"), 
         col("EAN_CAT"), 
         col("GTIN_VRNT"), 
+        col("MATL_TYPE_DESC"), 
+        col("MATL_GRP_DESC"), 
+        col("MATL_GRP_DESC_2"), 
         col("EAN_UPC_HRMZD"), 
         col("DAI_ETL_ID"), 
         col("DAI_CRT_DTTM"), 
@@ -75,5 +78,6 @@ def SELECT_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("_pk_L1").alias("_pk_"), 
         col("_pk_md5_"), 
         col("_l1_upt_"), 
-        col("_deleted_L1").alias("_deleted_")
+        col("_deleted_L1").alias("_deleted_"), 
+        col("SHRT_MATL_NUM")
     )

@@ -8,10 +8,11 @@ from sap_md_sls_doc_ptnr_func_hmd.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_SAP_VBPA = SAP_VBPA(spark)
+    df_MANDT_VBPA = MANDT_VBPA(spark, df_SAP_VBPA)
     df_SAP_VBAK = SAP_VBAK(spark)
     df_MANDT_VBAK = MANDT_VBAK(spark, df_SAP_VBAK)
-    df_MANDT_VBPA = MANDT_VBPA(spark, df_SAP_VBPA)
-    df_Join_1 = Join_1(spark, df_MANDT_VBPA, df_MANDT_VBAK)
+    df_SELECT_VBAK = SELECT_VBAK(spark, df_MANDT_VBAK)
+    df_Join_1 = Join_1(spark, df_MANDT_VBPA, df_SELECT_VBAK)
     df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_Join_1)
     df_SET_FIELDS_ORDER_REFORMAT = SET_FIELDS_ORDER_REFORMAT(spark, df_NEW_FIELDS_RENAME_FORMAT)
     df_DUPLICATE_CHECK = DUPLICATE_CHECK(spark, df_SET_FIELDS_ORDER_REFORMAT)
