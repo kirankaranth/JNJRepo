@@ -1,1 +1,1 @@
-from .md_crncy_text_bbl_bbn_mrs_p01_mbp_bwi_svs_atl import *
+from .sap_md_crncy_text_bbl_bbn_mrs_p01_mbp_bwi_svs_atl import *

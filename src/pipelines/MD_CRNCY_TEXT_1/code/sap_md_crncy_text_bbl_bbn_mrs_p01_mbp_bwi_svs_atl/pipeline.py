@@ -1,10 +1,10 @@
 from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
-from md_crncy_text_bbl_bbn_mrs_p01_mbp_bwi_svs_atl.config.ConfigStore import *
-from md_crncy_text_bbl_bbn_mrs_p01_mbp_bwi_svs_atl.udfs.UDFs import *
+from sap_md_crncy_text_bbl_bbn_mrs_p01_mbp_bwi_svs_atl.config.ConfigStore import *
+from sap_md_crncy_text_bbl_bbn_mrs_p01_mbp_bwi_svs_atl.udfs.UDFs import *
 from prophecy.utils import *
-from md_crncy_text_bbl_bbn_mrs_p01_mbp_bwi_svs_atl.graph import *
+from sap_md_crncy_text_bbl_bbn_mrs_p01_mbp_bwi_svs_atl.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_sql_MD_CRNCY_TEXT = sql_MD_CRNCY_TEXT(spark)
