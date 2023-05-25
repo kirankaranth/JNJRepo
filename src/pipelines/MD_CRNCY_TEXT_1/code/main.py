@@ -1,3 +1,3 @@
-from MD_CRNCY_TEXT_1.pipeline import main
+from md_crncy_text_bbl_bbn_mrs_p01_mbp_bwi_svs_atl.pipeline import main
 
 main()
