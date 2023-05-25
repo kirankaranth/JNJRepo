@@ -1,1 +1,1 @@
-from .MD_BOM_ITM_NODE_8 import *
+from .sap_md_bom_itm_node_hmd import *

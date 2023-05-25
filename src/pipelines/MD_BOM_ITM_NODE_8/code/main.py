@@ -1,3 +1,3 @@
-from MD_BOM_ITM_NODE_8.pipeline import main
+from sap_md_bom_itm_node_hmd.pipeline import main
 
 main()
