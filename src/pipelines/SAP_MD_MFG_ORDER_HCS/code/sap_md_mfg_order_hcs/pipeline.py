@@ -10,6 +10,8 @@ def pipeline(spark: SparkSession) -> None:
     df_AUFK = AUFK(spark)
     df_DELETED = DELETED(spark, df_AUFK)
     df_XFORM = XFORM(spark, df_DELETED)
+    df_SELECT_FIELDS = SELECT_FIELDS(spark, df_XFORM)
+    MFG_ORDER(spark, df_SELECT_FIELDS)
 
 def main():
     spark = SparkSession.builder\
