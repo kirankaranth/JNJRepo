@@ -24,7 +24,8 @@ else to_timestamp(stas.andat, \"yyyyMMdd\") end as  CRT_DTTM
 else to_timestamp(stas.aedat, \"yyyyMMdd\") end as  CHG_DTTM
 , TRIM(stas.lkenz) as DEL_IND,
 stas._upt_ as _l0_upt_,
-stas._deleted_
+stas._deleted_,
+stas._upt_
 FROM  {Config.sourceDatabase}.stas as stas  WHERE stas._deleted_ = 'F'
 and stas.MANDT = {Config.MANDT} 
 """
