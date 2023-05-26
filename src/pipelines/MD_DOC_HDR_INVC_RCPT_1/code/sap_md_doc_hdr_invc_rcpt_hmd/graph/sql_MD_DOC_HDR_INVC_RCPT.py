@@ -2,8 +2,8 @@ from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from prophecy.libs import typed_lit
-from MD_DOC_HDR_INVC_RCPT_1.config.ConfigStore import *
-from MD_DOC_HDR_INVC_RCPT_1.udfs.UDFs import *
+from sap_md_doc_hdr_invc_rcpt_hmd.config.ConfigStore import *
+from sap_md_doc_hdr_invc_rcpt_hmd.udfs.UDFs import *
 
 def sql_MD_DOC_HDR_INVC_RCPT(spark: SparkSession) -> DataFrame:
     out0 = spark.sql(
@@ -16,7 +16,7 @@ CASE WHEN RBKP.BLDAT = '00000000' THEN NULL ELSE to_timestamp(RBKP.BLDAT,\"yyyyM
 CASE WHEN RBKP.BUDAT = '00000000' THEN NULL ELSE to_timestamp(RBKP.BUDAT,\"yyyyMMdd\") END AS PSTNG_IN_DOC_DTTM,
 TRIM(RBKP.USNAM) AS USER_NM,
 TRIM(RBKP.TCODE) AS TRX_CD,
-CASE WHEN RBKP.CPUDT = '00000000000000' OR RBKP.CPUTM = '00000000000000' THEN NULL ELSE to_timestamp(CONCAT(RBKP.CPUDT,RBKP.CPUTM),'yyyyMMddHHmmss') END AS ACTG_DOC_ENT_DTTM,
+CASE WHEN RBKP.CPUDT = '00000000000000' THEN NULL ELSE to_timestamp(CONCAT(RBKP.CPUDT,RBKP.CPUTM),'yyyyMMddHHmmss') END AS ACTG_DOC_ENT_DTTM,
 TRIM(RBKP.VGART) AS TRX_TYPE_IN_AG08_DOC,
 TRIM(RBKP.XBLNR) AS REF_DOC_NUM,
 TRIM(RBKP.BUKRS) AS CO_CD,
@@ -197,7 +197,8 @@ TRIM(RBKP.PYIBAN) AS IBAN_INTNL_BANK_ACCT_NUM,
 TRIM(RBKP.INWARDNO_HD) AS INCM_DOC_NUM,
 CASE WHEN RBKP.INWARDDT_HD = '00000000' THEN NULL ELSE to_timestamp(RBKP.INWARDDT_HD,\"yyyyMMdd\") END AS INCM_DOC_DTTM,
 TRIM(T003T.LTEXT) AS DOC_TYPE_DESC,
-rbkp._upt_ as _l0_upt_
+rbkp._upt_ as _l0_upt_,
+rbkp._deleted_
 FROM
   {Config.sourceDatabase}.RBKP RBKP
   LEFT JOIN {Config.sourceDatabase}.T003T T003T on RBKP.BLART=T003T.BLART 
