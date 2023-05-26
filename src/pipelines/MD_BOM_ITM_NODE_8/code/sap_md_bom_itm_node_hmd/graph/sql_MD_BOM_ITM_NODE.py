@@ -21,8 +21,7 @@ case when STAS.andat = '00000000' then null else to_timestamp(STAS.andat,\"yyyyM
 case when STAS.aedat = '00000000' then null else to_timestamp(STAS.aedat,\"yyyyMMdd\") end AS CHG_DTTM,
 TRIM(STAS.lkenz) as DEL_IND,
 stas._upt_ as _l0_upt_,
-stas._deleted_,
-stas._upt_
+stas._deleted_
 FROM {Config.sourceDatabase}.STAS STAS
 where
 STAS._deleted_=\"F\" AND
