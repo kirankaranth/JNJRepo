@@ -20,7 +20,7 @@ class Config(ConfigBase):
             self,
             targetSchema: str="dev_md_l1",
             sourceSystem: str="hm2",
-            sourceDatabase: str="pqa_hm2",
+            sourceDatabase: str="hm2",
             MANDT: str=None,
             DAI_ETL_ID: int=0,
             ConfigDatabase: str=" ",
