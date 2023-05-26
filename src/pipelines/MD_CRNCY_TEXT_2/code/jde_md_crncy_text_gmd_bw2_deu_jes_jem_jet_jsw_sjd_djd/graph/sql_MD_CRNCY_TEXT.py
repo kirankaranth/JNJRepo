@@ -14,8 +14,7 @@ SELECT '{Config.sourceSystem}' AS SRC_SYS_CD,
     TRIM(F0013.cvdl01) AS CRNCY_SHRT_NM,
     TRIM(F0013.cvdl01) AS CRCNCY_LONG_NM,
     F0013._upt_ as _l0_upt_,
-    F0013._deleted_,
-    F0013._upt_
+    F0013._deleted_
 FROM {Config.sourceDatabase}.F0013 F0013
 WHERE F0013._deleted_ = 'F'  
  
