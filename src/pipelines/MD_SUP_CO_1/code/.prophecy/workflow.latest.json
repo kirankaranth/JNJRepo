@@ -74,7 +74,7 @@
       },
       "fabrics" : { },
       "instances" : { },
-      "selected" : "hmd",
+      "selected" : "hm2",
       "nonEditable" : [ ],
       "isSubscribedPipelineWithPipelineConfigs" : false
     },
@@ -248,15 +248,6 @@
             }, {
               "name" : "_deleted_",
               "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "_upt_",
-              "type" : "timestamp",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -474,15 +465,6 @@
                 "mappings" : [ ],
                 "tags" : [ ]
               }
-            }, {
-              "name" : "_upt_",
-              "type" : "timestamp",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
             } ]
           },
           "isStreaming" : false
@@ -681,29 +663,6 @@
               "expression" : "_deleted_"
             }
           }
-        }, {
-          "MissingColumn" : {
-            "sourceColumn" : "",
-            "defaultValue" : {
-              "expression" : "",
-              "format" : "python"
-            }
-          },
-          "DropColumn" : {
-            "sourceColumn" : ""
-          },
-          "kind" : "AddReplaceColumn",
-          "RenameColumn" : {
-            "sourceColumn" : "",
-            "targetColumn" : ""
-          },
-          "AddReplaceColumn" : {
-            "sourceColumn" : "_l0_upt_",
-            "expression" : {
-              "format" : "sql",
-              "expression" : "_upt_"
-            }
-          }
         } ],
         "activeTab" : "transformations",
         "columnsSelector" : [ "12f971ff-05c9-479b-b003-e7c3d336ff13##_deleted_", "12f971ff-05c9-479b-b003-e7c3d336ff13##SUP_NUM", "12f971ff-05c9-479b-b003-e7c3d336ff13##SRC_SYS_CD", "12f971ff-05c9-479b-b003-e7c3d336ff13##CO_CD" ]
@@ -855,15 +814,6 @@
                 "mappings" : [ ],
                 "tags" : [ ]
               }
-            }, {
-              "name" : "_upt_",
-              "type" : "timestamp",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
             } ]
           },
           "isStreaming" : false
@@ -872,7 +822,7 @@
         "isCustomOutputSchema" : true
       },
       "properties" : {
-        "script" : "out0 = spark.sql(f\"\"\"\nSELECT '{Config.sourceSystem}' AS SRC_SYS_CD,\n    LFB1.lifnr AS SUP_NUM,\n    LFB1.bukrs AS CO_CD,\n    CASE WHEN LFB1.erdat= '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(LFB1.erdat,'yyyyMMdd') END AS CRT_ON_DTTM,\n    TRIM(LFB1.sperr) AS PSTNG_BLK_IND,\n    TRIM(LFB1.loevm) AS DEL_IND,\n    TRIM(LFB1.akont) AS LDGR_ACCT_CD,\n    TRIM(LFB1.zwels) AS PMT_METH_CD,\n    TRIM(LFB1.zahls) AS PMT_BLK_IND,\n    TRIM(LFB1.zterm) AS PMT_TERM_CD,\n    TRIM(LFB1.nodel) AS BLOK_SUP_IND,\n    NULL AS OWN_EXPLN_OF_TERM_OF_PMT,\n    lfb1._upt_ as _l0_upt_,\n    lfb1._deleted_,\n    lfb1._upt_\nFROM {Config.sourceDatabase}.LFB1 LFB1\nWHERE LFB1._deleted_ = 'F'\nAND LFB1.mandt = {Config.MANDT}\n\"\"\")",
+        "script" : "out0 = spark.sql(f\"\"\"\nSELECT '{Config.sourceSystem}' AS SRC_SYS_CD,\n    LFB1.lifnr AS SUP_NUM,\n    LFB1.bukrs AS CO_CD,\n    CASE WHEN LFB1.erdat= '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE TO_TIMESTAMP(LFB1.erdat,'yyyyMMdd') END AS CRT_ON_DTTM,\n    TRIM(LFB1.sperr) AS PSTNG_BLK_IND,\n    TRIM(LFB1.loevm) AS DEL_IND,\n    TRIM(LFB1.akont) AS LDGR_ACCT_CD,\n    TRIM(LFB1.zwels) AS PMT_METH_CD,\n    TRIM(LFB1.zahls) AS PMT_BLK_IND,\n    TRIM(LFB1.zterm) AS PMT_TERM_CD,\n    TRIM(LFB1.nodel) AS BLOK_SUP_IND,\n    NULL AS OWN_EXPLN_OF_TERM_OF_PMT,\n    lfb1._upt_ as _l0_upt_,\n    lfb1._deleted_\nFROM {Config.sourceDatabase}.LFB1 LFB1\nWHERE LFB1._deleted_ = 'F'\nAND LFB1.mandt = {Config.MANDT}\n\"\"\")",
         "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
         "scriptMethodFooter" : "    return out0"
       }

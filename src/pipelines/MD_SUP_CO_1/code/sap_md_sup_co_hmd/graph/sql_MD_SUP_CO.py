@@ -21,8 +21,7 @@ SELECT '{Config.sourceSystem}' AS SRC_SYS_CD,
     TRIM(LFB1.nodel) AS BLOK_SUP_IND,
     NULL AS OWN_EXPLN_OF_TERM_OF_PMT,
     lfb1._upt_ as _l0_upt_,
-    lfb1._deleted_,
-    lfb1._upt_
+    lfb1._deleted_
 FROM {Config.sourceDatabase}.LFB1 LFB1
 WHERE LFB1._deleted_ = 'F'
 AND LFB1.mandt = {Config.MANDT}
