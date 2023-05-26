@@ -14,8 +14,7 @@ SELECT '{Config.sourceSystem}' AS SRC_SYS_CD,
     TRIM(TCURT.ktext) AS CRNCY_SHRT_NM,
     TRIM(TCURT.ltext) AS CRCNCY_LONG_NM,
     tcurt._upt_ as _l0_upt_,
-    tcurt._deleted_,
-    tcurt._upt_
+    tcurt._deleted_
 FROM {Config.sourceDatabase}.TCURT TCURT
 WHERE TCURT._deleted_ = 'F'
 AND TCURT.MANDT = {Config.MANDT}
