@@ -1,3 +1,3 @@
-from MD_SUP_CO_10.pipeline import main
+from sap_md_sup_co_mbp.pipeline import main
 
 main()
