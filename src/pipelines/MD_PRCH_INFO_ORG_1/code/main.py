@@ -1,3 +1,3 @@
-from MD_PRCH_INFO_ORG_1.pipeline import main
+from sap_md_prch_info_org_hmd.pipeline import main
 
 main()

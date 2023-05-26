@@ -2,8 +2,8 @@ from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from prophecy.libs import typed_lit
-from MD_PRCH_INFO_ORG_1.config.ConfigStore import *
-from MD_PRCH_INFO_ORG_1.udfs.UDFs import *
+from sap_md_prch_info_org_hmd.config.ConfigStore import *
+from sap_md_prch_info_org_hmd.udfs.UDFs import *
 
 def MD_PRCH_INFO_ORG(spark: SparkSession, in0: DataFrame):
     in0.write\

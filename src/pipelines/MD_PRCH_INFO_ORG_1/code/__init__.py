@@ -1,1 +1,1 @@
-from .MD_PRCH_INFO_ORG_1 import *
+from .sap_md_prch_info_org_hmd import *
