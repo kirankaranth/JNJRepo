@@ -6,4 +6,4 @@ from sap_md_mfg_order_geu.config.ConfigStore import *
 from sap_md_mfg_order_geu.udfs.UDFs import *
 
 def DELETED(spark: SparkSession, in0: DataFrame) -> DataFrame:
-    return in0.filter((col("_deleted_") == lit("F")))
+    return in0.filter(((col("_deleted_") == lit("F")) & (col("MANDT") == lit(Config.MANDT))))

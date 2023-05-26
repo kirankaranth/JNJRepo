@@ -17,8 +17,6 @@ def pipeline(spark: SparkSession) -> None:
     )
     df_DEL2 = DEL2(spark, df_JEST)
     df_LAST_STAT = LAST_STAT(spark, df_DEL2)
-    df_INTERIM_LU = INTERIM_LU(spark, df_LAST_STAT)
-    LU_STAT(spark, df_INTERIM_LU)
     df_TJ02T = TJ02T(spark)
     df_TJ02T = collectMetrics(
         spark, 
@@ -28,7 +26,8 @@ def pipeline(spark: SparkSession) -> None:
         "RYBbWOa5v9AIGLycbJhkc$$NbJhUFh6lM5C-Te0wzvTz"
     )
     df_DEL_SPRAS = DEL_SPRAS(spark, df_TJ02T)
-    LU_TXT04(spark, df_DEL_SPRAS)
+    df_STAT_TXT = STAT_TXT(spark, df_LAST_STAT, df_DEL_SPRAS)
+    LU_STAT(spark, df_STAT_TXT)
     df_AUFK = AUFK(spark)
     df_AUFK = collectMetrics(
         spark, 

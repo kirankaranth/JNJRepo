@@ -5,7 +5,5 @@ from prophecy.libs import typed_lit
 from sap_md_mfg_order_geu.config.ConfigStore import *
 from sap_md_mfg_order_geu.udfs.UDFs import *
 
-def LU_TXT04(spark: SparkSession, in0: DataFrame):
-    keyColumns = ['''ISTAT''']
-    valueColumns = ['''TXT04''']
-    createLookup("LU_TXT04", in0, spark, keyColumns, valueColumns)
+def STAT_TXT(spark: SparkSession, in0: DataFrame, in1: DataFrame, ) -> DataFrame:
+    return in0.alias("in0").join(in1.alias("in1"), (col("in0.STAT") == col("in1.ISTAT")), "left_outer")
