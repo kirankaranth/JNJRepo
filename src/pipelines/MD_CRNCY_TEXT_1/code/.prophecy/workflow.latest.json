@@ -192,15 +192,6 @@
                 "tags" : [ ]
               }
             }, {
-              "name" : "_upt_",
-              "type" : "timestamp",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
               "name" : "_pk_",
               "type" : "string",
               "nullable" : true,
@@ -342,15 +333,6 @@
             }, {
               "name" : "_deleted_",
               "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "_upt_",
-              "type" : "timestamp",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -555,32 +537,9 @@
               "expression" : "_deleted_"
             }
           }
-        }, {
-          "MissingColumn" : {
-            "sourceColumn" : "",
-            "defaultValue" : {
-              "expression" : "",
-              "format" : "python"
-            }
-          },
-          "DropColumn" : {
-            "sourceColumn" : ""
-          },
-          "kind" : "AddReplaceColumn",
-          "RenameColumn" : {
-            "sourceColumn" : "",
-            "targetColumn" : ""
-          },
-          "AddReplaceColumn" : {
-            "sourceColumn" : "_l0_upt_",
-            "expression" : {
-              "format" : "sql",
-              "expression" : "_upt_"
-            }
-          }
         } ],
         "activeTab" : "transformations",
-        "columnsSelector" : [ "aae5a3de-599b-4043-9049-eeae96ee250c##_deleted_", "aae5a3de-599b-4043-9049-eeae96ee250c##SRC_SYS_CD", "aae5a3de-599b-4043-9049-eeae96ee250c##CRNCY_CD", "aae5a3de-599b-4043-9049-eeae96ee250c##_upt_", "aae5a3de-599b-4043-9049-eeae96ee250c##LANG_CD" ]
+        "columnsSelector" : [ "aae5a3de-599b-4043-9049-eeae96ee250c##_deleted_", "aae5a3de-599b-4043-9049-eeae96ee250c##SRC_SYS_CD", "aae5a3de-599b-4043-9049-eeae96ee250c##CRNCY_CD", "aae5a3de-599b-4043-9049-eeae96ee250c##LANG_CD" ]
       }
     },
     "d8f5630d-13b3-4689-9c5c-7d7a9a680efd" : {
@@ -666,15 +625,6 @@
                 "mappings" : [ ],
                 "tags" : [ ]
               }
-            }, {
-              "name" : "_upt_",
-              "type" : "timestamp",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
             } ]
           },
           "isStreaming" : false
@@ -683,7 +633,7 @@
         "isCustomOutputSchema" : true
       },
       "properties" : {
-        "script" : "out0 = spark.sql(f\"\"\"\nSELECT '{Config.sourceSystem}' AS SRC_SYS_CD,\n    TCURT.waers AS CRNCY_CD,\n    TCURT.spras AS LANG_CD,\n    TRIM(TCURT.ktext) AS CRNCY_SHRT_NM,\n    TRIM(TCURT.ltext) AS CRCNCY_LONG_NM,\n    TCURT._upt_ as _l0_upt_,\n    TCURT._deleted_,\n    TCURT._upt_\nFROM {Config.sourceDatabase}.TCURT TCURT\nWHERE TCURT._deleted_ = 'F'\n  AND TCURT.MANDT = {Config.MANDT}\n\"\"\")",
+        "script" : "out0 = spark.sql(f\"\"\"\nSELECT '{Config.sourceSystem}' AS SRC_SYS_CD,\n    TCURT.waers AS CRNCY_CD,\n    TCURT.spras AS LANG_CD,\n    TRIM(TCURT.ktext) AS CRNCY_SHRT_NM,\n    TRIM(TCURT.ltext) AS CRCNCY_LONG_NM,\n    TCURT._upt_ as _l0_upt_,\n    TCURT._deleted_\nFROM {Config.sourceDatabase}.TCURT TCURT\nWHERE TCURT._deleted_ = 'F'\n  AND TCURT.MANDT = {Config.MANDT}\n\"\"\")",
         "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
         "scriptMethodFooter" : "    return out0"
       }
