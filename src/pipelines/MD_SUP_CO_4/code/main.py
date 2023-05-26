@@ -1,3 +1,3 @@
-from MD_SUP_CO_4.pipeline import main
+from sap_md_sup_co_geu.pipeline import main
 
 main()
