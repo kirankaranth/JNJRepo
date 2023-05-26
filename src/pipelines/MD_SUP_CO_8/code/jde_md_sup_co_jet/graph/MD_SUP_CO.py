@@ -2,8 +2,8 @@ from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from prophecy.libs import typed_lit
-from jde_md_sup_co_jet_jes.config.ConfigStore import *
-from jde_md_sup_co_jet_jes.udfs.UDFs import *
+from jde_md_sup_co_jet.config.ConfigStore import *
+from jde_md_sup_co_jet.udfs.UDFs import *
 
 def MD_SUP_CO(spark: SparkSession, in0: DataFrame):
     in0.write\

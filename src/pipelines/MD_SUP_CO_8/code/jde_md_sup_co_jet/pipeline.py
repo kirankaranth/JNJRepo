@@ -1,10 +1,10 @@
 from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
-from jde_md_sup_co_jet_jes.config.ConfigStore import *
-from jde_md_sup_co_jet_jes.udfs.UDFs import *
+from jde_md_sup_co_jet.config.ConfigStore import *
+from jde_md_sup_co_jet.udfs.UDFs import *
 from prophecy.utils import *
-from jde_md_sup_co_jet_jes.graph import *
+from jde_md_sup_co_jet.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_sql_MD_SUP_CO = sql_MD_SUP_CO(spark)

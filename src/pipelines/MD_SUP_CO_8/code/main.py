@@ -1,3 +1,3 @@
-from jde_md_sup_co_jet_jes.pipeline import main
+from jde_md_sup_co_jet.pipeline import main
 
 main()
