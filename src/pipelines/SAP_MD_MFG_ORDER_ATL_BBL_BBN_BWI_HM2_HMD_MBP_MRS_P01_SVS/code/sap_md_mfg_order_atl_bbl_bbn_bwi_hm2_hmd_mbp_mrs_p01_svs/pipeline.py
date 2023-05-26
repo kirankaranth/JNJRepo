@@ -28,6 +28,16 @@ def pipeline(spark: SparkSession) -> None:
     df_DEL_SPRAS = DEL_SPRAS(spark, df_TJ02T)
     df_STAT_TXT = STAT_TXT(spark, df_LAST_STAT, df_DEL_SPRAS)
     LU_STAT(spark, df_STAT_TXT)
+    df_AFKO = AFKO(spark)
+    df_AFKO = collectMetrics(
+        spark, 
+        df_AFKO, 
+        "graph", 
+        "FCDBOZBZXar7KymMTlm4O$$J50rSlMNbpsLRLUZDiAjN", 
+        "jbKCg95LJ4LOJ7xfLre7Y$$xSqgN69N8Wc2MPZ7BoNx7"
+    )
+    df_DEL3 = DEL3(spark, df_AFKO)
+    df_RENAME = RENAME(spark, df_DEL3)
     df_AUFK = AUFK(spark)
     df_AUFK = collectMetrics(
         spark, 
@@ -37,7 +47,8 @@ def pipeline(spark: SparkSession) -> None:
         "clWL8zK7XPUMMzoNesnYP$$udBwoK-r9Ye8eLCJNWiys"
     )
     df_DELETED = DELETED(spark, df_AUFK)
-    df_XFORM = XFORM(spark, df_DELETED)
+    df_JOIN = JOIN(spark, df_DELETED, df_RENAME)
+    df_XFORM = XFORM(spark, df_JOIN)
     df_SELECT_FIELDS = SELECT_FIELDS(spark, df_XFORM)
     df_SELECT_FIELDS = collectMetrics(
         spark, 

@@ -18,9 +18,9 @@ class Config(ConfigBase):
 
     def update(
             self,
-            sourceDatabase: str="geu",
-            sourceSystem: str="geu",
-            MANDT: str="232",
+            sourceDatabase: str="bbl",
+            sourceSystem: str="bbl",
+            MANDT: str="100",
             configDatabase: str=" ",
             DAI_ETL_ID: int=0,
             targetSchema: str="dev_md_l1",
