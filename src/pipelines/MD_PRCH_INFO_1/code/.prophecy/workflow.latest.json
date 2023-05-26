@@ -22,7 +22,7 @@
           "name" : "targetSchema",
           "kind" : {
             "type" : "string",
-            "value" : "sbx_md_l1"
+            "value" : "dev_md_l1"
           },
           "optional" : false,
           "isWorkflowNodeConfiguration" : false
@@ -54,7 +54,15 @@
           "name" : "DAI_ETL_ID",
           "kind" : {
             "type" : "int",
-            "value" : "0"
+            "value" : 0
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false
+        }, {
+          "name" : "ConfigDatabase",
+          "kind" : {
+            "type" : "string",
+            "value" : " "
           },
           "optional" : false,
           "isWorkflowNodeConfiguration" : false
@@ -66,7 +74,7 @@
       },
       "fabrics" : { },
       "instances" : { },
-      "selected" : "default",
+      "selected" : "hmd",
       "nonEditable" : [ ],
       "isSubscribedPipelineWithPipelineConfigs" : false
     },
@@ -79,12 +87,12 @@
     "isImported" : false,
     "interimMode" : "Full",
     "interimModeEnabled" : true,
-    "visualCodeInterimMode" : "Disabled",
+    "visualCodeInterimMode" : "IO",
     "recordsLimit" : {
       "enabled" : false,
       "value" : 1000
     },
-    "topLevelPackage" : "MD_PRCH_INFO_1",
+    "topLevelPackage" : "sap_md_prch_info_hmd",
     "configurationVersion" : "v1"
   },
   "connections" : [ {
@@ -238,6 +246,15 @@
                 "tags" : [ ]
               }
             }, {
+              "name" : "_deleted_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
               "name" : "_pk_",
               "type" : "string",
               "nullable" : true,
@@ -285,15 +302,6 @@
             }, {
               "name" : "DAI_UPDT_DTTM",
               "type" : "timestamp",
-              "nullable" : false,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "_deleted_",
-              "type" : "string",
               "nullable" : false,
               "metadata" : {
                 "description" : "",
@@ -442,6 +450,15 @@
             }, {
               "name" : "_l0_upt_",
               "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_deleted_",
+              "type" : "string",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -643,12 +660,12 @@
             "sourceColumn" : "_deleted_",
             "expression" : {
               "format" : "sql",
-              "expression" : "'F'"
+              "expression" : "_deleted_"
             }
           }
         } ],
         "activeTab" : "transformations",
-        "columnsSelector" : [ "3a5fc893-ff4f-4879-bc87-ba941374c16b##SRC_SYS_CD", "3a5fc893-ff4f-4879-bc87-ba941374c16b##PRCH_INFO_NUM" ]
+        "columnsSelector" : [ "3a5fc893-ff4f-4879-bc87-ba941374c16b##SRC_SYS_CD", "3a5fc893-ff4f-4879-bc87-ba941374c16b##_deleted_", "3a5fc893-ff4f-4879-bc87-ba941374c16b##PRCH_INFO_NUM" ]
       }
     },
     "66b172f7-8eee-47a3-9a37-03452a373647" : {
@@ -788,6 +805,15 @@
                 "mappings" : [ ],
                 "tags" : [ ]
               }
+            }, {
+              "name" : "_deleted_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
             } ]
           },
           "isStreaming" : false
@@ -796,7 +822,7 @@
         "isCustomOutputSchema" : true
       },
       "properties" : {
-        "script" : "out0 = spark.sql(f\"\"\"\nSELECT '{Config.sourceSystem}' AS SRC_SYS_CD,\n  EINA.infnr AS PRCH_INFO_NUM,\n  TRIM(EINA.matnr) AS MATL_NUM,\n  TRIM(EINA.matkl) AS MATL_GRP_CD,\n  EINA.lifnr AS SUP_NUM,\n  EINA.loekz AS DEL_IND,\n  CASE\n    WHEN EINA.erdat = '00000000' THEN CAST(NULL AS TIMESTAMP)\n    ELSE TO_TIMESTAMP(EINA.erdat, 'yyyyMMdd')\n  END AS CRT_ON_DTTM,\n  TRIM(EINA.ernam) AS CRT_BY_NM,\n  EINA.txz01 AS PRCH_INFO_DESC,\n  TRIM(EINA.meins) AS PO_UOM_CD,\n  TRIM(EINA.idnlf) AS MFR_PART_NUM,\n  TRIM(EINA.mfrnr) AS MFR_NUM,\n  EINA._upt_ as _l0_upt_\nFROM\n  {Config.sourceDatabase}.EINA EINA\nWHERE\n  EINA._deleted_ = 'F'\n  AND EINA.MANDT = {Config.MANDT}\n \n\"\"\")",
+        "script" : "out0 = spark.sql(f\"\"\"\nSELECT '{Config.sourceSystem}' AS SRC_SYS_CD,\n  EINA.infnr AS PRCH_INFO_NUM,\n  TRIM(EINA.matnr) AS MATL_NUM,\n  TRIM(EINA.matkl) AS MATL_GRP_CD,\n  TRIM(EINA.lifnr) AS SUP_NUM,\n  TRIM(EINA.loekz) AS DEL_IND,\n  CASE\n    WHEN EINA.erdat = '00000000' THEN CAST(NULL AS TIMESTAMP)\n    ELSE TO_TIMESTAMP(EINA.erdat, 'yyyyMMdd')\n  END AS CRT_ON_DTTM,\n  TRIM(EINA.ernam) AS CRT_BY_NM,\n  TRIM(EINA.txz01) AS PRCH_INFO_DESC,\n  TRIM(EINA.meins) AS PO_UOM_CD,\n  TRIM(EINA.idnlf) AS MFR_PART_NUM,\n  TRIM(EINA.mfrnr) AS MFR_NUM,\n  EINA._upt_ as _l0_upt_,\n  EINA._deleted_\nFROM\n  {Config.sourceDatabase}.EINA EINA\nWHERE\n  EINA._deleted_ = 'F'\n  AND EINA.MANDT = {Config.MANDT}\n \n\"\"\")",
         "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
         "scriptMethodFooter" : "    return out0"
       }
