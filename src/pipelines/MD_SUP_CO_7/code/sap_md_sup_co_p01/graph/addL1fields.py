@@ -2,8 +2,8 @@ from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from prophecy.libs import typed_lit
-from MD_SUP_CO_7.config.ConfigStore import *
-from MD_SUP_CO_7.udfs.UDFs import *
+from sap_md_sup_co_p01.config.ConfigStore import *
+from sap_md_sup_co_p01.udfs.UDFs import *
 
 def addL1fields(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
@@ -14,4 +14,4 @@ def addL1fields(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
         .withColumn("DAI_UPDT_DTTM", current_timestamp())\
-        .withColumn("_deleted_", lit("F"))
+        .withColumn("_deleted_", col("_deleted_"))
