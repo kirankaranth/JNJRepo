@@ -1925,6 +1925,38 @@ pipelines:
       - datasets/MD_PRCH_DELV_CNFRMS
     subgraphs: []
     dependencies: {}
+  pipelines/SAP_RSEG:
+    name: sap_md_doc_itm_incm_invc_hm2_hmd_bba_bbl_bbn_geu_mrs_po1_tai
+    description: ''
+    author: jcacere7@its.jnj.com
+    mode: batch
+    artefactID: ''
+    language: python
+    createdAt: '2023-04-26 18:25:43'
+    modifiedAt: '2023-05-25 13:46:36'
+    datasets:
+      inputs:
+      - datasets/DS_SAP_RSEG
+      outputs:
+      - datasets/MD_DOC_ITM_INCM_INVC
+    subgraphs: []
+    dependencies: {}
+  pipelines/jde_md_doc_itm_incm_invc:
+    name: jde_md_doc_itm_incm_invc_bw2_deu_gmd_jem_jes_jet_jsw_sjd
+    description: ''
+    author: jcacere7@its.jnj.com
+    mode: batch
+    artefactID: ''
+    language: python
+    createdAt: '2023-05-02 20:47:57'
+    modifiedAt: '2023-05-25 13:43:25'
+    datasets:
+      inputs:
+      - datasets/DS_JDE_01_F43199
+      outputs:
+      - datasets/MD_DOC_ITM_INCM_INVC
+    subgraphs: []
+    dependencies: {}
   pipelines/MD_BILL_DOC_HDR_BBL:
     name: SAP_01_MD_BILL_DOC_HDR_BBL
     description: ''
@@ -2873,7 +2905,7 @@ datasets:
     description: ''
     author: skostadi@its.jnj.com
     createdAt: '2023-03-20 18:20:04'
-    modifiedAt: '2023-03-20 18:20:04'
+    modifiedAt: '2023-05-04 01:55:33'
     mode: batch
     physicalDatasets:
       CDL_L1_Dev:
@@ -7327,8 +7359,8 @@ datasets:
     name: DS_JDE_01_F43199
     description: ''
     author: jcacere7@its.jnj.com
-    createdAt: '2023-04-17 03:16:51'
-    modifiedAt: '2023-04-17 03:41:21'
+    createdAt: '2023-05-02 22:50:51'
+    modifiedAt: '2023-05-02 22:53:16'
     mode: batch
     physicalDatasets:
       CDL_L1_Dev:
@@ -7336,8 +7368,8 @@ datasets:
         datasetType: Database
         description: ''
         author: jcacere7@its.jnj.com
-        createdAt: '2023-04-17 03:16:51'
-        modifiedAt: '2023-04-17 03:16:51'
+        createdAt: '2023-05-02 22:50:51'
+        modifiedAt: '2023-05-02 22:50:51'
   datasets/DS_SAP_01_VTTK:
     name: DS_SAP_01_VTTK
     description: ''
@@ -7506,18 +7538,33 @@ datasets:
   datasets/DS_SAP_01_NSDM_V_MARC:
     name: DS_SAP_01_NSDM_V_MARC
     description: ''
-    author: mbolado1@its.jnj.com
-    createdAt: '2023-04-06 16:08:14'
-    modifiedAt: '2023-04-06 16:08:14'
+    author: hgermi1@its.jnj.com
+    createdAt: '2023-04-05 18:43:35'
+    modifiedAt: '2023-04-18 20:59:14'
     mode: batch
     physicalDatasets:
       CDL_L1_Dev:
         fabricId: 32
         datasetType: Database
         description: ''
-        author: mbolado1@its.jnj.com
-        createdAt: '2023-04-06 16:08:14'
-        modifiedAt: '2023-04-06 16:08:14'
+        author: hgermi1@its.jnj.com
+        createdAt: '2023-04-05 18:43:35'
+        modifiedAt: '2023-04-05 18:43:35'
+  datasets/DS_SAP_RSEG:
+    name: DS_SAP_RSEG
+    description: ''
+    author: jcacere7@its.jnj.com
+    createdAt: '2023-04-26 18:39:08'
+    modifiedAt: '2023-05-25 13:37:48'
+    mode: batch
+    physicalDatasets:
+      CDL_L1_Dev:
+        fabricId: 32
+        datasetType: Database
+        description: ''
+        author: jcacere7@its.jnj.com
+        createdAt: '2023-04-26 18:39:08'
+        modifiedAt: '2023-04-26 18:39:08'
   datasets/DS_SAP_01_T141T:
     name: DS_SAP_01_T141T
     description: ''
@@ -10268,6 +10315,57 @@ jobs:
       onFailure: false
     pipelines:
     - pipelines/MD_DELV_10
+    jobClusterMode:
+      clusterMode:
+        Single: {}
+      clusterId: null
+    enabled: null
+    createdAt: '2023-05-04 21:28:37'
+    modifiedAt: '2023-05-04 22:01:32'
+    author: fsano1@its.jnj.com
+  jobs/JOB_MD_DOC_ITM_INCM_INVC:
+    name: JOB_MD_DOC_ITM_INCM_INVC
+    description: ''
+    fabricUID: 32
+    scheduler:
+      Databricks: {}
+    cloudProvider: null
+    jobSize: Prophecy_Small
+    scheduleCron: 0 0 0 1/1 * ? *
+    timeout: null
+    alerting:
+      emails: ''
+      onStart: false
+      onSuccess: false
+      onFailure: false
+    pipelines:
+    - pipelines/SAP_RSEG
+    - pipelines/jde_md_doc_itm_incm_invc
+    jobClusterMode:
+      clusterMode:
+        Single: {}
+      clusterId: null
+    enabled: null
+    createdAt: '2023-04-26 20:30:55'
+    modifiedAt: '2023-05-11 22:42:45'
+    author: jcacere7@its.jnj.com
+  jobs/JOB_MD_DOC_ITM_INCM_INVC_HM2:
+    name: JOB_MD_DOC_ITM_INCM_INVC_HM2
+    description: ''
+    fabricUID: 32
+    scheduler:
+      Databricks: {}
+    cloudProvider: null
+    jobSize: Prophecy_Small
+    scheduleCron: 0 0 0 1/1 * ? *
+    timeout: null
+    alerting:
+      emails: ''
+      onStart: false
+      onSuccess: false
+      onFailure: false
+    pipelines:
+    - pipelines/SAP_RSEG
     jobClusterMode:
       clusterMode:
         Single: {}
