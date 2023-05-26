@@ -113,4 +113,87 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
           )
         )\
         .withColumn("MFG_ORDR_STTS_CD", lookup("LU_STAT", col("OBJNR")).getField("STAT"))\
-        .withColumn("MFG_ORDR_STS_TXT", lookup("LU_STAT", col("OBJNR")).getField("TXT04"))
+        .withColumn("MFG_ORDR_STS_TXT", lookup("LU_STAT", col("OBJNR")).getField("TXT04"))\
+        .withColumn("ORDR_RTNG_NUM", trim(col("AFKO_AUFPL")))\
+        .withColumn("MRP_CNTRLLR_CD", trim(col("AFKO_DISPO")))\
+        .withColumn("PRD_SPVSR_CD", trim(col("AFKO_FEVOR")))\
+        .withColumn(
+          "ACT_RLSE_DTTM",
+          when((col("AFKO_FTRMI") == lit("00000000")), lit(None)).otherwise(to_timestamp(col("AFKO_FTRMI"), "yyyyMMdd"))
+        )\
+        .withColumn(
+          "PLAN_RLSE_DTTM",
+          when((col("AFKO_FTRMP") == lit("00000000")), lit(None)).otherwise(to_timestamp(col("AFKO_FTRMP"), "yyyyMMdd"))
+        )\
+        .withColumn(
+          "SCH_REL_DTTM",
+          when(
+              (
+                ((col("AFKO_GETRI") == lit("00000000")) | (length(regexp_replace(col("AFKO_GETRI"), "(\\d+)", "")) > lit(0)))
+                | (length(col("AFKO_GETRI")) < lit(8))
+              ), 
+              lit(None)
+            )\
+            .otherwise(to_timestamp(concat(col("AFKO_GETRI"), col("AFKO_GEUZI")), "yyyyMMddHHmmss"))
+        )\
+        .withColumn(
+          "PRDTN_END_DTTM",
+          when((col("AFKO_GLTRI") == lit("00000000")), lit(None)).otherwise(to_timestamp(col("AFKO_GLTRI"), "yyyyMMdd"))
+        )\
+        .withColumn(
+          "END_DTTM",
+          when(
+              (
+                ((col("AFKO_GLTRP") == lit("00000000")) | (length(regexp_replace(col("AFKO_GLTRP"), "(\\d+)", "")) > lit(0)))
+                | (length(col("AFKO_GLTRP")) < lit(8))
+              ), 
+              lit(None)
+            )\
+            .otherwise(to_timestamp(concat(col("AFKO_GLTRP"), col("AFKO_GLUZP")), "yyyyMMddHHmmss"))
+        )\
+        .withColumn(
+          "SCHD_END_DTTM",
+          when(
+              (
+                ((col("AFKO_GLTRS") == lit("00000000")) | (length(regexp_replace(col("AFKO_GLTRS"), "(\\d+)", "")) > lit(0)))
+                | (length(col("AFKO_GLTRS")) < lit(8))
+              ), 
+              lit(None)
+            )\
+            .otherwise(to_timestamp(concat(col("AFKO_GLTRS"), col("AFKO_GLUZS")), "yyyyMMddHHmmss"))
+        )\
+        .withColumn(
+          "ACT_STRT_DTTM",
+          when(
+              (
+                ((col("AFKO_GSTRI") == lit("00000000")) | (length(regexp_replace(col("AFKO_GSTRI"), "(\\d+)", "")) > lit(0)))
+                | (length(col("AFKO_GSTRI")) < lit(8))
+              ), 
+              lit(None)
+            )\
+            .otherwise(to_timestamp(concat(col("AFKO_GSTRI"), col("AFKO_GSUZI")), "yyyyMMddHHmmss"))
+        )\
+        .withColumn(
+          "STRT_DTTM",
+          when(
+              (
+                ((col("AFKO_GSTRP") == lit("00000000")) | (length(regexp_replace(col("AFKO_GSTRP"), "(\\d+)", "")) > lit(0)))
+                | (length(col("AFKO_GSTRP")) < lit(8))
+              ), 
+              lit(None)
+            )\
+            .otherwise(to_timestamp(concat(col("AFKO_GSTRP"), col("AFKO_GSUZP")), "yyyyMMddHHmmss"))
+        )\
+        .withColumn(
+          "SCHD_STRT_DTTM",
+          when(
+              (
+                ((col("AFKO_GSTRS") == lit("00000000")) | (length(regexp_replace(col("AFKO_GSTRS"), "(\\d+)", "")) > lit(0)))
+                | (length(col("AFKO_GSTRS")) < lit(8))
+              ), 
+              lit(None)
+            )\
+            .otherwise(to_timestamp(concat(col("AFKO_GSTRS"), col("AFKO_GSUZS")), "yyyyMMddHHmmss"))
+        )\
+        .withColumn("CNFRMD_SCRP_QTY", col("AFKO_IASMG").cast(DecimalType(18, 4)))\
+        .withColumn("CNFRMD_YLD_QTY", col("AFKO_IGMNG").cast(DecimalType(18, 4)))
