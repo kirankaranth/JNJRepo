@@ -68,7 +68,7 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("PRCSG_GRP", trim(col("ABKRS")))\
         .withColumn("SEQ_NUM", trim(col("SEQNR")))\
         .withColumn("APPLT", trim(col("USER0")))\
-        .withColumn("EST_TOT_COSTS_OF_ORDR", trim(col("USER4")))\
+        .withColumn("EST_TOT_COSTS_OF_ORDR", col("USER4").cast(DecimalType(18, 4)))\
         .withColumn(
           "APPL_DTTM",
           when((col("USER5") == lit("00000000")), lit(None)).otherwise(to_timestamp(col("USER5"), "yyyyMMdd"))
