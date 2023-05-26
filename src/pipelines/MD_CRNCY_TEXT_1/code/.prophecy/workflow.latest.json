@@ -183,6 +183,24 @@
                 "tags" : [ ]
               }
             }, {
+              "name" : "_deleted_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_upt_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
               "name" : "_pk_",
               "type" : "string",
               "nullable" : true,
@@ -230,15 +248,6 @@
             }, {
               "name" : "DAI_UPDT_DTTM",
               "type" : "timestamp",
-              "nullable" : false,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "_deleted_",
-              "type" : "string",
               "nullable" : false,
               "metadata" : {
                 "description" : "",
@@ -330,6 +339,24 @@
                 "mappings" : [ ],
                 "tags" : [ ]
               }
+            }, {
+              "name" : "_deleted_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_upt_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
             } ]
           },
           "isStreaming" : false
@@ -342,136 +369,218 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ ],
+        "importLanguage" : "${$.workflow.metainfo.frontEndLanguage}",
+        "importString" : "",
         "transformations" : [ {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
           "kind" : "AddReplaceColumn",
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "SRC_SYS_CD",
             "expression" : {
               "format" : "sql",
               "expression" : "'$sourceSystem'"
             }
+          }
+        }, {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
           },
           "DropColumn" : {
             "sourceColumn" : ""
           },
+          "kind" : "AddReplaceColumn",
           "RenameColumn" : {
             "sourceColumn" : "",
             "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "_pk_",
             "expression" : {
               "format" : "sql",
               "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'CRNCY_CD',CRNCY_CD,'LANG_CD',LANG_CD))"
             }
+          }
+        }, {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
           },
           "DropColumn" : {
             "sourceColumn" : ""
           },
+          "kind" : "AddReplaceColumn",
           "RenameColumn" : {
             "sourceColumn" : "",
             "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "_pk_md5_",
             "expression" : {
               "format" : "sql",
               "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'CRNCY_CD',CRNCY_CD,'LANG_CD',LANG_CD)))"
             }
+          }
+        }, {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
           },
           "DropColumn" : {
             "sourceColumn" : ""
           },
+          "kind" : "AddReplaceColumn",
           "RenameColumn" : {
             "sourceColumn" : "",
             "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "_l1_upt_",
             "expression" : {
               "format" : "sql",
               "expression" : "current_timestamp()"
             }
+          }
+        }, {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
           },
           "DropColumn" : {
             "sourceColumn" : ""
           },
+          "kind" : "AddReplaceColumn",
           "RenameColumn" : {
             "sourceColumn" : "",
             "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "DAI_ETL_ID",
             "expression" : {
               "format" : "sql",
               "expression" : "'$DAI_ETL_ID'"
             }
+          }
+        }, {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
           },
           "DropColumn" : {
             "sourceColumn" : ""
           },
+          "kind" : "AddReplaceColumn",
           "RenameColumn" : {
             "sourceColumn" : "",
             "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "DAI_CRT_DTTM",
             "expression" : {
               "format" : "sql",
               "expression" : "current_timestamp()"
             }
+          }
+        }, {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
           },
           "DropColumn" : {
             "sourceColumn" : ""
           },
+          "kind" : "AddReplaceColumn",
           "RenameColumn" : {
             "sourceColumn" : "",
             "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "DAI_UPDT_DTTM",
             "expression" : {
               "format" : "sql",
               "expression" : "current_timestamp()"
             }
-          },
-          "DropColumn" : {
-            "sourceColumn" : ""
-          },
-          "RenameColumn" : {
-            "sourceColumn" : "",
-            "targetColumn" : ""
           }
         }, {
-          "kind" : "AddReplaceColumn",
-          "AddReplaceColumn" : {
-            "sourceColumn" : "_deleted_",
-            "expression" : {
-              "format" : "sql",
-              "expression" : "'F'"
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
             }
           },
           "DropColumn" : {
             "sourceColumn" : ""
           },
+          "kind" : "AddReplaceColumn",
           "RenameColumn" : {
             "sourceColumn" : "",
             "targetColumn" : ""
+          },
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_deleted_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "_deleted_"
+            }
           }
-        } ]
+        }, {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "kind" : "AddReplaceColumn",
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          },
+          "AddReplaceColumn" : {
+            "sourceColumn" : "_l0_upt_",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "_upt_"
+            }
+          }
+        } ],
+        "activeTab" : "transformations",
+        "columnsSelector" : [ "aae5a3de-599b-4043-9049-eeae96ee250c##_deleted_", "aae5a3de-599b-4043-9049-eeae96ee250c##SRC_SYS_CD", "aae5a3de-599b-4043-9049-eeae96ee250c##CRNCY_CD", "aae5a3de-599b-4043-9049-eeae96ee250c##_upt_", "aae5a3de-599b-4043-9049-eeae96ee250c##LANG_CD" ]
       }
     },
     "d8f5630d-13b3-4689-9c5c-7d7a9a680efd" : {
@@ -548,6 +657,24 @@
                 "mappings" : [ ],
                 "tags" : [ ]
               }
+            }, {
+              "name" : "_deleted_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_upt_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
             } ]
           },
           "isStreaming" : false
@@ -556,7 +683,7 @@
         "isCustomOutputSchema" : true
       },
       "properties" : {
-        "script" : "out0 = spark.sql(f\"\"\"\nSELECT '{Config.sourceSystem}' AS SRC_SYS_CD,\n    TCURT.waers AS CRNCY_CD,\n    TCURT.spras AS LANG_CD,\n    TRIM(TCURT.ktext) AS CRNCY_SHRT_NM,\n    TRIM(TCURT.ltext) AS CRCNCY_LONG_NM,\n    TCURT._upt_ as _l0_upt_\nFROM {Config.sourceDatabase}.TCURT TCURT\nWHERE TCURT._deleted_ = 'F'\n  AND TCURT.MANDT = {Config.MANDT}\n\"\"\")",
+        "script" : "out0 = spark.sql(f\"\"\"\nSELECT '{Config.sourceSystem}' AS SRC_SYS_CD,\n    TCURT.waers AS CRNCY_CD,\n    TCURT.spras AS LANG_CD,\n    TRIM(TCURT.ktext) AS CRNCY_SHRT_NM,\n    TRIM(TCURT.ltext) AS CRCNCY_LONG_NM,\n    TCURT._upt_ as _l0_upt_,\n    TCURT._deleted_,\n    TCURT._upt_\nFROM {Config.sourceDatabase}.TCURT TCURT\nWHERE TCURT._deleted_ = 'F'\n  AND TCURT.MANDT = {Config.MANDT}\n\"\"\")",
         "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
         "scriptMethodFooter" : "    return out0"
       }
