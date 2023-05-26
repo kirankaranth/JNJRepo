@@ -246,15 +246,6 @@
                 "tags" : [ ]
               }
             }, {
-              "name" : "_upt_",
-              "type" : "timestamp",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
               "name" : "_pk_",
               "type" : "string",
               "nullable" : true,
@@ -450,15 +441,6 @@
             }, {
               "name" : "_deleted_",
               "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "_upt_",
-              "type" : "timestamp",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -663,32 +645,9 @@
               "expression" : "_deleted_"
             }
           }
-        }, {
-          "MissingColumn" : {
-            "sourceColumn" : "",
-            "defaultValue" : {
-              "expression" : "",
-              "format" : "python"
-            }
-          },
-          "DropColumn" : {
-            "sourceColumn" : ""
-          },
-          "kind" : "AddReplaceColumn",
-          "RenameColumn" : {
-            "sourceColumn" : "",
-            "targetColumn" : ""
-          },
-          "AddReplaceColumn" : {
-            "sourceColumn" : "_l0_upt_",
-            "expression" : {
-              "format" : "sql",
-              "expression" : "_upt_"
-            }
-          }
         } ],
         "activeTab" : "transformations",
-        "columnsSelector" : [ "c09db3fb-40ac-47c6-9d26-962d60e7119d##SRC_SYS_CD", "c09db3fb-40ac-47c6-9d26-962d60e7119d##BOM_ITM_NODE_NUM", "c09db3fb-40ac-47c6-9d26-962d60e7119d##BOM_CAT_CD", "c09db3fb-40ac-47c6-9d26-962d60e7119d##_upt_", "c09db3fb-40ac-47c6-9d26-962d60e7119d##BOM_NUM", "c09db3fb-40ac-47c6-9d26-962d60e7119d##ALT_BOM_NUM", "c09db3fb-40ac-47c6-9d26-962d60e7119d##_deleted_", "c09db3fb-40ac-47c6-9d26-962d60e7119d##BOM_ITM_NODE_CNTR_NBR" ]
+        "columnsSelector" : [ "c09db3fb-40ac-47c6-9d26-962d60e7119d##SRC_SYS_CD", "c09db3fb-40ac-47c6-9d26-962d60e7119d##BOM_ITM_NODE_NUM", "c09db3fb-40ac-47c6-9d26-962d60e7119d##BOM_CAT_CD", "c09db3fb-40ac-47c6-9d26-962d60e7119d##BOM_NUM", "c09db3fb-40ac-47c6-9d26-962d60e7119d##ALT_BOM_NUM", "c09db3fb-40ac-47c6-9d26-962d60e7119d##_deleted_", "c09db3fb-40ac-47c6-9d26-962d60e7119d##BOM_ITM_NODE_CNTR_NBR" ]
       }
     },
     "e6ad18d9-ce3c-4c02-b97c-f4c249fd98bd" : {
@@ -828,15 +787,6 @@
                 "mappings" : [ ],
                 "tags" : [ ]
               }
-            }, {
-              "name" : "_upt_",
-              "type" : "timestamp",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
             } ]
           },
           "isStreaming" : false
@@ -845,7 +795,7 @@
         "isCustomOutputSchema" : true
       },
       "properties" : {
-        "script" : "out0 = spark.sql(f\"\"\"\n    SELECT\n'{Config.sourceSystem}' AS SRC_SYS_CD\n, stas.stlty as BOM_CAT_CD\n, stas.stlnr AS BOM_NUM\n, stas.stlal AS ALT_BOM_NUM\n, stas.stlkn AS BOM_ITM_NODE_NUM\n, stas.stasz AS BOM_ITM_NODE_CNTR_NBR\n, case when stas.datuv = '00000000' then CAST(NULL AS timestamp)\nelse to_timestamp(stas.datuv, \\\"yyyyMMdd\\\") end as  BOM_ITM_VLD_FROM_DTTM\n, TRIM(stas.aennr) as CHG_NUM\n, case when stas.andat = '00000000' then CAST(NULL AS timestamp)\nelse to_timestamp(stas.andat, \\\"yyyyMMdd\\\") end as  CRT_DTTM\n, case when stas.aedat = '00000000' then CAST(NULL AS timestamp)\nelse to_timestamp(stas.aedat, \\\"yyyyMMdd\\\") end as  CHG_DTTM\n, TRIM(stas.lkenz) as DEL_IND,\nstas._upt_ as _l0_upt_,\nstas._deleted_,\nstas._upt_\nFROM  {Config.sourceDatabase}.stas as stas  WHERE stas._deleted_ = 'F'\nand stas.MANDT = {Config.MANDT} \n\"\"\")",
+        "script" : "out0 = spark.sql(f\"\"\"\n    SELECT\n'{Config.sourceSystem}' AS SRC_SYS_CD\n, stas.stlty as BOM_CAT_CD\n, stas.stlnr AS BOM_NUM\n, stas.stlal AS ALT_BOM_NUM\n, stas.stlkn AS BOM_ITM_NODE_NUM\n, stas.stasz AS BOM_ITM_NODE_CNTR_NBR\n, case when stas.datuv = '00000000' then CAST(NULL AS timestamp)\nelse to_timestamp(stas.datuv, \\\"yyyyMMdd\\\") end as  BOM_ITM_VLD_FROM_DTTM\n, TRIM(stas.aennr) as CHG_NUM\n, case when stas.andat = '00000000' then CAST(NULL AS timestamp)\nelse to_timestamp(stas.andat, \\\"yyyyMMdd\\\") end as  CRT_DTTM\n, case when stas.aedat = '00000000' then CAST(NULL AS timestamp)\nelse to_timestamp(stas.aedat, \\\"yyyyMMdd\\\") end as  CHG_DTTM\n, TRIM(stas.lkenz) as DEL_IND,\nstas._upt_ as _l0_upt_,\nstas._deleted_\nFROM  {Config.sourceDatabase}.stas as stas  WHERE stas._deleted_ = 'F'\nand stas.MANDT = {Config.MANDT} \n\"\"\")",
         "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
         "scriptMethodFooter" : "    return out0"
       }
