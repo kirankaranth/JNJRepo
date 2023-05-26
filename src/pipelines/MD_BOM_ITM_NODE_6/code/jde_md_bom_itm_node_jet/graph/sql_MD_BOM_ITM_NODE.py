@@ -11,7 +11,7 @@ def sql_MD_BOM_ITM_NODE(spark: SparkSession) -> DataFrame:
     SELECT
 '{Config.sourceSystem}' AS SRC_SYS_CD
 , f3002_adt.ixtbm as BOM_CAT_CD
-,concat(f3002_adt.ixkit,';',f3002_adt.ixmmcu,';' ,f3002_adt.ixtbm,';',f3002_adt.ixbqty,';',f3002_adt.ixcoby,';',f3002_adt.ixcpnt,';', f3002_adt.ixsbnt) AS BOM_NUM
+,concat(f3002_adt.ixkit,';',f3002_adt.ixmmcu,';',f3002_adt.ixtbm,';',f3002_adt.ixbqty,';',f3002_adt.ixcoby,';',f3002_adt.ixcpnt,';',f3002_adt.ixsbnt) AS BOM_NUM
 ,\"01\" AS ALT_BOM_NUM
 , f3002_adt.ixitm AS BOM_ITM_NODE_NUM
 ,concat(f3002_adt.ixcpnt,\".\",f3002_adt.ixsbnt) AS BOM_ITM_NODE_CNTR_NBR
