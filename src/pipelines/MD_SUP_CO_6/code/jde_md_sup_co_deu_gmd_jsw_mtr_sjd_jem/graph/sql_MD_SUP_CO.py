@@ -2,8 +2,8 @@ from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from prophecy.libs import typed_lit
-from MD_SUP_CO_6.config.ConfigStore import *
-from MD_SUP_CO_6.udfs.UDFs import *
+from jde_md_sup_co_deu_gmd_jsw_mtr_sjd_jem.config.ConfigStore import *
+from jde_md_sup_co_deu_gmd_jsw_mtr_sjd_jem.udfs.UDFs import *
 
 def sql_MD_SUP_CO(spark: SparkSession) -> DataFrame:
     out0 = spark.sql(
@@ -21,7 +21,8 @@ trim(f0401.a6hdpy) AS PMT_BLK_IND,
 trim(f0401.a6trap) AS PMT_TERM_CD,
 NULL AS BLOK_SUP_IND,
 NULL AS OWN_EXPLN_OF_TERM_OF_PMT,
-f0401._upt_ as _l0_upt_
+f0401._upt_ as _l0_upt_,
+f0401._deleted_
 FROM  {Config.sourceDatabase}.f0401 f0401
 left join  {Config.sourceDatabase}.f0101 f0101 on f0401.a6an8=f0101.aban8 and f0101._deleted_ = 'F'
 WHERE f0401._deleted_ = 'F'  
