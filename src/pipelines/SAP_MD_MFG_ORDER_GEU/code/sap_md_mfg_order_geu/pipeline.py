@@ -7,6 +7,28 @@ from prophecy.utils import *
 from sap_md_mfg_order_geu.graph import *
 
 def pipeline(spark: SparkSession) -> None:
+    df_JEST = JEST(spark)
+    df_JEST = collectMetrics(
+        spark, 
+        df_JEST, 
+        "graph", 
+        "RZ2nci0oJbC0JZGnFCVGV$$ZZ2zxj_8jW1f0XxEBfXQi", 
+        "OGKh5A-lI-a_YKvwiHhgn$$3xHIQxG8AB_UkNcfWqy64"
+    )
+    df_DEL2 = DEL2(spark, df_JEST)
+    df_LAST_STAT = LAST_STAT(spark, df_DEL2)
+    df_INTERIM_LU = INTERIM_LU(spark, df_LAST_STAT)
+    LU_STAT(spark, df_INTERIM_LU)
+    df_TJ02T = TJ02T(spark)
+    df_TJ02T = collectMetrics(
+        spark, 
+        df_TJ02T, 
+        "graph", 
+        "7svcEXBKbohvqy5A5pht3$$xMWyjdHkfQZr6NScVn0zS", 
+        "RYBbWOa5v9AIGLycbJhkc$$NbJhUFh6lM5C-Te0wzvTz"
+    )
+    df_DEL_SPRAS = DEL_SPRAS(spark, df_TJ02T)
+    LU_TXT04(spark, df_DEL_SPRAS)
     df_AUFK = AUFK(spark)
     df_AUFK = collectMetrics(
         spark, 
