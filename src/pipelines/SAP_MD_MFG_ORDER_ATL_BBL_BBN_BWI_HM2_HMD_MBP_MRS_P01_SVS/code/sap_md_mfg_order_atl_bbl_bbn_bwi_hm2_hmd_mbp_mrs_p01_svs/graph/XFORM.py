@@ -240,4 +240,73 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("COST_VRNT_FOR_ACTL_COSTS", trim(col("AFKO_KLVARI")))\
         .withColumn("CMPLT_CNFRM_NUM_FOR_THE_OPR", trim(col("AFKO_RUECK")))\
         .withColumn("INTRNL_CNTR3", trim(col("AFKO_RMZHL")))\
-        .withColumn("CNFG", trim(col("AFKO_CUOBJ")))
+        .withColumn("CNFG", trim(col("AFKO_CUOBJ")))\
+        .withColumn("OBJ_ID_OF_THE_RSRS1", trim(col("AFKO_RSHID")))\
+        .withColumn("OBJ_ID_OF_THE_RSRS2", trim(col("AFKO_RSNID")))\
+        .withColumn("LVL", col("AFKO_STUFE").cast(DecimalType(18, 4)))\
+        .withColumn("PATH1", col("AFKO_WEGXX").cast(DecimalType(18, 4)))\
+        .withColumn("PATH2", col("AFKO_VWEGX").cast(DecimalType(18, 4)))\
+        .withColumn("NUM_OF_RESV", trim(col("AFKO_ARSNR")))\
+        .withColumn("ORDR_ITM_NUM", trim(col("AFKO_ARSPS")))\
+        .withColumn("LEFT_NODE_IN_CLCTV_ORDR", trim(col("AFKO_LKNOT")))\
+        .withColumn("RIGHT_NODE_OF_CLCTV_ORDR", trim(col("AFKO_RKNOT")))\
+        .withColumn("CNFRM_DEG_OF_PRCSG", trim(col("AFKO_ABARB")))\
+        .withColumn("RTG_NUM_OF_OPS_IN_THE_ORDR", trim(col("AFKO_AUFPT")))\
+        .withColumn("GENL_CNTR_FOR_ORDR", trim(col("AFKO_APLZT")))\
+        .withColumn(
+          "RTG_EXPLS_DTTM",
+          when((col("AFKO_PLAUF") == lit("00000000")), lit(None)).otherwise(to_timestamp(col("AFKO_PLAUF"), "yyyyMMdd"))
+        )\
+        .withColumn(
+          "VLD_FROM_DTTM",
+          when((col("AFKO_PDATV") == lit("00000000")), lit(None)).otherwise(to_timestamp(col("AFKO_PDATV"), "yyyyMMdd"))
+        )\
+        .withColumn(
+          "VLD_FROM_DTTM1",
+          when((col("AFKO_SDATV") == lit("00000000")), lit(None)).otherwise(to_timestamp(col("AFKO_SDATV"), "yyyyMMdd"))
+        )\
+        .withColumn(
+          "BOM_EXPLS_TFR_DTTM",
+          when((col("AFKO_AUFLD") == lit("00000000")), lit(None)).otherwise(to_timestamp(col("AFKO_AUFLD"), "yyyyMMdd"))
+        )\
+        .withColumn(
+          "FIN_DTTM",
+          when(
+              (
+                ((col("AFKO_GLTPP") == lit("00000000")) | (length(regexp_replace(col("AFKO_GLTPP"), "(\\d+)", "")) > lit(0)))
+                | (length(col("AFKO_GLTPP")) < lit(8))
+              ), 
+              lit(None)
+            )\
+            .otherwise(to_timestamp(concat(col("AFKO_GLTPP"), col("AFKO_GLUPP")), "yyyyMMddHHmmss"))
+        )\
+        .withColumn(
+          "FCST_STRT_DTTM",
+          when(
+              (
+                ((col("AFKO_GSTPP") == lit("00000000")) | (length(regexp_replace(col("AFKO_GSTPP"), "(\\d+)", "")) > lit(0)))
+                | (length(col("AFKO_GSTPP")) < lit(8))
+              ), 
+              lit(None)
+            )\
+            .otherwise(to_timestamp(concat(col("AFKO_GSTPP"), col("AFKO_GSUPP")), "yyyyMMddHHmmss"))
+        )\
+        .withColumn(
+          "SCHD_FCST_FIN_DTTM",
+          when(
+              (
+                ((col("AFKO_GLTPS") == lit("00000000")) | (length(regexp_replace(col("AFKO_GLTPS"), "(\\d+)", "")) > lit(0)))
+                | (length(col("AFKO_GLTPS")) < lit(8))
+              ), 
+              lit(None)
+            )\
+            .otherwise(to_timestamp(concat(col("AFKO_GLTPS"), col("AFKO_GLUPS")), "yyyyMMddHHmmss"))
+        )\
+        .withColumn("SCHD_FCST_STRT_DTTM", when(
+          (
+            ((col("AFKO_GSTPS") == lit("00000000")) | (length(regexp_replace(col("AFKO_GSTPS"), "(\\d+)", "")) > lit(0)))
+            | (length(col("AFKO_GSTPS")) < lit(8))
+          ), 
+          lit(None)
+        )\
+        .otherwise(to_timestamp(concat(col("AFKO_GSTPS"), col("AFKO_GSUPS")), "yyyyMMddHHmmss")))
