@@ -49,7 +49,7 @@ def expectsManifest() {
  * Deploy the project
  */
 def prophecyDeploy(token, url, folder, version, environment, appName) {
-    ensure.insideDockerContainer('jekt-docker.artifactrepo.jnj.com/cdl-prophecy-deploy:1.0.4.2b') {
+    ensure.insideDockerContainer('jekt-docker.artifactrepo.jnj.com/cdl-prophecy-deploy:1.1.2') {
         checkout scm
 
         withCredentials([string(credentialsId: token, variable: 'deToken')]) {

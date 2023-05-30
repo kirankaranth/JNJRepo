@@ -19,5 +19,6 @@ def Select_MARD_Columns(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("RETME"), 
         col("LFGJA"), 
         col("LFMON"), 
-        col("_upt_")
+        col("_upt_"), 
+        col("_deleted_")
     )

@@ -6,4 +6,4 @@ from sap_01_md_matl_inv_hmd.config.ConfigStore import *
 from sap_01_md_matl_inv_hmd.udfs.UDFs import *
 
 def DS_SAP_03_NSDM_V_MSKU(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.sourceSystem}.nsdm_v_msku")
+    return spark.read.table(f"{Config.sourceDatabase}.nsdm_v_msku")
