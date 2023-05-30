@@ -17,6 +17,17 @@ def pipeline(spark: SparkSession) -> None:
     )
     df_MANDT_FILTER = MANDT_FILTER(spark, df_SAP_LFM1)
     df_NEW_FIELDS = NEW_FIELDS(spark, df_MANDT_FILTER)
+    df_PK_CHECK = PK_CHECK(spark, df_NEW_FIELDS)
+    df_PK_FILTER = PK_FILTER(spark, df_PK_CHECK)
+    df_PK_FILTER = collectMetrics(
+        spark, 
+        df_PK_FILTER, 
+        "graph", 
+        "kiIHsyiOYBwbeRgCx-t2h$$gaF6dZRfsNZsE6XGgBHU_", 
+        "Qvh84rdqXlv29-klZlZ9Z$$FTvQ_eVCJdIjVY4x-QOtm"
+    )
+    df_PK_FILTER.cache().count()
+    df_PK_FILTER.unpersist()
     df_FIELDS_ORDER = FIELDS_ORDER(spark, df_NEW_FIELDS)
     df_FIELDS_ORDER = collectMetrics(
         spark, 
