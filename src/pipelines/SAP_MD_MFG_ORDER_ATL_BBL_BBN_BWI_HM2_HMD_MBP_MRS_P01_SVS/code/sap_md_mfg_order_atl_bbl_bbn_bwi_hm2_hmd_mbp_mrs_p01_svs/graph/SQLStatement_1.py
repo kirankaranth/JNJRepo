@@ -5,10 +5,10 @@ from prophecy.libs import typed_lit
 from sap_md_mfg_order_atl_bbl_bbn_bwi_hm2_hmd_mbp_mrs_p01_svs.config.ConfigStore import *
 from sap_md_mfg_order_atl_bbl_bbn_bwi_hm2_hmd_mbp_mrs_p01_svs.udfs.UDFs import *
 
-def DE_DUPLICATE(spark: SparkSession, in0: DataFrame) -> (DataFrame):
+def SQLStatement_1(spark: SparkSession, in0: DataFrame) -> (DataFrame):
     in0.createOrReplaceTempView("in0")
     df1 = spark.sql(
-        "SELECT \r\n    *\r\nFROM\r\n    (SELECT \r\n        OBJNR AS JEST_OBJNR, \r\n        STAT, \r\n        row_number() OVER(PARTITION BY OBJNR ORDER BY OBJNR ASC, STAT DESC) rank_no \r\n    FROM \r\n        in0) a\r\nWHERE rank_no = 1"
+        "SELECT JEST_OBJNR, collect_list(all STAT) AS STAT_LIST, collect_list(all TXT04) AS TXT04_LIST  FROM in0 GROUP BY JEST_OBJNR-- WHERE INACT =' '"
     )
 
     return df1

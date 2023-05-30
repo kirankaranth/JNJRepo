@@ -9,4 +9,4 @@ def STAT_TXT(spark: SparkSession, in0: DataFrame, in1: DataFrame, ) -> DataFrame
     return in0\
         .alias("in0")\
         .join(in1.alias("in1"), (col("in0.STAT") == col("in1.ISTAT")), "left_outer")\
-        .select(col("in0.JEST_OBJNR").alias("JEST_OBJNR"), col("in0.STAT").alias("STAT"), col("in1.TXT04").alias("TXT04"))
+        .select(col("in0.OBJNR").alias("JEST_OBJNR"), col("in0.STAT").alias("STAT"), col("in1.TXT04").alias("TXT04"))

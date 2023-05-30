@@ -7,16 +7,6 @@ from prophecy.utils import *
 from sap_md_mfg_order_atl_bbl_bbn_bwi_hm2_hmd_mbp_mrs_p01_svs.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    df_AFKO = AFKO(spark)
-    df_AFKO = collectMetrics(
-        spark, 
-        df_AFKO, 
-        "graph", 
-        "FCDBOZBZXar7KymMTlm4O$$J50rSlMNbpsLRLUZDiAjN", 
-        "jbKCg95LJ4LOJ7xfLre7Y$$xSqgN69N8Wc2MPZ7BoNx7"
-    )
-    df_DEL3 = DEL3(spark, df_AFKO)
-    df_RENAME = RENAME(spark, df_DEL3)
     df_AUFK = AUFK(spark)
     df_AUFK = collectMetrics(
         spark, 
@@ -26,6 +16,16 @@ def pipeline(spark: SparkSession) -> None:
         "clWL8zK7XPUMMzoNesnYP$$udBwoK-r9Ye8eLCJNWiys"
     )
     df_DELETED = DELETED(spark, df_AUFK)
+    df_AFKO = AFKO(spark)
+    df_AFKO = collectMetrics(
+        spark, 
+        df_AFKO, 
+        "graph", 
+        "FCDBOZBZXar7KymMTlm4O$$J50rSlMNbpsLRLUZDiAjN", 
+        "jbKCg95LJ4LOJ7xfLre7Y$$xSqgN69N8Wc2MPZ7BoNx7"
+    )
+    df_DEL3 = DEL3(spark, df_AFKO)
+    df_Reformat_1 = Reformat_1(spark, df_DEL3)
     df_TJ02T = TJ02T(spark)
     df_TJ02T = collectMetrics(
         spark, 
@@ -44,9 +44,9 @@ def pipeline(spark: SparkSession) -> None:
         "OGKh5A-lI-a_YKvwiHhgn$$3xHIQxG8AB_UkNcfWqy64"
     )
     df_DEL2 = DEL2(spark, df_JEST)
-    df_DE_DUPLICATE = DE_DUPLICATE(spark, df_DEL2)
-    df_STAT_TXT = STAT_TXT(spark, df_DE_DUPLICATE, df_DEL_SPRAS)
-    df_JOIN = JOIN(spark, df_DELETED, df_RENAME, df_STAT_TXT)
+    df_STAT_TXT = STAT_TXT(spark, df_DEL2, df_DEL_SPRAS)
+    df_SQLStatement_1 = SQLStatement_1(spark, df_STAT_TXT)
+    df_JOIN = JOIN(spark, df_DELETED, df_Reformat_1, df_SQLStatement_1)
     df_XFORM = XFORM(spark, df_JOIN)
     df_SELECT_FIELDS = SELECT_FIELDS(spark, df_XFORM)
     df_SELECT_FIELDS = collectMetrics(
