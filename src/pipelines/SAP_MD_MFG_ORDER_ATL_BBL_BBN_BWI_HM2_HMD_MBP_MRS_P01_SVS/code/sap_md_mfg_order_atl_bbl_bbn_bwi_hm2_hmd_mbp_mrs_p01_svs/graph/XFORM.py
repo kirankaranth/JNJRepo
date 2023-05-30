@@ -196,4 +196,48 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
             .otherwise(to_timestamp(concat(col("AFKO_GSTRS"), col("AFKO_GSUZS")), "yyyyMMddHHmmss"))
         )\
         .withColumn("CNFRMD_SCRP_QTY", col("AFKO_IASMG").cast(DecimalType(18, 4)))\
-        .withColumn("CNFRMD_YLD_QTY", col("AFKO_IGMNG").cast(DecimalType(18, 4)))
+        .withColumn("CNFRMD_YLD_QTY", col("AFKO_IGMNG").cast(DecimalType(18, 4)))\
+        .withColumn("RTNG_GRP_CNTR_NUM", trim(col("AFKO_PLNAL")))\
+        .withColumn("RTNG_GRP_CD", trim(col("AFKO_PLNNR")))\
+        .withColumn("RTNG_TYP_CD", trim(col("AFKO_PLNTY")))\
+        .withColumn("RSRVTN_NUM", trim(col("AFKO_RSNUM")))\
+        .withColumn("BOM_ALT_NUM", trim(col("AFKO_STLAL")))\
+        .withColumn("BOM_NUM", trim(col("AFKO_STLNR")))\
+        .withColumn("BOM_CAT_CD", trim(col("AFKO_STLTY")))\
+        .withColumn("MATL_NUM", trim(col("AFKO_PLNBEZ")))\
+        .withColumn("TOT_ORDR_QTY", col("AFKO_GAMNG").cast(DecimalType(18, 4)))\
+        .withColumn("TOT_SCRAP_QTY_IN_ORDR", col("AFKO_GASMG").cast(DecimalType(18, 4)))\
+        .withColumn("BASE_UOM", trim(col("AFKO_GMEIN")))\
+        .withColumn("APPL_OF_THE_TASK_LIST", trim(col("AFKO_PLNAW")))\
+        .withColumn("TASK_LIST_USG", trim(col("AFKO_PVERW")))\
+        .withColumn("MAX_LOT_SIZE", col("AFKO_PLSVB").cast(DecimalType(18, 4)))\
+        .withColumn("TASK_LIST_UOM", trim(col("AFKO_PLNME")))\
+        .withColumn("MIN_LOT_SIZE", col("AFKO_PLSVN").cast(DecimalType(18, 4)))\
+        .withColumn("CHG_NUM1", trim(col("AFKO_PAENR")))\
+        .withColumn("RESP_PLNR_GRP_OR_DEPT", trim(col("AFKO_PLGRP")))\
+        .withColumn("LOT_SIZE_DIVSR", col("AFKO_LODIV").cast(DecimalType(18, 4)))\
+        .withColumn("MATL_NUM1", trim(col("AFKO_STLBEZ")))\
+        .withColumn("BILL_OF_MATL_STS", trim(col("AFKO_STLST")))\
+        .withColumn("BASE_QTY", col("AFKO_SBMNG").cast(DecimalType(18, 4)))\
+        .withColumn("BASE_UNIT_OF_MEAS", trim(col("AFKO_SBMEH")))\
+        .withColumn("CHG_NUM2", trim(col("AFKO_SAENR")))\
+        .withColumn("BOM_USG", trim(col("AFKO_STLAN")))\
+        .withColumn("FROM_LOT_SIZE", col("AFKO_SLSVN").cast(DecimalType(18, 4)))\
+        .withColumn("TO_LOT_SIZE", col("AFKO_SLSBS").cast(DecimalType(18, 4)))\
+        .withColumn("SCHDLNG_MRGN_KEY_FOR_FLOATS", trim(col("AFKO_FHORI")))\
+        .withColumn("SCHDLNG_TYPE", trim(col("AFKO_TERKZ")))\
+        .withColumn("FLOAT_BEF_PRDTN", trim(col("AFKO_VORGZ")))\
+        .withColumn("FLOAT_AFTER_PRDTN", trim(col("AFKO_SICHZ")))\
+        .withColumn("RLSE_PER", trim(col("AFKO_FREIZ")))\
+        .withColumn("CHG_TO_SCHD_DT_IN", trim(col("AFKO_UPTER")))\
+        .withColumn("ID_OF_THE_CAPY_RQR_REC", trim(col("AFKO_BEDID")))\
+        .withColumn("PROJ_DEF", trim(col("AFKO_PRONR")))\
+        .withColumn("INTRNL_CNTR1", trim(col("AFKO_ZAEHL")))\
+        .withColumn("INTRNL_CNTR2", trim(col("AFKO_MZAEHL")))\
+        .withColumn("CNTR_FOR_ADDL_CRITA", trim(col("AFKO_ZKRIZ")))\
+        .withColumn("INSP_LOT_NUM", trim(col("AFKO_PRUEFLOS")))\
+        .withColumn("COST_VRNT_FOR_PLAN_COSTS", trim(col("AFKO_KLVARP")))\
+        .withColumn("COST_VRNT_FOR_ACTL_COSTS", trim(col("AFKO_KLVARI")))\
+        .withColumn("CMPLT_CNFRM_NUM_FOR_THE_OPR", trim(col("AFKO_RUECK")))\
+        .withColumn("INTRNL_CNTR3", trim(col("AFKO_RMZHL")))\
+        .withColumn("CNFG", trim(col("AFKO_CUOBJ")))
