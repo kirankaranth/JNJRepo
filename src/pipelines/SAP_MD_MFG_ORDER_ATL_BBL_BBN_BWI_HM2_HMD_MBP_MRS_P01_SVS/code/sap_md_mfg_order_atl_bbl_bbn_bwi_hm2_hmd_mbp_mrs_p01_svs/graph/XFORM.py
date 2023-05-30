@@ -112,8 +112,8 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
             )
           )
         )\
-        .withColumn("MFG_ORDR_STTS_CD", lookup("LU_STAT", col("OBJNR")).getField("STAT"))\
-        .withColumn("MFG_ORDR_STS_TXT", lookup("LU_STAT", col("OBJNR")).getField("TXT04"))\
+        .withColumn("MFG_ORDR_STTS_CD", trim(col("STAT")))\
+        .withColumn("MFG_ORDR_STS_TXT", trim(col("TXT04")))\
         .withColumn("ORDR_RTNG_NUM", trim(col("AFKO_AUFPL")))\
         .withColumn("MRP_CNTRLLR_CD", trim(col("AFKO_DISPO")))\
         .withColumn("PRD_SPVSR_CD", trim(col("AFKO_FEVOR")))\
