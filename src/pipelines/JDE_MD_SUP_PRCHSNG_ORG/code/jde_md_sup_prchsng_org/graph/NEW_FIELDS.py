@@ -8,28 +8,33 @@ from jde_md_sup_prchsng_org.udfs.UDFs import *
 def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
         .withColumn("SRC_SYS_CD", lit(Config.sourceSystem))\
-        .withColumn("SUP_NUM", col("LIFNR"))\
-        .withColumn("PRCHSNG_ORG_NUM", col("EKORG"))\
+        .withColumn("SUP_NUM", col("A6AN8"))\
+        .withColumn(
+          "PRCHSNG_ORG_NUM",
+          lit(
+            "#"
+          )
+        )\
         .withColumn(
           "CRT_ON_DTTM",
-          when((col("ERDAT") == lit("00000000")), lit(None)).otherwise(to_timestamp(col("ERDAT"), "yyyyMMdd"))
+          when(
+              (
+                (lower(trim(col("a6upmj"))).isNull() | (trim(col("a6upmj")) == lit("")))
+                | (trim(col("a6upmj")) == lit("0"))
+              ), 
+              lit(None)
+            )\
+            .otherwise(to_timestamp(
+            date_add(
+              substring((col("a6upmj") + lit(1900000)), 1, 4).cast(DateType()), 
+              (substring(col("a6upmj"), 4, 3).cast(IntegerType()) - 1)
+            )
+          ))
         )\
-        .withColumn("PRCH_BLK_IND", trim(col("SPERM")))\
-        .withColumn("DEL_IND", trim(col("LOEVM")))\
-        .withColumn("CRNCY_CD", trim(col("WAERS")))\
-        .withColumn("PMT_TERM_CD", trim(col("ZTERM")))\
-        .withColumn("INCOTERM1_CD", trim(col("INCO1")))\
-        .withColumn("INCOTERM2_CD", trim(col("INCO2")))\
-        .withColumn("PRC_PCDR_CD", trim(col("KALSK")))\
-        .withColumn("PRC_CNTL_CD", trim(col("MEPRF")))\
-        .withColumn("EVAL_RCPT_SETLM_CD", trim(col("XERSY")))\
-        .withColumn("RTRN_VEND_IND", trim(col("KZRET")))\
-        .withColumn("CNFRM_CD", trim(col("BSTAE")))\
-        .withColumn("NM_OF_PRSN_RESP_CREAT_OBJ", trim(col("ERNAM")))\
-        .withColumn("GR_BAS_INVC_VERIF", trim(col("WEBRE")))\
-        .withColumn("AUTO_GNR_OF_PO_ALLW", trim(col("KZAUT")))\
-        .withColumn("AUTO_EVAL_RCPT_SETLM", trim(col("XERSR")))\
-        .withColumn("OWN_EXPLN_OF_TERM_OF_PMT", trim(col("VSBED")))\
+        .withColumn("CRNCY_CD", trim(col("A6CRRP")))\
+        .withColumn("INCOTERM1_CD", trim(col("A6FRTH")))\
+        .withColumn("INCOTERM2_CD", trim(col("ABMCU")))\
+        .withColumn("EVAL_RCPT_SETLM_CD", trim(col("A6AVCH")))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
         .withColumn("DAI_UPDT_DTTM", current_timestamp())\

@@ -6,4 +6,4 @@ from jde_md_sup_prchsng_org.config.ConfigStore import *
 from jde_md_sup_prchsng_org.udfs.UDFs import *
 
 def REFORMAT_F0101(spark: SparkSession, in0: DataFrame) -> DataFrame:
-    return in0
+    return in0.select(col("ABMCU"), col("ABAN8"))

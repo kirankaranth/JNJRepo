@@ -6,4 +6,4 @@ from jde_md_sup_prchsng_org.config.ConfigStore import *
 from jde_md_sup_prchsng_org.udfs.UDFs import *
 
 def JDE_FILTER_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
-    return in0.filter(lit(True))
+    return in0.filter((col("_deleted_") == lit("F")))
