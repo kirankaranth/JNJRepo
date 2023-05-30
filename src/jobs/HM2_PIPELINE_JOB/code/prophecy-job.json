@@ -9,7 +9,7 @@
       "clusterMode" : "Single"
     },
     "enabled" : false,
-    "defaultClusterSize" : "Prophecy_Photon_Medium",
+    "defaultClusterSize" : "Prophecy_Large_D12_2_10",
     "alerting" : {
       "emails" : "",
       "onStart" : false,
@@ -58,20 +58,7 @@
       "name" : "CDL_L1_Dev",
       "clusterSizes" : {
         "default" : "Prophecy_Small",
-        "availableClusterSizes" : [ "Prophecy_Small", "Prophecy_Medium", "Prophecy_Large", "Prophecy_Photon_Medium" ]
-      },
-      "pylibsResolutionMode" : {
-        "PublicCentral" : { }
-      },
-      "scalalibsResolutionMode" : {
-        "PublicCentral" : { }
-      }
-    }, {
-      "id" : "36",
-      "name" : "CDL_L1_QA",
-      "clusterSizes" : {
-        "default" : "small",
-        "availableClusterSizes" : [ "small" ]
+        "availableClusterSizes" : [ "Prophecy_Small", "Prophecy_Medium_D12_10", "Prophecy_Large_D12_2_10", "Prophecy_Medium_D16_2_5", "Compute_Medium_F16_2_10" ]
       },
       "pylibsResolutionMode" : {
         "PublicCentral" : { }
@@ -114,8 +101,8 @@
       "metadata" : {
         "label" : "MD_MATL_LOC",
         "slug" : "MD_MATL_LOC",
-        "x" : -840,
-        "y" : -360
+        "x" : -1400,
+        "y" : -760
       },
       "ports" : {
         "inputs" : [ {
@@ -210,8 +197,8 @@
       "metadata" : {
         "label" : "MD_BILL_DOC_HDR",
         "slug" : "MD_BILL_DOC_HDR",
-        "x" : -900,
-        "y" : -520
+        "x" : -1460,
+        "y" : -920
       },
       "ports" : {
         "inputs" : [ {
@@ -285,7 +272,7 @@
             "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "HM2", "default", "HMD" ]
+            "CDL_MD_L1" : [ "BBA", "HMD", "default", "HM2", "BBN" ]
           },
           "overrides" : { },
           "selectedInstance" : "HM2"
@@ -298,8 +285,8 @@
       "metadata" : {
         "label" : "MD_SLS_ORDR_LINE",
         "slug" : "MD_SLS_ORDR_LINE",
-        "x" : -1200,
-        "y" : -360
+        "x" : -1760,
+        "y" : -760
       },
       "ports" : {
         "inputs" : [ {
@@ -363,6 +350,22 @@
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "nonProdFilter",
+            "kind" : {
+              "type" : "boolean",
+              "value" : true
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "nonProdFilterDate",
+            "kind" : {
+              "type" : "string",
+              "value" : "20230101"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
             "CDL_MD_L1" : [ "default", "hmd", "hm2" ]
@@ -378,8 +381,8 @@
       "metadata" : {
         "label" : "MD_PO_HIST",
         "slug" : "MD_PO_HIST",
-        "x" : -1020,
-        "y" : -360
+        "x" : -1580,
+        "y" : -760
       },
       "ports" : {
         "inputs" : [ {
@@ -748,14 +751,102 @@
         }
       }
     },
+    "Zzp7ME7ulfjK6ENNX-Z-b" : {
+      "id" : "Zzp7ME7ulfjK6ENNX-Z-b",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "MD_CUST",
+        "slug" : "MD_CUST",
+        "x" : -1120,
+        "y" : -540
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "BvEtTUDP5olEmglMq6QEz",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "Q2kSZGLvGPAYy5PMY_z5j",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/SAP_01_MD_SHIP_SVS",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MANDT",
+            "kind" : {
+              "type" : "string",
+              "value" : "100"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "configDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "HM2", "default", "HMD" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "HM2"
+        }
+      }
+    },
     "QreLyCMDZlukIw0eF_fti$$HJt9zlXlKJu4W5EqtTzpM" : {
       "id" : "QreLyCMDZlukIw0eF_fti$$HJt9zlXlKJu4W5EqtTzpM",
       "component" : "Pipeline",
       "metadata" : {
         "label" : "MD_PO_SCHED_LINE_DELV",
         "slug" : "MD_PO_SCHED_LINE_DELV",
-        "x" : -1420,
-        "y" : -360
+        "x" : -1980,
+        "y" : -760
       },
       "ports" : {
         "inputs" : [ {
@@ -850,8 +941,8 @@
       "metadata" : {
         "label" : "MD_SER_NUM_STOCK_SGMNT",
         "slug" : "MD_SER_NUM_STOCK_SGMNT",
-        "x" : -1420,
-        "y" : -520
+        "x" : -1980,
+        "y" : -920
       },
       "ports" : {
         "inputs" : [ {
@@ -934,14 +1025,574 @@
         }
       }
     },
+    "O6Cf6z9Q_YBqUTdAALZqF" : {
+      "id" : "O6Cf6z9Q_YBqUTdAALZqF",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "MD_SLS_ORDR",
+        "slug" : "MD_SLS_ORDR",
+        "x" : -1840,
+        "y" : -240
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "R6gJpVKjD3p1gt758IsD1",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "ZWEBx2-_S4pB_24nq9zfT",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/SAP_01_MD_SLS_ORDR_HMD",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MANDT",
+            "kind" : {
+              "type" : "string",
+              "value" : "100"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceTable",
+            "kind" : {
+              "type" : "string",
+              "value" : "VBAK"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "FORBID_SLS_IN",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast( null as STRING)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CLS_OF_TRD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "cast( null as STRING)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "HM2", "default", "HMD" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "HM2"
+        }
+      }
+    },
+    "538nvl_SycIuBV8yIcmn8" : {
+      "id" : "538nvl_SycIuBV8yIcmn8",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "MD_SUP",
+        "slug" : "MD_SUP",
+        "x" : -380,
+        "y" : -540
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "JgJp_sNNRpPUWL1idoRJX",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "DbAGSa7z1NDLD8kcFwJM6",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/MD_SUP_11",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MANDT",
+            "kind" : {
+              "type" : "string",
+              "value" : "100"
+            },
+            "optional" : true,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : "0"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "default", "hmd", "hm2" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "hm2"
+        }
+      }
+    },
+    "Du-Gi5FQnSPBfCAlTsfnF" : {
+      "id" : "Du-Gi5FQnSPBfCAlTsfnF",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "MD_DOC_ITM_INCM_INVC",
+        "slug" : "MD_DOC_ITM_INCM_INVC",
+        "x" : -920,
+        "y" : -540
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "OVQT8TteUG4df4BJcMN7A",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "j-0F-CokbOPJBlmTmkAnd",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/SAP_RSEG",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceTable",
+            "kind" : {
+              "type" : "string",
+              "value" : "RSEG"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MANDT",
+            "kind" : {
+              "type" : "string",
+              "value" : "100"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "TAX_RDCTN_FOR_RETN",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(XRETTAXNET)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "LIFO_FIFO_RLVNT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(XLIFO)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "IN_DOC_PSTD_PREV_PER",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(XRUEB)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CONT_ITM_CAT_PRCHSNG_DOC",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(CONT_PSTYP)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "BTCH_NUM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(CHARG)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "BLOK_RSN_ENHNC_FLD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(SPGREXT)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "UPDT_MLT_ACCT_ASGNMT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(XHISTMA)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CMPNT_RSN_IN_INVC",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(COMPLAINT_REASON)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "RETN_AMT_IN_DOC_CRNCY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(RETAMT_FC)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "RETN_IN_PCT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(RETPC)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "RETN_DUE_DTTM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "case\r\n  when RETDUEDT = '00000000' then null\r\n  else to_timestamp (RETDUEDT, \"yyyyMMdd\")\r\nend"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CASH_LDGR_EXP_REVN_ACCT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(RE_ACCOUNT)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "NUM_OF_PRIN_PRCH_AGMT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ERP_CONTRACT_ID)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ITM_NUM_PRIN_PRCH_AGMT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ERP_CONTRACT_ITM)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CENT_CNTRC",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(SRM_CONTRACT_ID)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CENT_CNTRC_ITM_NUM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(SRM_CONTRACT_ITM)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ITM_KEY_FOR_ESOA_MSG",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(SRVMAPKEY)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ORIG_INVC_ITM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(INV_ITM_ORIGIN)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "GRP_CHAR_FOR_INVC_VERIF",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(INVREL)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "IN_FOR_DIFF_INVC",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(XDINV)\r\n"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DIFF_AMT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(DIFF_AMOUNT)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CMMDTY_REPRC_INVC_VERIF",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(XCPRF)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "INTRNL_LIC_NUM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(LICNO)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ITM_NUM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(ZEILE)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "GEU", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HM2", "BBN", "TAI" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "HM2"
+        }
+      }
+    },
+    "yNPEAmLqESjgc5QtOO60I" : {
+      "id" : "yNPEAmLqESjgc5QtOO60I",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "MD_CRNCY",
+        "slug" : "MD_CRNCY",
+        "x" : -1340,
+        "y" : -520
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "JuG8KtmhRhonAGBaZfz-s",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "lJRXtQBNqZZJixCEcpgfg",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/SAP_MD_CRNCY_BBN_P01_HCS_TAI_BBL_GEU_MBP_FSN_MRS_HM2",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MANDT",
+            "kind" : {
+              "type" : "string",
+              "value" : "100"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "GEU", "FSN", "MBP", "BBL", "HMD", "P01", "MRS", "default", "HCS", "HM2", "BBN", "TAI" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "HM2"
+        }
+      }
+    },
     "T1CvIWKTihAeM0skvN14Q$$zzL-vw5tYSjZ_HaBnbCwx" : {
       "id" : "T1CvIWKTihAeM0skvN14Q$$zzL-vw5tYSjZ_HaBnbCwx",
       "component" : "Pipeline",
       "metadata" : {
         "label" : "MD_MATL_INV",
         "slug" : "MD_MATL_INV",
-        "x" : -700,
-        "y" : -520
+        "x" : -1260,
+        "y" : -920
       },
       "ports" : {
         "inputs" : [ {
@@ -1006,34 +1657,34 @@
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
-            "name" : "DBTABLE1",
+            "name" : "NSDM_V_MARD",
             "kind" : {
               "type" : "string",
-              "value" : "nsdm_v_mard"
+              "value" : "NSDM_V_MARD"
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
-            "name" : "DBTABLE2",
+            "name" : "NSDM_V_MCHB",
             "kind" : {
               "type" : "string",
-              "value" : "nsdm_v_mchb"
+              "value" : "NSDM_V_MCHB"
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
-            "name" : "DBTABLE3",
+            "name" : "NSDM_V_MSKU",
             "kind" : {
               "type" : "string",
-              "value" : "nsdm_v_msku"
+              "value" : "NSDM_V_MSKU"
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
-            "name" : "DBTABLE4",
+            "name" : "MARA",
             "kind" : {
               "type" : "string",
-              "value" : "mara"
+              "value" : "MARA"
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
@@ -1060,8 +1711,8 @@
       "metadata" : {
         "label" : "MD_DELV_LINE",
         "slug" : "MD_DELV_LINE",
-        "x" : -1080,
-        "y" : -520
+        "x" : -1640,
+        "y" : -920
       },
       "ports" : {
         "inputs" : [ {
@@ -1142,14 +1793,638 @@
         }
       }
     },
+    "osR82hCnlurDkmEDFQHOx" : {
+      "id" : "osR82hCnlurDkmEDFQHOx",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "MD_PRCH_DELV_CNFRMS",
+        "slug" : "MD_PRCH_DELV_CNFRMS",
+        "x" : -180,
+        "y" : -540
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "AMs-3m6mNWb_209QF-oO_",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "NbepTGgTIj5Q3is9k10XY",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/MD_PRCH_DELV_CNFRMS_12",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MANDT",
+            "kind" : {
+              "type" : "string",
+              "value" : "100"
+            },
+            "optional" : true,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : "0"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "default", "hmd", "hm2" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "hm2"
+        }
+      }
+    },
+    "tDEybf3r4eREiBtjI9Oxb" : {
+      "id" : "tDEybf3r4eREiBtjI9Oxb",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "MD_DELV",
+        "slug" : "MD_DELV",
+        "x" : -580,
+        "y" : -540
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "TPUzr4rIB0zwAZWie8Q5y",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "uzaSAmWOj_Op5FWKaoB1J",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/MD_DELV_10",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MANDT",
+            "kind" : {
+              "type" : "string",
+              "value" : "100"
+            },
+            "optional" : true,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "default", "hmd", "hm2" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "hm2"
+        }
+      }
+    },
+    "tuzNQo-CuPYRh014B9q_7" : {
+      "id" : "tuzNQo-CuPYRh014B9q_7",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "MD_BOM_HDR",
+        "slug" : "MD_BOM_HDR",
+        "x" : -1960,
+        "y" : -380
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "gzXJjBZOL1-77KOJ5Ed7x",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "bPdKZe7jrqVNlFxrrDk3A",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/SAP_MD_BOM_HDR_ATL_BBL_BWI_FSN_GEU_MBP_P01_SVS_TAI",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MANDT",
+            "kind" : {
+              "type" : "string",
+              "value" : "100"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "BOM_VLD_TO_DTTM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CAST(NULL AS timestamp)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "GEU", "FSN", "ATL", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "hm2", "BBN", "SVS", "TAI", "BWI" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "hm2"
+        }
+      }
+    },
+    "TKOUgjWGbDJr3yO8PY9PJ" : {
+      "id" : "TKOUgjWGbDJr3yO8PY9PJ",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "MD_MATL_UOM",
+        "slug" : "MD_MATL_UOM",
+        "x" : -760,
+        "y" : -540
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "nGk7u7lNvCPYzz_DyP6h-",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "lfX18DMAo7GnqMss2oD33",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/MD_SAP_MATL_UOM_MBP_SVS_P01_HCS_HMD",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "configDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MANDT",
+            "kind" : {
+              "type" : "string",
+              "value" : "100"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTABLE1",
+            "kind" : {
+              "type" : "string",
+              "value" : "t006"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTABLE2",
+            "kind" : {
+              "type" : "string",
+              "value" : "t006a"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTABLE3",
+            "kind" : {
+              "type" : "string",
+              "value" : "t006t"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "MBP", "HMD", "P01", "default", "HCS", "HM2", "SVS" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "HM2"
+        }
+      }
+    },
+    "kXGQ5Zcrm_tBnorpmijjS" : {
+      "id" : "kXGQ5Zcrm_tBnorpmijjS",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "MD_MATL_ALT_UOM",
+        "slug" : "MD_MATL_ALT_UOM",
+        "x" : -1880,
+        "y" : -540
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "o7V0kjFcaq-r3r7JBVW1S",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "cU5kLFi9McnmU5o5SN-jl",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/MD_MATL_ALT_UOM_ATL_BBA_BBL_BBN_BWI_FSN_GEU_HCS_MBP_MRS_P01_SVS_TAI",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "configDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MANDT",
+            "kind" : {
+              "type" : "string",
+              "value" : "100"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "svs", "p01", "bbl", "hmd", "mbp", "bba", "bwi", "tai", "mrs", "hcs", "default", "hm2", "atl", "bbn", "geu", "fsn" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "hm2"
+        }
+      }
+    },
+    "RpihlofdrFRtXM4Vs-TPH" : {
+      "id" : "RpihlofdrFRtXM4Vs-TPH",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "MD_SLS_ORDR_SCHED_LINE_DELV",
+        "slug" : "MD_SLS_ORDR_SCHED_LINE_DELV",
+        "x" : -1600,
+        "y" : -260
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "hu6mN_Ovo2JSrPT_C_bfp",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "i3vgssTr0DFtoA9GRthBh",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/MD_SLS_ORDR_SCHED_LINE_DELV_10",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MANDT",
+            "kind" : {
+              "type" : "string",
+              "value" : "100"
+            },
+            "optional" : true,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "default", "hmd", "hm2" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "hm2"
+        }
+      }
+    },
+    "OvIC0SvL-8mqo1vzuNxBu" : {
+      "id" : "OvIC0SvL-8mqo1vzuNxBu",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "MD_PLNT",
+        "slug" : "MD_PLNT",
+        "x" : -1220,
+        "y" : -380
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "33yPMnnqiMPEziH65e5Z4",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "YScfE1m9uMtvtDMW6hgIs",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/SAP_01_MD_PLNT",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MANDT",
+            "kind" : {
+              "type" : "string",
+              "value" : "100"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "GEU", "FSN", "ATL", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "HM2", "BBN", "SVS", "TAI", "BWI" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "HM2"
+        }
+      }
+    },
     "TNugymgbpq6gi5LTND2dd$$9oVWdkSGY5oBlI_t2KzJT" : {
       "id" : "TNugymgbpq6gi5LTND2dd$$9oVWdkSGY5oBlI_t2KzJT",
       "component" : "Pipeline",
       "metadata" : {
         "label" : "MD_SLS_DOC_PTNR_FUNC",
         "slug" : "MD_SLS_DOC_PTNR_FUNC",
-        "x" : -1260,
-        "y" : -520
+        "x" : -1820,
+        "y" : -920
       },
       "ports" : {
         "inputs" : [ {
@@ -1229,6 +2504,310 @@
           "selectedInstance" : "HM2"
         }
       }
+    },
+    "XOdPyZcLGAOq_QaeVtR9s" : {
+      "id" : "XOdPyZcLGAOq_QaeVtR9s",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "MD_MATL_MVMT_HDR",
+        "slug" : "MD_MATL_MVMT_HDR",
+        "x" : -1560,
+        "y" : -560
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "ehOm2V67xM-pU706bYESR",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "4O8OLRhfteBblmSrtz3Pt",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/SAP_MD_MATL_MVMT_HDR_HMD",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MANDT",
+            "kind" : {
+              "type" : "string",
+              "value" : "100"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "HM2", "default", "HMD" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "HM2"
+        }
+      }
+    },
+    "zp0yhS3xg4u1VhajKYcdQ" : {
+      "id" : "zp0yhS3xg4u1VhajKYcdQ",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "MD_MATL_BOM",
+        "slug" : "MD_MATL_BOM",
+        "x" : -1480,
+        "y" : -380
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "FmOS56FeoS7wWFbxiA2or",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "996oXXfcS-Ehzt5oriMxD",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/SAP_MD_MATL_BOM",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MANDT",
+            "kind" : {
+              "type" : "string",
+              "value" : "100"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "GEU", "FSN", "ATL", "MBP", "BBA", "BBL", "HMD", "P01", "MRS", "default", "HCS", "HM2", "BBN", "SVS", "TAI", "BWI" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "HM2"
+        }
+      }
+    },
+    "qjwIn7vRkdtQm5ElxW25L" : {
+      "id" : "qjwIn7vRkdtQm5ElxW25L",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "MD_MATL",
+        "slug" : "MD_MATL",
+        "x" : -1720,
+        "y" : -420
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "vutC6ddb5tUWbTRO-FMaa",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "qHpUqCqm59Y0KgKx43jf4",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/SAP_MD_MATL_HM2",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : "hm2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "configDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MANDT",
+            "kind" : {
+              "type" : "string",
+              "value" : "100"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTABLE1",
+            "kind" : {
+              "type" : "string",
+              "value" : "mara"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTABLE2",
+            "kind" : {
+              "type" : "string",
+              "value" : "makt"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTABLE3",
+            "kind" : {
+              "type" : "string",
+              "value" : "ausp"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTABLE4",
+            "kind" : {
+              "type" : "string",
+              "value" : "inob"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTABLE5",
+            "kind" : {
+              "type" : "string",
+              "value" : "cabn"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "default", "hmd", "hm2" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "hm2"
+        }
+      }
     }
   },
   "connections" : [ {
@@ -1273,5 +2852,101 @@
     "target" : "TNugymgbpq6gi5LTND2dd$$9oVWdkSGY5oBlI_t2KzJT",
     "sourcePort" : "YqlqWRYnUWig8zPAnbex5$$IV3xRyr3TkqpQA6-HpUjT",
     "targetPort" : "gQrx-Trj6jJ4IQ3luHxEL$$--HhLKZhmdihRNxHroIG0"
+  }, {
+    "id" : "eJWmBwbn_6igWzoyS3kq6",
+    "source" : "tuzNQo-CuPYRh014B9q_7",
+    "target" : "kXGQ5Zcrm_tBnorpmijjS",
+    "sourcePort" : "bPdKZe7jrqVNlFxrrDk3A",
+    "targetPort" : "o7V0kjFcaq-r3r7JBVW1S"
+  }, {
+    "id" : "RTco8ps57ttbigQyOly0P",
+    "source" : "kXGQ5Zcrm_tBnorpmijjS",
+    "target" : "qjwIn7vRkdtQm5ElxW25L",
+    "sourcePort" : "cU5kLFi9McnmU5o5SN-jl",
+    "targetPort" : "vutC6ddb5tUWbTRO-FMaa"
+  }, {
+    "id" : "GFFRVKnsa5Zbp6zCwK6ge",
+    "source" : "qjwIn7vRkdtQm5ElxW25L",
+    "target" : "XOdPyZcLGAOq_QaeVtR9s",
+    "sourcePort" : "qHpUqCqm59Y0KgKx43jf4",
+    "targetPort" : "ehOm2V67xM-pU706bYESR"
+  }, {
+    "id" : "ssG969681ZgsxNCeWsnLF",
+    "source" : "XOdPyZcLGAOq_QaeVtR9s",
+    "target" : "zp0yhS3xg4u1VhajKYcdQ",
+    "sourcePort" : "4O8OLRhfteBblmSrtz3Pt",
+    "targetPort" : "FmOS56FeoS7wWFbxiA2or"
+  }, {
+    "id" : "BlFtZYB92R1zNlzXo_NHW",
+    "source" : "OvIC0SvL-8mqo1vzuNxBu",
+    "target" : "Zzp7ME7ulfjK6ENNX-Z-b",
+    "sourcePort" : "YScfE1m9uMtvtDMW6hgIs",
+    "targetPort" : "BvEtTUDP5olEmglMq6QEz"
+  }, {
+    "id" : "i3YFbGV13t2v1ziO2Uo1f",
+    "source" : "Zzp7ME7ulfjK6ENNX-Z-b",
+    "target" : "Du-Gi5FQnSPBfCAlTsfnF",
+    "sourcePort" : "Q2kSZGLvGPAYy5PMY_z5j",
+    "targetPort" : "OVQT8TteUG4df4BJcMN7A"
+  }, {
+    "id" : "KIL38l29suesBlNsU4STd",
+    "source" : "Du-Gi5FQnSPBfCAlTsfnF",
+    "target" : "TKOUgjWGbDJr3yO8PY9PJ",
+    "sourcePort" : "j-0F-CokbOPJBlmTmkAnd",
+    "targetPort" : "nGk7u7lNvCPYzz_DyP6h-"
+  }, {
+    "id" : "7mIzbnUG6Q3Rgm054O69M",
+    "source" : "TKOUgjWGbDJr3yO8PY9PJ",
+    "target" : "tDEybf3r4eREiBtjI9Oxb",
+    "sourcePort" : "lfX18DMAo7GnqMss2oD33",
+    "targetPort" : "TPUzr4rIB0zwAZWie8Q5y"
+  }, {
+    "id" : "smv-Ed578H3H0vvjhj8V7",
+    "source" : "tDEybf3r4eREiBtjI9Oxb",
+    "target" : "538nvl_SycIuBV8yIcmn8",
+    "sourcePort" : "uzaSAmWOj_Op5FWKaoB1J",
+    "targetPort" : "JgJp_sNNRpPUWL1idoRJX"
+  }, {
+    "id" : "iQGr7SStTDwH1PKIr0iJP",
+    "source" : "tDEybf3r4eREiBtjI9Oxb",
+    "target" : "538nvl_SycIuBV8yIcmn8",
+    "sourcePort" : "uzaSAmWOj_Op5FWKaoB1J",
+    "targetPort" : "JgJp_sNNRpPUWL1idoRJX"
+  }, {
+    "id" : "0UkGxBKblcYOzEXUMWabE",
+    "source" : "538nvl_SycIuBV8yIcmn8",
+    "target" : "osR82hCnlurDkmEDFQHOx",
+    "sourcePort" : "DbAGSa7z1NDLD8kcFwJM6",
+    "targetPort" : "AMs-3m6mNWb_209QF-oO_"
+  }, {
+    "id" : "AyAudjRarmscTfYsE1Ucp",
+    "source" : "538nvl_SycIuBV8yIcmn8",
+    "target" : "osR82hCnlurDkmEDFQHOx",
+    "sourcePort" : "DbAGSa7z1NDLD8kcFwJM6",
+    "targetPort" : "AMs-3m6mNWb_209QF-oO_"
+  }, {
+    "id" : "u6-OImtGrTBl8YNOZI7P5",
+    "source" : "O6Cf6z9Q_YBqUTdAALZqF",
+    "target" : "RpihlofdrFRtXM4Vs-TPH",
+    "sourcePort" : "ZWEBx2-_S4pB_24nq9zfT",
+    "targetPort" : "hu6mN_Ovo2JSrPT_C_bfp"
+  }, {
+    "id" : "T6g1LYpKrD8O5meKp3AUe",
+    "source" : "zp0yhS3xg4u1VhajKYcdQ",
+    "target" : "yNPEAmLqESjgc5QtOO60I",
+    "sourcePort" : "996oXXfcS-Ehzt5oriMxD",
+    "targetPort" : "JuG8KtmhRhonAGBaZfz-s"
+  }, {
+    "id" : "C3-8EZCgk86SNpVVBznDN",
+    "source" : "yNPEAmLqESjgc5QtOO60I",
+    "target" : "OvIC0SvL-8mqo1vzuNxBu",
+    "sourcePort" : "lJRXtQBNqZZJixCEcpgfg",
+    "targetPort" : "33yPMnnqiMPEziH65e5Z4"
+  }, {
+    "id" : "hBWouQkV-40juGSc4NSwe",
+    "source" : "yNPEAmLqESjgc5QtOO60I",
+    "target" : "OvIC0SvL-8mqo1vzuNxBu",
+    "sourcePort" : "lJRXtQBNqZZJixCEcpgfg",
+    "targetPort" : "33yPMnnqiMPEziH65e5Z4"
   } ]
 }
