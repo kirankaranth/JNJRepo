@@ -7,7 +7,9 @@ from prophecy.utils import *
 from jde_md_mfg_order.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    pass
+    df_F4801 = F4801(spark)
+    df_DEL = DEL(spark, df_F4801)
+    df_XFORM = XFORM(spark, df_DEL)
 
 def main():
     spark = SparkSession.builder\
