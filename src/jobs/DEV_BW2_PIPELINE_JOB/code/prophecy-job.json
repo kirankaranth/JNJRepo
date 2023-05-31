@@ -1349,7 +1349,7 @@
         }
       },
       "properties" : {
-        "pipelineId" : "pipelines/JDE_01_MD_MATL_INV",
+        "pipelineId" : "pipelines/JDE_BW2_MD_MATL",
         "configurations" : {
           "schema" : [ {
             "name" : "targetSchema",
@@ -1376,6 +1376,14 @@
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
+            "name" : "configDatabase",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
             "name" : "DBTABLE",
             "kind" : {
               "type" : "string",
@@ -1387,7 +1395,23 @@
             "name" : "DBTABLE1",
             "kind" : {
               "type" : "string",
-              "value" : "f41021"
+              "value" : "f0005_adt"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTABLE2",
+            "kind" : {
+              "type" : "string",
+              "value" : "f4104_adt"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DBTABLE3",
+            "kind" : {
+              "type" : "string",
+              "value" : "f6060002"
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
@@ -1400,25 +1424,336 @@
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
-            "name" : "DIVISOR",
-            "optional" : false,
-            "comment" : "What we should divide the inventory number by",
+            "name" : "BRAVO_MINOR_DESC_FILTER",
             "kind" : {
-              "type" : "int",
-              "value" : 1000
+              "type" : "spark_expression",
+              "value" : "10"
             },
+            "optional" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
-            "name" : "configDatabase",
+            "name" : "B_M_LU_Field",
             "kind" : {
-              "type" : "string",
-              "value" : " "
+              "type" : "spark_expression",
+              "value" : "IMSRP0"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "FRAN_CD_FILTER",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "S1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "F_C_LU_Field",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "IMSRP1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MATL_GRP_FILTER",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "\"Filter N/A\""
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "M_G_LU_Field",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "\"Field N/A\""
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MATL_TYPE_DESC_FILTER",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "S2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "M_T_D_LU_Field",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "IMSRP2"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MATL_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "TRIM(IMGLPT)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "BRND_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "TRIM(IMSRP5)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "FRANCHISE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "TRIM(IMSRP1)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "LCL_PLNG_SUB_FRAN_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "TRIM(IMSRP2)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MATL_GRP_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "TRIM(IMPRP7)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "INDSTR_SECTR_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "null"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MIN_SHLF_RMN_LIF_DAYS_CNT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "null"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DSTN_CHN_STS_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "null"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PROD_HIER_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "TRIM(IMSRP3)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "STRG_CONDS_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "null"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "BTCH_MNG_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CASE WHEN TRIM(IMSRCE) in ('0',' ', null) THEN '' ELSE 'X' END"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MATL_SHRT_DESC",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "TRIM(IMDSC1)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SRC_SECTR_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "null"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MATL_PARNT_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "TRIM(IMLITM)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MATL_SUB_TYPE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "TRIM(IMSRP4)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "FIN_HIER_BASE_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "TRIM(IMPRP5)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "IMPLNT_INSTM_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "null"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "KIT_IND",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "null"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DIR_PART_MRKNG_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "null"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MATL_CAT_GRP_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "TRIM(IMSRP5)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PLNG_HIER3_CD",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "TRIM(IMPRP8)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MATL_SPEC_NUM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "TRIM(IMDRAW)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MATL_SPEC_VERS_NUM",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "TRIM(IMRVNO)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VOL_UNIT",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "TRIM(IMVCUD)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "VOL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "IMUVM1"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "EAN_UPC",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "null"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MAIN_STRG_LOC",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "null"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "PROD_LINE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "TRIM(IMPRP4)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "MAKE_BUY_IN",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "null"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "TYPE_OF_MATERIAL",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "null"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "STERILE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "null"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "BRAVO_MINOR_CODE",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "TRIM(IMSRP0)"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CMMDTY",
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "TRIM(IMPRP1)"
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "djd", "mtr", "sjd", "jes", "jet", "gmd", "bw2", "jsw", "default", "jem", "deu" ]
+            "CDL_MD_L1" : [ "bw2", "default" ]
           },
           "overrides" : { },
           "selectedInstance" : "bw2"
