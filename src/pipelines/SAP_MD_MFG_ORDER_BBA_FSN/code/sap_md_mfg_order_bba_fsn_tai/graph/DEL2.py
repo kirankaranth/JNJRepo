@@ -7,5 +7,5 @@ from sap_md_mfg_order_bba_fsn_tai.udfs.UDFs import *
 
 def DEL2(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0.filter(
-        (((col("_deleted_") == lit("F")) & (col("MANDT") == lit(Config.MANDT))) & (col("INACT") == lit(" ")))
+        (((col("_deleted_") == lit("F")) & (col("MANDT") == lit(Config.MANDT))) & (col("INACT") != lit("X")))
     )
