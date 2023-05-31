@@ -9,7 +9,7 @@
       "clusterMode" : "Single"
     },
     "enabled" : true,
-    "defaultClusterSize" : "Prophecy_Large_D12_2_10",
+    "defaultClusterSize" : "Prophecy_Medium_D16_2_5",
     "alerting" : {
       "emails" : "",
       "onStart" : false,
@@ -41,6 +41,19 @@
         "PublicCentral" : { }
       }
     }, {
+      "id" : "37",
+      "name" : "CDL_L1_Dev_Pharm",
+      "clusterSizes" : {
+        "default" : "small",
+        "availableClusterSizes" : [ "small" ]
+      },
+      "pylibsResolutionMode" : {
+        "PublicCentral" : { }
+      },
+      "scalalibsResolutionMode" : {
+        "PublicCentral" : { }
+      }
+    }, {
       "id" : "16",
       "name" : "vkalluru-pilot",
       "clusterSizes" : {
@@ -59,6 +72,19 @@
       "clusterSizes" : {
         "default" : "Prophecy_Small",
         "availableClusterSizes" : [ "Prophecy_Small", "Prophecy_Medium_D12_10", "Prophecy_Large_D12_2_10", "Prophecy_Medium_D16_2_5", "Compute_Medium_F16_2_10" ]
+      },
+      "pylibsResolutionMode" : {
+        "PublicCentral" : { }
+      },
+      "scalalibsResolutionMode" : {
+        "PublicCentral" : { }
+      }
+    }, {
+      "id" : "36",
+      "name" : "CDL_L1_QA",
+      "clusterSizes" : {
+        "default" : "small",
+        "availableClusterSizes" : [ "small" ]
       },
       "pylibsResolutionMode" : {
         "PublicCentral" : { }
@@ -660,9 +686,17 @@
         }
       },
       "properties" : {
-        "pipelineId" : "pipelines/MD_DELV_2",
+        "pipelineId" : "pipelines/SAP_MD_DELV_LINE_FSN_GEU_HCS_MRS_P01_SVS_ATL",
         "configurations" : {
           "schema" : [ {
+            "name" : "sourceSystem",
+            "kind" : {
+              "type" : "string",
+              "value" : "fsn"
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
             "name" : "targetSchema",
             "kind" : {
               "type" : "string",
@@ -671,10 +705,10 @@
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
-            "name" : "sourceSystem",
+            "name" : "MANDT",
             "kind" : {
               "type" : "string",
-              "value" : "fsn"
+              "value" : "100"
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
@@ -687,14 +721,6 @@
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
-            "name" : "MANDT",
-            "kind" : {
-              "type" : "string",
-              "value" : "100"
-            },
-            "optional" : true,
-            "isWorkflowNodeConfiguration" : false
-          }, {
             "name" : "DAI_ETL_ID",
             "kind" : {
               "type" : "int",
@@ -702,12 +728,20 @@
             },
             "optional" : false,
             "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabse",
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "optional" : false,
+            "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
-            "CDL_MD_L1" : [ "default", "fsn" ]
+            "CDL_MD_L1" : [ "GEU", "FSN", "ATL", "P01", "MRS", "default", "HCS", "SVS" ]
           },
           "overrides" : { },
-          "selectedInstance" : "fsn"
+          "selectedInstance" : "FSN"
         }
       }
     },
