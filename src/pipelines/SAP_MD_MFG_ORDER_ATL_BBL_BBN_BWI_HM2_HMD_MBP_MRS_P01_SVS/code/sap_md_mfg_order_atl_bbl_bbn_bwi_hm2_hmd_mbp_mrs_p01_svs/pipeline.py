@@ -25,7 +25,7 @@ def pipeline(spark: SparkSession) -> None:
         "jbKCg95LJ4LOJ7xfLre7Y$$xSqgN69N8Wc2MPZ7BoNx7"
     )
     df_DEL3 = DEL3(spark, df_AFKO)
-    df_Reformat_1 = Reformat_1(spark, df_DEL3)
+    df_RE_NAME = RE_NAME(spark, df_DEL3)
     df_TJ02T = TJ02T(spark)
     df_TJ02T = collectMetrics(
         spark, 
@@ -45,8 +45,8 @@ def pipeline(spark: SparkSession) -> None:
     )
     df_DEL2 = DEL2(spark, df_JEST)
     df_STAT_TXT = STAT_TXT(spark, df_DEL2, df_DEL_SPRAS)
-    df_SQLStatement_1 = SQLStatement_1(spark, df_STAT_TXT)
-    df_JOIN = JOIN(spark, df_DELETED, df_Reformat_1, df_SQLStatement_1)
+    df_LIST_STATUS = LIST_STATUS(spark, df_STAT_TXT)
+    df_JOIN = JOIN(spark, df_DELETED, df_RE_NAME, df_LIST_STATUS)
     df_XFORM = XFORM(spark, df_JOIN)
     df_SELECT_FIELDS = SELECT_FIELDS(spark, df_XFORM)
     df_SELECT_FIELDS = collectMetrics(
