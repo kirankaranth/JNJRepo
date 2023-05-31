@@ -7,9 +7,13 @@ from prophecy.utils import *
 from sap_md_mfg_order_hcs.graph import *
 
 def pipeline(spark: SparkSession) -> None:
+    df_JEST = JEST(spark)
+    df_DEL2 = DEL2(spark, df_JEST)
+    df_LIST_STATUS = LIST_STATUS(spark, df_DEL2)
     df_AUFK = AUFK(spark)
     df_DELETED = DELETED(spark, df_AUFK)
-    df_XFORM = XFORM(spark, df_DELETED)
+    df_JOIN = JOIN(spark, df_DELETED, df_LIST_STATUS)
+    df_XFORM = XFORM(spark, df_JOIN)
     df_SELECT_FIELDS = SELECT_FIELDS(spark, df_XFORM)
     MFG_ORDER(spark, df_SELECT_FIELDS)
 

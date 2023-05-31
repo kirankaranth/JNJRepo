@@ -102,10 +102,14 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
             )
           )
         )\
-        .withColumn("_pk_md5_", md5(
-        to_json(
-          expr(
-            "named_struct('SRC_SYS_CD', SRC_SYS_CD, 'MFG_ORDR_TYP_CD', MFG_ORDR_TYP_CD, 'MFG_ORDR_NUM', MFG_ORDR_NUM)"
+        .withColumn(
+          "_pk_md5_",
+          md5(
+            to_json(
+              expr(
+                "named_struct('SRC_SYS_CD', SRC_SYS_CD, 'MFG_ORDR_TYP_CD', MFG_ORDR_TYP_CD, 'MFG_ORDR_NUM', MFG_ORDR_NUM)"
+              )
+            )
           )
-        )
-    ))
+        )\
+        .withColumn("MFG_ORDR_STTS_CD", trim(col("STAT_LIST")))

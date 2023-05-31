@@ -62,5 +62,6 @@ def SELECT_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("_l1_upt_"), 
         col("PRIM_KEY").alias("_pk_"), 
         col("_pk_md5_"), 
-        col("L0_DELETED").alias("_deleted_")
+        col("L0_DELETED").alias("_deleted_"), 
+        col("MFG_ORDR_STTS_CD")
     )
