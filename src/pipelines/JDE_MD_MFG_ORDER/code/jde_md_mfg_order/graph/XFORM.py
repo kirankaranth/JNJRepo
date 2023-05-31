@@ -107,9 +107,36 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
             )
           )
         )\
-        .withColumn("SCHD_STRT_DTTM", to_timestamp(
-        date_add(
-          substring((col("wastrt") + lit(1900000)), 1, 4).cast(DateType()), 
-          (substring(col("wastrt"), 4, 3).cast(IntegerType()) - 1)
-        )
-    ))
+        .withColumn(
+          "SCHD_STRT_DTTM",
+          to_timestamp(
+            date_add(
+              substring((col("wastrt") + lit(1900000)), 1, 4).cast(DateType()), 
+              (substring(col("wastrt"), 4, 3).cast(IntegerType()) - 1)
+            )
+          )
+        )\
+        .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
+        .withColumn("DAI_CRT_DTTM", current_timestamp())\
+        .withColumn("DAI_UPDT_DTTM", current_timestamp())\
+        .withColumn("_l0_upt_", col("_upt_"))\
+        .withColumn(
+          "_pk_",
+          to_json(
+            expr(
+              "named_struct('SRC_SYS_CD', SRC_SYS_CD, 'MFG_ORDR_TYP_CD', MFG_ORDR_TYP_CD, 'MFG_ORDR_NUM', MFG_ORDR_NUM)"
+            )
+          )
+        )\
+        .withColumn(
+          "_pk_md5_",
+          md5(
+            to_json(
+              expr(
+                "named_struct('SRC_SYS_CD', SRC_SYS_CD, 'MFG_ORDR_TYP_CD', MFG_ORDR_TYP_CD, 'MFG_ORDR_NUM', MFG_ORDR_NUM)"
+              )
+            )
+          )
+        )\
+        .withColumn("_1l_upt_", current_timestamp())\
+        .withColumn("_l0_deleted_", col("_deleted_"))
