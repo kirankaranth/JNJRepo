@@ -5,7 +5,5 @@ from prophecy.libs import typed_lit
 from sap_md_mfg_order_geu.config.ConfigStore import *
 from sap_md_mfg_order_geu.udfs.UDFs import *
 
-def LU_STAT(spark: SparkSession, in0: DataFrame):
-    keyColumns = ['''OBJNR''']
-    valueColumns = ['''STAT''', '''TXT04''']
-    createLookup("LU_STAT", in0, spark, keyColumns, valueColumns)
+def JOIN(spark: SparkSession, in0: DataFrame, in1: DataFrame, ) -> DataFrame:
+    return in0.alias("in0").join(in1.alias("in1"), (col("in0.OBJNR") == col("in1.JEST_OBJNR")), "inner")
