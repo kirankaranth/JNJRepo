@@ -18,8 +18,8 @@ class Config(ConfigBase):
 
     def update(
             self,
-            sourceDatabase: str="bbl",
-            sourceSystem: str="bbl",
+            sourceDatabase: str="bba",
+            sourceSystem: str="bba",
             MANDT: str="100",
             configDatabase: str=" ",
             DAI_ETL_ID: int=0,
