@@ -139,4 +139,4 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
           )
         )\
         .withColumn("_l1_upt_", current_timestamp())\
-        .withColumn("_l0_deleted_", col("_deleted_"))
+        .withColumn("_deleted_", col("_deleted_"))
