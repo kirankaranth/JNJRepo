@@ -1,10 +1,10 @@
 from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
-from sap_md_mfg_order_atl_bbl_bbn_bwi_hm2_hmd_mbp_mrs_p01_svs.config.ConfigStore import *
-from sap_md_mfg_order_atl_bbl_bbn_bwi_hm2_hmd_mbp_mrs_p01_svs.udfs.UDFs import *
+from sap_md_mfg_order_atl_bbl_bbn_bwi_hmd_mbp_mrs_p01_svs.config.ConfigStore import *
+from sap_md_mfg_order_atl_bbl_bbn_bwi_hmd_mbp_mrs_p01_svs.udfs.UDFs import *
 from prophecy.utils import *
-from sap_md_mfg_order_atl_bbl_bbn_bwi_hm2_hmd_mbp_mrs_p01_svs.graph import *
+from sap_md_mfg_order_atl_bbl_bbn_bwi_hmd_mbp_mrs_p01_svs.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_AUFK = AUFK(spark)

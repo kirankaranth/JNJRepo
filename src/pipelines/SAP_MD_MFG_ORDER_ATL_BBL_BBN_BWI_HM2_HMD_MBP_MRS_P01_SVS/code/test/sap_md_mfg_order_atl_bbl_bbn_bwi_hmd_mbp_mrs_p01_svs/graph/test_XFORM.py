@@ -4,8 +4,8 @@ from pyspark.sql.types import *
 from argparse import Namespace
 from prophecy.test import BaseTestCase
 from prophecy.test.utils import *
-from sap_md_mfg_order_atl_bbl_bbn_bwi_hm2_hmd_mbp_mrs_p01_svs.graph.XFORM import *
-from sap_md_mfg_order_atl_bbl_bbn_bwi_hm2_hmd_mbp_mrs_p01_svs.config.ConfigStore import *
+from sap_md_mfg_order_atl_bbl_bbn_bwi_hmd_mbp_mrs_p01_svs.graph.XFORM import *
+from sap_md_mfg_order_atl_bbl_bbn_bwi_hmd_mbp_mrs_p01_svs.config.ConfigStore import *
 
 
 class XFORMTest(BaseTestCase):
@@ -13,14 +13,14 @@ class XFORMTest(BaseTestCase):
     def test_first_15_strings(self):
         dfIn0 = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/sap_md_mfg_order_atl_bbl_bbn_bwi_hm2_hmd_mbp_mrs_p01_svs/graph/XFORM/in0/schema.json',
-            'test/resources/data/sap_md_mfg_order_atl_bbl_bbn_bwi_hm2_hmd_mbp_mrs_p01_svs/graph/XFORM/in0/data/test_first_15_strings.json',
+            'test/resources/data/sap_md_mfg_order_atl_bbl_bbn_bwi_hmd_mbp_mrs_p01_svs/graph/XFORM/in0/schema.json',
+            'test/resources/data/sap_md_mfg_order_atl_bbl_bbn_bwi_hmd_mbp_mrs_p01_svs/graph/XFORM/in0/data/test_first_15_strings.json',
             'in0'
         )
         dfOut = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/sap_md_mfg_order_atl_bbl_bbn_bwi_hm2_hmd_mbp_mrs_p01_svs/graph/XFORM/out/schema.json',
-            'test/resources/data/sap_md_mfg_order_atl_bbl_bbn_bwi_hm2_hmd_mbp_mrs_p01_svs/graph/XFORM/out/data/test_first_15_strings.json',
+            'test/resources/data/sap_md_mfg_order_atl_bbl_bbn_bwi_hmd_mbp_mrs_p01_svs/graph/XFORM/out/schema.json',
+            'test/resources/data/sap_md_mfg_order_atl_bbl_bbn_bwi_hmd_mbp_mrs_p01_svs/graph/XFORM/out/data/test_first_15_strings.json',
             'out'
         )
         dfOutComputed = XFORM(self.spark, dfIn0)
@@ -67,14 +67,14 @@ class XFORMTest(BaseTestCase):
     def test_datetime_test(self):
         dfIn0 = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/sap_md_mfg_order_atl_bbl_bbn_bwi_hm2_hmd_mbp_mrs_p01_svs/graph/XFORM/in0/schema.json',
-            'test/resources/data/sap_md_mfg_order_atl_bbl_bbn_bwi_hm2_hmd_mbp_mrs_p01_svs/graph/XFORM/in0/data/test_datetime_test.json',
+            'test/resources/data/sap_md_mfg_order_atl_bbl_bbn_bwi_hmd_mbp_mrs_p01_svs/graph/XFORM/in0/schema.json',
+            'test/resources/data/sap_md_mfg_order_atl_bbl_bbn_bwi_hmd_mbp_mrs_p01_svs/graph/XFORM/in0/data/test_datetime_test.json',
             'in0'
         )
         dfOut = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/sap_md_mfg_order_atl_bbl_bbn_bwi_hm2_hmd_mbp_mrs_p01_svs/graph/XFORM/out/schema.json',
-            'test/resources/data/sap_md_mfg_order_atl_bbl_bbn_bwi_hm2_hmd_mbp_mrs_p01_svs/graph/XFORM/out/data/test_datetime_test.json',
+            'test/resources/data/sap_md_mfg_order_atl_bbl_bbn_bwi_hmd_mbp_mrs_p01_svs/graph/XFORM/out/schema.json',
+            'test/resources/data/sap_md_mfg_order_atl_bbl_bbn_bwi_hmd_mbp_mrs_p01_svs/graph/XFORM/out/data/test_datetime_test.json',
             'out'
         )
         dfOutComputed = XFORM(self.spark, dfIn0)
@@ -83,14 +83,14 @@ class XFORMTest(BaseTestCase):
     def test_decimal_test(self):
         dfIn0 = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/sap_md_mfg_order_atl_bbl_bbn_bwi_hm2_hmd_mbp_mrs_p01_svs/graph/XFORM/in0/schema.json',
-            'test/resources/data/sap_md_mfg_order_atl_bbl_bbn_bwi_hm2_hmd_mbp_mrs_p01_svs/graph/XFORM/in0/data/test_decimal_test.json',
+            'test/resources/data/sap_md_mfg_order_atl_bbl_bbn_bwi_hmd_mbp_mrs_p01_svs/graph/XFORM/in0/schema.json',
+            'test/resources/data/sap_md_mfg_order_atl_bbl_bbn_bwi_hmd_mbp_mrs_p01_svs/graph/XFORM/in0/data/test_decimal_test.json',
             'in0'
         )
         dfOut = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/sap_md_mfg_order_atl_bbl_bbn_bwi_hm2_hmd_mbp_mrs_p01_svs/graph/XFORM/out/schema.json',
-            'test/resources/data/sap_md_mfg_order_atl_bbl_bbn_bwi_hm2_hmd_mbp_mrs_p01_svs/graph/XFORM/out/data/test_decimal_test.json',
+            'test/resources/data/sap_md_mfg_order_atl_bbl_bbn_bwi_hmd_mbp_mrs_p01_svs/graph/XFORM/out/schema.json',
+            'test/resources/data/sap_md_mfg_order_atl_bbl_bbn_bwi_hmd_mbp_mrs_p01_svs/graph/XFORM/out/data/test_decimal_test.json',
             'out'
         )
         dfOutComputed = XFORM(self.spark, dfIn0)
