@@ -11,6 +11,7 @@ def pipeline(spark: SparkSession) -> None:
     df_DEL = DEL(spark, df_T052U)
     df_XFORM = XFORM(spark, df_DEL)
     df_SELECT_FIELDS = SELECT_FIELDS(spark, df_XFORM)
+    PMENT_TS(spark, df_SELECT_FIELDS)
 
 def main():
     spark = SparkSession.builder\
