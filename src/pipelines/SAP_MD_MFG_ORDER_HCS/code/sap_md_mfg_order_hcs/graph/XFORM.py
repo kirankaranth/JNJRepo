@@ -92,10 +92,10 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
         .withColumn("DAI_UPDT_DTTM", current_timestamp())\
         .withColumn("_l0_upt_", col("_upt_"))\
-        .withColumn("L0_DELETED", col("_deleted_"))\
+        .withColumn("_deleted_", col("_deleted_"))\
         .withColumn("_l1_upt_", current_timestamp())\
         .withColumn(
-          "PRIM_KEY",
+          "_pk_",
           to_json(
             expr(
               "named_struct('SRC_SYS_CD', SRC_SYS_CD, 'MFG_ORDR_TYP_CD', MFG_ORDR_TYP_CD, 'MFG_ORDR_NUM', MFG_ORDR_NUM)"

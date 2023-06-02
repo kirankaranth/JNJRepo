@@ -6,4 +6,4 @@ from sap_md_mfg_order_geu.config.ConfigStore import *
 from sap_md_mfg_order_geu.udfs.UDFs import *
 
 def DEL_SPRAS(spark: SparkSession, in0: DataFrame) -> DataFrame:
-    return in0.filter(lit(True))
+    return in0.filter(((col("SPRAS") == lit("E")) & (col("_deleted_") == lit("F"))))
