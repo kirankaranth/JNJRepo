@@ -10,7 +10,7 @@ class Config(ConfigBase):
             MANDT: str=None,
             targetSchema: str=None,
             configDatabase: str=None,
-            DAI_ETL_ID: str=None,
+            DAI_ETL_ID: int=None,
             **kwargs
     ):
         self.spark = None
@@ -23,7 +23,7 @@ class Config(ConfigBase):
             MANDT: str="100",
             targetSchema: str="dev_md_l1",
             configDatabase: str=" ",
-            DAI_ETL_ID: str="0",
+            DAI_ETL_ID: int=0,
             **kwargs
     ):
         prophecy_spark = self.spark
@@ -32,5 +32,5 @@ class Config(ConfigBase):
         self.MANDT = MANDT
         self.targetSchema = targetSchema
         self.configDatabase = configDatabase
-        self.DAI_ETL_ID = DAI_ETL_ID
+        self.DAI_ETL_ID = self.get_int_value(DAI_ETL_ID)
         pass
