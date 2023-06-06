@@ -26,7 +26,7 @@ def FIELDS_ORDER(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("GR_BAS_INVC_VERIF"), 
         col("AUTO_GNR_OF_PO_ALLW"), 
         col("AUTO_EVAL_RCPT_SETLM"), 
-        col("OWN_EXPLN_OF_TERM_OF_PMT"), 
+        col("SHIPPING_COND_CD"), 
         col("DAI_ETL_ID"), 
         col("DAI_CRT_DTTM"), 
         col("DAI_UPDT_DTTM"), 

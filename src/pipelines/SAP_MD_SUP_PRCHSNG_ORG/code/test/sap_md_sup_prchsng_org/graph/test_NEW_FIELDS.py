@@ -40,8 +40,7 @@ class NEW_FIELDSTest(BaseTestCase):
               "NM_OF_PRSN_RESP_CREAT_OBJ",
               "GR_BAS_INVC_VERIF",
               "AUTO_GNR_OF_PO_ALLW",
-              "AUTO_EVAL_RCPT_SETLM",
-              "OWN_EXPLN_OF_TERM_OF_PMT"
+              "AUTO_EVAL_RCPT_SETLM"
             ),
             dfOutComputed.select(
               "PRCH_BLK_IND",
@@ -58,8 +57,7 @@ class NEW_FIELDSTest(BaseTestCase):
               "NM_OF_PRSN_RESP_CREAT_OBJ",
               "GR_BAS_INVC_VERIF",
               "AUTO_GNR_OF_PO_ALLW",
-              "AUTO_EVAL_RCPT_SETLM",
-              "OWN_EXPLN_OF_TERM_OF_PMT"
+              "AUTO_EVAL_RCPT_SETLM"
             ),
             self.maxUnequalRowsToShow
         )

@@ -29,7 +29,7 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("GR_BAS_INVC_VERIF", trim(col("WEBRE")))\
         .withColumn("AUTO_GNR_OF_PO_ALLW", trim(col("KZAUT")))\
         .withColumn("AUTO_EVAL_RCPT_SETLM", trim(col("XERSR")))\
-        .withColumn("OWN_EXPLN_OF_TERM_OF_PMT", trim(col("VSBED")))\
+        .withColumn("SHIPPING_COND_CD", trim(col("VSBED")))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
         .withColumn("DAI_UPDT_DTTM", current_timestamp())\
