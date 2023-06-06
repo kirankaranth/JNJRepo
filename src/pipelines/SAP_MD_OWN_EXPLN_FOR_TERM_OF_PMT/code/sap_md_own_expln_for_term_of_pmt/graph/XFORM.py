@@ -9,7 +9,7 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
         .withColumn("SRC_SYS_CD", lit(Config.sourceSystem))\
         .withColumn("_l0_upt_", col("_upt_"))\
-        .withColumn("L1_deleted_", col("_deleted_"))\
+        .withColumn("_deleted_", col("_deleted_"))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
         .withColumn("DAI_UPDT_DTTM", current_timestamp())\
@@ -18,7 +18,7 @@ def XFORM(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("DAY_LMT", col("ZTAGG").cast(IntegerType()))\
         .withColumn("TERM_OF_PMT_KEY", col("ZTERM"))\
         .withColumn(
-          "l1_pk_",
+          "_pk_",
           to_json(
             expr(
               "named_struct('SRC_SYS_CD', SRC_SYS_CD, 'LANG_KEY', LANG_KEY, 'TERM_OF_PMT_KEY', TERM_OF_PMT_KEY, 'DAY_LMT', DAY_LMT)"

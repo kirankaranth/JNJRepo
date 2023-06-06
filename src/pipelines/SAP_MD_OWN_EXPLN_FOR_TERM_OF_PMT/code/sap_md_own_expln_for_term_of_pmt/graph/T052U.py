@@ -6,4 +6,4 @@ from sap_md_own_expln_for_term_of_pmt.config.ConfigStore import *
 from sap_md_own_expln_for_term_of_pmt.udfs.UDFs import *
 
 def T052U(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"hm2.T052U")
+    return spark.read.table(f"{Config.sourceDatabase}.T052U")

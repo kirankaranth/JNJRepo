@@ -17,7 +17,7 @@ def SELECT_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("DAI_UPDT_DTTM"), 
         col("_l0_upt_"), 
         col("_l1_upt_"), 
-        col("l1_pk_").alias("_pk_"), 
+        col("_pk_"), 
         col("_pk_md5_"), 
-        col("L1_deleted_").alias("_deleted_")
+        col("_deleted_")
     )
