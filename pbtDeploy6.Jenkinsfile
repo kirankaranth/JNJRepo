@@ -10,6 +10,8 @@ def run(jobManifest) {
     def branchName = jobVars.projectBranch
     def environment = "dev"
     def appName = "md_l1"
+    def projectID = "97"
+    def metricsDB = "l1metrics"
     environment = jobVars.jpmEnvironment.toLowerCase() 
     def version = jobVars.calculatedVersion
 
@@ -32,7 +34,7 @@ def run(jobManifest) {
             ])
         }
     stage('Deploy Prophecy Project') {
-        prophecyDeploy(databricks_token, databricks_url, prophecy_root_folder, version, environment, appName)
+        prophecyDeploy(databricks_token, databricks_url, prophecy_root_folder, version, environment, appName,projectID, metricsDB)
     }
 
 }
@@ -48,8 +50,8 @@ def expectsManifest() {
 /**
  * Deploy the project
  */
-def prophecyDeploy(token, url, folder, version, environment, appName) {
-    ensure.insideDockerContainer('jekt-docker.artifactrepo.jnj.com/cdl-prophecy-deploy:1.0.4.2b') {
+def prophecyDeploy(token, url, folder, version, environment, appName, projectID, metricsDB) {
+    ensure.insideDockerContainer('jekt-docker.artifactrepo.jnj.com/cdl-prophecy-deploy:1.1.2') {
         checkout scm
 
         withCredentials([string(credentialsId: token, variable: 'deToken')]) {
@@ -59,7 +61,7 @@ def prophecyDeploy(token, url, folder, version, environment, appName) {
                 export DATABRICKS_TOKEN=$deToken 
                 export LC_ALL=en_US.UTF-8 
                 python updateDeploy.py $environment $appName            
-                pbt deploy --release-version $version --project-id 97 --path  $folder
+                pbt deploy --prophecy-url $metricsDB --release-version $version --project-id $projectID --path  $folder
                 python updatePermissions.py $environment $appName      
             """
         }
