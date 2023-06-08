@@ -8,7 +8,7 @@ from sap_01_md_matl_inv_hmd.udfs.UDFs import *
 def SchemaTransform_3_MSKU(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
         .withColumn("SRC_SYS_CD", lit(Config.sourceSystem))\
-        .withColumn("SRC_TBL_NM", lit(Config.DBTABLE3))\
+        .withColumn("SRC_TBL_NM", lit(Config.NSDM_V_MSKU))\
         .withColumn("MATL_NUM", col("MATNR"))\
         .withColumn("PLNT_CD", col("WERKS"))\
         .withColumn(
@@ -67,4 +67,4 @@ def SchemaTransform_3_MSKU(spark: SparkSession, in0: DataFrame) -> DataFrame:
             )
           )
         )\
-        .withColumn("_deleted_", lit("F"))
+        .withColumn("_deleted_", col("_deleted_"))

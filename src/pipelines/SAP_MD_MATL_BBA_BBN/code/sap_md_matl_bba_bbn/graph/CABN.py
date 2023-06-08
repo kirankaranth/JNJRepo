@@ -6,4 +6,4 @@ from sap_md_matl_bba_bbn.config.ConfigStore import *
 from sap_md_matl_bba_bbn.udfs.UDFs import *
 
 def CABN(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.sourceDatabase}.{Config.DBTABLE5}")
+    return spark.read.table(f"{Config.sourceDatabase}.cabn")

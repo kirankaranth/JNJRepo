@@ -10,13 +10,11 @@ class Config(ConfigBase):
             sourceDatabase: str=None,
             configDatabase: str=None,
             MANDT: str=None,
-            DBTABLE1: str=None,
-            DBTABLE2: str=None,
             DAI_ETL_ID: int=None,
             **kwargs
     ):
         self.spark = None
-        self.update(sourceSystem, targetSchema, sourceDatabase, configDatabase, MANDT, DBTABLE1, DBTABLE2, DAI_ETL_ID)
+        self.update(sourceSystem, targetSchema, sourceDatabase, configDatabase, MANDT, DAI_ETL_ID)
 
     def update(
             self,
@@ -25,8 +23,6 @@ class Config(ConfigBase):
             sourceDatabase: str="hcs",
             configDatabase: str=" ",
             MANDT: str="100",
-            DBTABLE1: str="mara",
-            DBTABLE2: str="makt",
             DAI_ETL_ID: int=0,
             **kwargs
     ):
@@ -36,7 +32,5 @@ class Config(ConfigBase):
         self.sourceDatabase = sourceDatabase
         self.configDatabase = configDatabase
         self.MANDT = MANDT
-        self.DBTABLE1 = DBTABLE1
-        self.DBTABLE2 = DBTABLE2
         self.DAI_ETL_ID = self.get_int_value(DAI_ETL_ID)
         pass
