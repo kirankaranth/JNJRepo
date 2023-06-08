@@ -6,4 +6,4 @@ from sap_md_matl_mbp.config.ConfigStore import *
 from sap_md_matl_mbp.udfs.UDFs import *
 
 def MARA_MBP(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"mbp.mara")
+    return spark.read.table(f"{Config.sourceDatabase}.mara")

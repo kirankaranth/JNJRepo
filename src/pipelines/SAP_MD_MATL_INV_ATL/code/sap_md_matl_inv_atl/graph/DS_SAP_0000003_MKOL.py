@@ -6,4 +6,4 @@ from sap_md_matl_inv_atl.config.ConfigStore import *
 from sap_md_matl_inv_atl.udfs.UDFs import *
 
 def DS_SAP_0000003_MKOL(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.sourceSystem}.mkol")
+    return spark.read.table(f"{Config.sourceDatabase}.mkol")

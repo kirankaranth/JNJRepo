@@ -6,4 +6,4 @@ from sap_md_matl_bbl.config.ConfigStore import *
 from sap_md_matl_bbl.udfs.UDFs import *
 
 def INOB(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.sourceDatabase}.{Config.DBTABLE4}")
+    return spark.read.table(f"{Config.sourceDatabase}.inob")
