@@ -9,8 +9,8 @@ buildSystemDetails:
   parentArtefactID: cdl_l1_team
   buildSystem: wheel
   author: null
-  createdAt: '2023-03-24 12:57:11'
-  modifiedAt: '2023-03-24 12:57:11'
+  createdAt: '2023-03-24 15:54:27'
+  modifiedAt: '2023-03-24 15:54:27'
 pipelines:
   pipelines/SAP_01_MD_SER_NUM_STOCK_SGMNT:
     name: SAP_MD_SER_NUM_STOCK_SGMNT_ATL_BBA_BBL_BBN_MRS
@@ -3448,6 +3448,22 @@ pipelines:
       - datasets/DS_SAP_01_AUFK
       outputs:
       - datasets/MD_MFG_ORDER_ITM
+    subgraphs: []
+    dependencies: {}
+  pipelines/SAP_MD_OWN_EXPLN_FOR_TERM_OF_PMT:
+    name: SAP_MD_OWN_EXPLN_FOR_TERM_OF_PMT
+    description: Mapping T052U for all SAP systems
+    author: natkins7@its.jnj.com
+    mode: batch
+    artefactID: ''
+    language: python
+    createdAt: '2023-05-24 12:46:11'
+    modifiedAt: '2023-06-06 08:46:53'
+    datasets:
+      inputs:
+      - datasets/DS_SAP_01_T052U
+      outputs:
+      - datasets/MD_OWN_EXPLN_FOR_TERM_OF_PMT
     subgraphs: []
     dependencies: {}
 datasets:
@@ -9226,6 +9242,36 @@ datasets:
         author: hgermi1@its.jnj.com
         createdAt: '2023-05-11 21:21:47'
         modifiedAt: '2023-05-11 21:21:47'
+  datasets/DS_SAP_01_T052U:
+    name: DS_SAP_01_T052U
+    description: ''
+    author: natkins7@its.jnj.com
+    createdAt: '2023-05-24 12:53:16'
+    modifiedAt: '2023-06-06 08:13:28'
+    mode: batch
+    physicalDatasets:
+      CDL_L1_Dev:
+        fabricId: 32
+        datasetType: Database
+        description: ''
+        author: natkins7@its.jnj.com
+        createdAt: '2023-05-24 12:53:16'
+        modifiedAt: '2023-05-24 12:53:16'
+  datasets/MD_OWN_EXPLN_FOR_TERM_OF_PMT:
+    name: MD_OWN_EXPLN_FOR_TERM_OF_PMT
+    description: ''
+    author: natkins7@its.jnj.com
+    createdAt: '2023-06-05 16:23:35'
+    modifiedAt: '2023-06-05 16:25:52'
+    mode: batch
+    physicalDatasets:
+      CDL_L1_Dev:
+        fabricId: 32
+        datasetType: Database
+        description: ''
+        author: natkins7@its.jnj.com
+        createdAt: '2023-06-05 16:23:35'
+        modifiedAt: '2023-06-05 16:23:35'
 templates: {}
 jobs:
   jobs/DEV_ATL_PIPELINE_JOB:
@@ -11863,6 +11909,31 @@ jobs:
     createdAt: '2023-05-12 01:38:37'
     modifiedAt: '2023-05-15 15:07:30'
     author: hgermi1@its.jnj.com
+  jobs/JOB_MD_OWN_EXPLN_FOR_TERM_OF_PMT:
+    name: JOB_MD_OWN_EXPLN_FOR_TERM_OF_PMT
+    description: ''
+    fabricUID: 32
+    scheduler:
+      Databricks: {}
+    cloudProvider: null
+    jobSize: Prophecy_Small
+    scheduleCron: 0 0 0 1/1 * ? *
+    timeout: null
+    alerting:
+      emails: ''
+      onStart: false
+      onSuccess: false
+      onFailure: false
+    pipelines:
+    - pipelines/SAP_MD_OWN_EXPLN_FOR_TERM_OF_PMT
+    jobClusterMode:
+      clusterMode:
+        Single: {}
+      clusterId: null
+    enabled: null
+    createdAt: '2023-05-24 16:07:26'
+    modifiedAt: '2023-05-24 16:17:27'
+    author: natkins7@its.jnj.com
 functions:
   author: null
   createdAt: '2023-03-24 15:42:34'
