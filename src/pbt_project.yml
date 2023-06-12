@@ -3400,6 +3400,56 @@ pipelines:
       - datasets/DS_JDE_MD_SLS_ORDR_HIST_JDE
     subgraphs: []
     dependencies: {}
+  pipelines/MD_MFG_ORDER_ITM:
+    name: SAP_MD_MFG_ORDER_ITM_MBP_BWI_BBN_BBL_BBA_MRS_P01_TAI
+    description: ''
+    author: hgermi1@its.jnj.com
+    mode: batch
+    artefactID: ''
+    language: python
+    createdAt: '2023-05-09 23:11:42'
+    modifiedAt: '2023-05-12 18:50:58'
+    datasets:
+      inputs:
+      - datasets/DS_SAP_01_AFPO
+      - datasets/DS_SAP_01_AUFK
+      outputs:
+      - datasets/MD_MFG_ORDER_ITM
+    subgraphs: []
+    dependencies: {}
+  pipelines/JDE_MD_MFG_ORDER_ITM:
+    name: JDE_MD_MFG_ORDER_ITM_BW2_DEU_DJD_JET_JEM_JES_JSW_SJD_MTR_GMD
+    description: ''
+    author: hgermi1@its.jnj.com
+    mode: batch
+    artefactID: ''
+    language: python
+    createdAt: '2023-05-11 21:14:36'
+    modifiedAt: '2023-05-15 15:05:43'
+    datasets:
+      inputs:
+      - datasets/DS_JDE_01_F4801
+      outputs:
+      - datasets/MD_MFG_ORDER_ITM
+    subgraphs: []
+    dependencies: {}
+  pipelines/SAP_MD_MFG_ORDER_ITM_HM2_HMD:
+    name: SAP_MD_MFG_ORDER_ITM_HM2_HMD
+    description: ''
+    author: hgermi1@its.jnj.com
+    mode: batch
+    artefactID: ''
+    language: python
+    createdAt: '2023-05-11 23:30:57'
+    modifiedAt: '2023-05-12 19:05:57'
+    datasets:
+      inputs:
+      - datasets/DS_SAP_01_AFPO
+      - datasets/DS_SAP_01_AUFK
+      outputs:
+      - datasets/MD_MFG_ORDER_ITM
+    subgraphs: []
+    dependencies: {}
   pipelines/SAP_MD_OWN_EXPLN_FOR_TERM_OF_PMT:
     name: SAP_MD_OWN_EXPLN_FOR_TERM_OF_PMT
     description: Mapping T052U for all SAP systems
@@ -9147,6 +9197,51 @@ datasets:
         author: ggrilo1@its.jnj.com
         createdAt: '2023-05-17 09:01:13'
         modifiedAt: '2023-05-17 09:01:13'
+  datasets/DS_SAP_01_AUFK:
+    name: DS_SAP_01_AUFK
+    description: ''
+    author: hgermi1@its.jnj.com
+    createdAt: '2023-05-09 23:18:47'
+    modifiedAt: '2023-05-11 23:40:43'
+    mode: batch
+    physicalDatasets:
+      CDL_L1_Dev:
+        fabricId: 32
+        datasetType: Database
+        description: ''
+        author: hgermi1@its.jnj.com
+        createdAt: '2023-05-09 23:18:47'
+        modifiedAt: '2023-05-09 23:18:47'
+  datasets/DS_SAP_01_AFPO:
+    name: DS_SAP_01_AFPO
+    description: ''
+    author: hgermi1@its.jnj.com
+    createdAt: '2023-05-09 23:20:01'
+    modifiedAt: '2023-05-11 23:40:30'
+    mode: batch
+    physicalDatasets:
+      CDL_L1_Dev:
+        fabricId: 32
+        datasetType: Database
+        description: ''
+        author: hgermi1@its.jnj.com
+        createdAt: '2023-05-09 23:20:01'
+        modifiedAt: '2023-05-09 23:20:01'
+  datasets/DS_JDE_01_F4801:
+    name: DS_JDE_01_F4801
+    description: ''
+    author: hgermi1@its.jnj.com
+    createdAt: '2023-05-11 21:21:47'
+    modifiedAt: '2023-05-11 21:49:40'
+    mode: batch
+    physicalDatasets:
+      CDL_L1_Dev:
+        fabricId: 32
+        datasetType: Database
+        description: ''
+        author: hgermi1@its.jnj.com
+        createdAt: '2023-05-11 21:21:47'
+        modifiedAt: '2023-05-11 21:21:47'
   datasets/DS_SAP_01_T052U:
     name: DS_SAP_01_T052U
     description: ''
@@ -11787,6 +11882,33 @@ jobs:
     createdAt: '2023-05-18 12:06:17'
     modifiedAt: '2023-05-19 15:35:01'
     author: ggrilo1@its.jnj.com
+  jobs/JOB_MD_MFG_ORDER_ITM:
+    name: JOB_MD_MFG_ORDER_ITM
+    description: ''
+    fabricUID: 32
+    scheduler:
+      Databricks: {}
+    cloudProvider: null
+    jobSize: Prophecy_Small
+    scheduleCron: 0 0 0 1/1 * ? *
+    timeout: null
+    alerting:
+      emails: ''
+      onStart: false
+      onSuccess: false
+      onFailure: false
+    pipelines:
+    - pipelines/MD_MFG_ORDER_ITM
+    - pipelines/JDE_MD_MFG_ORDER_ITM
+    - pipelines/SAP_MD_MFG_ORDER_ITM_HM2_HMD
+    jobClusterMode:
+      clusterMode:
+        Single: {}
+      clusterId: null
+    enabled: null
+    createdAt: '2023-05-12 01:38:37'
+    modifiedAt: '2023-05-15 15:07:30'
+    author: hgermi1@its.jnj.com
   jobs/JOB_MD_OWN_EXPLN_FOR_TERM_OF_PMT:
     name: JOB_MD_OWN_EXPLN_FOR_TERM_OF_PMT
     description: ''
