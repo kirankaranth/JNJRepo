@@ -3157,6 +3157,41 @@ pipelines:
       - datasets/MD_SLS_ORDR_SCHED_LINE_DELV
     subgraphs: []
     dependencies: {}
+  pipelines/SAP_MD_MATL_VALUT:
+    name: SAP_MD_MATL_VALUT
+    description: Valuation of material inventory
+    author: natkins7@its.jnj.com
+    mode: batch
+    artefactID: ''
+    language: python
+    createdAt: '2023-05-06 08:36:05'
+    modifiedAt: '2023-05-17 22:12:31'
+    datasets:
+      inputs:
+      - datasets/DS_SAP_MARA_01
+      - datasets/DS_SAP_MBEW_01
+      outputs:
+      - datasets/MD_MATL_VALUT
+    subgraphs: []
+    dependencies: {}
+  pipelines/MD_MATL_VALUT_JDE:
+    name: JDE_MD_MATL_VALUT
+    description: Valuation of material inventory for JDE Systems
+    author: natkins7@its.jnj.com
+    mode: batch
+    artefactID: ''
+    language: python
+    createdAt: '2023-05-09 12:49:52'
+    modifiedAt: '2023-05-17 17:26:04'
+    datasets:
+      inputs:
+      - datasets/DS_JDE_01_F4101_NC
+      - datasets/DS_JDE_01_F41021_NC
+      - datasets/DS_JDE_01_F4105
+      outputs:
+      - datasets/MD_MATL_VALUT
+    subgraphs: []
+    dependencies: {}
   pipelines/SAP_MD_CO_CD_HMD:
     name: SAP_MD_CO_CD_HMD
     description: ''
@@ -7366,21 +7401,6 @@ datasets:
         author: fsano1@its.jnj.com
         createdAt: '2023-04-10 17:07:55'
         modifiedAt: '2023-04-10 17:07:55'
-  datasets/DS_JDE_01_f42119:
-    name: DS_JDE_01_f42119
-    description: ''
-    author: fsano1@its.jnj.com
-    createdAt: '2023-04-10 17:31:01'
-    modifiedAt: '2023-05-10 03:12:39'
-    mode: batch
-    physicalDatasets:
-      CDL_L1_Dev:
-        fabricId: 32
-        datasetType: Database
-        description: ''
-        author: fsano1@its.jnj.com
-        createdAt: '2023-04-10 17:31:01'
-        modifiedAt: '2023-04-10 17:31:01'
   datasets/DS_SAP_TVM4T:
     name: DS_SAP_TVM4T
     description: ''
@@ -8896,6 +8916,81 @@ datasets:
         author: smille29@its.jnj.com
         createdAt: '2023-06-05 18:37:10'
         modifiedAt: '2023-06-05 18:37:10'
+  datasets/DS_SAP_MBEW_01:
+    name: DS_SAP_MBEW_01
+    description: ''
+    author: natkins7@its.jnj.com
+    createdAt: '2023-05-06 09:50:07'
+    modifiedAt: '2023-05-06 09:50:07'
+    mode: batch
+    physicalDatasets:
+      CDL_L1_Dev:
+        fabricId: 32
+        datasetType: Database
+        description: ''
+        author: natkins7@its.jnj.com
+        createdAt: '2023-05-06 09:50:07'
+        modifiedAt: '2023-05-06 09:50:07'
+  datasets/DS_JDE_01_F4105:
+    name: DS_JDE_01_F4105_NC
+    description: ''
+    author: natkins7@its.jnj.com
+    createdAt: '2023-05-09 12:56:32'
+    modifiedAt: '2023-05-12 08:52:01'
+    mode: batch
+    physicalDatasets:
+      CDL_L1_Dev:
+        fabricId: 32
+        datasetType: Database
+        description: ''
+        author: natkins7@its.jnj.com
+        createdAt: '2023-05-09 12:56:32'
+        modifiedAt: '2023-05-09 12:56:32'
+  datasets/DS_JDE_01_F41021_NC:
+    name: DS_JDE_01_F41021_NC
+    description: ''
+    author: natkins7@its.jnj.com
+    createdAt: '2023-05-10 08:39:41'
+    modifiedAt: '2023-05-12 08:53:37'
+    mode: batch
+    physicalDatasets:
+      CDL_L1_Dev:
+        fabricId: 32
+        datasetType: Database
+        description: ''
+        author: natkins7@its.jnj.com
+        createdAt: '2023-05-10 08:39:41'
+        modifiedAt: '2023-05-10 08:39:41'
+  datasets/DS_JDE_01_F4101_NC:
+    name: DS_JDE_01_F4101_NC
+    description: ''
+    author: natkins7@its.jnj.com
+    createdAt: '2023-05-10 08:45:06'
+    modifiedAt: '2023-05-12 08:52:54'
+    mode: batch
+    physicalDatasets:
+      CDL_L1_Dev:
+        fabricId: 32
+        datasetType: Database
+        description: ''
+        author: natkins7@its.jnj.com
+        createdAt: '2023-05-10 08:45:06'
+        modifiedAt: '2023-05-10 08:45:06'
+  datasets/TEST_INV_OUT:
+    name: TEST_INV_OUT
+    description: ''
+    author: natkins7@its.jnj.com
+    createdAt: '2023-05-10 10:02:28'
+    modifiedAt: '2023-05-14 16:42:12'
+    mode: batch
+    physicalDatasets:
+      CDL_L1_Dev:
+        fabricId: 32
+        datasetType: File
+        description: ''
+        author: natkins7@its.jnj.com
+        createdAt: '2023-05-10 10:02:28'
+        modifiedAt: '2023-05-10 10:02:28'
   datasets/DS_SAP_HMD_KNB1:
     name: DS_SAP_HMD_KNB1
     description: ''
@@ -11449,6 +11544,32 @@ jobs:
     createdAt: '2023-05-04 18:12:08'
     modifiedAt: '2023-05-11 22:50:42'
     author: fsano1@its.jnj.com
+  jobs/MD_MATL_VALUT_JOB:
+    name: MD_MATL_VALUT_JOB
+    description: ''
+    fabricUID: 32
+    scheduler:
+      Databricks: {}
+    cloudProvider: null
+    jobSize: Prophecy_Small
+    scheduleCron: 0 0 0 1/1 * ? *
+    timeout: null
+    alerting:
+      emails: ''
+      onStart: false
+      onSuccess: false
+      onFailure: false
+    pipelines:
+    - pipelines/SAP_MD_MATL_VALUT
+    - pipelines/MD_MATL_VALUT_JDE
+    jobClusterMode:
+      clusterMode:
+        Single: {}
+      clusterId: null
+    enabled: null
+    createdAt: '2023-05-16 15:12:34'
+    modifiedAt: '2023-05-17 17:00:37'
+    author: natkins7@its.jnj.com
   jobs/JOB_MD_CO_CD:
     name: JOB_MD_CO_CD
     description: ''
