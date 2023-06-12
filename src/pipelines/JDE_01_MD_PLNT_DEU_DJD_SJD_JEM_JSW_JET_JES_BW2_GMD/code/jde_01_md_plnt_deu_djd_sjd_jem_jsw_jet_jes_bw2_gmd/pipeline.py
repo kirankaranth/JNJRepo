@@ -7,15 +7,6 @@ from prophecy.utils import *
 from jde_01_md_plnt_deu_djd_sjd_jem_jsw_jet_jes_bw2_gmd.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    df_JDE_F0116 = JDE_F0116(spark)
-    df_JDE_F0116 = collectMetrics(
-        spark, 
-        df_JDE_F0116, 
-        "graph", 
-        "NbDhgrZZOVotu_LgAcRUq$$qUg9PowtJa7-G65aFEy1b", 
-        "O_DQKOyEBnZfHrkQX_FOc$$0eQyIngIn3fmq1gm2QvL9"
-    )
-    df_JDE_F0116_FILTER = JDE_F0116_FILTER(spark, df_JDE_F0116)
     df_JDE_F0006 = JDE_F0006(spark)
     df_JDE_F0006 = collectMetrics(
         spark, 
@@ -25,7 +16,26 @@ def pipeline(spark: SparkSession) -> None:
         "q1yiwG83r7EbrIkavD8qL$$wRaCGs3nmvo8JeWl_xj_T"
     )
     df_JDE_F0006_FILTER = JDE_F0006_FILTER(spark, df_JDE_F0006)
-    df_Join_JDE = Join_JDE(spark, df_JDE_F0006_FILTER, df_JDE_F0116_FILTER)
+    df_DS_F0101 = DS_F0101(spark)
+    df_DS_F0101 = collectMetrics(
+        spark, 
+        df_DS_F0101, 
+        "graph", 
+        "2VP9D63VbBzV5UBrZtRUF$$nyGO2ZiPK-neuKWUAkrZC", 
+        "_fAsOuWlr1SFPiEcQXAED$$mGGMML5h68mvAIaYtbel6"
+    )
+    df_JDE_F0101_Filter = JDE_F0101_Filter(spark, df_DS_F0101)
+    df_JDE_F0116 = JDE_F0116(spark)
+    df_JDE_F0116 = collectMetrics(
+        spark, 
+        df_JDE_F0116, 
+        "graph", 
+        "NbDhgrZZOVotu_LgAcRUq$$qUg9PowtJa7-G65aFEy1b", 
+        "O_DQKOyEBnZfHrkQX_FOc$$0eQyIngIn3fmq1gm2QvL9"
+    )
+    df_JDE_F0116_FILTER = JDE_F0116_FILTER(spark, df_JDE_F0116)
+    df_Join_1 = Join_1(spark, df_JDE_F0116_FILTER, df_JDE_F0101_Filter)
+    df_Join_JDE = Join_JDE(spark, df_JDE_F0006_FILTER, df_Join_1)
     df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_Join_JDE)
     df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS_RENAME_FORMAT)
     df_SET_FIELD_ORDER_REFORMAT = collectMetrics(
