@@ -7,19 +7,8 @@ from sap_md_matl_bbl.udfs.UDFs import *
 
 def INOB_DEDUP(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
-        .withColumn(
-          "row_number",
-          row_number()\
-            .over(Window.partitionBy("OBJEK").orderBy(lit(1)).rowsBetween(Window.unboundedPreceding, Window.currentRow))
-        )\
-        .withColumn(
-          "count",
-          count("*")\
-            .over(Window\
-            .partitionBy("OBJEK")\
-            .orderBy(lit(1))\
-            .rowsBetween(Window.unboundedPreceding, Window.unboundedFollowing))
-        )\
+        .withColumn("row_number", row_number().over(Window.partitionBy("OBJEK").orderBy(lit(1))))\
+        .withColumn("count", count("*").over(Window.partitionBy("OBJEK")))\
         .filter(col("row_number") == col("count"))\
         .drop("row_number")\
         .drop("count")
