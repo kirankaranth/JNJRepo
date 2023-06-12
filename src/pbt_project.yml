@@ -3450,6 +3450,22 @@ pipelines:
       - datasets/MD_MFG_ORDER_ITM
     subgraphs: []
     dependencies: {}
+  pipelines/SAP_MD_OWN_EXPLN_FOR_TERM_OF_PMT:
+    name: SAP_MD_OWN_EXPLN_FOR_TERM_OF_PMT
+    description: Mapping T052U for all SAP systems
+    author: natkins7@its.jnj.com
+    mode: batch
+    artefactID: ''
+    language: python
+    createdAt: '2023-05-24 12:46:11'
+    modifiedAt: '2023-06-06 08:46:53'
+    datasets:
+      inputs:
+      - datasets/DS_SAP_01_T052U
+      outputs:
+      - datasets/MD_OWN_EXPLN_FOR_TERM_OF_PMT
+    subgraphs: []
+    dependencies: {}
   pipelines/JDE_MD_MATL_MVMT_HDR_GMD_v2:
     name: JDE_MD_MATL_MVMT_HDR_GMD_v2
     description: ''
@@ -7533,21 +7549,6 @@ datasets:
         author: fsano1@its.jnj.com
         createdAt: '2023-03-21 20:31:12'
         modifiedAt: '2023-03-21 20:31:12'
-  datasets/DS_JDE_01_F42119:
-    name: DS_JDE_01_F42119
-    description: ''
-    author: fsano1@its.jnj.com
-    createdAt: '2023-04-10 17:07:55'
-    modifiedAt: '2023-04-10 17:09:24'
-    mode: batch
-    physicalDatasets:
-      CDL_L1_Dev:
-        fabricId: 32
-        datasetType: Database
-        description: ''
-        author: fsano1@its.jnj.com
-        createdAt: '2023-04-10 17:07:55'
-        modifiedAt: '2023-04-10 17:07:55'
   datasets/DS_SAP_TVM4T:
     name: DS_SAP_TVM4T
     description: ''
@@ -8168,7 +8169,7 @@ datasets:
     description: ''
     author: ypatel8@its.jnj.com
     createdAt: '2023-05-02 17:12:56'
-    modifiedAt: '2023-06-09 20:04:46'
+    modifiedAt: '2023-05-25 14:03:15'
     mode: batch
     physicalDatasets:
       CDL_L1_Dev:
@@ -8423,7 +8424,7 @@ datasets:
     description: ''
     author: ggrilo1@its.jnj.com
     createdAt: '2023-04-13 08:19:56'
-    modifiedAt: '2023-06-09 20:04:26'
+    modifiedAt: '2023-05-25 14:02:53'
     mode: batch
     physicalDatasets:
       CDL_L1_Dev:
@@ -9243,6 +9244,36 @@ datasets:
         author: hgermi1@its.jnj.com
         createdAt: '2023-05-11 21:21:47'
         modifiedAt: '2023-05-11 21:21:47'
+  datasets/DS_SAP_01_T052U:
+    name: DS_SAP_01_T052U
+    description: ''
+    author: natkins7@its.jnj.com
+    createdAt: '2023-05-24 12:53:16'
+    modifiedAt: '2023-06-06 08:13:28'
+    mode: batch
+    physicalDatasets:
+      CDL_L1_Dev:
+        fabricId: 32
+        datasetType: Database
+        description: ''
+        author: natkins7@its.jnj.com
+        createdAt: '2023-05-24 12:53:16'
+        modifiedAt: '2023-05-24 12:53:16'
+  datasets/MD_OWN_EXPLN_FOR_TERM_OF_PMT:
+    name: MD_OWN_EXPLN_FOR_TERM_OF_PMT
+    description: ''
+    author: natkins7@its.jnj.com
+    createdAt: '2023-06-05 16:23:35'
+    modifiedAt: '2023-06-05 16:25:52'
+    mode: batch
+    physicalDatasets:
+      CDL_L1_Dev:
+        fabricId: 32
+        datasetType: Database
+        description: ''
+        author: natkins7@its.jnj.com
+        createdAt: '2023-06-05 16:23:35'
+        modifiedAt: '2023-06-05 16:23:35'
 templates: {}
 jobs:
   jobs/DEV_ATL_PIPELINE_JOB:
@@ -10120,9 +10151,9 @@ jobs:
       onFailure: false
     pipelines:
     - pipelines/JDE_MD_DELV_LINE_BW2_GMD_JET_JSW_DEU_MTR_SJD_DJD_JEM_JES
+    - pipelines/JDE_MD_MATL_MVMT_HDR_GMD
     - pipelines/JDE_MD_BOM_HDR_BW2
     - pipelines/DART_L1_Purchase_Order_MD_PO_HIST_JDE
-    - pipelines/JDE_MD_MATL_MVMT_HDR_GMD_v2
     - pipelines/JDE_01_MD_SLS_ORDR_BW2_GMD_JET_JSW_DEU_MTR_SJD_DJD_JEM_JES
     - pipelines/JDE_MD_MATL_LOC_GMD
     - pipelines/MD_DELV_9
@@ -10147,7 +10178,7 @@ jobs:
       clusterId: null
     enabled: true
     createdAt: '2023-03-28 17:23:35'
-    modifiedAt: '2023-06-09 20:22:26'
+    modifiedAt: '2023-05-31 02:49:32'
     author: smille29@its.jnj.com
   jobs/DEV_JEM_PIPELINE_JOB:
     name: JEM_PIPELINE_JOB
@@ -11880,6 +11911,31 @@ jobs:
     createdAt: '2023-05-12 01:38:37'
     modifiedAt: '2023-05-15 15:07:30'
     author: hgermi1@its.jnj.com
+  jobs/JOB_MD_OWN_EXPLN_FOR_TERM_OF_PMT:
+    name: JOB_MD_OWN_EXPLN_FOR_TERM_OF_PMT
+    description: ''
+    fabricUID: 32
+    scheduler:
+      Databricks: {}
+    cloudProvider: null
+    jobSize: Prophecy_Small
+    scheduleCron: 0 0 0 1/1 * ? *
+    timeout: null
+    alerting:
+      emails: ''
+      onStart: false
+      onSuccess: false
+      onFailure: false
+    pipelines:
+    - pipelines/SAP_MD_OWN_EXPLN_FOR_TERM_OF_PMT
+    jobClusterMode:
+      clusterMode:
+        Single: {}
+      clusterId: null
+    enabled: null
+    createdAt: '2023-05-24 16:07:26'
+    modifiedAt: '2023-05-24 16:17:27'
+    author: natkins7@its.jnj.com
 functions:
   author: null
   createdAt: '2023-03-24 15:42:34'
