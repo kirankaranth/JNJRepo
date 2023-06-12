@@ -3483,6 +3483,55 @@ pipelines:
       - datasets/MD_MATL_MVMT_HDR
     subgraphs: []
     dependencies: {}
+  pipelines/SAP_MD_CUST_MSTR_UNLD_DATA:
+    name: SAP_MD_CUST_MSTR_UNLD_DATA_P01_BBA_BBN_BBL_HCS_MBP_FSN
+    description: ''
+    author: hgermi1@its.jnj.com
+    mode: batch
+    artefactID: ''
+    language: python
+    createdAt: '2023-05-14 20:11:53'
+    modifiedAt: '2023-05-17 17:04:34'
+    datasets:
+      inputs:
+      - datasets/DS_SAP_01_KNVA
+      outputs:
+      - datasets/MD_CUST_MSTR_UNLD_DATA
+    subgraphs: []
+    dependencies: {}
+  pipelines/SAP_01_MD_BTCH:
+    name: SAP_MD_BTCH
+    description: ''
+    author: mbolado1@its.jnj.com
+    mode: batch
+    artefactID: ''
+    language: python
+    createdAt: '2023-05-08 17:49:25'
+    modifiedAt: '2023-05-18 13:50:41'
+    datasets:
+      inputs:
+      - datasets/DS_SAP_01_MCH1
+      - datasets/DS_SAP_01_MCHA
+      outputs:
+      - datasets/MD_BTCH
+    subgraphs: []
+    dependencies: {}
+  pipelines/JDE_01_MD_BTCH:
+    name: JDE_MD_BTCH
+    description: ''
+    author: mbolado1@its.jnj.com
+    mode: batch
+    artefactID: ''
+    language: python
+    createdAt: '2023-05-10 14:58:43'
+    modifiedAt: '2023-05-19 15:51:25'
+    datasets:
+      inputs:
+      - datasets/DS_JDE_01_F4108
+      outputs:
+      - datasets/MD_BTCH
+    subgraphs: []
+    dependencies: {}
   pipelines/SAP_MD_MATL_VALUT_HIST:
     name: SAP_MD_MATL_VALUT_HIST_BBN_BBA_BBL_P01_TAI_MRS_HCS_GEU_BWI_MBP_FSN_ATL_SVS_HMD
     description: ''
@@ -9291,6 +9340,66 @@ datasets:
         author: natkins7@its.jnj.com
         createdAt: '2023-06-05 16:23:35'
         modifiedAt: '2023-06-05 16:23:35'
+  datasets/DS_SAP_01_KNVA:
+    name: DS_SAP_01_KNVA
+    description: ''
+    author: hgermi1@its.jnj.com
+    createdAt: '2023-05-14 20:15:32'
+    modifiedAt: '2023-05-16 12:10:41'
+    mode: batch
+    physicalDatasets:
+      CDL_L1_Dev:
+        fabricId: 32
+        datasetType: Database
+        description: ''
+        author: hgermi1@its.jnj.com
+        createdAt: '2023-05-14 20:15:32'
+        modifiedAt: '2023-05-14 20:15:32'
+  datasets/DS_SAP_01_MCHA:
+    name: DS_SAP_01_MCHA
+    description: ''
+    author: mbolado1@its.jnj.com
+    createdAt: '2023-05-08 18:01:11'
+    modifiedAt: '2023-05-16 18:26:59'
+    mode: batch
+    physicalDatasets:
+      CDL_L1_Dev:
+        fabricId: 32
+        datasetType: Database
+        description: ''
+        author: mbolado1@its.jnj.com
+        createdAt: '2023-05-08 18:01:11'
+        modifiedAt: '2023-05-08 18:01:11'
+  datasets/DS_SAP_01_MCH1:
+    name: DS_SAP_01_MCH1
+    description: ''
+    author: mbolado1@its.jnj.com
+    createdAt: '2023-05-08 18:02:43'
+    modifiedAt: '2023-05-10 12:13:24'
+    mode: batch
+    physicalDatasets:
+      CDL_L1_Dev:
+        fabricId: 32
+        datasetType: Database
+        description: ''
+        author: mbolado1@its.jnj.com
+        createdAt: '2023-05-08 18:02:43'
+        modifiedAt: '2023-05-08 18:02:43'
+  datasets/DS_JDE_01_F4108:
+    name: DS_JDE_01_F4108
+    description: ''
+    author: mbolado1@its.jnj.com
+    createdAt: '2023-05-10 15:05:34'
+    modifiedAt: '2023-05-10 19:48:37'
+    mode: batch
+    physicalDatasets:
+      CDL_L1_Dev:
+        fabricId: 32
+        datasetType: Database
+        description: ''
+        author: mbolado1@its.jnj.com
+        createdAt: '2023-05-10 15:05:34'
+        modifiedAt: '2023-05-10 15:05:34'
   datasets/DS_SAP_01_MBEWH:
     name: DS_SAP_01_MBEWH
     description: ''
@@ -11983,6 +12092,57 @@ jobs:
     createdAt: '2023-05-24 16:07:26'
     modifiedAt: '2023-05-24 16:17:27'
     author: natkins7@its.jnj.com
+  jobs/JOB_MD_CUST_MSTR_UNLD_DATA:
+    name: JOB_MD_CUST_MSTR_UNLD_DATA
+    description: ''
+    fabricUID: 32
+    scheduler:
+      Databricks: {}
+    cloudProvider: null
+    jobSize: Prophecy_Small
+    scheduleCron: 0 0 0 1/1 * ? *
+    timeout: null
+    alerting:
+      emails: ''
+      onStart: false
+      onSuccess: false
+      onFailure: false
+    pipelines:
+    - pipelines/SAP_MD_CUST_MSTR_UNLD_DATA
+    jobClusterMode:
+      clusterMode:
+        Single: {}
+      clusterId: null
+    enabled: null
+    createdAt: '2023-05-17 02:15:14'
+    modifiedAt: '2023-05-17 17:11:07'
+    author: hgermi1@its.jnj.com
+  jobs/JOB_MD_BTCH:
+    name: JOB_MD_BTCH
+    description: ''
+    fabricUID: 32
+    scheduler:
+      Databricks: {}
+    cloudProvider: null
+    jobSize: Prophecy_Small
+    scheduleCron: 0 0 0 1/1 * ? *
+    timeout: null
+    alerting:
+      emails: ''
+      onStart: false
+      onSuccess: false
+      onFailure: false
+    pipelines:
+    - pipelines/JDE_01_MD_BTCH
+    - pipelines/SAP_01_MD_BTCH
+    jobClusterMode:
+      clusterMode:
+        Single: {}
+      clusterId: null
+    enabled: null
+    createdAt: '2023-05-12 15:27:23'
+    modifiedAt: '2023-05-19 15:43:12'
+    author: mbolado1@its.jnj.com
   jobs/JOB_MD_MATL_VALUT_HIST_BBN_BBA_BBL_P01_TAI_MRS_HCS_GEU_BWI_MBP_FSN_ATL_SVS_HM2:
     name: JOB_MD_MATL_VALUT_HIST_BBN_BBA_BBL_P01_TAI_MRS_HCS_GEU_BWI_MBP_FSN_ATL_SVS_HMD
     description: ''
