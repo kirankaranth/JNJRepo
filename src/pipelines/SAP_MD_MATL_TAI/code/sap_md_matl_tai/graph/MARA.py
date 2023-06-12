@@ -6,4 +6,4 @@ from sap_md_matl_tai.config.ConfigStore import *
 from sap_md_matl_tai.udfs.UDFs import *
 
 def MARA(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.sourceDatabase}.{Config.DBTABLE1}")
+    return spark.read.table(f"{Config.sourceDatabase}.mara")
