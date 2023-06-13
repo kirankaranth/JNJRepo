@@ -2,8 +2,10 @@ from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from prophecy.libs import typed_lit
-from MD_SLS_ORDR_SCHED_LINE_DELV_6.config.ConfigStore import *
-from MD_SLS_ORDR_SCHED_LINE_DELV_6.udfs.UDFs import *
+from prophecy.transpiler import call_spark_fcn
+from prophecy.transpiler.fixed_file_schema import *
+from sap_md_sls_ordr_sched_line_delv_bwi.config.ConfigStore import *
+from sap_md_sls_ordr_sched_line_delv_bwi.udfs.UDFs import *
 
 def MD_SLS_ORDR_SCHED_LINE_DELV(spark: SparkSession, in0: DataFrame):
     in0.write\

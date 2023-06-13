@@ -1,10 +1,12 @@
 from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
-from md_sls_ordr_sched_line_delv_bwi.config.ConfigStore import *
-from md_sls_ordr_sched_line_delv_bwi.udfs.UDFs import *
+from sap_md_sls_ordr_sched_line_delv_bwi.config.ConfigStore import *
+from sap_md_sls_ordr_sched_line_delv_bwi.udfs.UDFs import *
 from prophecy.utils import *
-from md_sls_ordr_sched_line_delv_bwi.graph import *
+from prophecy.transpiler import call_spark_fcn
+from prophecy.transpiler.fixed_file_schema import *
+from sap_md_sls_ordr_sched_line_delv_bwi.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_sql_MD_SLS_ORDR_SCHED_LINE_DELV = sql_MD_SLS_ORDR_SCHED_LINE_DELV(spark)
@@ -32,6 +34,7 @@ def main():
     spark.conf.set("spark.sql.legacy.allowUntypedScalaUDF", "true")
     spark.conf.set("spark.sql.optimizer.excludedRules", "org.apache.spark.sql.catalyst.optimizer.ColumnPruning")
     spark.conf.set("prophecy.metadata.pipeline.uri", "pipelines/MD_SLS_ORDR_SCHED_LINE_DELV_6")
+    registerUDFs(spark)
     
     MetricsCollector.start(spark = spark, pipelineId = "pipelines/MD_SLS_ORDR_SCHED_LINE_DELV_6")
     pipeline(spark)

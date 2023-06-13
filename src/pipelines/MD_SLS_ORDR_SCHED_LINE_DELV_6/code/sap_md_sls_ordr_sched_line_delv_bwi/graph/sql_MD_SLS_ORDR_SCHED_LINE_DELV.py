@@ -2,8 +2,10 @@ from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from prophecy.libs import typed_lit
-from MD_SLS_ORDR_SCHED_LINE_DELV_6.config.ConfigStore import *
-from MD_SLS_ORDR_SCHED_LINE_DELV_6.udfs.UDFs import *
+from prophecy.transpiler import call_spark_fcn
+from prophecy.transpiler.fixed_file_schema import *
+from sap_md_sls_ordr_sched_line_delv_bwi.config.ConfigStore import *
+from sap_md_sls_ordr_sched_line_delv_bwi.udfs.UDFs import *
 
 def sql_MD_SLS_ORDR_SCHED_LINE_DELV(spark: SparkSession) -> DataFrame:
     out0 = spark.sql(
@@ -27,7 +29,7 @@ CASE WHEN VBEP.tddat = '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE to_timestamp
 CASE WHEN VBEP.lddat = '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE to_timestamp(CONCAT(VBEP.lddat,VBEP.lduhr),'yyyyMMddHHmmss') END AS LD_DTTM,
 TRIM(ETTYP) SCHED_LINE_CAT,
 TRIM(LFREL) ITM_RLVNT_DELV,
-to_timestamp(EZEIT,\"HHmmSS\") as ARR_DTTM,
+case when VBEP.EDATU = '00000000' THEN CAST(NULL AS TIMESTAMP) ELSE to_timestamp(concat(VBEP.EDATU,VBEP.EZEIT),'yyyyMMddHHmmss') END AS ARR_DTTM,
 cast(trim(LMENG) as decimal(18,4)) REQ_QTY_MGMT_SKU,
 TRIM(MEINS) BASE_UNIT_OF_MEAS,
 case when BDDAT = '00000000' then cast(null as TIMESTAMP) else to_timestamp(BDDAT,\"yyyyMMdd\") end as REQ_DTTM,
