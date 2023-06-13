@@ -7,9 +7,9 @@ from prophecy.utils import *
 from jde_md_matl_mvmt_hdr_bw2.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    df_F0005 = F0005(spark)
     df_F4111 = F4111(spark)
-    df_FILTER = FILTER(spark, df_F0005)
+    df_F0005_ADT = F0005_ADT(spark)
+    df_FILTER = FILTER(spark, df_F0005_ADT)
     df_FILTER_DELETED = FILTER_DELETED(spark, df_F4111)
     df_Join_1 = Join_1(spark, df_FILTER_DELETED, df_FILTER)
     df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_Join_1)
