@@ -45,11 +45,11 @@ for item in os.scandir("./src/jobs/"):
 
             #We update the name to reflect the environment and app name
             jsonObject["request"]["name"] = env+"_"+app+"_"+ jsonObject["request"]["name"]
-            ##Auto disable jobs that don't have PIPELINE in their name 
+            ##Auto disable jobs that don't have PIPELINE in their name
             if "PIPELINE" not in jsonObject["request"]["name"].upper():
                 jsonObject["request"]["schedule"]["pause_status"] = "PAUSED"
                 print("Pausing job: " + jsonObject["request"]["name"] + " as it doesn't have PIPELINE in it's name")
-            #TODO: For prod switch them to daily automatically, 
+            #For prod switch them to daily automatically,
             if env == "prod" and ("PIPELINE" in jsonObject["request"]["name"].upper()):
                 #jsonObject["request"]["schedule"]["pause_status"] = "UNPAUSED"
                 #"* * ? *"
@@ -57,13 +57,13 @@ for item in os.scandir("./src/jobs/"):
                 currentSchedule = jsonObject["request"]["schedule"]["quartz_cron_expression"].split()
                 jsonObject["request"]["schedule"]["quartz_cron_expression"] = currentSchedule[0]+" "+currentSchedule[1]+" "+currentSchedule[2]+" * * ? *"
                 print("Switching job to daily: " + jsonObject["request"]["name"] + " for Production environment")
-            
+
             if env == "pqa" and ("HM2_PIPELINE" in jsonObject["request"]["name"].upper() or "HMD_PIPELINE" in jsonObject["request"]["name"].upper()):
                 #jsonObject["request"]["schedule"]["pause_status"] = "UNPAUSED"
                 jsonObject["request"]["schedule"]["quartz_cron_expression"] = "0 0 12 * * ? *"
                 jsonObject["request"]["schedule"]["timezone_id"] = "GMT"
                 print("Switching job: " + jsonObject["request"]["name"] + " to daily for PQA (HMD/HM2)")
-                
+
 
             #For each task in the pipeline we:
             # Read the default configuration from the python package
@@ -80,7 +80,7 @@ for item in os.scandir("./src/jobs/"):
                     d = {}
                     a = {}
                     try:
-                        
+
                         fo = open("./src/"+pipelinePath+"/code/setup.py", "r")
                         setupFile = fo.read()
                         packageName = re.findall("'main = (.*)\.",setupFile)[0]
@@ -98,14 +98,14 @@ for item in os.scandir("./src/jobs/"):
                         c2 = foo.Config()
 
                         c2.update()
-                        ##Address bug with configs dropping out 
+                        ##Address bug with configs dropping out
                         #print(c2.__class__)
                         a = c2.__dict__
 
                         #if task["python_wheel_task"]["parameters"][1] == "BW2":
                         #   print(task["task_key"])
-                        #    print(jsonObject["request"]["name"] + str(c2.__dict__))  
-                        #    print("./src/"+pipelinePath+"/code/"+packageName)   
+                        #    print(jsonObject["request"]["name"] + str(c2.__dict__))
+                        #    print("./src/"+pipelinePath+"/code/"+packageName)
                         a.pop("spark")
                         #sys.path.pop(0)
                     except Exception as e:
@@ -113,7 +113,7 @@ for item in os.scandir("./src/jobs/"):
                             +"----"+jsonObject["request"]["name"] \
                             +"  cannot find package  " + packageName )
                             # task["python_wheel_task"]["package_name"])
-                    
+
                     if pipelinePath != None:
                         orConfig = open("./src/"+pipelinePath+"/code/configs/"+ "resources/config/" + task["python_wheel_task"]["parameters"][1] + ".json")
 
@@ -145,7 +145,7 @@ for item in os.scandir("./src/jobs/"):
                         #if task["python_wheel_task"]["parameters"][1] == "BW2":
                         #    print(jsonObject["request"]["name"] + str(a))
                     else:
-                        print(jsonObject)                
+                        print(jsonObject)
             f.close()
             f = open(item.path+"/"+dbLoc,'w')
             json.dump(jsonObject,f)
