@@ -12,10 +12,20 @@ class Config(ConfigBase):
             ConfigDatabase: str=None,
             sourceTable: str=None,
             sourceTable1: str=None,
+            STf0101: str=None,
             **kwargs
     ):
         self.spark = None
-        self.update(sourceSystem, targetSchema, sourceDatabase, DAI_ETL_ID, ConfigDatabase, sourceTable, sourceTable1)
+        self.update(
+            sourceSystem, 
+            targetSchema, 
+            sourceDatabase, 
+            DAI_ETL_ID, 
+            ConfigDatabase, 
+            sourceTable, 
+            sourceTable1, 
+            STf0101
+        )
 
     def update(
             self,
@@ -26,6 +36,7 @@ class Config(ConfigBase):
             ConfigDatabase: str=" ",
             sourceTable: str="f0006",
             sourceTable1: str="f0116",
+            STf0101: str="f0101",
             **kwargs
     ):
         prophecy_spark = self.spark
@@ -36,4 +47,5 @@ class Config(ConfigBase):
         self.ConfigDatabase = ConfigDatabase
         self.sourceTable = sourceTable
         self.sourceTable1 = sourceTable1
+        self.STf0101 = STf0101
         pass

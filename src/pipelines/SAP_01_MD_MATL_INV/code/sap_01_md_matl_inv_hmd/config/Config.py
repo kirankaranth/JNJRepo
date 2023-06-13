@@ -10,10 +10,10 @@ class Config(ConfigBase):
             sourceDatabase: str=None,
             configDatabase: str=None,
             MANDT: str=None,
-            DBTABLE1: str=None,
-            DBTABLE2: str=None,
-            DBTABLE3: str=None,
-            DBTABLE4: str=None,
+            NSDM_V_MARD: str=None,
+            NSDM_V_MCHB: str=None,
+            NSDM_V_MSKU: str=None,
+            MARA: str=None,
             DAI_ETL_ID: int=None,
             **kwargs
     ):
@@ -24,10 +24,10 @@ class Config(ConfigBase):
             sourceDatabase, 
             configDatabase, 
             MANDT, 
-            DBTABLE1, 
-            DBTABLE2, 
-            DBTABLE3, 
-            DBTABLE4, 
+            NSDM_V_MARD, 
+            NSDM_V_MCHB, 
+            NSDM_V_MSKU, 
+            MARA, 
             DAI_ETL_ID
         )
 
@@ -38,10 +38,10 @@ class Config(ConfigBase):
             sourceDatabase: str="hm2",
             configDatabase: str=" ",
             MANDT: str="100",
-            DBTABLE1: str="nsdm_v_mard",
-            DBTABLE2: str="nsdm_v_mchb",
-            DBTABLE3: str="nsdm_v_msku",
-            DBTABLE4: str="mara",
+            NSDM_V_MARD: str="NSDM_V_MARD",
+            NSDM_V_MCHB: str="NSDM_V_MCHB",
+            NSDM_V_MSKU: str="NSDM_V_MSKU",
+            MARA: str="MARA",
             DAI_ETL_ID: int=0,
             **kwargs
     ):
@@ -51,9 +51,9 @@ class Config(ConfigBase):
         self.sourceDatabase = sourceDatabase
         self.configDatabase = configDatabase
         self.MANDT = MANDT
-        self.DBTABLE1 = DBTABLE1
-        self.DBTABLE2 = DBTABLE2
-        self.DBTABLE3 = DBTABLE3
-        self.DBTABLE4 = DBTABLE4
+        self.NSDM_V_MARD = NSDM_V_MARD
+        self.NSDM_V_MCHB = NSDM_V_MCHB
+        self.NSDM_V_MSKU = NSDM_V_MSKU
+        self.MARA = MARA
         self.DAI_ETL_ID = self.get_int_value(DAI_ETL_ID)
         pass

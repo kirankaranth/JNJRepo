@@ -7,15 +7,6 @@ from prophecy.utils import *
 from jde_02_md_plnt_mtr.graph import *
 
 def pipeline(spark: SparkSession) -> None:
-    df_JDE_F0116 = JDE_F0116(spark)
-    df_JDE_F0116 = collectMetrics(
-        spark, 
-        df_JDE_F0116, 
-        "graph", 
-        "4zljP0FlXXHBtlHtSH5R2$$MkDcVRnqDK5IfGcFMBrzx", 
-        "bbTi6qu675vn_0fgQWzax$$71yjJlLh4hCRHrX5yvhh6"
-    )
-    df_JDE_F0116_FILTER = JDE_F0116_FILTER(spark, df_JDE_F0116)
     df_JDE_F0006 = JDE_F0006(spark)
     df_JDE_F0006 = collectMetrics(
         spark, 
@@ -25,10 +16,29 @@ def pipeline(spark: SparkSession) -> None:
         "21DF_bl72RV0BeadNutJh$$xoub2cfLSrdOtci7enhJm"
     )
     df_JDE_F0006_FILTER = JDE_F0006_FILTER(spark, df_JDE_F0006)
-    df_Join_JDE = Join_JDE(spark, df_JDE_F0006_FILTER, df_JDE_F0116_FILTER)
+    df_DS_F0101 = DS_F0101(spark)
+    df_DS_F0101 = collectMetrics(
+        spark, 
+        df_DS_F0101, 
+        "graph", 
+        "QMRbzt06-wLBs9ITZADsP$$QzVeFQTsHYX-CSvGjjhWC", 
+        "QAnal8AsAS-LFBACh_akL$$151Dbf6SQGa0M9t-VjqUn"
+    )
+    df_JDE_F0101_FILTER = JDE_F0101_FILTER(spark, df_DS_F0101)
+    df_JDE_F0116 = JDE_F0116(spark)
+    df_JDE_F0116 = collectMetrics(
+        spark, 
+        df_JDE_F0116, 
+        "graph", 
+        "4zljP0FlXXHBtlHtSH5R2$$MkDcVRnqDK5IfGcFMBrzx", 
+        "bbTi6qu675vn_0fgQWzax$$71yjJlLh4hCRHrX5yvhh6"
+    )
+    df_JDE_F0116_FILTER = JDE_F0116_FILTER(spark, df_JDE_F0116)
+    df_DEDUPLICATE = DEDUPLICATE(spark, df_JDE_F0116_FILTER)
+    df_Join_1 = Join_1(spark, df_DEDUPLICATE, df_JDE_F0101_FILTER)
+    df_Join_JDE = Join_JDE(spark, df_JDE_F0006_FILTER, df_Join_1)
     df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_Join_JDE)
-    df_DEDUPLICATE = DEDUPLICATE(spark, df_NEW_FIELDS_RENAME_FORMAT)
-    df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_DEDUPLICATE)
+    df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_NEW_FIELDS_RENAME_FORMAT)
     df_SET_FIELD_ORDER_REFORMAT = collectMetrics(
         spark, 
         df_SET_FIELD_ORDER_REFORMAT, 
