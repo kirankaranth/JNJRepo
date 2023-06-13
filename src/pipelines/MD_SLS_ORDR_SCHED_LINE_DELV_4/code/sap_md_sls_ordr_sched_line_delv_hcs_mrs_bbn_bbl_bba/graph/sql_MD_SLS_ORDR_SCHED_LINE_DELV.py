@@ -4,8 +4,8 @@ from pyspark.sql.types import *
 from prophecy.libs import typed_lit
 from prophecy.transpiler import call_spark_fcn
 from prophecy.transpiler.fixed_file_schema import *
-from sap_md_sls_ordr_sched_line_delv_4_hcs_mrs_bbn_bbl_bba.config.ConfigStore import *
-from sap_md_sls_ordr_sched_line_delv_4_hcs_mrs_bbn_bbl_bba.udfs.UDFs import *
+from sap_md_sls_ordr_sched_line_delv_hcs_mrs_bbn_bbl_bba.config.ConfigStore import *
+from sap_md_sls_ordr_sched_line_delv_hcs_mrs_bbn_bbl_bba.udfs.UDFs import *
 
 def sql_MD_SLS_ORDR_SCHED_LINE_DELV(spark: SparkSession) -> DataFrame:
     out0 = spark.sql(

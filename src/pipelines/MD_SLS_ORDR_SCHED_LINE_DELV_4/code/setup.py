@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 setup(
-    name = 'SAP_MD_SLS_ORDR_SCHED_LINE_DELV_4_hcs_mrs_bbn_bbl_bba',
+    name = 'SAP_MD_SLS_ORDR_SCHED_LINE_DELV_hcs_mrs_bbn_bbl_bba',
     version = '1.0',
-    packages = find_packages(include = ('sap_md_sls_ordr_sched_line_delv_4_hcs_mrs_bbn_bbl_bba*', )) + ["prophecy_config_instances"],
+    packages = find_packages(include = ('sap_md_sls_ordr_sched_line_delv_hcs_mrs_bbn_bbl_bba*', )) + ["prophecy_config_instances"],
     package_dir = {'prophecy_config_instances' : 'configs/resources/config'},
     package_data = {'prophecy_config_instances' : ['*.json', '*.py', '*.conf']},
     description = 'workflow',
@@ -10,7 +10,7 @@ setup(
 'prophecy-libs==1.5.4'],
     entry_points = {
 'console_scripts' : [
-'main = sap_md_sls_ordr_sched_line_delv_4_hcs_mrs_bbn_bbl_bba.pipeline:main'], },
+'main = sap_md_sls_ordr_sched_line_delv_hcs_mrs_bbn_bbl_bba.pipeline:main'], },
     data_files = [(".prophecy", [".prophecy/workflow.latest.json"])],
     extras_require = {
 'test' : ['pytest', 'pytest-html'], }

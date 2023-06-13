@@ -1,12 +1,12 @@
 from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
-from sap_md_sls_ordr_sched_line_delv_4_hcs_mrs_bbn_bbl_bba.config.ConfigStore import *
-from sap_md_sls_ordr_sched_line_delv_4_hcs_mrs_bbn_bbl_bba.udfs.UDFs import *
+from sap_md_sls_ordr_sched_line_delv_hcs_mrs_bbn_bbl_bba.config.ConfigStore import *
+from sap_md_sls_ordr_sched_line_delv_hcs_mrs_bbn_bbl_bba.udfs.UDFs import *
 from prophecy.utils import *
 from prophecy.transpiler import call_spark_fcn
 from prophecy.transpiler.fixed_file_schema import *
-from sap_md_sls_ordr_sched_line_delv_4_hcs_mrs_bbn_bbl_bba.graph import *
+from sap_md_sls_ordr_sched_line_delv_hcs_mrs_bbn_bbl_bba.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_sql_MD_SLS_ORDR_SCHED_LINE_DELV = sql_MD_SLS_ORDR_SCHED_LINE_DELV(spark)
