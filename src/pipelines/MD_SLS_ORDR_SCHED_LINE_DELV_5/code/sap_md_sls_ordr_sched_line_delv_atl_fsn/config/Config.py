@@ -18,8 +18,8 @@ class Config(ConfigBase):
     def update(
             self,
             targetSchema: str="dev_md_l1",
-            sourceSystem: str="atlas",
-            sourceDatabase: str="atlas",
+            sourceSystem: str="atl",
+            sourceDatabase: str="atl",
             MANDT: str=None,
             DAI_ETL_ID: int=0,
             **kwargs
