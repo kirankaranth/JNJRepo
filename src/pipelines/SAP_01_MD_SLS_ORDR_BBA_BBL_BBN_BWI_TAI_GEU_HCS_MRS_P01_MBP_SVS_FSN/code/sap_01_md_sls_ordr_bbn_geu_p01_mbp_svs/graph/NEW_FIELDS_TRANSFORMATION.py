@@ -13,7 +13,13 @@ def NEW_FIELDS_TRANSFORMATION(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("SLS_ORDR_TYPE_CD", trim(col("AUART")))\
         .withColumn(
           "CRT_DTTM",
-          when(((col("ERDAT") == lit("00000000")) | (col("ERZET") == lit("00000000"))), lit(None).cast(TimestampType()))\
+          when(
+              (
+                ((col("ERDAT") == lit("00000000")) | (col("ERZET") == lit("00000000")))
+                | (col("ERDAT") < lit("19000101"))
+              ), 
+              lit(None).cast(TimestampType())
+            )\
             .otherwise(to_timestamp(concat(col("ERDAT"), col("ERZET")), "yyyyMMddHHmmss"))
         )\
         .withColumn("_l0_upt_", col("_upt_"))\
@@ -36,7 +42,7 @@ def NEW_FIELDS_TRANSFORMATION(spark: SparkSession, in0: DataFrame) -> DataFrame:
           )
         )\
         .withColumn("_l1_upt_", current_timestamp())\
-        .withColumn("_deleted_", lit("F"))\
+        .withColumn("_deleted_", col("_deleted_"))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
         .withColumn("DAI_UPDT_DTTM", current_timestamp())\
@@ -46,23 +52,23 @@ def NEW_FIELDS_TRANSFORMATION(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("DELV_BLK_CD", trim(col("LIFSK")))\
         .withColumn(
           "CHG_DTTM",
-          when((col("AEDAT") == lit("00000000")), lit(None).cast(TimestampType()))\
+          when(((col("AEDAT") == lit("00000000")) | (col("AEDAT") < lit("19000101"))), lit(None).cast(TimestampType()))\
             .otherwise(to_timestamp(col("AEDAT"), "yyyyMMdd"))
         )\
         .withColumn("CUST_PO_TYPE_CD", trim(col("BSARK")))\
         .withColumn(
           "VALID_FROM_DTTM",
-          when((col("GUEBG") == lit("00000000")), lit(None).cast(TimestampType()))\
+          when(((col("GUEBG") == lit("00000000")) | (col("GUEBG") < lit("19000101"))), lit(None).cast(TimestampType()))\
             .otherwise(to_timestamp(col("GUEBG"), "yyyyMMdd"))
         )\
         .withColumn(
           "VALID_TO_DTTM",
-          when((col("GUEEN") == lit("00000000")), lit(None).cast(TimestampType()))\
+          when(((col("GUEEN") == lit("00000000")) | (col("GUEEN") < lit("19000101"))), lit(None).cast(TimestampType()))\
             .otherwise(to_timestamp(col("GUEEN"), "yyyyMMdd"))
         )\
         .withColumn(
           "RQST_DELV_DTTM",
-          when((col("VDATU") == lit("00000000")), lit(None).cast(TimestampType()))\
+          when(((col("VDATU") == lit("00000000")) | (col("VDATU") < lit("19000101"))), lit(None).cast(TimestampType()))\
             .otherwise(to_timestamp(col("VDATU"), "yyyyMMdd"))
         )\
         .withColumn("PRC_PCDR_CD", trim(col("KALSM")))\
@@ -81,19 +87,19 @@ def NEW_FIELDS_TRANSFORMATION(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("SLS_GRP_CD", trim(col("VKGRP")))\
         .withColumn(
           "ORIG_MATL_AVLBLTY_DTTM",
-          when((col("FMBDAT") == lit("00000000")), lit(None).cast(TimestampType()))\
+          when(((col("FMBDAT") == lit("00000000")) | (col("FMBDAT") < lit("19000101"))), lit(None).cast(TimestampType()))\
             .otherwise(to_timestamp(col("FMBDAT"), "yyyyMMdd"))
         )\
         .withColumn("CMPLT_DELV_CD", trim(col("AUTLF")))\
         .withColumn(
           "RLSE_DTTM",
-          when((col("CMFRE") == lit("00000000")), lit(None).cast(TimestampType()))\
+          when(((col("CMFRE") == lit("00000000")) | (col("CMFRE") < lit("19000101"))), lit(None).cast(TimestampType()))\
             .otherwise(to_timestamp(col("CMFRE"), "yyyyMMdd"))
         )\
         .withColumn("SRCH_ITM_PROD_PROPS", trim(col("KTEXT")))\
         .withColumn(
           "DOC_DTTM",
-          when((col("AUDAT") == lit("00000000")), lit(None).cast(TimestampType()))\
+          when(((col("AUDAT") == lit("00000000")) | (col("AUDAT") < lit("19000101"))), lit(None).cast(TimestampType()))\
             .otherwise(to_timestamp(col("AUDAT"), "yyyyMMdd"))
         )\
         .withColumn("BUSN_AREA", trim(col("GSBER")))\

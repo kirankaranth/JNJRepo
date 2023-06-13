@@ -6,4 +6,4 @@ from sap_md_matl_mvmt_hdr.config.ConfigStore import *
 from sap_md_matl_mvmt_hdr.udfs.UDFs import *
 
 def DS_SAP_MKPF(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.sourceSystem}.mkpf")
+    return spark.read.table(f"{Config.sourceDatabase}.mkpf")
