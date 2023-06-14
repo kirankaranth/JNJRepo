@@ -2269,13 +2269,13 @@ pipelines:
     dependencies: {}
   pipelines/JDE_MD_MATL:
     name: JDE_MD_MATL
-    description: MD_MATL For JDE systems
+    description: MD_MATL For JDE --> bw2, deu, djd, gmd, jem, jes, jsw, mtr, sjd
     author: natkins7@its.jnj.com
     mode: batch
     artefactID: ''
     language: python
     createdAt: '2023-05-02 10:39:17'
-    modifiedAt: '2023-05-11 07:34:19'
+    modifiedAt: '2023-05-17 13:56:44'
     datasets:
       inputs:
       - datasets/DS_JDE_01_F0005_41
@@ -3896,6 +3896,25 @@ pipelines:
       inputs: []
       outputs:
       - datasets/MD_PRCH_INFO_ORG
+    subgraphs: []
+    dependencies: {}
+  pipelines/JDE_MD_MATL_JET:
+    name: JDE_MD_MATL_JET
+    description: 'MD_MATL For jet, based on unique requirement to map F0005 via F554101b_adt '
+    author: natkins7@its.jnj.com
+    mode: batch
+    artefactID: ''
+    language: python
+    createdAt: '2023-05-17 10:51:58'
+    modifiedAt: '2023-05-22 09:28:03'
+    datasets:
+      inputs:
+      - datasets/DS_JDE_01_F0005_41
+      - datasets/DS_JDE_01_F4101
+      - datasets/DS_JDE_F0005_NC
+      - datasets/DS_JDE_F554101B_NC
+      outputs:
+      - datasets/MD_MATL
     subgraphs: []
     dependencies: {}
   pipelines/MD_SUP_CO_1:
@@ -10035,6 +10054,51 @@ datasets:
         author: natkins7@its.jnj.com
         createdAt: '2023-05-31 10:47:25'
         modifiedAt: '2023-05-31 10:47:25'
+  datasets/DS_JDE_F0005_NC:
+    name: DS_JDE_F0005_NC
+    description: ''
+    author: natkins7@its.jnj.com
+    createdAt: '2023-05-17 15:37:41'
+    modifiedAt: '2023-05-17 15:42:45'
+    mode: batch
+    physicalDatasets:
+      CDL_L1_Dev:
+        fabricId: 32
+        datasetType: Database
+        description: ''
+        author: natkins7@its.jnj.com
+        createdAt: '2023-05-17 15:37:41'
+        modifiedAt: '2023-05-17 15:37:41'
+  datasets/DS_JDE_F554101B_NC:
+    name: DS_JDE_F554101B_NC
+    description: ''
+    author: natkins7@its.jnj.com
+    createdAt: '2023-05-17 16:24:21'
+    modifiedAt: '2023-05-17 16:25:27'
+    mode: batch
+    physicalDatasets:
+      CDL_L1_Dev:
+        fabricId: 32
+        datasetType: Database
+        description: ''
+        author: natkins7@its.jnj.com
+        createdAt: '2023-05-17 16:24:21'
+        modifiedAt: '2023-05-17 16:24:21'
+  datasets/DS_SAP_T006A_NC:
+    name: DS_SAP_T006A_NC
+    description: ''
+    author: natkins7@its.jnj.com
+    createdAt: '2023-05-18 17:09:41'
+    modifiedAt: '2023-05-18 17:09:41'
+    mode: batch
+    physicalDatasets:
+      CDL_L1_Dev:
+        fabricId: 32
+        datasetType: Database
+        description: ''
+        author: natkins7@its.jnj.com
+        createdAt: '2023-05-18 17:09:41'
+        modifiedAt: '2023-05-18 17:09:41'
 templates: {}
 jobs:
   jobs/DEV_ATL_PIPELINE_JOB:
@@ -12019,6 +12083,7 @@ jobs:
     pipelines:
     - pipelines/SAP_MD_MATL_MBP
     - pipelines/MD_MATL_SAP_ATL_BWI_FSN_GEU_MRS_P01_SVS_TAI
+    - pipelines/JDE_MD_MATL_JET
     - pipelines/SAP_MD_MATL_BBL
     - pipelines/SAP_MD_MATL_HCS
     - pipelines/JDE_BW2_MD_MATL
@@ -12032,7 +12097,7 @@ jobs:
       clusterId: null
     enabled: null
     createdAt: '2023-05-05 13:05:54'
-    modifiedAt: '2023-05-12 21:12:41'
+    modifiedAt: '2023-06-13 22:31:38'
     author: natkins7@its.jnj.com
   jobs/MD_MATL_HM2_JOB:
     name: JOB_MD_MATL_HM2
