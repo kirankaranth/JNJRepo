@@ -9,3 +9,7 @@ Testing job deployment
 JEKT-2500
 
 Job run 
+
+*** Release notes for version: JEKT-2500 ***
+
+running the job
