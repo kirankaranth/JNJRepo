@@ -1,0 +1,45 @@
+folder('md_l1')
+folder('md_l1/manual_deploy')
+pipelineJob('md_l1/manual_deploy/deploy_job') {
+    definition {
+        cpsScm {
+          scm {
+                gitParameter {
+                            // The name of the parameter.
+                            name('SELECTED_BRANCH')
+                            // The type of the list of parameters: Tag - list of all commit tags in repository - returns Tag Name Branch - list of all branch in repository - returns Branch Name Revision - list of all revision sha1 in repository followed by its author and date - returns Tag SHA1
+                            type('PT_BRANCH')
+                            // In my case this is a variable pointing to the gitlab hook variable
+                            defaultValue('$gitlabAfter')
+                            // A description that will be shown to the user later.
+                            description('Select a git the configuration you want to deploy')
+                            // Name of branch to look in.
+                            branch('')
+                            // Regex used to filter displayed branches.
+                            // Whatever is captured in the group will be the name used as the value of the SELECTED_BRANCH
+                            branchFilter('origin/(feature\\/.*)')
+                            // This parameter is used to get tag from git.
+                            tagFilter('*')
+                            // Select how to sort the downloaded parameters.
+                            sortMode('NONE')
+                            // Which value is selected, after loaded parameters.
+                            selectedValue('NONE')
+                            // If in the task are defined multiple repositories, this option specifies which the repository is taken into account on getting data.
+                            useRepository("https://sourcecode.jnj.com/scm/asx-jekt/l1_md_prophecy.git")
+                            // When this option is enabled will show a text field.
+                            quickFilterEnabled(true)
+                            // Specify the number of items the list will display.
+                            // listSize(String value)
+                        }
+
+            git {
+                branch('robot_tests')
+                remote {
+                    url('https://sourcecode.jnj.com/scm/asx-jekt/l1_md_prophecy.git')
+                    credentials('sourcecode-bitbucket')
+                }
+            }
+          }
+        }
+    }
+}
