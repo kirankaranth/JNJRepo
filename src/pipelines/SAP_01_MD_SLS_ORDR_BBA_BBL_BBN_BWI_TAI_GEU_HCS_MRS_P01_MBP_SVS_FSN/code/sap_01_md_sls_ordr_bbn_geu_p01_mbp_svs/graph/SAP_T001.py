@@ -6,4 +6,4 @@ from sap_01_md_sls_ordr_bbn_geu_p01_mbp_svs.config.ConfigStore import *
 from sap_01_md_sls_ordr_bbn_geu_p01_mbp_svs.udfs.UDFs import *
 
 def SAP_T001(spark: SparkSession) -> DataFrame:
-    return spark.read.table(f"{Config.sourceDatabase}.T001")
+    return spark.read.table(f"{Config.sourceDatabase}.t001")
