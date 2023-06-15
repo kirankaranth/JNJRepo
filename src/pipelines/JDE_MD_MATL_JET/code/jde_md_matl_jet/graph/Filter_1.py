@@ -7,7 +7,5 @@ from prophecy.transpiler.fixed_file_schema import *
 from jde_md_matl_jet.config.ConfigStore import *
 from jde_md_matl_jet.udfs.UDFs import *
 
-def T162(spark: SparkSession, in0: DataFrame) -> DataFrame:
-    df1 = in0.groupBy(col("XBITM"), col("XB_T162"))
-
-    return df1.agg(count(col("XBMCU")).alias("Plants"))
+def Filter_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
+    return in0.filter((trim(col("DRSY")) == lit("41")))
