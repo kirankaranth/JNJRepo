@@ -30,16 +30,6 @@ def pipeline(spark: SparkSession) -> None:
     df_MANDT_FILTER_VBFA = MANDT_FILTER_VBFA(spark, df_SAP_VBFA)
     df_FIELDS_VBFA = FIELDS_VBFA(spark, df_MANDT_FILTER_VBFA)
     df_JOIN_SAP = JOIN_SAP(spark, df_FIELDS_VBAK, df_FIELDS_VBFA)
-    df_JOIN_SAP_1 = JOIN_SAP_1(spark, df_JOIN_SAP)
-    df_JOIN_SAP_1 = collectMetrics(
-        spark, 
-        df_JOIN_SAP_1, 
-        "graph", 
-        "oI-FE2_llgcpAO-2AfNZx$$CrpmTDk12bcjEBQRLwTxV", 
-        "7EgaobHDyHArNbi2wMPVn$$ZmV5aFjWfL3mRbNO5_TeH"
-    )
-    df_JOIN_SAP_1.cache().count()
-    df_JOIN_SAP_1.unpersist()
     df_SAP_VBAP = SAP_VBAP(spark)
     df_SAP_VBAP = collectMetrics(
         spark, 
@@ -49,16 +39,17 @@ def pipeline(spark: SparkSession) -> None:
         "o5YEKFinGSrT92hZqv_x1$$uu6ZzCgA_RuPlXQug5a1D"
     )
     df_MANDT_FILTER_VBAP = MANDT_FILTER_VBAP(spark, df_SAP_VBAP)
-    df_Reformat_1 = Reformat_1(spark, df_MANDT_FILTER_VBAP)
-    df_Reformat_1 = collectMetrics(
+    df_FIELDS_VBAP = FIELDS_VBAP(spark, df_MANDT_FILTER_VBAP)
+    df_JOIN_SAP_1 = JOIN_SAP_1(spark, df_JOIN_SAP, df_FIELDS_VBAP)
+    df_NEW_FIELDS = NEW_FIELDS(spark, df_JOIN_SAP_1)
+    df_NEW_FIELDS = collectMetrics(
         spark, 
-        df_Reformat_1, 
+        df_NEW_FIELDS, 
         "graph", 
-        "iRY1xc-9_1b6lpgR-4dq_$$xMLEACaAsRuEaKYV2pgGA", 
-        "ePJN1ygwAzsgETyeGclvu$$J7Yju6ImP7wKWMvjwRIP6"
+        "qqLwHAcvxNpIZNPXk0vd2$$mFNbq4K4Lxh7ZUS7JD5IN", 
+        "S6a4oNkdbiAY1rBKaW9F_$$5u3_uetgaiDlGk1PBdwaB"
     )
-    df_Reformat_1.cache().count()
-    df_Reformat_1.unpersist()
+    MD_SLS_DOC_HIER(spark, df_NEW_FIELDS)
 
 def main():
     spark = SparkSession.builder\

@@ -8,4 +8,4 @@ from sap_md_sls_doc_hier_bba_bbl_bbn_mbp_hcs_geu_mrs_tai_svs_bwi_p01_atl_fsn_hm2
 from sap_md_sls_doc_hier_bba_bbl_bbn_mbp_hcs_geu_mrs_tai_svs_bwi_p01_atl_fsn_hm2.udfs.UDFs import *
 
 def FIELDS_VBAK(spark: SparkSession, in0: DataFrame) -> DataFrame:
-    return in0.select(col("BUKRS_VF"), col("AUART"), col("VBELN"))
+    return in0.select(col("BUKRS_VF"), col("AUART"), col("VBELN").alias("VBAK.VBELN"))

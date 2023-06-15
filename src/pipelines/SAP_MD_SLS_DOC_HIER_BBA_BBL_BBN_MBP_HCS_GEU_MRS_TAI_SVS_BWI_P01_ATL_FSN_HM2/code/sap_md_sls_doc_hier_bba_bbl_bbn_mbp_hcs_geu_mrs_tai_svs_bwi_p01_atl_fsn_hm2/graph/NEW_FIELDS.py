@@ -7,5 +7,10 @@ from prophecy.transpiler.fixed_file_schema import *
 from sap_md_sls_doc_hier_bba_bbl_bbn_mbp_hcs_geu_mrs_tai_svs_bwi_p01_atl_fsn_hm2.config.ConfigStore import *
 from sap_md_sls_doc_hier_bba_bbl_bbn_mbp_hcs_geu_mrs_tai_svs_bwi_p01_atl_fsn_hm2.udfs.UDFs import *
 
-def Reformat_1(spark: SparkSession, in0: DataFrame) -> DataFrame:
-    return in0
+def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
+    return in0\
+        .withColumn("SRC_SYS_CD", lit(Config.sourceSystem))\
+        .withColumn("CO_CD", col("BUKRS_VF"))\
+        .withColumn("PREV_DOC_NUM", col("VBELV"))\
+        .withColumn("PREV_DOC_LINE_NBR", col("POSNV"))\
+        .withColumn("SUBSQ_DOC_NUM", col("VBELN"))
