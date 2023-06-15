@@ -1,1 +1,1 @@
-from .MD_PRCH_DELV_CNFRMS_10 import *
+from .md_prch_delv_cnfrms_10_bwi import *
