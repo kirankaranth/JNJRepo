@@ -25,16 +25,8 @@ class NEW_FIELDSTest(BaseTestCase):
         )
         dfOutComputed = NEW_FIELDS(self.spark, dfIn0)
         assertDFEquals(
-            dfOut.select("_deleted_", "_pk_", "SRC_SYS_CD", "MATL_NUM", "SL_ORG_NUM", "DSTR_CHNL_CD", "_pk_md5_"),
-            dfOutComputed.select(
-              "_deleted_",
-              "_pk_",
-              "SRC_SYS_CD",
-              "MATL_NUM",
-              "SL_ORG_NUM",
-              "DSTR_CHNL_CD",
-              "_pk_md5_"
-            ),
+            dfOut.select("MATL_NUM", "PROD_HIER_CD"),
+            dfOutComputed.select("MATL_NUM", "PROD_HIER_CD"),
             self.maxUnequalRowsToShow
         )
 
