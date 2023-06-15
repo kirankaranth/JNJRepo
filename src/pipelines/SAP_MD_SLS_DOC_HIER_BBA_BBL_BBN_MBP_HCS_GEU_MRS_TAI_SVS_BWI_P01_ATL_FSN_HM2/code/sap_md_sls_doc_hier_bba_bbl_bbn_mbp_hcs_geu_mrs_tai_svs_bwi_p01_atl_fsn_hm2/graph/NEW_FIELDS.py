@@ -13,4 +13,24 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("CO_CD", col("BUKRS_VF"))\
         .withColumn("PREV_DOC_NUM", col("VBELV"))\
         .withColumn("PREV_DOC_LINE_NBR", col("POSNV"))\
-        .withColumn("SUBSQ_DOC_NUM", col("VBELN"))
+        .withColumn("SUBSQ_DOC_NUM", col("VBELN"))\
+        .withColumn("SUBSQ_DOC_LINE_NBR", col("POSNN"))\
+        .withColumn("SUBSQ_DOC_CAT_CD", col("VBTYP_N"))\
+        .withColumn("PREV_DOC_TYPE_CD", col("AUART"))\
+        .withColumn("PREV_DOC_CAT_CD", col("VBTYP_V"))\
+        .withColumn("REF_QTY", col("RFMNG").cast(DecimalType(18, 4)))\
+        .withColumn("BASE_UOM_CD", trim(col("MEINS")))\
+        .withColumn("REF_AMT", trim(col("RFWRT")))\
+        .withColumn("CRNCY_CD", trim(col("WAERS")))\
+        .withColumn(
+          "CRT_DTTM",
+          when(
+              (
+                ((col("ERDAT") == lit("00000000")) | (col("ERDAT") < lit("19000101")))
+                | ((length(regexp_replace(col("ERDAT"), "(\\d+)", "")) > lit(0)) | (length(col("ERDAT")) < lit(8)))
+              ), 
+              lit(None)
+            )\
+            .otherwise(to_timestamp(concat(col("ERDAT"), col("ERZET")), "yyyyMMddHHmmss"))
+        )\
+        .withColumn("MATL_NUM", trim(col("MATNR")))
