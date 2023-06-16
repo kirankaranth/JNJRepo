@@ -4,8 +4,8 @@ from pyspark.sql.types import *
 from prophecy.libs import typed_lit
 from prophecy.transpiler import call_spark_fcn
 from prophecy.transpiler.fixed_file_schema import *
-from sap_md_sls_doc_hier_bba_bbl_bbn_mbp_hcs_geu_mrs_tai_svs_bwi_p01_atl_fsn_hm2.config.ConfigStore import *
-from sap_md_sls_doc_hier_bba_bbl_bbn_mbp_hcs_geu_mrs_tai_svs_bwi_p01_atl_fsn_hm2.udfs.UDFs import *
+from sap_md_sls_doc_hier_bba_bbl_bbn_mbp_hcs_geu_mrs_tai_svs_bwi_p01_atl_fsn.config.ConfigStore import *
+from sap_md_sls_doc_hier_bba_bbl_bbn_mbp_hcs_geu_mrs_tai_svs_bwi_p01_atl_fsn.udfs.UDFs import *
 
 def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
@@ -61,7 +61,12 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("GM_STS_CD", trim(col("WBSTA")))\
         .withColumn("QTY_CONV_CD", trim(col("CMETH")))\
         .withColumn("MATL_MVMT_YR", trim(col("MJAHR")))\
-        .withColumn("SD_UNIQ_DOC_RL_ID", expr(Config.SD_UNIQ_DOC_RL_ID))\
+        .withColumn(
+          "SD_UNIQ_DOC_RL_ID",
+          lit(
+            "#"
+          )
+        )\
         .withColumn("QTY_CALC_POS_NGTV", trim(col("PLMIN")))\
         .withColumn("ID_MM_WM_TFR_ORDR_CNFRM", trim(col("TAQUI")))\
         .withColumn("MVMT_TYPE", trim(col("BWART")))\
@@ -72,7 +77,6 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("GUARNT", col("ABGES").cast(DecimalType(18, 4)))\
         .withColumn("IN_INV_MGMT_ACT", trim(col("KZBEF")))\
         .withColumn("LOGL_SYS", trim(col("LOGSYS")))\
-        .withColumn("DATA_FIL_VAL_DATA_AGE_DTTM", expr(Config.DATA_FIL_VAL_DATA_AGE_DTTM))\
         .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
         .withColumn("DAI_CRT_DTTM", current_timestamp())\
         .withColumn("DAI_UPDT_DTTM", current_timestamp())\

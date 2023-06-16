@@ -1,12 +1,12 @@
 from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
-from sap_md_sls_doc_hier_bba_bbl_bbn_mbp_hcs_geu_mrs_tai_svs_bwi_p01_atl_fsn_hm2.config.ConfigStore import *
-from sap_md_sls_doc_hier_bba_bbl_bbn_mbp_hcs_geu_mrs_tai_svs_bwi_p01_atl_fsn_hm2.udfs.UDFs import *
+from sap_md_sls_doc_hier_bba_bbl_bbn_mbp_hcs_geu_mrs_tai_svs_bwi_p01_atl_fsn.config.ConfigStore import *
+from sap_md_sls_doc_hier_bba_bbl_bbn_mbp_hcs_geu_mrs_tai_svs_bwi_p01_atl_fsn.udfs.UDFs import *
 from prophecy.utils import *
 from prophecy.transpiler import call_spark_fcn
 from prophecy.transpiler.fixed_file_schema import *
-from sap_md_sls_doc_hier_bba_bbl_bbn_mbp_hcs_geu_mrs_tai_svs_bwi_p01_atl_fsn_hm2.graph import *
+from sap_md_sls_doc_hier_bba_bbl_bbn_mbp_hcs_geu_mrs_tai_svs_bwi_p01_atl_fsn.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_SAP_VBFA = SAP_VBFA(spark)
@@ -42,7 +42,8 @@ def pipeline(spark: SparkSession) -> None:
     df_FIELDS_VBAP = FIELDS_VBAP(spark, df_MANDT_FILTER_VBAP)
     df_JOIN_SAP_1 = JOIN_SAP_1(spark, df_JOIN_SAP, df_FIELDS_VBAP)
     df_NEW_FIELDS = NEW_FIELDS(spark, df_JOIN_SAP_1)
-    df_FIELD_ORDER = FIELD_ORDER(spark, df_NEW_FIELDS)
+    df_DEDUPLICATE = DEDUPLICATE(spark, df_NEW_FIELDS)
+    df_FIELD_ORDER = FIELD_ORDER(spark, df_DEDUPLICATE)
     df_FIELD_ORDER = collectMetrics(
         spark, 
         df_FIELD_ORDER, 

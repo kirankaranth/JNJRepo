@@ -11,21 +11,10 @@ class Config(ConfigBase):
             sourceDatabase: str=None,
             DAI_ETL_ID: int=None,
             ConfigDatabase: str=None,
-            DATA_FIL_VAL_DATA_AGE_DTTM: str=None,
-            SD_UNIQ_DOC_RL_ID: str=None,
             **kwargs
     ):
         self.spark = None
-        self.update(
-            sourceSystem, 
-            targetSchema, 
-            MANDT, 
-            sourceDatabase, 
-            DAI_ETL_ID, 
-            ConfigDatabase, 
-            DATA_FIL_VAL_DATA_AGE_DTTM, 
-            SD_UNIQ_DOC_RL_ID
-        )
+        self.update(sourceSystem, targetSchema, MANDT, sourceDatabase, DAI_ETL_ID, ConfigDatabase)
 
     def update(
             self,
@@ -35,8 +24,6 @@ class Config(ConfigBase):
             sourceDatabase: str="bba",
             DAI_ETL_ID: int=0,
             ConfigDatabase: str=" ",
-            DATA_FIL_VAL_DATA_AGE_DTTM: str="cast(null as string)",
-            SD_UNIQ_DOC_RL_ID: str="'#'",
             **kwargs
     ):
         prophecy_spark = self.spark
@@ -46,6 +33,4 @@ class Config(ConfigBase):
         self.sourceDatabase = sourceDatabase
         self.DAI_ETL_ID = self.get_int_value(DAI_ETL_ID)
         self.ConfigDatabase = ConfigDatabase
-        self.DATA_FIL_VAL_DATA_AGE_DTTM = DATA_FIL_VAL_DATA_AGE_DTTM
-        self.SD_UNIQ_DOC_RL_ID = SD_UNIQ_DOC_RL_ID
         pass

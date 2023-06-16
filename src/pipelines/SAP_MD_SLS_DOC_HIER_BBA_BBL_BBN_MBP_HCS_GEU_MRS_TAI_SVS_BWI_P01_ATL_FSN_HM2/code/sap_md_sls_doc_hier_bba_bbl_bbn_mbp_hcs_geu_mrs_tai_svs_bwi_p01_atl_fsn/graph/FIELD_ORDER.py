@@ -4,8 +4,8 @@ from pyspark.sql.types import *
 from prophecy.libs import typed_lit
 from prophecy.transpiler import call_spark_fcn
 from prophecy.transpiler.fixed_file_schema import *
-from sap_md_sls_doc_hier_bba_bbl_bbn_mbp_hcs_geu_mrs_tai_svs_bwi_p01_atl_fsn_hm2.config.ConfigStore import *
-from sap_md_sls_doc_hier_bba_bbl_bbn_mbp_hcs_geu_mrs_tai_svs_bwi_p01_atl_fsn_hm2.udfs.UDFs import *
+from sap_md_sls_doc_hier_bba_bbl_bbn_mbp_hcs_geu_mrs_tai_svs_bwi_p01_atl_fsn.config.ConfigStore import *
+from sap_md_sls_doc_hier_bba_bbl_bbn_mbp_hcs_geu_mrs_tai_svs_bwi_p01_atl_fsn.udfs.UDFs import *
 
 def FIELD_ORDER(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0.select(
@@ -52,7 +52,6 @@ def FIELD_ORDER(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("GUARNT"), 
         col("IN_INV_MGMT_ACT"), 
         col("LOGL_SYS"), 
-        col("DATA_FIL_VAL_DATA_AGE_DTTM"), 
         col("DAI_ETL_ID"), 
         col("DAI_CRT_DTTM"), 
         col("DAI_UPDT_DTTM"), 
