@@ -73,28 +73,13 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
             )
           ))
         )\
-        .withColumn("GRS_WT_MEAS", trim(col("SDGRWT")))\
+        .withColumn("GRS_WT_MEAS", col("SDGRWT").cast(DecimalType(18, 4)))\
         .withColumn("WT_UOM_CD", trim(col("SDWTUM")))\
-        .withColumn("VOL_MEAS", trim(col("SDITVL")))\
+        .withColumn("VOL_MEAS", col("SDITVL").cast(DecimalType(18, 4)))\
         .withColumn("VOL_UOM_CD", trim(col("SDVLUM")))\
         .withColumn("SLS_UOM_CD", trim(col("SDUOM4")))\
-        .withColumn("NET_WT_MEAS", trim(col("SDITWT")))\
-        .withColumn(
-          "MATL_MVMT_YR",
-          when(
-              (
-                (lower(trim(col("SDTRDJ"))).isNull() | (trim(col("SDTRDJ")) == lit("")))
-                | (trim(col("SDTRDJ")) == lit("0"))
-              ), 
-              lit(None)
-            )\
-            .otherwise(to_timestamp(
-            date_add(
-              substring((col("SDTRDJ") + lit(1900000)), 1, 4).cast(DateType()), 
-              (substring(col("SDTRDJ"), 4, 3).cast(IntegerType()) - 1)
-            )
-          ))
-        )\
+        .withColumn("NET_WT_MEAS", col("SDITWT").cast(DecimalType(18, 4)))\
+        .withColumn("MATL_MVMT_YR", substring((col("SDTRDJ") + lit(1900000)), 1, 4))\
         .withColumn(
           "SD_UNIQ_DOC_RL_ID",
           lit(

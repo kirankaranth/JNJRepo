@@ -71,7 +71,7 @@
       },
       "fabrics" : { },
       "instances" : { },
-      "selected" : "GMD",
+      "selected" : "JES",
       "nonEditable" : [ ],
       "isSubscribedPipelineWithPipelineConfigs" : false
     },
@@ -83,10 +83,10 @@
     "dependentProjectExternalDependencies" : [ ],
     "isImported" : false,
     "interimMode" : "Full",
-    "interimModeEnabled" : false,
+    "interimModeEnabled" : true,
     "visualCodeInterimMode" : "IO",
     "recordsLimit" : {
-      "enabled" : false,
+      "enabled" : true,
       "value" : 1000
     },
     "topLevelPackage" : "jde_md_sls_doc_hier_gmd_bw2_deu_djd_jem_jet_jsw_mtr_sjd_jes",
@@ -2860,7 +2860,7 @@
             "sourceColumn" : "GRS_WT_MEAS",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(SDGRWT)"
+              "expression" : "cast(SDGRWT as decimal(18,4))"
             }
           }
         }, {
@@ -2906,7 +2906,7 @@
             "sourceColumn" : "VOL_MEAS",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(SDITVL)"
+              "expression" : "cast(SDITVL as decimal(18,4))"
             }
           }
         }, {
@@ -2975,7 +2975,7 @@
             "sourceColumn" : "NET_WT_MEAS",
             "expression" : {
               "format" : "sql",
-              "expression" : "trim(SDITWT)"
+              "expression" : "cast(SDITWT as decimal(18,4))"
             }
           }
         }, {
@@ -2998,7 +2998,7 @@
             "sourceColumn" : "MATL_MVMT_YR",
             "expression" : {
               "format" : "sql",
-              "expression" : "CASE WHEN LOWER(TRIM(SDTRDJ)) IS NULL OR TRIM(SDTRDJ) = '' OR TRIM(SDTRDJ) = '0' THEN NULL ELSE to_timestamp(date_add(cast(substring(SDTRDJ+ 1900000,1,4) AS Date),cast(substring(SDTRDJ,4,3) as int)-1)) end"
+              "expression" : "substring(SDTRDJ + 1900000,1,4)"
             }
           }
         }, {
@@ -5709,7 +5709,7 @@
               }
             }, {
               "name" : "GRS_WT_MEAS",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -5727,7 +5727,7 @@
               }
             }, {
               "name" : "VOL_MEAS",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -5754,7 +5754,7 @@
               }
             }, {
               "name" : "NET_WT_MEAS",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -5763,7 +5763,7 @@
               }
             }, {
               "name" : "MATL_MVMT_YR",
-              "type" : "timestamp",
+              "type" : "string",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -8440,7 +8440,7 @@
               }
             }, {
               "name" : "GRS_WT_MEAS",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -8458,7 +8458,7 @@
               }
             }, {
               "name" : "VOL_MEAS",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -8485,7 +8485,7 @@
               }
             }, {
               "name" : "NET_WT_MEAS",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -8494,7 +8494,7 @@
               }
             }, {
               "name" : "MATL_MVMT_YR",
-              "type" : "timestamp",
+              "type" : "string",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -8641,24 +8641,10 @@
           },
           "description" : ""
         }, {
-          "target" : "REF_QTY",
-          "expression" : {
-            "format" : "sql",
-            "expression" : "REF_QTY"
-          },
-          "description" : ""
-        }, {
           "target" : "BASE_UOM_CD",
           "expression" : {
             "format" : "sql",
             "expression" : "BASE_UOM_CD"
-          },
-          "description" : ""
-        }, {
-          "target" : "REF_AMT",
-          "expression" : {
-            "format" : "sql",
-            "expression" : "REF_AMT"
           },
           "description" : ""
         }, {
@@ -8687,41 +8673,6 @@
           "expression" : {
             "format" : "sql",
             "expression" : "CHG_DTTM"
-          },
-          "description" : ""
-        }, {
-          "target" : "REQ_TYPE_CD",
-          "expression" : {
-            "format" : "sql",
-            "expression" : "REQ_TYPE_CD"
-          },
-          "description" : ""
-        }, {
-          "target" : "PLNG_TYPE_CD",
-          "expression" : {
-            "format" : "sql",
-            "expression" : "PLNG_TYPE_CD"
-          },
-          "description" : ""
-        }, {
-          "target" : "LVL_CD",
-          "expression" : {
-            "format" : "sql",
-            "expression" : "LVL_CD"
-          },
-          "description" : ""
-        }, {
-          "target" : "WHSE_CD",
-          "expression" : {
-            "format" : "sql",
-            "expression" : "WHSE_CD"
-          },
-          "description" : ""
-        }, {
-          "target" : "BILL_CAT_CD",
-          "expression" : {
-            "format" : "sql",
-            "expression" : "BILL_CAT_CD"
           },
           "description" : ""
         }, {
@@ -8760,38 +8711,10 @@
           },
           "description" : ""
         }, {
-          "target" : "SPL_STK_TYPE_CD",
-          "expression" : {
-            "format" : "sql",
-            "expression" : "SPL_STK_TYPE_CD"
-          },
-          "description" : ""
-        }, {
-          "target" : "SPL_STK_NUM",
-          "expression" : {
-            "format" : "sql",
-            "expression" : "SPL_STK_NUM"
-          },
-          "description" : ""
-        }, {
           "target" : "NET_WT_MEAS",
           "expression" : {
             "format" : "sql",
             "expression" : "NET_WT_MEAS"
-          },
-          "description" : ""
-        }, {
-          "target" : "GM_STS_CD",
-          "expression" : {
-            "format" : "sql",
-            "expression" : "GM_STS_CD"
-          },
-          "description" : ""
-        }, {
-          "target" : "QTY_CONV_CD",
-          "expression" : {
-            "format" : "sql",
-            "expression" : "QTY_CONV_CD"
           },
           "description" : ""
         }, {
@@ -8806,83 +8729,6 @@
           "expression" : {
             "format" : "sql",
             "expression" : "SD_UNIQ_DOC_RL_ID"
-          },
-          "description" : ""
-        }, {
-          "target" : "QTY_CALC_POS_NGTV",
-          "expression" : {
-            "format" : "sql",
-            "expression" : "QTY_CALC_POS_NGTV"
-          },
-          "description" : ""
-        }, {
-          "target" : "ID_MM_WM_TFR_ORDR_CNFRM",
-          "expression" : {
-            "format" : "sql",
-            "expression" : "ID_MM_WM_TFR_ORDR_CNFRM"
-          },
-          "description" : ""
-        }, {
-          "target" : "MVMT_TYPE",
-          "expression" : {
-            "format" : "sql",
-            "expression" : "MVMT_TYPE"
-          },
-          "description" : ""
-        }, {
-          "target" : "BILL_INVC_PLAN_NUM",
-          "expression" : {
-            "format" : "sql",
-            "expression" : "BILL_INVC_PLAN_NUM"
-          },
-          "description" : ""
-        }, {
-          "target" : "ITM_FOR_BILL_INVC_PLAN_PMT_CRD",
-          "expression" : {
-            "format" : "sql",
-            "expression" : "ITM_FOR_BILL_INVC_PLAN_PMT_CRD"
-          },
-          "description" : ""
-        }, {
-          "target" : "REF_QTY_SLS_UNIT",
-          "expression" : {
-            "format" : "sql",
-            "expression" : "REF_QTY_SLS_UNIT"
-          },
-          "description" : ""
-        }, {
-          "target" : "REF_QTY_BASE_UNIT_MEAS",
-          "expression" : {
-            "format" : "sql",
-            "expression" : "REF_QTY_BASE_UNIT_MEAS"
-          },
-          "description" : ""
-        }, {
-          "target" : "GUARNT",
-          "expression" : {
-            "format" : "sql",
-            "expression" : "GUARNT"
-          },
-          "description" : ""
-        }, {
-          "target" : "IN_INV_MGMT_ACT",
-          "expression" : {
-            "format" : "sql",
-            "expression" : "IN_INV_MGMT_ACT"
-          },
-          "description" : ""
-        }, {
-          "target" : "LOGL_SYS",
-          "expression" : {
-            "format" : "sql",
-            "expression" : "LOGL_SYS"
-          },
-          "description" : ""
-        }, {
-          "target" : "DATA_FIL_VAL_DATA_AGE_DTTM",
-          "expression" : {
-            "format" : "sql",
-            "expression" : "DATA_FIL_VAL_DATA_AGE_DTTM"
           },
           "description" : ""
         }, {
@@ -8944,7 +8790,7 @@
         } ],
         "importString" : "",
         "activeTab" : "expressions",
-        "columnsSelector" : [ "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##DAI_UPDT_DTTM", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##_l0_upt_", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##NET_WT_MEAS", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##DAI_ETL_ID", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##_l1_upt_", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##MATL_NUM", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##SPL_STK_NUM", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##BILL_INVC_PLAN_NUM", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##VOL_MEAS", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##ITM_FOR_BILL_INVC_PLAN_PMT_CRD", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##CHG_DTTM", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##SUBSQ_DOC_NUM", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##QTY_CONV_CD", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##PREV_DOC_CAT_CD", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##MATL_MVMT_YR", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##IN_INV_MGMT_ACT", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##REF_QTY_BASE_UNIT_MEAS", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##GRS_WT_MEAS", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##WHSE_CD", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##DAI_CRT_DTTM", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##PLNG_TYPE_CD", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##CRT_DTTM", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##QTY_CALC_POS_NGTV", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##DATA_FIL_VAL_DATA_AGE_DTTM", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##SRC_SYS_CD", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##REF_QTY_SLS_UNIT", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##MVMT_TYPE", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##_pk_md5_", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##BASE_UOM_CD", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##LVL_CD", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##SD_UNIQ_DOC_RL_ID", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##LOGL_SYS", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##_pk_", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##CO_CD", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##WT_UOM_CD", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##REF_QTY", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##PREV_DOC_NUM", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##SUBSQ_DOC_CAT_CD", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##SUBSQ_DOC_LINE_NBR", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##REF_AMT", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##SPL_STK_TYPE_CD", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##_deleted_", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##ID_MM_WM_TFR_ORDR_CNFRM", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##REQ_TYPE_CD", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##BILL_CAT_CD", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##PREV_DOC_LINE_NBR", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##CRNCY_CD", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##SLS_UOM_CD", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##GUARNT", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##VOL_UOM_CD", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##GM_STS_CD", "0mDhWV2NrZGDUFZ9PUOqf$$RH2Z6dL8TlLiToNRRxFs9##PREV_DOC_TYPE_CD" ]
+        "columnsSelector" : [ "mqbnnFk0lYFGj07AeCkV4$$tg-aY0-UiADfPPhb3BU6B##SUBSQ_DOC_CAT_CD", "mqbnnFk0lYFGj07AeCkV4$$tg-aY0-UiADfPPhb3BU6B##PREV_DOC_CAT_CD", "mqbnnFk0lYFGj07AeCkV4$$tg-aY0-UiADfPPhb3BU6B##VOL_MEAS", "mqbnnFk0lYFGj07AeCkV4$$tg-aY0-UiADfPPhb3BU6B##SD_UNIQ_DOC_RL_ID", "mqbnnFk0lYFGj07AeCkV4$$tg-aY0-UiADfPPhb3BU6B##_deleted_", "mqbnnFk0lYFGj07AeCkV4$$tg-aY0-UiADfPPhb3BU6B##CRT_DTTM", "mqbnnFk0lYFGj07AeCkV4$$tg-aY0-UiADfPPhb3BU6B##PREV_DOC_NUM", "mqbnnFk0lYFGj07AeCkV4$$tg-aY0-UiADfPPhb3BU6B##NET_WT_MEAS", "mqbnnFk0lYFGj07AeCkV4$$tg-aY0-UiADfPPhb3BU6B##DAI_ETL_ID", "mqbnnFk0lYFGj07AeCkV4$$tg-aY0-UiADfPPhb3BU6B##SRC_SYS_CD", "mqbnnFk0lYFGj07AeCkV4$$tg-aY0-UiADfPPhb3BU6B##CHG_DTTM", "mqbnnFk0lYFGj07AeCkV4$$tg-aY0-UiADfPPhb3BU6B##_pk_md5_", "mqbnnFk0lYFGj07AeCkV4$$tg-aY0-UiADfPPhb3BU6B##CO_CD", "mqbnnFk0lYFGj07AeCkV4$$tg-aY0-UiADfPPhb3BU6B##GRS_WT_MEAS", "mqbnnFk0lYFGj07AeCkV4$$tg-aY0-UiADfPPhb3BU6B##PREV_DOC_TYPE_CD", "mqbnnFk0lYFGj07AeCkV4$$tg-aY0-UiADfPPhb3BU6B##MATL_MVMT_YR", "mqbnnFk0lYFGj07AeCkV4$$tg-aY0-UiADfPPhb3BU6B##SLS_UOM_CD", "mqbnnFk0lYFGj07AeCkV4$$tg-aY0-UiADfPPhb3BU6B##WT_UOM_CD", "mqbnnFk0lYFGj07AeCkV4$$tg-aY0-UiADfPPhb3BU6B##MATL_NUM", "mqbnnFk0lYFGj07AeCkV4$$tg-aY0-UiADfPPhb3BU6B##DAI_CRT_DTTM", "mqbnnFk0lYFGj07AeCkV4$$tg-aY0-UiADfPPhb3BU6B##_l0_upt_", "mqbnnFk0lYFGj07AeCkV4$$tg-aY0-UiADfPPhb3BU6B##BASE_UOM_CD", "mqbnnFk0lYFGj07AeCkV4$$tg-aY0-UiADfPPhb3BU6B##_l1_upt_", "mqbnnFk0lYFGj07AeCkV4$$tg-aY0-UiADfPPhb3BU6B##SUBSQ_DOC_LINE_NBR", "mqbnnFk0lYFGj07AeCkV4$$tg-aY0-UiADfPPhb3BU6B##VOL_UOM_CD", "mqbnnFk0lYFGj07AeCkV4$$tg-aY0-UiADfPPhb3BU6B##_pk_", "mqbnnFk0lYFGj07AeCkV4$$tg-aY0-UiADfPPhb3BU6B##SUBSQ_DOC_NUM", "mqbnnFk0lYFGj07AeCkV4$$tg-aY0-UiADfPPhb3BU6B##DAI_UPDT_DTTM", "mqbnnFk0lYFGj07AeCkV4$$tg-aY0-UiADfPPhb3BU6B##CRNCY_CD", "mqbnnFk0lYFGj07AeCkV4$$tg-aY0-UiADfPPhb3BU6B##PREV_DOC_LINE_NBR" ]
       }
     },
     "bHNM7e7-ELU5IRWpb7Ffb$$GrDEszsE4g3LucMlShejz" : {
@@ -9126,7 +8972,282 @@
       "ports" : {
         "inputs" : [ {
           "id" : "OngN34vATYZSJUbuPKiKM$$kQeTlsT7IlFWxm9BVNfX3",
-          "slug" : "in0"
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "SRC_SYS_CD",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CO_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PREV_DOC_NUM",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PREV_DOC_LINE_NBR",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SUBSQ_DOC_NUM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SUBSQ_DOC_LINE_NBR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SUBSQ_DOC_CAT_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PREV_DOC_TYPE_CD",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "PREV_DOC_CAT_CD",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "BASE_UOM_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CRNCY_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CRT_DTTM",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MATL_NUM",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "CHG_DTTM",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "GRS_WT_MEAS",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "WT_UOM_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VOL_MEAS",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "VOL_UOM_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SLS_UOM_CD",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "NET_WT_MEAS",
+              "type" : "decimal(18,4)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "MATL_MVMT_YR",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "SD_UNIQ_DOC_RL_ID",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DAI_ETL_ID",
+              "type" : "integer",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DAI_CRT_DTTM",
+              "type" : "timestamp",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "DAI_UPDT_DTTM",
+              "type" : "timestamp",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_l0_upt_",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_l1_upt_",
+              "type" : "timestamp",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_pk_md5_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_pk_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "_deleted_",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
         } ],
         "outputs" : [ ],
         "selectedInputFields" : [ ],
@@ -11632,7 +11753,7 @@
               }
             }, {
               "name" : "GRS_WT_MEAS",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -11650,7 +11771,7 @@
               }
             }, {
               "name" : "VOL_MEAS",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -11677,7 +11798,7 @@
               }
             }, {
               "name" : "NET_WT_MEAS",
-              "type" : "string",
+              "type" : "decimal(18,4)",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -11686,7 +11807,7 @@
               }
             }, {
               "name" : "MATL_MVMT_YR",
-              "type" : "timestamp",
+              "type" : "string",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -14188,374 +14309,5 @@
     "outputs" : [ ],
     "selectedInputFields" : [ ],
     "isCustomOutputSchema" : false
-  },
-  "diagnostics" : [ {
-    "property" : "$.workflow.processes.mbo372BCjrH4ktmOu0GvL$$31O7kjFk910TEdbPM9BhX.properties.expressions[9].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "No match found for column REF_QTY",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.mbo372BCjrH4ktmOu0GvL$$31O7kjFk910TEdbPM9BhX.properties.expressions[11].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "No match found for column REF_AMT",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.mbo372BCjrH4ktmOu0GvL$$31O7kjFk910TEdbPM9BhX.properties.expressions[16].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "No match found for column REQ_TYPE_CD",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.mbo372BCjrH4ktmOu0GvL$$31O7kjFk910TEdbPM9BhX.properties.expressions[17].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "No match found for column PLNG_TYPE_CD",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.mbo372BCjrH4ktmOu0GvL$$31O7kjFk910TEdbPM9BhX.properties.expressions[18].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "No match found for column LVL_CD",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.mbo372BCjrH4ktmOu0GvL$$31O7kjFk910TEdbPM9BhX.properties.expressions[19].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "No match found for column WHSE_CD",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.mbo372BCjrH4ktmOu0GvL$$31O7kjFk910TEdbPM9BhX.properties.expressions[20].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "No match found for column BILL_CAT_CD",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.mbo372BCjrH4ktmOu0GvL$$31O7kjFk910TEdbPM9BhX.properties.expressions[26].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "No match found for column SPL_STK_TYPE_CD",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.mbo372BCjrH4ktmOu0GvL$$31O7kjFk910TEdbPM9BhX.properties.expressions[27].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "No match found for column SPL_STK_NUM",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.mbo372BCjrH4ktmOu0GvL$$31O7kjFk910TEdbPM9BhX.properties.expressions[29].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "No match found for column GM_STS_CD",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.mbo372BCjrH4ktmOu0GvL$$31O7kjFk910TEdbPM9BhX.properties.expressions[30].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "No match found for column QTY_CONV_CD",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.mbo372BCjrH4ktmOu0GvL$$31O7kjFk910TEdbPM9BhX.properties.expressions[33].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "No match found for column QTY_CALC_POS_NGTV",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.mbo372BCjrH4ktmOu0GvL$$31O7kjFk910TEdbPM9BhX.properties.expressions[34].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "No match found for column ID_MM_WM_TFR_ORDR_CNFRM",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.mbo372BCjrH4ktmOu0GvL$$31O7kjFk910TEdbPM9BhX.properties.expressions[35].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "No match found for column MVMT_TYPE",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.mbo372BCjrH4ktmOu0GvL$$31O7kjFk910TEdbPM9BhX.properties.expressions[36].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "No match found for column BILL_INVC_PLAN_NUM",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.mbo372BCjrH4ktmOu0GvL$$31O7kjFk910TEdbPM9BhX.properties.expressions[37].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "No match found for column ITM_FOR_BILL_INVC_PLAN_PMT_CRD",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.mbo372BCjrH4ktmOu0GvL$$31O7kjFk910TEdbPM9BhX.properties.expressions[38].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "No match found for column REF_QTY_SLS_UNIT",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.mbo372BCjrH4ktmOu0GvL$$31O7kjFk910TEdbPM9BhX.properties.expressions[39].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "No match found for column REF_QTY_BASE_UNIT_MEAS",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.mbo372BCjrH4ktmOu0GvL$$31O7kjFk910TEdbPM9BhX.properties.expressions[40].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "No match found for column GUARNT",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.mbo372BCjrH4ktmOu0GvL$$31O7kjFk910TEdbPM9BhX.properties.expressions[41].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "No match found for column IN_INV_MGMT_ACT",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.mbo372BCjrH4ktmOu0GvL$$31O7kjFk910TEdbPM9BhX.properties.expressions[42].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "No match found for column LOGL_SYS",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.mbo372BCjrH4ktmOu0GvL$$31O7kjFk910TEdbPM9BhX.properties.expressions[43].expression.expression",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "No match found for column DATA_FIL_VAL_DATA_AGE_DTTM",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  }, {
-    "property" : "$.workflow.processes.mbdTlj7AKPSAH1ED3tNYV$$_Dex7Go5Lr-4Mn8KCb4C6",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "One of the upstream gems is broken. Please, fix it first.",
-    "tags" : [ ],
-    "relatedInformation" : [ ]
-  } ]
+  }
 }
