@@ -33,4 +33,29 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
             )\
             .otherwise(to_timestamp(concat(col("ERDAT"), col("ERZET")), "yyyyMMddHHmmss"))
         )\
-        .withColumn("MATL_NUM", trim(col("MATNR")))
+        .withColumn("MATL_NUM", trim(col("MATNR")))\
+        .withColumn(
+          "CHG_DTTM",
+          when(
+              (
+                ((col("AEDAT") == lit("00000000")) | (col("AEDAT") < lit("19000101")))
+                | ((length(regexp_replace(col("AEDAT"), "(\\d+)", "")) > lit(0)) | (length(col("AEDAT")) < lit(8)))
+              ), 
+              lit(None)
+            )\
+            .otherwise(to_timestamp(col("AEDAT"), "yyyyMMdd"))
+        )\
+        .withColumn("REQ_TYPE_CD", trim(col("BDART")))\
+        .withColumn("PLNG_TYPE_CD", trim(col("PLART")))\
+        .withColumn("LVL_CD", trim(col("STUFE")))\
+        .withColumn("WHSE_CD", trim(col("LGNUM")))\
+        .withColumn("BILL_CAT_CD", trim(col("FKTYP")))\
+        .withColumn("GRS_WT_MEAS", col("BRGEW").cast(DecimalType(18, 4)))\
+        .withColumn("WT_UOM_CD", trim(col("GEWEI")))\
+        .withColumn("VOL_MEAS", col("VOLUM").cast(DecimalType(18, 4)))\
+        .withColumn("VOL_UOM_CD", trim(col("VOLEH")))\
+        .withColumn("SLS_UOM_CD", trim(col("VRKME")))\
+        .withColumn("SPL_STK_TYPE_CD", trim(col("SOBKZ")))\
+        .withColumn("SPL_STK_NUM", trim(col("SONUM")))\
+        .withColumn("NET_WT_MEAS", col("NTGEW").cast(DecimalType(18, 4)))\
+        .withColumn("GM_STS_CD", trim(col("WBSTA")))
