@@ -50,6 +50,17 @@ def pipeline(spark: SparkSession) -> None:
         "V20eFHkS8NuFKlaVv0xfX$$cNri_nNqDHpz3CnrO_WTe", 
         "PACFkGuneEY10qSYsQOXH$$YdLpy7f5yAQM-H5QpVbra"
     )
+    df_DUPLICATE_CHECK = DUPLICATE_CHECK(spark, df_NEW_FIELDS)
+    df_DUPLICATE_CHECK_FILTER = DUPLICATE_CHECK_FILTER(spark, df_DUPLICATE_CHECK)
+    df_DUPLICATE_CHECK_FILTER = collectMetrics(
+        spark, 
+        df_DUPLICATE_CHECK_FILTER, 
+        "graph", 
+        "zUUOuJqcl8fPcDY7gAZTF$$hLKDPPP8jsvF-rEHI5yyy", 
+        "kVj9AVdu76PeFcYQqK_C4$$p6YzzNY20-ZF9IgtN6Jzj"
+    )
+    df_DUPLICATE_CHECK_FILTER.cache().count()
+    df_DUPLICATE_CHECK_FILTER.unpersist()
     MD_SLS_DOC_HIER(spark, df_FIELD_ORDER)
 
 def main():
