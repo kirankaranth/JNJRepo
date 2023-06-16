@@ -58,4 +58,42 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("SPL_STK_TYPE_CD", trim(col("SOBKZ")))\
         .withColumn("SPL_STK_NUM", trim(col("SONUM")))\
         .withColumn("NET_WT_MEAS", col("NTGEW").cast(DecimalType(18, 4)))\
-        .withColumn("GM_STS_CD", trim(col("WBSTA")))
+        .withColumn("GM_STS_CD", trim(col("WBSTA")))\
+        .withColumn("QTY_CONV_CD", trim(col("CMETH")))\
+        .withColumn("MATL_MVMT_YR", trim(col("MJAHR")))\
+        .withColumn("SD_UNIQ_DOC_RL_ID", expr(Config.SD_UNIQ_DOC_RL_ID))\
+        .withColumn("QTY_CALC_POS_NGTV", trim(col("PLMIN")))\
+        .withColumn("ID_MM_WM_TFR_ORDR_CNFRM", trim(col("TAQUI")))\
+        .withColumn("MVMT_TYPE", trim(col("BWART")))\
+        .withColumn("BILL_INVC_PLAN_NUM", trim(col("FPLNR")))\
+        .withColumn("ITM_FOR_BILL_INVC_PLAN_PMT_CRD", trim(col("FPLTR")))\
+        .withColumn("REF_QTY_SLS_UNIT", col("RFMNG_FLO").cast(DecimalType(18, 4)))\
+        .withColumn("REF_QTY_BASE_UNIT_MEAS", col("RFMNG_FLT").cast(DecimalType(18, 4)))\
+        .withColumn("GUARNT", col("ABGES").cast(DecimalType(18, 4)))\
+        .withColumn("IN_INV_MGMT_ACT", trim(col("KZBEF")))\
+        .withColumn("LOGL_SYS", trim(col("LOGSYS")))\
+        .withColumn("DATA_FIL_VAL_DATA_AGE_DTTM", expr(Config.DATA_FIL_VAL_DATA_AGE_DTTM))\
+        .withColumn("DAI_ETL_ID", lit(Config.DAI_ETL_ID))\
+        .withColumn("DAI_CRT_DTTM", current_timestamp())\
+        .withColumn("DAI_UPDT_DTTM", current_timestamp())\
+        .withColumn("_l0_upt_", col("`VBAK._upt_`"))\
+        .withColumn("_l1_upt_", current_timestamp())\
+        .withColumn(
+          "_pk_",
+          to_json(
+            expr(
+              "named_struct('SRC_SYS_CD', SRC_SYS_CD, 'CO_CD', CO_CD, 'PREV_DOC_NUM', PREV_DOC_NUM, 'PREV_DOC_LINE_NBR', PREV_DOC_LINE_NBR, 'SUBSQ_DOC_NUM', SUBSQ_DOC_NUM, 'SUBSQ_DOC_LINE_NBR', SUBSQ_DOC_LINE_NBR, 'SUBSQ_DOC_CAT_CD', SUBSQ_DOC_CAT_CD, 'PREV_DOC_TYPE_CD', PREV_DOC_TYPE_CD, 'PREV_DOC_CAT_CD', PREV_DOC_CAT_CD, 'SD_UNIQ_DOC_RL_ID', SD_UNIQ_DOC_RL_ID)"
+            )
+          )
+        )\
+        .withColumn(
+          "_pk_md5_",
+          md5(
+            to_json(
+              expr(
+                "named_struct('SRC_SYS_CD', SRC_SYS_CD, 'CO_CD', CO_CD, 'PREV_DOC_NUM', PREV_DOC_NUM, 'PREV_DOC_LINE_NBR', PREV_DOC_LINE_NBR, 'SUBSQ_DOC_NUM', SUBSQ_DOC_NUM, 'SUBSQ_DOC_LINE_NBR', SUBSQ_DOC_LINE_NBR, 'SUBSQ_DOC_CAT_CD', SUBSQ_DOC_CAT_CD, 'PREV_DOC_TYPE_CD', PREV_DOC_TYPE_CD, 'PREV_DOC_CAT_CD', PREV_DOC_CAT_CD, 'SD_UNIQ_DOC_RL_ID', SD_UNIQ_DOC_RL_ID)"
+              )
+            )
+          )
+        )\
+        .withColumn("_deleted_", col("`VBAK._deleted_`"))
