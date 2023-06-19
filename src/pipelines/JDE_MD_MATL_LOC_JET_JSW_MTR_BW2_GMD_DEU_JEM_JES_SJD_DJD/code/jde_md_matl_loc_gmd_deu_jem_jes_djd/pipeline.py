@@ -4,6 +4,8 @@ from pyspark.sql.types import *
 from jde_md_matl_loc_gmd_deu_jem_jes_djd.config.ConfigStore import *
 from jde_md_matl_loc_gmd_deu_jem_jes_djd.udfs.UDFs import *
 from prophecy.utils import *
+from prophecy.transpiler import call_spark_fcn
+from prophecy.transpiler.fixed_file_schema import *
 from jde_md_matl_loc_gmd_deu_jem_jes_djd.graph import *
 
 def pipeline(spark: SparkSession) -> None:
@@ -53,6 +55,7 @@ def main():
     spark.conf.set("spark.sql.legacy.allowUntypedScalaUDF", "true")
     spark.conf.set("spark.sql.optimizer.excludedRules", "org.apache.spark.sql.catalyst.optimizer.ColumnPruning")
     spark.conf.set("prophecy.metadata.pipeline.uri", "pipelines/JDE_MD_MATL_LOC_JET_JSW_MTR_BW2_GMD_DEU_JEM_JES_SJD_DJD")
+    registerUDFs(spark)
     
     MetricsCollector.start(
         spark = spark,
