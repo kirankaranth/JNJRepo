@@ -16,7 +16,6 @@ from .RE_JOIN import RE_JOIN
 from .F0005_41 import F0005_41
 from .T_O_MAT import T_O_MAT
 from .TRIM_1 import TRIM_1
-from .Filter_1 import Filter_1
 from .JOIN import JOIN
 from .DS_JDE_F554101B_NC import DS_JDE_F554101B_NC
 from .MAT_SPEC_LU import MAT_SPEC_LU

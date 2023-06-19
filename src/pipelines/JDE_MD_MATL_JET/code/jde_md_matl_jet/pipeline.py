@@ -4,8 +4,6 @@ from pyspark.sql.types import *
 from jde_md_matl_jet.config.ConfigStore import *
 from jde_md_matl_jet.udfs.UDFs import *
 from prophecy.utils import *
-from prophecy.transpiler import call_spark_fcn
-from prophecy.transpiler.fixed_file_schema import *
 from jde_md_matl_jet.graph import *
 
 def pipeline(spark: SparkSession) -> None:
@@ -17,8 +15,7 @@ def pipeline(spark: SparkSession) -> None:
         "IwqM6en2Wen7_rnocVOGY$$BuM9Pan3pGXCjmGdZnVCw", 
         "pFs-s97IlaM4wdxpnKq5V$$UxCZRkRlHQ2i58EU3pJ_p"
     )
-    df_Filter_1 = Filter_1(spark, df_F0005_41)
-    df_TRIM = TRIM(spark, df_Filter_1)
+    df_TRIM = TRIM(spark, df_F0005_41)
     df_FRAN_CD = FRAN_CD(spark, df_TRIM)
     FRAN_LU(spark, df_FRAN_CD)
     df_BRAVO_MINOR_DESC = BRAVO_MINOR_DESC(spark, df_TRIM)
@@ -95,7 +92,6 @@ def main():
     spark.conf.set("spark.sql.legacy.allowUntypedScalaUDF", "true")
     spark.conf.set("spark.sql.optimizer.excludedRules", "org.apache.spark.sql.catalyst.optimizer.ColumnPruning")
     spark.conf.set("prophecy.metadata.pipeline.uri", "pipelines/JDE_MD_MATL_JET")
-    registerUDFs(spark)
     
     MetricsCollector.start(spark = spark, pipelineId = "pipelines/JDE_MD_MATL_JET")
     pipeline(spark)
