@@ -11,10 +11,21 @@ class Config(ConfigBase):
             sourceDatabase: str=None,
             DAI_ETL_ID: int=None,
             ConfigDatabase: str=None,
+            QTY_CONV_CD: str=None,
+            MATL_MVMT_YR: str=None,
             **kwargs
     ):
         self.spark = None
-        self.update(sourceSystem, targetSchema, MANDT, sourceDatabase, DAI_ETL_ID, ConfigDatabase)
+        self.update(
+            sourceSystem, 
+            targetSchema, 
+            MANDT, 
+            sourceDatabase, 
+            DAI_ETL_ID, 
+            ConfigDatabase, 
+            QTY_CONV_CD, 
+            MATL_MVMT_YR
+        )
 
     def update(
             self,
@@ -24,6 +35,8 @@ class Config(ConfigBase):
             sourceDatabase: str="bba",
             DAI_ETL_ID: int=0,
             ConfigDatabase: str=" ",
+            QTY_CONV_CD: str="cast(null as string)",
+            MATL_MVMT_YR: str="cast(null as string)",
             **kwargs
     ):
         prophecy_spark = self.spark
@@ -33,4 +46,6 @@ class Config(ConfigBase):
         self.sourceDatabase = sourceDatabase
         self.DAI_ETL_ID = self.get_int_value(DAI_ETL_ID)
         self.ConfigDatabase = ConfigDatabase
+        self.QTY_CONV_CD = QTY_CONV_CD
+        self.MATL_MVMT_YR = MATL_MVMT_YR
         pass
