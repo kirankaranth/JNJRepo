@@ -16,5 +16,6 @@ def SELECT_MSLB(spark: SparkSession, in0: DataFrame) -> DataFrame:
         col("LBINS"), 
         col("LBEIN"), 
         col("ERSDA"), 
-        col("_upt_")
+        col("_upt_"), 
+        col("_deleted_")
     )
