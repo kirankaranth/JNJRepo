@@ -8,4 +8,4 @@ from jde_md_matl_loc_jet_jsw_mtr_bw2_sjd.config.ConfigStore import *
 from jde_md_matl_loc_jet_jsw_mtr_bw2_sjd.udfs.UDFs import *
 
 def JDE_F4102(spark: SparkSession) -> DataFrame:
-    return spark.sql(f'SELECT * FROM {f"{Config.sourceSystem}.{Config.sourceTable}"} WHERE _deleted_='F'')
+    return spark.read.table(f"{Config.sourceDatabase}.{Config.sourceTable}")
