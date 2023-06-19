@@ -59,8 +59,8 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("SPL_STK_NUM", trim(col("SONUM")))\
         .withColumn("NET_WT_MEAS", col("NTGEW").cast(DecimalType(18, 4)))\
         .withColumn("GM_STS_CD", trim(col("WBSTA")))\
-        .withColumn("QTY_CONV_CD", trim(col("CMETH")))\
-        .withColumn("MATL_MVMT_YR", trim(col("MJAHR")))\
+        .withColumn("QTY_CONV_CD", expr(Config.QTY_CONV_CD))\
+        .withColumn("MATL_MVMT_YR", expr(Config.MATL_MVMT_YR))\
         .withColumn(
           "SD_UNIQ_DOC_RL_ID",
           lit(

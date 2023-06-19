@@ -35,8 +35,8 @@ class Config(ConfigBase):
             sourceDatabase: str="bba",
             DAI_ETL_ID: int=0,
             ConfigDatabase: str=" ",
-            QTY_CONV_CD: str="cast(null as string)",
-            MATL_MVMT_YR: str="cast(null as string)",
+            QTY_CONV_CD: str="trim(CMETH)",
+            MATL_MVMT_YR: str="trim(MJAHR)",
             **kwargs
     ):
         prophecy_spark = self.spark
