@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 setup(
-    name = 'SAP_MD_SLS_ORDR_SCHED_LINE_DELV_5_atl_fsn',
+    name = 'SAP_MD_SLS_ORDR_SCHED_LINE_DELV_atl_fsn',
     version = '1.0',
     packages = find_packages(include = ('sap_md_sls_ordr_sched_line_delv_atl_fsn*', )) + ["prophecy_config_instances"],
     package_dir = {'prophecy_config_instances' : 'configs/resources/config'},

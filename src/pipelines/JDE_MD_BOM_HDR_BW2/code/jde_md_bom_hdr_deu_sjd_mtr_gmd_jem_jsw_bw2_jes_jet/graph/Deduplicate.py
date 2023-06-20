@@ -10,10 +10,7 @@ def Deduplicate(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn(
           "row_number",
           row_number()\
-            .over(Window\
-            .partitionBy("SRC_SYS_CD", "BOM_CAT_CD", "BOM_NUM", "ALT_BOM_NUM", "BOM_CNTR_NBR")\
-            .orderBy(lit(1))\
-            .rowsBetween(Window.unboundedPreceding, Window.currentRow))
+            .over(Window.partitionBy("SRC_SYS_CD", "BOM_CAT_CD", "BOM_NUM", "ALT_BOM_NUM", "BOM_CNTR_NBR").orderBy(lit(1)))
         )\
         .filter(col("row_number") == lit(1))\
         .drop("row_number")
