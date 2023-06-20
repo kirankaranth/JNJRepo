@@ -4,6 +4,8 @@ from pyspark.sql.types import *
 from jde_md_matl_bom_bw2_deu_gmd_jem_jes_jet_jsw_mtr_sjd.config.ConfigStore import *
 from jde_md_matl_bom_bw2_deu_gmd_jem_jes_jet_jsw_mtr_sjd.udfs.UDFs import *
 from prophecy.utils import *
+from prophecy.transpiler import call_spark_fcn
+from prophecy.transpiler.fixed_file_schema import *
 from jde_md_matl_bom_bw2_deu_gmd_jem_jes_jet_jsw_mtr_sjd.graph import *
 
 def pipeline(spark: SparkSession) -> None:
@@ -15,8 +17,8 @@ def pipeline(spark: SparkSession) -> None:
         "tds-xWzfVXzjUK-9TPNj7$$pzCEwZ9p2chKzQO-gnUtg", 
         "-I1oCENYg5OEMsjQcEiq6$$TlV-gB4016JY4w49MuXBc"
     )
-    df_Filter_SAP_01_MAST = Filter_SAP_01_MAST(spark, df_JDE_f3002_f3002_adt)
-    df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_Filter_SAP_01_MAST)
+    df_Filter_JDE_Filter = Filter_JDE_Filter(spark, df_JDE_f3002_f3002_adt)
+    df_NEW_FIELDS_RENAME_FORMAT = NEW_FIELDS_RENAME_FORMAT(spark, df_Filter_JDE_Filter)
     df_Deduplicate_1 = Deduplicate_1(spark, df_NEW_FIELDS_RENAME_FORMAT)
     df_SET_FIELD_ORDER_REFORMAT = SET_FIELD_ORDER_REFORMAT(spark, df_Deduplicate_1)
     df_SET_FIELD_ORDER_REFORMAT = collectMetrics(
@@ -53,6 +55,7 @@ def main():
     spark.conf.set("spark.sql.legacy.allowUntypedScalaUDF", "true")
     spark.conf.set("spark.sql.optimizer.excludedRules", "org.apache.spark.sql.catalyst.optimizer.ColumnPruning")
     spark.conf.set("prophecy.metadata.pipeline.uri", "pipelines/JDE_01_MD_MATL_BOM")
+    registerUDFs(spark)
     
     MetricsCollector.start(spark = spark, pipelineId = "pipelines/JDE_01_MD_MATL_BOM")
     pipeline(spark)

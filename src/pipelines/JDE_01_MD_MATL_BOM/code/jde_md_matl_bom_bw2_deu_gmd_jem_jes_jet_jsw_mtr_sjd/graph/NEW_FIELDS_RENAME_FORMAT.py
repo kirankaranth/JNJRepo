@@ -2,6 +2,8 @@ from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from prophecy.libs import typed_lit
+from prophecy.transpiler import call_spark_fcn
+from prophecy.transpiler.fixed_file_schema import *
 from jde_md_matl_bom_bw2_deu_gmd_jem_jes_jet_jsw_mtr_sjd.config.ConfigStore import *
 from jde_md_matl_bom_bw2_deu_gmd_jem_jes_jet_jsw_mtr_sjd.udfs.UDFs import *
 
@@ -11,24 +13,7 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("MATL_NUM", col("ixkitl"))\
         .withColumn("PLNT_CD", col("ixmmcu"))\
         .withColumn("BOM_USG_CD", col("ixtbm"))\
-        .withColumn(
-          "BOM_NUM",
-          concat(
-            col("ixkit"), 
-            lit(";"), 
-            col("ixmmcu"), 
-            lit(";"), 
-            col("ixtbm"), 
-            lit(";"), 
-            col("ixbqty"), 
-            lit(";"), 
-            col("ixcoby"), 
-            lit(";"), 
-            col("ixcpnt"), 
-            lit(";"), 
-            col("ixsbnt")
-          )
-        )\
+        .withColumn("BOM_NUM", expr(Config.BOM_NUM))\
         .withColumn("ALT_BOM_NUM", lit("01").cast(StringType()))\
         .withColumn(
           "CRT_DTTM",
@@ -115,4 +100,4 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
           )
         )\
         .withColumn("_l1_upt_", current_timestamp())\
-        .withColumn("_deleted_", lit("F"))
+        .withColumn("_deleted_", col("_deleted_"))
