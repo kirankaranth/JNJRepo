@@ -13,7 +13,6 @@ from .DS_JDE_01_F4101 import DS_JDE_01_F4101
 from .MATL_GRP import MATL_GRP
 from .DEL import DEL
 from .RE_JOIN import RE_JOIN
-from .F0005_41 import F0005_41
 from .T_O_MAT import T_O_MAT
 from .TRIM_1 import TRIM_1
 from .Filter_1 import Filter_1
@@ -21,6 +20,7 @@ from .JOIN import JOIN
 from .DS_JDE_F554101B_NC import DS_JDE_F554101B_NC
 from .MAT_SPEC_LU import MAT_SPEC_LU
 from .FIELD_ORDER import FIELD_ORDER
+from .DS_JDE_02_F0005 import DS_JDE_02_F0005
 from .MAT_SPEC import MAT_SPEC
 from .MATL_GRP_2 import MATL_GRP_2
 from .MATL_TYPE_DESC import MATL_TYPE_DESC
