@@ -28,32 +28,6 @@
       }
     },
     "availableFabrics" : [ {
-      "id" : "4",
-      "name" : "CDL_Dev_Consume_Views",
-      "clusterSizes" : {
-        "default" : "small",
-        "availableClusterSizes" : [ "small" ]
-      },
-      "pylibsResolutionMode" : {
-        "PublicCentral" : { }
-      },
-      "scalalibsResolutionMode" : {
-        "PublicCentral" : { }
-      }
-    }, {
-      "id" : "16",
-      "name" : "vkalluru-pilot",
-      "clusterSizes" : {
-        "default" : "small",
-        "availableClusterSizes" : [ "small" ]
-      },
-      "pylibsResolutionMode" : {
-        "PublicCentral" : { }
-      },
-      "scalalibsResolutionMode" : {
-        "PublicCentral" : { }
-      }
-    }, {
       "id" : "32",
       "name" : "CDL_L1_Dev",
       "clusterSizes" : {
@@ -67,21 +41,8 @@
         "PublicCentral" : { }
       }
     }, {
-      "id" : "14",
-      "name" : "Epicenter",
-      "clusterSizes" : {
-        "default" : "small",
-        "availableClusterSizes" : [ "small", "sk_test" ]
-      },
-      "pylibsResolutionMode" : {
-        "PublicCentral" : { }
-      },
-      "scalalibsResolutionMode" : {
-        "PublicCentral" : { }
-      }
-    }, {
-      "id" : "29",
-      "name" : "affiliate_4",
+      "id" : "4",
+      "name" : "CDL_Dev_Consume_Views",
       "clusterSizes" : {
         "default" : "small",
         "availableClusterSizes" : [ "small" ]
@@ -95,6 +56,145 @@
     } ]
   },
   "processes" : {
+    "7J5NbqQUntt5wo9ibSjiz$$Y7QPDszYokwxwAdS3L5ho" : {
+      "id" : "7J5NbqQUntt5wo9ibSjiz$$Y7QPDszYokwxwAdS3L5ho",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "MD_BTCH",
+        "slug" : "MD_BTCH",
+        "x" : -780,
+        "y" : -780
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "_e8z2nFqU8XV8gzWzryMy$$7110ujz_alwK8bLZ2-pL5",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "PM9lifOXCjtHQr-JWPtHw$$sKGxFndh3ZcyPZPJmnbV_",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/JDE_01_MD_BTCH",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "bw2"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "bw2"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "optional" : false,
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceTable",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "f4108_adt"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CRT_DTTM",
+            "optional" : false,
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CASE WHEN LOWER(TRIM(ioohdj)) IS NULL OR TRIM(ioohdj) = '' OR TRIM(ioohdj) = '0' THEN NULL ELSE to_timestamp(date_add(cast(substring(ioohdj + 1900000,1,4) AS Date),cast(substring(ioohdj,4,3) as int)-1)) end"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "AVAIL_DTTM",
+            "optional" : false,
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CASE WHEN LOWER(TRIM(iodlej)) IS NULL OR TRIM(iodlej) = '' OR TRIM(iodlej) = '0' THEN NULL ELSE to_timestamp(date_add(cast(substring(iodlej + 1900000,1,4) AS Date),cast(substring(iodlej,4,3) as int)-1)) end"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "CHG_DTTM",
+            "optional" : false,
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CASE WHEN LOWER(TRIM(ioupmj)) IS NULL OR TRIM(ioupmj) = '' OR TRIM(ioupmj) = '0' THEN NULL ELSE to_timestamp(date_add(cast(substring(ioupmj+ 1900000,1,4) AS Date),cast(substring(ioupmj,4,3) as int)-1)) end"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "BTCH_EXP_DTTM",
+            "optional" : false,
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "CASE WHEN LOWER(TRIM(iommej)) IS NULL OR TRIM(iommej) = '' OR TRIM(iommej) = '0' THEN NULL ELSE to_timestamp(date_add(cast(substring(iommej+ 1900000,1,4) AS Date),cast(substring(iommej,4,3) as int)-1)) end"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "SUI_IND",
+            "optional" : false,
+            "kind" : {
+              "type" : "spark_expression",
+              "value" : "trim(iochdf)"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "DJD", "MTR", "JET", "JES", "BW2", "SJD", "default", "GMD", "JSW", "JEM", "DEU" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "BW2"
+        }
+      }
+    },
     "8Ver4oQypzMDOfhvPz_jE" : {
       "id" : "8Ver4oQypzMDOfhvPz_jE",
       "component" : "Pipeline",
@@ -128,47 +228,146 @@
         "configurations" : {
           "schema" : [ {
             "name" : "targetSchema",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "dev_md_l1"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceSystem",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceDatabase",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "MANDT",
+            "optional" : true,
             "kind" : {
               "type" : "string",
               "value" : "100"
             },
-            "optional" : true,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DAI_ETL_ID",
+            "optional" : false,
             "kind" : {
               "type" : "int",
               "value" : 0
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
             "CDL_MD_L1" : [ "bw2", "default" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "bw2"
+        }
+      }
+    },
+    "xd-DNE3gwZj-_PNaIV3nS$$AU8YUVhhPblaSRSyc7KSB" : {
+      "id" : "xd-DNE3gwZj-_PNaIV3nS$$AU8YUVhhPblaSRSyc7KSB",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "MD_BOM_ITM_NODE",
+        "slug" : "MD_BOM_ITM_NODE",
+        "x" : 180,
+        "y" : -780
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "qwtD3KrdyYD-hjjsQdAfR$$rLkWFldvcLNH6agZnqXdg",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "J260Io80XqGuASSqovMTK$$6kCTo_nlkPnQKAnu1ODle",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/MD_BOM_ITM_NODE_1",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "targetSchema",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceSystem",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "bw2"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "bw2"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceTable",
+            "optional" : true,
+            "kind" : {
+              "type" : "string",
+              "value" : "f3002_adt"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "optional" : false,
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "jes", "bw2", "default" ]
           },
           "overrides" : { },
           "selectedInstance" : "bw2"
@@ -208,51 +407,57 @@
         "configurations" : {
           "schema" : [ {
             "name" : "targetSchema",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "dev_md_l1"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceDatabase",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceSystem",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DBTABLE",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "f4101_adt"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DBTABLE1",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "f41021"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DAI_ETL_ID",
+            "optional" : false,
             "kind" : {
               "type" : "int",
               "value" : 0
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DIVISOR",
@@ -262,14 +467,16 @@
               "type" : "int",
               "value" : 1000
             },
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "configDatabase",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : " "
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
@@ -313,43 +520,48 @@
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "targetSchema",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "dev_md_l1"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceDatabase",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DAI_ETL_ID",
+            "optional" : false,
             "kind" : {
               "type" : "int",
               "value" : 0
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "ConfigDatabase",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : " "
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
@@ -393,51 +605,57 @@
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "targetSchema",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "dev_md_l1"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceDatabase",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DAI_ETL_ID",
+            "optional" : false,
             "kind" : {
               "type" : "int",
               "value" : 0
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "ConfigDatabase",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : " "
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceTable",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "f0101_adt"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
@@ -481,51 +699,57 @@
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "targetSchema",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "dev_md_l1"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceDatabase",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "configDatabase",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : " "
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DBTABLE1",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "f0005_adt"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DAI_ETL_ID",
+            "optional" : false,
             "kind" : {
               "type" : "int",
               "value" : 0
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
@@ -569,59 +793,66 @@
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceDatabase",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceTable",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "F43121"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceTable1",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "F4211"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DAI_ETL_ID",
+            "optional" : false,
             "kind" : {
               "type" : "int",
               "value" : 0
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "targetSchema",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "dev_md_l1"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "ConfigDatabase",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : " "
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
@@ -665,55 +896,155 @@
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceDatabase",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "targetSchema",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "dev_md_l1"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceTable",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "f43199"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DAI_ETL_ID",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "0"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "configDatabase",
+            "optional" : true,
             "kind" : {
               "type" : "string",
               "value" : " "
             },
-            "optional" : true,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
             "CDL_MD_L1" : [ "JET", "JES", "BW2", "SJD", "default", "GMD", "JSW", "JEM", "DEU" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "BW2"
+        }
+      }
+    },
+    "2vqcnLfqeaZMeOmRNSRBP$$YahXJOGvSJBFRYlCMoj_6" : {
+      "id" : "2vqcnLfqeaZMeOmRNSRBP$$YahXJOGvSJBFRYlCMoj_6",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "MD_MFG_ORDER_ITM",
+        "slug" : "MD_MFG_ORDER_ITM",
+        "x" : -620,
+        "y" : -780
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Y1UjltoSs_VmSHsfdUY_X$$0DnodeMB4mQKXtJi6GeXV",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "jyHuIFNSdiAEhxsfACLvn$$1ftCyTnkQ6Q4zm76sAMjT",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/JDE_MD_MFG_ORDER_ITM",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "bw2"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "bw2"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "optional" : false,
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceTable",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "F4801_adt"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "DJD", "MTR", "JET", "JES", "BW2", "SJD", "default", "GMD", "JSW", "JEM", "DEU" ]
           },
           "overrides" : { },
           "selectedInstance" : "BW2"
@@ -753,43 +1084,48 @@
         "configurations" : {
           "schema" : [ {
             "name" : "targetSchema",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "dev_md_l1"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceSystem",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceDatabase",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "MANDT",
+            "optional" : true,
             "kind" : {
               "type" : "string",
               "value" : ""
             },
-            "optional" : true,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DAI_ETL_ID",
+            "optional" : false,
             "kind" : {
               "type" : "int",
               "value" : 0
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
@@ -833,51 +1169,57 @@
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceDatabase",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceTable",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "f4311_adt"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DAI_ETL_ID",
+            "optional" : false,
             "kind" : {
               "type" : "int",
               "value" : 0
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "targetSchema",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "dev_md_l1"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "configDatabase",
+            "optional" : true,
             "kind" : {
               "type" : "string",
               "value" : " "
             },
-            "optional" : true,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
@@ -921,51 +1263,57 @@
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "targetSchema",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "dev_md_l1"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceDatabase",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "ConfigDatabase",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : " "
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceTable",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "f3002_adt"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DAI_ETL_ID",
+            "optional" : false,
             "kind" : {
               "type" : "int",
               "value" : 0
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
@@ -1009,43 +1357,48 @@
         "configurations" : {
           "schema" : [ {
             "name" : "sourceTable",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "f43199"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceDatabase",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DAI_ETL_ID",
+            "optional" : false,
             "kind" : {
               "type" : "int",
               "value" : 0
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceSystem",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "targetSchema",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "dev_md_l1"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
@@ -1089,43 +1442,48 @@
         "configurations" : {
           "schema" : [ {
             "name" : "targetSchema",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "dev_md_l1"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceSystem",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceDatabase",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "MANDT",
+            "optional" : true,
             "kind" : {
               "type" : "string",
               "value" : "0"
             },
-            "optional" : true,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DAI_ETL_ID",
+            "optional" : false,
             "kind" : {
               "type" : "int",
               "value" : 0
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
@@ -1169,67 +1527,75 @@
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "targetSchema",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "dev_md_l1"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceDatabase",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceTable",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "f42119"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceTable1",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "f4211"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DAI_ETL_ID",
+            "optional" : false,
             "kind" : {
               "type" : "int",
               "value" : 0
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "nonProdFilter",
+            "optional" : false,
             "kind" : {
               "type" : "boolean",
               "value" : true
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "nonProdFilterDate",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "123000"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
@@ -1273,43 +1639,254 @@
         "configurations" : {
           "schema" : [ {
             "name" : "targetSchema",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "dev_md_l1"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceSystem",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceDatabase",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "MANDT",
+            "optional" : true,
             "kind" : {
               "type" : "string",
               "value" : ""
             },
-            "optional" : true,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DAI_ETL_ID",
+            "optional" : false,
             "kind" : {
               "type" : "int",
               "value" : 0
             },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "djd", "mtr", "sjd", "jes", "jet", "gmd", "bw2", "jsw", "default", "jem", "deu" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "bw2"
+        }
+      }
+    },
+    "eUBoL4N5ybfuuUExPpbPD$$B2nRH0ehc49i5sEgBhxww" : {
+      "id" : "eUBoL4N5ybfuuUExPpbPD$$B2nRH0ehc49i5sEgBhxww",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "MD_SLS_ORDR_HIST_LDGR",
+        "slug" : "MD_SLS_ORDR_HIST_LDGR",
+        "x" : -340,
+        "y" : -780
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "CfGGs_JiPr1nQpzf2z796$$21IRhBAMohj04WkZgxX5i",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "BwVZcRVqX7BzIZCJ3TjTR$$0TCaV8hh5FomjDJcvn0bK",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/JDE_MD_SLS_ORDR_HIST_JDE_BW2",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "targetSchema",
             "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "bw2"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceSystem",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "bw2"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "optional" : false,
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "configDatabase",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "default", "BW2" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "BW2"
+        }
+      }
+    },
+    "vYXpAWeWaLPyXr3qyOti7$$7ubQsCixcoOxSiQxafrhN" : {
+      "id" : "vYXpAWeWaLPyXr3qyOti7$$7ubQsCixcoOxSiQxafrhN",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "MD_MATL_VALUT",
+        "slug" : "MD_MATL_VALUT",
+        "x" : -920,
+        "y" : -780
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "knnyrH6H8quM0tMmPtU9l$$YTwIjmjPuOqcYJDb4XuGq",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "IxZLxzAqPOEkZBtHro8_g$$rpHtQr1S7F4Hu3pbpT5Xi",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/MD_MATL_VALUT_JDE",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "bw2"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "F4101",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "F4101_adt"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "F4105",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "F4105_adt"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "F41021",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "F41021"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "divisor",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "1000"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "costDivisor",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "10000"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "optional" : false,
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "configDatabase",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "  "
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
@@ -1353,403 +1930,453 @@
         "configurations" : {
           "schema" : [ {
             "name" : "targetSchema",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "dev_md_l1"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceDatabase",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceSystem",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "configDatabase",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : " "
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DBTABLE",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "f4101_adt"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DBTABLE1",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "f0005_adt"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DBTABLE2",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "f4104_adt"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DBTABLE3",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "f6060002"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DAI_ETL_ID",
+            "optional" : false,
             "kind" : {
               "type" : "int",
               "value" : 0
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "BRAVO_MINOR_DESC_FILTER",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "10"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "B_M_LU_Field",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "IMSRP0"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "FRAN_CD_FILTER",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "S1"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "F_C_LU_Field",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "IMSRP1"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "MATL_GRP_FILTER",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "\"Filter N/A\""
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "M_G_LU_Field",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "\"Field N/A\""
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "MATL_TYPE_DESC_FILTER",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "S2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "M_T_D_LU_Field",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "IMSRP2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "MATL_TYPE_CD",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "TRIM(IMGLPT)"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "BRND_CD",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "TRIM(IMSRP5)"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "FRANCHISE_CD",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "TRIM(IMSRP1)"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "LCL_PLNG_SUB_FRAN_CD",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "TRIM(IMSRP2)"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "MATL_GRP_CD",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "TRIM(IMPRP7)"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "INDSTR_SECTR_CD",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "null"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "MIN_SHLF_RMN_LIF_DAYS_CNT",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "null"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DSTN_CHN_STS_CD",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "null"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "PROD_HIER_CD",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "TRIM(IMSRP3)"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "STRG_CONDS_CD",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "null"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "BTCH_MNG_IND",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "CASE WHEN TRIM(IMSRCE) in ('0',' ', null) THEN '' ELSE 'X' END"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "MATL_SHRT_DESC",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "TRIM(IMDSC1)"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "SRC_SECTR_CD",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "null"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "MATL_PARNT_CD",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "TRIM(IMLITM)"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "MATL_SUB_TYPE_CD",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "TRIM(IMSRP4)"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "FIN_HIER_BASE_CD",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "TRIM(IMPRP5)"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "IMPLNT_INSTM_IND",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "null"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "KIT_IND",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "null"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DIR_PART_MRKNG_CD",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "null"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "MATL_CAT_GRP_CD",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "TRIM(IMSRP5)"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "PLNG_HIER3_CD",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "TRIM(IMPRP8)"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "MATL_SPEC_NUM",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "TRIM(IMDRAW)"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "MATL_SPEC_VERS_NUM",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "TRIM(IMRVNO)"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "VOL_UNIT",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "TRIM(IMVCUD)"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "VOL",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "IMUVM1"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "EAN_UPC",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "null"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "MAIN_STRG_LOC",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "null"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "PROD_LINE",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "TRIM(IMPRP4)"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "MAKE_BUY_IN",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "null"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "TYPE_OF_MATERIAL",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "null"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "STERILE",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "null"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "BRAVO_MINOR_CODE",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "TRIM(IMSRP0)"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "CMMDTY",
+            "optional" : false,
             "kind" : {
               "type" : "spark_expression",
               "value" : "TRIM(IMPRP1)"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
@@ -1757,6 +2384,100 @@
           },
           "overrides" : { },
           "selectedInstance" : "bw2"
+        }
+      }
+    },
+    "oc3kDJ-TjJaKHPgAJup1u$$cRQpPxl_pFNykhXi9WD_1" : {
+      "id" : "oc3kDJ-TjJaKHPgAJup1u$$cRQpPxl_pFNykhXi9WD_1",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "MD_CO_CD",
+        "slug" : "MD_CO_CD",
+        "x" : -480,
+        "y" : -780
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "vzt-89r1SGThdTCqoESqP$$G2vBgCwDK8wUK3lNh1jHB",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "vZK3qocXKynQAd-MUJoCJ$$lpEXeENkmy5TzdDuL88N8",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/JDE_MD_CO_CD_BW2_JET_DJD_JES",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "bw2"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceTable",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "f0101_adt"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "bw2"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "optional" : false,
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "DJD", "MTR", "JET", "JES", "BW2", "SJD", "default", "GMD", "JSW", "JEM", "DEU" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "BW2"
         }
       }
     },
@@ -1793,59 +2514,66 @@
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "targetSchema",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "dev_md_l1"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceDatabase",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DAI_ETL_ID",
+            "optional" : false,
             "kind" : {
               "type" : "int",
               "value" : 0
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "ConfigDatabase",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : " "
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceTable",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "f4211"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceTable1",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "f43121"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
@@ -1889,43 +2617,48 @@
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "targetSchema",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "dev_md_l1"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceDatabase",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceTable",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "f3002_adt"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DAI_ETL_ID",
+            "optional" : false,
             "kind" : {
               "type" : "int",
               "value" : 0
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
@@ -1969,51 +2702,57 @@
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "targetSchema",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "dev_md_l1"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceDatabase",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceTable",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "f4102_adt"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DAI_ETL_ID",
+            "optional" : false,
             "kind" : {
               "type" : "int",
               "value" : 0
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "configDatabase",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : " "
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
@@ -2021,6 +2760,100 @@
           },
           "overrides" : { },
           "selectedInstance" : "BW2"
+        }
+      }
+    },
+    "GjYBKNWAp6VMZcD34N7hq$$laiJb_VtQyDffI_tL5oFn" : {
+      "id" : "GjYBKNWAp6VMZcD34N7hq$$laiJb_VtQyDffI_tL5oFn",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "MD_MATL_DSTN_CHN",
+        "slug" : "MD_MATL_DSTN_CHN",
+        "x" : -200,
+        "y" : -780
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "tQd1y3e7zid1LMMroRNhe$$UIG-kkegQ4MdrIWa4oF41",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "2ZjUgOxYuj-Ch7IIZdj_f$$cqohBxdtwuKwp0gHglHWr",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/JDE_01_md_matl_dstn_chn",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceDatabase",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "bw2"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceSystem",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "bw2"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "optional" : false,
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceTable",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "f4101_adt"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "djd", "mtr", "sjd", "jes", "jet", "gmd", "bw2", "jsw", "default", "jem", "deu" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "bw2"
         }
       }
     },
@@ -2057,51 +2890,57 @@
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceDatabase",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceTable",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "f0013"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DAI_ETL_ID",
+            "optional" : false,
             "kind" : {
               "type" : "int",
               "value" : 0
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "targetSchema",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "dev_md_l1"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "ConfigDatabase",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : " "
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
@@ -2109,6 +2948,203 @@
           },
           "overrides" : { },
           "selectedInstance" : "BW2"
+        }
+      }
+    },
+    "uvNFC0oRHhvtffoWoLHZU$$LW1MC70CRB-rC0chwhMnA" : {
+      "id" : "uvNFC0oRHhvtffoWoLHZU$$LW1MC70CRB-rC0chwhMnA",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "MD_SUP_PRCHSNG_ORG",
+        "slug" : "MD_SUP_PRCHSNG_ORG",
+        "x" : 60,
+        "y" : -780
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "ILFJCKaJwvTA3ZbyL9o-f$$JiQaozd99Y0vpcDrtIRM-",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "buUDFPMsaXNVwfblo4050$$QvGA5kl6lDBIoJiqi-SCd",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/JDE_MD_SUP_PRCHSNG_ORG",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "bw2"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "bw2"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "optional" : false,
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceTable",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "f0401_adt"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceTable1",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "f0101_adt"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "DJD", "MTR", "JET", "JES", "BW2", "SJD", "default", "GMD", "JSW", "JEM", "DEU" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "BW2"
+        }
+      }
+    },
+    "-8VZyTd6h97Fx8OPE5mit$$Y_8VktG7yDg9ki78jZVf-" : {
+      "id" : "-8VZyTd6h97Fx8OPE5mit$$Y_8VktG7yDg9ki78jZVf-",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "MD_SUP_CO",
+        "slug" : "MD_SUP_CO",
+        "x" : 320,
+        "y" : -780
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "lXKFMgI_xl4WwfioJqjr7$$TNRmf18c5fqs1RWvJgGan",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "vBhmHgKkEQHHuP5mF2Giw$$nWVJN7lvUa7Yrrqbt7U5f",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/MD_SUP_CO_9",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "targetSchema",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceSystem",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "bw2"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "bw2"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceTable",
+            "optional" : true,
+            "kind" : {
+              "type" : "string",
+              "value" : "f0401_adt"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "optional" : false,
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "ConfigDatabase",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "jes", "bw2", "default", "djd" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "bw2"
         }
       }
     },
@@ -2145,59 +3181,66 @@
         "configurations" : {
           "schema" : [ {
             "name" : "targetSchema",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "dev_md_l1"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceDatabase",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceSystem",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DBTABLE",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "f4101_adt"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DBTABLE1",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "f41002"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DAI_ETL_ID",
+            "optional" : false,
             "kind" : {
               "type" : "int",
               "value" : 0
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "configDatabase",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : " "
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
@@ -2241,59 +3284,75 @@
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "targetSchema",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "dev_md_l1"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceDatabase",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DAI_ETL_ID",
+            "optional" : false,
             "kind" : {
               "type" : "int",
               "value" : 0
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "ConfigDatabase",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : " "
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceTable",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "f0006_adt"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceTable1",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "f0116_adt"
             },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "STf0101",
             "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "f0101_adt"
+            },
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
@@ -2337,51 +3396,57 @@
         "configurations" : {
           "schema" : [ {
             "name" : "sourceSystem",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceDatabase",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "bw2"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "targetSchema",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "dev_md_l1"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "DAI_ETL_ID",
+            "optional" : false,
             "kind" : {
               "type" : "int",
               "value" : 0
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "sourceTable",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : "F4201"
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           }, {
             "name" : "ConfigDatabase",
+            "optional" : false,
             "kind" : {
               "type" : "string",
               "value" : " "
             },
-            "optional" : false,
+            "isReferenced" : false,
             "isWorkflowNodeConfiguration" : false
           } ],
           "instances" : {
@@ -2389,6 +3454,100 @@
           },
           "overrides" : { },
           "selectedInstance" : "BW2"
+        }
+      }
+    },
+    "cXSFF0ujA4RbpjRu8AJYT$$6mTsAw49tVPLeoAsq2nav" : {
+      "id" : "cXSFF0ujA4RbpjRu8AJYT$$6mTsAw49tVPLeoAsq2nav",
+      "component" : "Pipeline",
+      "metadata" : {
+        "label" : "MD_MFG_ORDER",
+        "slug" : "MD_MFG_ORDER",
+        "x" : -80,
+        "y" : -780
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "GY2LgIeixNpcaKo6BktxP$$45CkMjksaP-X3l-MTeyqd",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "4gemFoVItEK5mqoouYSGO$$h1D6GSy1Uuo-3XJylFDsi",
+          "slug" : ""
+        } ]
+      },
+      "settings" : {
+        "type" : "Inherited",
+        "alerting" : {
+          "emails" : "",
+          "onStart" : false,
+          "onSuccess" : false,
+          "onFailure" : false
+        }
+      },
+      "properties" : {
+        "pipelineId" : "pipelines/JDE_MD_MFG_ORDER",
+        "configurations" : {
+          "schema" : [ {
+            "name" : "sourceSystem",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "bw2"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "sourceDatabase",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "bw2"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "F4801",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "f4801_adt"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "configDatabase",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : " "
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "targetSchema",
+            "optional" : false,
+            "kind" : {
+              "type" : "string",
+              "value" : "dev_md_l1"
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          }, {
+            "name" : "DAI_ETL_ID",
+            "optional" : false,
+            "kind" : {
+              "type" : "int",
+              "value" : 0
+            },
+            "isReferenced" : false,
+            "isWorkflowNodeConfiguration" : false
+          } ],
+          "instances" : {
+            "CDL_MD_L1" : [ "djd", "mtr", "sjd", "jes", "jet", "gmd", "bw2", "jsw", "default", "jem", "deu" ]
+          },
+          "overrides" : { },
+          "selectedInstance" : "bw2"
         }
       }
     }
@@ -2519,5 +3678,59 @@
     "target" : "IB7QlKnKQjcwAtni5cXBt",
     "sourcePort" : "2zRNrJsfAM96TzOT04VDm",
     "targetPort" : "39kW2DLsW1ALovoL7djNr"
+  }, {
+    "id" : "3wcuXgPnMxqJFr-F8ZBsk$$LuK-0IshQSA0K4VPK_pFb",
+    "source" : "vYXpAWeWaLPyXr3qyOti7$$7ubQsCixcoOxSiQxafrhN",
+    "target" : "7J5NbqQUntt5wo9ibSjiz$$Y7QPDszYokwxwAdS3L5ho",
+    "sourcePort" : "IxZLxzAqPOEkZBtHro8_g$$rpHtQr1S7F4Hu3pbpT5Xi",
+    "targetPort" : "_e8z2nFqU8XV8gzWzryMy$$7110ujz_alwK8bLZ2-pL5"
+  }, {
+    "id" : "tcb-D7g2ADiR6UjzBB5ae$$HcUFJRhnjac28x2mFHIFD",
+    "source" : "7J5NbqQUntt5wo9ibSjiz$$Y7QPDszYokwxwAdS3L5ho",
+    "target" : "2vqcnLfqeaZMeOmRNSRBP$$YahXJOGvSJBFRYlCMoj_6",
+    "sourcePort" : "PM9lifOXCjtHQr-JWPtHw$$sKGxFndh3ZcyPZPJmnbV_",
+    "targetPort" : "Y1UjltoSs_VmSHsfdUY_X$$0DnodeMB4mQKXtJi6GeXV"
+  }, {
+    "id" : "5095JMfznXCtpWa8Uc7Ao$$AvGJjbKBK9_CMWQvdC3K8",
+    "source" : "2vqcnLfqeaZMeOmRNSRBP$$YahXJOGvSJBFRYlCMoj_6",
+    "target" : "oc3kDJ-TjJaKHPgAJup1u$$cRQpPxl_pFNykhXi9WD_1",
+    "sourcePort" : "jyHuIFNSdiAEhxsfACLvn$$1ftCyTnkQ6Q4zm76sAMjT",
+    "targetPort" : "vzt-89r1SGThdTCqoESqP$$G2vBgCwDK8wUK3lNh1jHB"
+  }, {
+    "id" : "KMo0wy8GjQLFJlveUxz9h$$vdN3yxIDmrOQ0AmmKsysa",
+    "source" : "oc3kDJ-TjJaKHPgAJup1u$$cRQpPxl_pFNykhXi9WD_1",
+    "target" : "eUBoL4N5ybfuuUExPpbPD$$B2nRH0ehc49i5sEgBhxww",
+    "sourcePort" : "vZK3qocXKynQAd-MUJoCJ$$lpEXeENkmy5TzdDuL88N8",
+    "targetPort" : "CfGGs_JiPr1nQpzf2z796$$21IRhBAMohj04WkZgxX5i"
+  }, {
+    "id" : "bUHXgUEzJQyeEHSbTg9q_$$r-V-wDUOETCy04KyUmCbo",
+    "source" : "eUBoL4N5ybfuuUExPpbPD$$B2nRH0ehc49i5sEgBhxww",
+    "target" : "GjYBKNWAp6VMZcD34N7hq$$laiJb_VtQyDffI_tL5oFn",
+    "sourcePort" : "BwVZcRVqX7BzIZCJ3TjTR$$0TCaV8hh5FomjDJcvn0bK",
+    "targetPort" : "tQd1y3e7zid1LMMroRNhe$$UIG-kkegQ4MdrIWa4oF41"
+  }, {
+    "id" : "nF9LCH_zvpl-D6-k54v_7$$gTOLEg_D1EgJuoZwlKOik",
+    "source" : "cXSFF0ujA4RbpjRu8AJYT$$6mTsAw49tVPLeoAsq2nav",
+    "target" : "uvNFC0oRHhvtffoWoLHZU$$LW1MC70CRB-rC0chwhMnA",
+    "sourcePort" : "4gemFoVItEK5mqoouYSGO$$h1D6GSy1Uuo-3XJylFDsi",
+    "targetPort" : "ILFJCKaJwvTA3ZbyL9o-f$$JiQaozd99Y0vpcDrtIRM-"
+  }, {
+    "id" : "esqGoGE4xs2bxR2hGxwas$$y6cmWEEJIAl-_TnwSvKIn",
+    "source" : "uvNFC0oRHhvtffoWoLHZU$$LW1MC70CRB-rC0chwhMnA",
+    "target" : "xd-DNE3gwZj-_PNaIV3nS$$AU8YUVhhPblaSRSyc7KSB",
+    "sourcePort" : "buUDFPMsaXNVwfblo4050$$QvGA5kl6lDBIoJiqi-SCd",
+    "targetPort" : "qwtD3KrdyYD-hjjsQdAfR$$rLkWFldvcLNH6agZnqXdg"
+  }, {
+    "id" : "ET4qQScIQ_LP-TkucBEgX",
+    "source" : "GjYBKNWAp6VMZcD34N7hq$$laiJb_VtQyDffI_tL5oFn",
+    "target" : "cXSFF0ujA4RbpjRu8AJYT$$6mTsAw49tVPLeoAsq2nav",
+    "sourcePort" : "2ZjUgOxYuj-Ch7IIZdj_f$$cqohBxdtwuKwp0gHglHWr",
+    "targetPort" : "GY2LgIeixNpcaKo6BktxP$$45CkMjksaP-X3l-MTeyqd"
+  }, {
+    "id" : "_fhMB_2txRzPOmN1RsGXf$$h8vR-bmjXQvPXUivPE_F3",
+    "source" : "xd-DNE3gwZj-_PNaIV3nS$$AU8YUVhhPblaSRSyc7KSB",
+    "target" : "-8VZyTd6h97Fx8OPE5mit$$Y_8VktG7yDg9ki78jZVf-",
+    "sourcePort" : "J260Io80XqGuASSqovMTK$$6kCTo_nlkPnQKAnu1ODle",
+    "targetPort" : "lXKFMgI_xl4WwfioJqjr7$$TNRmf18c5fqs1RWvJgGan"
   } ]
 }
