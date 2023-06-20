@@ -4,6 +4,8 @@ from pyspark.sql.types import *
 from sap_md_matl_mvmt_hdr_hmd.config.ConfigStore import *
 from sap_md_matl_mvmt_hdr_hmd.udfs.UDFs import *
 from prophecy.utils import *
+from prophecy.transpiler import call_spark_fcn
+from prophecy.transpiler.fixed_file_schema import *
 from sap_md_matl_mvmt_hdr_hmd.graph import *
 
 def pipeline(spark: SparkSession) -> None:
@@ -26,6 +28,7 @@ def main():
                 .newSession()
     Utils.initializeFromArgs(spark, parse_args())
     spark.conf.set("prophecy.metadata.pipeline.uri", "pipelines/SAP_MD_MATL_MVMT_HDR_HMD")
+    registerUDFs(spark)
     
     MetricsCollector.start(spark = spark, pipelineId = "pipelines/SAP_MD_MATL_MVMT_HDR_HMD")
     pipeline(spark)

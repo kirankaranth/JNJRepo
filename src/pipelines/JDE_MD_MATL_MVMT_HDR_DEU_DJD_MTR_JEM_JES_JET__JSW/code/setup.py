@@ -4,10 +4,10 @@ setup(
     version = '1.0',
     packages = find_packages(include = ('jde_md_matl_mvmt_hdr_deu_djd_mtr_jem_jes_jet_jsw*', )) + ["prophecy_config_instances"],
     package_dir = {'prophecy_config_instances' : 'configs/resources/config'},
-    package_data = {'prophecy_config_instances' : ['*.json', '*.py']},
+    package_data = {'prophecy_config_instances' : ['*.json', '*.py', '*.conf']},
     description = 'workflow',
     install_requires = [
-'prophecy-libs==1.5.0'],
+'prophecy-libs==1.5.4'],
     entry_points = {
 'console_scripts' : [
 'main = jde_md_matl_mvmt_hdr_deu_djd_mtr_jem_jes_jet_jsw.pipeline:main'], },

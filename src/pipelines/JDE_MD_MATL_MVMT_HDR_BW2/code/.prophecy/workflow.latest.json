@@ -25,7 +25,8 @@
             "value" : "gmd"
           },
           "optional" : false,
-          "isWorkflowNodeConfiguration" : false
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
         }, {
           "name" : "targetSchema",
           "kind" : {
@@ -33,7 +34,8 @@
             "value" : "dev_md_l1"
           },
           "optional" : false,
-          "isWorkflowNodeConfiguration" : false
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
         }, {
           "name" : "sourceDatabase",
           "kind" : {
@@ -41,7 +43,8 @@
             "value" : "gmd"
           },
           "optional" : false,
-          "isWorkflowNodeConfiguration" : false
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
         }, {
           "name" : "DAI_ETL_ID",
           "kind" : {
@@ -49,7 +52,8 @@
             "value" : 0
           },
           "optional" : false,
-          "isWorkflowNodeConfiguration" : false
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
         }, {
           "name" : "ConfigDatabase",
           "kind" : {
@@ -57,7 +61,8 @@
             "value" : " "
           },
           "optional" : false,
-          "isWorkflowNodeConfiguration" : false
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
         } ]
       },
       "oldCommon" : {
@@ -1180,376 +1185,540 @@
         "isCustomOutputSchema" : false
       },
       "properties" : {
-        "columnsSelector" : [ "pppE4pO2uQ76gtFgyttGU$$-VStNcqNpn32aX7HcD1pJ##ILTRDJ", "pppE4pO2uQ76gtFgyttGU$$-VStNcqNpn32aX7HcD1pJ##ILDGL", "pppE4pO2uQ76gtFgyttGU$$-VStNcqNpn32aX7HcD1pJ##ILDCTO", "pppE4pO2uQ76gtFgyttGU$$-VStNcqNpn32aX7HcD1pJ##DRDL01", "pppE4pO2uQ76gtFgyttGU$$-VStNcqNpn32aX7HcD1pJ##ILUKID", "pppE4pO2uQ76gtFgyttGU$$-VStNcqNpn32aX7HcD1pJ##_upt_", "pppE4pO2uQ76gtFgyttGU$$-VStNcqNpn32aX7HcD1pJ##ILCRDJ", "pppE4pO2uQ76gtFgyttGU$$-VStNcqNpn32aX7HcD1pJ##ILTREX" ],
+        "importLanguage" : "sql",
+        "importString" : "",
         "transformations" : [ {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
           "kind" : "AddReplaceColumn",
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "SRC_SYS_CD",
             "expression" : {
               "format" : "sql",
               "expression" : "'$sourceSystem'"
             }
+          }
+        }, {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
           },
           "DropColumn" : {
             "sourceColumn" : ""
           },
+          "kind" : "AddReplaceColumn",
           "RenameColumn" : {
             "sourceColumn" : "",
             "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "MATL_MVMT_NUM",
             "expression" : {
               "format" : "sql",
               "expression" : "ILUKID"
             }
+          }
+        }, {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
           },
           "DropColumn" : {
             "sourceColumn" : ""
           },
+          "kind" : "AddReplaceColumn",
           "RenameColumn" : {
             "sourceColumn" : "",
             "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "MATL_MVMT_YR",
             "expression" : {
               "format" : "sql",
               "expression" : "substring(ILTRDJ + 1900000,1,4)"
             }
+          }
+        }, {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
           },
           "DropColumn" : {
             "sourceColumn" : ""
           },
+          "kind" : "AddReplaceColumn",
           "RenameColumn" : {
             "sourceColumn" : "",
             "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "MATL_MVMT_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "to_timestamp(date_add(cast(substring(iltrdj + 1900000,1,4) AS Date),cast(substring(iltrdj,4,3) as int)-1))"
+              "expression" : "CASE WHEN LOWER(TRIM(iltrdj)) = 'null' OR TRIM(iltrdj) = '' OR TRIM(iltrdj) = '0' THEN NULL ELSE to_timestamp(substr(CAST(date_add(concat(substr(CAST(CAST(TRIM(iltrdj) AS INT) + 1900000 AS STRING),1,4),'-01-01'), CAST(substr(CAST(CAST(TRIM(iltrdj) AS INT) + 1900000 AS string),5,4) AS INT )-1) AS STRING), 1, 10),'yyyy-MM-dd') END"
+            }
+          }
+        }, {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
             }
           },
           "DropColumn" : {
             "sourceColumn" : ""
           },
+          "kind" : "AddReplaceColumn",
           "RenameColumn" : {
             "sourceColumn" : "",
             "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "PSTNG_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "to_timestamp(date_add(cast(substring(ildgl + 1900000,1,4) AS Date),cast(substring(ildgl,4,3) as int)-1))"
+              "expression" : "CASE WHEN LOWER(TRIM(ildgl)) = 'null' OR TRIM(ildgl) = '' OR TRIM(ildgl) = '0' THEN NULL ELSE to_timestamp(substr(CAST(date_add(concat(substr(CAST(CAST(TRIM(ildgl) AS INT) + 1900000 AS STRING),1,4),'-01-01'), CAST(substr(CAST(CAST(TRIM(ildgl) AS INT) + 1900000 AS string),5,4) AS INT )-1) AS STRING), 1, 10),'yyyy-MM-dd') END"
+            }
+          }
+        }, {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
             }
           },
           "DropColumn" : {
             "sourceColumn" : ""
           },
+          "kind" : "AddReplaceColumn",
           "RenameColumn" : {
             "sourceColumn" : "",
             "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "MATL_MVMT_HDR_TXT",
             "expression" : {
               "format" : "sql",
               "expression" : "trim(iltrex)"
             }
+          }
+        }, {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
           },
           "DropColumn" : {
             "sourceColumn" : ""
           },
+          "kind" : "AddReplaceColumn",
           "RenameColumn" : {
             "sourceColumn" : "",
             "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "DOC_TYPE",
             "expression" : {
               "format" : "sql",
               "expression" : "trim(ildcto)"
             }
+          }
+        }, {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
           },
           "DropColumn" : {
             "sourceColumn" : ""
           },
+          "kind" : "AddReplaceColumn",
           "RenameColumn" : {
             "sourceColumn" : "",
             "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "DOC_TYPE_DESC",
             "expression" : {
               "format" : "sql",
               "expression" : "trim(drdl01)"
             }
-          },
-          "DropColumn" : {
-            "sourceColumn" : ""
-          },
-          "RenameColumn" : {
-            "sourceColumn" : "",
-            "targetColumn" : ""
           }
         }, {
-          "kind" : "AddReplaceColumn",
-          "AddReplaceColumn" : {
-            "sourceColumn" : "LAST_CHG_DTTM",
-            "expression" : {
-              "format" : "sql",
-              "expression" : "to_timestamp(date_add(cast(substring(ilcrdj + 1900000,1,4) AS Date),cast(substring(ilcrdj,4,3) as int)-1))"
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
             }
           },
           "DropColumn" : {
             "sourceColumn" : ""
           },
+          "kind" : "AddReplaceColumn",
           "RenameColumn" : {
             "sourceColumn" : "",
             "targetColumn" : ""
+          },
+          "AddReplaceColumn" : {
+            "sourceColumn" : "LAST_CHG_DTTM",
+            "expression" : {
+              "format" : "sql",
+              "expression" : "CASE WHEN LOWER(TRIM(ilcrdj)) = 'null' OR TRIM(ilcrdj) = '' OR TRIM(ilcrdj) = '0' THEN NULL ELSE to_timestamp(substr(CAST(date_add(concat(substr(CAST(CAST(TRIM(ilcrdj) AS INT) + 1900000 AS STRING),1,4),'-01-01'), CAST(substr(CAST(CAST(TRIM(ilcrdj) AS INT) + 1900000 AS string),5,4) AS INT )-1) AS STRING), 1, 10),'yyyy-MM-dd') END"
+            }
           }
         }, {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
           "kind" : "AddReplaceColumn",
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "SPLT_GUID_PART1",
             "expression" : {
               "format" : "sql",
               "expression" : "'#'"
             }
+          }
+        }, {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
           },
           "DropColumn" : {
             "sourceColumn" : ""
           },
+          "kind" : "AddReplaceColumn",
           "RenameColumn" : {
             "sourceColumn" : "",
             "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "SPLT_GUID_PART2",
             "expression" : {
               "format" : "sql",
               "expression" : "'#'"
             }
+          }
+        }, {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
           },
           "DropColumn" : {
             "sourceColumn" : ""
           },
+          "kind" : "AddReplaceColumn",
           "RenameColumn" : {
             "sourceColumn" : "",
             "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "SPLT_GUID_PART3",
             "expression" : {
               "format" : "sql",
               "expression" : "'#'"
             }
+          }
+        }, {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
           },
           "DropColumn" : {
             "sourceColumn" : ""
           },
+          "kind" : "AddReplaceColumn",
           "RenameColumn" : {
             "sourceColumn" : "",
             "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "SPLT_GUID_PART4",
             "expression" : {
               "format" : "sql",
               "expression" : "'#'"
             }
+          }
+        }, {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
           },
           "DropColumn" : {
             "sourceColumn" : ""
           },
+          "kind" : "AddReplaceColumn",
           "RenameColumn" : {
             "sourceColumn" : "",
             "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "SPLT_GUID_PART5",
             "expression" : {
               "format" : "sql",
               "expression" : "'#'"
             }
+          }
+        }, {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
           },
           "DropColumn" : {
             "sourceColumn" : ""
           },
+          "kind" : "AddReplaceColumn",
           "RenameColumn" : {
             "sourceColumn" : "",
             "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "SPLT_GUID_PART6",
             "expression" : {
               "format" : "sql",
               "expression" : "'#'"
             }
+          }
+        }, {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
           },
           "DropColumn" : {
             "sourceColumn" : ""
           },
+          "kind" : "AddReplaceColumn",
           "RenameColumn" : {
             "sourceColumn" : "",
             "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "DAI_ETL_ID",
             "expression" : {
               "format" : "sql",
               "expression" : "'$DAI_ETL_ID'"
             }
+          }
+        }, {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
           },
           "DropColumn" : {
             "sourceColumn" : ""
           },
+          "kind" : "AddReplaceColumn",
           "RenameColumn" : {
             "sourceColumn" : "",
             "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "DAI_CRT_DTTM",
             "expression" : {
               "format" : "sql",
               "expression" : "current_timestamp()"
             }
+          }
+        }, {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
           },
           "DropColumn" : {
             "sourceColumn" : ""
           },
+          "kind" : "AddReplaceColumn",
           "RenameColumn" : {
             "sourceColumn" : "",
             "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "DAI_UPDT_DTTM",
             "expression" : {
               "format" : "sql",
               "expression" : "current_timestamp()"
             }
+          }
+        }, {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
           },
           "DropColumn" : {
             "sourceColumn" : ""
           },
+          "kind" : "AddReplaceColumn",
           "RenameColumn" : {
             "sourceColumn" : "",
             "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "_l0_upt_",
             "expression" : {
               "format" : "sql",
               "expression" : "_upt_"
             }
+          }
+        }, {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
           },
           "DropColumn" : {
             "sourceColumn" : ""
           },
+          "kind" : "AddReplaceColumn",
           "RenameColumn" : {
             "sourceColumn" : "",
             "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "_pk_",
             "expression" : {
               "format" : "sql",
               "expression" : "to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'MATL_MVMT_NUM',MATL_MVMT_NUM,'MATL_MVMT_YR',MATL_MVMT_YR,'SPLT_GUID_PART1',SPLT_GUID_PART1,'SPLT_GUID_PART2',SPLT_GUID_PART2,'SPLT_GUID_PART3',SPLT_GUID_PART3,'SPLT_GUID_PART4',SPLT_GUID_PART4,'SPLT_GUID_PART5',SPLT_GUID_PART5,'SPLT_GUID_PART6',SPLT_GUID_PART6))"
             }
+          }
+        }, {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
           },
           "DropColumn" : {
             "sourceColumn" : ""
           },
+          "kind" : "AddReplaceColumn",
           "RenameColumn" : {
             "sourceColumn" : "",
             "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "_pk_md5_",
             "expression" : {
               "format" : "sql",
               "expression" : "md5(to_json(named_struct('SRC_SYS_CD',SRC_SYS_CD,'MATL_MVMT_NUM',MATL_MVMT_NUM,'MATL_MVMT_YR',MATL_MVMT_YR,'SPLT_GUID_PART1',SPLT_GUID_PART1,'SPLT_GUID_PART2',SPLT_GUID_PART2,'SPLT_GUID_PART3',SPLT_GUID_PART3,'SPLT_GUID_PART4',SPLT_GUID_PART4,'SPLT_GUID_PART5',SPLT_GUID_PART5,'SPLT_GUID_PART6',SPLT_GUID_PART6)))"
             }
+          }
+        }, {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
           },
           "DropColumn" : {
             "sourceColumn" : ""
           },
+          "kind" : "AddReplaceColumn",
           "RenameColumn" : {
             "sourceColumn" : "",
             "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "_l1_upt_",
             "expression" : {
               "format" : "sql",
               "expression" : "current_timestamp()"
             }
+          }
+        }, {
+          "MissingColumn" : {
+            "sourceColumn" : "",
+            "defaultValue" : {
+              "expression" : "",
+              "format" : "python"
+            }
           },
           "DropColumn" : {
             "sourceColumn" : ""
           },
+          "kind" : "AddReplaceColumn",
           "RenameColumn" : {
             "sourceColumn" : "",
             "targetColumn" : ""
-          }
-        }, {
-          "kind" : "AddReplaceColumn",
+          },
           "AddReplaceColumn" : {
             "sourceColumn" : "_deleted_",
             "expression" : {
               "format" : "sql",
               "expression" : "'F'"
             }
-          },
-          "DropColumn" : {
-            "sourceColumn" : ""
-          },
-          "RenameColumn" : {
-            "sourceColumn" : "",
-            "targetColumn" : ""
           }
-        } ]
+        } ],
+        "activeTab" : "transformations",
+        "columnsSelector" : [ "pppE4pO2uQ76gtFgyttGU$$-VStNcqNpn32aX7HcD1pJ##ILTRDJ", "pppE4pO2uQ76gtFgyttGU$$-VStNcqNpn32aX7HcD1pJ##ILUKID", "pppE4pO2uQ76gtFgyttGU$$-VStNcqNpn32aX7HcD1pJ##ILCRDJ", "pppE4pO2uQ76gtFgyttGU$$-VStNcqNpn32aX7HcD1pJ##ILDGL", "pppE4pO2uQ76gtFgyttGU$$-VStNcqNpn32aX7HcD1pJ##_upt_", "pppE4pO2uQ76gtFgyttGU$$-VStNcqNpn32aX7HcD1pJ##ILDCTO", "pppE4pO2uQ76gtFgyttGU$$-VStNcqNpn32aX7HcD1pJ##ILTREX", "pppE4pO2uQ76gtFgyttGU$$-VStNcqNpn32aX7HcD1pJ##DRDL01" ]
       }
     },
     "wkViTnctcgBvYg-anP2zn$$pF0g77Jv6--4bu3UMwnRK" : {
