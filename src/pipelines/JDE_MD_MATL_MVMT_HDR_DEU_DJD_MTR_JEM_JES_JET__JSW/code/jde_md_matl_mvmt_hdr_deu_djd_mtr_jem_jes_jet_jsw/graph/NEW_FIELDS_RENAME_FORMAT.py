@@ -2,6 +2,8 @@ from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from prophecy.libs import typed_lit
+from prophecy.transpiler import call_spark_fcn
+from prophecy.transpiler.fixed_file_schema import *
 from jde_md_matl_mvmt_hdr_deu_djd_mtr_jem_jes_jet_jsw.config.ConfigStore import *
 from jde_md_matl_mvmt_hdr_deu_djd_mtr_jem_jes_jet_jsw.udfs.UDFs import *
 
@@ -13,33 +15,93 @@ def NEW_FIELDS_RENAME_FORMAT(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("EV_TYPE_CD", trim(col("ilrcd")))\
         .withColumn(
           "MATL_MVMT_DTTM",
-          to_timestamp(
-            date_add(
-              substring((col("iltrdj") + lit(1900000)), 1, 4).cast(DateType()), 
-              (substring(col("iltrdj"), 4, 3).cast(IntegerType()) - 1)
-            )
-          )
+          when(
+              (
+                ((lower(trim(col("iltrdj"))) == lit("null")) | (trim(col("iltrdj")) == lit("")))
+                | (trim(col("iltrdj")) == lit("0"))
+              ), 
+              lit(None)
+            )\
+            .otherwise(to_timestamp(
+            substring(
+              date_add(
+                  concat(
+                    substring((trim(col("iltrdj")).cast(IntegerType()) + lit(1900000)).cast(StringType()), 1, 4), 
+                    lit("-01-01")
+                  ), 
+                  (
+                    substring((trim(col("iltrdj")).cast(IntegerType()) + 1900000).cast(StringType()), 5, 4)\
+                      .cast(IntegerType())
+                    - 1
+                  )
+                )\
+                .cast(StringType()), 
+              1, 
+              10
+            ), 
+            "yyyy-MM-dd"
+          ))
         )\
         .withColumn(
           "PSTNG_DTTM",
-          to_timestamp(
-            date_add(
-              substring((col("ildgl") + lit(1900000)), 1, 4).cast(DateType()), 
-              (substring(col("ildgl"), 4, 3).cast(IntegerType()) - 1)
-            )
-          )
+          when(
+              (
+                ((lower(trim(col("ildgl"))) == lit("null")) | (trim(col("ildgl")) == lit("")))
+                | (trim(col("ildgl")) == lit("0"))
+              ), 
+              lit(None)
+            )\
+            .otherwise(to_timestamp(
+            substring(
+              date_add(
+                  concat(
+                    substring((trim(col("ildgl")).cast(IntegerType()) + lit(1900000)).cast(StringType()), 1, 4), 
+                    lit("-01-01")
+                  ), 
+                  (
+                    substring((trim(col("ildgl")).cast(IntegerType()) + 1900000).cast(StringType()), 5, 4)\
+                      .cast(IntegerType())
+                    - 1
+                  )
+                )\
+                .cast(StringType()), 
+              1, 
+              10
+            ), 
+            "yyyy-MM-dd"
+          ))
         )\
         .withColumn("MATL_MVMT_HDR_TXT", trim(col("iltrex")))\
         .withColumn("DOC_TYPE", trim(col("ildct")))\
         .withColumn("DOC_TYPE_DESC", trim(col("drdl01")))\
         .withColumn(
           "LAST_CHG_DTTM",
-          to_timestamp(
-            date_add(
-              substring((col("ilcrdj") + lit(1900000)), 1, 4).cast(DateType()), 
-              (substring(col("ilcrdj"), 4, 3).cast(IntegerType()) - 1)
-            )
-          )
+          when(
+              (
+                ((lower(trim(col("ilcrdj"))) == lit("null")) | (trim(col("ilcrdj")) == lit("")))
+                | (trim(col("ilcrdj")) == lit("0"))
+              ), 
+              lit(None)
+            )\
+            .otherwise(to_timestamp(
+            substring(
+              date_add(
+                  concat(
+                    substring((trim(col("ilcrdj")).cast(IntegerType()) + lit(1900000)).cast(StringType()), 1, 4), 
+                    lit("-01-01")
+                  ), 
+                  (
+                    substring((trim(col("ilcrdj")).cast(IntegerType()) + 1900000).cast(StringType()), 5, 4)\
+                      .cast(IntegerType())
+                    - 1
+                  )
+                )\
+                .cast(StringType()), 
+              1, 
+              10
+            ), 
+            "yyyy-MM-dd"
+          ))
         )\
         .withColumn(
           "SPLT_GUID_PART1",
