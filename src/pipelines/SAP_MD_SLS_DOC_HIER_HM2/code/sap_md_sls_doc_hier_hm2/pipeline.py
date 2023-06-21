@@ -24,24 +24,12 @@ def pipeline(spark: SparkSession) -> None:
         spark, 
         df_SAP_VBFA, 
         "graph", 
-        "op9V7m6GB_EU8vxYMvNa4$$3YBF8N-H0RwX3NFp5PJI9", 
-        "izBjVHlJklncruTjA_Wqi$$UCEPw7kpdZailE4XTmdyw"
+        "XXhfvXl14f1Pa1nBmB75u$$hbNpJYswOs91t49Qb5aXk", 
+        "O8R52T_arZJ-EDJS6dIrF$$Zikrt9R3RwPnpNxWagj67"
     )
     df_MANDT_FILTER_VBFA = MANDT_FILTER_VBFA(spark, df_SAP_VBFA)
-    df_FIELDS_VBFA = FIELDS_VBFA(spark, df_MANDT_FILTER_VBFA)
-    df_JOIN_SAP = JOIN_SAP(spark, df_FIELDS_VBAK, df_FIELDS_VBFA)
-    df_SAP_VBAP = SAP_VBAP(spark)
-    df_SAP_VBAP = collectMetrics(
-        spark, 
-        df_SAP_VBAP, 
-        "graph", 
-        "UBosAcNhX5sgH06v2ALFO$$XATpLRt9wNsMAypgKOTeI", 
-        "vmJpJx3DWlkHx1pl0SolN$$cAxILo5DEcO1ovxd-ZvE0"
-    )
-    df_MANDT_FILTER_VBAP = MANDT_FILTER_VBAP(spark, df_SAP_VBAP)
-    df_FIELDS_VBAP = FIELDS_VBAP(spark, df_MANDT_FILTER_VBAP)
-    df_JOIN_SAP_1 = JOIN_SAP_1(spark, df_JOIN_SAP, df_FIELDS_VBAP)
-    df_NEW_FIELDS = NEW_FIELDS(spark, df_JOIN_SAP_1)
+    df_JOIN_SAP = JOIN_SAP(spark, df_FIELDS_VBAK, df_MANDT_FILTER_VBFA)
+    df_NEW_FIELDS = NEW_FIELDS(spark, df_JOIN_SAP)
     df_DUPLICATE_CHECK = DUPLICATE_CHECK(spark, df_NEW_FIELDS)
     df_DUPLICATE_CHECK_FILTER = DUPLICATE_CHECK_FILTER(spark, df_DUPLICATE_CHECK)
     df_DUPLICATE_CHECK_FILTER = collectMetrics(
