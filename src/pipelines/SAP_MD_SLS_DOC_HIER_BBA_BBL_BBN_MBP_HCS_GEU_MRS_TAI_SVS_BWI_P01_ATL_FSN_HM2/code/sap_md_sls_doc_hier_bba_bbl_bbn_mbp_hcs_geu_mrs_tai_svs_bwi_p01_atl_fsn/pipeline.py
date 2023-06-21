@@ -30,18 +30,7 @@ def pipeline(spark: SparkSession) -> None:
     df_MANDT_FILTER_VBFA = MANDT_FILTER_VBFA(spark, df_SAP_VBFA)
     df_FIELDS_VBFA = FIELDS_VBFA(spark, df_MANDT_FILTER_VBFA)
     df_JOIN_SAP = JOIN_SAP(spark, df_FIELDS_VBAK, df_FIELDS_VBFA)
-    df_SAP_VBAP = SAP_VBAP(spark)
-    df_SAP_VBAP = collectMetrics(
-        spark, 
-        df_SAP_VBAP, 
-        "graph", 
-        "bZiAbnYCSIO7GsxM1WWHs$$gIusxIZBWj-wYQlnihBKR", 
-        "o5YEKFinGSrT92hZqv_x1$$uu6ZzCgA_RuPlXQug5a1D"
-    )
-    df_MANDT_FILTER_VBAP = MANDT_FILTER_VBAP(spark, df_SAP_VBAP)
-    df_FIELDS_VBAP = FIELDS_VBAP(spark, df_MANDT_FILTER_VBAP)
-    df_JOIN_SAP_1 = JOIN_SAP_1(spark, df_JOIN_SAP, df_FIELDS_VBAP)
-    df_NEW_FIELDS = NEW_FIELDS(spark, df_JOIN_SAP_1)
+    df_NEW_FIELDS = NEW_FIELDS(spark, df_JOIN_SAP)
     df_DEDUPLICATE = DEDUPLICATE(spark, df_NEW_FIELDS)
     df_FIELD_ORDER = FIELD_ORDER(spark, df_DEDUPLICATE)
     df_FIELD_ORDER = collectMetrics(
