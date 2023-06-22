@@ -30,7 +30,8 @@ def pipeline(spark: SparkSession) -> None:
     df_MANDT_FILTER_VBFA = MANDT_FILTER_VBFA(spark, df_SAP_VBFA)
     df_JOIN_SAP = JOIN_SAP(spark, df_FIELDS_VBAK, df_MANDT_FILTER_VBFA)
     df_NEW_FIELDS = NEW_FIELDS(spark, df_JOIN_SAP)
-    df_FIELD_ORDER = FIELD_ORDER(spark, df_NEW_FIELDS)
+    df_DEDUPLICATE = DEDUPLICATE(spark, df_NEW_FIELDS)
+    df_FIELD_ORDER = FIELD_ORDER(spark, df_DEDUPLICATE)
     df_FIELD_ORDER = collectMetrics(
         spark, 
         df_FIELD_ORDER, 
