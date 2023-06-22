@@ -8,4 +8,4 @@ from sap_md_sls_doc_hier_bba_bbl_bbn_mbp_hcs_geu_mrs_tai_svs_bwi_p01_atl_fsn.con
 from sap_md_sls_doc_hier_bba_bbl_bbn_mbp_hcs_geu_mrs_tai_svs_bwi_p01_atl_fsn.udfs.UDFs import *
 
 def JOIN_SAP(spark: SparkSession, in0: DataFrame, in1: DataFrame, ) -> DataFrame:
-    return in0.alias("in0").join(in1.alias("in1"), (col("in0.`VBAK.VBELN`") == col("in1.VBELV")), "left_outer")
+    return in0.alias("in0").join(in1.alias("in1"), (col("in1.VBELV") == col("in0.`VBAK.VBELN`")), "inner")
