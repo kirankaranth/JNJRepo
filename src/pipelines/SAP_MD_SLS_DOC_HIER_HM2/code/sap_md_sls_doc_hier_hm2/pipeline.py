@@ -41,8 +41,7 @@ def pipeline(spark: SparkSession) -> None:
     )
     df_DUPLICATE_CHECK_FILTER.cache().count()
     df_DUPLICATE_CHECK_FILTER.unpersist()
-    df_DEDUPLICATE = DEDUPLICATE(spark, df_NEW_FIELDS)
-    df_FIELD_ORDER = FIELD_ORDER(spark, df_DEDUPLICATE)
+    df_FIELD_ORDER = FIELD_ORDER(spark, df_NEW_FIELDS)
     df_FIELD_ORDER = collectMetrics(
         spark, 
         df_FIELD_ORDER, 
