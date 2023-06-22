@@ -116,7 +116,7 @@
     "PipelineComponent" : {
       "path" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_MFG_ORDER_ITM_MBP_BWI_BBN_BBL_BBA_MRS_P01_TAI-1.0-py3-none-any.whl",
       "nodeName" : "MD_MFG_ORDER_ITM",
-      "id" : "lDe9FQM7rcrKcjlidPijV$$AfJGMqE6gKkCkrXVJskNs",
+      "id" : "4Pnp4Vgyc4mfXg-yCnqKJ$$1hSBXFlfwwo0xEqqGRjPP",
       "language" : "python",
       "pipelineId" : "pipelines/MD_MFG_ORDER_ITM"
     }
@@ -167,6 +167,14 @@
       "id" : "ItKYGRaEWnUMtVYxLwjFd$$LSIF9NAKqaJU0xXg_dXHV",
       "language" : "python",
       "pipelineId" : "pipelines/SAP_MD_MFG_ORDER_ATL_BBL_BBN_BWI_HM2_HMD_MBP_MRS_P01_SVS"
+    }
+  }, {
+    "PipelineComponent" : {
+      "path" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_MATL_LOC_TAI_MRS_P01_HCS_BWI_GEU_SVS_MBP_FSN-1.0-py3-none-any.whl",
+      "nodeName" : "MD_MATL_LOC",
+      "id" : "oWB4EYOlBudoS39y8NTf_$$w4UqZTn0LFrdSVYIVjzsR",
+      "language" : "python",
+      "pipelineId" : "pipelines/SAP_MD_MATL_LOC_TAI_MRS_P01_HCS_BWI_GEU_SVS_MBP_FSN_02"
     }
   }, {
     "PipelineComponent" : {
@@ -247,14 +255,6 @@
       "id" : "w9JrPCdt-ru3gJPWVqEm_",
       "language" : "python",
       "pipelineId" : "pipelines/DART_L1_Purchase_Order_MD_PO_HIST"
-    }
-  }, {
-    "PipelineComponent" : {
-      "path" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_MATL_LOC_TAI_MRS_P01_HCS_BWI_GEU_SVS_MBP_FSN-1.0-py3-none-any.whl",
-      "nodeName" : "MD_MATL_LOC",
-      "id" : "I5Ass6JFNwSFF3-3raCD4",
-      "language" : "python",
-      "pipelineId" : "pipelines/SAP_MD_MATL_LOC_TAI_MRS_P01_HCS_BWI_GEU_SVS_MBP_FSN_02"
     }
   } ],
   "request" : {
@@ -802,7 +802,31 @@
       "email_notifications" : { },
       "max_retries" : 0
     }, {
+      "task_key" : "MD_MATL_LOC",
+      "job_cluster_key" : "BWI_PIPELINE_JOB_default_Prophecy_Medium_D16_2_5",
+      "python_wheel_task" : {
+        "package_name" : "SAP_MD_MATL_LOC_TAI_MRS_P01_HCS_BWI_GEU_SVS_MBP_FSN",
+        "entry_point" : "main",
+        "parameters" : [ "-i", "BWI", "-O", "{}" ]
+      },
+      "libraries" : [ {
+        "maven" : {
+          "coordinates" : "io.prophecy:prophecy-libs_2.12:3.3.0-7.0.43"
+        }
+      }, {
+        "pypi" : {
+          "package" : "prophecy-libs==1.5.4"
+        }
+      }, {
+        "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_MATL_LOC_TAI_MRS_P01_HCS_BWI_GEU_SVS_MBP_FSN-1.0-py3-none-any.whl"
+      } ],
+      "email_notifications" : { },
+      "max_retries" : 0
+    }, {
       "task_key" : "MD_PO_SCHED_LINE_DELV",
+      "depends_on" : [ {
+        "task_key" : "MD_MATL_LOC"
+      } ],
       "job_cluster_key" : "BWI_PIPELINE_JOB_default_Prophecy_Medium_D16_2_5",
       "python_wheel_task" : {
         "package_name" : "SAP_MD_PO_SCHED_LINE_DELV_ATL_BBA_BBL_BBN_BWI_FSN_GEU_HCS_HMD_MBP_MRS_P01_SVS_TAI_HMD",
@@ -1035,27 +1059,6 @@
       } ],
       "email_notifications" : { },
       "max_retries" : 0
-    }, {
-      "task_key" : "MD_MATL_LOC",
-      "job_cluster_key" : "BWI_PIPELINE_JOB_default_Prophecy_Medium_D16_2_5",
-      "python_wheel_task" : {
-        "package_name" : "SAP_MD_MATL_LOC_TAI_MRS_P01_HCS_BWI_GEU_SVS_MBP_FSN",
-        "entry_point" : "main",
-        "parameters" : [ "-i", "BWI", "-O", "{}" ]
-      },
-      "libraries" : [ {
-        "maven" : {
-          "coordinates" : "io.prophecy:prophecy-libs_2.12:3.3.0-7.0.43"
-        }
-      }, {
-        "pypi" : {
-          "package" : "prophecy-libs==1.5.4"
-        }
-      }, {
-        "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/SAP_MD_MATL_LOC_TAI_MRS_P01_HCS_BWI_GEU_SVS_MBP_FSN-1.0-py3-none-any.whl"
-      } ],
-      "email_notifications" : { },
-      "max_retries" : 0
     } ],
     "max_concurrent_runs" : 1,
     "schedule" : {
@@ -1068,5 +1071,5 @@
     "clusterMode" : "Single"
   },
   "secret_scope" : "prophecy_jobs_3",
-  "sorted_processes" : [ "Tu3BlQE0VmTE7HcAodD0R", "VGxlM2ugu-jHMDCB5OOZA", "aCDM8ENyJYnHeN-umF3a2", "p9dFqzSNlcUcYSOAYCOSt", "aYYIkRRgH2Tlee4kEPYk0", "z9KA6W3BBEDzEfFiSWzuj", "f6h-FNAoMO1zf4U2BN5cu", "txVN5hdT8Mb_L8QruNBAA", "-ErMi8A8do_0v1PPCqrzZ", "hkHHHOEZ6bREMT49wE2Ua", "2jRyUdeLrb9gy9be8eaoK", "KTas68ktMGQXD8SU72zco", "iz4eaum3InJjDiRCjddmv$$y7O2EZ37ZYHuvksO_Ny3k", "W_EtcO4x5X7M6fTq1ZM4W$$fOE-Ilsns8S9aLWJ1qwXe", "lDe9FQM7rcrKcjlidPijV$$AfJGMqE6gKkCkrXVJskNs", "8s4mXPq6tNAyHnSkvWSV9$$XSaaB4KKhGc5UVVnvx_73", "iU3rHH8rNTCQpRnUjzKHH$$vLejIAUGnqojEDzqSxQHS", "nzTycMu6zEKIqfVryKn5o$$_YNPrhtx72KZzv2xLoGZa", "uIf_FVIaefZGmqdMCpeHd", "03kPlyxtSNJaBk4_6cc6N", "ItKYGRaEWnUMtVYxLwjFd$$LSIF9NAKqaJU0xXg_dXHV", "z2kxfJuPpysP5U3anIgiL$$VOhd3Zr4zE5E2GhK_biBV", "IYYy9GwwAd6hQkT8NOvJG$$Qt5AUvA6k-F6Zz0ycl-rQ", "jbUa5rKhJGB8sfk9iIav_$$UekE53vIA9qk4v39Ihl_t", "DBsZjXpqk_EbCtGQx48Er$$npO87zfnTEi4xk5eWv-_k", "z_AD1CVGRSRYJul3N2KCe$$06WghcjyO8wyQhkoa4Tc2", "E-Xy6XSIeC03SEHlvgn6h$$no8mmz662tYAnpLt-UnV5", "9eaw9h1foYg-D6ve4686x$$g2LHSzqfdoG4YVsfu-3iD", "9mwO4Due43V8jQDoYM6nI$$fLl8Ate84u2jHjIy2QC4Y", "F2DFIneI791B-PHejRQ-_", "w9JrPCdt-ru3gJPWVqEm_", "I5Ass6JFNwSFF3-3raCD4" ]
+  "sorted_processes" : [ "Tu3BlQE0VmTE7HcAodD0R", "VGxlM2ugu-jHMDCB5OOZA", "aCDM8ENyJYnHeN-umF3a2", "p9dFqzSNlcUcYSOAYCOSt", "aYYIkRRgH2Tlee4kEPYk0", "z9KA6W3BBEDzEfFiSWzuj", "f6h-FNAoMO1zf4U2BN5cu", "txVN5hdT8Mb_L8QruNBAA", "-ErMi8A8do_0v1PPCqrzZ", "hkHHHOEZ6bREMT49wE2Ua", "2jRyUdeLrb9gy9be8eaoK", "KTas68ktMGQXD8SU72zco", "iz4eaum3InJjDiRCjddmv$$y7O2EZ37ZYHuvksO_Ny3k", "W_EtcO4x5X7M6fTq1ZM4W$$fOE-Ilsns8S9aLWJ1qwXe", "4Pnp4Vgyc4mfXg-yCnqKJ$$1hSBXFlfwwo0xEqqGRjPP", "8s4mXPq6tNAyHnSkvWSV9$$XSaaB4KKhGc5UVVnvx_73", "iU3rHH8rNTCQpRnUjzKHH$$vLejIAUGnqojEDzqSxQHS", "nzTycMu6zEKIqfVryKn5o$$_YNPrhtx72KZzv2xLoGZa", "uIf_FVIaefZGmqdMCpeHd", "03kPlyxtSNJaBk4_6cc6N", "ItKYGRaEWnUMtVYxLwjFd$$LSIF9NAKqaJU0xXg_dXHV", "oWB4EYOlBudoS39y8NTf_$$w4UqZTn0LFrdSVYIVjzsR", "z2kxfJuPpysP5U3anIgiL$$VOhd3Zr4zE5E2GhK_biBV", "IYYy9GwwAd6hQkT8NOvJG$$Qt5AUvA6k-F6Zz0ycl-rQ", "jbUa5rKhJGB8sfk9iIav_$$UekE53vIA9qk4v39Ihl_t", "DBsZjXpqk_EbCtGQx48Er$$npO87zfnTEi4xk5eWv-_k", "z_AD1CVGRSRYJul3N2KCe$$06WghcjyO8wyQhkoa4Tc2", "E-Xy6XSIeC03SEHlvgn6h$$no8mmz662tYAnpLt-UnV5", "9eaw9h1foYg-D6ve4686x$$g2LHSzqfdoG4YVsfu-3iD", "9mwO4Due43V8jQDoYM6nI$$fLl8Ate84u2jHjIy2QC4Y", "F2DFIneI791B-PHejRQ-_", "w9JrPCdt-ru3gJPWVqEm_" ]
 }
