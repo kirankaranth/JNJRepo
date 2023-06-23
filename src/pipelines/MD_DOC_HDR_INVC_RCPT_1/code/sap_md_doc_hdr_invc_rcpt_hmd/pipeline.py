@@ -4,6 +4,8 @@ from pyspark.sql.types import *
 from sap_md_doc_hdr_invc_rcpt_hmd.config.ConfigStore import *
 from sap_md_doc_hdr_invc_rcpt_hmd.udfs.UDFs import *
 from prophecy.utils import *
+from prophecy.transpiler import call_spark_fcn
+from prophecy.transpiler.fixed_file_schema import *
 from sap_md_doc_hdr_invc_rcpt_hmd.graph import *
 
 def pipeline(spark: SparkSession) -> None:
@@ -32,6 +34,7 @@ def main():
     spark.conf.set("spark.sql.legacy.allowUntypedScalaUDF", "true")
     spark.conf.set("spark.sql.optimizer.excludedRules", "org.apache.spark.sql.catalyst.optimizer.ColumnPruning")
     spark.conf.set("prophecy.metadata.pipeline.uri", "pipelines/MD_DOC_HDR_INVC_RCPT_1")
+    registerUDFs(spark)
     
     MetricsCollector.start(spark = spark, pipelineId = "pipelines/MD_DOC_HDR_INVC_RCPT_1")
     pipeline(spark)
