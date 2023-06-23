@@ -4,10 +4,10 @@ setup(
     version = '1.0',
     packages = find_packages(include = ('sap_md_mfg_order_itm_mbp_bwi_bbn_bbl_bba_mrs_p01_tai*', )) + ["prophecy_config_instances"],
     package_dir = {'prophecy_config_instances' : 'configs/resources/config'},
-    package_data = {'prophecy_config_instances' : ['*.json', '*.py']},
+    package_data = {'prophecy_config_instances' : ['*.json', '*.py', '*.conf']},
     description = 'workflow',
     install_requires = [
-'prophecy-libs==1.5.0'],
+'prophecy-libs==1.5.4'],
     entry_points = {
 'console_scripts' : [
 'main = sap_md_mfg_order_itm_mbp_bwi_bbn_bbl_bba_mrs_p01_tai.pipeline:main'], },
