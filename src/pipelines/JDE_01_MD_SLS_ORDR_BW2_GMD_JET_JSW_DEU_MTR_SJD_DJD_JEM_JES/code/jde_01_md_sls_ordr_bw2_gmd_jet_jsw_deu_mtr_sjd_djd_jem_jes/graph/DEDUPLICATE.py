@@ -11,9 +11,9 @@ def DEDUPLICATE(spark: SparkSession, in0: DataFrame) -> DataFrame:
     return in0\
         .withColumn(
           "row_number",
-          row_number().over(Window.partitionBy("SRC_SYS_CD", "SHKCOO", "SHDOCO", "SHDCTO").orderBy(lit(1)))
+          row_number().over(Window.partitionBy("SHKCOO", "SHDOCO", "SRC_SYS_CD", "SHDCTO").orderBy(lit(1)))
         )\
-        .withColumn("count", count("*").over(Window.partitionBy("SRC_SYS_CD", "SHKCOO", "SHDOCO", "SHDCTO")))\
+        .withColumn("count", count("*").over(Window.partitionBy("SHKCOO", "SHDOCO", "SRC_SYS_CD", "SHDCTO")))\
         .filter(col("row_number") == col("count"))\
         .drop("row_number")\
         .drop("count")
