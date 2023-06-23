@@ -7,10 +7,10 @@ setup(
       + ["prophecy_config_instances"]
     ),
     package_dir = {'prophecy_config_instances' : 'configs/resources/config'},
-    package_data = {'prophecy_config_instances' : ['*.json', '*.py']},
+    package_data = {'prophecy_config_instances' : ['*.json', '*.py', '*.conf']},
     description = 'workflow',
     install_requires = [
-'prophecy-libs==1.5.0'],
+'prophecy-libs==1.5.4'],
     entry_points = {
 'console_scripts' : [
 'main = jde_01_md_sls_ordr_bw2_gmd_jet_jsw_deu_mtr_sjd_djd_jem_jes.pipeline:main'], },
