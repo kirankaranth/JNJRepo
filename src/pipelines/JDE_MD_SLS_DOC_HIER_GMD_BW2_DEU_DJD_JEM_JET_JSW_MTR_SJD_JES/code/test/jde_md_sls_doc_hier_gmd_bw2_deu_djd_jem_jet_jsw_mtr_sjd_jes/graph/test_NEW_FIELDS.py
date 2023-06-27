@@ -50,6 +50,38 @@ class NEW_FIELDSTest(BaseTestCase):
             self.maxUnequalRowsToShow
         )
 
+    def test_timestamp(self):
+        dfIn0 = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/jde_md_sls_doc_hier_gmd_bw2_deu_djd_jem_jet_jsw_mtr_sjd_jes/graph/NEW_FIELDS/in0/schema.json',
+            'test/resources/data/jde_md_sls_doc_hier_gmd_bw2_deu_djd_jem_jet_jsw_mtr_sjd_jes/graph/NEW_FIELDS/in0/data/test_timestamp.json',
+            'in0'
+        )
+        dfOut = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/jde_md_sls_doc_hier_gmd_bw2_deu_djd_jem_jet_jsw_mtr_sjd_jes/graph/NEW_FIELDS/out/schema.json',
+            'test/resources/data/jde_md_sls_doc_hier_gmd_bw2_deu_djd_jem_jet_jsw_mtr_sjd_jes/graph/NEW_FIELDS/out/data/test_timestamp.json',
+            'out'
+        )
+        dfOutComputed = NEW_FIELDS(self.spark, dfIn0)
+        assertDFEquals(dfOut.select("CHG_DTTM"), dfOutComputed.select("CHG_DTTM"), self.maxUnequalRowsToShow)
+
+    def test_decimal(self):
+        dfIn0 = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/jde_md_sls_doc_hier_gmd_bw2_deu_djd_jem_jet_jsw_mtr_sjd_jes/graph/NEW_FIELDS/in0/schema.json',
+            'test/resources/data/jde_md_sls_doc_hier_gmd_bw2_deu_djd_jem_jet_jsw_mtr_sjd_jes/graph/NEW_FIELDS/in0/data/test_decimal.json',
+            'in0'
+        )
+        dfOut = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/jde_md_sls_doc_hier_gmd_bw2_deu_djd_jem_jet_jsw_mtr_sjd_jes/graph/NEW_FIELDS/out/schema.json',
+            'test/resources/data/jde_md_sls_doc_hier_gmd_bw2_deu_djd_jem_jet_jsw_mtr_sjd_jes/graph/NEW_FIELDS/out/data/test_decimal.json',
+            'out'
+        )
+        dfOutComputed = NEW_FIELDS(self.spark, dfIn0)
+        assertDFEquals(dfOut.select("NET_WT_MEAS"), dfOutComputed.select("NET_WT_MEAS"), self.maxUnequalRowsToShow)
+
     def setUp(self):
         BaseTestCase.setUp(self)
         import os
