@@ -1,12 +1,12 @@
 from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
-from sap_md_sls_doc_hier_hm2.config.ConfigStore import *
-from sap_md_sls_doc_hier_hm2.udfs.UDFs import *
+from sap_md_sls_doc_hier_hmd.config.ConfigStore import *
+from sap_md_sls_doc_hier_hmd.udfs.UDFs import *
 from prophecy.utils import *
 from prophecy.transpiler import call_spark_fcn
 from prophecy.transpiler.fixed_file_schema import *
-from sap_md_sls_doc_hier_hm2.graph import *
+from sap_md_sls_doc_hier_hmd.graph import *
 
 def pipeline(spark: SparkSession) -> None:
     df_SAP_VBAK = SAP_VBAK(spark)

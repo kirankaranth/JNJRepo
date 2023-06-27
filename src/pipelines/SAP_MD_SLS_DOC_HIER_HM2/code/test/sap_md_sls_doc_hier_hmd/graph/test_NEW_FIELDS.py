@@ -4,8 +4,8 @@ from pyspark.sql.types import *
 from argparse import Namespace
 from prophecy.test import BaseTestCase
 from prophecy.test.utils import *
-from sap_md_sls_doc_hier_hm2.graph.NEW_FIELDS import *
-from sap_md_sls_doc_hier_hm2.config.ConfigStore import *
+from sap_md_sls_doc_hier_hmd.graph.NEW_FIELDS import *
+from sap_md_sls_doc_hier_hmd.config.ConfigStore import *
 
 
 class NEW_FIELDSTest(BaseTestCase):
@@ -13,14 +13,14 @@ class NEW_FIELDSTest(BaseTestCase):
     def test_pk_(self):
         dfIn0 = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/sap_md_sls_doc_hier_hm2/graph/NEW_FIELDS/in0/schema.json',
-            'test/resources/data/sap_md_sls_doc_hier_hm2/graph/NEW_FIELDS/in0/data/test_pk_.json',
+            'test/resources/data/sap_md_sls_doc_hier_hmd/graph/NEW_FIELDS/in0/schema.json',
+            'test/resources/data/sap_md_sls_doc_hier_hmd/graph/NEW_FIELDS/in0/data/test_pk_.json',
             'in0'
         )
         dfOut = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/sap_md_sls_doc_hier_hm2/graph/NEW_FIELDS/out/schema.json',
-            'test/resources/data/sap_md_sls_doc_hier_hm2/graph/NEW_FIELDS/out/data/test_pk_.json',
+            'test/resources/data/sap_md_sls_doc_hier_hmd/graph/NEW_FIELDS/out/schema.json',
+            'test/resources/data/sap_md_sls_doc_hier_hmd/graph/NEW_FIELDS/out/data/test_pk_.json',
             'out'
         )
         dfOutComputed = NEW_FIELDS(self.spark, dfIn0)
@@ -55,14 +55,14 @@ class NEW_FIELDSTest(BaseTestCase):
     def test_trim(self):
         dfIn0 = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/sap_md_sls_doc_hier_hm2/graph/NEW_FIELDS/in0/schema.json',
-            'test/resources/data/sap_md_sls_doc_hier_hm2/graph/NEW_FIELDS/in0/data/test_trim.json',
+            'test/resources/data/sap_md_sls_doc_hier_hmd/graph/NEW_FIELDS/in0/schema.json',
+            'test/resources/data/sap_md_sls_doc_hier_hmd/graph/NEW_FIELDS/in0/data/test_trim.json',
             'in0'
         )
         dfOut = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/sap_md_sls_doc_hier_hm2/graph/NEW_FIELDS/out/schema.json',
-            'test/resources/data/sap_md_sls_doc_hier_hm2/graph/NEW_FIELDS/out/data/test_trim.json',
+            'test/resources/data/sap_md_sls_doc_hier_hmd/graph/NEW_FIELDS/out/schema.json',
+            'test/resources/data/sap_md_sls_doc_hier_hmd/graph/NEW_FIELDS/out/data/test_trim.json',
             'out'
         )
         dfOutComputed = NEW_FIELDS(self.spark, dfIn0)
@@ -125,14 +125,14 @@ class NEW_FIELDSTest(BaseTestCase):
     def test_decimal(self):
         dfIn0 = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/sap_md_sls_doc_hier_hm2/graph/NEW_FIELDS/in0/schema.json',
-            'test/resources/data/sap_md_sls_doc_hier_hm2/graph/NEW_FIELDS/in0/data/test_decimal.json',
+            'test/resources/data/sap_md_sls_doc_hier_hmd/graph/NEW_FIELDS/in0/schema.json',
+            'test/resources/data/sap_md_sls_doc_hier_hmd/graph/NEW_FIELDS/in0/data/test_decimal.json',
             'in0'
         )
         dfOut = createDfFromResourceFiles(
             self.spark,
-            'test/resources/data/sap_md_sls_doc_hier_hm2/graph/NEW_FIELDS/out/schema.json',
-            'test/resources/data/sap_md_sls_doc_hier_hm2/graph/NEW_FIELDS/out/data/test_decimal.json',
+            'test/resources/data/sap_md_sls_doc_hier_hmd/graph/NEW_FIELDS/out/schema.json',
+            'test/resources/data/sap_md_sls_doc_hier_hmd/graph/NEW_FIELDS/out/data/test_decimal.json',
             'out'
         )
         dfOutComputed = NEW_FIELDS(self.spark, dfIn0)

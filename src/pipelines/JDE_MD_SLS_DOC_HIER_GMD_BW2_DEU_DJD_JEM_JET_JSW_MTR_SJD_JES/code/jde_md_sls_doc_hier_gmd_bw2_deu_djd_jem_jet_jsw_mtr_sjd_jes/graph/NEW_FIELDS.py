@@ -44,16 +44,29 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
           "CRT_DTTM",
           when(
               (
-                (lower(trim(col("SDTRDJ"))).isNull() | (trim(col("SDTRDJ")) == lit("")))
+                ((lower(trim(col("SDTRDJ"))) == lit("null")) | (trim(col("SDTRDJ")) == lit("")))
                 | (trim(col("SDTRDJ")) == lit("0"))
               ), 
               lit(None)
             )\
             .otherwise(to_timestamp(
-            date_add(
-              substring((col("SDTRDJ") + lit(1900000)), 1, 4).cast(DateType()), 
-              (substring(col("SDTRDJ"), 4, 3).cast(IntegerType()) - 1)
-            )
+            substring(
+              date_add(
+                  concat(
+                    substring((trim(col("SDTRDJ")).cast(IntegerType()) + lit(1900000)).cast(StringType()), 1, 4), 
+                    lit("-01-01")
+                  ), 
+                  (
+                    substring((trim(col("SDTRDJ")).cast(IntegerType()) + 1900000).cast(StringType()), 5, 4)\
+                      .cast(IntegerType())
+                    - 1
+                  )
+                )\
+                .cast(StringType()), 
+              1, 
+              10
+            ), 
+            "yyyy-MM-dd"
           ))
         )\
         .withColumn("MATL_NUM", trim(col("SDLITM")))\
@@ -61,16 +74,29 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
           "CHG_DTTM",
           when(
               (
-                (lower(trim(col("SDUPMJ"))).isNull() | (trim(col("SDUPMJ")) == lit("")))
+                ((lower(trim(col("SDUPMJ"))) == lit("null")) | (trim(col("SDUPMJ")) == lit("")))
                 | (trim(col("SDUPMJ")) == lit("0"))
               ), 
               lit(None)
             )\
             .otherwise(to_timestamp(
-            date_add(
-              substring((col("SDUPMJ") + lit(1900000)), 1, 4).cast(DateType()), 
-              (substring(col("SDUPMJ"), 4, 3).cast(IntegerType()) - 1)
-            )
+            substring(
+              date_add(
+                  concat(
+                    substring((trim(col("SDUPMJ")).cast(IntegerType()) + lit(1900000)).cast(StringType()), 1, 4), 
+                    lit("-01-01")
+                  ), 
+                  (
+                    substring((trim(col("SDUPMJ")).cast(IntegerType()) + 1900000).cast(StringType()), 5, 4)\
+                      .cast(IntegerType())
+                    - 1
+                  )
+                )\
+                .cast(StringType()), 
+              1, 
+              10
+            ), 
+            "yyyy-MM-dd"
           ))
         )\
         .withColumn("GRS_WT_MEAS", col("SDGRWT").cast(DecimalType(18, 4)))\

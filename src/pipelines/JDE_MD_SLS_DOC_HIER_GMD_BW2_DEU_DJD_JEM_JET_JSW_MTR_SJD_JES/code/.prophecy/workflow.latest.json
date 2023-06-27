@@ -2791,7 +2791,7 @@
             "sourceColumn" : "CRT_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "CASE WHEN LOWER(TRIM(SDTRDJ)) IS NULL OR TRIM(SDTRDJ) = '' OR TRIM(SDTRDJ) = '0' THEN NULL ELSE to_timestamp(date_add(cast(substring(SDTRDJ+ 1900000,1,4) AS Date),cast(substring(SDTRDJ,4,3) as int)-1)) end"
+              "expression" : "CASE WHEN LOWER(TRIM(SDTRDJ)) = 'null' OR TRIM(SDTRDJ) = '' OR TRIM(SDTRDJ) = '0' THEN NULL ELSE to_timestamp(substr(CAST(date_add(concat(substr(CAST(CAST(TRIM(SDTRDJ) AS INT) + 1900000 AS STRING),1,4),'-01-01'), CAST(substr(CAST(CAST(TRIM(SDTRDJ) AS INT) + 1900000 AS string),5,4) AS INT )-1) AS STRING), 1, 10),'yyyy-MM-dd') end"
             }
           }
         }, {
@@ -2837,7 +2837,7 @@
             "sourceColumn" : "CHG_DTTM",
             "expression" : {
               "format" : "sql",
-              "expression" : "CASE WHEN LOWER(TRIM(SDUPMJ)) IS NULL OR TRIM(SDUPMJ) = '' OR TRIM(SDUPMJ) = '0' THEN NULL ELSE to_timestamp(date_add(cast(substring(SDUPMJ+ 1900000,1,4) AS Date),cast(substring(SDUPMJ,4,3) as int)-1)) end"
+              "expression" : "CASE WHEN LOWER(TRIM(SDUPMJ)) = 'null' OR TRIM(SDUPMJ) = '' OR TRIM(SDUPMJ) = '0' THEN NULL ELSE to_timestamp(substr(CAST(date_add(concat(substr(CAST(CAST(TRIM(SDUPMJ) AS INT) + 1900000 AS STRING),1,4),'-01-01'), CAST(substr(CAST(CAST(TRIM(SDUPMJ) AS INT) + 1900000 AS string),5,4) AS INT )-1) AS STRING), 1, 10),'yyyy-MM-dd') end"
             }
           }
         }, {
