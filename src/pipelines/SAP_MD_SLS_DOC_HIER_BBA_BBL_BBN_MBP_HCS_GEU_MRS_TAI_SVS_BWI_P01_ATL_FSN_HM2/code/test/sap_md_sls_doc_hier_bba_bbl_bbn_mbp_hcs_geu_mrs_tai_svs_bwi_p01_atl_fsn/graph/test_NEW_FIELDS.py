@@ -90,21 +90,89 @@ class NEW_FIELDSTest(BaseTestCase):
             self.maxUnequalRowsToShow
         )
 
-    def test_unit_test_(self):
+    def test_timestamp_(self):
         dfIn0 = createDfFromResourceFiles(
             self.spark,
             'test/resources/data/sap_md_sls_doc_hier_bba_bbl_bbn_mbp_hcs_geu_mrs_tai_svs_bwi_p01_atl_fsn/graph/NEW_FIELDS/in0/schema.json',
-            'test/resources/data/sap_md_sls_doc_hier_bba_bbl_bbn_mbp_hcs_geu_mrs_tai_svs_bwi_p01_atl_fsn/graph/NEW_FIELDS/in0/data/test_unit_test_.json',
+            'test/resources/data/sap_md_sls_doc_hier_bba_bbl_bbn_mbp_hcs_geu_mrs_tai_svs_bwi_p01_atl_fsn/graph/NEW_FIELDS/in0/data/test_timestamp_.json',
             'in0'
         )
         dfOut = createDfFromResourceFiles(
             self.spark,
             'test/resources/data/sap_md_sls_doc_hier_bba_bbl_bbn_mbp_hcs_geu_mrs_tai_svs_bwi_p01_atl_fsn/graph/NEW_FIELDS/out/schema.json',
-            'test/resources/data/sap_md_sls_doc_hier_bba_bbl_bbn_mbp_hcs_geu_mrs_tai_svs_bwi_p01_atl_fsn/graph/NEW_FIELDS/out/data/test_unit_test_.json',
+            'test/resources/data/sap_md_sls_doc_hier_bba_bbl_bbn_mbp_hcs_geu_mrs_tai_svs_bwi_p01_atl_fsn/graph/NEW_FIELDS/out/data/test_timestamp_.json',
             'out'
         )
         dfOutComputed = NEW_FIELDS(self.spark, dfIn0)
         assertDFEquals(dfOut.select("CRT_DTTM"), dfOutComputed.select("CRT_DTTM"), self.maxUnequalRowsToShow)
+
+    def test_all_trims_(self):
+        dfIn0 = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/sap_md_sls_doc_hier_bba_bbl_bbn_mbp_hcs_geu_mrs_tai_svs_bwi_p01_atl_fsn/graph/NEW_FIELDS/in0/schema.json',
+            'test/resources/data/sap_md_sls_doc_hier_bba_bbl_bbn_mbp_hcs_geu_mrs_tai_svs_bwi_p01_atl_fsn/graph/NEW_FIELDS/in0/data/test_all_trims_.json',
+            'in0'
+        )
+        dfOut = createDfFromResourceFiles(
+            self.spark,
+            'test/resources/data/sap_md_sls_doc_hier_bba_bbl_bbn_mbp_hcs_geu_mrs_tai_svs_bwi_p01_atl_fsn/graph/NEW_FIELDS/out/schema.json',
+            'test/resources/data/sap_md_sls_doc_hier_bba_bbl_bbn_mbp_hcs_geu_mrs_tai_svs_bwi_p01_atl_fsn/graph/NEW_FIELDS/out/data/test_all_trims_.json',
+            'out'
+        )
+        dfOutComputed = NEW_FIELDS(self.spark, dfIn0)
+        assertDFEquals(
+            dfOut.select(
+              "BASE_UOM_CD",
+              "REF_AMT",
+              "CRNCY_CD",
+              "MATL_NUM",
+              "REQ_TYPE_CD",
+              "LVL_CD",
+              "WHSE_CD",
+              "BILL_CAT_CD",
+              "WT_UOM_CD",
+              "VOL_UOM_CD",
+              "SLS_UOM_CD",
+              "SPL_STK_TYPE_CD",
+              "SPL_STK_NUM",
+              "GM_STS_CD",
+              "QTY_CONV_CD",
+              "MATL_MVMT_YR",
+              "QTY_CALC_POS_NGTV",
+              "ID_MM_WM_TFR_ORDR_CNFRM",
+              "MVMT_TYPE",
+              "BILL_INVC_PLAN_NUM",
+              "ITM_FOR_BILL_INVC_PLAN_PMT_CRD",
+              "IN_INV_MGMT_ACT",
+              "LOGL_SYS"
+            ),
+            dfOutComputed.select(
+              "BASE_UOM_CD",
+              "REF_AMT",
+              "CRNCY_CD",
+              "MATL_NUM",
+              "REQ_TYPE_CD",
+              "LVL_CD",
+              "WHSE_CD",
+              "BILL_CAT_CD",
+              "WT_UOM_CD",
+              "VOL_UOM_CD",
+              "SLS_UOM_CD",
+              "SPL_STK_TYPE_CD",
+              "SPL_STK_NUM",
+              "GM_STS_CD",
+              "QTY_CONV_CD",
+              "MATL_MVMT_YR",
+              "QTY_CALC_POS_NGTV",
+              "ID_MM_WM_TFR_ORDR_CNFRM",
+              "MVMT_TYPE",
+              "BILL_INVC_PLAN_NUM",
+              "ITM_FOR_BILL_INVC_PLAN_PMT_CRD",
+              "IN_INV_MGMT_ACT",
+              "LOGL_SYS"
+            ),
+            self.maxUnequalRowsToShow
+        )
 
     def setUp(self):
         BaseTestCase.setUp(self)
