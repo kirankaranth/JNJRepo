@@ -42,12 +42,12 @@ class Config(ConfigBase):
             sourceDatabase: str="mrs",
             configDatabase: str=" ",
             MANDT: str="100",
-            DBTABLE1: str="mard",
-            DBTABLE2: str="mchb",
-            DBTABLE3: str="msku",
-            DBTABLE4: str="mslb",
-            DBTABLE5: str="mssl",
-            DBTABLE6: str="mara",
+            DBTABLE1: str="MARD",
+            DBTABLE2: str="MCHB",
+            DBTABLE3: str="MSKU",
+            DBTABLE4: str="MSLB",
+            DBTABLE5: str="MSSL",
+            DBTABLE6: str="MARA",
             DAI_ETL_ID: int=0,
             **kwargs
     ):
