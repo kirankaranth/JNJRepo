@@ -105,7 +105,7 @@ def NEW_FIELDS(spark: SparkSession, in0: DataFrame) -> DataFrame:
         .withColumn("VOL_UOM_CD", trim(col("SDVLUM")))\
         .withColumn("SLS_UOM_CD", trim(col("SDUOM4")))\
         .withColumn("NET_WT_MEAS", col("SDITWT").cast(DecimalType(18, 4)))\
-        .withColumn("MATL_MVMT_YR", substring((col("SDTRDJ") + lit(1900000)), 1, 4))\
+        .withColumn("MATL_MVMT_YR", trim(substring((col("SDTRDJ") + lit(1900000)), 1, 4)))\
         .withColumn(
           "SD_UNIQ_DOC_RL_ID",
           lit(
