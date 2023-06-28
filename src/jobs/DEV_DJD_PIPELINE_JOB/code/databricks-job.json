@@ -216,6 +216,14 @@
       "language" : "python",
       "pipelineId" : "pipelines/MD_SLS_ORDR_SCHED_LINE_DELV_9"
     }
+  }, {
+    "PipelineComponent" : {
+      "path" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/JDE_MD_MFG_ORDER_ITM_BW2_DEU_DJD_JET_JEM_JES_JSW_SJD_MTR_GMD-1.0-py3-none-any.whl",
+      "nodeName" : "MD_MFG_ORDER_ITM",
+      "id" : "O5D-uTJNHMvIXZNIHwSrm$$B_2QGDGoue_Rtyd-W22eu",
+      "language" : "python",
+      "pipelineId" : "pipelines/JDE_MD_MFG_ORDER_ITM"
+    }
   } ],
   "request" : {
     "format" : "MULTI_TASK",
@@ -263,7 +271,7 @@
       "python_wheel_task" : {
         "package_name" : "JDE_MD_MATL_LOC_GMD_DEU_JEM_JES_DJD",
         "entry_point" : "main",
-        "parameters" : [ "-i", "default", "-O", "{}" ]
+        "parameters" : [ "-i", "DJD", "-O", "{}" ]
       },
       "libraries" : [ {
         "maven" : {
@@ -902,6 +910,30 @@
       } ],
       "email_notifications" : { },
       "max_retries" : 0
+    }, {
+      "task_key" : "MD_MFG_ORDER_ITM",
+      "depends_on" : [ {
+        "task_key" : "MD_SLS_ORDR_SCHED_LINE_DELV"
+      } ],
+      "job_cluster_key" : "DJD_PIPELINE_JOB_default_Prophecy_Medium_D16_2_5",
+      "python_wheel_task" : {
+        "package_name" : "JDE_MD_MFG_ORDER_ITM_BW2_DEU_DJD_JET_JEM_JES_JSW_SJD_MTR_GMD",
+        "entry_point" : "main",
+        "parameters" : [ "-i", "DJD", "-O", "{}" ]
+      },
+      "libraries" : [ {
+        "maven" : {
+          "coordinates" : "io.prophecy:prophecy-libs_2.12:3.3.0-7.0.43"
+        }
+      }, {
+        "pypi" : {
+          "package" : "prophecy-libs==1.5.4"
+        }
+      }, {
+        "whl" : "dbfs:/FileStore/prophecy/artifacts/jnj/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/JDE_MD_MFG_ORDER_ITM_BW2_DEU_DJD_JET_JEM_JES_JSW_SJD_MTR_GMD-1.0-py3-none-any.whl"
+      } ],
+      "email_notifications" : { },
+      "max_retries" : 0
     } ],
     "max_concurrent_runs" : 1,
     "schedule" : {
@@ -914,5 +946,5 @@
     "clusterMode" : "Single"
   },
   "secret_scope" : "prophecy_jobs_3",
-  "sorted_processes" : [ "MSs7ySYoDRz5x1V9MbWUt$$rGwgqhATI77qCmFypWswe", "4XjeOT3-7_LcfLQymwiuV$$jcMjvLkZtqqlygQPbTqoF", "xNgEyGYnxc53KfkgnTKAf$$FRW_SLOulx1HYTa-qloSC", "Rs1P6Z1CyFByVyRyCByJI$$XZ9mRc7XGISAhXPx4IeKu", "2GSWBkJNvSZtmfff8-EPi$$V6OXCNM_PyAB7zn46D2ea", "--cQFt3D50cxOQunNXylm$$_Vda6RQ4zuGDlWsPM6ydy", "V5s7uH43DFdFpearpzOJm$$uCtBgOs8Ue4F3iSB4uVCo", "2mxpn5vIJ0reExpWM3FA2$$6cnxe7sq4DoWTior21d3x", "COZ0sq-ypOR4jvbSsjQYb$$pboexc_flnkcMNnG9n0BD", "_iSr9JdydfW88OLoDVAw5$$O-Co7lYOEE76TC9xQT5cT", "nKuA_f_fKUafj7RwEAdCq$$OdTvbMK8vJUF0HfP0UZjJ", "I3UelHn_T1zFTMNxJrnxO", "c9c7iUeL71hEcd_R0jxwD", "ww38oDR6u9isxd4cWWPUx", "Z2OLIHT_ln4ivL-bcWFnl", "VhxKg1GNOH-ZrmkfYfIHj", "Ka0C10SjIFicTPSH0mIxE", "rx63IAjVt3xNx_0Uoidjp", "Wt_Dm4NebJyyQdq8cVpuc", "vRc_Kj9RXeRRLP0WMkhcJ", "HjFjvRLDDj7ovblR1Bltj$$CulO29y8T_Rp6C9kIiz3H", "e18_YucHM3vs0W7s6tWeM$$gs1nvqE3AGz8xhv0YiJYB", "znPYRKDmQ9eVtLbC5E4e4", "SjBzDfsVVIyYVEZjgSfio", "aUWTAaCcHgdcO4-MrdQGF$$voDaUxqa9hs0KJy2LK_Gu", "e6ntMTzcr6ZrJqqq-2DhV$$KmW9LU02-kJ52FNPlRzYB", "Bq0uVVI-AKFUyF-27NYXU" ]
+  "sorted_processes" : [ "e6ntMTzcr6ZrJqqq-2DhV$$KmW9LU02-kJ52FNPlRzYB", "MSs7ySYoDRz5x1V9MbWUt$$rGwgqhATI77qCmFypWswe", "4XjeOT3-7_LcfLQymwiuV$$jcMjvLkZtqqlygQPbTqoF", "xNgEyGYnxc53KfkgnTKAf$$FRW_SLOulx1HYTa-qloSC", "Rs1P6Z1CyFByVyRyCByJI$$XZ9mRc7XGISAhXPx4IeKu", "2GSWBkJNvSZtmfff8-EPi$$V6OXCNM_PyAB7zn46D2ea", "--cQFt3D50cxOQunNXylm$$_Vda6RQ4zuGDlWsPM6ydy", "V5s7uH43DFdFpearpzOJm$$uCtBgOs8Ue4F3iSB4uVCo", "2mxpn5vIJ0reExpWM3FA2$$6cnxe7sq4DoWTior21d3x", "COZ0sq-ypOR4jvbSsjQYb$$pboexc_flnkcMNnG9n0BD", "_iSr9JdydfW88OLoDVAw5$$O-Co7lYOEE76TC9xQT5cT", "nKuA_f_fKUafj7RwEAdCq$$OdTvbMK8vJUF0HfP0UZjJ", "I3UelHn_T1zFTMNxJrnxO", "c9c7iUeL71hEcd_R0jxwD", "ww38oDR6u9isxd4cWWPUx", "Z2OLIHT_ln4ivL-bcWFnl", "VhxKg1GNOH-ZrmkfYfIHj", "Ka0C10SjIFicTPSH0mIxE", "rx63IAjVt3xNx_0Uoidjp", "Wt_Dm4NebJyyQdq8cVpuc", "vRc_Kj9RXeRRLP0WMkhcJ", "HjFjvRLDDj7ovblR1Bltj$$CulO29y8T_Rp6C9kIiz3H", "e18_YucHM3vs0W7s6tWeM$$gs1nvqE3AGz8xhv0YiJYB", "znPYRKDmQ9eVtLbC5E4e4", "SjBzDfsVVIyYVEZjgSfio", "aUWTAaCcHgdcO4-MrdQGF$$voDaUxqa9hs0KJy2LK_Gu", "Bq0uVVI-AKFUyF-27NYXU", "O5D-uTJNHMvIXZNIHwSrm$$B_2QGDGoue_Rtyd-W22eu" ]
 }
