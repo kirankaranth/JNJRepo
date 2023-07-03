@@ -1,6 +1,7 @@
 from pyspark.sql import *
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
+from prophecy.utils import *
 from sap_02_md_ser_num_stock_sgmnt.config.ConfigStore import *
 from sap_02_md_ser_num_stock_sgmnt.udfs.UDFs import *
 from prophecy.utils import *
@@ -23,6 +24,7 @@ def main():
                 .newSession()
     Utils.initializeFromArgs(spark, parse_args())
     spark.conf.set("prophecy.metadata.pipeline.uri", "pipelines/SAP_02_MD_SER_NUM_STOCK_SGMNT")
+    registerUDFs(spark)
     
     MetricsCollector.start(spark = spark, pipelineId = "pipelines/SAP_02_MD_SER_NUM_STOCK_SGMNT")
     pipeline(spark)

@@ -14,4 +14,4 @@ from prophecy.lookups import (
 )
 
 def registerUDFs(spark: SparkSession):
-    pass
+    ScalaUtil.initializeUDFs(spark)

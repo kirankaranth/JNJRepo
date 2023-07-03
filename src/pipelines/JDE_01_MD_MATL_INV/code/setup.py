@@ -2,12 +2,12 @@ from setuptools import setup, find_packages
 setup(
     name = 'JDE_MD_MATL_INV_BW2_DEU_DJD_GMD_JEM_JES_JET_JSW_MTR_SDJ',
     version = '1.0',
-    packages = find_packages(include = ('jde_01_md_matl_inv*', )) + ["prophecy_config_instances"],
+    packages = find_packages(include = ('jde_01_md_matl_inv*', )) + ['prophecy_config_instances'],
     package_dir = {'prophecy_config_instances' : 'configs/resources/config'},
-    package_data = {'prophecy_config_instances' : ['*.json', '*.py']},
+    package_data = {'prophecy_config_instances' : ['*.json', '*.py', '*.conf']},
     description = 'workflow',
     install_requires = [
-'prophecy-libs==1.4.7'],
+'prophecy-libs==1.5.6'],
     entry_points = {
 'console_scripts' : [
 'main = jde_01_md_matl_inv.pipeline:main'], },
